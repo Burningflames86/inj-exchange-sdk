@@ -34,7 +34,10 @@ function createBaseApp(): App {
 }
 
 export const App: MessageFns<App> = {
-  encode(message: App, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: App,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.protocol !== 0) {
       writer.uint32(8).uint64(message.protocol);
     }
@@ -45,7 +48,8 @@ export const App: MessageFns<App> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): App {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApp();
     while (reader.pos < end) {
@@ -79,7 +83,9 @@ export const App: MessageFns<App> = {
   fromJSON(object: any): App {
     return {
       protocol: isSet(object.protocol) ? globalThis.Number(object.protocol) : 0,
-      software: isSet(object.software) ? globalThis.String(object.software) : "",
+      software: isSet(object.software)
+        ? globalThis.String(object.software)
+        : "",
     };
   },
 
@@ -110,7 +116,10 @@ function createBaseConsensus(): Consensus {
 }
 
 export const Consensus: MessageFns<Consensus> = {
-  encode(message: Consensus, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Consensus,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.block !== 0) {
       writer.uint32(8).uint64(message.block);
     }
@@ -121,7 +130,8 @@ export const Consensus: MessageFns<Consensus> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Consensus {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensus();
     while (reader.pos < end) {
@@ -173,7 +183,9 @@ export const Consensus: MessageFns<Consensus> = {
   create<I extends Exact<DeepPartial<Consensus>, I>>(base?: I): Consensus {
     return Consensus.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<Consensus>, I>>(object: I): Consensus {
+  fromPartial<I extends Exact<DeepPartial<Consensus>, I>>(
+    object: I,
+  ): Consensus {
     const message = createBaseConsensus();
     message.block = object.block ?? 0;
     message.app = object.app ?? 0;
@@ -181,17 +193,25 @@ export const Consensus: MessageFns<Consensus> = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

@@ -41,9 +41,7 @@ export interface TxResponse {
   /** Amount of gas consumed by transaction. */
   gasUsed: number;
   /** The request transaction bytes. */
-  tx:
-    | Any
-    | undefined;
+  tx: Any | undefined;
   /**
    * Time of the previous block. For heights > 1, it's the weighted median of
    * the timestamps of the valid votes in the block.LastCommit. For height == 1,
@@ -214,7 +212,10 @@ function createBaseTxResponse(): TxResponse {
 }
 
 export const TxResponse: MessageFns<TxResponse> = {
-  encode(message: TxResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.height !== 0) {
       writer.uint32(8).int64(message.height);
     }
@@ -258,7 +259,8 @@ export const TxResponse: MessageFns<TxResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TxResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxResponse();
     while (reader.pos < end) {
@@ -381,28 +383,34 @@ export const TxResponse: MessageFns<TxResponse> = {
     return {
       height: isSet(object.height) ? globalThis.Number(object.height) : 0,
       txhash: isSet(object.txhash) ? globalThis.String(object.txhash) : "",
-      codespace: isSet(object.codespace) ? globalThis.String(object.codespace) : "",
+      codespace: isSet(object.codespace)
+        ? globalThis.String(object.codespace)
+        : "",
       code: isSet(object.code) ? globalThis.Number(object.code) : 0,
       data: isSet(object.data) ? globalThis.String(object.data) : "",
       rawLog: isSet(object.rawLog)
         ? globalThis.String(object.rawLog)
         : isSet(object.raw_log)
-        ? globalThis.String(object.raw_log)
-        : "",
-      logs: globalThis.Array.isArray(object?.logs) ? object.logs.map((e: any) => ABCIMessageLog.fromJSON(e)) : [],
+          ? globalThis.String(object.raw_log)
+          : "",
+      logs: globalThis.Array.isArray(object?.logs)
+        ? object.logs.map((e: any) => ABCIMessageLog.fromJSON(e))
+        : [],
       info: isSet(object.info) ? globalThis.String(object.info) : "",
       gasWanted: isSet(object.gasWanted)
         ? globalThis.Number(object.gasWanted)
         : isSet(object.gas_wanted)
-        ? globalThis.Number(object.gas_wanted)
-        : 0,
+          ? globalThis.Number(object.gas_wanted)
+          : 0,
       gasUsed: isSet(object.gasUsed)
         ? globalThis.Number(object.gasUsed)
         : isSet(object.gas_used)
-        ? globalThis.Number(object.gas_used)
-        : 0,
+          ? globalThis.Number(object.gas_used)
+          : 0,
       tx: isSet(object.tx) ? Any.fromJSON(object.tx) : undefined,
-      timestamp: isSet(object.timestamp) ? globalThis.String(object.timestamp) : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.String(object.timestamp)
+        : "",
       events: globalThis.Array.isArray(object?.events)
         ? object.events.map((e: any) => Event.fromJSON(e))
         : [],
@@ -456,7 +464,9 @@ export const TxResponse: MessageFns<TxResponse> = {
   create<I extends Exact<DeepPartial<TxResponse>, I>>(base?: I): TxResponse {
     return TxResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TxResponse>, I>>(object: I): TxResponse {
+  fromPartial<I extends Exact<DeepPartial<TxResponse>, I>>(
+    object: I,
+  ): TxResponse {
     const message = createBaseTxResponse();
     message.height = object.height ?? 0;
     message.txhash = object.txhash ?? "";
@@ -468,7 +478,10 @@ export const TxResponse: MessageFns<TxResponse> = {
     message.info = object.info ?? "";
     message.gasWanted = object.gasWanted ?? 0;
     message.gasUsed = object.gasUsed ?? 0;
-    message.tx = (object.tx !== undefined && object.tx !== null) ? Any.fromPartial(object.tx) : undefined;
+    message.tx =
+      object.tx !== undefined && object.tx !== null
+        ? Any.fromPartial(object.tx)
+        : undefined;
     message.timestamp = object.timestamp ?? "";
     message.events = object.events?.map((e) => Event.fromPartial(e)) || [];
     return message;
@@ -480,7 +493,10 @@ function createBaseABCIMessageLog(): ABCIMessageLog {
 }
 
 export const ABCIMessageLog: MessageFns<ABCIMessageLog> = {
-  encode(message: ABCIMessageLog, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ABCIMessageLog,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.msgIndex !== 0) {
       writer.uint32(8).uint32(message.msgIndex);
     }
@@ -494,7 +510,8 @@ export const ABCIMessageLog: MessageFns<ABCIMessageLog> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ABCIMessageLog {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseABCIMessageLog();
     while (reader.pos < end) {
@@ -538,10 +555,12 @@ export const ABCIMessageLog: MessageFns<ABCIMessageLog> = {
       msgIndex: isSet(object.msgIndex)
         ? globalThis.Number(object.msgIndex)
         : isSet(object.msg_index)
-        ? globalThis.Number(object.msg_index)
-        : 0,
+          ? globalThis.Number(object.msg_index)
+          : 0,
       log: isSet(object.log) ? globalThis.String(object.log) : "",
-      events: globalThis.Array.isArray(object?.events) ? object.events.map((e: any) => StringEvent.fromJSON(e)) : [],
+      events: globalThis.Array.isArray(object?.events)
+        ? object.events.map((e: any) => StringEvent.fromJSON(e))
+        : [],
     };
   },
 
@@ -559,14 +578,19 @@ export const ABCIMessageLog: MessageFns<ABCIMessageLog> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ABCIMessageLog>, I>>(base?: I): ABCIMessageLog {
+  create<I extends Exact<DeepPartial<ABCIMessageLog>, I>>(
+    base?: I,
+  ): ABCIMessageLog {
     return ABCIMessageLog.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ABCIMessageLog>, I>>(object: I): ABCIMessageLog {
+  fromPartial<I extends Exact<DeepPartial<ABCIMessageLog>, I>>(
+    object: I,
+  ): ABCIMessageLog {
     const message = createBaseABCIMessageLog();
     message.msgIndex = object.msgIndex ?? 0;
     message.log = object.log ?? "";
-    message.events = object.events?.map((e) => StringEvent.fromPartial(e)) || [];
+    message.events =
+      object.events?.map((e) => StringEvent.fromPartial(e)) || [];
     return message;
   },
 };
@@ -576,7 +600,10 @@ function createBaseStringEvent(): StringEvent {
 }
 
 export const StringEvent: MessageFns<StringEvent> = {
-  encode(message: StringEvent, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StringEvent,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -587,7 +614,8 @@ export const StringEvent: MessageFns<StringEvent> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): StringEvent {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStringEvent();
     while (reader.pos < end) {
@@ -641,10 +669,13 @@ export const StringEvent: MessageFns<StringEvent> = {
   create<I extends Exact<DeepPartial<StringEvent>, I>>(base?: I): StringEvent {
     return StringEvent.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StringEvent>, I>>(object: I): StringEvent {
+  fromPartial<I extends Exact<DeepPartial<StringEvent>, I>>(
+    object: I,
+  ): StringEvent {
     const message = createBaseStringEvent();
     message.type = object.type ?? "";
-    message.attributes = object.attributes?.map((e) => Attribute.fromPartial(e)) || [];
+    message.attributes =
+      object.attributes?.map((e) => Attribute.fromPartial(e)) || [];
     return message;
   },
 };
@@ -654,7 +685,10 @@ function createBaseAttribute(): Attribute {
 }
 
 export const Attribute: MessageFns<Attribute> = {
-  encode(message: Attribute, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Attribute,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -665,7 +699,8 @@ export const Attribute: MessageFns<Attribute> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Attribute {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttribute();
     while (reader.pos < end) {
@@ -717,7 +752,9 @@ export const Attribute: MessageFns<Attribute> = {
   create<I extends Exact<DeepPartial<Attribute>, I>>(base?: I): Attribute {
     return Attribute.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<Attribute>, I>>(object: I): Attribute {
+  fromPartial<I extends Exact<DeepPartial<Attribute>, I>>(
+    object: I,
+  ): Attribute {
     const message = createBaseAttribute();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -730,7 +767,10 @@ function createBaseGasInfo(): GasInfo {
 }
 
 export const GasInfo: MessageFns<GasInfo> = {
-  encode(message: GasInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GasInfo,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.gasWanted !== 0) {
       writer.uint32(8).uint64(message.gasWanted);
     }
@@ -741,7 +781,8 @@ export const GasInfo: MessageFns<GasInfo> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): GasInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGasInfo();
     while (reader.pos < end) {
@@ -777,13 +818,13 @@ export const GasInfo: MessageFns<GasInfo> = {
       gasWanted: isSet(object.gasWanted)
         ? globalThis.Number(object.gasWanted)
         : isSet(object.gas_wanted)
-        ? globalThis.Number(object.gas_wanted)
-        : 0,
+          ? globalThis.Number(object.gas_wanted)
+          : 0,
       gasUsed: isSet(object.gasUsed)
         ? globalThis.Number(object.gasUsed)
         : isSet(object.gas_used)
-        ? globalThis.Number(object.gas_used)
-        : 0,
+          ? globalThis.Number(object.gas_used)
+          : 0,
     };
   },
 
@@ -814,7 +855,10 @@ function createBaseResult(): Result {
 }
 
 export const Result: MessageFns<Result> = {
-  encode(message: Result, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Result,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
@@ -831,7 +875,8 @@ export const Result: MessageFns<Result> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Result {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResult();
     while (reader.pos < end) {
@@ -880,14 +925,18 @@ export const Result: MessageFns<Result> = {
 
   fromJSON(object: any): Result {
     return {
-      data: isSet(object.data) ? Buffer.from(bytesFromBase64(object.data)) : Buffer.alloc(0),
+      data: isSet(object.data)
+        ? Buffer.from(bytesFromBase64(object.data))
+        : Buffer.alloc(0),
       log: isSet(object.log) ? globalThis.String(object.log) : "",
-      events: globalThis.Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
+      events: globalThis.Array.isArray(object?.events)
+        ? object.events.map((e: any) => Event.fromJSON(e))
+        : [],
       msgResponses: globalThis.Array.isArray(object?.msgResponses)
         ? object.msgResponses.map((e: any) => Any.fromJSON(e))
         : globalThis.Array.isArray(object?.msg_responses)
-        ? object.msg_responses.map((e: any) => Any.fromJSON(e))
-        : [],
+          ? object.msg_responses.map((e: any) => Any.fromJSON(e))
+          : [],
     };
   },
 
@@ -916,7 +965,8 @@ export const Result: MessageFns<Result> = {
     message.data = object.data ?? Buffer.alloc(0);
     message.log = object.log ?? "";
     message.events = object.events?.map((e) => Event.fromPartial(e)) || [];
-    message.msgResponses = object.msgResponses?.map((e) => Any.fromPartial(e)) || [];
+    message.msgResponses =
+      object.msgResponses?.map((e) => Any.fromPartial(e)) || [];
     return message;
   },
 };
@@ -926,7 +976,10 @@ function createBaseSimulationResponse(): SimulationResponse {
 }
 
 export const SimulationResponse: MessageFns<SimulationResponse> = {
-  encode(message: SimulationResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SimulationResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.gasInfo !== undefined) {
       GasInfo.encode(message.gasInfo, writer.uint32(10).fork()).join();
     }
@@ -936,8 +989,12 @@ export const SimulationResponse: MessageFns<SimulationResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SimulationResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SimulationResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimulationResponse();
     while (reader.pos < end) {
@@ -973,8 +1030,8 @@ export const SimulationResponse: MessageFns<SimulationResponse> = {
       gasInfo: isSet(object.gasInfo)
         ? GasInfo.fromJSON(object.gasInfo)
         : isSet(object.gas_info)
-        ? GasInfo.fromJSON(object.gas_info)
-        : undefined,
+          ? GasInfo.fromJSON(object.gas_info)
+          : undefined,
       result: isSet(object.result) ? Result.fromJSON(object.result) : undefined,
     };
   },
@@ -990,17 +1047,23 @@ export const SimulationResponse: MessageFns<SimulationResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SimulationResponse>, I>>(base?: I): SimulationResponse {
+  create<I extends Exact<DeepPartial<SimulationResponse>, I>>(
+    base?: I,
+  ): SimulationResponse {
     return SimulationResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SimulationResponse>, I>>(object: I): SimulationResponse {
+  fromPartial<I extends Exact<DeepPartial<SimulationResponse>, I>>(
+    object: I,
+  ): SimulationResponse {
     const message = createBaseSimulationResponse();
-    message.gasInfo = (object.gasInfo !== undefined && object.gasInfo !== null)
-      ? GasInfo.fromPartial(object.gasInfo)
-      : undefined;
-    message.result = (object.result !== undefined && object.result !== null)
-      ? Result.fromPartial(object.result)
-      : undefined;
+    message.gasInfo =
+      object.gasInfo !== undefined && object.gasInfo !== null
+        ? GasInfo.fromPartial(object.gasInfo)
+        : undefined;
+    message.result =
+      object.result !== undefined && object.result !== null
+        ? Result.fromPartial(object.result)
+        : undefined;
     return message;
   },
 };
@@ -1010,7 +1073,10 @@ function createBaseMsgData(): MsgData {
 }
 
 export const MsgData: MessageFns<MsgData> = {
-  encode(message: MsgData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgData,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.msgType !== "") {
       writer.uint32(10).string(message.msgType);
     }
@@ -1021,7 +1087,8 @@ export const MsgData: MessageFns<MsgData> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MsgData {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgData();
     while (reader.pos < end) {
@@ -1057,9 +1124,11 @@ export const MsgData: MessageFns<MsgData> = {
       msgType: isSet(object.msgType)
         ? globalThis.String(object.msgType)
         : isSet(object.msg_type)
-        ? globalThis.String(object.msg_type)
-        : "",
-      data: isSet(object.data) ? Buffer.from(bytesFromBase64(object.data)) : Buffer.alloc(0),
+          ? globalThis.String(object.msg_type)
+          : "",
+      data: isSet(object.data)
+        ? Buffer.from(bytesFromBase64(object.data))
+        : Buffer.alloc(0),
     };
   },
 
@@ -1090,7 +1159,10 @@ function createBaseTxMsgData(): TxMsgData {
 }
 
 export const TxMsgData: MessageFns<TxMsgData> = {
-  encode(message: TxMsgData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxMsgData,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.data) {
       MsgData.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -1101,7 +1173,8 @@ export const TxMsgData: MessageFns<TxMsgData> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TxMsgData {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxMsgData();
     while (reader.pos < end) {
@@ -1134,12 +1207,14 @@ export const TxMsgData: MessageFns<TxMsgData> = {
 
   fromJSON(object: any): TxMsgData {
     return {
-      data: globalThis.Array.isArray(object?.data) ? object.data.map((e: any) => MsgData.fromJSON(e)) : [],
+      data: globalThis.Array.isArray(object?.data)
+        ? object.data.map((e: any) => MsgData.fromJSON(e))
+        : [],
       msgResponses: globalThis.Array.isArray(object?.msgResponses)
         ? object.msgResponses.map((e: any) => Any.fromJSON(e))
         : globalThis.Array.isArray(object?.msg_responses)
-        ? object.msg_responses.map((e: any) => Any.fromJSON(e))
-        : [],
+          ? object.msg_responses.map((e: any) => Any.fromJSON(e))
+          : [],
     };
   },
 
@@ -1157,20 +1232,33 @@ export const TxMsgData: MessageFns<TxMsgData> = {
   create<I extends Exact<DeepPartial<TxMsgData>, I>>(base?: I): TxMsgData {
     return TxMsgData.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TxMsgData>, I>>(object: I): TxMsgData {
+  fromPartial<I extends Exact<DeepPartial<TxMsgData>, I>>(
+    object: I,
+  ): TxMsgData {
     const message = createBaseTxMsgData();
     message.data = object.data?.map((e) => MsgData.fromPartial(e)) || [];
-    message.msgResponses = object.msgResponses?.map((e) => Any.fromPartial(e)) || [];
+    message.msgResponses =
+      object.msgResponses?.map((e) => Any.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseSearchTxsResult(): SearchTxsResult {
-  return { totalCount: 0, count: 0, pageNumber: 0, pageTotal: 0, limit: 0, txs: [] };
+  return {
+    totalCount: 0,
+    count: 0,
+    pageNumber: 0,
+    pageTotal: 0,
+    limit: 0,
+    txs: [],
+  };
 }
 
 export const SearchTxsResult: MessageFns<SearchTxsResult> = {
-  encode(message: SearchTxsResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SearchTxsResult,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.totalCount !== 0) {
       writer.uint32(8).uint64(message.totalCount);
     }
@@ -1193,7 +1281,8 @@ export const SearchTxsResult: MessageFns<SearchTxsResult> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SearchTxsResult {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSearchTxsResult();
     while (reader.pos < end) {
@@ -1261,19 +1350,19 @@ export const SearchTxsResult: MessageFns<SearchTxsResult> = {
       totalCount: isSet(object.totalCount)
         ? globalThis.Number(object.totalCount)
         : isSet(object.total_count)
-        ? globalThis.Number(object.total_count)
-        : 0,
+          ? globalThis.Number(object.total_count)
+          : 0,
       count: isSet(object.count) ? globalThis.Number(object.count) : 0,
       pageNumber: isSet(object.pageNumber)
         ? globalThis.Number(object.pageNumber)
         : isSet(object.page_number)
-        ? globalThis.Number(object.page_number)
-        : 0,
+          ? globalThis.Number(object.page_number)
+          : 0,
       pageTotal: isSet(object.pageTotal)
         ? globalThis.Number(object.pageTotal)
         : isSet(object.page_total)
-        ? globalThis.Number(object.page_total)
-        : 0,
+          ? globalThis.Number(object.page_total)
+          : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       txs: globalThis.Array.isArray(object?.txs)
         ? object.txs.map((e: any) => TxResponse.fromJSON(e))
@@ -1304,10 +1393,14 @@ export const SearchTxsResult: MessageFns<SearchTxsResult> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SearchTxsResult>, I>>(base?: I): SearchTxsResult {
+  create<I extends Exact<DeepPartial<SearchTxsResult>, I>>(
+    base?: I,
+  ): SearchTxsResult {
     return SearchTxsResult.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SearchTxsResult>, I>>(object: I): SearchTxsResult {
+  fromPartial<I extends Exact<DeepPartial<SearchTxsResult>, I>>(
+    object: I,
+  ): SearchTxsResult {
     const message = createBaseSearchTxsResult();
     message.totalCount = object.totalCount ?? 0;
     message.count = object.count ?? 0;
@@ -1320,11 +1413,21 @@ export const SearchTxsResult: MessageFns<SearchTxsResult> = {
 };
 
 function createBaseSearchBlocksResult(): SearchBlocksResult {
-  return { totalCount: 0, count: 0, pageNumber: 0, pageTotal: 0, limit: 0, blocks: [] };
+  return {
+    totalCount: 0,
+    count: 0,
+    pageNumber: 0,
+    pageTotal: 0,
+    limit: 0,
+    blocks: [],
+  };
 }
 
 export const SearchBlocksResult: MessageFns<SearchBlocksResult> = {
-  encode(message: SearchBlocksResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SearchBlocksResult,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.totalCount !== 0) {
       writer.uint32(8).int64(message.totalCount);
     }
@@ -1346,8 +1449,12 @@ export const SearchBlocksResult: MessageFns<SearchBlocksResult> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SearchBlocksResult {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SearchBlocksResult {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSearchBlocksResult();
     while (reader.pos < end) {
@@ -1415,19 +1522,19 @@ export const SearchBlocksResult: MessageFns<SearchBlocksResult> = {
       totalCount: isSet(object.totalCount)
         ? globalThis.Number(object.totalCount)
         : isSet(object.total_count)
-        ? globalThis.Number(object.total_count)
-        : 0,
+          ? globalThis.Number(object.total_count)
+          : 0,
       count: isSet(object.count) ? globalThis.Number(object.count) : 0,
       pageNumber: isSet(object.pageNumber)
         ? globalThis.Number(object.pageNumber)
         : isSet(object.page_number)
-        ? globalThis.Number(object.page_number)
-        : 0,
+          ? globalThis.Number(object.page_number)
+          : 0,
       pageTotal: isSet(object.pageTotal)
         ? globalThis.Number(object.pageTotal)
         : isSet(object.page_total)
-        ? globalThis.Number(object.page_total)
-        : 0,
+          ? globalThis.Number(object.page_total)
+          : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       blocks: globalThis.Array.isArray(object?.blocks)
         ? object.blocks.map((e: any) => Block.fromJSON(e))
@@ -1458,10 +1565,14 @@ export const SearchBlocksResult: MessageFns<SearchBlocksResult> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SearchBlocksResult>, I>>(base?: I): SearchBlocksResult {
+  create<I extends Exact<DeepPartial<SearchBlocksResult>, I>>(
+    base?: I,
+  ): SearchBlocksResult {
     return SearchBlocksResult.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SearchBlocksResult>, I>>(object: I): SearchBlocksResult {
+  fromPartial<I extends Exact<DeepPartial<SearchBlocksResult>, I>>(
+    object: I,
+  ): SearchBlocksResult {
     const message = createBaseSearchBlocksResult();
     message.totalCount = object.totalCount ?? 0;
     message.count = object.count ?? 0;
@@ -1481,17 +1592,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

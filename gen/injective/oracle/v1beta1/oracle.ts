@@ -499,7 +499,10 @@ function createBaseParams(): Params {
 }
 
 export const Params: MessageFns<Params> = {
-  encode(message: Params, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Params,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.pythContract !== "") {
       writer.uint32(10).string(message.pythContract);
     }
@@ -507,7 +510,9 @@ export const Params: MessageFns<Params> = {
       writer.uint32(18).string(message.chainlinkVerifierProxyContract);
     }
     if (message.chainlinkDataStreamsVerificationGasLimit !== 0) {
-      writer.uint32(32).uint64(message.chainlinkDataStreamsVerificationGasLimit);
+      writer
+        .uint32(32)
+        .uint64(message.chainlinkDataStreamsVerificationGasLimit);
     }
     if (message.pythProVerifierContract !== "") {
       writer.uint32(42).string(message.pythProVerifierContract);
@@ -519,13 +524,17 @@ export const Params: MessageFns<Params> = {
       writer.uint32(56).uint64(message.pythProVerificationFee);
     }
     if (message.sedaFastParams !== undefined) {
-      SedaFastParams.encode(message.sedaFastParams, writer.uint32(66).fork()).join();
+      SedaFastParams.encode(
+        message.sedaFastParams,
+        writer.uint32(66).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Params {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -552,7 +561,9 @@ export const Params: MessageFns<Params> = {
             break;
           }
 
-          message.chainlinkDataStreamsVerificationGasLimit = longToNumber(reader.uint64());
+          message.chainlinkDataStreamsVerificationGasLimit = longToNumber(
+            reader.uint64(),
+          );
           continue;
         }
         case 5: {
@@ -584,7 +595,10 @@ export const Params: MessageFns<Params> = {
             break;
           }
 
-          message.sedaFastParams = SedaFastParams.decode(reader, reader.uint32());
+          message.sedaFastParams = SedaFastParams.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -601,38 +615,44 @@ export const Params: MessageFns<Params> = {
       pythContract: isSet(object.pythContract)
         ? globalThis.String(object.pythContract)
         : isSet(object.pyth_contract)
-        ? globalThis.String(object.pyth_contract)
-        : "",
-      chainlinkVerifierProxyContract: isSet(object.chainlinkVerifierProxyContract)
+          ? globalThis.String(object.pyth_contract)
+          : "",
+      chainlinkVerifierProxyContract: isSet(
+        object.chainlinkVerifierProxyContract,
+      )
         ? globalThis.String(object.chainlinkVerifierProxyContract)
         : isSet(object.chainlink_verifier_proxy_contract)
-        ? globalThis.String(object.chainlink_verifier_proxy_contract)
-        : "",
-      chainlinkDataStreamsVerificationGasLimit: isSet(object.chainlinkDataStreamsVerificationGasLimit)
+          ? globalThis.String(object.chainlink_verifier_proxy_contract)
+          : "",
+      chainlinkDataStreamsVerificationGasLimit: isSet(
+        object.chainlinkDataStreamsVerificationGasLimit,
+      )
         ? globalThis.Number(object.chainlinkDataStreamsVerificationGasLimit)
         : isSet(object.chainlink_data_streams_verification_gas_limit)
-        ? globalThis.Number(object.chainlink_data_streams_verification_gas_limit)
-        : 0,
+          ? globalThis.Number(
+              object.chainlink_data_streams_verification_gas_limit,
+            )
+          : 0,
       pythProVerifierContract: isSet(object.pythProVerifierContract)
         ? globalThis.String(object.pythProVerifierContract)
         : isSet(object.pyth_pro_verifier_contract)
-        ? globalThis.String(object.pyth_pro_verifier_contract)
-        : "",
+          ? globalThis.String(object.pyth_pro_verifier_contract)
+          : "",
       pythProVerificationGasLimit: isSet(object.pythProVerificationGasLimit)
         ? globalThis.Number(object.pythProVerificationGasLimit)
         : isSet(object.pyth_pro_verification_gas_limit)
-        ? globalThis.Number(object.pyth_pro_verification_gas_limit)
-        : 0,
+          ? globalThis.Number(object.pyth_pro_verification_gas_limit)
+          : 0,
       pythProVerificationFee: isSet(object.pythProVerificationFee)
         ? globalThis.Number(object.pythProVerificationFee)
         : isSet(object.pyth_pro_verification_fee)
-        ? globalThis.Number(object.pyth_pro_verification_fee)
-        : 0,
+          ? globalThis.Number(object.pyth_pro_verification_fee)
+          : 0,
       sedaFastParams: isSet(object.sedaFastParams)
         ? SedaFastParams.fromJSON(object.sedaFastParams)
         : isSet(object.seda_fast_params)
-        ? SedaFastParams.fromJSON(object.seda_fast_params)
-        : undefined,
+          ? SedaFastParams.fromJSON(object.seda_fast_params)
+          : undefined,
     };
   },
 
@@ -642,16 +662,21 @@ export const Params: MessageFns<Params> = {
       obj.pythContract = message.pythContract;
     }
     if (message.chainlinkVerifierProxyContract !== "") {
-      obj.chainlinkVerifierProxyContract = message.chainlinkVerifierProxyContract;
+      obj.chainlinkVerifierProxyContract =
+        message.chainlinkVerifierProxyContract;
     }
     if (message.chainlinkDataStreamsVerificationGasLimit !== 0) {
-      obj.chainlinkDataStreamsVerificationGasLimit = Math.round(message.chainlinkDataStreamsVerificationGasLimit);
+      obj.chainlinkDataStreamsVerificationGasLimit = Math.round(
+        message.chainlinkDataStreamsVerificationGasLimit,
+      );
     }
     if (message.pythProVerifierContract !== "") {
       obj.pythProVerifierContract = message.pythProVerifierContract;
     }
     if (message.pythProVerificationGasLimit !== 0) {
-      obj.pythProVerificationGasLimit = Math.round(message.pythProVerificationGasLimit);
+      obj.pythProVerificationGasLimit = Math.round(
+        message.pythProVerificationGasLimit,
+      );
     }
     if (message.pythProVerificationFee !== 0) {
       obj.pythProVerificationFee = Math.round(message.pythProVerificationFee);
@@ -668,24 +693,35 @@ export const Params: MessageFns<Params> = {
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
     message.pythContract = object.pythContract ?? "";
-    message.chainlinkVerifierProxyContract = object.chainlinkVerifierProxyContract ?? "";
-    message.chainlinkDataStreamsVerificationGasLimit = object.chainlinkDataStreamsVerificationGasLimit ?? 0;
+    message.chainlinkVerifierProxyContract =
+      object.chainlinkVerifierProxyContract ?? "";
+    message.chainlinkDataStreamsVerificationGasLimit =
+      object.chainlinkDataStreamsVerificationGasLimit ?? 0;
     message.pythProVerifierContract = object.pythProVerifierContract ?? "";
-    message.pythProVerificationGasLimit = object.pythProVerificationGasLimit ?? 0;
+    message.pythProVerificationGasLimit =
+      object.pythProVerificationGasLimit ?? 0;
     message.pythProVerificationFee = object.pythProVerificationFee ?? 0;
-    message.sedaFastParams = (object.sedaFastParams !== undefined && object.sedaFastParams !== null)
-      ? SedaFastParams.fromPartial(object.sedaFastParams)
-      : undefined;
+    message.sedaFastParams =
+      object.sedaFastParams !== undefined && object.sedaFastParams !== null
+        ? SedaFastParams.fromPartial(object.sedaFastParams)
+        : undefined;
     return message;
   },
 };
 
 function createBaseSedaFastParams(): SedaFastParams {
-  return { publicKey: Buffer.alloc(0), simpleProgramIds: [], jsonProgramIds: [] };
+  return {
+    publicKey: Buffer.alloc(0),
+    simpleProgramIds: [],
+    jsonProgramIds: [],
+  };
 }
 
 export const SedaFastParams: MessageFns<SedaFastParams> = {
-  encode(message: SedaFastParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SedaFastParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.publicKey.length !== 0) {
       writer.uint32(10).bytes(message.publicKey);
     }
@@ -699,7 +735,8 @@ export const SedaFastParams: MessageFns<SedaFastParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SedaFastParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSedaFastParams();
     while (reader.pos < end) {
@@ -743,18 +780,18 @@ export const SedaFastParams: MessageFns<SedaFastParams> = {
       publicKey: isSet(object.publicKey)
         ? Buffer.from(bytesFromBase64(object.publicKey))
         : isSet(object.public_key)
-        ? Buffer.from(bytesFromBase64(object.public_key))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.public_key))
+          : Buffer.alloc(0),
       simpleProgramIds: globalThis.Array.isArray(object?.simpleProgramIds)
         ? object.simpleProgramIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.simple_program_ids)
-        ? object.simple_program_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.simple_program_ids.map((e: any) => globalThis.String(e))
+          : [],
       jsonProgramIds: globalThis.Array.isArray(object?.jsonProgramIds)
         ? object.jsonProgramIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.json_program_ids)
-        ? object.json_program_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.json_program_ids.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -772,10 +809,14 @@ export const SedaFastParams: MessageFns<SedaFastParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SedaFastParams>, I>>(base?: I): SedaFastParams {
+  create<I extends Exact<DeepPartial<SedaFastParams>, I>>(
+    base?: I,
+  ): SedaFastParams {
     return SedaFastParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SedaFastParams>, I>>(object: I): SedaFastParams {
+  fromPartial<I extends Exact<DeepPartial<SedaFastParams>, I>>(
+    object: I,
+  ): SedaFastParams {
     const message = createBaseSedaFastParams();
     message.publicKey = object.publicKey ?? Buffer.alloc(0);
     message.simpleProgramIds = object.simpleProgramIds?.map((e) => e) || [];
@@ -789,7 +830,10 @@ function createBaseOracleInfo(): OracleInfo {
 }
 
 export const OracleInfo: MessageFns<OracleInfo> = {
-  encode(message: OracleInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OracleInfo,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.symbol !== "") {
       writer.uint32(10).string(message.symbol);
     }
@@ -800,7 +844,8 @@ export const OracleInfo: MessageFns<OracleInfo> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): OracleInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOracleInfo();
     while (reader.pos < end) {
@@ -837,8 +882,8 @@ export const OracleInfo: MessageFns<OracleInfo> = {
       oracleType: isSet(object.oracleType)
         ? oracleTypeFromJSON(object.oracleType)
         : isSet(object.oracle_type)
-        ? oracleTypeFromJSON(object.oracle_type)
-        : 0,
+          ? oracleTypeFromJSON(object.oracle_type)
+          : 0,
     };
   },
 
@@ -856,7 +901,9 @@ export const OracleInfo: MessageFns<OracleInfo> = {
   create<I extends Exact<DeepPartial<OracleInfo>, I>>(base?: I): OracleInfo {
     return OracleInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OracleInfo>, I>>(object: I): OracleInfo {
+  fromPartial<I extends Exact<DeepPartial<OracleInfo>, I>>(
+    object: I,
+  ): OracleInfo {
     const message = createBaseOracleInfo();
     message.symbol = object.symbol ?? "";
     message.oracleType = object.oracleType ?? 0;
@@ -869,7 +916,10 @@ function createBaseChainlinkPriceState(): ChainlinkPriceState {
 }
 
 export const ChainlinkPriceState: MessageFns<ChainlinkPriceState> = {
-  encode(message: ChainlinkPriceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ChainlinkPriceState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.feedId !== "") {
       writer.uint32(10).string(message.feedId);
     }
@@ -885,8 +935,12 @@ export const ChainlinkPriceState: MessageFns<ChainlinkPriceState> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ChainlinkPriceState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ChainlinkPriceState {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChainlinkPriceState();
     while (reader.pos < end) {
@@ -938,15 +992,17 @@ export const ChainlinkPriceState: MessageFns<ChainlinkPriceState> = {
       feedId: isSet(object.feedId)
         ? globalThis.String(object.feedId)
         : isSet(object.feed_id)
-        ? globalThis.String(object.feed_id)
-        : "",
+          ? globalThis.String(object.feed_id)
+          : "",
       answer: isSet(object.answer) ? globalThis.String(object.answer) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
       priceState: isSet(object.priceState)
         ? PriceState.fromJSON(object.priceState)
         : isSet(object.price_state)
-        ? PriceState.fromJSON(object.price_state)
-        : undefined,
+          ? PriceState.fromJSON(object.price_state)
+          : undefined,
     };
   },
 
@@ -967,27 +1023,41 @@ export const ChainlinkPriceState: MessageFns<ChainlinkPriceState> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ChainlinkPriceState>, I>>(base?: I): ChainlinkPriceState {
+  create<I extends Exact<DeepPartial<ChainlinkPriceState>, I>>(
+    base?: I,
+  ): ChainlinkPriceState {
     return ChainlinkPriceState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ChainlinkPriceState>, I>>(object: I): ChainlinkPriceState {
+  fromPartial<I extends Exact<DeepPartial<ChainlinkPriceState>, I>>(
+    object: I,
+  ): ChainlinkPriceState {
     const message = createBaseChainlinkPriceState();
     message.feedId = object.feedId ?? "";
     message.answer = object.answer ?? "";
     message.timestamp = object.timestamp ?? 0;
-    message.priceState = (object.priceState !== undefined && object.priceState !== null)
-      ? PriceState.fromPartial(object.priceState)
-      : undefined;
+    message.priceState =
+      object.priceState !== undefined && object.priceState !== null
+        ? PriceState.fromPartial(object.priceState)
+        : undefined;
     return message;
   },
 };
 
 function createBaseBandPriceState(): BandPriceState {
-  return { symbol: "", rate: "", resolveTime: 0, requestID: 0, priceState: undefined };
+  return {
+    symbol: "",
+    rate: "",
+    resolveTime: 0,
+    requestID: 0,
+    priceState: undefined,
+  };
 }
 
 export const BandPriceState: MessageFns<BandPriceState> = {
-  encode(message: BandPriceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BandPriceState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.symbol !== "") {
       writer.uint32(10).string(message.symbol);
     }
@@ -1007,7 +1077,8 @@ export const BandPriceState: MessageFns<BandPriceState> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): BandPriceState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBandPriceState();
     while (reader.pos < end) {
@@ -1069,18 +1140,18 @@ export const BandPriceState: MessageFns<BandPriceState> = {
       resolveTime: isSet(object.resolveTime)
         ? globalThis.Number(object.resolveTime)
         : isSet(object.resolve_time)
-        ? globalThis.Number(object.resolve_time)
-        : 0,
+          ? globalThis.Number(object.resolve_time)
+          : 0,
       requestID: isSet(object.requestID)
         ? globalThis.Number(object.requestID)
         : isSet(object.request_ID)
-        ? globalThis.Number(object.request_ID)
-        : 0,
+          ? globalThis.Number(object.request_ID)
+          : 0,
       priceState: isSet(object.priceState)
         ? PriceState.fromJSON(object.priceState)
         : isSet(object.price_state)
-        ? PriceState.fromJSON(object.price_state)
-        : undefined,
+          ? PriceState.fromJSON(object.price_state)
+          : undefined,
     };
   },
 
@@ -1104,18 +1175,23 @@ export const BandPriceState: MessageFns<BandPriceState> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BandPriceState>, I>>(base?: I): BandPriceState {
+  create<I extends Exact<DeepPartial<BandPriceState>, I>>(
+    base?: I,
+  ): BandPriceState {
     return BandPriceState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BandPriceState>, I>>(object: I): BandPriceState {
+  fromPartial<I extends Exact<DeepPartial<BandPriceState>, I>>(
+    object: I,
+  ): BandPriceState {
     const message = createBaseBandPriceState();
     message.symbol = object.symbol ?? "";
     message.rate = object.rate ?? "";
     message.resolveTime = object.resolveTime ?? 0;
     message.requestID = object.requestID ?? 0;
-    message.priceState = (object.priceState !== undefined && object.priceState !== null)
-      ? PriceState.fromPartial(object.priceState)
-      : undefined;
+    message.priceState =
+      object.priceState !== undefined && object.priceState !== null
+        ? PriceState.fromPartial(object.priceState)
+        : undefined;
     return message;
   },
 };
@@ -1125,7 +1201,10 @@ function createBasePriceFeedState(): PriceFeedState {
 }
 
 export const PriceFeedState: MessageFns<PriceFeedState> = {
-  encode(message: PriceFeedState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceFeedState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.base !== "") {
       writer.uint32(10).string(message.base);
     }
@@ -1142,7 +1221,8 @@ export const PriceFeedState: MessageFns<PriceFeedState> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceFeedState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceFeedState();
     while (reader.pos < end) {
@@ -1196,9 +1276,11 @@ export const PriceFeedState: MessageFns<PriceFeedState> = {
       priceState: isSet(object.priceState)
         ? PriceState.fromJSON(object.priceState)
         : isSet(object.price_state)
-        ? PriceState.fromJSON(object.price_state)
-        : undefined,
-      relayers: globalThis.Array.isArray(object?.relayers) ? object.relayers.map((e: any) => globalThis.String(e)) : [],
+          ? PriceState.fromJSON(object.price_state)
+          : undefined,
+      relayers: globalThis.Array.isArray(object?.relayers)
+        ? object.relayers.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -1219,16 +1301,21 @@ export const PriceFeedState: MessageFns<PriceFeedState> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceFeedState>, I>>(base?: I): PriceFeedState {
+  create<I extends Exact<DeepPartial<PriceFeedState>, I>>(
+    base?: I,
+  ): PriceFeedState {
     return PriceFeedState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceFeedState>, I>>(object: I): PriceFeedState {
+  fromPartial<I extends Exact<DeepPartial<PriceFeedState>, I>>(
+    object: I,
+  ): PriceFeedState {
     const message = createBasePriceFeedState();
     message.base = object.base ?? "";
     message.quote = object.quote ?? "";
-    message.priceState = (object.priceState !== undefined && object.priceState !== null)
-      ? PriceState.fromPartial(object.priceState)
-      : undefined;
+    message.priceState =
+      object.priceState !== undefined && object.priceState !== null
+        ? PriceState.fromPartial(object.priceState)
+        : undefined;
     message.relayers = object.relayers?.map((e) => e) || [];
     return message;
   },
@@ -1239,7 +1326,10 @@ function createBaseProviderInfo(): ProviderInfo {
 }
 
 export const ProviderInfo: MessageFns<ProviderInfo> = {
-  encode(message: ProviderInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ProviderInfo,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.provider !== "") {
       writer.uint32(10).string(message.provider);
     }
@@ -1250,7 +1340,8 @@ export const ProviderInfo: MessageFns<ProviderInfo> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ProviderInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProviderInfo();
     while (reader.pos < end) {
@@ -1283,8 +1374,12 @@ export const ProviderInfo: MessageFns<ProviderInfo> = {
 
   fromJSON(object: any): ProviderInfo {
     return {
-      provider: isSet(object.provider) ? globalThis.String(object.provider) : "",
-      relayers: globalThis.Array.isArray(object?.relayers) ? object.relayers.map((e: any) => globalThis.String(e)) : [],
+      provider: isSet(object.provider)
+        ? globalThis.String(object.provider)
+        : "",
+      relayers: globalThis.Array.isArray(object?.relayers)
+        ? object.relayers.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -1299,10 +1394,14 @@ export const ProviderInfo: MessageFns<ProviderInfo> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProviderInfo>, I>>(base?: I): ProviderInfo {
+  create<I extends Exact<DeepPartial<ProviderInfo>, I>>(
+    base?: I,
+  ): ProviderInfo {
     return ProviderInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ProviderInfo>, I>>(object: I): ProviderInfo {
+  fromPartial<I extends Exact<DeepPartial<ProviderInfo>, I>>(
+    object: I,
+  ): ProviderInfo {
     const message = createBaseProviderInfo();
     message.provider = object.provider ?? "";
     message.relayers = object.relayers?.map((e) => e) || [];
@@ -1315,9 +1414,15 @@ function createBaseProviderState(): ProviderState {
 }
 
 export const ProviderState: MessageFns<ProviderState> = {
-  encode(message: ProviderState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ProviderState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.providerInfo !== undefined) {
-      ProviderInfo.encode(message.providerInfo, writer.uint32(10).fork()).join();
+      ProviderInfo.encode(
+        message.providerInfo,
+        writer.uint32(10).fork(),
+      ).join();
     }
     for (const v of message.providerPriceStates) {
       ProviderPriceState.encode(v!, writer.uint32(18).fork()).join();
@@ -1326,7 +1431,8 @@ export const ProviderState: MessageFns<ProviderState> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ProviderState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProviderState();
     while (reader.pos < end) {
@@ -1345,7 +1451,9 @@ export const ProviderState: MessageFns<ProviderState> = {
             break;
           }
 
-          message.providerPriceStates.push(ProviderPriceState.decode(reader, reader.uint32()));
+          message.providerPriceStates.push(
+            ProviderPriceState.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -1362,13 +1470,17 @@ export const ProviderState: MessageFns<ProviderState> = {
       providerInfo: isSet(object.providerInfo)
         ? ProviderInfo.fromJSON(object.providerInfo)
         : isSet(object.provider_info)
-        ? ProviderInfo.fromJSON(object.provider_info)
-        : undefined,
+          ? ProviderInfo.fromJSON(object.provider_info)
+          : undefined,
       providerPriceStates: globalThis.Array.isArray(object?.providerPriceStates)
-        ? object.providerPriceStates.map((e: any) => ProviderPriceState.fromJSON(e))
+        ? object.providerPriceStates.map((e: any) =>
+            ProviderPriceState.fromJSON(e),
+          )
         : globalThis.Array.isArray(object?.provider_price_states)
-        ? object.provider_price_states.map((e: any) => ProviderPriceState.fromJSON(e))
-        : [],
+          ? object.provider_price_states.map((e: any) =>
+              ProviderPriceState.fromJSON(e),
+            )
+          : [],
     };
   },
 
@@ -1378,20 +1490,30 @@ export const ProviderState: MessageFns<ProviderState> = {
       obj.providerInfo = ProviderInfo.toJSON(message.providerInfo);
     }
     if (message.providerPriceStates?.length) {
-      obj.providerPriceStates = message.providerPriceStates.map((e) => ProviderPriceState.toJSON(e));
+      obj.providerPriceStates = message.providerPriceStates.map((e) =>
+        ProviderPriceState.toJSON(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProviderState>, I>>(base?: I): ProviderState {
+  create<I extends Exact<DeepPartial<ProviderState>, I>>(
+    base?: I,
+  ): ProviderState {
     return ProviderState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ProviderState>, I>>(object: I): ProviderState {
+  fromPartial<I extends Exact<DeepPartial<ProviderState>, I>>(
+    object: I,
+  ): ProviderState {
     const message = createBaseProviderState();
-    message.providerInfo = (object.providerInfo !== undefined && object.providerInfo !== null)
-      ? ProviderInfo.fromPartial(object.providerInfo)
-      : undefined;
-    message.providerPriceStates = object.providerPriceStates?.map((e) => ProviderPriceState.fromPartial(e)) || [];
+    message.providerInfo =
+      object.providerInfo !== undefined && object.providerInfo !== null
+        ? ProviderInfo.fromPartial(object.providerInfo)
+        : undefined;
+    message.providerPriceStates =
+      object.providerPriceStates?.map((e) =>
+        ProviderPriceState.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -1401,7 +1523,10 @@ function createBaseProviderPriceState(): ProviderPriceState {
 }
 
 export const ProviderPriceState: MessageFns<ProviderPriceState> = {
-  encode(message: ProviderPriceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ProviderPriceState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.symbol !== "") {
       writer.uint32(10).string(message.symbol);
     }
@@ -1411,8 +1536,12 @@ export const ProviderPriceState: MessageFns<ProviderPriceState> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ProviderPriceState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ProviderPriceState {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProviderPriceState();
     while (reader.pos < end) {
@@ -1446,7 +1575,9 @@ export const ProviderPriceState: MessageFns<ProviderPriceState> = {
   fromJSON(object: any): ProviderPriceState {
     return {
       symbol: isSet(object.symbol) ? globalThis.String(object.symbol) : "",
-      state: isSet(object.state) ? PriceState.fromJSON(object.state) : undefined,
+      state: isSet(object.state)
+        ? PriceState.fromJSON(object.state)
+        : undefined,
     };
   },
 
@@ -1461,15 +1592,20 @@ export const ProviderPriceState: MessageFns<ProviderPriceState> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProviderPriceState>, I>>(base?: I): ProviderPriceState {
+  create<I extends Exact<DeepPartial<ProviderPriceState>, I>>(
+    base?: I,
+  ): ProviderPriceState {
     return ProviderPriceState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ProviderPriceState>, I>>(object: I): ProviderPriceState {
+  fromPartial<I extends Exact<DeepPartial<ProviderPriceState>, I>>(
+    object: I,
+  ): ProviderPriceState {
     const message = createBaseProviderPriceState();
     message.symbol = object.symbol ?? "";
-    message.state = (object.state !== undefined && object.state !== null)
-      ? PriceState.fromPartial(object.state)
-      : undefined;
+    message.state =
+      object.state !== undefined && object.state !== null
+        ? PriceState.fromPartial(object.state)
+        : undefined;
     return message;
   },
 };
@@ -1479,7 +1615,10 @@ function createBasePriceFeedInfo(): PriceFeedInfo {
 }
 
 export const PriceFeedInfo: MessageFns<PriceFeedInfo> = {
-  encode(message: PriceFeedInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceFeedInfo,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.base !== "") {
       writer.uint32(10).string(message.base);
     }
@@ -1490,7 +1629,8 @@ export const PriceFeedInfo: MessageFns<PriceFeedInfo> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceFeedInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceFeedInfo();
     while (reader.pos < end) {
@@ -1539,10 +1679,14 @@ export const PriceFeedInfo: MessageFns<PriceFeedInfo> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceFeedInfo>, I>>(base?: I): PriceFeedInfo {
+  create<I extends Exact<DeepPartial<PriceFeedInfo>, I>>(
+    base?: I,
+  ): PriceFeedInfo {
     return PriceFeedInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceFeedInfo>, I>>(object: I): PriceFeedInfo {
+  fromPartial<I extends Exact<DeepPartial<PriceFeedInfo>, I>>(
+    object: I,
+  ): PriceFeedInfo {
     const message = createBasePriceFeedInfo();
     message.base = object.base ?? "";
     message.quote = object.quote ?? "";
@@ -1555,7 +1699,10 @@ function createBasePriceFeedPrice(): PriceFeedPrice {
 }
 
 export const PriceFeedPrice: MessageFns<PriceFeedPrice> = {
-  encode(message: PriceFeedPrice, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceFeedPrice,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -1563,7 +1710,8 @@ export const PriceFeedPrice: MessageFns<PriceFeedPrice> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceFeedPrice {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceFeedPrice();
     while (reader.pos < end) {
@@ -1587,7 +1735,9 @@ export const PriceFeedPrice: MessageFns<PriceFeedPrice> = {
   },
 
   fromJSON(object: any): PriceFeedPrice {
-    return { price: isSet(object.price) ? globalThis.String(object.price) : "" };
+    return {
+      price: isSet(object.price) ? globalThis.String(object.price) : "",
+    };
   },
 
   toJSON(message: PriceFeedPrice): unknown {
@@ -1598,10 +1748,14 @@ export const PriceFeedPrice: MessageFns<PriceFeedPrice> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceFeedPrice>, I>>(base?: I): PriceFeedPrice {
+  create<I extends Exact<DeepPartial<PriceFeedPrice>, I>>(
+    base?: I,
+  ): PriceFeedPrice {
     return PriceFeedPrice.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceFeedPrice>, I>>(object: I): PriceFeedPrice {
+  fromPartial<I extends Exact<DeepPartial<PriceFeedPrice>, I>>(
+    object: I,
+  ): PriceFeedPrice {
     const message = createBasePriceFeedPrice();
     message.price = object.price ?? "";
     return message;
@@ -1613,7 +1767,10 @@ function createBaseCoinbasePriceState(): CoinbasePriceState {
 }
 
 export const CoinbasePriceState: MessageFns<CoinbasePriceState> = {
-  encode(message: CoinbasePriceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CoinbasePriceState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
     }
@@ -1632,8 +1789,12 @@ export const CoinbasePriceState: MessageFns<CoinbasePriceState> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): CoinbasePriceState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): CoinbasePriceState {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCoinbasePriceState();
     while (reader.pos < end) {
@@ -1691,14 +1852,16 @@ export const CoinbasePriceState: MessageFns<CoinbasePriceState> = {
   fromJSON(object: any): CoinbasePriceState {
     return {
       kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? globalThis.Number(object.value) : 0,
       priceState: isSet(object.priceState)
         ? PriceState.fromJSON(object.priceState)
         : isSet(object.price_state)
-        ? PriceState.fromJSON(object.price_state)
-        : undefined,
+          ? PriceState.fromJSON(object.price_state)
+          : undefined,
     };
   },
 
@@ -1722,18 +1885,23 @@ export const CoinbasePriceState: MessageFns<CoinbasePriceState> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CoinbasePriceState>, I>>(base?: I): CoinbasePriceState {
+  create<I extends Exact<DeepPartial<CoinbasePriceState>, I>>(
+    base?: I,
+  ): CoinbasePriceState {
     return CoinbasePriceState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CoinbasePriceState>, I>>(object: I): CoinbasePriceState {
+  fromPartial<I extends Exact<DeepPartial<CoinbasePriceState>, I>>(
+    object: I,
+  ): CoinbasePriceState {
     const message = createBaseCoinbasePriceState();
     message.kind = object.kind ?? "";
     message.timestamp = object.timestamp ?? 0;
     message.key = object.key ?? "";
     message.value = object.value ?? 0;
-    message.priceState = (object.priceState !== undefined && object.priceState !== null)
-      ? PriceState.fromPartial(object.priceState)
-      : undefined;
+    message.priceState =
+      object.priceState !== undefined && object.priceState !== null
+        ? PriceState.fromPartial(object.priceState)
+        : undefined;
     return message;
   },
 };
@@ -1743,7 +1911,10 @@ function createBaseStorkPriceState(): StorkPriceState {
 }
 
 export const StorkPriceState: MessageFns<StorkPriceState> = {
-  encode(message: StorkPriceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StorkPriceState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.timestamp !== 0) {
       writer.uint32(8).uint64(message.timestamp);
     }
@@ -1760,7 +1931,8 @@ export const StorkPriceState: MessageFns<StorkPriceState> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): StorkPriceState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStorkPriceState();
     while (reader.pos < end) {
@@ -1809,14 +1981,16 @@ export const StorkPriceState: MessageFns<StorkPriceState> = {
 
   fromJSON(object: any): StorkPriceState {
     return {
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
       symbol: isSet(object.symbol) ? globalThis.String(object.symbol) : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
       priceState: isSet(object.priceState)
         ? PriceState.fromJSON(object.priceState)
         : isSet(object.price_state)
-        ? PriceState.fromJSON(object.price_state)
-        : undefined,
+          ? PriceState.fromJSON(object.price_state)
+          : undefined,
     };
   },
 
@@ -1837,17 +2011,22 @@ export const StorkPriceState: MessageFns<StorkPriceState> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StorkPriceState>, I>>(base?: I): StorkPriceState {
+  create<I extends Exact<DeepPartial<StorkPriceState>, I>>(
+    base?: I,
+  ): StorkPriceState {
     return StorkPriceState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StorkPriceState>, I>>(object: I): StorkPriceState {
+  fromPartial<I extends Exact<DeepPartial<StorkPriceState>, I>>(
+    object: I,
+  ): StorkPriceState {
     const message = createBaseStorkPriceState();
     message.timestamp = object.timestamp ?? 0;
     message.symbol = object.symbol ?? "";
     message.value = object.value ?? "";
-    message.priceState = (object.priceState !== undefined && object.priceState !== null)
-      ? PriceState.fromPartial(object.priceState)
-      : undefined;
+    message.priceState =
+      object.priceState !== undefined && object.priceState !== null
+        ? PriceState.fromPartial(object.priceState)
+        : undefined;
     return message;
   },
 };
@@ -1857,7 +2036,10 @@ function createBasePriceState(): PriceState {
 }
 
 export const PriceState: MessageFns<PriceState> = {
-  encode(message: PriceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -1871,7 +2053,8 @@ export const PriceState: MessageFns<PriceState> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceState();
     while (reader.pos < end) {
@@ -1916,9 +2099,11 @@ export const PriceState: MessageFns<PriceState> = {
       cumulativePrice: isSet(object.cumulativePrice)
         ? globalThis.String(object.cumulativePrice)
         : isSet(object.cumulative_price)
-        ? globalThis.String(object.cumulative_price)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.cumulative_price)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -1939,7 +2124,9 @@ export const PriceState: MessageFns<PriceState> = {
   create<I extends Exact<DeepPartial<PriceState>, I>>(base?: I): PriceState {
     return PriceState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceState>, I>>(object: I): PriceState {
+  fromPartial<I extends Exact<DeepPartial<PriceState>, I>>(
+    object: I,
+  ): PriceState {
     const message = createBasePriceState();
     message.price = object.price ?? "";
     message.cumulativePrice = object.cumulativePrice ?? "";
@@ -1949,11 +2136,21 @@ export const PriceState: MessageFns<PriceState> = {
 };
 
 function createBasePythPriceState(): PythPriceState {
-  return { priceId: "", emaPrice: "", emaConf: "", conf: "", publishTime: 0, priceState: undefined };
+  return {
+    priceId: "",
+    emaPrice: "",
+    emaConf: "",
+    conf: "",
+    publishTime: 0,
+    priceState: undefined,
+  };
 }
 
 export const PythPriceState: MessageFns<PythPriceState> = {
-  encode(message: PythPriceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PythPriceState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.priceId !== "") {
       writer.uint32(10).string(message.priceId);
     }
@@ -1976,7 +2173,8 @@ export const PythPriceState: MessageFns<PythPriceState> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PythPriceState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePythPriceState();
     while (reader.pos < end) {
@@ -2044,29 +2242,29 @@ export const PythPriceState: MessageFns<PythPriceState> = {
       priceId: isSet(object.priceId)
         ? globalThis.String(object.priceId)
         : isSet(object.price_id)
-        ? globalThis.String(object.price_id)
-        : "",
+          ? globalThis.String(object.price_id)
+          : "",
       emaPrice: isSet(object.emaPrice)
         ? globalThis.String(object.emaPrice)
         : isSet(object.ema_price)
-        ? globalThis.String(object.ema_price)
-        : "",
+          ? globalThis.String(object.ema_price)
+          : "",
       emaConf: isSet(object.emaConf)
         ? globalThis.String(object.emaConf)
         : isSet(object.ema_conf)
-        ? globalThis.String(object.ema_conf)
-        : "",
+          ? globalThis.String(object.ema_conf)
+          : "",
       conf: isSet(object.conf) ? globalThis.String(object.conf) : "",
       publishTime: isSet(object.publishTime)
         ? globalThis.Number(object.publishTime)
         : isSet(object.publish_time)
-        ? globalThis.Number(object.publish_time)
-        : 0,
+          ? globalThis.Number(object.publish_time)
+          : 0,
       priceState: isSet(object.priceState)
         ? PriceState.fromJSON(object.priceState)
         : isSet(object.price_state)
-        ? PriceState.fromJSON(object.price_state)
-        : undefined,
+          ? PriceState.fromJSON(object.price_state)
+          : undefined,
     };
   },
 
@@ -2093,19 +2291,24 @@ export const PythPriceState: MessageFns<PythPriceState> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PythPriceState>, I>>(base?: I): PythPriceState {
+  create<I extends Exact<DeepPartial<PythPriceState>, I>>(
+    base?: I,
+  ): PythPriceState {
     return PythPriceState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PythPriceState>, I>>(object: I): PythPriceState {
+  fromPartial<I extends Exact<DeepPartial<PythPriceState>, I>>(
+    object: I,
+  ): PythPriceState {
     const message = createBasePythPriceState();
     message.priceId = object.priceId ?? "";
     message.emaPrice = object.emaPrice ?? "";
     message.emaConf = object.emaConf ?? "";
     message.conf = object.conf ?? "";
     message.publishTime = object.publishTime ?? 0;
-    message.priceState = (object.priceState !== undefined && object.priceState !== null)
-      ? PriceState.fromPartial(object.priceState)
-      : undefined;
+    message.priceState =
+      object.priceState !== undefined && object.priceState !== null
+        ? PriceState.fromPartial(object.priceState)
+        : undefined;
     return message;
   },
 };
@@ -2121,169 +2324,180 @@ function createBaseChainlinkDataStreamsPriceState(): ChainlinkDataStreamsPriceSt
   };
 }
 
-export const ChainlinkDataStreamsPriceState: MessageFns<ChainlinkDataStreamsPriceState> = {
-  encode(message: ChainlinkDataStreamsPriceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.feedId !== "") {
-      writer.uint32(10).string(message.feedId);
-    }
-    if (message.reportPrice !== "") {
-      writer.uint32(18).string(message.reportPrice);
-    }
-    if (message.validFromTimestamp !== 0) {
-      writer.uint32(24).uint64(message.validFromTimestamp);
-    }
-    if (message.observationsTimestamp !== 0) {
-      writer.uint32(32).uint64(message.observationsTimestamp);
-    }
-    if (message.priceState !== undefined) {
-      PriceState.encode(message.priceState, writer.uint32(42).fork()).join();
-    }
-    if (message.expiresAt !== 0) {
-      writer.uint32(48).uint64(message.expiresAt);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): ChainlinkDataStreamsPriceState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseChainlinkDataStreamsPriceState();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.feedId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.reportPrice = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.validFromTimestamp = longToNumber(reader.uint64());
-          continue;
-        }
-        case 4: {
-          if (tag !== 32) {
-            break;
-          }
-
-          message.observationsTimestamp = longToNumber(reader.uint64());
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.priceState = PriceState.decode(reader, reader.uint32());
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.expiresAt = longToNumber(reader.uint64());
-          continue;
-        }
+export const ChainlinkDataStreamsPriceState: MessageFns<ChainlinkDataStreamsPriceState> =
+  {
+    encode(
+      message: ChainlinkDataStreamsPriceState,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.feedId !== "") {
+        writer.uint32(10).string(message.feedId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.reportPrice !== "") {
+        writer.uint32(18).string(message.reportPrice);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.validFromTimestamp !== 0) {
+        writer.uint32(24).uint64(message.validFromTimestamp);
+      }
+      if (message.observationsTimestamp !== 0) {
+        writer.uint32(32).uint64(message.observationsTimestamp);
+      }
+      if (message.priceState !== undefined) {
+        PriceState.encode(message.priceState, writer.uint32(42).fork()).join();
+      }
+      if (message.expiresAt !== 0) {
+        writer.uint32(48).uint64(message.expiresAt);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): ChainlinkDataStreamsPriceState {
-    return {
-      feedId: isSet(object.feedId)
-        ? globalThis.String(object.feedId)
-        : isSet(object.feed_id)
-        ? globalThis.String(object.feed_id)
-        : "",
-      reportPrice: isSet(object.reportPrice)
-        ? globalThis.String(object.reportPrice)
-        : isSet(object.report_price)
-        ? globalThis.String(object.report_price)
-        : "",
-      validFromTimestamp: isSet(object.validFromTimestamp)
-        ? globalThis.Number(object.validFromTimestamp)
-        : isSet(object.valid_from_timestamp)
-        ? globalThis.Number(object.valid_from_timestamp)
-        : 0,
-      observationsTimestamp: isSet(object.observationsTimestamp)
-        ? globalThis.Number(object.observationsTimestamp)
-        : isSet(object.observations_timestamp)
-        ? globalThis.Number(object.observations_timestamp)
-        : 0,
-      priceState: isSet(object.priceState)
-        ? PriceState.fromJSON(object.priceState)
-        : isSet(object.price_state)
-        ? PriceState.fromJSON(object.price_state)
-        : undefined,
-      expiresAt: isSet(object.expiresAt)
-        ? globalThis.Number(object.expiresAt)
-        : isSet(object.expires_at)
-        ? globalThis.Number(object.expires_at)
-        : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): ChainlinkDataStreamsPriceState {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseChainlinkDataStreamsPriceState();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: ChainlinkDataStreamsPriceState): unknown {
-    const obj: any = {};
-    if (message.feedId !== "") {
-      obj.feedId = message.feedId;
-    }
-    if (message.reportPrice !== "") {
-      obj.reportPrice = message.reportPrice;
-    }
-    if (message.validFromTimestamp !== 0) {
-      obj.validFromTimestamp = Math.round(message.validFromTimestamp);
-    }
-    if (message.observationsTimestamp !== 0) {
-      obj.observationsTimestamp = Math.round(message.observationsTimestamp);
-    }
-    if (message.priceState !== undefined) {
-      obj.priceState = PriceState.toJSON(message.priceState);
-    }
-    if (message.expiresAt !== 0) {
-      obj.expiresAt = Math.round(message.expiresAt);
-    }
-    return obj;
-  },
+            message.feedId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<ChainlinkDataStreamsPriceState>, I>>(base?: I): ChainlinkDataStreamsPriceState {
-    return ChainlinkDataStreamsPriceState.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<ChainlinkDataStreamsPriceState>, I>>(
-    object: I,
-  ): ChainlinkDataStreamsPriceState {
-    const message = createBaseChainlinkDataStreamsPriceState();
-    message.feedId = object.feedId ?? "";
-    message.reportPrice = object.reportPrice ?? "";
-    message.validFromTimestamp = object.validFromTimestamp ?? 0;
-    message.observationsTimestamp = object.observationsTimestamp ?? 0;
-    message.priceState = (object.priceState !== undefined && object.priceState !== null)
-      ? PriceState.fromPartial(object.priceState)
-      : undefined;
-    message.expiresAt = object.expiresAt ?? 0;
-    return message;
-  },
-};
+            message.reportPrice = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.validFromTimestamp = longToNumber(reader.uint64());
+            continue;
+          }
+          case 4: {
+            if (tag !== 32) {
+              break;
+            }
+
+            message.observationsTimestamp = longToNumber(reader.uint64());
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.priceState = PriceState.decode(reader, reader.uint32());
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.expiresAt = longToNumber(reader.uint64());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): ChainlinkDataStreamsPriceState {
+      return {
+        feedId: isSet(object.feedId)
+          ? globalThis.String(object.feedId)
+          : isSet(object.feed_id)
+            ? globalThis.String(object.feed_id)
+            : "",
+        reportPrice: isSet(object.reportPrice)
+          ? globalThis.String(object.reportPrice)
+          : isSet(object.report_price)
+            ? globalThis.String(object.report_price)
+            : "",
+        validFromTimestamp: isSet(object.validFromTimestamp)
+          ? globalThis.Number(object.validFromTimestamp)
+          : isSet(object.valid_from_timestamp)
+            ? globalThis.Number(object.valid_from_timestamp)
+            : 0,
+        observationsTimestamp: isSet(object.observationsTimestamp)
+          ? globalThis.Number(object.observationsTimestamp)
+          : isSet(object.observations_timestamp)
+            ? globalThis.Number(object.observations_timestamp)
+            : 0,
+        priceState: isSet(object.priceState)
+          ? PriceState.fromJSON(object.priceState)
+          : isSet(object.price_state)
+            ? PriceState.fromJSON(object.price_state)
+            : undefined,
+        expiresAt: isSet(object.expiresAt)
+          ? globalThis.Number(object.expiresAt)
+          : isSet(object.expires_at)
+            ? globalThis.Number(object.expires_at)
+            : 0,
+      };
+    },
+
+    toJSON(message: ChainlinkDataStreamsPriceState): unknown {
+      const obj: any = {};
+      if (message.feedId !== "") {
+        obj.feedId = message.feedId;
+      }
+      if (message.reportPrice !== "") {
+        obj.reportPrice = message.reportPrice;
+      }
+      if (message.validFromTimestamp !== 0) {
+        obj.validFromTimestamp = Math.round(message.validFromTimestamp);
+      }
+      if (message.observationsTimestamp !== 0) {
+        obj.observationsTimestamp = Math.round(message.observationsTimestamp);
+      }
+      if (message.priceState !== undefined) {
+        obj.priceState = PriceState.toJSON(message.priceState);
+      }
+      if (message.expiresAt !== 0) {
+        obj.expiresAt = Math.round(message.expiresAt);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<ChainlinkDataStreamsPriceState>, I>>(
+      base?: I,
+    ): ChainlinkDataStreamsPriceState {
+      return ChainlinkDataStreamsPriceState.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<ChainlinkDataStreamsPriceState>, I>,
+    >(object: I): ChainlinkDataStreamsPriceState {
+      const message = createBaseChainlinkDataStreamsPriceState();
+      message.feedId = object.feedId ?? "";
+      message.reportPrice = object.reportPrice ?? "";
+      message.validFromTimestamp = object.validFromTimestamp ?? 0;
+      message.observationsTimestamp = object.observationsTimestamp ?? 0;
+      message.priceState =
+        object.priceState !== undefined && object.priceState !== null
+          ? PriceState.fromPartial(object.priceState)
+          : undefined;
+      message.expiresAt = object.expiresAt ?? 0;
+      return message;
+    },
+  };
 
 function createBaseBandOracleRequest(): BandOracleRequest {
   return {
@@ -2300,7 +2514,10 @@ function createBaseBandOracleRequest(): BandOracleRequest {
 }
 
 export const BandOracleRequest: MessageFns<BandOracleRequest> = {
-  encode(message: BandOracleRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BandOracleRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.requestId !== 0) {
       writer.uint32(8).uint64(message.requestId);
     }
@@ -2332,7 +2549,8 @@ export const BandOracleRequest: MessageFns<BandOracleRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): BandOracleRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBandOracleRequest();
     while (reader.pos < end) {
@@ -2424,44 +2642,46 @@ export const BandOracleRequest: MessageFns<BandOracleRequest> = {
       requestId: isSet(object.requestId)
         ? globalThis.Number(object.requestId)
         : isSet(object.request_id)
-        ? globalThis.Number(object.request_id)
-        : 0,
+          ? globalThis.Number(object.request_id)
+          : 0,
       oracleScriptId: isSet(object.oracleScriptId)
         ? globalThis.Number(object.oracleScriptId)
         : isSet(object.oracle_script_id)
-        ? globalThis.Number(object.oracle_script_id)
-        : 0,
-      symbols: globalThis.Array.isArray(object?.symbols) ? object.symbols.map((e: any) => globalThis.String(e)) : [],
+          ? globalThis.Number(object.oracle_script_id)
+          : 0,
+      symbols: globalThis.Array.isArray(object?.symbols)
+        ? object.symbols.map((e: any) => globalThis.String(e))
+        : [],
       askCount: isSet(object.askCount)
         ? globalThis.Number(object.askCount)
         : isSet(object.ask_count)
-        ? globalThis.Number(object.ask_count)
-        : 0,
+          ? globalThis.Number(object.ask_count)
+          : 0,
       minCount: isSet(object.minCount)
         ? globalThis.Number(object.minCount)
         : isSet(object.min_count)
-        ? globalThis.Number(object.min_count)
-        : 0,
+          ? globalThis.Number(object.min_count)
+          : 0,
       feeLimit: globalThis.Array.isArray(object?.feeLimit)
         ? object.feeLimit.map((e: any) => Coin.fromJSON(e))
         : globalThis.Array.isArray(object?.fee_limit)
-        ? object.fee_limit.map((e: any) => Coin.fromJSON(e))
-        : [],
+          ? object.fee_limit.map((e: any) => Coin.fromJSON(e))
+          : [],
       prepareGas: isSet(object.prepareGas)
         ? globalThis.Number(object.prepareGas)
         : isSet(object.prepare_gas)
-        ? globalThis.Number(object.prepare_gas)
-        : 0,
+          ? globalThis.Number(object.prepare_gas)
+          : 0,
       executeGas: isSet(object.executeGas)
         ? globalThis.Number(object.executeGas)
         : isSet(object.execute_gas)
-        ? globalThis.Number(object.execute_gas)
-        : 0,
+          ? globalThis.Number(object.execute_gas)
+          : 0,
       minSourceCount: isSet(object.minSourceCount)
         ? globalThis.Number(object.minSourceCount)
         : isSet(object.min_source_count)
-        ? globalThis.Number(object.min_source_count)
-        : 0,
+          ? globalThis.Number(object.min_source_count)
+          : 0,
     };
   },
 
@@ -2497,10 +2717,14 @@ export const BandOracleRequest: MessageFns<BandOracleRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BandOracleRequest>, I>>(base?: I): BandOracleRequest {
+  create<I extends Exact<DeepPartial<BandOracleRequest>, I>>(
+    base?: I,
+  ): BandOracleRequest {
     return BandOracleRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BandOracleRequest>, I>>(object: I): BandOracleRequest {
+  fromPartial<I extends Exact<DeepPartial<BandOracleRequest>, I>>(
+    object: I,
+  ): BandOracleRequest {
     const message = createBaseBandOracleRequest();
     message.requestId = object.requestId ?? 0;
     message.oracleScriptId = object.oracleScriptId ?? 0;
@@ -2527,7 +2751,10 @@ function createBaseBandIBCParams(): BandIBCParams {
 }
 
 export const BandIBCParams: MessageFns<BandIBCParams> = {
-  encode(message: BandIBCParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BandIBCParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.bandIbcEnabled !== false) {
       writer.uint32(8).bool(message.bandIbcEnabled);
     }
@@ -2552,7 +2779,8 @@ export const BandIBCParams: MessageFns<BandIBCParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): BandIBCParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBandIBCParams();
     while (reader.pos < end) {
@@ -2630,33 +2858,33 @@ export const BandIBCParams: MessageFns<BandIBCParams> = {
       bandIbcEnabled: isSet(object.bandIbcEnabled)
         ? globalThis.Boolean(object.bandIbcEnabled)
         : isSet(object.band_ibc_enabled)
-        ? globalThis.Boolean(object.band_ibc_enabled)
-        : false,
+          ? globalThis.Boolean(object.band_ibc_enabled)
+          : false,
       ibcRequestInterval: isSet(object.ibcRequestInterval)
         ? globalThis.Number(object.ibcRequestInterval)
         : isSet(object.ibc_request_interval)
-        ? globalThis.Number(object.ibc_request_interval)
-        : 0,
+          ? globalThis.Number(object.ibc_request_interval)
+          : 0,
       ibcSourceChannel: isSet(object.ibcSourceChannel)
         ? globalThis.String(object.ibcSourceChannel)
         : isSet(object.ibc_source_channel)
-        ? globalThis.String(object.ibc_source_channel)
-        : "",
+          ? globalThis.String(object.ibc_source_channel)
+          : "",
       ibcVersion: isSet(object.ibcVersion)
         ? globalThis.String(object.ibcVersion)
         : isSet(object.ibc_version)
-        ? globalThis.String(object.ibc_version)
-        : "",
+          ? globalThis.String(object.ibc_version)
+          : "",
       ibcPortId: isSet(object.ibcPortId)
         ? globalThis.String(object.ibcPortId)
         : isSet(object.ibc_port_id)
-        ? globalThis.String(object.ibc_port_id)
-        : "",
+          ? globalThis.String(object.ibc_port_id)
+          : "",
       legacyOracleIds: globalThis.Array.isArray(object?.legacyOracleIds)
         ? object.legacyOracleIds.map((e: any) => globalThis.Number(e))
         : globalThis.Array.isArray(object?.legacy_oracle_ids)
-        ? object.legacy_oracle_ids.map((e: any) => globalThis.Number(e))
-        : [],
+          ? object.legacy_oracle_ids.map((e: any) => globalThis.Number(e))
+          : [],
     };
   },
 
@@ -2683,10 +2911,14 @@ export const BandIBCParams: MessageFns<BandIBCParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BandIBCParams>, I>>(base?: I): BandIBCParams {
+  create<I extends Exact<DeepPartial<BandIBCParams>, I>>(
+    base?: I,
+  ): BandIBCParams {
     return BandIBCParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BandIBCParams>, I>>(object: I): BandIBCParams {
+  fromPartial<I extends Exact<DeepPartial<BandIBCParams>, I>>(
+    object: I,
+  ): BandIBCParams {
     const message = createBaseBandIBCParams();
     message.bandIbcEnabled = object.bandIbcEnabled ?? false;
     message.ibcRequestInterval = object.ibcRequestInterval ?? 0;
@@ -2703,7 +2935,10 @@ function createBaseSymbolPriceTimestamp(): SymbolPriceTimestamp {
 }
 
 export const SymbolPriceTimestamp: MessageFns<SymbolPriceTimestamp> = {
-  encode(message: SymbolPriceTimestamp, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SymbolPriceTimestamp,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.oracle !== 0) {
       writer.uint32(8).int32(message.oracle);
     }
@@ -2716,8 +2951,12 @@ export const SymbolPriceTimestamp: MessageFns<SymbolPriceTimestamp> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SymbolPriceTimestamp {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SymbolPriceTimestamp {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSymbolPriceTimestamp();
     while (reader.pos < end) {
@@ -2762,9 +3001,11 @@ export const SymbolPriceTimestamp: MessageFns<SymbolPriceTimestamp> = {
       symbolId: isSet(object.symbolId)
         ? globalThis.String(object.symbolId)
         : isSet(object.symbol_id)
-        ? globalThis.String(object.symbol_id)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.symbol_id)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -2782,10 +3023,14 @@ export const SymbolPriceTimestamp: MessageFns<SymbolPriceTimestamp> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SymbolPriceTimestamp>, I>>(base?: I): SymbolPriceTimestamp {
+  create<I extends Exact<DeepPartial<SymbolPriceTimestamp>, I>>(
+    base?: I,
+  ): SymbolPriceTimestamp {
     return SymbolPriceTimestamp.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SymbolPriceTimestamp>, I>>(object: I): SymbolPriceTimestamp {
+  fromPartial<I extends Exact<DeepPartial<SymbolPriceTimestamp>, I>>(
+    object: I,
+  ): SymbolPriceTimestamp {
     const message = createBaseSymbolPriceTimestamp();
     message.oracle = object.oracle ?? 0;
     message.symbolId = object.symbolId ?? "";
@@ -2799,15 +3044,22 @@ function createBaseLastPriceTimestamps(): LastPriceTimestamps {
 }
 
 export const LastPriceTimestamps: MessageFns<LastPriceTimestamps> = {
-  encode(message: LastPriceTimestamps, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: LastPriceTimestamps,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.lastPriceTimestamps) {
       SymbolPriceTimestamp.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): LastPriceTimestamps {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): LastPriceTimestamps {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLastPriceTimestamps();
     while (reader.pos < end) {
@@ -2818,7 +3070,9 @@ export const LastPriceTimestamps: MessageFns<LastPriceTimestamps> = {
             break;
           }
 
-          message.lastPriceTimestamps.push(SymbolPriceTimestamp.decode(reader, reader.uint32()));
+          message.lastPriceTimestamps.push(
+            SymbolPriceTimestamp.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -2833,27 +3087,40 @@ export const LastPriceTimestamps: MessageFns<LastPriceTimestamps> = {
   fromJSON(object: any): LastPriceTimestamps {
     return {
       lastPriceTimestamps: globalThis.Array.isArray(object?.lastPriceTimestamps)
-        ? object.lastPriceTimestamps.map((e: any) => SymbolPriceTimestamp.fromJSON(e))
+        ? object.lastPriceTimestamps.map((e: any) =>
+            SymbolPriceTimestamp.fromJSON(e),
+          )
         : globalThis.Array.isArray(object?.last_price_timestamps)
-        ? object.last_price_timestamps.map((e: any) => SymbolPriceTimestamp.fromJSON(e))
-        : [],
+          ? object.last_price_timestamps.map((e: any) =>
+              SymbolPriceTimestamp.fromJSON(e),
+            )
+          : [],
     };
   },
 
   toJSON(message: LastPriceTimestamps): unknown {
     const obj: any = {};
     if (message.lastPriceTimestamps?.length) {
-      obj.lastPriceTimestamps = message.lastPriceTimestamps.map((e) => SymbolPriceTimestamp.toJSON(e));
+      obj.lastPriceTimestamps = message.lastPriceTimestamps.map((e) =>
+        SymbolPriceTimestamp.toJSON(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<LastPriceTimestamps>, I>>(base?: I): LastPriceTimestamps {
+  create<I extends Exact<DeepPartial<LastPriceTimestamps>, I>>(
+    base?: I,
+  ): LastPriceTimestamps {
     return LastPriceTimestamps.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<LastPriceTimestamps>, I>>(object: I): LastPriceTimestamps {
+  fromPartial<I extends Exact<DeepPartial<LastPriceTimestamps>, I>>(
+    object: I,
+  ): LastPriceTimestamps {
     const message = createBaseLastPriceTimestamps();
-    message.lastPriceTimestamps = object.lastPriceTimestamps?.map((e) => SymbolPriceTimestamp.fromPartial(e)) || [];
+    message.lastPriceTimestamps =
+      object.lastPriceTimestamps?.map((e) =>
+        SymbolPriceTimestamp.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -2863,7 +3130,10 @@ function createBasePriceRecords(): PriceRecords {
 }
 
 export const PriceRecords: MessageFns<PriceRecords> = {
-  encode(message: PriceRecords, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceRecords,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.oracle !== 0) {
       writer.uint32(8).int32(message.oracle);
     }
@@ -2877,7 +3147,8 @@ export const PriceRecords: MessageFns<PriceRecords> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceRecords {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceRecords();
     while (reader.pos < end) {
@@ -2904,7 +3175,9 @@ export const PriceRecords: MessageFns<PriceRecords> = {
             break;
           }
 
-          message.latestPriceRecords.push(PriceRecord.decode(reader, reader.uint32()));
+          message.latestPriceRecords.push(
+            PriceRecord.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -2922,13 +3195,13 @@ export const PriceRecords: MessageFns<PriceRecords> = {
       symbolId: isSet(object.symbolId)
         ? globalThis.String(object.symbolId)
         : isSet(object.symbol_id)
-        ? globalThis.String(object.symbol_id)
-        : "",
+          ? globalThis.String(object.symbol_id)
+          : "",
       latestPriceRecords: globalThis.Array.isArray(object?.latestPriceRecords)
         ? object.latestPriceRecords.map((e: any) => PriceRecord.fromJSON(e))
         : globalThis.Array.isArray(object?.latest_price_records)
-        ? object.latest_price_records.map((e: any) => PriceRecord.fromJSON(e))
-        : [],
+          ? object.latest_price_records.map((e: any) => PriceRecord.fromJSON(e))
+          : [],
     };
   },
 
@@ -2941,19 +3214,26 @@ export const PriceRecords: MessageFns<PriceRecords> = {
       obj.symbolId = message.symbolId;
     }
     if (message.latestPriceRecords?.length) {
-      obj.latestPriceRecords = message.latestPriceRecords.map((e) => PriceRecord.toJSON(e));
+      obj.latestPriceRecords = message.latestPriceRecords.map((e) =>
+        PriceRecord.toJSON(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceRecords>, I>>(base?: I): PriceRecords {
+  create<I extends Exact<DeepPartial<PriceRecords>, I>>(
+    base?: I,
+  ): PriceRecords {
     return PriceRecords.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceRecords>, I>>(object: I): PriceRecords {
+  fromPartial<I extends Exact<DeepPartial<PriceRecords>, I>>(
+    object: I,
+  ): PriceRecords {
     const message = createBasePriceRecords();
     message.oracle = object.oracle ?? 0;
     message.symbolId = object.symbolId ?? "";
-    message.latestPriceRecords = object.latestPriceRecords?.map((e) => PriceRecord.fromPartial(e)) || [];
+    message.latestPriceRecords =
+      object.latestPriceRecords?.map((e) => PriceRecord.fromPartial(e)) || [];
     return message;
   },
 };
@@ -2963,7 +3243,10 @@ function createBasePriceRecord(): PriceRecord {
 }
 
 export const PriceRecord: MessageFns<PriceRecord> = {
-  encode(message: PriceRecord, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceRecord,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.timestamp !== 0) {
       writer.uint32(8).int64(message.timestamp);
     }
@@ -2974,7 +3257,8 @@ export const PriceRecord: MessageFns<PriceRecord> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceRecord {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceRecord();
     while (reader.pos < end) {
@@ -3007,7 +3291,9 @@ export const PriceRecord: MessageFns<PriceRecord> = {
 
   fromJSON(object: any): PriceRecord {
     return {
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
       price: isSet(object.price) ? globalThis.String(object.price) : "",
     };
   },
@@ -3026,7 +3312,9 @@ export const PriceRecord: MessageFns<PriceRecord> = {
   create<I extends Exact<DeepPartial<PriceRecord>, I>>(base?: I): PriceRecord {
     return PriceRecord.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceRecord>, I>>(object: I): PriceRecord {
+  fromPartial<I extends Exact<DeepPartial<PriceRecord>, I>>(
+    object: I,
+  ): PriceRecord {
     const message = createBasePriceRecord();
     message.timestamp = object.timestamp ?? 0;
     message.price = object.price ?? "";
@@ -3049,7 +3337,10 @@ function createBaseMetadataStatistics(): MetadataStatistics {
 }
 
 export const MetadataStatistics: MessageFns<MetadataStatistics> = {
-  encode(message: MetadataStatistics, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MetadataStatistics,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.groupCount !== 0) {
       writer.uint32(8).uint32(message.groupCount);
     }
@@ -3080,8 +3371,12 @@ export const MetadataStatistics: MessageFns<MetadataStatistics> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MetadataStatistics {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MetadataStatistics {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetadataStatistics();
     while (reader.pos < end) {
@@ -3173,40 +3468,40 @@ export const MetadataStatistics: MessageFns<MetadataStatistics> = {
       groupCount: isSet(object.groupCount)
         ? globalThis.Number(object.groupCount)
         : isSet(object.group_count)
-        ? globalThis.Number(object.group_count)
-        : 0,
+          ? globalThis.Number(object.group_count)
+          : 0,
       recordsSampleSize: isSet(object.recordsSampleSize)
         ? globalThis.Number(object.recordsSampleSize)
         : isSet(object.records_sample_size)
-        ? globalThis.Number(object.records_sample_size)
-        : 0,
+          ? globalThis.Number(object.records_sample_size)
+          : 0,
       mean: isSet(object.mean) ? globalThis.String(object.mean) : "",
       twap: isSet(object.twap) ? globalThis.String(object.twap) : "",
       firstTimestamp: isSet(object.firstTimestamp)
         ? globalThis.Number(object.firstTimestamp)
         : isSet(object.first_timestamp)
-        ? globalThis.Number(object.first_timestamp)
-        : 0,
+          ? globalThis.Number(object.first_timestamp)
+          : 0,
       lastTimestamp: isSet(object.lastTimestamp)
         ? globalThis.Number(object.lastTimestamp)
         : isSet(object.last_timestamp)
-        ? globalThis.Number(object.last_timestamp)
-        : 0,
+          ? globalThis.Number(object.last_timestamp)
+          : 0,
       minPrice: isSet(object.minPrice)
         ? globalThis.String(object.minPrice)
         : isSet(object.min_price)
-        ? globalThis.String(object.min_price)
-        : "",
+          ? globalThis.String(object.min_price)
+          : "",
       maxPrice: isSet(object.maxPrice)
         ? globalThis.String(object.maxPrice)
         : isSet(object.max_price)
-        ? globalThis.String(object.max_price)
-        : "",
+          ? globalThis.String(object.max_price)
+          : "",
       medianPrice: isSet(object.medianPrice)
         ? globalThis.String(object.medianPrice)
         : isSet(object.median_price)
-        ? globalThis.String(object.median_price)
-        : "",
+          ? globalThis.String(object.median_price)
+          : "",
     };
   },
 
@@ -3242,10 +3537,14 @@ export const MetadataStatistics: MessageFns<MetadataStatistics> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MetadataStatistics>, I>>(base?: I): MetadataStatistics {
+  create<I extends Exact<DeepPartial<MetadataStatistics>, I>>(
+    base?: I,
+  ): MetadataStatistics {
     return MetadataStatistics.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MetadataStatistics>, I>>(object: I): MetadataStatistics {
+  fromPartial<I extends Exact<DeepPartial<MetadataStatistics>, I>>(
+    object: I,
+  ): MetadataStatistics {
     const message = createBaseMetadataStatistics();
     message.groupCount = object.groupCount ?? 0;
     message.recordsSampleSize = object.recordsSampleSize ?? 0;
@@ -3261,11 +3560,23 @@ export const MetadataStatistics: MessageFns<MetadataStatistics> = {
 };
 
 function createBasePriceAttestation(): PriceAttestation {
-  return { priceId: "", price: 0, conf: 0, expo: 0, emaPrice: 0, emaConf: 0, emaExpo: 0, publishTime: 0 };
+  return {
+    priceId: "",
+    price: 0,
+    conf: 0,
+    expo: 0,
+    emaPrice: 0,
+    emaConf: 0,
+    emaExpo: 0,
+    publishTime: 0,
+  };
 }
 
 export const PriceAttestation: MessageFns<PriceAttestation> = {
-  encode(message: PriceAttestation, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceAttestation,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.priceId !== "") {
       writer.uint32(10).string(message.priceId);
     }
@@ -3294,7 +3605,8 @@ export const PriceAttestation: MessageFns<PriceAttestation> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceAttestation {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceAttestation();
     while (reader.pos < end) {
@@ -3378,31 +3690,31 @@ export const PriceAttestation: MessageFns<PriceAttestation> = {
       priceId: isSet(object.priceId)
         ? globalThis.String(object.priceId)
         : isSet(object.price_id)
-        ? globalThis.String(object.price_id)
-        : "",
+          ? globalThis.String(object.price_id)
+          : "",
       price: isSet(object.price) ? globalThis.Number(object.price) : 0,
       conf: isSet(object.conf) ? globalThis.Number(object.conf) : 0,
       expo: isSet(object.expo) ? globalThis.Number(object.expo) : 0,
       emaPrice: isSet(object.emaPrice)
         ? globalThis.Number(object.emaPrice)
         : isSet(object.ema_price)
-        ? globalThis.Number(object.ema_price)
-        : 0,
+          ? globalThis.Number(object.ema_price)
+          : 0,
       emaConf: isSet(object.emaConf)
         ? globalThis.Number(object.emaConf)
         : isSet(object.ema_conf)
-        ? globalThis.Number(object.ema_conf)
-        : 0,
+          ? globalThis.Number(object.ema_conf)
+          : 0,
       emaExpo: isSet(object.emaExpo)
         ? globalThis.Number(object.emaExpo)
         : isSet(object.ema_expo)
-        ? globalThis.Number(object.ema_expo)
-        : 0,
+          ? globalThis.Number(object.ema_expo)
+          : 0,
       publishTime: isSet(object.publishTime)
         ? globalThis.Number(object.publishTime)
         : isSet(object.publish_time)
-        ? globalThis.Number(object.publish_time)
-        : 0,
+          ? globalThis.Number(object.publish_time)
+          : 0,
     };
   },
 
@@ -3435,10 +3747,14 @@ export const PriceAttestation: MessageFns<PriceAttestation> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceAttestation>, I>>(base?: I): PriceAttestation {
+  create<I extends Exact<DeepPartial<PriceAttestation>, I>>(
+    base?: I,
+  ): PriceAttestation {
     return PriceAttestation.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceAttestation>, I>>(object: I): PriceAttestation {
+  fromPartial<I extends Exact<DeepPartial<PriceAttestation>, I>>(
+    object: I,
+  ): PriceAttestation {
     const message = createBasePriceAttestation();
     message.priceId = object.priceId ?? "";
     message.price = object.price ?? 0;
@@ -3457,7 +3773,10 @@ function createBaseAssetPair(): AssetPair {
 }
 
 export const AssetPair: MessageFns<AssetPair> = {
-  encode(message: AssetPair, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AssetPair,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.assetId !== "") {
       writer.uint32(10).string(message.assetId);
     }
@@ -3468,7 +3787,8 @@ export const AssetPair: MessageFns<AssetPair> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): AssetPair {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAssetPair();
     while (reader.pos < end) {
@@ -3487,7 +3807,9 @@ export const AssetPair: MessageFns<AssetPair> = {
             break;
           }
 
-          message.signedPrices.push(SignedPriceOfAssetPair.decode(reader, reader.uint32()));
+          message.signedPrices.push(
+            SignedPriceOfAssetPair.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -3504,13 +3826,17 @@ export const AssetPair: MessageFns<AssetPair> = {
       assetId: isSet(object.assetId)
         ? globalThis.String(object.assetId)
         : isSet(object.asset_id)
-        ? globalThis.String(object.asset_id)
-        : "",
+          ? globalThis.String(object.asset_id)
+          : "",
       signedPrices: globalThis.Array.isArray(object?.signedPrices)
-        ? object.signedPrices.map((e: any) => SignedPriceOfAssetPair.fromJSON(e))
+        ? object.signedPrices.map((e: any) =>
+            SignedPriceOfAssetPair.fromJSON(e),
+          )
         : globalThis.Array.isArray(object?.signed_prices)
-        ? object.signed_prices.map((e: any) => SignedPriceOfAssetPair.fromJSON(e))
-        : [],
+          ? object.signed_prices.map((e: any) =>
+              SignedPriceOfAssetPair.fromJSON(e),
+            )
+          : [],
     };
   },
 
@@ -3520,7 +3846,9 @@ export const AssetPair: MessageFns<AssetPair> = {
       obj.assetId = message.assetId;
     }
     if (message.signedPrices?.length) {
-      obj.signedPrices = message.signedPrices.map((e) => SignedPriceOfAssetPair.toJSON(e));
+      obj.signedPrices = message.signedPrices.map((e) =>
+        SignedPriceOfAssetPair.toJSON(e),
+      );
     }
     return obj;
   },
@@ -3528,20 +3856,32 @@ export const AssetPair: MessageFns<AssetPair> = {
   create<I extends Exact<DeepPartial<AssetPair>, I>>(base?: I): AssetPair {
     return AssetPair.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AssetPair>, I>>(object: I): AssetPair {
+  fromPartial<I extends Exact<DeepPartial<AssetPair>, I>>(
+    object: I,
+  ): AssetPair {
     const message = createBaseAssetPair();
     message.assetId = object.assetId ?? "";
-    message.signedPrices = object.signedPrices?.map((e) => SignedPriceOfAssetPair.fromPartial(e)) || [];
+    message.signedPrices =
+      object.signedPrices?.map((e) => SignedPriceOfAssetPair.fromPartial(e)) ||
+      [];
     return message;
   },
 };
 
 function createBaseSignedPriceOfAssetPair(): SignedPriceOfAssetPair {
-  return { publisherKey: "", timestamp: 0, price: "", signature: Buffer.alloc(0) };
+  return {
+    publisherKey: "",
+    timestamp: 0,
+    price: "",
+    signature: Buffer.alloc(0),
+  };
 }
 
 export const SignedPriceOfAssetPair: MessageFns<SignedPriceOfAssetPair> = {
-  encode(message: SignedPriceOfAssetPair, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SignedPriceOfAssetPair,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.publisherKey !== "") {
       writer.uint32(10).string(message.publisherKey);
     }
@@ -3557,8 +3897,12 @@ export const SignedPriceOfAssetPair: MessageFns<SignedPriceOfAssetPair> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SignedPriceOfAssetPair {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SignedPriceOfAssetPair {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignedPriceOfAssetPair();
     while (reader.pos < end) {
@@ -3610,11 +3954,15 @@ export const SignedPriceOfAssetPair: MessageFns<SignedPriceOfAssetPair> = {
       publisherKey: isSet(object.publisherKey)
         ? globalThis.String(object.publisherKey)
         : isSet(object.publisher_key)
-        ? globalThis.String(object.publisher_key)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.publisher_key)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      signature: isSet(object.signature) ? Buffer.from(bytesFromBase64(object.signature)) : Buffer.alloc(0),
+      signature: isSet(object.signature)
+        ? Buffer.from(bytesFromBase64(object.signature))
+        : Buffer.alloc(0),
     };
   },
 
@@ -3635,10 +3983,14 @@ export const SignedPriceOfAssetPair: MessageFns<SignedPriceOfAssetPair> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SignedPriceOfAssetPair>, I>>(base?: I): SignedPriceOfAssetPair {
+  create<I extends Exact<DeepPartial<SignedPriceOfAssetPair>, I>>(
+    base?: I,
+  ): SignedPriceOfAssetPair {
     return SignedPriceOfAssetPair.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SignedPriceOfAssetPair>, I>>(object: I): SignedPriceOfAssetPair {
+  fromPartial<I extends Exact<DeepPartial<SignedPriceOfAssetPair>, I>>(
+    object: I,
+  ): SignedPriceOfAssetPair {
     const message = createBaseSignedPriceOfAssetPair();
     message.publisherKey = object.publisherKey ?? "";
     message.timestamp = object.timestamp ?? 0;
@@ -3649,11 +4001,19 @@ export const SignedPriceOfAssetPair: MessageFns<SignedPriceOfAssetPair> = {
 };
 
 function createBaseChainlinkReport(): ChainlinkReport {
-  return { feedId: Buffer.alloc(0), fullReport: Buffer.alloc(0), validFromTimestamp: 0, observationsTimestamp: 0 };
+  return {
+    feedId: Buffer.alloc(0),
+    fullReport: Buffer.alloc(0),
+    validFromTimestamp: 0,
+    observationsTimestamp: 0,
+  };
 }
 
 export const ChainlinkReport: MessageFns<ChainlinkReport> = {
-  encode(message: ChainlinkReport, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ChainlinkReport,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.feedId.length !== 0) {
       writer.uint32(10).bytes(message.feedId);
     }
@@ -3670,7 +4030,8 @@ export const ChainlinkReport: MessageFns<ChainlinkReport> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ChainlinkReport {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChainlinkReport();
     while (reader.pos < end) {
@@ -3722,23 +4083,23 @@ export const ChainlinkReport: MessageFns<ChainlinkReport> = {
       feedId: isSet(object.feedId)
         ? Buffer.from(bytesFromBase64(object.feedId))
         : isSet(object.feed_id)
-        ? Buffer.from(bytesFromBase64(object.feed_id))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.feed_id))
+          : Buffer.alloc(0),
       fullReport: isSet(object.fullReport)
         ? Buffer.from(bytesFromBase64(object.fullReport))
         : isSet(object.full_report)
-        ? Buffer.from(bytesFromBase64(object.full_report))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.full_report))
+          : Buffer.alloc(0),
       validFromTimestamp: isSet(object.validFromTimestamp)
         ? globalThis.Number(object.validFromTimestamp)
         : isSet(object.valid_from_timestamp)
-        ? globalThis.Number(object.valid_from_timestamp)
-        : 0,
+          ? globalThis.Number(object.valid_from_timestamp)
+          : 0,
       observationsTimestamp: isSet(object.observationsTimestamp)
         ? globalThis.Number(object.observationsTimestamp)
         : isSet(object.observations_timestamp)
-        ? globalThis.Number(object.observations_timestamp)
-        : 0,
+          ? globalThis.Number(object.observations_timestamp)
+          : 0,
     };
   },
 
@@ -3759,10 +4120,14 @@ export const ChainlinkReport: MessageFns<ChainlinkReport> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ChainlinkReport>, I>>(base?: I): ChainlinkReport {
+  create<I extends Exact<DeepPartial<ChainlinkReport>, I>>(
+    base?: I,
+  ): ChainlinkReport {
     return ChainlinkReport.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ChainlinkReport>, I>>(object: I): ChainlinkReport {
+  fromPartial<I extends Exact<DeepPartial<ChainlinkReport>, I>>(
+    object: I,
+  ): ChainlinkReport {
     const message = createBaseChainlinkReport();
     message.feedId = object.feedId ?? Buffer.alloc(0);
     message.fullReport = object.fullReport ?? Buffer.alloc(0);
@@ -3777,7 +4142,10 @@ function createBasePythProPriceState(): PythProPriceState {
 }
 
 export const PythProPriceState: MessageFns<PythProPriceState> = {
-  encode(message: PythProPriceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PythProPriceState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.feedId !== 0) {
       writer.uint32(8).uint32(message.feedId);
     }
@@ -3791,7 +4159,8 @@ export const PythProPriceState: MessageFns<PythProPriceState> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PythProPriceState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePythProPriceState();
     while (reader.pos < end) {
@@ -3835,14 +4204,16 @@ export const PythProPriceState: MessageFns<PythProPriceState> = {
       feedId: isSet(object.feedId)
         ? globalThis.Number(object.feedId)
         : isSet(object.feed_id)
-        ? globalThis.Number(object.feed_id)
+          ? globalThis.Number(object.feed_id)
+          : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
         : 0,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
       priceState: isSet(object.priceState)
         ? PriceState.fromJSON(object.priceState)
         : isSet(object.price_state)
-        ? PriceState.fromJSON(object.price_state)
-        : undefined,
+          ? PriceState.fromJSON(object.price_state)
+          : undefined,
     };
   },
 
@@ -3860,16 +4231,21 @@ export const PythProPriceState: MessageFns<PythProPriceState> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PythProPriceState>, I>>(base?: I): PythProPriceState {
+  create<I extends Exact<DeepPartial<PythProPriceState>, I>>(
+    base?: I,
+  ): PythProPriceState {
     return PythProPriceState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PythProPriceState>, I>>(object: I): PythProPriceState {
+  fromPartial<I extends Exact<DeepPartial<PythProPriceState>, I>>(
+    object: I,
+  ): PythProPriceState {
     const message = createBasePythProPriceState();
     message.feedId = object.feedId ?? 0;
     message.timestamp = object.timestamp ?? 0;
-    message.priceState = (object.priceState !== undefined && object.priceState !== null)
-      ? PriceState.fromPartial(object.priceState)
-      : undefined;
+    message.priceState =
+      object.priceState !== undefined && object.priceState !== null
+        ? PriceState.fromPartial(object.priceState)
+        : undefined;
     return message;
   },
 };
@@ -3879,7 +4255,10 @@ function createBaseSedaFastPriceState(): SedaFastPriceState {
 }
 
 export const SedaFastPriceState: MessageFns<SedaFastPriceState> = {
-  encode(message: SedaFastPriceState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SedaFastPriceState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.feedId !== "") {
       writer.uint32(10).string(message.feedId);
     }
@@ -3892,8 +4271,12 @@ export const SedaFastPriceState: MessageFns<SedaFastPriceState> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SedaFastPriceState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SedaFastPriceState {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSedaFastPriceState();
     while (reader.pos < end) {
@@ -3937,14 +4320,16 @@ export const SedaFastPriceState: MessageFns<SedaFastPriceState> = {
       feedId: isSet(object.feedId)
         ? globalThis.String(object.feedId)
         : isSet(object.feed_id)
-        ? globalThis.String(object.feed_id)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.feed_id)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
       priceState: isSet(object.priceState)
         ? PriceState.fromJSON(object.priceState)
         : isSet(object.price_state)
-        ? PriceState.fromJSON(object.price_state)
-        : undefined,
+          ? PriceState.fromJSON(object.price_state)
+          : undefined,
     };
   },
 
@@ -3962,16 +4347,21 @@ export const SedaFastPriceState: MessageFns<SedaFastPriceState> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SedaFastPriceState>, I>>(base?: I): SedaFastPriceState {
+  create<I extends Exact<DeepPartial<SedaFastPriceState>, I>>(
+    base?: I,
+  ): SedaFastPriceState {
     return SedaFastPriceState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SedaFastPriceState>, I>>(object: I): SedaFastPriceState {
+  fromPartial<I extends Exact<DeepPartial<SedaFastPriceState>, I>>(
+    object: I,
+  ): SedaFastPriceState {
     const message = createBaseSedaFastPriceState();
     message.feedId = object.feedId ?? "";
     message.timestamp = object.timestamp ?? 0;
-    message.priceState = (object.priceState !== undefined && object.priceState !== null)
-      ? PriceState.fromPartial(object.priceState)
-      : undefined;
+    message.priceState =
+      object.priceState !== undefined && object.priceState !== null
+        ? PriceState.fromPartial(object.priceState)
+        : undefined;
     return message;
   },
 };
@@ -3984,17 +4374,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

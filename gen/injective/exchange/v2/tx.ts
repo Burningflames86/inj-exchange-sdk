@@ -19,9 +19,23 @@ import {
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { OracleType, oracleTypeFromJSON, oracleTypeToJSON } from "../../oracle/v1beta1/oracle";
-import { GrantAuthorization, Params, PositionDelta, SubaccountRiskProfile } from "./exchange";
-import { MarketStatus, marketStatusFromJSON, marketStatusToJSON, OpenNotionalCap } from "./market";
+import {
+  OracleType,
+  oracleTypeFromJSON,
+  oracleTypeToJSON,
+} from "../../oracle/v1beta1/oracle";
+import {
+  GrantAuthorization,
+  Params,
+  PositionDelta,
+  SubaccountRiskProfile,
+} from "./exchange";
+import {
+  MarketStatus,
+  marketStatusFromJSON,
+  marketStatusToJSON,
+  OpenNotionalCap,
+} from "./market";
 import { DerivativeOrder, SpotOrder } from "./order";
 import {
   AtomicMarketOrderFeeMultiplierScheduleProposal,
@@ -62,8 +76,7 @@ export interface MsgUpdateSpotMarket {
   newMinNotional: string;
 }
 
-export interface MsgUpdateSpotMarketResponse {
-}
+export interface MsgUpdateSpotMarketResponse {}
 
 export interface MsgUpdateDerivativeMarket {
   /** current admin address of the associated market */
@@ -85,9 +98,7 @@ export interface MsgUpdateDerivativeMarket {
   /** (optional) updated value for reduce_margin_ratio */
   newReduceMarginRatio: string;
   /** (optional) updated value for open_notional_cap */
-  newOpenNotionalCap:
-    | OpenNotionalCap
-    | undefined;
+  newOpenNotionalCap: OpenNotionalCap | undefined;
   /**
    * (optional) tri-state toggle for cross-margin eligibility. Direct message
    * updates are exchange-admin-only and may set either ELIGIBLE or INELIGIBLE.
@@ -96,8 +107,7 @@ export interface MsgUpdateDerivativeMarket {
   crossMarginEligibility: CrossMarginEligibility;
 }
 
-export interface MsgUpdateDerivativeMarketResponse {
-}
+export interface MsgUpdateDerivativeMarketResponse {}
 
 export interface MsgUpdateParams {
   /** authority is the address of the governance account. */
@@ -110,8 +120,7 @@ export interface MsgUpdateParams {
   params: Params | undefined;
 }
 
-export interface MsgUpdateParamsResponse {
-}
+export interface MsgUpdateParamsResponse {}
 
 /**
  * MsgDeposit defines a SDK message for transferring coins from the sender's
@@ -130,8 +139,7 @@ export interface MsgDeposit {
 }
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
-export interface MsgDepositResponse {
-}
+export interface MsgDepositResponse {}
 
 /**
  * MsgWithdraw defines a SDK message for withdrawing coins from a subaccount's
@@ -147,8 +155,7 @@ export interface MsgWithdraw {
 }
 
 /** MsgWithdraw defines the Msg/Withdraw response type. */
-export interface MsgWithdrawResponse {
-}
+export interface MsgWithdrawResponse {}
 
 /**
  * MsgUpdateSubaccountRiskProfile defines a SDK message for updating a
@@ -167,8 +174,7 @@ export interface MsgUpdateSubaccountRiskProfile {
  * MsgUpdateSubaccountRiskProfileResponse defines the
  * Msg/UpdateSubaccountRiskProfile response type.
  */
-export interface MsgUpdateSubaccountRiskProfileResponse {
-}
+export interface MsgUpdateSubaccountRiskProfileResponse {}
 
 /**
  * MsgCreateSpotLimitOrder defines a SDK message for creating a new spot limit
@@ -247,8 +253,7 @@ export interface MsgInstantSpotMarketLaunch {
  * MsgInstantSpotMarketLaunchResponse defines the Msg/InstantSpotMarketLaunch
  * response type.
  */
-export interface MsgInstantSpotMarketLaunchResponse {
-}
+export interface MsgInstantSpotMarketLaunchResponse {}
 
 /**
  * MsgInstantPerpetualMarketLaunch defines a SDK message for creating a new
@@ -307,9 +312,7 @@ export interface MsgInstantPerpetualMarketLaunch {
   /** reduce_margin_ratio defines the ratio of the margin that is reduced */
   reduceMarginRatio: string;
   /** open_notional_cap defines the cap on the open notional */
-  openNotionalCap:
-    | OpenNotionalCap
-    | undefined;
+  openNotionalCap: OpenNotionalCap | undefined;
   /** cross_margin_eligible marks the market as eligible for cross-margin */
   crossMarginEligible: boolean;
 }
@@ -318,8 +321,7 @@ export interface MsgInstantPerpetualMarketLaunch {
  * MsgInstantPerpetualMarketLaunchResponse defines the
  * Msg/InstantPerpetualMarketLaunchResponse response type.
  */
-export interface MsgInstantPerpetualMarketLaunchResponse {
-}
+export interface MsgInstantPerpetualMarketLaunchResponse {}
 
 /**
  * MsgInstantBinaryOptionsMarketLaunch defines a SDK message for creating a new
@@ -378,8 +380,7 @@ export interface MsgInstantBinaryOptionsMarketLaunch {
  * MsgInstantBinaryOptionsMarketLaunchResponse defines the
  * Msg/InstantBinaryOptionsMarketLaunchResponse response type.
  */
-export interface MsgInstantBinaryOptionsMarketLaunchResponse {
-}
+export interface MsgInstantBinaryOptionsMarketLaunchResponse {}
 
 /**
  * MsgInstantExpiryFuturesMarketLaunch defines a SDK message for creating a new
@@ -439,9 +440,7 @@ export interface MsgInstantExpiryFuturesMarketLaunch {
   /** reduce_margin_ratio defines the ratio of the margin that is reduced */
   reduceMarginRatio: string;
   /** open_notional_cap defines the cap on the open notional */
-  openNotionalCap:
-    | OpenNotionalCap
-    | undefined;
+  openNotionalCap: OpenNotionalCap | undefined;
   /** cross_margin_eligible marks the market as eligible for cross-margin */
   crossMarginEligible: boolean;
 }
@@ -450,8 +449,7 @@ export interface MsgInstantExpiryFuturesMarketLaunch {
  * MsgInstantExpiryFuturesMarketLaunchResponse defines the
  * Msg/InstantExpiryFuturesMarketLaunch response type.
  */
-export interface MsgInstantExpiryFuturesMarketLaunchResponse {
-}
+export interface MsgInstantExpiryFuturesMarketLaunchResponse {}
 
 /**
  * MsgCreateSpotMarketOrder defines a SDK message for creating a new spot market
@@ -552,8 +550,7 @@ export interface MsgCancelSpotOrder {
 }
 
 /** MsgCancelSpotOrderResponse defines the Msg/CancelSpotOrder response type. */
-export interface MsgCancelSpotOrderResponse {
-}
+export interface MsgCancelSpotOrderResponse {}
 
 /** MsgBatchCancelSpotOrders defines the Msg/BatchCancelSpotOrders response type. */
 export interface MsgBatchCancelSpotOrders {
@@ -710,8 +707,7 @@ export interface MsgCancelDerivativeOrder {
  * MsgCancelDerivativeOrderResponse defines the
  * Msg/CancelDerivativeOrderResponse response type.
  */
-export interface MsgCancelDerivativeOrderResponse {
-}
+export interface MsgCancelDerivativeOrderResponse {}
 
 /**
  * MsgCancelBinaryOptionsOrder defines the Msg/CancelBinaryOptionsOrder response
@@ -736,8 +732,7 @@ export interface MsgCancelBinaryOptionsOrder {
  * MsgCancelBinaryOptionsOrderResponse defines the
  * Msg/CancelBinaryOptionsOrderResponse response type.
  */
-export interface MsgCancelBinaryOptionsOrderResponse {
-}
+export interface MsgCancelBinaryOptionsOrderResponse {}
 
 export interface OrderData {
   /** the market ID */
@@ -791,8 +786,7 @@ export interface MsgSubaccountTransfer {
  * MsgSubaccountTransferResponse defines the Msg/SubaccountTransfer response
  * type.
  */
-export interface MsgSubaccountTransferResponse {
-}
+export interface MsgSubaccountTransferResponse {}
 
 /** A Cosmos-SDK MsgExternalTransfer */
 export interface MsgExternalTransfer {
@@ -807,8 +801,7 @@ export interface MsgExternalTransfer {
 }
 
 /** MsgExternalTransferResponse defines the Msg/ExternalTransfer response type. */
-export interface MsgExternalTransferResponse {
-}
+export interface MsgExternalTransferResponse {}
 
 /** A Cosmos-SDK MsgLiquidatePosition */
 export interface MsgLiquidatePosition {
@@ -823,8 +816,7 @@ export interface MsgLiquidatePosition {
 }
 
 /** MsgLiquidatePositionResponse defines the Msg/LiquidatePosition response type. */
-export interface MsgLiquidatePositionResponse {
-}
+export interface MsgLiquidatePositionResponse {}
 
 /** LiquidatePositionData contains per-position liquidation input fields. */
 export interface LiquidatePositionData {
@@ -876,8 +868,7 @@ export interface MsgOffsetPosition {
  * MsgOffsetPositionResponse defines the Msg/OffsetPosition
  * response type.
  */
-export interface MsgOffsetPositionResponse {
-}
+export interface MsgOffsetPositionResponse {}
 
 /** A Cosmos-SDK MsgEmergencySettleMarket */
 export interface MsgEmergencySettleMarket {
@@ -893,8 +884,7 @@ export interface MsgEmergencySettleMarket {
  * MsgEmergencySettleMarketResponse defines the Msg/EmergencySettleMarket
  * response type.
  */
-export interface MsgEmergencySettleMarketResponse {
-}
+export interface MsgEmergencySettleMarketResponse {}
 
 /** A Cosmos-SDK MsgIncreasePositionMargin */
 export interface MsgIncreasePositionMargin {
@@ -917,8 +907,7 @@ export interface MsgIncreasePositionMargin {
  * MsgIncreasePositionMarginResponse defines the Msg/IncreasePositionMargin
  * response type.
  */
-export interface MsgIncreasePositionMarginResponse {
-}
+export interface MsgIncreasePositionMarginResponse {}
 
 /** A Cosmos-SDK MsgDecreasePositionMargin */
 export interface MsgDecreasePositionMargin {
@@ -941,8 +930,7 @@ export interface MsgDecreasePositionMargin {
  * MsgDecreasePositionMarginResponse defines the Msg/MsgDecreasePositionMargin
  * response type.
  */
-export interface MsgDecreasePositionMarginResponse {
-}
+export interface MsgDecreasePositionMarginResponse {}
 
 /** MsgPrivilegedExecuteContract defines the Msg/Exec message type */
 export interface MsgPrivilegedExecuteContract {
@@ -970,8 +958,7 @@ export interface MsgRewardsOptOut {
 }
 
 /** MsgRewardsOptOutResponse defines the Msg/RewardsOptOut response type. */
-export interface MsgRewardsOptOutResponse {
-}
+export interface MsgRewardsOptOutResponse {}
 
 /** A Cosmos-SDK MsgReclaimLockedFunds */
 export interface MsgReclaimLockedFunds {
@@ -984,8 +971,7 @@ export interface MsgReclaimLockedFunds {
  * MsgReclaimLockedFundsResponse defines the Msg/ReclaimLockedFunds response
  * type.
  */
-export interface MsgReclaimLockedFundsResponse {
-}
+export interface MsgReclaimLockedFundsResponse {}
 
 /** MsgSignData defines an arbitrary, general-purpose, off-chain message */
 export interface MsgSignData {
@@ -1027,8 +1013,7 @@ export interface MsgAdminUpdateBinaryOptionsMarket {
  * MsgAdminUpdateBinaryOptionsMarketResponse is the response for
  * AdminUpdateBinaryOptionsMarket rpc method
  */
-export interface MsgAdminUpdateBinaryOptionsMarketResponse {
-}
+export interface MsgAdminUpdateBinaryOptionsMarketResponse {}
 
 /** MsgAuthorizeStakeGrants grants stakes to grantees. */
 export interface MsgAuthorizeStakeGrants {
@@ -1038,8 +1023,7 @@ export interface MsgAuthorizeStakeGrants {
   grants: GrantAuthorization[];
 }
 
-export interface MsgAuthorizeStakeGrantsResponse {
-}
+export interface MsgAuthorizeStakeGrantsResponse {}
 
 /** MsgActivateStakeGrant allows a grantee to activate a stake grant. */
 export interface MsgActivateStakeGrant {
@@ -1049,8 +1033,7 @@ export interface MsgActivateStakeGrant {
   granter: string;
 }
 
-export interface MsgActivateStakeGrantResponse {
-}
+export interface MsgActivateStakeGrantResponse {}
 
 export interface MsgBatchExchangeModification {
   /** message sender, that is also the TX signer */
@@ -1058,8 +1041,7 @@ export interface MsgBatchExchangeModification {
   proposal: BatchExchangeModificationProposal | undefined;
 }
 
-export interface MsgBatchExchangeModificationResponse {
-}
+export interface MsgBatchExchangeModificationResponse {}
 
 export interface MsgSpotMarketLaunch {
   /** message sender, that is also the TX signer */
@@ -1067,8 +1049,7 @@ export interface MsgSpotMarketLaunch {
   proposal: SpotMarketLaunchProposal | undefined;
 }
 
-export interface MsgSpotMarketLaunchResponse {
-}
+export interface MsgSpotMarketLaunchResponse {}
 
 export interface MsgPerpetualMarketLaunch {
   /** message sender, that is also the TX signer */
@@ -1076,8 +1057,7 @@ export interface MsgPerpetualMarketLaunch {
   proposal: PerpetualMarketLaunchProposal | undefined;
 }
 
-export interface MsgPerpetualMarketLaunchResponse {
-}
+export interface MsgPerpetualMarketLaunchResponse {}
 
 export interface MsgExpiryFuturesMarketLaunch {
   /** message sender, that is also the TX signer */
@@ -1085,8 +1065,7 @@ export interface MsgExpiryFuturesMarketLaunch {
   proposal: ExpiryFuturesMarketLaunchProposal | undefined;
 }
 
-export interface MsgExpiryFuturesMarketLaunchResponse {
-}
+export interface MsgExpiryFuturesMarketLaunchResponse {}
 
 export interface MsgBinaryOptionsMarketLaunch {
   /** message sender, that is also the TX signer */
@@ -1094,8 +1073,7 @@ export interface MsgBinaryOptionsMarketLaunch {
   proposal: BinaryOptionsMarketLaunchProposal | undefined;
 }
 
-export interface MsgBinaryOptionsMarketLaunchResponse {
-}
+export interface MsgBinaryOptionsMarketLaunchResponse {}
 
 export interface MsgBatchCommunityPoolSpend {
   /** message sender, that is also the TX signer */
@@ -1103,8 +1081,7 @@ export interface MsgBatchCommunityPoolSpend {
   proposal: BatchCommunityPoolSpendProposal | undefined;
 }
 
-export interface MsgBatchCommunityPoolSpendResponse {
-}
+export interface MsgBatchCommunityPoolSpendResponse {}
 
 export interface MsgSpotMarketParamUpdate {
   /** message sender, that is also the TX signer */
@@ -1112,8 +1089,7 @@ export interface MsgSpotMarketParamUpdate {
   proposal: SpotMarketParamUpdateProposal | undefined;
 }
 
-export interface MsgSpotMarketParamUpdateResponse {
-}
+export interface MsgSpotMarketParamUpdateResponse {}
 
 export interface MsgDerivativeMarketParamUpdate {
   /** message sender, that is also the TX signer */
@@ -1121,8 +1097,7 @@ export interface MsgDerivativeMarketParamUpdate {
   proposal: DerivativeMarketParamUpdateProposal | undefined;
 }
 
-export interface MsgDerivativeMarketParamUpdateResponse {
-}
+export interface MsgDerivativeMarketParamUpdateResponse {}
 
 export interface MsgBinaryOptionsMarketParamUpdate {
   /** message sender, that is also the TX signer */
@@ -1130,8 +1105,7 @@ export interface MsgBinaryOptionsMarketParamUpdate {
   proposal: BinaryOptionsMarketParamUpdateProposal | undefined;
 }
 
-export interface MsgBinaryOptionsMarketParamUpdateResponse {
-}
+export interface MsgBinaryOptionsMarketParamUpdateResponse {}
 
 export interface MsgMarketForcedSettlement {
   /** message sender, that is also the TX signer */
@@ -1139,8 +1113,7 @@ export interface MsgMarketForcedSettlement {
   proposal: MarketForcedSettlementProposal | undefined;
 }
 
-export interface MsgMarketForcedSettlementResponse {
-}
+export interface MsgMarketForcedSettlementResponse {}
 
 export interface MsgTradingRewardCampaignLaunch {
   /** message sender, that is also the TX signer */
@@ -1148,8 +1121,7 @@ export interface MsgTradingRewardCampaignLaunch {
   proposal: TradingRewardCampaignLaunchProposal | undefined;
 }
 
-export interface MsgTradingRewardCampaignLaunchResponse {
-}
+export interface MsgTradingRewardCampaignLaunchResponse {}
 
 export interface MsgExchangeEnable {
   /** message sender, that is also the TX signer */
@@ -1157,8 +1129,7 @@ export interface MsgExchangeEnable {
   proposal: ExchangeEnableProposal | undefined;
 }
 
-export interface MsgExchangeEnableResponse {
-}
+export interface MsgExchangeEnableResponse {}
 
 export interface MsgTradingRewardCampaignUpdate {
   /** message sender, that is also the TX signer */
@@ -1166,8 +1137,7 @@ export interface MsgTradingRewardCampaignUpdate {
   proposal: TradingRewardCampaignUpdateProposal | undefined;
 }
 
-export interface MsgTradingRewardCampaignUpdateResponse {
-}
+export interface MsgTradingRewardCampaignUpdateResponse {}
 
 export interface MsgTradingRewardPendingPointsUpdate {
   /** message sender, that is also the TX signer */
@@ -1175,8 +1145,7 @@ export interface MsgTradingRewardPendingPointsUpdate {
   proposal: TradingRewardPendingPointsUpdateProposal | undefined;
 }
 
-export interface MsgTradingRewardPendingPointsUpdateResponse {
-}
+export interface MsgTradingRewardPendingPointsUpdateResponse {}
 
 export interface MsgFeeDiscount {
   /** message sender, that is also the TX signer */
@@ -1184,8 +1153,7 @@ export interface MsgFeeDiscount {
   proposal: FeeDiscountProposal | undefined;
 }
 
-export interface MsgFeeDiscountResponse {
-}
+export interface MsgFeeDiscountResponse {}
 
 export interface MsgAtomicMarketOrderFeeMultiplierSchedule {
   /** message sender, that is also the TX signer */
@@ -1193,8 +1161,7 @@ export interface MsgAtomicMarketOrderFeeMultiplierSchedule {
   proposal: AtomicMarketOrderFeeMultiplierScheduleProposal | undefined;
 }
 
-export interface MsgAtomicMarketOrderFeeMultiplierScheduleResponse {
-}
+export interface MsgAtomicMarketOrderFeeMultiplierScheduleResponse {}
 
 /**
  * MsgSetDelegationTransferReceivers defines a message for adding delegation
@@ -1211,8 +1178,7 @@ export interface MsgSetDelegationTransferReceivers {
  * MsgSetDelegationTransferReceiversResponse defines the response for
  * MsgSetDelegationTransferReceivers.
  */
-export interface MsgSetDelegationTransferReceiversResponse {
-}
+export interface MsgSetDelegationTransferReceiversResponse {}
 
 /** MsgCancelPostOnlyMode defines a message for canceling post-only mode */
 export interface MsgCancelPostOnlyMode {
@@ -1221,8 +1187,7 @@ export interface MsgCancelPostOnlyMode {
 }
 
 /** MsgCancelPostOnlyModeResponse defines the response for MsgCancelPostOnlyMode */
-export interface MsgCancelPostOnlyModeResponse {
-}
+export interface MsgCancelPostOnlyModeResponse {}
 
 /**
  * MsgActivatePostOnlyMode defines a message to turn on the post-only mode for a
@@ -1239,8 +1204,7 @@ export interface MsgActivatePostOnlyMode {
  * MsgActivatePostOnlyModeResponse defines the response for
  * MsgActivatePostOnlyMode
  */
-export interface MsgActivatePostOnlyModeResponse {
-}
+export interface MsgActivatePostOnlyModeResponse {}
 
 /**
  * MsgLiquidateCrossMarginPool atomically closes all positions in a
@@ -1260,8 +1224,7 @@ export interface MsgLiquidateCrossMarginPool {
  * MsgLiquidateCrossMarginPoolResponse defines the
  * Msg/LiquidateCrossMarginPool response type.
  */
-export interface MsgLiquidateCrossMarginPoolResponse {
-}
+export interface MsgLiquidateCrossMarginPoolResponse {}
 
 function createBaseMsgUpdateSpotMarket(): MsgUpdateSpotMarket {
   return {
@@ -1275,7 +1238,10 @@ function createBaseMsgUpdateSpotMarket(): MsgUpdateSpotMarket {
 }
 
 export const MsgUpdateSpotMarket: MessageFns<MsgUpdateSpotMarket> = {
-  encode(message: MsgUpdateSpotMarket, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgUpdateSpotMarket,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -1297,8 +1263,12 @@ export const MsgUpdateSpotMarket: MessageFns<MsgUpdateSpotMarket> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateSpotMarket {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgUpdateSpotMarket {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateSpotMarket();
     while (reader.pos < end) {
@@ -1367,28 +1337,28 @@ export const MsgUpdateSpotMarket: MessageFns<MsgUpdateSpotMarket> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       newTicker: isSet(object.newTicker)
         ? globalThis.String(object.newTicker)
         : isSet(object.new_ticker)
-        ? globalThis.String(object.new_ticker)
-        : "",
+          ? globalThis.String(object.new_ticker)
+          : "",
       newMinPriceTickSize: isSet(object.newMinPriceTickSize)
         ? globalThis.String(object.newMinPriceTickSize)
         : isSet(object.new_min_price_tick_size)
-        ? globalThis.String(object.new_min_price_tick_size)
-        : "",
+          ? globalThis.String(object.new_min_price_tick_size)
+          : "",
       newMinQuantityTickSize: isSet(object.newMinQuantityTickSize)
         ? globalThis.String(object.newMinQuantityTickSize)
         : isSet(object.new_min_quantity_tick_size)
-        ? globalThis.String(object.new_min_quantity_tick_size)
-        : "",
+          ? globalThis.String(object.new_min_quantity_tick_size)
+          : "",
       newMinNotional: isSet(object.newMinNotional)
         ? globalThis.String(object.newMinNotional)
         : isSet(object.new_min_notional)
-        ? globalThis.String(object.new_min_notional)
-        : "",
+          ? globalThis.String(object.new_min_notional)
+          : "",
     };
   },
 
@@ -1415,10 +1385,14 @@ export const MsgUpdateSpotMarket: MessageFns<MsgUpdateSpotMarket> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgUpdateSpotMarket>, I>>(base?: I): MsgUpdateSpotMarket {
+  create<I extends Exact<DeepPartial<MsgUpdateSpotMarket>, I>>(
+    base?: I,
+  ): MsgUpdateSpotMarket {
     return MsgUpdateSpotMarket.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateSpotMarket>, I>>(object: I): MsgUpdateSpotMarket {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateSpotMarket>, I>>(
+    object: I,
+  ): MsgUpdateSpotMarket {
     const message = createBaseMsgUpdateSpotMarket();
     message.admin = object.admin ?? "";
     message.marketId = object.marketId ?? "";
@@ -1434,44 +1408,56 @@ function createBaseMsgUpdateSpotMarketResponse(): MsgUpdateSpotMarketResponse {
   return {};
 }
 
-export const MsgUpdateSpotMarketResponse: MessageFns<MsgUpdateSpotMarketResponse> = {
-  encode(_: MsgUpdateSpotMarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgUpdateSpotMarketResponse: MessageFns<MsgUpdateSpotMarketResponse> =
+  {
+    encode(
+      _: MsgUpdateSpotMarketResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateSpotMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgUpdateSpotMarketResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgUpdateSpotMarketResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgUpdateSpotMarketResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgUpdateSpotMarketResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgUpdateSpotMarketResponse {
+      return {};
+    },
 
-  toJSON(_: MsgUpdateSpotMarketResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgUpdateSpotMarketResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgUpdateSpotMarketResponse>, I>>(base?: I): MsgUpdateSpotMarketResponse {
-    return MsgUpdateSpotMarketResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateSpotMarketResponse>, I>>(_: I): MsgUpdateSpotMarketResponse {
-    const message = createBaseMsgUpdateSpotMarketResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgUpdateSpotMarketResponse>, I>>(
+      base?: I,
+    ): MsgUpdateSpotMarketResponse {
+      return MsgUpdateSpotMarketResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgUpdateSpotMarketResponse>, I>>(
+      _: I,
+    ): MsgUpdateSpotMarketResponse {
+      const message = createBaseMsgUpdateSpotMarketResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgUpdateDerivativeMarket(): MsgUpdateDerivativeMarket {
   return {
@@ -1489,317 +1475,353 @@ function createBaseMsgUpdateDerivativeMarket(): MsgUpdateDerivativeMarket {
   };
 }
 
-export const MsgUpdateDerivativeMarket: MessageFns<MsgUpdateDerivativeMarket> = {
-  encode(message: MsgUpdateDerivativeMarket, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.admin !== "") {
-      writer.uint32(10).string(message.admin);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    if (message.newTicker !== "") {
-      writer.uint32(26).string(message.newTicker);
-    }
-    if (message.newMinPriceTickSize !== "") {
-      writer.uint32(34).string(message.newMinPriceTickSize);
-    }
-    if (message.newMinQuantityTickSize !== "") {
-      writer.uint32(42).string(message.newMinQuantityTickSize);
-    }
-    if (message.newMinNotional !== "") {
-      writer.uint32(50).string(message.newMinNotional);
-    }
-    if (message.newInitialMarginRatio !== "") {
-      writer.uint32(58).string(message.newInitialMarginRatio);
-    }
-    if (message.newMaintenanceMarginRatio !== "") {
-      writer.uint32(66).string(message.newMaintenanceMarginRatio);
-    }
-    if (message.newReduceMarginRatio !== "") {
-      writer.uint32(74).string(message.newReduceMarginRatio);
-    }
-    if (message.newOpenNotionalCap !== undefined) {
-      OpenNotionalCap.encode(message.newOpenNotionalCap, writer.uint32(82).fork()).join();
-    }
-    if (message.crossMarginEligibility !== 0) {
-      writer.uint32(88).int32(message.crossMarginEligibility);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDerivativeMarket {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgUpdateDerivativeMarket();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.admin = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.newTicker = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.newMinPriceTickSize = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.newMinQuantityTickSize = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.newMinNotional = reader.string();
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.newInitialMarginRatio = reader.string();
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.newMaintenanceMarginRatio = reader.string();
-          continue;
-        }
-        case 9: {
-          if (tag !== 74) {
-            break;
-          }
-
-          message.newReduceMarginRatio = reader.string();
-          continue;
-        }
-        case 10: {
-          if (tag !== 82) {
-            break;
-          }
-
-          message.newOpenNotionalCap = OpenNotionalCap.decode(reader, reader.uint32());
-          continue;
-        }
-        case 11: {
-          if (tag !== 88) {
-            break;
-          }
-
-          message.crossMarginEligibility = reader.int32() as any;
-          continue;
-        }
+export const MsgUpdateDerivativeMarket: MessageFns<MsgUpdateDerivativeMarket> =
+  {
+    encode(
+      message: MsgUpdateDerivativeMarket,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.admin !== "") {
+        writer.uint32(10).string(message.admin);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.newTicker !== "") {
+        writer.uint32(26).string(message.newTicker);
+      }
+      if (message.newMinPriceTickSize !== "") {
+        writer.uint32(34).string(message.newMinPriceTickSize);
+      }
+      if (message.newMinQuantityTickSize !== "") {
+        writer.uint32(42).string(message.newMinQuantityTickSize);
+      }
+      if (message.newMinNotional !== "") {
+        writer.uint32(50).string(message.newMinNotional);
+      }
+      if (message.newInitialMarginRatio !== "") {
+        writer.uint32(58).string(message.newInitialMarginRatio);
+      }
+      if (message.newMaintenanceMarginRatio !== "") {
+        writer.uint32(66).string(message.newMaintenanceMarginRatio);
+      }
+      if (message.newReduceMarginRatio !== "") {
+        writer.uint32(74).string(message.newReduceMarginRatio);
+      }
+      if (message.newOpenNotionalCap !== undefined) {
+        OpenNotionalCap.encode(
+          message.newOpenNotionalCap,
+          writer.uint32(82).fork(),
+        ).join();
+      }
+      if (message.crossMarginEligibility !== 0) {
+        writer.uint32(88).int32(message.crossMarginEligibility);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgUpdateDerivativeMarket {
-    return {
-      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      newTicker: isSet(object.newTicker)
-        ? globalThis.String(object.newTicker)
-        : isSet(object.new_ticker)
-        ? globalThis.String(object.new_ticker)
-        : "",
-      newMinPriceTickSize: isSet(object.newMinPriceTickSize)
-        ? globalThis.String(object.newMinPriceTickSize)
-        : isSet(object.new_min_price_tick_size)
-        ? globalThis.String(object.new_min_price_tick_size)
-        : "",
-      newMinQuantityTickSize: isSet(object.newMinQuantityTickSize)
-        ? globalThis.String(object.newMinQuantityTickSize)
-        : isSet(object.new_min_quantity_tick_size)
-        ? globalThis.String(object.new_min_quantity_tick_size)
-        : "",
-      newMinNotional: isSet(object.newMinNotional)
-        ? globalThis.String(object.newMinNotional)
-        : isSet(object.new_min_notional)
-        ? globalThis.String(object.new_min_notional)
-        : "",
-      newInitialMarginRatio: isSet(object.newInitialMarginRatio)
-        ? globalThis.String(object.newInitialMarginRatio)
-        : isSet(object.new_initial_margin_ratio)
-        ? globalThis.String(object.new_initial_margin_ratio)
-        : "",
-      newMaintenanceMarginRatio: isSet(object.newMaintenanceMarginRatio)
-        ? globalThis.String(object.newMaintenanceMarginRatio)
-        : isSet(object.new_maintenance_margin_ratio)
-        ? globalThis.String(object.new_maintenance_margin_ratio)
-        : "",
-      newReduceMarginRatio: isSet(object.newReduceMarginRatio)
-        ? globalThis.String(object.newReduceMarginRatio)
-        : isSet(object.new_reduce_margin_ratio)
-        ? globalThis.String(object.new_reduce_margin_ratio)
-        : "",
-      newOpenNotionalCap: isSet(object.newOpenNotionalCap)
-        ? OpenNotionalCap.fromJSON(object.newOpenNotionalCap)
-        : isSet(object.new_open_notional_cap)
-        ? OpenNotionalCap.fromJSON(object.new_open_notional_cap)
-        : undefined,
-      crossMarginEligibility: isSet(object.crossMarginEligibility)
-        ? crossMarginEligibilityFromJSON(object.crossMarginEligibility)
-        : isSet(object.cross_margin_eligibility)
-        ? crossMarginEligibilityFromJSON(object.cross_margin_eligibility)
-        : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgUpdateDerivativeMarket {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgUpdateDerivativeMarket();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgUpdateDerivativeMarket): unknown {
-    const obj: any = {};
-    if (message.admin !== "") {
-      obj.admin = message.admin;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.newTicker !== "") {
-      obj.newTicker = message.newTicker;
-    }
-    if (message.newMinPriceTickSize !== "") {
-      obj.newMinPriceTickSize = message.newMinPriceTickSize;
-    }
-    if (message.newMinQuantityTickSize !== "") {
-      obj.newMinQuantityTickSize = message.newMinQuantityTickSize;
-    }
-    if (message.newMinNotional !== "") {
-      obj.newMinNotional = message.newMinNotional;
-    }
-    if (message.newInitialMarginRatio !== "") {
-      obj.newInitialMarginRatio = message.newInitialMarginRatio;
-    }
-    if (message.newMaintenanceMarginRatio !== "") {
-      obj.newMaintenanceMarginRatio = message.newMaintenanceMarginRatio;
-    }
-    if (message.newReduceMarginRatio !== "") {
-      obj.newReduceMarginRatio = message.newReduceMarginRatio;
-    }
-    if (message.newOpenNotionalCap !== undefined) {
-      obj.newOpenNotionalCap = OpenNotionalCap.toJSON(message.newOpenNotionalCap);
-    }
-    if (message.crossMarginEligibility !== 0) {
-      obj.crossMarginEligibility = crossMarginEligibilityToJSON(message.crossMarginEligibility);
-    }
-    return obj;
-  },
+            message.admin = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgUpdateDerivativeMarket>, I>>(base?: I): MsgUpdateDerivativeMarket {
-    return MsgUpdateDerivativeMarket.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateDerivativeMarket>, I>>(object: I): MsgUpdateDerivativeMarket {
-    const message = createBaseMsgUpdateDerivativeMarket();
-    message.admin = object.admin ?? "";
-    message.marketId = object.marketId ?? "";
-    message.newTicker = object.newTicker ?? "";
-    message.newMinPriceTickSize = object.newMinPriceTickSize ?? "";
-    message.newMinQuantityTickSize = object.newMinQuantityTickSize ?? "";
-    message.newMinNotional = object.newMinNotional ?? "";
-    message.newInitialMarginRatio = object.newInitialMarginRatio ?? "";
-    message.newMaintenanceMarginRatio = object.newMaintenanceMarginRatio ?? "";
-    message.newReduceMarginRatio = object.newReduceMarginRatio ?? "";
-    message.newOpenNotionalCap = (object.newOpenNotionalCap !== undefined && object.newOpenNotionalCap !== null)
-      ? OpenNotionalCap.fromPartial(object.newOpenNotionalCap)
-      : undefined;
-    message.crossMarginEligibility = object.crossMarginEligibility ?? 0;
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.newTicker = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.newMinPriceTickSize = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.newMinQuantityTickSize = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.newMinNotional = reader.string();
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.newInitialMarginRatio = reader.string();
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.newMaintenanceMarginRatio = reader.string();
+            continue;
+          }
+          case 9: {
+            if (tag !== 74) {
+              break;
+            }
+
+            message.newReduceMarginRatio = reader.string();
+            continue;
+          }
+          case 10: {
+            if (tag !== 82) {
+              break;
+            }
+
+            message.newOpenNotionalCap = OpenNotionalCap.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 11: {
+            if (tag !== 88) {
+              break;
+            }
+
+            message.crossMarginEligibility = reader.int32() as any;
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgUpdateDerivativeMarket {
+      return {
+        admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        newTicker: isSet(object.newTicker)
+          ? globalThis.String(object.newTicker)
+          : isSet(object.new_ticker)
+            ? globalThis.String(object.new_ticker)
+            : "",
+        newMinPriceTickSize: isSet(object.newMinPriceTickSize)
+          ? globalThis.String(object.newMinPriceTickSize)
+          : isSet(object.new_min_price_tick_size)
+            ? globalThis.String(object.new_min_price_tick_size)
+            : "",
+        newMinQuantityTickSize: isSet(object.newMinQuantityTickSize)
+          ? globalThis.String(object.newMinQuantityTickSize)
+          : isSet(object.new_min_quantity_tick_size)
+            ? globalThis.String(object.new_min_quantity_tick_size)
+            : "",
+        newMinNotional: isSet(object.newMinNotional)
+          ? globalThis.String(object.newMinNotional)
+          : isSet(object.new_min_notional)
+            ? globalThis.String(object.new_min_notional)
+            : "",
+        newInitialMarginRatio: isSet(object.newInitialMarginRatio)
+          ? globalThis.String(object.newInitialMarginRatio)
+          : isSet(object.new_initial_margin_ratio)
+            ? globalThis.String(object.new_initial_margin_ratio)
+            : "",
+        newMaintenanceMarginRatio: isSet(object.newMaintenanceMarginRatio)
+          ? globalThis.String(object.newMaintenanceMarginRatio)
+          : isSet(object.new_maintenance_margin_ratio)
+            ? globalThis.String(object.new_maintenance_margin_ratio)
+            : "",
+        newReduceMarginRatio: isSet(object.newReduceMarginRatio)
+          ? globalThis.String(object.newReduceMarginRatio)
+          : isSet(object.new_reduce_margin_ratio)
+            ? globalThis.String(object.new_reduce_margin_ratio)
+            : "",
+        newOpenNotionalCap: isSet(object.newOpenNotionalCap)
+          ? OpenNotionalCap.fromJSON(object.newOpenNotionalCap)
+          : isSet(object.new_open_notional_cap)
+            ? OpenNotionalCap.fromJSON(object.new_open_notional_cap)
+            : undefined,
+        crossMarginEligibility: isSet(object.crossMarginEligibility)
+          ? crossMarginEligibilityFromJSON(object.crossMarginEligibility)
+          : isSet(object.cross_margin_eligibility)
+            ? crossMarginEligibilityFromJSON(object.cross_margin_eligibility)
+            : 0,
+      };
+    },
+
+    toJSON(message: MsgUpdateDerivativeMarket): unknown {
+      const obj: any = {};
+      if (message.admin !== "") {
+        obj.admin = message.admin;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.newTicker !== "") {
+        obj.newTicker = message.newTicker;
+      }
+      if (message.newMinPriceTickSize !== "") {
+        obj.newMinPriceTickSize = message.newMinPriceTickSize;
+      }
+      if (message.newMinQuantityTickSize !== "") {
+        obj.newMinQuantityTickSize = message.newMinQuantityTickSize;
+      }
+      if (message.newMinNotional !== "") {
+        obj.newMinNotional = message.newMinNotional;
+      }
+      if (message.newInitialMarginRatio !== "") {
+        obj.newInitialMarginRatio = message.newInitialMarginRatio;
+      }
+      if (message.newMaintenanceMarginRatio !== "") {
+        obj.newMaintenanceMarginRatio = message.newMaintenanceMarginRatio;
+      }
+      if (message.newReduceMarginRatio !== "") {
+        obj.newReduceMarginRatio = message.newReduceMarginRatio;
+      }
+      if (message.newOpenNotionalCap !== undefined) {
+        obj.newOpenNotionalCap = OpenNotionalCap.toJSON(
+          message.newOpenNotionalCap,
+        );
+      }
+      if (message.crossMarginEligibility !== 0) {
+        obj.crossMarginEligibility = crossMarginEligibilityToJSON(
+          message.crossMarginEligibility,
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgUpdateDerivativeMarket>, I>>(
+      base?: I,
+    ): MsgUpdateDerivativeMarket {
+      return MsgUpdateDerivativeMarket.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgUpdateDerivativeMarket>, I>>(
+      object: I,
+    ): MsgUpdateDerivativeMarket {
+      const message = createBaseMsgUpdateDerivativeMarket();
+      message.admin = object.admin ?? "";
+      message.marketId = object.marketId ?? "";
+      message.newTicker = object.newTicker ?? "";
+      message.newMinPriceTickSize = object.newMinPriceTickSize ?? "";
+      message.newMinQuantityTickSize = object.newMinQuantityTickSize ?? "";
+      message.newMinNotional = object.newMinNotional ?? "";
+      message.newInitialMarginRatio = object.newInitialMarginRatio ?? "";
+      message.newMaintenanceMarginRatio =
+        object.newMaintenanceMarginRatio ?? "";
+      message.newReduceMarginRatio = object.newReduceMarginRatio ?? "";
+      message.newOpenNotionalCap =
+        object.newOpenNotionalCap !== undefined &&
+        object.newOpenNotionalCap !== null
+          ? OpenNotionalCap.fromPartial(object.newOpenNotionalCap)
+          : undefined;
+      message.crossMarginEligibility = object.crossMarginEligibility ?? 0;
+      return message;
+    },
+  };
 
 function createBaseMsgUpdateDerivativeMarketResponse(): MsgUpdateDerivativeMarketResponse {
   return {};
 }
 
-export const MsgUpdateDerivativeMarketResponse: MessageFns<MsgUpdateDerivativeMarketResponse> = {
-  encode(_: MsgUpdateDerivativeMarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgUpdateDerivativeMarketResponse: MessageFns<MsgUpdateDerivativeMarketResponse> =
+  {
+    encode(
+      _: MsgUpdateDerivativeMarketResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDerivativeMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgUpdateDerivativeMarketResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgUpdateDerivativeMarketResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgUpdateDerivativeMarketResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgUpdateDerivativeMarketResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgUpdateDerivativeMarketResponse {
+      return {};
+    },
 
-  toJSON(_: MsgUpdateDerivativeMarketResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgUpdateDerivativeMarketResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgUpdateDerivativeMarketResponse>, I>>(
-    base?: I,
-  ): MsgUpdateDerivativeMarketResponse {
-    return MsgUpdateDerivativeMarketResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateDerivativeMarketResponse>, I>>(
-    _: I,
-  ): MsgUpdateDerivativeMarketResponse {
-    const message = createBaseMsgUpdateDerivativeMarketResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgUpdateDerivativeMarketResponse>, I>>(
+      base?: I,
+    ): MsgUpdateDerivativeMarketResponse {
+      return MsgUpdateDerivativeMarketResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgUpdateDerivativeMarketResponse>, I>,
+    >(_: I): MsgUpdateDerivativeMarketResponse {
+      const message = createBaseMsgUpdateDerivativeMarketResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgUpdateParams(): MsgUpdateParams {
   return { authority: "", params: undefined };
 }
 
 export const MsgUpdateParams: MessageFns<MsgUpdateParams> = {
-  encode(message: MsgUpdateParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgUpdateParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
@@ -1810,7 +1832,8 @@ export const MsgUpdateParams: MessageFns<MsgUpdateParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateParams();
     while (reader.pos < end) {
@@ -1843,7 +1866,9 @@ export const MsgUpdateParams: MessageFns<MsgUpdateParams> = {
 
   fromJSON(object: any): MsgUpdateParams {
     return {
-      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
+      authority: isSet(object.authority)
+        ? globalThis.String(object.authority)
+        : "",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -1859,15 +1884,20 @@ export const MsgUpdateParams: MessageFns<MsgUpdateParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgUpdateParams>, I>>(base?: I): MsgUpdateParams {
+  create<I extends Exact<DeepPartial<MsgUpdateParams>, I>>(
+    base?: I,
+  ): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateParams>, I>>(object: I): MsgUpdateParams {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateParams>, I>>(
+    object: I,
+  ): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
-    message.params = (object.params !== undefined && object.params !== null)
-      ? Params.fromPartial(object.params)
-      : undefined;
+    message.params =
+      object.params !== undefined && object.params !== null
+        ? Params.fromPartial(object.params)
+        : undefined;
     return message;
   },
 };
@@ -1877,12 +1907,19 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse: MessageFns<MsgUpdateParamsResponse> = {
-  encode(_: MsgUpdateParamsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: MsgUpdateParamsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateParamsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgUpdateParamsResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateParamsResponse();
     while (reader.pos < end) {
@@ -1906,10 +1943,14 @@ export const MsgUpdateParamsResponse: MessageFns<MsgUpdateParamsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgUpdateParamsResponse>, I>>(base?: I): MsgUpdateParamsResponse {
+  create<I extends Exact<DeepPartial<MsgUpdateParamsResponse>, I>>(
+    base?: I,
+  ): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateParamsResponse>, I>>(_: I): MsgUpdateParamsResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateParamsResponse>, I>>(
+    _: I,
+  ): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;
   },
@@ -1920,7 +1961,10 @@ function createBaseMsgDeposit(): MsgDeposit {
 }
 
 export const MsgDeposit: MessageFns<MsgDeposit> = {
-  encode(message: MsgDeposit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgDeposit,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -1934,7 +1978,8 @@ export const MsgDeposit: MessageFns<MsgDeposit> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MsgDeposit {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeposit();
     while (reader.pos < end) {
@@ -1979,8 +2024,8 @@ export const MsgDeposit: MessageFns<MsgDeposit> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
     };
   },
@@ -2002,13 +2047,16 @@ export const MsgDeposit: MessageFns<MsgDeposit> = {
   create<I extends Exact<DeepPartial<MsgDeposit>, I>>(base?: I): MsgDeposit {
     return MsgDeposit.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgDeposit>, I>>(object: I): MsgDeposit {
+  fromPartial<I extends Exact<DeepPartial<MsgDeposit>, I>>(
+    object: I,
+  ): MsgDeposit {
     const message = createBaseMsgDeposit();
     message.sender = object.sender ?? "";
     message.subaccountId = object.subaccountId ?? "";
-    message.amount = (object.amount !== undefined && object.amount !== null)
-      ? Coin.fromPartial(object.amount)
-      : undefined;
+    message.amount =
+      object.amount !== undefined && object.amount !== null
+        ? Coin.fromPartial(object.amount)
+        : undefined;
     return message;
   },
 };
@@ -2018,12 +2066,19 @@ function createBaseMsgDepositResponse(): MsgDepositResponse {
 }
 
 export const MsgDepositResponse: MessageFns<MsgDepositResponse> = {
-  encode(_: MsgDepositResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: MsgDepositResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDepositResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgDepositResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositResponse();
     while (reader.pos < end) {
@@ -2047,10 +2102,14 @@ export const MsgDepositResponse: MessageFns<MsgDepositResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgDepositResponse>, I>>(base?: I): MsgDepositResponse {
+  create<I extends Exact<DeepPartial<MsgDepositResponse>, I>>(
+    base?: I,
+  ): MsgDepositResponse {
     return MsgDepositResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgDepositResponse>, I>>(_: I): MsgDepositResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgDepositResponse>, I>>(
+    _: I,
+  ): MsgDepositResponse {
     const message = createBaseMsgDepositResponse();
     return message;
   },
@@ -2061,7 +2120,10 @@ function createBaseMsgWithdraw(): MsgWithdraw {
 }
 
 export const MsgWithdraw: MessageFns<MsgWithdraw> = {
-  encode(message: MsgWithdraw, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgWithdraw,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -2075,7 +2137,8 @@ export const MsgWithdraw: MessageFns<MsgWithdraw> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdraw {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdraw();
     while (reader.pos < end) {
@@ -2120,8 +2183,8 @@ export const MsgWithdraw: MessageFns<MsgWithdraw> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
     };
   },
@@ -2143,13 +2206,16 @@ export const MsgWithdraw: MessageFns<MsgWithdraw> = {
   create<I extends Exact<DeepPartial<MsgWithdraw>, I>>(base?: I): MsgWithdraw {
     return MsgWithdraw.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgWithdraw>, I>>(object: I): MsgWithdraw {
+  fromPartial<I extends Exact<DeepPartial<MsgWithdraw>, I>>(
+    object: I,
+  ): MsgWithdraw {
     const message = createBaseMsgWithdraw();
     message.sender = object.sender ?? "";
     message.subaccountId = object.subaccountId ?? "";
-    message.amount = (object.amount !== undefined && object.amount !== null)
-      ? Coin.fromPartial(object.amount)
-      : undefined;
+    message.amount =
+      object.amount !== undefined && object.amount !== null
+        ? Coin.fromPartial(object.amount)
+        : undefined;
     return message;
   },
 };
@@ -2159,12 +2225,19 @@ function createBaseMsgWithdrawResponse(): MsgWithdrawResponse {
 }
 
 export const MsgWithdrawResponse: MessageFns<MsgWithdrawResponse> = {
-  encode(_: MsgWithdrawResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: MsgWithdrawResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgWithdrawResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawResponse();
     while (reader.pos < end) {
@@ -2188,10 +2261,14 @@ export const MsgWithdrawResponse: MessageFns<MsgWithdrawResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgWithdrawResponse>, I>>(base?: I): MsgWithdrawResponse {
+  create<I extends Exact<DeepPartial<MsgWithdrawResponse>, I>>(
+    base?: I,
+  ): MsgWithdrawResponse {
     return MsgWithdrawResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgWithdrawResponse>, I>>(_: I): MsgWithdrawResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgWithdrawResponse>, I>>(
+    _: I,
+  ): MsgWithdrawResponse {
     const message = createBaseMsgWithdrawResponse();
     return message;
   },
@@ -2201,159 +2278,189 @@ function createBaseMsgUpdateSubaccountRiskProfile(): MsgUpdateSubaccountRiskProf
   return { sender: "", subaccountId: "", riskProfile: undefined };
 }
 
-export const MsgUpdateSubaccountRiskProfile: MessageFns<MsgUpdateSubaccountRiskProfile> = {
-  encode(message: MsgUpdateSubaccountRiskProfile, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(18).string(message.subaccountId);
-    }
-    if (message.riskProfile !== undefined) {
-      SubaccountRiskProfile.encode(message.riskProfile, writer.uint32(26).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateSubaccountRiskProfile {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgUpdateSubaccountRiskProfile();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.riskProfile = SubaccountRiskProfile.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgUpdateSubaccountRiskProfile: MessageFns<MsgUpdateSubaccountRiskProfile> =
+  {
+    encode(
+      message: MsgUpdateSubaccountRiskProfile,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccountId !== "") {
+        writer.uint32(18).string(message.subaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.riskProfile !== undefined) {
+        SubaccountRiskProfile.encode(
+          message.riskProfile,
+          writer.uint32(26).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgUpdateSubaccountRiskProfile {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      riskProfile: isSet(object.riskProfile)
-        ? SubaccountRiskProfile.fromJSON(object.riskProfile)
-        : isSet(object.risk_profile)
-        ? SubaccountRiskProfile.fromJSON(object.risk_profile)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgUpdateSubaccountRiskProfile {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgUpdateSubaccountRiskProfile();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgUpdateSubaccountRiskProfile): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.riskProfile !== undefined) {
-      obj.riskProfile = SubaccountRiskProfile.toJSON(message.riskProfile);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgUpdateSubaccountRiskProfile>, I>>(base?: I): MsgUpdateSubaccountRiskProfile {
-    return MsgUpdateSubaccountRiskProfile.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateSubaccountRiskProfile>, I>>(
-    object: I,
-  ): MsgUpdateSubaccountRiskProfile {
-    const message = createBaseMsgUpdateSubaccountRiskProfile();
-    message.sender = object.sender ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    message.riskProfile = (object.riskProfile !== undefined && object.riskProfile !== null)
-      ? SubaccountRiskProfile.fromPartial(object.riskProfile)
-      : undefined;
-    return message;
-  },
-};
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.riskProfile = SubaccountRiskProfile.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgUpdateSubaccountRiskProfile {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        riskProfile: isSet(object.riskProfile)
+          ? SubaccountRiskProfile.fromJSON(object.riskProfile)
+          : isSet(object.risk_profile)
+            ? SubaccountRiskProfile.fromJSON(object.risk_profile)
+            : undefined,
+      };
+    },
+
+    toJSON(message: MsgUpdateSubaccountRiskProfile): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.riskProfile !== undefined) {
+        obj.riskProfile = SubaccountRiskProfile.toJSON(message.riskProfile);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgUpdateSubaccountRiskProfile>, I>>(
+      base?: I,
+    ): MsgUpdateSubaccountRiskProfile {
+      return MsgUpdateSubaccountRiskProfile.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgUpdateSubaccountRiskProfile>, I>,
+    >(object: I): MsgUpdateSubaccountRiskProfile {
+      const message = createBaseMsgUpdateSubaccountRiskProfile();
+      message.sender = object.sender ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      message.riskProfile =
+        object.riskProfile !== undefined && object.riskProfile !== null
+          ? SubaccountRiskProfile.fromPartial(object.riskProfile)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgUpdateSubaccountRiskProfileResponse(): MsgUpdateSubaccountRiskProfileResponse {
   return {};
 }
 
-export const MsgUpdateSubaccountRiskProfileResponse: MessageFns<MsgUpdateSubaccountRiskProfileResponse> = {
-  encode(_: MsgUpdateSubaccountRiskProfileResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgUpdateSubaccountRiskProfileResponse: MessageFns<MsgUpdateSubaccountRiskProfileResponse> =
+  {
+    encode(
+      _: MsgUpdateSubaccountRiskProfileResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateSubaccountRiskProfileResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgUpdateSubaccountRiskProfileResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgUpdateSubaccountRiskProfileResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgUpdateSubaccountRiskProfileResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgUpdateSubaccountRiskProfileResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgUpdateSubaccountRiskProfileResponse {
+      return {};
+    },
 
-  toJSON(_: MsgUpdateSubaccountRiskProfileResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgUpdateSubaccountRiskProfileResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgUpdateSubaccountRiskProfileResponse>, I>>(
-    base?: I,
-  ): MsgUpdateSubaccountRiskProfileResponse {
-    return MsgUpdateSubaccountRiskProfileResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateSubaccountRiskProfileResponse>, I>>(
-    _: I,
-  ): MsgUpdateSubaccountRiskProfileResponse {
-    const message = createBaseMsgUpdateSubaccountRiskProfileResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgUpdateSubaccountRiskProfileResponse>, I>,
+    >(base?: I): MsgUpdateSubaccountRiskProfileResponse {
+      return MsgUpdateSubaccountRiskProfileResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgUpdateSubaccountRiskProfileResponse>, I>,
+    >(_: I): MsgUpdateSubaccountRiskProfileResponse {
+      const message = createBaseMsgUpdateSubaccountRiskProfileResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgCreateSpotLimitOrder(): MsgCreateSpotLimitOrder {
   return { sender: "", order: undefined };
 }
 
 export const MsgCreateSpotLimitOrder: MessageFns<MsgCreateSpotLimitOrder> = {
-  encode(message: MsgCreateSpotLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgCreateSpotLimitOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -2363,8 +2470,12 @@ export const MsgCreateSpotLimitOrder: MessageFns<MsgCreateSpotLimitOrder> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateSpotLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgCreateSpotLimitOrder {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateSpotLimitOrder();
     while (reader.pos < end) {
@@ -2413,15 +2524,20 @@ export const MsgCreateSpotLimitOrder: MessageFns<MsgCreateSpotLimitOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgCreateSpotLimitOrder>, I>>(base?: I): MsgCreateSpotLimitOrder {
+  create<I extends Exact<DeepPartial<MsgCreateSpotLimitOrder>, I>>(
+    base?: I,
+  ): MsgCreateSpotLimitOrder {
     return MsgCreateSpotLimitOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateSpotLimitOrder>, I>>(object: I): MsgCreateSpotLimitOrder {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateSpotLimitOrder>, I>>(
+    object: I,
+  ): MsgCreateSpotLimitOrder {
     const message = createBaseMsgCreateSpotLimitOrder();
     message.sender = object.sender ?? "";
-    message.order = (object.order !== undefined && object.order !== null)
-      ? SpotOrder.fromPartial(object.order)
-      : undefined;
+    message.order =
+      object.order !== undefined && object.order !== null
+        ? SpotOrder.fromPartial(object.order)
+        : undefined;
     return message;
   },
 };
@@ -2430,269 +2546,302 @@ function createBaseMsgCreateSpotLimitOrderResponse(): MsgCreateSpotLimitOrderRes
   return { orderHash: "", cid: "" };
 }
 
-export const MsgCreateSpotLimitOrderResponse: MessageFns<MsgCreateSpotLimitOrderResponse> = {
-  encode(message: MsgCreateSpotLimitOrderResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.orderHash !== "") {
-      writer.uint32(10).string(message.orderHash);
-    }
-    if (message.cid !== "") {
-      writer.uint32(18).string(message.cid);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateSpotLimitOrderResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateSpotLimitOrderResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orderHash = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.cid = reader.string();
-          continue;
-        }
+export const MsgCreateSpotLimitOrderResponse: MessageFns<MsgCreateSpotLimitOrderResponse> =
+  {
+    encode(
+      message: MsgCreateSpotLimitOrderResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.orderHash !== "") {
+        writer.uint32(10).string(message.orderHash);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.cid !== "") {
+        writer.uint32(18).string(message.cid);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCreateSpotLimitOrderResponse {
-    return {
-      orderHash: isSet(object.orderHash)
-        ? globalThis.String(object.orderHash)
-        : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
-      cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCreateSpotLimitOrderResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCreateSpotLimitOrderResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCreateSpotLimitOrderResponse): unknown {
-    const obj: any = {};
-    if (message.orderHash !== "") {
-      obj.orderHash = message.orderHash;
-    }
-    if (message.cid !== "") {
-      obj.cid = message.cid;
-    }
-    return obj;
-  },
+            message.orderHash = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCreateSpotLimitOrderResponse>, I>>(base?: I): MsgCreateSpotLimitOrderResponse {
-    return MsgCreateSpotLimitOrderResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateSpotLimitOrderResponse>, I>>(
-    object: I,
-  ): MsgCreateSpotLimitOrderResponse {
-    const message = createBaseMsgCreateSpotLimitOrderResponse();
-    message.orderHash = object.orderHash ?? "";
-    message.cid = object.cid ?? "";
-    return message;
-  },
-};
+            message.cid = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCreateSpotLimitOrderResponse {
+      return {
+        orderHash: isSet(object.orderHash)
+          ? globalThis.String(object.orderHash)
+          : isSet(object.order_hash)
+            ? globalThis.String(object.order_hash)
+            : "",
+        cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
+      };
+    },
+
+    toJSON(message: MsgCreateSpotLimitOrderResponse): unknown {
+      const obj: any = {};
+      if (message.orderHash !== "") {
+        obj.orderHash = message.orderHash;
+      }
+      if (message.cid !== "") {
+        obj.cid = message.cid;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgCreateSpotLimitOrderResponse>, I>>(
+      base?: I,
+    ): MsgCreateSpotLimitOrderResponse {
+      return MsgCreateSpotLimitOrderResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgCreateSpotLimitOrderResponse>, I>,
+    >(object: I): MsgCreateSpotLimitOrderResponse {
+      const message = createBaseMsgCreateSpotLimitOrderResponse();
+      message.orderHash = object.orderHash ?? "";
+      message.cid = object.cid ?? "";
+      return message;
+    },
+  };
 
 function createBaseMsgBatchCreateSpotLimitOrders(): MsgBatchCreateSpotLimitOrders {
   return { sender: "", orders: [] };
 }
 
-export const MsgBatchCreateSpotLimitOrders: MessageFns<MsgBatchCreateSpotLimitOrders> = {
-  encode(message: MsgBatchCreateSpotLimitOrders, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    for (const v of message.orders) {
-      SpotOrder.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCreateSpotLimitOrders {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCreateSpotLimitOrders();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.orders.push(SpotOrder.decode(reader, reader.uint32()));
-          continue;
-        }
+export const MsgBatchCreateSpotLimitOrders: MessageFns<MsgBatchCreateSpotLimitOrders> =
+  {
+    encode(
+      message: MsgBatchCreateSpotLimitOrders,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.orders) {
+        SpotOrder.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBatchCreateSpotLimitOrders {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      orders: globalThis.Array.isArray(object?.orders) ? object.orders.map((e: any) => SpotOrder.fromJSON(e)) : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCreateSpotLimitOrders {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCreateSpotLimitOrders();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBatchCreateSpotLimitOrders): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.orders?.length) {
-      obj.orders = message.orders.map((e) => SpotOrder.toJSON(e));
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBatchCreateSpotLimitOrders>, I>>(base?: I): MsgBatchCreateSpotLimitOrders {
-    return MsgBatchCreateSpotLimitOrders.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCreateSpotLimitOrders>, I>>(
-    object: I,
-  ): MsgBatchCreateSpotLimitOrders {
-    const message = createBaseMsgBatchCreateSpotLimitOrders();
-    message.sender = object.sender ?? "";
-    message.orders = object.orders?.map((e) => SpotOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.orders.push(SpotOrder.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchCreateSpotLimitOrders {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        orders: globalThis.Array.isArray(object?.orders)
+          ? object.orders.map((e: any) => SpotOrder.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: MsgBatchCreateSpotLimitOrders): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.orders?.length) {
+        obj.orders = message.orders.map((e) => SpotOrder.toJSON(e));
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgBatchCreateSpotLimitOrders>, I>>(
+      base?: I,
+    ): MsgBatchCreateSpotLimitOrders {
+      return MsgBatchCreateSpotLimitOrders.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgBatchCreateSpotLimitOrders>, I>>(
+      object: I,
+    ): MsgBatchCreateSpotLimitOrders {
+      const message = createBaseMsgBatchCreateSpotLimitOrders();
+      message.sender = object.sender ?? "";
+      message.orders =
+        object.orders?.map((e) => SpotOrder.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgBatchCreateSpotLimitOrdersResponse(): MsgBatchCreateSpotLimitOrdersResponse {
   return { orderHashes: [], createdOrdersCids: [], failedOrdersCids: [] };
 }
 
-export const MsgBatchCreateSpotLimitOrdersResponse: MessageFns<MsgBatchCreateSpotLimitOrdersResponse> = {
-  encode(message: MsgBatchCreateSpotLimitOrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.orderHashes) {
-      writer.uint32(10).string(v!);
-    }
-    for (const v of message.createdOrdersCids) {
-      writer.uint32(18).string(v!);
-    }
-    for (const v of message.failedOrdersCids) {
-      writer.uint32(26).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCreateSpotLimitOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCreateSpotLimitOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orderHashes.push(reader.string());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.createdOrdersCids.push(reader.string());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.failedOrdersCids.push(reader.string());
-          continue;
-        }
+export const MsgBatchCreateSpotLimitOrdersResponse: MessageFns<MsgBatchCreateSpotLimitOrdersResponse> =
+  {
+    encode(
+      message: MsgBatchCreateSpotLimitOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.orderHashes) {
+        writer.uint32(10).string(v!);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.createdOrdersCids) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.failedOrdersCids) {
+        writer.uint32(26).string(v!);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBatchCreateSpotLimitOrdersResponse {
-    return {
-      orderHashes: globalThis.Array.isArray(object?.orderHashes)
-        ? object.orderHashes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.order_hashes)
-        ? object.order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-      createdOrdersCids: globalThis.Array.isArray(object?.createdOrdersCids)
-        ? object.createdOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.created_orders_cids)
-        ? object.created_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      failedOrdersCids: globalThis.Array.isArray(object?.failedOrdersCids)
-        ? object.failedOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.failed_orders_cids)
-        ? object.failed_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCreateSpotLimitOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCreateSpotLimitOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBatchCreateSpotLimitOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.orderHashes?.length) {
-      obj.orderHashes = message.orderHashes;
-    }
-    if (message.createdOrdersCids?.length) {
-      obj.createdOrdersCids = message.createdOrdersCids;
-    }
-    if (message.failedOrdersCids?.length) {
-      obj.failedOrdersCids = message.failedOrdersCids;
-    }
-    return obj;
-  },
+            message.orderHashes.push(reader.string());
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBatchCreateSpotLimitOrdersResponse>, I>>(
-    base?: I,
-  ): MsgBatchCreateSpotLimitOrdersResponse {
-    return MsgBatchCreateSpotLimitOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCreateSpotLimitOrdersResponse>, I>>(
-    object: I,
-  ): MsgBatchCreateSpotLimitOrdersResponse {
-    const message = createBaseMsgBatchCreateSpotLimitOrdersResponse();
-    message.orderHashes = object.orderHashes?.map((e) => e) || [];
-    message.createdOrdersCids = object.createdOrdersCids?.map((e) => e) || [];
-    message.failedOrdersCids = object.failedOrdersCids?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.createdOrdersCids.push(reader.string());
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.failedOrdersCids.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchCreateSpotLimitOrdersResponse {
+      return {
+        orderHashes: globalThis.Array.isArray(object?.orderHashes)
+          ? object.orderHashes.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.order_hashes)
+            ? object.order_hashes.map((e: any) => globalThis.String(e))
+            : [],
+        createdOrdersCids: globalThis.Array.isArray(object?.createdOrdersCids)
+          ? object.createdOrdersCids.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.created_orders_cids)
+            ? object.created_orders_cids.map((e: any) => globalThis.String(e))
+            : [],
+        failedOrdersCids: globalThis.Array.isArray(object?.failedOrdersCids)
+          ? object.failedOrdersCids.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.failed_orders_cids)
+            ? object.failed_orders_cids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: MsgBatchCreateSpotLimitOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.orderHashes?.length) {
+        obj.orderHashes = message.orderHashes;
+      }
+      if (message.createdOrdersCids?.length) {
+        obj.createdOrdersCids = message.createdOrdersCids;
+      }
+      if (message.failedOrdersCids?.length) {
+        obj.failedOrdersCids = message.failedOrdersCids;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<MsgBatchCreateSpotLimitOrdersResponse>, I>,
+    >(base?: I): MsgBatchCreateSpotLimitOrdersResponse {
+      return MsgBatchCreateSpotLimitOrdersResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBatchCreateSpotLimitOrdersResponse>, I>,
+    >(object: I): MsgBatchCreateSpotLimitOrdersResponse {
+      const message = createBaseMsgBatchCreateSpotLimitOrdersResponse();
+      message.orderHashes = object.orderHashes?.map((e) => e) || [];
+      message.createdOrdersCids = object.createdOrdersCids?.map((e) => e) || [];
+      message.failedOrdersCids = object.failedOrdersCids?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgInstantSpotMarketLaunch(): MsgInstantSpotMarketLaunch {
   return {
@@ -2708,264 +2857,286 @@ function createBaseMsgInstantSpotMarketLaunch(): MsgInstantSpotMarketLaunch {
   };
 }
 
-export const MsgInstantSpotMarketLaunch: MessageFns<MsgInstantSpotMarketLaunch> = {
-  encode(message: MsgInstantSpotMarketLaunch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.ticker !== "") {
-      writer.uint32(18).string(message.ticker);
-    }
-    if (message.baseDenom !== "") {
-      writer.uint32(26).string(message.baseDenom);
-    }
-    if (message.quoteDenom !== "") {
-      writer.uint32(34).string(message.quoteDenom);
-    }
-    if (message.minPriceTickSize !== "") {
-      writer.uint32(42).string(message.minPriceTickSize);
-    }
-    if (message.minQuantityTickSize !== "") {
-      writer.uint32(50).string(message.minQuantityTickSize);
-    }
-    if (message.minNotional !== "") {
-      writer.uint32(58).string(message.minNotional);
-    }
-    if (message.baseDecimals !== 0) {
-      writer.uint32(64).uint32(message.baseDecimals);
-    }
-    if (message.quoteDecimals !== 0) {
-      writer.uint32(72).uint32(message.quoteDecimals);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgInstantSpotMarketLaunch {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgInstantSpotMarketLaunch();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.ticker = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.baseDenom = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.quoteDenom = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.minPriceTickSize = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.minQuantityTickSize = reader.string();
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.minNotional = reader.string();
-          continue;
-        }
-        case 8: {
-          if (tag !== 64) {
-            break;
-          }
-
-          message.baseDecimals = reader.uint32();
-          continue;
-        }
-        case 9: {
-          if (tag !== 72) {
-            break;
-          }
-
-          message.quoteDecimals = reader.uint32();
-          continue;
-        }
+export const MsgInstantSpotMarketLaunch: MessageFns<MsgInstantSpotMarketLaunch> =
+  {
+    encode(
+      message: MsgInstantSpotMarketLaunch,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.ticker !== "") {
+        writer.uint32(18).string(message.ticker);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.baseDenom !== "") {
+        writer.uint32(26).string(message.baseDenom);
+      }
+      if (message.quoteDenom !== "") {
+        writer.uint32(34).string(message.quoteDenom);
+      }
+      if (message.minPriceTickSize !== "") {
+        writer.uint32(42).string(message.minPriceTickSize);
+      }
+      if (message.minQuantityTickSize !== "") {
+        writer.uint32(50).string(message.minQuantityTickSize);
+      }
+      if (message.minNotional !== "") {
+        writer.uint32(58).string(message.minNotional);
+      }
+      if (message.baseDecimals !== 0) {
+        writer.uint32(64).uint32(message.baseDecimals);
+      }
+      if (message.quoteDecimals !== 0) {
+        writer.uint32(72).uint32(message.quoteDecimals);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgInstantSpotMarketLaunch {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
-      baseDenom: isSet(object.baseDenom)
-        ? globalThis.String(object.baseDenom)
-        : isSet(object.base_denom)
-        ? globalThis.String(object.base_denom)
-        : "",
-      quoteDenom: isSet(object.quoteDenom)
-        ? globalThis.String(object.quoteDenom)
-        : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
-      minPriceTickSize: isSet(object.minPriceTickSize)
-        ? globalThis.String(object.minPriceTickSize)
-        : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
-      minQuantityTickSize: isSet(object.minQuantityTickSize)
-        ? globalThis.String(object.minQuantityTickSize)
-        : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
-      minNotional: isSet(object.minNotional)
-        ? globalThis.String(object.minNotional)
-        : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
-      baseDecimals: isSet(object.baseDecimals)
-        ? globalThis.Number(object.baseDecimals)
-        : isSet(object.base_decimals)
-        ? globalThis.Number(object.base_decimals)
-        : 0,
-      quoteDecimals: isSet(object.quoteDecimals)
-        ? globalThis.Number(object.quoteDecimals)
-        : isSet(object.quote_decimals)
-        ? globalThis.Number(object.quote_decimals)
-        : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgInstantSpotMarketLaunch {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgInstantSpotMarketLaunch();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgInstantSpotMarketLaunch): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.ticker !== "") {
-      obj.ticker = message.ticker;
-    }
-    if (message.baseDenom !== "") {
-      obj.baseDenom = message.baseDenom;
-    }
-    if (message.quoteDenom !== "") {
-      obj.quoteDenom = message.quoteDenom;
-    }
-    if (message.minPriceTickSize !== "") {
-      obj.minPriceTickSize = message.minPriceTickSize;
-    }
-    if (message.minQuantityTickSize !== "") {
-      obj.minQuantityTickSize = message.minQuantityTickSize;
-    }
-    if (message.minNotional !== "") {
-      obj.minNotional = message.minNotional;
-    }
-    if (message.baseDecimals !== 0) {
-      obj.baseDecimals = Math.round(message.baseDecimals);
-    }
-    if (message.quoteDecimals !== 0) {
-      obj.quoteDecimals = Math.round(message.quoteDecimals);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgInstantSpotMarketLaunch>, I>>(base?: I): MsgInstantSpotMarketLaunch {
-    return MsgInstantSpotMarketLaunch.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgInstantSpotMarketLaunch>, I>>(object: I): MsgInstantSpotMarketLaunch {
-    const message = createBaseMsgInstantSpotMarketLaunch();
-    message.sender = object.sender ?? "";
-    message.ticker = object.ticker ?? "";
-    message.baseDenom = object.baseDenom ?? "";
-    message.quoteDenom = object.quoteDenom ?? "";
-    message.minPriceTickSize = object.minPriceTickSize ?? "";
-    message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.minNotional = object.minNotional ?? "";
-    message.baseDecimals = object.baseDecimals ?? 0;
-    message.quoteDecimals = object.quoteDecimals ?? 0;
-    return message;
-  },
-};
+            message.ticker = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.baseDenom = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.quoteDenom = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.minPriceTickSize = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.minQuantityTickSize = reader.string();
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.minNotional = reader.string();
+            continue;
+          }
+          case 8: {
+            if (tag !== 64) {
+              break;
+            }
+
+            message.baseDecimals = reader.uint32();
+            continue;
+          }
+          case 9: {
+            if (tag !== 72) {
+              break;
+            }
+
+            message.quoteDecimals = reader.uint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgInstantSpotMarketLaunch {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
+        baseDenom: isSet(object.baseDenom)
+          ? globalThis.String(object.baseDenom)
+          : isSet(object.base_denom)
+            ? globalThis.String(object.base_denom)
+            : "",
+        quoteDenom: isSet(object.quoteDenom)
+          ? globalThis.String(object.quoteDenom)
+          : isSet(object.quote_denom)
+            ? globalThis.String(object.quote_denom)
+            : "",
+        minPriceTickSize: isSet(object.minPriceTickSize)
+          ? globalThis.String(object.minPriceTickSize)
+          : isSet(object.min_price_tick_size)
+            ? globalThis.String(object.min_price_tick_size)
+            : "",
+        minQuantityTickSize: isSet(object.minQuantityTickSize)
+          ? globalThis.String(object.minQuantityTickSize)
+          : isSet(object.min_quantity_tick_size)
+            ? globalThis.String(object.min_quantity_tick_size)
+            : "",
+        minNotional: isSet(object.minNotional)
+          ? globalThis.String(object.minNotional)
+          : isSet(object.min_notional)
+            ? globalThis.String(object.min_notional)
+            : "",
+        baseDecimals: isSet(object.baseDecimals)
+          ? globalThis.Number(object.baseDecimals)
+          : isSet(object.base_decimals)
+            ? globalThis.Number(object.base_decimals)
+            : 0,
+        quoteDecimals: isSet(object.quoteDecimals)
+          ? globalThis.Number(object.quoteDecimals)
+          : isSet(object.quote_decimals)
+            ? globalThis.Number(object.quote_decimals)
+            : 0,
+      };
+    },
+
+    toJSON(message: MsgInstantSpotMarketLaunch): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.ticker !== "") {
+        obj.ticker = message.ticker;
+      }
+      if (message.baseDenom !== "") {
+        obj.baseDenom = message.baseDenom;
+      }
+      if (message.quoteDenom !== "") {
+        obj.quoteDenom = message.quoteDenom;
+      }
+      if (message.minPriceTickSize !== "") {
+        obj.minPriceTickSize = message.minPriceTickSize;
+      }
+      if (message.minQuantityTickSize !== "") {
+        obj.minQuantityTickSize = message.minQuantityTickSize;
+      }
+      if (message.minNotional !== "") {
+        obj.minNotional = message.minNotional;
+      }
+      if (message.baseDecimals !== 0) {
+        obj.baseDecimals = Math.round(message.baseDecimals);
+      }
+      if (message.quoteDecimals !== 0) {
+        obj.quoteDecimals = Math.round(message.quoteDecimals);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgInstantSpotMarketLaunch>, I>>(
+      base?: I,
+    ): MsgInstantSpotMarketLaunch {
+      return MsgInstantSpotMarketLaunch.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgInstantSpotMarketLaunch>, I>>(
+      object: I,
+    ): MsgInstantSpotMarketLaunch {
+      const message = createBaseMsgInstantSpotMarketLaunch();
+      message.sender = object.sender ?? "";
+      message.ticker = object.ticker ?? "";
+      message.baseDenom = object.baseDenom ?? "";
+      message.quoteDenom = object.quoteDenom ?? "";
+      message.minPriceTickSize = object.minPriceTickSize ?? "";
+      message.minQuantityTickSize = object.minQuantityTickSize ?? "";
+      message.minNotional = object.minNotional ?? "";
+      message.baseDecimals = object.baseDecimals ?? 0;
+      message.quoteDecimals = object.quoteDecimals ?? 0;
+      return message;
+    },
+  };
 
 function createBaseMsgInstantSpotMarketLaunchResponse(): MsgInstantSpotMarketLaunchResponse {
   return {};
 }
 
-export const MsgInstantSpotMarketLaunchResponse: MessageFns<MsgInstantSpotMarketLaunchResponse> = {
-  encode(_: MsgInstantSpotMarketLaunchResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgInstantSpotMarketLaunchResponse: MessageFns<MsgInstantSpotMarketLaunchResponse> =
+  {
+    encode(
+      _: MsgInstantSpotMarketLaunchResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgInstantSpotMarketLaunchResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgInstantSpotMarketLaunchResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgInstantSpotMarketLaunchResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgInstantSpotMarketLaunchResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgInstantSpotMarketLaunchResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgInstantSpotMarketLaunchResponse {
+      return {};
+    },
 
-  toJSON(_: MsgInstantSpotMarketLaunchResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgInstantSpotMarketLaunchResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgInstantSpotMarketLaunchResponse>, I>>(
-    base?: I,
-  ): MsgInstantSpotMarketLaunchResponse {
-    return MsgInstantSpotMarketLaunchResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgInstantSpotMarketLaunchResponse>, I>>(
-    _: I,
-  ): MsgInstantSpotMarketLaunchResponse {
-    const message = createBaseMsgInstantSpotMarketLaunchResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgInstantSpotMarketLaunchResponse>, I>>(
+      base?: I,
+    ): MsgInstantSpotMarketLaunchResponse {
+      return MsgInstantSpotMarketLaunchResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgInstantSpotMarketLaunchResponse>, I>,
+    >(_: I): MsgInstantSpotMarketLaunchResponse {
+      const message = createBaseMsgInstantSpotMarketLaunchResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgInstantPerpetualMarketLaunch(): MsgInstantPerpetualMarketLaunch {
   return {
@@ -2989,428 +3160,455 @@ function createBaseMsgInstantPerpetualMarketLaunch(): MsgInstantPerpetualMarketL
   };
 }
 
-export const MsgInstantPerpetualMarketLaunch: MessageFns<MsgInstantPerpetualMarketLaunch> = {
-  encode(message: MsgInstantPerpetualMarketLaunch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.ticker !== "") {
-      writer.uint32(18).string(message.ticker);
-    }
-    if (message.quoteDenom !== "") {
-      writer.uint32(26).string(message.quoteDenom);
-    }
-    if (message.oracleBase !== "") {
-      writer.uint32(34).string(message.oracleBase);
-    }
-    if (message.oracleQuote !== "") {
-      writer.uint32(42).string(message.oracleQuote);
-    }
-    if (message.oracleScaleFactor !== 0) {
-      writer.uint32(48).uint32(message.oracleScaleFactor);
-    }
-    if (message.oracleType !== 0) {
-      writer.uint32(56).int32(message.oracleType);
-    }
-    if (message.makerFeeRate !== "") {
-      writer.uint32(66).string(message.makerFeeRate);
-    }
-    if (message.takerFeeRate !== "") {
-      writer.uint32(74).string(message.takerFeeRate);
-    }
-    if (message.initialMarginRatio !== "") {
-      writer.uint32(82).string(message.initialMarginRatio);
-    }
-    if (message.maintenanceMarginRatio !== "") {
-      writer.uint32(90).string(message.maintenanceMarginRatio);
-    }
-    if (message.minPriceTickSize !== "") {
-      writer.uint32(98).string(message.minPriceTickSize);
-    }
-    if (message.minQuantityTickSize !== "") {
-      writer.uint32(106).string(message.minQuantityTickSize);
-    }
-    if (message.minNotional !== "") {
-      writer.uint32(114).string(message.minNotional);
-    }
-    if (message.reduceMarginRatio !== "") {
-      writer.uint32(122).string(message.reduceMarginRatio);
-    }
-    if (message.openNotionalCap !== undefined) {
-      OpenNotionalCap.encode(message.openNotionalCap, writer.uint32(130).fork()).join();
-    }
-    if (message.crossMarginEligible !== false) {
-      writer.uint32(136).bool(message.crossMarginEligible);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgInstantPerpetualMarketLaunch {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgInstantPerpetualMarketLaunch();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.ticker = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.quoteDenom = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.oracleBase = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.oracleQuote = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.oracleScaleFactor = reader.uint32();
-          continue;
-        }
-        case 7: {
-          if (tag !== 56) {
-            break;
-          }
-
-          message.oracleType = reader.int32() as any;
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.makerFeeRate = reader.string();
-          continue;
-        }
-        case 9: {
-          if (tag !== 74) {
-            break;
-          }
-
-          message.takerFeeRate = reader.string();
-          continue;
-        }
-        case 10: {
-          if (tag !== 82) {
-            break;
-          }
-
-          message.initialMarginRatio = reader.string();
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.maintenanceMarginRatio = reader.string();
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.minPriceTickSize = reader.string();
-          continue;
-        }
-        case 13: {
-          if (tag !== 106) {
-            break;
-          }
-
-          message.minQuantityTickSize = reader.string();
-          continue;
-        }
-        case 14: {
-          if (tag !== 114) {
-            break;
-          }
-
-          message.minNotional = reader.string();
-          continue;
-        }
-        case 15: {
-          if (tag !== 122) {
-            break;
-          }
-
-          message.reduceMarginRatio = reader.string();
-          continue;
-        }
-        case 16: {
-          if (tag !== 130) {
-            break;
-          }
-
-          message.openNotionalCap = OpenNotionalCap.decode(reader, reader.uint32());
-          continue;
-        }
-        case 17: {
-          if (tag !== 136) {
-            break;
-          }
-
-          message.crossMarginEligible = reader.bool();
-          continue;
-        }
+export const MsgInstantPerpetualMarketLaunch: MessageFns<MsgInstantPerpetualMarketLaunch> =
+  {
+    encode(
+      message: MsgInstantPerpetualMarketLaunch,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.ticker !== "") {
+        writer.uint32(18).string(message.ticker);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.quoteDenom !== "") {
+        writer.uint32(26).string(message.quoteDenom);
+      }
+      if (message.oracleBase !== "") {
+        writer.uint32(34).string(message.oracleBase);
+      }
+      if (message.oracleQuote !== "") {
+        writer.uint32(42).string(message.oracleQuote);
+      }
+      if (message.oracleScaleFactor !== 0) {
+        writer.uint32(48).uint32(message.oracleScaleFactor);
+      }
+      if (message.oracleType !== 0) {
+        writer.uint32(56).int32(message.oracleType);
+      }
+      if (message.makerFeeRate !== "") {
+        writer.uint32(66).string(message.makerFeeRate);
+      }
+      if (message.takerFeeRate !== "") {
+        writer.uint32(74).string(message.takerFeeRate);
+      }
+      if (message.initialMarginRatio !== "") {
+        writer.uint32(82).string(message.initialMarginRatio);
+      }
+      if (message.maintenanceMarginRatio !== "") {
+        writer.uint32(90).string(message.maintenanceMarginRatio);
+      }
+      if (message.minPriceTickSize !== "") {
+        writer.uint32(98).string(message.minPriceTickSize);
+      }
+      if (message.minQuantityTickSize !== "") {
+        writer.uint32(106).string(message.minQuantityTickSize);
+      }
+      if (message.minNotional !== "") {
+        writer.uint32(114).string(message.minNotional);
+      }
+      if (message.reduceMarginRatio !== "") {
+        writer.uint32(122).string(message.reduceMarginRatio);
+      }
+      if (message.openNotionalCap !== undefined) {
+        OpenNotionalCap.encode(
+          message.openNotionalCap,
+          writer.uint32(130).fork(),
+        ).join();
+      }
+      if (message.crossMarginEligible !== false) {
+        writer.uint32(136).bool(message.crossMarginEligible);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgInstantPerpetualMarketLaunch {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
-      quoteDenom: isSet(object.quoteDenom)
-        ? globalThis.String(object.quoteDenom)
-        : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
-      oracleBase: isSet(object.oracleBase)
-        ? globalThis.String(object.oracleBase)
-        : isSet(object.oracle_base)
-        ? globalThis.String(object.oracle_base)
-        : "",
-      oracleQuote: isSet(object.oracleQuote)
-        ? globalThis.String(object.oracleQuote)
-        : isSet(object.oracle_quote)
-        ? globalThis.String(object.oracle_quote)
-        : "",
-      oracleScaleFactor: isSet(object.oracleScaleFactor)
-        ? globalThis.Number(object.oracleScaleFactor)
-        : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
-      oracleType: isSet(object.oracleType)
-        ? oracleTypeFromJSON(object.oracleType)
-        : isSet(object.oracle_type)
-        ? oracleTypeFromJSON(object.oracle_type)
-        : 0,
-      makerFeeRate: isSet(object.makerFeeRate)
-        ? globalThis.String(object.makerFeeRate)
-        : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
-      takerFeeRate: isSet(object.takerFeeRate)
-        ? globalThis.String(object.takerFeeRate)
-        : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
-      initialMarginRatio: isSet(object.initialMarginRatio)
-        ? globalThis.String(object.initialMarginRatio)
-        : isSet(object.initial_margin_ratio)
-        ? globalThis.String(object.initial_margin_ratio)
-        : "",
-      maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
-        ? globalThis.String(object.maintenanceMarginRatio)
-        : isSet(object.maintenance_margin_ratio)
-        ? globalThis.String(object.maintenance_margin_ratio)
-        : "",
-      minPriceTickSize: isSet(object.minPriceTickSize)
-        ? globalThis.String(object.minPriceTickSize)
-        : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
-      minQuantityTickSize: isSet(object.minQuantityTickSize)
-        ? globalThis.String(object.minQuantityTickSize)
-        : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
-      minNotional: isSet(object.minNotional)
-        ? globalThis.String(object.minNotional)
-        : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
-      reduceMarginRatio: isSet(object.reduceMarginRatio)
-        ? globalThis.String(object.reduceMarginRatio)
-        : isSet(object.reduce_margin_ratio)
-        ? globalThis.String(object.reduce_margin_ratio)
-        : "",
-      openNotionalCap: isSet(object.openNotionalCap)
-        ? OpenNotionalCap.fromJSON(object.openNotionalCap)
-        : isSet(object.open_notional_cap)
-        ? OpenNotionalCap.fromJSON(object.open_notional_cap)
-        : undefined,
-      crossMarginEligible: isSet(object.crossMarginEligible)
-        ? globalThis.Boolean(object.crossMarginEligible)
-        : isSet(object.cross_margin_eligible)
-        ? globalThis.Boolean(object.cross_margin_eligible)
-        : false,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgInstantPerpetualMarketLaunch {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgInstantPerpetualMarketLaunch();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgInstantPerpetualMarketLaunch): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.ticker !== "") {
-      obj.ticker = message.ticker;
-    }
-    if (message.quoteDenom !== "") {
-      obj.quoteDenom = message.quoteDenom;
-    }
-    if (message.oracleBase !== "") {
-      obj.oracleBase = message.oracleBase;
-    }
-    if (message.oracleQuote !== "") {
-      obj.oracleQuote = message.oracleQuote;
-    }
-    if (message.oracleScaleFactor !== 0) {
-      obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
-    }
-    if (message.oracleType !== 0) {
-      obj.oracleType = oracleTypeToJSON(message.oracleType);
-    }
-    if (message.makerFeeRate !== "") {
-      obj.makerFeeRate = message.makerFeeRate;
-    }
-    if (message.takerFeeRate !== "") {
-      obj.takerFeeRate = message.takerFeeRate;
-    }
-    if (message.initialMarginRatio !== "") {
-      obj.initialMarginRatio = message.initialMarginRatio;
-    }
-    if (message.maintenanceMarginRatio !== "") {
-      obj.maintenanceMarginRatio = message.maintenanceMarginRatio;
-    }
-    if (message.minPriceTickSize !== "") {
-      obj.minPriceTickSize = message.minPriceTickSize;
-    }
-    if (message.minQuantityTickSize !== "") {
-      obj.minQuantityTickSize = message.minQuantityTickSize;
-    }
-    if (message.minNotional !== "") {
-      obj.minNotional = message.minNotional;
-    }
-    if (message.reduceMarginRatio !== "") {
-      obj.reduceMarginRatio = message.reduceMarginRatio;
-    }
-    if (message.openNotionalCap !== undefined) {
-      obj.openNotionalCap = OpenNotionalCap.toJSON(message.openNotionalCap);
-    }
-    if (message.crossMarginEligible !== false) {
-      obj.crossMarginEligible = message.crossMarginEligible;
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgInstantPerpetualMarketLaunch>, I>>(base?: I): MsgInstantPerpetualMarketLaunch {
-    return MsgInstantPerpetualMarketLaunch.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgInstantPerpetualMarketLaunch>, I>>(
-    object: I,
-  ): MsgInstantPerpetualMarketLaunch {
-    const message = createBaseMsgInstantPerpetualMarketLaunch();
-    message.sender = object.sender ?? "";
-    message.ticker = object.ticker ?? "";
-    message.quoteDenom = object.quoteDenom ?? "";
-    message.oracleBase = object.oracleBase ?? "";
-    message.oracleQuote = object.oracleQuote ?? "";
-    message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
-    message.oracleType = object.oracleType ?? 0;
-    message.makerFeeRate = object.makerFeeRate ?? "";
-    message.takerFeeRate = object.takerFeeRate ?? "";
-    message.initialMarginRatio = object.initialMarginRatio ?? "";
-    message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
-    message.minPriceTickSize = object.minPriceTickSize ?? "";
-    message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.minNotional = object.minNotional ?? "";
-    message.reduceMarginRatio = object.reduceMarginRatio ?? "";
-    message.openNotionalCap = (object.openNotionalCap !== undefined && object.openNotionalCap !== null)
-      ? OpenNotionalCap.fromPartial(object.openNotionalCap)
-      : undefined;
-    message.crossMarginEligible = object.crossMarginEligible ?? false;
-    return message;
-  },
-};
+            message.ticker = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.quoteDenom = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.oracleBase = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.oracleQuote = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.oracleScaleFactor = reader.uint32();
+            continue;
+          }
+          case 7: {
+            if (tag !== 56) {
+              break;
+            }
+
+            message.oracleType = reader.int32() as any;
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.makerFeeRate = reader.string();
+            continue;
+          }
+          case 9: {
+            if (tag !== 74) {
+              break;
+            }
+
+            message.takerFeeRate = reader.string();
+            continue;
+          }
+          case 10: {
+            if (tag !== 82) {
+              break;
+            }
+
+            message.initialMarginRatio = reader.string();
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.maintenanceMarginRatio = reader.string();
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.minPriceTickSize = reader.string();
+            continue;
+          }
+          case 13: {
+            if (tag !== 106) {
+              break;
+            }
+
+            message.minQuantityTickSize = reader.string();
+            continue;
+          }
+          case 14: {
+            if (tag !== 114) {
+              break;
+            }
+
+            message.minNotional = reader.string();
+            continue;
+          }
+          case 15: {
+            if (tag !== 122) {
+              break;
+            }
+
+            message.reduceMarginRatio = reader.string();
+            continue;
+          }
+          case 16: {
+            if (tag !== 130) {
+              break;
+            }
+
+            message.openNotionalCap = OpenNotionalCap.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 17: {
+            if (tag !== 136) {
+              break;
+            }
+
+            message.crossMarginEligible = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgInstantPerpetualMarketLaunch {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
+        quoteDenom: isSet(object.quoteDenom)
+          ? globalThis.String(object.quoteDenom)
+          : isSet(object.quote_denom)
+            ? globalThis.String(object.quote_denom)
+            : "",
+        oracleBase: isSet(object.oracleBase)
+          ? globalThis.String(object.oracleBase)
+          : isSet(object.oracle_base)
+            ? globalThis.String(object.oracle_base)
+            : "",
+        oracleQuote: isSet(object.oracleQuote)
+          ? globalThis.String(object.oracleQuote)
+          : isSet(object.oracle_quote)
+            ? globalThis.String(object.oracle_quote)
+            : "",
+        oracleScaleFactor: isSet(object.oracleScaleFactor)
+          ? globalThis.Number(object.oracleScaleFactor)
+          : isSet(object.oracle_scale_factor)
+            ? globalThis.Number(object.oracle_scale_factor)
+            : 0,
+        oracleType: isSet(object.oracleType)
+          ? oracleTypeFromJSON(object.oracleType)
+          : isSet(object.oracle_type)
+            ? oracleTypeFromJSON(object.oracle_type)
+            : 0,
+        makerFeeRate: isSet(object.makerFeeRate)
+          ? globalThis.String(object.makerFeeRate)
+          : isSet(object.maker_fee_rate)
+            ? globalThis.String(object.maker_fee_rate)
+            : "",
+        takerFeeRate: isSet(object.takerFeeRate)
+          ? globalThis.String(object.takerFeeRate)
+          : isSet(object.taker_fee_rate)
+            ? globalThis.String(object.taker_fee_rate)
+            : "",
+        initialMarginRatio: isSet(object.initialMarginRatio)
+          ? globalThis.String(object.initialMarginRatio)
+          : isSet(object.initial_margin_ratio)
+            ? globalThis.String(object.initial_margin_ratio)
+            : "",
+        maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
+          ? globalThis.String(object.maintenanceMarginRatio)
+          : isSet(object.maintenance_margin_ratio)
+            ? globalThis.String(object.maintenance_margin_ratio)
+            : "",
+        minPriceTickSize: isSet(object.minPriceTickSize)
+          ? globalThis.String(object.minPriceTickSize)
+          : isSet(object.min_price_tick_size)
+            ? globalThis.String(object.min_price_tick_size)
+            : "",
+        minQuantityTickSize: isSet(object.minQuantityTickSize)
+          ? globalThis.String(object.minQuantityTickSize)
+          : isSet(object.min_quantity_tick_size)
+            ? globalThis.String(object.min_quantity_tick_size)
+            : "",
+        minNotional: isSet(object.minNotional)
+          ? globalThis.String(object.minNotional)
+          : isSet(object.min_notional)
+            ? globalThis.String(object.min_notional)
+            : "",
+        reduceMarginRatio: isSet(object.reduceMarginRatio)
+          ? globalThis.String(object.reduceMarginRatio)
+          : isSet(object.reduce_margin_ratio)
+            ? globalThis.String(object.reduce_margin_ratio)
+            : "",
+        openNotionalCap: isSet(object.openNotionalCap)
+          ? OpenNotionalCap.fromJSON(object.openNotionalCap)
+          : isSet(object.open_notional_cap)
+            ? OpenNotionalCap.fromJSON(object.open_notional_cap)
+            : undefined,
+        crossMarginEligible: isSet(object.crossMarginEligible)
+          ? globalThis.Boolean(object.crossMarginEligible)
+          : isSet(object.cross_margin_eligible)
+            ? globalThis.Boolean(object.cross_margin_eligible)
+            : false,
+      };
+    },
+
+    toJSON(message: MsgInstantPerpetualMarketLaunch): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.ticker !== "") {
+        obj.ticker = message.ticker;
+      }
+      if (message.quoteDenom !== "") {
+        obj.quoteDenom = message.quoteDenom;
+      }
+      if (message.oracleBase !== "") {
+        obj.oracleBase = message.oracleBase;
+      }
+      if (message.oracleQuote !== "") {
+        obj.oracleQuote = message.oracleQuote;
+      }
+      if (message.oracleScaleFactor !== 0) {
+        obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
+      }
+      if (message.oracleType !== 0) {
+        obj.oracleType = oracleTypeToJSON(message.oracleType);
+      }
+      if (message.makerFeeRate !== "") {
+        obj.makerFeeRate = message.makerFeeRate;
+      }
+      if (message.takerFeeRate !== "") {
+        obj.takerFeeRate = message.takerFeeRate;
+      }
+      if (message.initialMarginRatio !== "") {
+        obj.initialMarginRatio = message.initialMarginRatio;
+      }
+      if (message.maintenanceMarginRatio !== "") {
+        obj.maintenanceMarginRatio = message.maintenanceMarginRatio;
+      }
+      if (message.minPriceTickSize !== "") {
+        obj.minPriceTickSize = message.minPriceTickSize;
+      }
+      if (message.minQuantityTickSize !== "") {
+        obj.minQuantityTickSize = message.minQuantityTickSize;
+      }
+      if (message.minNotional !== "") {
+        obj.minNotional = message.minNotional;
+      }
+      if (message.reduceMarginRatio !== "") {
+        obj.reduceMarginRatio = message.reduceMarginRatio;
+      }
+      if (message.openNotionalCap !== undefined) {
+        obj.openNotionalCap = OpenNotionalCap.toJSON(message.openNotionalCap);
+      }
+      if (message.crossMarginEligible !== false) {
+        obj.crossMarginEligible = message.crossMarginEligible;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgInstantPerpetualMarketLaunch>, I>>(
+      base?: I,
+    ): MsgInstantPerpetualMarketLaunch {
+      return MsgInstantPerpetualMarketLaunch.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgInstantPerpetualMarketLaunch>, I>,
+    >(object: I): MsgInstantPerpetualMarketLaunch {
+      const message = createBaseMsgInstantPerpetualMarketLaunch();
+      message.sender = object.sender ?? "";
+      message.ticker = object.ticker ?? "";
+      message.quoteDenom = object.quoteDenom ?? "";
+      message.oracleBase = object.oracleBase ?? "";
+      message.oracleQuote = object.oracleQuote ?? "";
+      message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
+      message.oracleType = object.oracleType ?? 0;
+      message.makerFeeRate = object.makerFeeRate ?? "";
+      message.takerFeeRate = object.takerFeeRate ?? "";
+      message.initialMarginRatio = object.initialMarginRatio ?? "";
+      message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
+      message.minPriceTickSize = object.minPriceTickSize ?? "";
+      message.minQuantityTickSize = object.minQuantityTickSize ?? "";
+      message.minNotional = object.minNotional ?? "";
+      message.reduceMarginRatio = object.reduceMarginRatio ?? "";
+      message.openNotionalCap =
+        object.openNotionalCap !== undefined && object.openNotionalCap !== null
+          ? OpenNotionalCap.fromPartial(object.openNotionalCap)
+          : undefined;
+      message.crossMarginEligible = object.crossMarginEligible ?? false;
+      return message;
+    },
+  };
 
 function createBaseMsgInstantPerpetualMarketLaunchResponse(): MsgInstantPerpetualMarketLaunchResponse {
   return {};
 }
 
-export const MsgInstantPerpetualMarketLaunchResponse: MessageFns<MsgInstantPerpetualMarketLaunchResponse> = {
-  encode(_: MsgInstantPerpetualMarketLaunchResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgInstantPerpetualMarketLaunchResponse: MessageFns<MsgInstantPerpetualMarketLaunchResponse> =
+  {
+    encode(
+      _: MsgInstantPerpetualMarketLaunchResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgInstantPerpetualMarketLaunchResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgInstantPerpetualMarketLaunchResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgInstantPerpetualMarketLaunchResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgInstantPerpetualMarketLaunchResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgInstantPerpetualMarketLaunchResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgInstantPerpetualMarketLaunchResponse {
+      return {};
+    },
 
-  toJSON(_: MsgInstantPerpetualMarketLaunchResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgInstantPerpetualMarketLaunchResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgInstantPerpetualMarketLaunchResponse>, I>>(
-    base?: I,
-  ): MsgInstantPerpetualMarketLaunchResponse {
-    return MsgInstantPerpetualMarketLaunchResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgInstantPerpetualMarketLaunchResponse>, I>>(
-    _: I,
-  ): MsgInstantPerpetualMarketLaunchResponse {
-    const message = createBaseMsgInstantPerpetualMarketLaunchResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgInstantPerpetualMarketLaunchResponse>, I>,
+    >(base?: I): MsgInstantPerpetualMarketLaunchResponse {
+      return MsgInstantPerpetualMarketLaunchResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgInstantPerpetualMarketLaunchResponse>, I>,
+    >(_: I): MsgInstantPerpetualMarketLaunchResponse {
+      const message = createBaseMsgInstantPerpetualMarketLaunchResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgInstantBinaryOptionsMarketLaunch(): MsgInstantBinaryOptionsMarketLaunch {
   return {
@@ -3433,406 +3631,439 @@ function createBaseMsgInstantBinaryOptionsMarketLaunch(): MsgInstantBinaryOption
   };
 }
 
-export const MsgInstantBinaryOptionsMarketLaunch: MessageFns<MsgInstantBinaryOptionsMarketLaunch> = {
-  encode(message: MsgInstantBinaryOptionsMarketLaunch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.ticker !== "") {
-      writer.uint32(18).string(message.ticker);
-    }
-    if (message.oracleSymbol !== "") {
-      writer.uint32(26).string(message.oracleSymbol);
-    }
-    if (message.oracleProvider !== "") {
-      writer.uint32(34).string(message.oracleProvider);
-    }
-    if (message.oracleType !== 0) {
-      writer.uint32(40).int32(message.oracleType);
-    }
-    if (message.oracleScaleFactor !== 0) {
-      writer.uint32(48).uint32(message.oracleScaleFactor);
-    }
-    if (message.makerFeeRate !== "") {
-      writer.uint32(58).string(message.makerFeeRate);
-    }
-    if (message.takerFeeRate !== "") {
-      writer.uint32(66).string(message.takerFeeRate);
-    }
-    if (message.expirationTimestamp !== 0) {
-      writer.uint32(72).int64(message.expirationTimestamp);
-    }
-    if (message.settlementTimestamp !== 0) {
-      writer.uint32(80).int64(message.settlementTimestamp);
-    }
-    if (message.admin !== "") {
-      writer.uint32(90).string(message.admin);
-    }
-    if (message.quoteDenom !== "") {
-      writer.uint32(98).string(message.quoteDenom);
-    }
-    if (message.minPriceTickSize !== "") {
-      writer.uint32(106).string(message.minPriceTickSize);
-    }
-    if (message.minQuantityTickSize !== "") {
-      writer.uint32(114).string(message.minQuantityTickSize);
-    }
-    if (message.minNotional !== "") {
-      writer.uint32(122).string(message.minNotional);
-    }
-    if (message.openNotionalCap !== undefined) {
-      OpenNotionalCap.encode(message.openNotionalCap, writer.uint32(130).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgInstantBinaryOptionsMarketLaunch {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgInstantBinaryOptionsMarketLaunch();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.ticker = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.oracleSymbol = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.oracleProvider = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.oracleType = reader.int32() as any;
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.oracleScaleFactor = reader.uint32();
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.makerFeeRate = reader.string();
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.takerFeeRate = reader.string();
-          continue;
-        }
-        case 9: {
-          if (tag !== 72) {
-            break;
-          }
-
-          message.expirationTimestamp = longToNumber(reader.int64());
-          continue;
-        }
-        case 10: {
-          if (tag !== 80) {
-            break;
-          }
-
-          message.settlementTimestamp = longToNumber(reader.int64());
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.admin = reader.string();
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.quoteDenom = reader.string();
-          continue;
-        }
-        case 13: {
-          if (tag !== 106) {
-            break;
-          }
-
-          message.minPriceTickSize = reader.string();
-          continue;
-        }
-        case 14: {
-          if (tag !== 114) {
-            break;
-          }
-
-          message.minQuantityTickSize = reader.string();
-          continue;
-        }
-        case 15: {
-          if (tag !== 122) {
-            break;
-          }
-
-          message.minNotional = reader.string();
-          continue;
-        }
-        case 16: {
-          if (tag !== 130) {
-            break;
-          }
-
-          message.openNotionalCap = OpenNotionalCap.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgInstantBinaryOptionsMarketLaunch: MessageFns<MsgInstantBinaryOptionsMarketLaunch> =
+  {
+    encode(
+      message: MsgInstantBinaryOptionsMarketLaunch,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.ticker !== "") {
+        writer.uint32(18).string(message.ticker);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.oracleSymbol !== "") {
+        writer.uint32(26).string(message.oracleSymbol);
+      }
+      if (message.oracleProvider !== "") {
+        writer.uint32(34).string(message.oracleProvider);
+      }
+      if (message.oracleType !== 0) {
+        writer.uint32(40).int32(message.oracleType);
+      }
+      if (message.oracleScaleFactor !== 0) {
+        writer.uint32(48).uint32(message.oracleScaleFactor);
+      }
+      if (message.makerFeeRate !== "") {
+        writer.uint32(58).string(message.makerFeeRate);
+      }
+      if (message.takerFeeRate !== "") {
+        writer.uint32(66).string(message.takerFeeRate);
+      }
+      if (message.expirationTimestamp !== 0) {
+        writer.uint32(72).int64(message.expirationTimestamp);
+      }
+      if (message.settlementTimestamp !== 0) {
+        writer.uint32(80).int64(message.settlementTimestamp);
+      }
+      if (message.admin !== "") {
+        writer.uint32(90).string(message.admin);
+      }
+      if (message.quoteDenom !== "") {
+        writer.uint32(98).string(message.quoteDenom);
+      }
+      if (message.minPriceTickSize !== "") {
+        writer.uint32(106).string(message.minPriceTickSize);
+      }
+      if (message.minQuantityTickSize !== "") {
+        writer.uint32(114).string(message.minQuantityTickSize);
+      }
+      if (message.minNotional !== "") {
+        writer.uint32(122).string(message.minNotional);
+      }
+      if (message.openNotionalCap !== undefined) {
+        OpenNotionalCap.encode(
+          message.openNotionalCap,
+          writer.uint32(130).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgInstantBinaryOptionsMarketLaunch {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
-      oracleSymbol: isSet(object.oracleSymbol)
-        ? globalThis.String(object.oracleSymbol)
-        : isSet(object.oracle_symbol)
-        ? globalThis.String(object.oracle_symbol)
-        : "",
-      oracleProvider: isSet(object.oracleProvider)
-        ? globalThis.String(object.oracleProvider)
-        : isSet(object.oracle_provider)
-        ? globalThis.String(object.oracle_provider)
-        : "",
-      oracleType: isSet(object.oracleType)
-        ? oracleTypeFromJSON(object.oracleType)
-        : isSet(object.oracle_type)
-        ? oracleTypeFromJSON(object.oracle_type)
-        : 0,
-      oracleScaleFactor: isSet(object.oracleScaleFactor)
-        ? globalThis.Number(object.oracleScaleFactor)
-        : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
-      makerFeeRate: isSet(object.makerFeeRate)
-        ? globalThis.String(object.makerFeeRate)
-        : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
-      takerFeeRate: isSet(object.takerFeeRate)
-        ? globalThis.String(object.takerFeeRate)
-        : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
-      expirationTimestamp: isSet(object.expirationTimestamp)
-        ? globalThis.Number(object.expirationTimestamp)
-        : isSet(object.expiration_timestamp)
-        ? globalThis.Number(object.expiration_timestamp)
-        : 0,
-      settlementTimestamp: isSet(object.settlementTimestamp)
-        ? globalThis.Number(object.settlementTimestamp)
-        : isSet(object.settlement_timestamp)
-        ? globalThis.Number(object.settlement_timestamp)
-        : 0,
-      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
-      quoteDenom: isSet(object.quoteDenom)
-        ? globalThis.String(object.quoteDenom)
-        : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
-      minPriceTickSize: isSet(object.minPriceTickSize)
-        ? globalThis.String(object.minPriceTickSize)
-        : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
-      minQuantityTickSize: isSet(object.minQuantityTickSize)
-        ? globalThis.String(object.minQuantityTickSize)
-        : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
-      minNotional: isSet(object.minNotional)
-        ? globalThis.String(object.minNotional)
-        : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
-      openNotionalCap: isSet(object.openNotionalCap)
-        ? OpenNotionalCap.fromJSON(object.openNotionalCap)
-        : isSet(object.open_notional_cap)
-        ? OpenNotionalCap.fromJSON(object.open_notional_cap)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgInstantBinaryOptionsMarketLaunch {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgInstantBinaryOptionsMarketLaunch();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgInstantBinaryOptionsMarketLaunch): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.ticker !== "") {
-      obj.ticker = message.ticker;
-    }
-    if (message.oracleSymbol !== "") {
-      obj.oracleSymbol = message.oracleSymbol;
-    }
-    if (message.oracleProvider !== "") {
-      obj.oracleProvider = message.oracleProvider;
-    }
-    if (message.oracleType !== 0) {
-      obj.oracleType = oracleTypeToJSON(message.oracleType);
-    }
-    if (message.oracleScaleFactor !== 0) {
-      obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
-    }
-    if (message.makerFeeRate !== "") {
-      obj.makerFeeRate = message.makerFeeRate;
-    }
-    if (message.takerFeeRate !== "") {
-      obj.takerFeeRate = message.takerFeeRate;
-    }
-    if (message.expirationTimestamp !== 0) {
-      obj.expirationTimestamp = Math.round(message.expirationTimestamp);
-    }
-    if (message.settlementTimestamp !== 0) {
-      obj.settlementTimestamp = Math.round(message.settlementTimestamp);
-    }
-    if (message.admin !== "") {
-      obj.admin = message.admin;
-    }
-    if (message.quoteDenom !== "") {
-      obj.quoteDenom = message.quoteDenom;
-    }
-    if (message.minPriceTickSize !== "") {
-      obj.minPriceTickSize = message.minPriceTickSize;
-    }
-    if (message.minQuantityTickSize !== "") {
-      obj.minQuantityTickSize = message.minQuantityTickSize;
-    }
-    if (message.minNotional !== "") {
-      obj.minNotional = message.minNotional;
-    }
-    if (message.openNotionalCap !== undefined) {
-      obj.openNotionalCap = OpenNotionalCap.toJSON(message.openNotionalCap);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgInstantBinaryOptionsMarketLaunch>, I>>(
-    base?: I,
-  ): MsgInstantBinaryOptionsMarketLaunch {
-    return MsgInstantBinaryOptionsMarketLaunch.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgInstantBinaryOptionsMarketLaunch>, I>>(
-    object: I,
-  ): MsgInstantBinaryOptionsMarketLaunch {
-    const message = createBaseMsgInstantBinaryOptionsMarketLaunch();
-    message.sender = object.sender ?? "";
-    message.ticker = object.ticker ?? "";
-    message.oracleSymbol = object.oracleSymbol ?? "";
-    message.oracleProvider = object.oracleProvider ?? "";
-    message.oracleType = object.oracleType ?? 0;
-    message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
-    message.makerFeeRate = object.makerFeeRate ?? "";
-    message.takerFeeRate = object.takerFeeRate ?? "";
-    message.expirationTimestamp = object.expirationTimestamp ?? 0;
-    message.settlementTimestamp = object.settlementTimestamp ?? 0;
-    message.admin = object.admin ?? "";
-    message.quoteDenom = object.quoteDenom ?? "";
-    message.minPriceTickSize = object.minPriceTickSize ?? "";
-    message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.minNotional = object.minNotional ?? "";
-    message.openNotionalCap = (object.openNotionalCap !== undefined && object.openNotionalCap !== null)
-      ? OpenNotionalCap.fromPartial(object.openNotionalCap)
-      : undefined;
-    return message;
-  },
-};
+            message.ticker = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.oracleSymbol = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.oracleProvider = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.oracleType = reader.int32() as any;
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.oracleScaleFactor = reader.uint32();
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.makerFeeRate = reader.string();
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.takerFeeRate = reader.string();
+            continue;
+          }
+          case 9: {
+            if (tag !== 72) {
+              break;
+            }
+
+            message.expirationTimestamp = longToNumber(reader.int64());
+            continue;
+          }
+          case 10: {
+            if (tag !== 80) {
+              break;
+            }
+
+            message.settlementTimestamp = longToNumber(reader.int64());
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.admin = reader.string();
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.quoteDenom = reader.string();
+            continue;
+          }
+          case 13: {
+            if (tag !== 106) {
+              break;
+            }
+
+            message.minPriceTickSize = reader.string();
+            continue;
+          }
+          case 14: {
+            if (tag !== 114) {
+              break;
+            }
+
+            message.minQuantityTickSize = reader.string();
+            continue;
+          }
+          case 15: {
+            if (tag !== 122) {
+              break;
+            }
+
+            message.minNotional = reader.string();
+            continue;
+          }
+          case 16: {
+            if (tag !== 130) {
+              break;
+            }
+
+            message.openNotionalCap = OpenNotionalCap.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgInstantBinaryOptionsMarketLaunch {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
+        oracleSymbol: isSet(object.oracleSymbol)
+          ? globalThis.String(object.oracleSymbol)
+          : isSet(object.oracle_symbol)
+            ? globalThis.String(object.oracle_symbol)
+            : "",
+        oracleProvider: isSet(object.oracleProvider)
+          ? globalThis.String(object.oracleProvider)
+          : isSet(object.oracle_provider)
+            ? globalThis.String(object.oracle_provider)
+            : "",
+        oracleType: isSet(object.oracleType)
+          ? oracleTypeFromJSON(object.oracleType)
+          : isSet(object.oracle_type)
+            ? oracleTypeFromJSON(object.oracle_type)
+            : 0,
+        oracleScaleFactor: isSet(object.oracleScaleFactor)
+          ? globalThis.Number(object.oracleScaleFactor)
+          : isSet(object.oracle_scale_factor)
+            ? globalThis.Number(object.oracle_scale_factor)
+            : 0,
+        makerFeeRate: isSet(object.makerFeeRate)
+          ? globalThis.String(object.makerFeeRate)
+          : isSet(object.maker_fee_rate)
+            ? globalThis.String(object.maker_fee_rate)
+            : "",
+        takerFeeRate: isSet(object.takerFeeRate)
+          ? globalThis.String(object.takerFeeRate)
+          : isSet(object.taker_fee_rate)
+            ? globalThis.String(object.taker_fee_rate)
+            : "",
+        expirationTimestamp: isSet(object.expirationTimestamp)
+          ? globalThis.Number(object.expirationTimestamp)
+          : isSet(object.expiration_timestamp)
+            ? globalThis.Number(object.expiration_timestamp)
+            : 0,
+        settlementTimestamp: isSet(object.settlementTimestamp)
+          ? globalThis.Number(object.settlementTimestamp)
+          : isSet(object.settlement_timestamp)
+            ? globalThis.Number(object.settlement_timestamp)
+            : 0,
+        admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+        quoteDenom: isSet(object.quoteDenom)
+          ? globalThis.String(object.quoteDenom)
+          : isSet(object.quote_denom)
+            ? globalThis.String(object.quote_denom)
+            : "",
+        minPriceTickSize: isSet(object.minPriceTickSize)
+          ? globalThis.String(object.minPriceTickSize)
+          : isSet(object.min_price_tick_size)
+            ? globalThis.String(object.min_price_tick_size)
+            : "",
+        minQuantityTickSize: isSet(object.minQuantityTickSize)
+          ? globalThis.String(object.minQuantityTickSize)
+          : isSet(object.min_quantity_tick_size)
+            ? globalThis.String(object.min_quantity_tick_size)
+            : "",
+        minNotional: isSet(object.minNotional)
+          ? globalThis.String(object.minNotional)
+          : isSet(object.min_notional)
+            ? globalThis.String(object.min_notional)
+            : "",
+        openNotionalCap: isSet(object.openNotionalCap)
+          ? OpenNotionalCap.fromJSON(object.openNotionalCap)
+          : isSet(object.open_notional_cap)
+            ? OpenNotionalCap.fromJSON(object.open_notional_cap)
+            : undefined,
+      };
+    },
+
+    toJSON(message: MsgInstantBinaryOptionsMarketLaunch): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.ticker !== "") {
+        obj.ticker = message.ticker;
+      }
+      if (message.oracleSymbol !== "") {
+        obj.oracleSymbol = message.oracleSymbol;
+      }
+      if (message.oracleProvider !== "") {
+        obj.oracleProvider = message.oracleProvider;
+      }
+      if (message.oracleType !== 0) {
+        obj.oracleType = oracleTypeToJSON(message.oracleType);
+      }
+      if (message.oracleScaleFactor !== 0) {
+        obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
+      }
+      if (message.makerFeeRate !== "") {
+        obj.makerFeeRate = message.makerFeeRate;
+      }
+      if (message.takerFeeRate !== "") {
+        obj.takerFeeRate = message.takerFeeRate;
+      }
+      if (message.expirationTimestamp !== 0) {
+        obj.expirationTimestamp = Math.round(message.expirationTimestamp);
+      }
+      if (message.settlementTimestamp !== 0) {
+        obj.settlementTimestamp = Math.round(message.settlementTimestamp);
+      }
+      if (message.admin !== "") {
+        obj.admin = message.admin;
+      }
+      if (message.quoteDenom !== "") {
+        obj.quoteDenom = message.quoteDenom;
+      }
+      if (message.minPriceTickSize !== "") {
+        obj.minPriceTickSize = message.minPriceTickSize;
+      }
+      if (message.minQuantityTickSize !== "") {
+        obj.minQuantityTickSize = message.minQuantityTickSize;
+      }
+      if (message.minNotional !== "") {
+        obj.minNotional = message.minNotional;
+      }
+      if (message.openNotionalCap !== undefined) {
+        obj.openNotionalCap = OpenNotionalCap.toJSON(message.openNotionalCap);
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<MsgInstantBinaryOptionsMarketLaunch>, I>,
+    >(base?: I): MsgInstantBinaryOptionsMarketLaunch {
+      return MsgInstantBinaryOptionsMarketLaunch.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgInstantBinaryOptionsMarketLaunch>, I>,
+    >(object: I): MsgInstantBinaryOptionsMarketLaunch {
+      const message = createBaseMsgInstantBinaryOptionsMarketLaunch();
+      message.sender = object.sender ?? "";
+      message.ticker = object.ticker ?? "";
+      message.oracleSymbol = object.oracleSymbol ?? "";
+      message.oracleProvider = object.oracleProvider ?? "";
+      message.oracleType = object.oracleType ?? 0;
+      message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
+      message.makerFeeRate = object.makerFeeRate ?? "";
+      message.takerFeeRate = object.takerFeeRate ?? "";
+      message.expirationTimestamp = object.expirationTimestamp ?? 0;
+      message.settlementTimestamp = object.settlementTimestamp ?? 0;
+      message.admin = object.admin ?? "";
+      message.quoteDenom = object.quoteDenom ?? "";
+      message.minPriceTickSize = object.minPriceTickSize ?? "";
+      message.minQuantityTickSize = object.minQuantityTickSize ?? "";
+      message.minNotional = object.minNotional ?? "";
+      message.openNotionalCap =
+        object.openNotionalCap !== undefined && object.openNotionalCap !== null
+          ? OpenNotionalCap.fromPartial(object.openNotionalCap)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgInstantBinaryOptionsMarketLaunchResponse(): MsgInstantBinaryOptionsMarketLaunchResponse {
   return {};
 }
 
-export const MsgInstantBinaryOptionsMarketLaunchResponse: MessageFns<MsgInstantBinaryOptionsMarketLaunchResponse> = {
-  encode(_: MsgInstantBinaryOptionsMarketLaunchResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgInstantBinaryOptionsMarketLaunchResponse: MessageFns<MsgInstantBinaryOptionsMarketLaunchResponse> =
+  {
+    encode(
+      _: MsgInstantBinaryOptionsMarketLaunchResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgInstantBinaryOptionsMarketLaunchResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgInstantBinaryOptionsMarketLaunchResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgInstantBinaryOptionsMarketLaunchResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgInstantBinaryOptionsMarketLaunchResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgInstantBinaryOptionsMarketLaunchResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgInstantBinaryOptionsMarketLaunchResponse {
+      return {};
+    },
 
-  toJSON(_: MsgInstantBinaryOptionsMarketLaunchResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgInstantBinaryOptionsMarketLaunchResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgInstantBinaryOptionsMarketLaunchResponse>, I>>(
-    base?: I,
-  ): MsgInstantBinaryOptionsMarketLaunchResponse {
-    return MsgInstantBinaryOptionsMarketLaunchResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgInstantBinaryOptionsMarketLaunchResponse>, I>>(
-    _: I,
-  ): MsgInstantBinaryOptionsMarketLaunchResponse {
-    const message = createBaseMsgInstantBinaryOptionsMarketLaunchResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<MsgInstantBinaryOptionsMarketLaunchResponse>,
+        I
+      >,
+    >(base?: I): MsgInstantBinaryOptionsMarketLaunchResponse {
+      return MsgInstantBinaryOptionsMarketLaunchResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgInstantBinaryOptionsMarketLaunchResponse>,
+        I
+      >,
+    >(_: I): MsgInstantBinaryOptionsMarketLaunchResponse {
+      const message = createBaseMsgInstantBinaryOptionsMarketLaunchResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgInstantExpiryFuturesMarketLaunch(): MsgInstantExpiryFuturesMarketLaunch {
   return {
@@ -3857,453 +4088,489 @@ function createBaseMsgInstantExpiryFuturesMarketLaunch(): MsgInstantExpiryFuture
   };
 }
 
-export const MsgInstantExpiryFuturesMarketLaunch: MessageFns<MsgInstantExpiryFuturesMarketLaunch> = {
-  encode(message: MsgInstantExpiryFuturesMarketLaunch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.ticker !== "") {
-      writer.uint32(18).string(message.ticker);
-    }
-    if (message.quoteDenom !== "") {
-      writer.uint32(26).string(message.quoteDenom);
-    }
-    if (message.oracleBase !== "") {
-      writer.uint32(34).string(message.oracleBase);
-    }
-    if (message.oracleQuote !== "") {
-      writer.uint32(42).string(message.oracleQuote);
-    }
-    if (message.oracleType !== 0) {
-      writer.uint32(48).int32(message.oracleType);
-    }
-    if (message.oracleScaleFactor !== 0) {
-      writer.uint32(56).uint32(message.oracleScaleFactor);
-    }
-    if (message.expiry !== 0) {
-      writer.uint32(64).int64(message.expiry);
-    }
-    if (message.makerFeeRate !== "") {
-      writer.uint32(74).string(message.makerFeeRate);
-    }
-    if (message.takerFeeRate !== "") {
-      writer.uint32(82).string(message.takerFeeRate);
-    }
-    if (message.initialMarginRatio !== "") {
-      writer.uint32(90).string(message.initialMarginRatio);
-    }
-    if (message.maintenanceMarginRatio !== "") {
-      writer.uint32(98).string(message.maintenanceMarginRatio);
-    }
-    if (message.minPriceTickSize !== "") {
-      writer.uint32(106).string(message.minPriceTickSize);
-    }
-    if (message.minQuantityTickSize !== "") {
-      writer.uint32(114).string(message.minQuantityTickSize);
-    }
-    if (message.minNotional !== "") {
-      writer.uint32(122).string(message.minNotional);
-    }
-    if (message.reduceMarginRatio !== "") {
-      writer.uint32(130).string(message.reduceMarginRatio);
-    }
-    if (message.openNotionalCap !== undefined) {
-      OpenNotionalCap.encode(message.openNotionalCap, writer.uint32(138).fork()).join();
-    }
-    if (message.crossMarginEligible !== false) {
-      writer.uint32(144).bool(message.crossMarginEligible);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgInstantExpiryFuturesMarketLaunch {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgInstantExpiryFuturesMarketLaunch();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.ticker = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.quoteDenom = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.oracleBase = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.oracleQuote = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.oracleType = reader.int32() as any;
-          continue;
-        }
-        case 7: {
-          if (tag !== 56) {
-            break;
-          }
-
-          message.oracleScaleFactor = reader.uint32();
-          continue;
-        }
-        case 8: {
-          if (tag !== 64) {
-            break;
-          }
-
-          message.expiry = longToNumber(reader.int64());
-          continue;
-        }
-        case 9: {
-          if (tag !== 74) {
-            break;
-          }
-
-          message.makerFeeRate = reader.string();
-          continue;
-        }
-        case 10: {
-          if (tag !== 82) {
-            break;
-          }
-
-          message.takerFeeRate = reader.string();
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.initialMarginRatio = reader.string();
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.maintenanceMarginRatio = reader.string();
-          continue;
-        }
-        case 13: {
-          if (tag !== 106) {
-            break;
-          }
-
-          message.minPriceTickSize = reader.string();
-          continue;
-        }
-        case 14: {
-          if (tag !== 114) {
-            break;
-          }
-
-          message.minQuantityTickSize = reader.string();
-          continue;
-        }
-        case 15: {
-          if (tag !== 122) {
-            break;
-          }
-
-          message.minNotional = reader.string();
-          continue;
-        }
-        case 16: {
-          if (tag !== 130) {
-            break;
-          }
-
-          message.reduceMarginRatio = reader.string();
-          continue;
-        }
-        case 17: {
-          if (tag !== 138) {
-            break;
-          }
-
-          message.openNotionalCap = OpenNotionalCap.decode(reader, reader.uint32());
-          continue;
-        }
-        case 18: {
-          if (tag !== 144) {
-            break;
-          }
-
-          message.crossMarginEligible = reader.bool();
-          continue;
-        }
+export const MsgInstantExpiryFuturesMarketLaunch: MessageFns<MsgInstantExpiryFuturesMarketLaunch> =
+  {
+    encode(
+      message: MsgInstantExpiryFuturesMarketLaunch,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.ticker !== "") {
+        writer.uint32(18).string(message.ticker);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.quoteDenom !== "") {
+        writer.uint32(26).string(message.quoteDenom);
+      }
+      if (message.oracleBase !== "") {
+        writer.uint32(34).string(message.oracleBase);
+      }
+      if (message.oracleQuote !== "") {
+        writer.uint32(42).string(message.oracleQuote);
+      }
+      if (message.oracleType !== 0) {
+        writer.uint32(48).int32(message.oracleType);
+      }
+      if (message.oracleScaleFactor !== 0) {
+        writer.uint32(56).uint32(message.oracleScaleFactor);
+      }
+      if (message.expiry !== 0) {
+        writer.uint32(64).int64(message.expiry);
+      }
+      if (message.makerFeeRate !== "") {
+        writer.uint32(74).string(message.makerFeeRate);
+      }
+      if (message.takerFeeRate !== "") {
+        writer.uint32(82).string(message.takerFeeRate);
+      }
+      if (message.initialMarginRatio !== "") {
+        writer.uint32(90).string(message.initialMarginRatio);
+      }
+      if (message.maintenanceMarginRatio !== "") {
+        writer.uint32(98).string(message.maintenanceMarginRatio);
+      }
+      if (message.minPriceTickSize !== "") {
+        writer.uint32(106).string(message.minPriceTickSize);
+      }
+      if (message.minQuantityTickSize !== "") {
+        writer.uint32(114).string(message.minQuantityTickSize);
+      }
+      if (message.minNotional !== "") {
+        writer.uint32(122).string(message.minNotional);
+      }
+      if (message.reduceMarginRatio !== "") {
+        writer.uint32(130).string(message.reduceMarginRatio);
+      }
+      if (message.openNotionalCap !== undefined) {
+        OpenNotionalCap.encode(
+          message.openNotionalCap,
+          writer.uint32(138).fork(),
+        ).join();
+      }
+      if (message.crossMarginEligible !== false) {
+        writer.uint32(144).bool(message.crossMarginEligible);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgInstantExpiryFuturesMarketLaunch {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
-      quoteDenom: isSet(object.quoteDenom)
-        ? globalThis.String(object.quoteDenom)
-        : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
-      oracleBase: isSet(object.oracleBase)
-        ? globalThis.String(object.oracleBase)
-        : isSet(object.oracle_base)
-        ? globalThis.String(object.oracle_base)
-        : "",
-      oracleQuote: isSet(object.oracleQuote)
-        ? globalThis.String(object.oracleQuote)
-        : isSet(object.oracle_quote)
-        ? globalThis.String(object.oracle_quote)
-        : "",
-      oracleType: isSet(object.oracleType)
-        ? oracleTypeFromJSON(object.oracleType)
-        : isSet(object.oracle_type)
-        ? oracleTypeFromJSON(object.oracle_type)
-        : 0,
-      oracleScaleFactor: isSet(object.oracleScaleFactor)
-        ? globalThis.Number(object.oracleScaleFactor)
-        : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
-      expiry: isSet(object.expiry) ? globalThis.Number(object.expiry) : 0,
-      makerFeeRate: isSet(object.makerFeeRate)
-        ? globalThis.String(object.makerFeeRate)
-        : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
-      takerFeeRate: isSet(object.takerFeeRate)
-        ? globalThis.String(object.takerFeeRate)
-        : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
-      initialMarginRatio: isSet(object.initialMarginRatio)
-        ? globalThis.String(object.initialMarginRatio)
-        : isSet(object.initial_margin_ratio)
-        ? globalThis.String(object.initial_margin_ratio)
-        : "",
-      maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
-        ? globalThis.String(object.maintenanceMarginRatio)
-        : isSet(object.maintenance_margin_ratio)
-        ? globalThis.String(object.maintenance_margin_ratio)
-        : "",
-      minPriceTickSize: isSet(object.minPriceTickSize)
-        ? globalThis.String(object.minPriceTickSize)
-        : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
-      minQuantityTickSize: isSet(object.minQuantityTickSize)
-        ? globalThis.String(object.minQuantityTickSize)
-        : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
-      minNotional: isSet(object.minNotional)
-        ? globalThis.String(object.minNotional)
-        : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
-      reduceMarginRatio: isSet(object.reduceMarginRatio)
-        ? globalThis.String(object.reduceMarginRatio)
-        : isSet(object.reduce_margin_ratio)
-        ? globalThis.String(object.reduce_margin_ratio)
-        : "",
-      openNotionalCap: isSet(object.openNotionalCap)
-        ? OpenNotionalCap.fromJSON(object.openNotionalCap)
-        : isSet(object.open_notional_cap)
-        ? OpenNotionalCap.fromJSON(object.open_notional_cap)
-        : undefined,
-      crossMarginEligible: isSet(object.crossMarginEligible)
-        ? globalThis.Boolean(object.crossMarginEligible)
-        : isSet(object.cross_margin_eligible)
-        ? globalThis.Boolean(object.cross_margin_eligible)
-        : false,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgInstantExpiryFuturesMarketLaunch {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgInstantExpiryFuturesMarketLaunch();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgInstantExpiryFuturesMarketLaunch): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.ticker !== "") {
-      obj.ticker = message.ticker;
-    }
-    if (message.quoteDenom !== "") {
-      obj.quoteDenom = message.quoteDenom;
-    }
-    if (message.oracleBase !== "") {
-      obj.oracleBase = message.oracleBase;
-    }
-    if (message.oracleQuote !== "") {
-      obj.oracleQuote = message.oracleQuote;
-    }
-    if (message.oracleType !== 0) {
-      obj.oracleType = oracleTypeToJSON(message.oracleType);
-    }
-    if (message.oracleScaleFactor !== 0) {
-      obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
-    }
-    if (message.expiry !== 0) {
-      obj.expiry = Math.round(message.expiry);
-    }
-    if (message.makerFeeRate !== "") {
-      obj.makerFeeRate = message.makerFeeRate;
-    }
-    if (message.takerFeeRate !== "") {
-      obj.takerFeeRate = message.takerFeeRate;
-    }
-    if (message.initialMarginRatio !== "") {
-      obj.initialMarginRatio = message.initialMarginRatio;
-    }
-    if (message.maintenanceMarginRatio !== "") {
-      obj.maintenanceMarginRatio = message.maintenanceMarginRatio;
-    }
-    if (message.minPriceTickSize !== "") {
-      obj.minPriceTickSize = message.minPriceTickSize;
-    }
-    if (message.minQuantityTickSize !== "") {
-      obj.minQuantityTickSize = message.minQuantityTickSize;
-    }
-    if (message.minNotional !== "") {
-      obj.minNotional = message.minNotional;
-    }
-    if (message.reduceMarginRatio !== "") {
-      obj.reduceMarginRatio = message.reduceMarginRatio;
-    }
-    if (message.openNotionalCap !== undefined) {
-      obj.openNotionalCap = OpenNotionalCap.toJSON(message.openNotionalCap);
-    }
-    if (message.crossMarginEligible !== false) {
-      obj.crossMarginEligible = message.crossMarginEligible;
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgInstantExpiryFuturesMarketLaunch>, I>>(
-    base?: I,
-  ): MsgInstantExpiryFuturesMarketLaunch {
-    return MsgInstantExpiryFuturesMarketLaunch.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgInstantExpiryFuturesMarketLaunch>, I>>(
-    object: I,
-  ): MsgInstantExpiryFuturesMarketLaunch {
-    const message = createBaseMsgInstantExpiryFuturesMarketLaunch();
-    message.sender = object.sender ?? "";
-    message.ticker = object.ticker ?? "";
-    message.quoteDenom = object.quoteDenom ?? "";
-    message.oracleBase = object.oracleBase ?? "";
-    message.oracleQuote = object.oracleQuote ?? "";
-    message.oracleType = object.oracleType ?? 0;
-    message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
-    message.expiry = object.expiry ?? 0;
-    message.makerFeeRate = object.makerFeeRate ?? "";
-    message.takerFeeRate = object.takerFeeRate ?? "";
-    message.initialMarginRatio = object.initialMarginRatio ?? "";
-    message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
-    message.minPriceTickSize = object.minPriceTickSize ?? "";
-    message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.minNotional = object.minNotional ?? "";
-    message.reduceMarginRatio = object.reduceMarginRatio ?? "";
-    message.openNotionalCap = (object.openNotionalCap !== undefined && object.openNotionalCap !== null)
-      ? OpenNotionalCap.fromPartial(object.openNotionalCap)
-      : undefined;
-    message.crossMarginEligible = object.crossMarginEligible ?? false;
-    return message;
-  },
-};
+            message.ticker = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.quoteDenom = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.oracleBase = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.oracleQuote = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.oracleType = reader.int32() as any;
+            continue;
+          }
+          case 7: {
+            if (tag !== 56) {
+              break;
+            }
+
+            message.oracleScaleFactor = reader.uint32();
+            continue;
+          }
+          case 8: {
+            if (tag !== 64) {
+              break;
+            }
+
+            message.expiry = longToNumber(reader.int64());
+            continue;
+          }
+          case 9: {
+            if (tag !== 74) {
+              break;
+            }
+
+            message.makerFeeRate = reader.string();
+            continue;
+          }
+          case 10: {
+            if (tag !== 82) {
+              break;
+            }
+
+            message.takerFeeRate = reader.string();
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.initialMarginRatio = reader.string();
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.maintenanceMarginRatio = reader.string();
+            continue;
+          }
+          case 13: {
+            if (tag !== 106) {
+              break;
+            }
+
+            message.minPriceTickSize = reader.string();
+            continue;
+          }
+          case 14: {
+            if (tag !== 114) {
+              break;
+            }
+
+            message.minQuantityTickSize = reader.string();
+            continue;
+          }
+          case 15: {
+            if (tag !== 122) {
+              break;
+            }
+
+            message.minNotional = reader.string();
+            continue;
+          }
+          case 16: {
+            if (tag !== 130) {
+              break;
+            }
+
+            message.reduceMarginRatio = reader.string();
+            continue;
+          }
+          case 17: {
+            if (tag !== 138) {
+              break;
+            }
+
+            message.openNotionalCap = OpenNotionalCap.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 18: {
+            if (tag !== 144) {
+              break;
+            }
+
+            message.crossMarginEligible = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgInstantExpiryFuturesMarketLaunch {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
+        quoteDenom: isSet(object.quoteDenom)
+          ? globalThis.String(object.quoteDenom)
+          : isSet(object.quote_denom)
+            ? globalThis.String(object.quote_denom)
+            : "",
+        oracleBase: isSet(object.oracleBase)
+          ? globalThis.String(object.oracleBase)
+          : isSet(object.oracle_base)
+            ? globalThis.String(object.oracle_base)
+            : "",
+        oracleQuote: isSet(object.oracleQuote)
+          ? globalThis.String(object.oracleQuote)
+          : isSet(object.oracle_quote)
+            ? globalThis.String(object.oracle_quote)
+            : "",
+        oracleType: isSet(object.oracleType)
+          ? oracleTypeFromJSON(object.oracleType)
+          : isSet(object.oracle_type)
+            ? oracleTypeFromJSON(object.oracle_type)
+            : 0,
+        oracleScaleFactor: isSet(object.oracleScaleFactor)
+          ? globalThis.Number(object.oracleScaleFactor)
+          : isSet(object.oracle_scale_factor)
+            ? globalThis.Number(object.oracle_scale_factor)
+            : 0,
+        expiry: isSet(object.expiry) ? globalThis.Number(object.expiry) : 0,
+        makerFeeRate: isSet(object.makerFeeRate)
+          ? globalThis.String(object.makerFeeRate)
+          : isSet(object.maker_fee_rate)
+            ? globalThis.String(object.maker_fee_rate)
+            : "",
+        takerFeeRate: isSet(object.takerFeeRate)
+          ? globalThis.String(object.takerFeeRate)
+          : isSet(object.taker_fee_rate)
+            ? globalThis.String(object.taker_fee_rate)
+            : "",
+        initialMarginRatio: isSet(object.initialMarginRatio)
+          ? globalThis.String(object.initialMarginRatio)
+          : isSet(object.initial_margin_ratio)
+            ? globalThis.String(object.initial_margin_ratio)
+            : "",
+        maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
+          ? globalThis.String(object.maintenanceMarginRatio)
+          : isSet(object.maintenance_margin_ratio)
+            ? globalThis.String(object.maintenance_margin_ratio)
+            : "",
+        minPriceTickSize: isSet(object.minPriceTickSize)
+          ? globalThis.String(object.minPriceTickSize)
+          : isSet(object.min_price_tick_size)
+            ? globalThis.String(object.min_price_tick_size)
+            : "",
+        minQuantityTickSize: isSet(object.minQuantityTickSize)
+          ? globalThis.String(object.minQuantityTickSize)
+          : isSet(object.min_quantity_tick_size)
+            ? globalThis.String(object.min_quantity_tick_size)
+            : "",
+        minNotional: isSet(object.minNotional)
+          ? globalThis.String(object.minNotional)
+          : isSet(object.min_notional)
+            ? globalThis.String(object.min_notional)
+            : "",
+        reduceMarginRatio: isSet(object.reduceMarginRatio)
+          ? globalThis.String(object.reduceMarginRatio)
+          : isSet(object.reduce_margin_ratio)
+            ? globalThis.String(object.reduce_margin_ratio)
+            : "",
+        openNotionalCap: isSet(object.openNotionalCap)
+          ? OpenNotionalCap.fromJSON(object.openNotionalCap)
+          : isSet(object.open_notional_cap)
+            ? OpenNotionalCap.fromJSON(object.open_notional_cap)
+            : undefined,
+        crossMarginEligible: isSet(object.crossMarginEligible)
+          ? globalThis.Boolean(object.crossMarginEligible)
+          : isSet(object.cross_margin_eligible)
+            ? globalThis.Boolean(object.cross_margin_eligible)
+            : false,
+      };
+    },
+
+    toJSON(message: MsgInstantExpiryFuturesMarketLaunch): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.ticker !== "") {
+        obj.ticker = message.ticker;
+      }
+      if (message.quoteDenom !== "") {
+        obj.quoteDenom = message.quoteDenom;
+      }
+      if (message.oracleBase !== "") {
+        obj.oracleBase = message.oracleBase;
+      }
+      if (message.oracleQuote !== "") {
+        obj.oracleQuote = message.oracleQuote;
+      }
+      if (message.oracleType !== 0) {
+        obj.oracleType = oracleTypeToJSON(message.oracleType);
+      }
+      if (message.oracleScaleFactor !== 0) {
+        obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
+      }
+      if (message.expiry !== 0) {
+        obj.expiry = Math.round(message.expiry);
+      }
+      if (message.makerFeeRate !== "") {
+        obj.makerFeeRate = message.makerFeeRate;
+      }
+      if (message.takerFeeRate !== "") {
+        obj.takerFeeRate = message.takerFeeRate;
+      }
+      if (message.initialMarginRatio !== "") {
+        obj.initialMarginRatio = message.initialMarginRatio;
+      }
+      if (message.maintenanceMarginRatio !== "") {
+        obj.maintenanceMarginRatio = message.maintenanceMarginRatio;
+      }
+      if (message.minPriceTickSize !== "") {
+        obj.minPriceTickSize = message.minPriceTickSize;
+      }
+      if (message.minQuantityTickSize !== "") {
+        obj.minQuantityTickSize = message.minQuantityTickSize;
+      }
+      if (message.minNotional !== "") {
+        obj.minNotional = message.minNotional;
+      }
+      if (message.reduceMarginRatio !== "") {
+        obj.reduceMarginRatio = message.reduceMarginRatio;
+      }
+      if (message.openNotionalCap !== undefined) {
+        obj.openNotionalCap = OpenNotionalCap.toJSON(message.openNotionalCap);
+      }
+      if (message.crossMarginEligible !== false) {
+        obj.crossMarginEligible = message.crossMarginEligible;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<MsgInstantExpiryFuturesMarketLaunch>, I>,
+    >(base?: I): MsgInstantExpiryFuturesMarketLaunch {
+      return MsgInstantExpiryFuturesMarketLaunch.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgInstantExpiryFuturesMarketLaunch>, I>,
+    >(object: I): MsgInstantExpiryFuturesMarketLaunch {
+      const message = createBaseMsgInstantExpiryFuturesMarketLaunch();
+      message.sender = object.sender ?? "";
+      message.ticker = object.ticker ?? "";
+      message.quoteDenom = object.quoteDenom ?? "";
+      message.oracleBase = object.oracleBase ?? "";
+      message.oracleQuote = object.oracleQuote ?? "";
+      message.oracleType = object.oracleType ?? 0;
+      message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
+      message.expiry = object.expiry ?? 0;
+      message.makerFeeRate = object.makerFeeRate ?? "";
+      message.takerFeeRate = object.takerFeeRate ?? "";
+      message.initialMarginRatio = object.initialMarginRatio ?? "";
+      message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
+      message.minPriceTickSize = object.minPriceTickSize ?? "";
+      message.minQuantityTickSize = object.minQuantityTickSize ?? "";
+      message.minNotional = object.minNotional ?? "";
+      message.reduceMarginRatio = object.reduceMarginRatio ?? "";
+      message.openNotionalCap =
+        object.openNotionalCap !== undefined && object.openNotionalCap !== null
+          ? OpenNotionalCap.fromPartial(object.openNotionalCap)
+          : undefined;
+      message.crossMarginEligible = object.crossMarginEligible ?? false;
+      return message;
+    },
+  };
 
 function createBaseMsgInstantExpiryFuturesMarketLaunchResponse(): MsgInstantExpiryFuturesMarketLaunchResponse {
   return {};
 }
 
-export const MsgInstantExpiryFuturesMarketLaunchResponse: MessageFns<MsgInstantExpiryFuturesMarketLaunchResponse> = {
-  encode(_: MsgInstantExpiryFuturesMarketLaunchResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgInstantExpiryFuturesMarketLaunchResponse: MessageFns<MsgInstantExpiryFuturesMarketLaunchResponse> =
+  {
+    encode(
+      _: MsgInstantExpiryFuturesMarketLaunchResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgInstantExpiryFuturesMarketLaunchResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgInstantExpiryFuturesMarketLaunchResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgInstantExpiryFuturesMarketLaunchResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgInstantExpiryFuturesMarketLaunchResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgInstantExpiryFuturesMarketLaunchResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgInstantExpiryFuturesMarketLaunchResponse {
+      return {};
+    },
 
-  toJSON(_: MsgInstantExpiryFuturesMarketLaunchResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgInstantExpiryFuturesMarketLaunchResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgInstantExpiryFuturesMarketLaunchResponse>, I>>(
-    base?: I,
-  ): MsgInstantExpiryFuturesMarketLaunchResponse {
-    return MsgInstantExpiryFuturesMarketLaunchResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgInstantExpiryFuturesMarketLaunchResponse>, I>>(
-    _: I,
-  ): MsgInstantExpiryFuturesMarketLaunchResponse {
-    const message = createBaseMsgInstantExpiryFuturesMarketLaunchResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<MsgInstantExpiryFuturesMarketLaunchResponse>,
+        I
+      >,
+    >(base?: I): MsgInstantExpiryFuturesMarketLaunchResponse {
+      return MsgInstantExpiryFuturesMarketLaunchResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgInstantExpiryFuturesMarketLaunchResponse>,
+        I
+      >,
+    >(_: I): MsgInstantExpiryFuturesMarketLaunchResponse {
+      const message = createBaseMsgInstantExpiryFuturesMarketLaunchResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgCreateSpotMarketOrder(): MsgCreateSpotMarketOrder {
   return { sender: "", order: undefined };
 }
 
 export const MsgCreateSpotMarketOrder: MessageFns<MsgCreateSpotMarketOrder> = {
-  encode(message: MsgCreateSpotMarketOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgCreateSpotMarketOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -4313,8 +4580,12 @@ export const MsgCreateSpotMarketOrder: MessageFns<MsgCreateSpotMarketOrder> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateSpotMarketOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgCreateSpotMarketOrder {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateSpotMarketOrder();
     while (reader.pos < end) {
@@ -4363,15 +4634,20 @@ export const MsgCreateSpotMarketOrder: MessageFns<MsgCreateSpotMarketOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgCreateSpotMarketOrder>, I>>(base?: I): MsgCreateSpotMarketOrder {
+  create<I extends Exact<DeepPartial<MsgCreateSpotMarketOrder>, I>>(
+    base?: I,
+  ): MsgCreateSpotMarketOrder {
     return MsgCreateSpotMarketOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateSpotMarketOrder>, I>>(object: I): MsgCreateSpotMarketOrder {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateSpotMarketOrder>, I>>(
+    object: I,
+  ): MsgCreateSpotMarketOrder {
     const message = createBaseMsgCreateSpotMarketOrder();
     message.sender = object.sender ?? "";
-    message.order = (object.order !== undefined && object.order !== null)
-      ? SpotOrder.fromPartial(object.order)
-      : undefined;
+    message.order =
+      object.order !== undefined && object.order !== null
+        ? SpotOrder.fromPartial(object.order)
+        : undefined;
     return message;
   },
 };
@@ -4380,110 +4656,130 @@ function createBaseMsgCreateSpotMarketOrderResponse(): MsgCreateSpotMarketOrderR
   return { orderHash: "", results: undefined, cid: "" };
 }
 
-export const MsgCreateSpotMarketOrderResponse: MessageFns<MsgCreateSpotMarketOrderResponse> = {
-  encode(message: MsgCreateSpotMarketOrderResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.orderHash !== "") {
-      writer.uint32(10).string(message.orderHash);
-    }
-    if (message.results !== undefined) {
-      SpotMarketOrderResults.encode(message.results, writer.uint32(18).fork()).join();
-    }
-    if (message.cid !== "") {
-      writer.uint32(26).string(message.cid);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateSpotMarketOrderResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateSpotMarketOrderResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orderHash = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.results = SpotMarketOrderResults.decode(reader, reader.uint32());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.cid = reader.string();
-          continue;
-        }
+export const MsgCreateSpotMarketOrderResponse: MessageFns<MsgCreateSpotMarketOrderResponse> =
+  {
+    encode(
+      message: MsgCreateSpotMarketOrderResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.orderHash !== "") {
+        writer.uint32(10).string(message.orderHash);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.results !== undefined) {
+        SpotMarketOrderResults.encode(
+          message.results,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.cid !== "") {
+        writer.uint32(26).string(message.cid);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCreateSpotMarketOrderResponse {
-    return {
-      orderHash: isSet(object.orderHash)
-        ? globalThis.String(object.orderHash)
-        : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
-      results: isSet(object.results) ? SpotMarketOrderResults.fromJSON(object.results) : undefined,
-      cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCreateSpotMarketOrderResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCreateSpotMarketOrderResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCreateSpotMarketOrderResponse): unknown {
-    const obj: any = {};
-    if (message.orderHash !== "") {
-      obj.orderHash = message.orderHash;
-    }
-    if (message.results !== undefined) {
-      obj.results = SpotMarketOrderResults.toJSON(message.results);
-    }
-    if (message.cid !== "") {
-      obj.cid = message.cid;
-    }
-    return obj;
-  },
+            message.orderHash = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCreateSpotMarketOrderResponse>, I>>(
-    base?: I,
-  ): MsgCreateSpotMarketOrderResponse {
-    return MsgCreateSpotMarketOrderResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateSpotMarketOrderResponse>, I>>(
-    object: I,
-  ): MsgCreateSpotMarketOrderResponse {
-    const message = createBaseMsgCreateSpotMarketOrderResponse();
-    message.orderHash = object.orderHash ?? "";
-    message.results = (object.results !== undefined && object.results !== null)
-      ? SpotMarketOrderResults.fromPartial(object.results)
-      : undefined;
-    message.cid = object.cid ?? "";
-    return message;
-  },
-};
+            message.results = SpotMarketOrderResults.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.cid = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCreateSpotMarketOrderResponse {
+      return {
+        orderHash: isSet(object.orderHash)
+          ? globalThis.String(object.orderHash)
+          : isSet(object.order_hash)
+            ? globalThis.String(object.order_hash)
+            : "",
+        results: isSet(object.results)
+          ? SpotMarketOrderResults.fromJSON(object.results)
+          : undefined,
+        cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
+      };
+    },
+
+    toJSON(message: MsgCreateSpotMarketOrderResponse): unknown {
+      const obj: any = {};
+      if (message.orderHash !== "") {
+        obj.orderHash = message.orderHash;
+      }
+      if (message.results !== undefined) {
+        obj.results = SpotMarketOrderResults.toJSON(message.results);
+      }
+      if (message.cid !== "") {
+        obj.cid = message.cid;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgCreateSpotMarketOrderResponse>, I>>(
+      base?: I,
+    ): MsgCreateSpotMarketOrderResponse {
+      return MsgCreateSpotMarketOrderResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgCreateSpotMarketOrderResponse>, I>,
+    >(object: I): MsgCreateSpotMarketOrderResponse {
+      const message = createBaseMsgCreateSpotMarketOrderResponse();
+      message.orderHash = object.orderHash ?? "";
+      message.results =
+        object.results !== undefined && object.results !== null
+          ? SpotMarketOrderResults.fromPartial(object.results)
+          : undefined;
+      message.cid = object.cid ?? "";
+      return message;
+    },
+  };
 
 function createBaseSpotMarketOrderResults(): SpotMarketOrderResults {
   return { quantity: "", price: "", fee: "", notional: "" };
 }
 
 export const SpotMarketOrderResults: MessageFns<SpotMarketOrderResults> = {
-  encode(message: SpotMarketOrderResults, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotMarketOrderResults,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.quantity !== "") {
       writer.uint32(10).string(message.quantity);
     }
@@ -4499,8 +4795,12 @@ export const SpotMarketOrderResults: MessageFns<SpotMarketOrderResults> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SpotMarketOrderResults {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SpotMarketOrderResults {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotMarketOrderResults();
     while (reader.pos < end) {
@@ -4549,10 +4849,14 @@ export const SpotMarketOrderResults: MessageFns<SpotMarketOrderResults> = {
 
   fromJSON(object: any): SpotMarketOrderResults {
     return {
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       price: isSet(object.price) ? globalThis.String(object.price) : "",
       fee: isSet(object.fee) ? globalThis.String(object.fee) : "",
-      notional: isSet(object.notional) ? globalThis.String(object.notional) : "",
+      notional: isSet(object.notional)
+        ? globalThis.String(object.notional)
+        : "",
     };
   },
 
@@ -4573,10 +4877,14 @@ export const SpotMarketOrderResults: MessageFns<SpotMarketOrderResults> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SpotMarketOrderResults>, I>>(base?: I): SpotMarketOrderResults {
+  create<I extends Exact<DeepPartial<SpotMarketOrderResults>, I>>(
+    base?: I,
+  ): SpotMarketOrderResults {
     return SpotMarketOrderResults.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotMarketOrderResults>, I>>(object: I): SpotMarketOrderResults {
+  fromPartial<I extends Exact<DeepPartial<SpotMarketOrderResults>, I>>(
+    object: I,
+  ): SpotMarketOrderResults {
     const message = createBaseSpotMarketOrderResults();
     message.quantity = object.quantity ?? "";
     message.price = object.price ?? "";
@@ -4590,531 +4898,604 @@ function createBaseMsgCreateDerivativeLimitOrder(): MsgCreateDerivativeLimitOrde
   return { sender: "", order: undefined };
 }
 
-export const MsgCreateDerivativeLimitOrder: MessageFns<MsgCreateDerivativeLimitOrder> = {
-  encode(message: MsgCreateDerivativeLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.order !== undefined) {
-      DerivativeOrder.encode(message.order, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDerivativeLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateDerivativeLimitOrder();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.order = DerivativeOrder.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgCreateDerivativeLimitOrder: MessageFns<MsgCreateDerivativeLimitOrder> =
+  {
+    encode(
+      message: MsgCreateDerivativeLimitOrder,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.order !== undefined) {
+        DerivativeOrder.encode(message.order, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCreateDerivativeLimitOrder {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      order: isSet(object.order) ? DerivativeOrder.fromJSON(object.order) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCreateDerivativeLimitOrder {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCreateDerivativeLimitOrder();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCreateDerivativeLimitOrder): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.order !== undefined) {
-      obj.order = DerivativeOrder.toJSON(message.order);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCreateDerivativeLimitOrder>, I>>(base?: I): MsgCreateDerivativeLimitOrder {
-    return MsgCreateDerivativeLimitOrder.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateDerivativeLimitOrder>, I>>(
-    object: I,
-  ): MsgCreateDerivativeLimitOrder {
-    const message = createBaseMsgCreateDerivativeLimitOrder();
-    message.sender = object.sender ?? "";
-    message.order = (object.order !== undefined && object.order !== null)
-      ? DerivativeOrder.fromPartial(object.order)
-      : undefined;
-    return message;
-  },
-};
+            message.order = DerivativeOrder.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCreateDerivativeLimitOrder {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        order: isSet(object.order)
+          ? DerivativeOrder.fromJSON(object.order)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgCreateDerivativeLimitOrder): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.order !== undefined) {
+        obj.order = DerivativeOrder.toJSON(message.order);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgCreateDerivativeLimitOrder>, I>>(
+      base?: I,
+    ): MsgCreateDerivativeLimitOrder {
+      return MsgCreateDerivativeLimitOrder.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgCreateDerivativeLimitOrder>, I>>(
+      object: I,
+    ): MsgCreateDerivativeLimitOrder {
+      const message = createBaseMsgCreateDerivativeLimitOrder();
+      message.sender = object.sender ?? "";
+      message.order =
+        object.order !== undefined && object.order !== null
+          ? DerivativeOrder.fromPartial(object.order)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgCreateDerivativeLimitOrderResponse(): MsgCreateDerivativeLimitOrderResponse {
   return { orderHash: "", cid: "" };
 }
 
-export const MsgCreateDerivativeLimitOrderResponse: MessageFns<MsgCreateDerivativeLimitOrderResponse> = {
-  encode(message: MsgCreateDerivativeLimitOrderResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.orderHash !== "") {
-      writer.uint32(10).string(message.orderHash);
-    }
-    if (message.cid !== "") {
-      writer.uint32(18).string(message.cid);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDerivativeLimitOrderResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateDerivativeLimitOrderResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orderHash = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.cid = reader.string();
-          continue;
-        }
+export const MsgCreateDerivativeLimitOrderResponse: MessageFns<MsgCreateDerivativeLimitOrderResponse> =
+  {
+    encode(
+      message: MsgCreateDerivativeLimitOrderResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.orderHash !== "") {
+        writer.uint32(10).string(message.orderHash);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.cid !== "") {
+        writer.uint32(18).string(message.cid);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCreateDerivativeLimitOrderResponse {
-    return {
-      orderHash: isSet(object.orderHash)
-        ? globalThis.String(object.orderHash)
-        : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
-      cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCreateDerivativeLimitOrderResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCreateDerivativeLimitOrderResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCreateDerivativeLimitOrderResponse): unknown {
-    const obj: any = {};
-    if (message.orderHash !== "") {
-      obj.orderHash = message.orderHash;
-    }
-    if (message.cid !== "") {
-      obj.cid = message.cid;
-    }
-    return obj;
-  },
+            message.orderHash = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCreateDerivativeLimitOrderResponse>, I>>(
-    base?: I,
-  ): MsgCreateDerivativeLimitOrderResponse {
-    return MsgCreateDerivativeLimitOrderResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateDerivativeLimitOrderResponse>, I>>(
-    object: I,
-  ): MsgCreateDerivativeLimitOrderResponse {
-    const message = createBaseMsgCreateDerivativeLimitOrderResponse();
-    message.orderHash = object.orderHash ?? "";
-    message.cid = object.cid ?? "";
-    return message;
-  },
-};
+            message.cid = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCreateDerivativeLimitOrderResponse {
+      return {
+        orderHash: isSet(object.orderHash)
+          ? globalThis.String(object.orderHash)
+          : isSet(object.order_hash)
+            ? globalThis.String(object.order_hash)
+            : "",
+        cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
+      };
+    },
+
+    toJSON(message: MsgCreateDerivativeLimitOrderResponse): unknown {
+      const obj: any = {};
+      if (message.orderHash !== "") {
+        obj.orderHash = message.orderHash;
+      }
+      if (message.cid !== "") {
+        obj.cid = message.cid;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<MsgCreateDerivativeLimitOrderResponse>, I>,
+    >(base?: I): MsgCreateDerivativeLimitOrderResponse {
+      return MsgCreateDerivativeLimitOrderResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgCreateDerivativeLimitOrderResponse>, I>,
+    >(object: I): MsgCreateDerivativeLimitOrderResponse {
+      const message = createBaseMsgCreateDerivativeLimitOrderResponse();
+      message.orderHash = object.orderHash ?? "";
+      message.cid = object.cid ?? "";
+      return message;
+    },
+  };
 
 function createBaseMsgCreateBinaryOptionsLimitOrder(): MsgCreateBinaryOptionsLimitOrder {
   return { sender: "", order: undefined };
 }
 
-export const MsgCreateBinaryOptionsLimitOrder: MessageFns<MsgCreateBinaryOptionsLimitOrder> = {
-  encode(message: MsgCreateBinaryOptionsLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.order !== undefined) {
-      DerivativeOrder.encode(message.order, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBinaryOptionsLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateBinaryOptionsLimitOrder();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.order = DerivativeOrder.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgCreateBinaryOptionsLimitOrder: MessageFns<MsgCreateBinaryOptionsLimitOrder> =
+  {
+    encode(
+      message: MsgCreateBinaryOptionsLimitOrder,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.order !== undefined) {
+        DerivativeOrder.encode(message.order, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCreateBinaryOptionsLimitOrder {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      order: isSet(object.order) ? DerivativeOrder.fromJSON(object.order) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCreateBinaryOptionsLimitOrder {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCreateBinaryOptionsLimitOrder();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCreateBinaryOptionsLimitOrder): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.order !== undefined) {
-      obj.order = DerivativeOrder.toJSON(message.order);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCreateBinaryOptionsLimitOrder>, I>>(
-    base?: I,
-  ): MsgCreateBinaryOptionsLimitOrder {
-    return MsgCreateBinaryOptionsLimitOrder.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateBinaryOptionsLimitOrder>, I>>(
-    object: I,
-  ): MsgCreateBinaryOptionsLimitOrder {
-    const message = createBaseMsgCreateBinaryOptionsLimitOrder();
-    message.sender = object.sender ?? "";
-    message.order = (object.order !== undefined && object.order !== null)
-      ? DerivativeOrder.fromPartial(object.order)
-      : undefined;
-    return message;
-  },
-};
+            message.order = DerivativeOrder.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCreateBinaryOptionsLimitOrder {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        order: isSet(object.order)
+          ? DerivativeOrder.fromJSON(object.order)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgCreateBinaryOptionsLimitOrder): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.order !== undefined) {
+        obj.order = DerivativeOrder.toJSON(message.order);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgCreateBinaryOptionsLimitOrder>, I>>(
+      base?: I,
+    ): MsgCreateBinaryOptionsLimitOrder {
+      return MsgCreateBinaryOptionsLimitOrder.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgCreateBinaryOptionsLimitOrder>, I>,
+    >(object: I): MsgCreateBinaryOptionsLimitOrder {
+      const message = createBaseMsgCreateBinaryOptionsLimitOrder();
+      message.sender = object.sender ?? "";
+      message.order =
+        object.order !== undefined && object.order !== null
+          ? DerivativeOrder.fromPartial(object.order)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgCreateBinaryOptionsLimitOrderResponse(): MsgCreateBinaryOptionsLimitOrderResponse {
   return { orderHash: "", cid: "" };
 }
 
-export const MsgCreateBinaryOptionsLimitOrderResponse: MessageFns<MsgCreateBinaryOptionsLimitOrderResponse> = {
-  encode(message: MsgCreateBinaryOptionsLimitOrderResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.orderHash !== "") {
-      writer.uint32(10).string(message.orderHash);
-    }
-    if (message.cid !== "") {
-      writer.uint32(18).string(message.cid);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBinaryOptionsLimitOrderResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateBinaryOptionsLimitOrderResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orderHash = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.cid = reader.string();
-          continue;
-        }
+export const MsgCreateBinaryOptionsLimitOrderResponse: MessageFns<MsgCreateBinaryOptionsLimitOrderResponse> =
+  {
+    encode(
+      message: MsgCreateBinaryOptionsLimitOrderResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.orderHash !== "") {
+        writer.uint32(10).string(message.orderHash);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.cid !== "") {
+        writer.uint32(18).string(message.cid);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCreateBinaryOptionsLimitOrderResponse {
-    return {
-      orderHash: isSet(object.orderHash)
-        ? globalThis.String(object.orderHash)
-        : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
-      cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCreateBinaryOptionsLimitOrderResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCreateBinaryOptionsLimitOrderResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCreateBinaryOptionsLimitOrderResponse): unknown {
-    const obj: any = {};
-    if (message.orderHash !== "") {
-      obj.orderHash = message.orderHash;
-    }
-    if (message.cid !== "") {
-      obj.cid = message.cid;
-    }
-    return obj;
-  },
+            message.orderHash = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCreateBinaryOptionsLimitOrderResponse>, I>>(
-    base?: I,
-  ): MsgCreateBinaryOptionsLimitOrderResponse {
-    return MsgCreateBinaryOptionsLimitOrderResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateBinaryOptionsLimitOrderResponse>, I>>(
-    object: I,
-  ): MsgCreateBinaryOptionsLimitOrderResponse {
-    const message = createBaseMsgCreateBinaryOptionsLimitOrderResponse();
-    message.orderHash = object.orderHash ?? "";
-    message.cid = object.cid ?? "";
-    return message;
-  },
-};
+            message.cid = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCreateBinaryOptionsLimitOrderResponse {
+      return {
+        orderHash: isSet(object.orderHash)
+          ? globalThis.String(object.orderHash)
+          : isSet(object.order_hash)
+            ? globalThis.String(object.order_hash)
+            : "",
+        cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
+      };
+    },
+
+    toJSON(message: MsgCreateBinaryOptionsLimitOrderResponse): unknown {
+      const obj: any = {};
+      if (message.orderHash !== "") {
+        obj.orderHash = message.orderHash;
+      }
+      if (message.cid !== "") {
+        obj.cid = message.cid;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<MsgCreateBinaryOptionsLimitOrderResponse>, I>,
+    >(base?: I): MsgCreateBinaryOptionsLimitOrderResponse {
+      return MsgCreateBinaryOptionsLimitOrderResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgCreateBinaryOptionsLimitOrderResponse>, I>,
+    >(object: I): MsgCreateBinaryOptionsLimitOrderResponse {
+      const message = createBaseMsgCreateBinaryOptionsLimitOrderResponse();
+      message.orderHash = object.orderHash ?? "";
+      message.cid = object.cid ?? "";
+      return message;
+    },
+  };
 
 function createBaseMsgBatchCreateDerivativeLimitOrders(): MsgBatchCreateDerivativeLimitOrders {
   return { sender: "", orders: [] };
 }
 
-export const MsgBatchCreateDerivativeLimitOrders: MessageFns<MsgBatchCreateDerivativeLimitOrders> = {
-  encode(message: MsgBatchCreateDerivativeLimitOrders, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    for (const v of message.orders) {
-      DerivativeOrder.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCreateDerivativeLimitOrders {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCreateDerivativeLimitOrders();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.orders.push(DerivativeOrder.decode(reader, reader.uint32()));
-          continue;
-        }
+export const MsgBatchCreateDerivativeLimitOrders: MessageFns<MsgBatchCreateDerivativeLimitOrders> =
+  {
+    encode(
+      message: MsgBatchCreateDerivativeLimitOrders,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.orders) {
+        DerivativeOrder.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBatchCreateDerivativeLimitOrders {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      orders: globalThis.Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => DerivativeOrder.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCreateDerivativeLimitOrders {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCreateDerivativeLimitOrders();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBatchCreateDerivativeLimitOrders): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.orders?.length) {
-      obj.orders = message.orders.map((e) => DerivativeOrder.toJSON(e));
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBatchCreateDerivativeLimitOrders>, I>>(
-    base?: I,
-  ): MsgBatchCreateDerivativeLimitOrders {
-    return MsgBatchCreateDerivativeLimitOrders.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCreateDerivativeLimitOrders>, I>>(
-    object: I,
-  ): MsgBatchCreateDerivativeLimitOrders {
-    const message = createBaseMsgBatchCreateDerivativeLimitOrders();
-    message.sender = object.sender ?? "";
-    message.orders = object.orders?.map((e) => DerivativeOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.orders.push(
+              DerivativeOrder.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchCreateDerivativeLimitOrders {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        orders: globalThis.Array.isArray(object?.orders)
+          ? object.orders.map((e: any) => DerivativeOrder.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: MsgBatchCreateDerivativeLimitOrders): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.orders?.length) {
+        obj.orders = message.orders.map((e) => DerivativeOrder.toJSON(e));
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<MsgBatchCreateDerivativeLimitOrders>, I>,
+    >(base?: I): MsgBatchCreateDerivativeLimitOrders {
+      return MsgBatchCreateDerivativeLimitOrders.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBatchCreateDerivativeLimitOrders>, I>,
+    >(object: I): MsgBatchCreateDerivativeLimitOrders {
+      const message = createBaseMsgBatchCreateDerivativeLimitOrders();
+      message.sender = object.sender ?? "";
+      message.orders =
+        object.orders?.map((e) => DerivativeOrder.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgBatchCreateDerivativeLimitOrdersResponse(): MsgBatchCreateDerivativeLimitOrdersResponse {
   return { orderHashes: [], createdOrdersCids: [], failedOrdersCids: [] };
 }
 
-export const MsgBatchCreateDerivativeLimitOrdersResponse: MessageFns<MsgBatchCreateDerivativeLimitOrdersResponse> = {
-  encode(
-    message: MsgBatchCreateDerivativeLimitOrdersResponse,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    for (const v of message.orderHashes) {
-      writer.uint32(10).string(v!);
-    }
-    for (const v of message.createdOrdersCids) {
-      writer.uint32(18).string(v!);
-    }
-    for (const v of message.failedOrdersCids) {
-      writer.uint32(26).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCreateDerivativeLimitOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCreateDerivativeLimitOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orderHashes.push(reader.string());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.createdOrdersCids.push(reader.string());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.failedOrdersCids.push(reader.string());
-          continue;
-        }
+export const MsgBatchCreateDerivativeLimitOrdersResponse: MessageFns<MsgBatchCreateDerivativeLimitOrdersResponse> =
+  {
+    encode(
+      message: MsgBatchCreateDerivativeLimitOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.orderHashes) {
+        writer.uint32(10).string(v!);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.createdOrdersCids) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.failedOrdersCids) {
+        writer.uint32(26).string(v!);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBatchCreateDerivativeLimitOrdersResponse {
-    return {
-      orderHashes: globalThis.Array.isArray(object?.orderHashes)
-        ? object.orderHashes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.order_hashes)
-        ? object.order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-      createdOrdersCids: globalThis.Array.isArray(object?.createdOrdersCids)
-        ? object.createdOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.created_orders_cids)
-        ? object.created_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      failedOrdersCids: globalThis.Array.isArray(object?.failedOrdersCids)
-        ? object.failedOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.failed_orders_cids)
-        ? object.failed_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCreateDerivativeLimitOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCreateDerivativeLimitOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBatchCreateDerivativeLimitOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.orderHashes?.length) {
-      obj.orderHashes = message.orderHashes;
-    }
-    if (message.createdOrdersCids?.length) {
-      obj.createdOrdersCids = message.createdOrdersCids;
-    }
-    if (message.failedOrdersCids?.length) {
-      obj.failedOrdersCids = message.failedOrdersCids;
-    }
-    return obj;
-  },
+            message.orderHashes.push(reader.string());
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBatchCreateDerivativeLimitOrdersResponse>, I>>(
-    base?: I,
-  ): MsgBatchCreateDerivativeLimitOrdersResponse {
-    return MsgBatchCreateDerivativeLimitOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCreateDerivativeLimitOrdersResponse>, I>>(
-    object: I,
-  ): MsgBatchCreateDerivativeLimitOrdersResponse {
-    const message = createBaseMsgBatchCreateDerivativeLimitOrdersResponse();
-    message.orderHashes = object.orderHashes?.map((e) => e) || [];
-    message.createdOrdersCids = object.createdOrdersCids?.map((e) => e) || [];
-    message.failedOrdersCids = object.failedOrdersCids?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.createdOrdersCids.push(reader.string());
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.failedOrdersCids.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchCreateDerivativeLimitOrdersResponse {
+      return {
+        orderHashes: globalThis.Array.isArray(object?.orderHashes)
+          ? object.orderHashes.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.order_hashes)
+            ? object.order_hashes.map((e: any) => globalThis.String(e))
+            : [],
+        createdOrdersCids: globalThis.Array.isArray(object?.createdOrdersCids)
+          ? object.createdOrdersCids.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.created_orders_cids)
+            ? object.created_orders_cids.map((e: any) => globalThis.String(e))
+            : [],
+        failedOrdersCids: globalThis.Array.isArray(object?.failedOrdersCids)
+          ? object.failedOrdersCids.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.failed_orders_cids)
+            ? object.failed_orders_cids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: MsgBatchCreateDerivativeLimitOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.orderHashes?.length) {
+        obj.orderHashes = message.orderHashes;
+      }
+      if (message.createdOrdersCids?.length) {
+        obj.createdOrdersCids = message.createdOrdersCids;
+      }
+      if (message.failedOrdersCids?.length) {
+        obj.failedOrdersCids = message.failedOrdersCids;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<
+        DeepPartial<MsgBatchCreateDerivativeLimitOrdersResponse>,
+        I
+      >,
+    >(base?: I): MsgBatchCreateDerivativeLimitOrdersResponse {
+      return MsgBatchCreateDerivativeLimitOrdersResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgBatchCreateDerivativeLimitOrdersResponse>,
+        I
+      >,
+    >(object: I): MsgBatchCreateDerivativeLimitOrdersResponse {
+      const message = createBaseMsgBatchCreateDerivativeLimitOrdersResponse();
+      message.orderHashes = object.orderHashes?.map((e) => e) || [];
+      message.createdOrdersCids = object.createdOrdersCids?.map((e) => e) || [];
+      message.failedOrdersCids = object.failedOrdersCids?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgCancelSpotOrder(): MsgCancelSpotOrder {
   return { sender: "", marketId: "", subaccountId: "", orderHash: "", cid: "" };
 }
 
 export const MsgCancelSpotOrder: MessageFns<MsgCancelSpotOrder> = {
-  encode(message: MsgCancelSpotOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgCancelSpotOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -5133,8 +5514,12 @@ export const MsgCancelSpotOrder: MessageFns<MsgCancelSpotOrder> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelSpotOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgCancelSpotOrder {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelSpotOrder();
     while (reader.pos < end) {
@@ -5195,18 +5580,18 @@ export const MsgCancelSpotOrder: MessageFns<MsgCancelSpotOrder> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -5231,10 +5616,14 @@ export const MsgCancelSpotOrder: MessageFns<MsgCancelSpotOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgCancelSpotOrder>, I>>(base?: I): MsgCancelSpotOrder {
+  create<I extends Exact<DeepPartial<MsgCancelSpotOrder>, I>>(
+    base?: I,
+  ): MsgCancelSpotOrder {
     return MsgCancelSpotOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgCancelSpotOrder>, I>>(object: I): MsgCancelSpotOrder {
+  fromPartial<I extends Exact<DeepPartial<MsgCancelSpotOrder>, I>>(
+    object: I,
+  ): MsgCancelSpotOrder {
     const message = createBaseMsgCancelSpotOrder();
     message.sender = object.sender ?? "";
     message.marketId = object.marketId ?? "";
@@ -5249,51 +5638,66 @@ function createBaseMsgCancelSpotOrderResponse(): MsgCancelSpotOrderResponse {
   return {};
 }
 
-export const MsgCancelSpotOrderResponse: MessageFns<MsgCancelSpotOrderResponse> = {
-  encode(_: MsgCancelSpotOrderResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgCancelSpotOrderResponse: MessageFns<MsgCancelSpotOrderResponse> =
+  {
+    encode(
+      _: MsgCancelSpotOrderResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelSpotOrderResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCancelSpotOrderResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCancelSpotOrderResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCancelSpotOrderResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgCancelSpotOrderResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgCancelSpotOrderResponse {
+      return {};
+    },
 
-  toJSON(_: MsgCancelSpotOrderResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgCancelSpotOrderResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgCancelSpotOrderResponse>, I>>(base?: I): MsgCancelSpotOrderResponse {
-    return MsgCancelSpotOrderResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCancelSpotOrderResponse>, I>>(_: I): MsgCancelSpotOrderResponse {
-    const message = createBaseMsgCancelSpotOrderResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgCancelSpotOrderResponse>, I>>(
+      base?: I,
+    ): MsgCancelSpotOrderResponse {
+      return MsgCancelSpotOrderResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgCancelSpotOrderResponse>, I>>(
+      _: I,
+    ): MsgCancelSpotOrderResponse {
+      const message = createBaseMsgCancelSpotOrderResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgBatchCancelSpotOrders(): MsgBatchCancelSpotOrders {
   return { sender: "", data: [] };
 }
 
 export const MsgBatchCancelSpotOrders: MessageFns<MsgBatchCancelSpotOrders> = {
-  encode(message: MsgBatchCancelSpotOrders, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgBatchCancelSpotOrders,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -5303,8 +5707,12 @@ export const MsgBatchCancelSpotOrders: MessageFns<MsgBatchCancelSpotOrders> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCancelSpotOrders {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgBatchCancelSpotOrders {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBatchCancelSpotOrders();
     while (reader.pos < end) {
@@ -5338,7 +5746,9 @@ export const MsgBatchCancelSpotOrders: MessageFns<MsgBatchCancelSpotOrders> = {
   fromJSON(object: any): MsgBatchCancelSpotOrders {
     return {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      data: globalThis.Array.isArray(object?.data) ? object.data.map((e: any) => OrderData.fromJSON(e)) : [],
+      data: globalThis.Array.isArray(object?.data)
+        ? object.data.map((e: any) => OrderData.fromJSON(e))
+        : [],
     };
   },
 
@@ -5353,10 +5763,14 @@ export const MsgBatchCancelSpotOrders: MessageFns<MsgBatchCancelSpotOrders> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgBatchCancelSpotOrders>, I>>(base?: I): MsgBatchCancelSpotOrders {
+  create<I extends Exact<DeepPartial<MsgBatchCancelSpotOrders>, I>>(
+    base?: I,
+  ): MsgBatchCancelSpotOrders {
     return MsgBatchCancelSpotOrders.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCancelSpotOrders>, I>>(object: I): MsgBatchCancelSpotOrders {
+  fromPartial<I extends Exact<DeepPartial<MsgBatchCancelSpotOrders>, I>>(
+    object: I,
+  ): MsgBatchCancelSpotOrders {
     const message = createBaseMsgBatchCancelSpotOrders();
     message.sender = object.sender ?? "";
     message.data = object.data?.map((e) => OrderData.fromPartial(e)) || [];
@@ -5368,233 +5782,271 @@ function createBaseMsgBatchCancelSpotOrdersResponse(): MsgBatchCancelSpotOrdersR
   return { success: [] };
 }
 
-export const MsgBatchCancelSpotOrdersResponse: MessageFns<MsgBatchCancelSpotOrdersResponse> = {
-  encode(message: MsgBatchCancelSpotOrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    writer.uint32(10).fork();
-    for (const v of message.success) {
-      writer.bool(v);
-    }
-    writer.join();
-    return writer;
-  },
+export const MsgBatchCancelSpotOrdersResponse: MessageFns<MsgBatchCancelSpotOrdersResponse> =
+  {
+    encode(
+      message: MsgBatchCancelSpotOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      writer.uint32(10).fork();
+      for (const v of message.success) {
+        writer.bool(v);
+      }
+      writer.join();
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCancelSpotOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCancelSpotOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag === 8) {
-            message.success.push(reader.bool());
-
-            continue;
-          }
-
-          if (tag === 10) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCancelSpotOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCancelSpotOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag === 8) {
               message.success.push(reader.bool());
+
+              continue;
             }
 
-            continue;
-          }
+            if (tag === 10) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.success.push(reader.bool());
+              }
 
+              continue;
+            }
+
+            break;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchCancelSpotOrdersResponse {
+      return {
+        success: globalThis.Array.isArray(object?.success)
+          ? object.success.map((e: any) => globalThis.Boolean(e))
+          : [],
+      };
+    },
+
+    toJSON(message: MsgBatchCancelSpotOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.success?.length) {
+        obj.success = message.success;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): MsgBatchCancelSpotOrdersResponse {
-    return {
-      success: globalThis.Array.isArray(object?.success) ? object.success.map((e: any) => globalThis.Boolean(e)) : [],
-    };
-  },
-
-  toJSON(message: MsgBatchCancelSpotOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.success?.length) {
-      obj.success = message.success;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<MsgBatchCancelSpotOrdersResponse>, I>>(
-    base?: I,
-  ): MsgBatchCancelSpotOrdersResponse {
-    return MsgBatchCancelSpotOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCancelSpotOrdersResponse>, I>>(
-    object: I,
-  ): MsgBatchCancelSpotOrdersResponse {
-    const message = createBaseMsgBatchCancelSpotOrdersResponse();
-    message.success = object.success?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgBatchCancelSpotOrdersResponse>, I>>(
+      base?: I,
+    ): MsgBatchCancelSpotOrdersResponse {
+      return MsgBatchCancelSpotOrdersResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBatchCancelSpotOrdersResponse>, I>,
+    >(object: I): MsgBatchCancelSpotOrdersResponse {
+      const message = createBaseMsgBatchCancelSpotOrdersResponse();
+      message.success = object.success?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgBatchCancelBinaryOptionsOrders(): MsgBatchCancelBinaryOptionsOrders {
   return { sender: "", data: [] };
 }
 
-export const MsgBatchCancelBinaryOptionsOrders: MessageFns<MsgBatchCancelBinaryOptionsOrders> = {
-  encode(message: MsgBatchCancelBinaryOptionsOrders, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    for (const v of message.data) {
-      OrderData.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCancelBinaryOptionsOrders {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCancelBinaryOptionsOrders();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.data.push(OrderData.decode(reader, reader.uint32()));
-          continue;
-        }
+export const MsgBatchCancelBinaryOptionsOrders: MessageFns<MsgBatchCancelBinaryOptionsOrders> =
+  {
+    encode(
+      message: MsgBatchCancelBinaryOptionsOrders,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.data) {
+        OrderData.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBatchCancelBinaryOptionsOrders {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      data: globalThis.Array.isArray(object?.data) ? object.data.map((e: any) => OrderData.fromJSON(e)) : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCancelBinaryOptionsOrders {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCancelBinaryOptionsOrders();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBatchCancelBinaryOptionsOrders): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.data?.length) {
-      obj.data = message.data.map((e) => OrderData.toJSON(e));
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBatchCancelBinaryOptionsOrders>, I>>(
-    base?: I,
-  ): MsgBatchCancelBinaryOptionsOrders {
-    return MsgBatchCancelBinaryOptionsOrders.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCancelBinaryOptionsOrders>, I>>(
-    object: I,
-  ): MsgBatchCancelBinaryOptionsOrders {
-    const message = createBaseMsgBatchCancelBinaryOptionsOrders();
-    message.sender = object.sender ?? "";
-    message.data = object.data?.map((e) => OrderData.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.data.push(OrderData.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchCancelBinaryOptionsOrders {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        data: globalThis.Array.isArray(object?.data)
+          ? object.data.map((e: any) => OrderData.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: MsgBatchCancelBinaryOptionsOrders): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.data?.length) {
+        obj.data = message.data.map((e) => OrderData.toJSON(e));
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgBatchCancelBinaryOptionsOrders>, I>>(
+      base?: I,
+    ): MsgBatchCancelBinaryOptionsOrders {
+      return MsgBatchCancelBinaryOptionsOrders.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBatchCancelBinaryOptionsOrders>, I>,
+    >(object: I): MsgBatchCancelBinaryOptionsOrders {
+      const message = createBaseMsgBatchCancelBinaryOptionsOrders();
+      message.sender = object.sender ?? "";
+      message.data = object.data?.map((e) => OrderData.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgBatchCancelBinaryOptionsOrdersResponse(): MsgBatchCancelBinaryOptionsOrdersResponse {
   return { success: [] };
 }
 
-export const MsgBatchCancelBinaryOptionsOrdersResponse: MessageFns<MsgBatchCancelBinaryOptionsOrdersResponse> = {
-  encode(message: MsgBatchCancelBinaryOptionsOrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    writer.uint32(10).fork();
-    for (const v of message.success) {
-      writer.bool(v);
-    }
-    writer.join();
-    return writer;
-  },
+export const MsgBatchCancelBinaryOptionsOrdersResponse: MessageFns<MsgBatchCancelBinaryOptionsOrdersResponse> =
+  {
+    encode(
+      message: MsgBatchCancelBinaryOptionsOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      writer.uint32(10).fork();
+      for (const v of message.success) {
+        writer.bool(v);
+      }
+      writer.join();
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCancelBinaryOptionsOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCancelBinaryOptionsOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag === 8) {
-            message.success.push(reader.bool());
-
-            continue;
-          }
-
-          if (tag === 10) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCancelBinaryOptionsOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCancelBinaryOptionsOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag === 8) {
               message.success.push(reader.bool());
+
+              continue;
             }
 
-            continue;
-          }
+            if (tag === 10) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.success.push(reader.bool());
+              }
 
+              continue;
+            }
+
+            break;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchCancelBinaryOptionsOrdersResponse {
+      return {
+        success: globalThis.Array.isArray(object?.success)
+          ? object.success.map((e: any) => globalThis.Boolean(e))
+          : [],
+      };
+    },
+
+    toJSON(message: MsgBatchCancelBinaryOptionsOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.success?.length) {
+        obj.success = message.success;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): MsgBatchCancelBinaryOptionsOrdersResponse {
-    return {
-      success: globalThis.Array.isArray(object?.success) ? object.success.map((e: any) => globalThis.Boolean(e)) : [],
-    };
-  },
-
-  toJSON(message: MsgBatchCancelBinaryOptionsOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.success?.length) {
-      obj.success = message.success;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<MsgBatchCancelBinaryOptionsOrdersResponse>, I>>(
-    base?: I,
-  ): MsgBatchCancelBinaryOptionsOrdersResponse {
-    return MsgBatchCancelBinaryOptionsOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCancelBinaryOptionsOrdersResponse>, I>>(
-    object: I,
-  ): MsgBatchCancelBinaryOptionsOrdersResponse {
-    const message = createBaseMsgBatchCancelBinaryOptionsOrdersResponse();
-    message.success = object.success?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<MsgBatchCancelBinaryOptionsOrdersResponse>,
+        I
+      >,
+    >(base?: I): MsgBatchCancelBinaryOptionsOrdersResponse {
+      return MsgBatchCancelBinaryOptionsOrdersResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgBatchCancelBinaryOptionsOrdersResponse>,
+        I
+      >,
+    >(object: I): MsgBatchCancelBinaryOptionsOrdersResponse {
+      const message = createBaseMsgBatchCancelBinaryOptionsOrdersResponse();
+      message.success = object.success?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgBatchUpdateOrders(): MsgBatchUpdateOrders {
   return {
@@ -5616,7 +6068,10 @@ function createBaseMsgBatchUpdateOrders(): MsgBatchUpdateOrders {
 }
 
 export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
-  encode(message: MsgBatchUpdateOrders, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgBatchUpdateOrders,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -5662,8 +6117,12 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchUpdateOrders {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgBatchUpdateOrders {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBatchUpdateOrders();
     while (reader.pos < end) {
@@ -5706,7 +6165,9 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
             break;
           }
 
-          message.spotOrdersToCancel.push(OrderData.decode(reader, reader.uint32()));
+          message.spotOrdersToCancel.push(
+            OrderData.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 6: {
@@ -5714,7 +6175,9 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
             break;
           }
 
-          message.derivativeOrdersToCancel.push(OrderData.decode(reader, reader.uint32()));
+          message.derivativeOrdersToCancel.push(
+            OrderData.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 7: {
@@ -5722,7 +6185,9 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
             break;
           }
 
-          message.spotOrdersToCreate.push(SpotOrder.decode(reader, reader.uint32()));
+          message.spotOrdersToCreate.push(
+            SpotOrder.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 8: {
@@ -5730,7 +6195,9 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
             break;
           }
 
-          message.derivativeOrdersToCreate.push(DerivativeOrder.decode(reader, reader.uint32()));
+          message.derivativeOrdersToCreate.push(
+            DerivativeOrder.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 9: {
@@ -5738,7 +6205,9 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
             break;
           }
 
-          message.binaryOptionsOrdersToCancel.push(OrderData.decode(reader, reader.uint32()));
+          message.binaryOptionsOrdersToCancel.push(
+            OrderData.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 10: {
@@ -5754,7 +6223,9 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
             break;
           }
 
-          message.binaryOptionsOrdersToCreate.push(DerivativeOrder.decode(reader, reader.uint32()));
+          message.binaryOptionsOrdersToCreate.push(
+            DerivativeOrder.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 12: {
@@ -5762,7 +6233,9 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
             break;
           }
 
-          message.spotMarketOrdersToCreate.push(SpotOrder.decode(reader, reader.uint32()));
+          message.spotMarketOrdersToCreate.push(
+            SpotOrder.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 13: {
@@ -5770,7 +6243,9 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
             break;
           }
 
-          message.derivativeMarketOrdersToCreate.push(DerivativeOrder.decode(reader, reader.uint32()));
+          message.derivativeMarketOrdersToCreate.push(
+            DerivativeOrder.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 14: {
@@ -5778,7 +6253,9 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
             break;
           }
 
-          message.binaryOptionsMarketOrdersToCreate.push(DerivativeOrder.decode(reader, reader.uint32()));
+          message.binaryOptionsMarketOrdersToCreate.push(
+            DerivativeOrder.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -5796,68 +6273,126 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      spotMarketIdsToCancelAll: globalThis.Array.isArray(object?.spotMarketIdsToCancelAll)
+          ? globalThis.String(object.subaccount_id)
+          : "",
+      spotMarketIdsToCancelAll: globalThis.Array.isArray(
+        object?.spotMarketIdsToCancelAll,
+      )
         ? object.spotMarketIdsToCancelAll.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.spot_market_ids_to_cancel_all)
-        ? object.spot_market_ids_to_cancel_all.map((e: any) => globalThis.String(e))
-        : [],
-      derivativeMarketIdsToCancelAll: globalThis.Array.isArray(object?.derivativeMarketIdsToCancelAll)
-        ? object.derivativeMarketIdsToCancelAll.map((e: any) => globalThis.String(e))
+          ? object.spot_market_ids_to_cancel_all.map((e: any) =>
+              globalThis.String(e),
+            )
+          : [],
+      derivativeMarketIdsToCancelAll: globalThis.Array.isArray(
+        object?.derivativeMarketIdsToCancelAll,
+      )
+        ? object.derivativeMarketIdsToCancelAll.map((e: any) =>
+            globalThis.String(e),
+          )
         : globalThis.Array.isArray(object?.derivative_market_ids_to_cancel_all)
-        ? object.derivative_market_ids_to_cancel_all.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.derivative_market_ids_to_cancel_all.map((e: any) =>
+              globalThis.String(e),
+            )
+          : [],
       spotOrdersToCancel: globalThis.Array.isArray(object?.spotOrdersToCancel)
         ? object.spotOrdersToCancel.map((e: any) => OrderData.fromJSON(e))
         : globalThis.Array.isArray(object?.spot_orders_to_cancel)
-        ? object.spot_orders_to_cancel.map((e: any) => OrderData.fromJSON(e))
-        : [],
-      derivativeOrdersToCancel: globalThis.Array.isArray(object?.derivativeOrdersToCancel)
+          ? object.spot_orders_to_cancel.map((e: any) => OrderData.fromJSON(e))
+          : [],
+      derivativeOrdersToCancel: globalThis.Array.isArray(
+        object?.derivativeOrdersToCancel,
+      )
         ? object.derivativeOrdersToCancel.map((e: any) => OrderData.fromJSON(e))
         : globalThis.Array.isArray(object?.derivative_orders_to_cancel)
-        ? object.derivative_orders_to_cancel.map((e: any) => OrderData.fromJSON(e))
-        : [],
+          ? object.derivative_orders_to_cancel.map((e: any) =>
+              OrderData.fromJSON(e),
+            )
+          : [],
       spotOrdersToCreate: globalThis.Array.isArray(object?.spotOrdersToCreate)
         ? object.spotOrdersToCreate.map((e: any) => SpotOrder.fromJSON(e))
         : globalThis.Array.isArray(object?.spot_orders_to_create)
-        ? object.spot_orders_to_create.map((e: any) => SpotOrder.fromJSON(e))
-        : [],
-      derivativeOrdersToCreate: globalThis.Array.isArray(object?.derivativeOrdersToCreate)
-        ? object.derivativeOrdersToCreate.map((e: any) => DerivativeOrder.fromJSON(e))
+          ? object.spot_orders_to_create.map((e: any) => SpotOrder.fromJSON(e))
+          : [],
+      derivativeOrdersToCreate: globalThis.Array.isArray(
+        object?.derivativeOrdersToCreate,
+      )
+        ? object.derivativeOrdersToCreate.map((e: any) =>
+            DerivativeOrder.fromJSON(e),
+          )
         : globalThis.Array.isArray(object?.derivative_orders_to_create)
-        ? object.derivative_orders_to_create.map((e: any) => DerivativeOrder.fromJSON(e))
-        : [],
-      binaryOptionsOrdersToCancel: globalThis.Array.isArray(object?.binaryOptionsOrdersToCancel)
-        ? object.binaryOptionsOrdersToCancel.map((e: any) => OrderData.fromJSON(e))
+          ? object.derivative_orders_to_create.map((e: any) =>
+              DerivativeOrder.fromJSON(e),
+            )
+          : [],
+      binaryOptionsOrdersToCancel: globalThis.Array.isArray(
+        object?.binaryOptionsOrdersToCancel,
+      )
+        ? object.binaryOptionsOrdersToCancel.map((e: any) =>
+            OrderData.fromJSON(e),
+          )
         : globalThis.Array.isArray(object?.binary_options_orders_to_cancel)
-        ? object.binary_options_orders_to_cancel.map((e: any) => OrderData.fromJSON(e))
-        : [],
-      binaryOptionsMarketIdsToCancelAll: globalThis.Array.isArray(object?.binaryOptionsMarketIdsToCancelAll)
-        ? object.binaryOptionsMarketIdsToCancelAll.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.binary_options_market_ids_to_cancel_all)
-        ? object.binary_options_market_ids_to_cancel_all.map((e: any) => globalThis.String(e))
-        : [],
-      binaryOptionsOrdersToCreate: globalThis.Array.isArray(object?.binaryOptionsOrdersToCreate)
-        ? object.binaryOptionsOrdersToCreate.map((e: any) => DerivativeOrder.fromJSON(e))
+          ? object.binary_options_orders_to_cancel.map((e: any) =>
+              OrderData.fromJSON(e),
+            )
+          : [],
+      binaryOptionsMarketIdsToCancelAll: globalThis.Array.isArray(
+        object?.binaryOptionsMarketIdsToCancelAll,
+      )
+        ? object.binaryOptionsMarketIdsToCancelAll.map((e: any) =>
+            globalThis.String(e),
+          )
+        : globalThis.Array.isArray(
+              object?.binary_options_market_ids_to_cancel_all,
+            )
+          ? object.binary_options_market_ids_to_cancel_all.map((e: any) =>
+              globalThis.String(e),
+            )
+          : [],
+      binaryOptionsOrdersToCreate: globalThis.Array.isArray(
+        object?.binaryOptionsOrdersToCreate,
+      )
+        ? object.binaryOptionsOrdersToCreate.map((e: any) =>
+            DerivativeOrder.fromJSON(e),
+          )
         : globalThis.Array.isArray(object?.binary_options_orders_to_create)
-        ? object.binary_options_orders_to_create.map((e: any) => DerivativeOrder.fromJSON(e))
-        : [],
-      spotMarketOrdersToCreate: globalThis.Array.isArray(object?.spotMarketOrdersToCreate)
+          ? object.binary_options_orders_to_create.map((e: any) =>
+              DerivativeOrder.fromJSON(e),
+            )
+          : [],
+      spotMarketOrdersToCreate: globalThis.Array.isArray(
+        object?.spotMarketOrdersToCreate,
+      )
         ? object.spotMarketOrdersToCreate.map((e: any) => SpotOrder.fromJSON(e))
         : globalThis.Array.isArray(object?.spot_market_orders_to_create)
-        ? object.spot_market_orders_to_create.map((e: any) => SpotOrder.fromJSON(e))
-        : [],
-      derivativeMarketOrdersToCreate: globalThis.Array.isArray(object?.derivativeMarketOrdersToCreate)
-        ? object.derivativeMarketOrdersToCreate.map((e: any) => DerivativeOrder.fromJSON(e))
+          ? object.spot_market_orders_to_create.map((e: any) =>
+              SpotOrder.fromJSON(e),
+            )
+          : [],
+      derivativeMarketOrdersToCreate: globalThis.Array.isArray(
+        object?.derivativeMarketOrdersToCreate,
+      )
+        ? object.derivativeMarketOrdersToCreate.map((e: any) =>
+            DerivativeOrder.fromJSON(e),
+          )
         : globalThis.Array.isArray(object?.derivative_market_orders_to_create)
-        ? object.derivative_market_orders_to_create.map((e: any) => DerivativeOrder.fromJSON(e))
-        : [],
-      binaryOptionsMarketOrdersToCreate: globalThis.Array.isArray(object?.binaryOptionsMarketOrdersToCreate)
-        ? object.binaryOptionsMarketOrdersToCreate.map((e: any) => DerivativeOrder.fromJSON(e))
-        : globalThis.Array.isArray(object?.binary_options_market_orders_to_create)
-        ? object.binary_options_market_orders_to_create.map((e: any) => DerivativeOrder.fromJSON(e))
-        : [],
+          ? object.derivative_market_orders_to_create.map((e: any) =>
+              DerivativeOrder.fromJSON(e),
+            )
+          : [],
+      binaryOptionsMarketOrdersToCreate: globalThis.Array.isArray(
+        object?.binaryOptionsMarketOrdersToCreate,
+      )
+        ? object.binaryOptionsMarketOrdersToCreate.map((e: any) =>
+            DerivativeOrder.fromJSON(e),
+          )
+        : globalThis.Array.isArray(
+              object?.binary_options_market_orders_to_create,
+            )
+          ? object.binary_options_market_orders_to_create.map((e: any) =>
+              DerivativeOrder.fromJSON(e),
+            )
+          : [],
     };
   },
 
@@ -5873,67 +6408,110 @@ export const MsgBatchUpdateOrders: MessageFns<MsgBatchUpdateOrders> = {
       obj.spotMarketIdsToCancelAll = message.spotMarketIdsToCancelAll;
     }
     if (message.derivativeMarketIdsToCancelAll?.length) {
-      obj.derivativeMarketIdsToCancelAll = message.derivativeMarketIdsToCancelAll;
+      obj.derivativeMarketIdsToCancelAll =
+        message.derivativeMarketIdsToCancelAll;
     }
     if (message.spotOrdersToCancel?.length) {
-      obj.spotOrdersToCancel = message.spotOrdersToCancel.map((e) => OrderData.toJSON(e));
+      obj.spotOrdersToCancel = message.spotOrdersToCancel.map((e) =>
+        OrderData.toJSON(e),
+      );
     }
     if (message.derivativeOrdersToCancel?.length) {
-      obj.derivativeOrdersToCancel = message.derivativeOrdersToCancel.map((e) => OrderData.toJSON(e));
+      obj.derivativeOrdersToCancel = message.derivativeOrdersToCancel.map((e) =>
+        OrderData.toJSON(e),
+      );
     }
     if (message.spotOrdersToCreate?.length) {
-      obj.spotOrdersToCreate = message.spotOrdersToCreate.map((e) => SpotOrder.toJSON(e));
+      obj.spotOrdersToCreate = message.spotOrdersToCreate.map((e) =>
+        SpotOrder.toJSON(e),
+      );
     }
     if (message.derivativeOrdersToCreate?.length) {
-      obj.derivativeOrdersToCreate = message.derivativeOrdersToCreate.map((e) => DerivativeOrder.toJSON(e));
+      obj.derivativeOrdersToCreate = message.derivativeOrdersToCreate.map((e) =>
+        DerivativeOrder.toJSON(e),
+      );
     }
     if (message.binaryOptionsOrdersToCancel?.length) {
-      obj.binaryOptionsOrdersToCancel = message.binaryOptionsOrdersToCancel.map((e) => OrderData.toJSON(e));
+      obj.binaryOptionsOrdersToCancel = message.binaryOptionsOrdersToCancel.map(
+        (e) => OrderData.toJSON(e),
+      );
     }
     if (message.binaryOptionsMarketIdsToCancelAll?.length) {
-      obj.binaryOptionsMarketIdsToCancelAll = message.binaryOptionsMarketIdsToCancelAll;
+      obj.binaryOptionsMarketIdsToCancelAll =
+        message.binaryOptionsMarketIdsToCancelAll;
     }
     if (message.binaryOptionsOrdersToCreate?.length) {
-      obj.binaryOptionsOrdersToCreate = message.binaryOptionsOrdersToCreate.map((e) => DerivativeOrder.toJSON(e));
+      obj.binaryOptionsOrdersToCreate = message.binaryOptionsOrdersToCreate.map(
+        (e) => DerivativeOrder.toJSON(e),
+      );
     }
     if (message.spotMarketOrdersToCreate?.length) {
-      obj.spotMarketOrdersToCreate = message.spotMarketOrdersToCreate.map((e) => SpotOrder.toJSON(e));
+      obj.spotMarketOrdersToCreate = message.spotMarketOrdersToCreate.map((e) =>
+        SpotOrder.toJSON(e),
+      );
     }
     if (message.derivativeMarketOrdersToCreate?.length) {
-      obj.derivativeMarketOrdersToCreate = message.derivativeMarketOrdersToCreate.map((e) => DerivativeOrder.toJSON(e));
+      obj.derivativeMarketOrdersToCreate =
+        message.derivativeMarketOrdersToCreate.map((e) =>
+          DerivativeOrder.toJSON(e),
+        );
     }
     if (message.binaryOptionsMarketOrdersToCreate?.length) {
-      obj.binaryOptionsMarketOrdersToCreate = message.binaryOptionsMarketOrdersToCreate.map((e) =>
-        DerivativeOrder.toJSON(e)
-      );
+      obj.binaryOptionsMarketOrdersToCreate =
+        message.binaryOptionsMarketOrdersToCreate.map((e) =>
+          DerivativeOrder.toJSON(e),
+        );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgBatchUpdateOrders>, I>>(base?: I): MsgBatchUpdateOrders {
+  create<I extends Exact<DeepPartial<MsgBatchUpdateOrders>, I>>(
+    base?: I,
+  ): MsgBatchUpdateOrders {
     return MsgBatchUpdateOrders.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchUpdateOrders>, I>>(object: I): MsgBatchUpdateOrders {
+  fromPartial<I extends Exact<DeepPartial<MsgBatchUpdateOrders>, I>>(
+    object: I,
+  ): MsgBatchUpdateOrders {
     const message = createBaseMsgBatchUpdateOrders();
     message.sender = object.sender ?? "";
     message.subaccountId = object.subaccountId ?? "";
-    message.spotMarketIdsToCancelAll = object.spotMarketIdsToCancelAll?.map((e) => e) || [];
-    message.derivativeMarketIdsToCancelAll = object.derivativeMarketIdsToCancelAll?.map((e) => e) || [];
-    message.spotOrdersToCancel = object.spotOrdersToCancel?.map((e) => OrderData.fromPartial(e)) || [];
-    message.derivativeOrdersToCancel = object.derivativeOrdersToCancel?.map((e) => OrderData.fromPartial(e)) || [];
-    message.spotOrdersToCreate = object.spotOrdersToCreate?.map((e) => SpotOrder.fromPartial(e)) || [];
-    message.derivativeOrdersToCreate = object.derivativeOrdersToCreate?.map((e) => DerivativeOrder.fromPartial(e)) ||
+    message.spotMarketIdsToCancelAll =
+      object.spotMarketIdsToCancelAll?.map((e) => e) || [];
+    message.derivativeMarketIdsToCancelAll =
+      object.derivativeMarketIdsToCancelAll?.map((e) => e) || [];
+    message.spotOrdersToCancel =
+      object.spotOrdersToCancel?.map((e) => OrderData.fromPartial(e)) || [];
+    message.derivativeOrdersToCancel =
+      object.derivativeOrdersToCancel?.map((e) => OrderData.fromPartial(e)) ||
       [];
-    message.binaryOptionsOrdersToCancel = object.binaryOptionsOrdersToCancel?.map((e) => OrderData.fromPartial(e)) ||
-      [];
-    message.binaryOptionsMarketIdsToCancelAll = object.binaryOptionsMarketIdsToCancelAll?.map((e) => e) || [];
+    message.spotOrdersToCreate =
+      object.spotOrdersToCreate?.map((e) => SpotOrder.fromPartial(e)) || [];
+    message.derivativeOrdersToCreate =
+      object.derivativeOrdersToCreate?.map((e) =>
+        DerivativeOrder.fromPartial(e),
+      ) || [];
+    message.binaryOptionsOrdersToCancel =
+      object.binaryOptionsOrdersToCancel?.map((e) =>
+        OrderData.fromPartial(e),
+      ) || [];
+    message.binaryOptionsMarketIdsToCancelAll =
+      object.binaryOptionsMarketIdsToCancelAll?.map((e) => e) || [];
     message.binaryOptionsOrdersToCreate =
-      object.binaryOptionsOrdersToCreate?.map((e) => DerivativeOrder.fromPartial(e)) || [];
-    message.spotMarketOrdersToCreate = object.spotMarketOrdersToCreate?.map((e) => SpotOrder.fromPartial(e)) || [];
+      object.binaryOptionsOrdersToCreate?.map((e) =>
+        DerivativeOrder.fromPartial(e),
+      ) || [];
+    message.spotMarketOrdersToCreate =
+      object.spotMarketOrdersToCreate?.map((e) => SpotOrder.fromPartial(e)) ||
+      [];
     message.derivativeMarketOrdersToCreate =
-      object.derivativeMarketOrdersToCreate?.map((e) => DerivativeOrder.fromPartial(e)) || [];
+      object.derivativeMarketOrdersToCreate?.map((e) =>
+        DerivativeOrder.fromPartial(e),
+      ) || [];
     message.binaryOptionsMarketOrdersToCreate =
-      object.binaryOptionsMarketOrdersToCreate?.map((e) => DerivativeOrder.fromPartial(e)) || [];
+      object.binaryOptionsMarketOrdersToCreate?.map((e) =>
+        DerivativeOrder.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -5964,1004 +6542,1261 @@ function createBaseMsgBatchUpdateOrdersResponse(): MsgBatchUpdateOrdersResponse 
   };
 }
 
-export const MsgBatchUpdateOrdersResponse: MessageFns<MsgBatchUpdateOrdersResponse> = {
-  encode(message: MsgBatchUpdateOrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    writer.uint32(10).fork();
-    for (const v of message.spotCancelSuccess) {
-      writer.bool(v);
-    }
-    writer.join();
-    writer.uint32(18).fork();
-    for (const v of message.derivativeCancelSuccess) {
-      writer.bool(v);
-    }
-    writer.join();
-    for (const v of message.spotOrderHashes) {
-      writer.uint32(26).string(v!);
-    }
-    for (const v of message.derivativeOrderHashes) {
-      writer.uint32(34).string(v!);
-    }
-    writer.uint32(42).fork();
-    for (const v of message.binaryOptionsCancelSuccess) {
-      writer.bool(v);
-    }
-    writer.join();
-    for (const v of message.binaryOptionsOrderHashes) {
-      writer.uint32(50).string(v!);
-    }
-    for (const v of message.createdSpotOrdersCids) {
-      writer.uint32(58).string(v!);
-    }
-    for (const v of message.failedSpotOrdersCids) {
-      writer.uint32(66).string(v!);
-    }
-    for (const v of message.createdDerivativeOrdersCids) {
-      writer.uint32(74).string(v!);
-    }
-    for (const v of message.failedDerivativeOrdersCids) {
-      writer.uint32(82).string(v!);
-    }
-    for (const v of message.createdBinaryOptionsOrdersCids) {
-      writer.uint32(90).string(v!);
-    }
-    for (const v of message.failedBinaryOptionsOrdersCids) {
-      writer.uint32(98).string(v!);
-    }
-    for (const v of message.spotMarketOrderHashes) {
-      writer.uint32(106).string(v!);
-    }
-    for (const v of message.createdSpotMarketOrdersCids) {
-      writer.uint32(114).string(v!);
-    }
-    for (const v of message.failedSpotMarketOrdersCids) {
-      writer.uint32(122).string(v!);
-    }
-    for (const v of message.derivativeMarketOrderHashes) {
-      writer.uint32(130).string(v!);
-    }
-    for (const v of message.createdDerivativeMarketOrdersCids) {
-      writer.uint32(138).string(v!);
-    }
-    for (const v of message.failedDerivativeMarketOrdersCids) {
-      writer.uint32(146).string(v!);
-    }
-    for (const v of message.binaryOptionsMarketOrderHashes) {
-      writer.uint32(154).string(v!);
-    }
-    for (const v of message.createdBinaryOptionsMarketOrdersCids) {
-      writer.uint32(162).string(v!);
-    }
-    for (const v of message.failedBinaryOptionsMarketOrdersCids) {
-      writer.uint32(170).string(v!);
-    }
-    return writer;
-  },
+export const MsgBatchUpdateOrdersResponse: MessageFns<MsgBatchUpdateOrdersResponse> =
+  {
+    encode(
+      message: MsgBatchUpdateOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      writer.uint32(10).fork();
+      for (const v of message.spotCancelSuccess) {
+        writer.bool(v);
+      }
+      writer.join();
+      writer.uint32(18).fork();
+      for (const v of message.derivativeCancelSuccess) {
+        writer.bool(v);
+      }
+      writer.join();
+      for (const v of message.spotOrderHashes) {
+        writer.uint32(26).string(v!);
+      }
+      for (const v of message.derivativeOrderHashes) {
+        writer.uint32(34).string(v!);
+      }
+      writer.uint32(42).fork();
+      for (const v of message.binaryOptionsCancelSuccess) {
+        writer.bool(v);
+      }
+      writer.join();
+      for (const v of message.binaryOptionsOrderHashes) {
+        writer.uint32(50).string(v!);
+      }
+      for (const v of message.createdSpotOrdersCids) {
+        writer.uint32(58).string(v!);
+      }
+      for (const v of message.failedSpotOrdersCids) {
+        writer.uint32(66).string(v!);
+      }
+      for (const v of message.createdDerivativeOrdersCids) {
+        writer.uint32(74).string(v!);
+      }
+      for (const v of message.failedDerivativeOrdersCids) {
+        writer.uint32(82).string(v!);
+      }
+      for (const v of message.createdBinaryOptionsOrdersCids) {
+        writer.uint32(90).string(v!);
+      }
+      for (const v of message.failedBinaryOptionsOrdersCids) {
+        writer.uint32(98).string(v!);
+      }
+      for (const v of message.spotMarketOrderHashes) {
+        writer.uint32(106).string(v!);
+      }
+      for (const v of message.createdSpotMarketOrdersCids) {
+        writer.uint32(114).string(v!);
+      }
+      for (const v of message.failedSpotMarketOrdersCids) {
+        writer.uint32(122).string(v!);
+      }
+      for (const v of message.derivativeMarketOrderHashes) {
+        writer.uint32(130).string(v!);
+      }
+      for (const v of message.createdDerivativeMarketOrdersCids) {
+        writer.uint32(138).string(v!);
+      }
+      for (const v of message.failedDerivativeMarketOrdersCids) {
+        writer.uint32(146).string(v!);
+      }
+      for (const v of message.binaryOptionsMarketOrderHashes) {
+        writer.uint32(154).string(v!);
+      }
+      for (const v of message.createdBinaryOptionsMarketOrdersCids) {
+        writer.uint32(162).string(v!);
+      }
+      for (const v of message.failedBinaryOptionsMarketOrdersCids) {
+        writer.uint32(170).string(v!);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchUpdateOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchUpdateOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag === 8) {
-            message.spotCancelSuccess.push(reader.bool());
-
-            continue;
-          }
-
-          if (tag === 10) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchUpdateOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchUpdateOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag === 8) {
               message.spotCancelSuccess.push(reader.bool());
+
+              continue;
             }
 
-            continue;
+            if (tag === 10) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.spotCancelSuccess.push(reader.bool());
+              }
+
+              continue;
+            }
+
+            break;
           }
-
-          break;
-        }
-        case 2: {
-          if (tag === 16) {
-            message.derivativeCancelSuccess.push(reader.bool());
-
-            continue;
-          }
-
-          if (tag === 18) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+          case 2: {
+            if (tag === 16) {
               message.derivativeCancelSuccess.push(reader.bool());
+
+              continue;
             }
 
-            continue;
-          }
+            if (tag === 18) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.derivativeCancelSuccess.push(reader.bool());
+              }
 
-          break;
-        }
-        case 3: {
-          if (tag !== 26) {
+              continue;
+            }
+
             break;
           }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
 
-          message.spotOrderHashes.push(reader.string());
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.derivativeOrderHashes.push(reader.string());
-          continue;
-        }
-        case 5: {
-          if (tag === 40) {
-            message.binaryOptionsCancelSuccess.push(reader.bool());
-
+            message.spotOrderHashes.push(reader.string());
             continue;
           }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
 
-          if (tag === 42) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+            message.derivativeOrderHashes.push(reader.string());
+            continue;
+          }
+          case 5: {
+            if (tag === 40) {
               message.binaryOptionsCancelSuccess.push(reader.bool());
+
+              continue;
             }
 
+            if (tag === 42) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.binaryOptionsCancelSuccess.push(reader.bool());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.binaryOptionsOrderHashes.push(reader.string());
             continue;
           }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
 
+            message.createdSpotOrdersCids.push(reader.string());
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.failedSpotOrdersCids.push(reader.string());
+            continue;
+          }
+          case 9: {
+            if (tag !== 74) {
+              break;
+            }
+
+            message.createdDerivativeOrdersCids.push(reader.string());
+            continue;
+          }
+          case 10: {
+            if (tag !== 82) {
+              break;
+            }
+
+            message.failedDerivativeOrdersCids.push(reader.string());
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.createdBinaryOptionsOrdersCids.push(reader.string());
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.failedBinaryOptionsOrdersCids.push(reader.string());
+            continue;
+          }
+          case 13: {
+            if (tag !== 106) {
+              break;
+            }
+
+            message.spotMarketOrderHashes.push(reader.string());
+            continue;
+          }
+          case 14: {
+            if (tag !== 114) {
+              break;
+            }
+
+            message.createdSpotMarketOrdersCids.push(reader.string());
+            continue;
+          }
+          case 15: {
+            if (tag !== 122) {
+              break;
+            }
+
+            message.failedSpotMarketOrdersCids.push(reader.string());
+            continue;
+          }
+          case 16: {
+            if (tag !== 130) {
+              break;
+            }
+
+            message.derivativeMarketOrderHashes.push(reader.string());
+            continue;
+          }
+          case 17: {
+            if (tag !== 138) {
+              break;
+            }
+
+            message.createdDerivativeMarketOrdersCids.push(reader.string());
+            continue;
+          }
+          case 18: {
+            if (tag !== 146) {
+              break;
+            }
+
+            message.failedDerivativeMarketOrdersCids.push(reader.string());
+            continue;
+          }
+          case 19: {
+            if (tag !== 154) {
+              break;
+            }
+
+            message.binaryOptionsMarketOrderHashes.push(reader.string());
+            continue;
+          }
+          case 20: {
+            if (tag !== 162) {
+              break;
+            }
+
+            message.createdBinaryOptionsMarketOrdersCids.push(reader.string());
+            continue;
+          }
+          case 21: {
+            if (tag !== 170) {
+              break;
+            }
+
+            message.failedBinaryOptionsMarketOrdersCids.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.binaryOptionsOrderHashes.push(reader.string());
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.createdSpotOrdersCids.push(reader.string());
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.failedSpotOrdersCids.push(reader.string());
-          continue;
-        }
-        case 9: {
-          if (tag !== 74) {
-            break;
-          }
-
-          message.createdDerivativeOrdersCids.push(reader.string());
-          continue;
-        }
-        case 10: {
-          if (tag !== 82) {
-            break;
-          }
-
-          message.failedDerivativeOrdersCids.push(reader.string());
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.createdBinaryOptionsOrdersCids.push(reader.string());
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.failedBinaryOptionsOrdersCids.push(reader.string());
-          continue;
-        }
-        case 13: {
-          if (tag !== 106) {
-            break;
-          }
-
-          message.spotMarketOrderHashes.push(reader.string());
-          continue;
-        }
-        case 14: {
-          if (tag !== 114) {
-            break;
-          }
-
-          message.createdSpotMarketOrdersCids.push(reader.string());
-          continue;
-        }
-        case 15: {
-          if (tag !== 122) {
-            break;
-          }
-
-          message.failedSpotMarketOrdersCids.push(reader.string());
-          continue;
-        }
-        case 16: {
-          if (tag !== 130) {
-            break;
-          }
-
-          message.derivativeMarketOrderHashes.push(reader.string());
-          continue;
-        }
-        case 17: {
-          if (tag !== 138) {
-            break;
-          }
-
-          message.createdDerivativeMarketOrdersCids.push(reader.string());
-          continue;
-        }
-        case 18: {
-          if (tag !== 146) {
-            break;
-          }
-
-          message.failedDerivativeMarketOrdersCids.push(reader.string());
-          continue;
-        }
-        case 19: {
-          if (tag !== 154) {
-            break;
-          }
-
-          message.binaryOptionsMarketOrderHashes.push(reader.string());
-          continue;
-        }
-        case 20: {
-          if (tag !== 162) {
-            break;
-          }
-
-          message.createdBinaryOptionsMarketOrdersCids.push(reader.string());
-          continue;
-        }
-        case 21: {
-          if (tag !== 170) {
-            break;
-          }
-
-          message.failedBinaryOptionsMarketOrdersCids.push(reader.string());
-          continue;
-        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchUpdateOrdersResponse {
+      return {
+        spotCancelSuccess: globalThis.Array.isArray(object?.spotCancelSuccess)
+          ? object.spotCancelSuccess.map((e: any) => globalThis.Boolean(e))
+          : globalThis.Array.isArray(object?.spot_cancel_success)
+            ? object.spot_cancel_success.map((e: any) => globalThis.Boolean(e))
+            : [],
+        derivativeCancelSuccess: globalThis.Array.isArray(
+          object?.derivativeCancelSuccess,
+        )
+          ? object.derivativeCancelSuccess.map((e: any) =>
+              globalThis.Boolean(e),
+            )
+          : globalThis.Array.isArray(object?.derivative_cancel_success)
+            ? object.derivative_cancel_success.map((e: any) =>
+                globalThis.Boolean(e),
+              )
+            : [],
+        spotOrderHashes: globalThis.Array.isArray(object?.spotOrderHashes)
+          ? object.spotOrderHashes.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.spot_order_hashes)
+            ? object.spot_order_hashes.map((e: any) => globalThis.String(e))
+            : [],
+        derivativeOrderHashes: globalThis.Array.isArray(
+          object?.derivativeOrderHashes,
+        )
+          ? object.derivativeOrderHashes.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.derivative_order_hashes)
+            ? object.derivative_order_hashes.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        binaryOptionsCancelSuccess: globalThis.Array.isArray(
+          object?.binaryOptionsCancelSuccess,
+        )
+          ? object.binaryOptionsCancelSuccess.map((e: any) =>
+              globalThis.Boolean(e),
+            )
+          : globalThis.Array.isArray(object?.binary_options_cancel_success)
+            ? object.binary_options_cancel_success.map((e: any) =>
+                globalThis.Boolean(e),
+              )
+            : [],
+        binaryOptionsOrderHashes: globalThis.Array.isArray(
+          object?.binaryOptionsOrderHashes,
+        )
+          ? object.binaryOptionsOrderHashes.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.binary_options_order_hashes)
+            ? object.binary_options_order_hashes.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        createdSpotOrdersCids: globalThis.Array.isArray(
+          object?.createdSpotOrdersCids,
+        )
+          ? object.createdSpotOrdersCids.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.created_spot_orders_cids)
+            ? object.created_spot_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        failedSpotOrdersCids: globalThis.Array.isArray(
+          object?.failedSpotOrdersCids,
+        )
+          ? object.failedSpotOrdersCids.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.failed_spot_orders_cids)
+            ? object.failed_spot_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        createdDerivativeOrdersCids: globalThis.Array.isArray(
+          object?.createdDerivativeOrdersCids,
+        )
+          ? object.createdDerivativeOrdersCids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.created_derivative_orders_cids)
+            ? object.created_derivative_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        failedDerivativeOrdersCids: globalThis.Array.isArray(
+          object?.failedDerivativeOrdersCids,
+        )
+          ? object.failedDerivativeOrdersCids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.failed_derivative_orders_cids)
+            ? object.failed_derivative_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        createdBinaryOptionsOrdersCids: globalThis.Array.isArray(
+          object?.createdBinaryOptionsOrdersCids,
+        )
+          ? object.createdBinaryOptionsOrdersCids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.created_binary_options_orders_cids)
+            ? object.created_binary_options_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        failedBinaryOptionsOrdersCids: globalThis.Array.isArray(
+          object?.failedBinaryOptionsOrdersCids,
+        )
+          ? object.failedBinaryOptionsOrdersCids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.failed_binary_options_orders_cids)
+            ? object.failed_binary_options_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        spotMarketOrderHashes: globalThis.Array.isArray(
+          object?.spotMarketOrderHashes,
+        )
+          ? object.spotMarketOrderHashes.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.spot_market_order_hashes)
+            ? object.spot_market_order_hashes.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        createdSpotMarketOrdersCids: globalThis.Array.isArray(
+          object?.createdSpotMarketOrdersCids,
+        )
+          ? object.createdSpotMarketOrdersCids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.created_spot_market_orders_cids)
+            ? object.created_spot_market_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        failedSpotMarketOrdersCids: globalThis.Array.isArray(
+          object?.failedSpotMarketOrdersCids,
+        )
+          ? object.failedSpotMarketOrdersCids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.failed_spot_market_orders_cids)
+            ? object.failed_spot_market_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        derivativeMarketOrderHashes: globalThis.Array.isArray(
+          object?.derivativeMarketOrderHashes,
+        )
+          ? object.derivativeMarketOrderHashes.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.derivative_market_order_hashes)
+            ? object.derivative_market_order_hashes.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        createdDerivativeMarketOrdersCids: globalThis.Array.isArray(
+          object?.createdDerivativeMarketOrdersCids,
+        )
+          ? object.createdDerivativeMarketOrdersCids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(
+                object?.created_derivative_market_orders_cids,
+              )
+            ? object.created_derivative_market_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        failedDerivativeMarketOrdersCids: globalThis.Array.isArray(
+          object?.failedDerivativeMarketOrdersCids,
+        )
+          ? object.failedDerivativeMarketOrdersCids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(
+                object?.failed_derivative_market_orders_cids,
+              )
+            ? object.failed_derivative_market_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        binaryOptionsMarketOrderHashes: globalThis.Array.isArray(
+          object?.binaryOptionsMarketOrderHashes,
+        )
+          ? object.binaryOptionsMarketOrderHashes.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.binary_options_market_order_hashes)
+            ? object.binary_options_market_order_hashes.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        createdBinaryOptionsMarketOrdersCids: globalThis.Array.isArray(
+          object?.createdBinaryOptionsMarketOrdersCids,
+        )
+          ? object.createdBinaryOptionsMarketOrdersCids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(
+                object?.created_binary_options_market_orders_cids,
+              )
+            ? object.created_binary_options_market_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+        failedBinaryOptionsMarketOrdersCids: globalThis.Array.isArray(
+          object?.failedBinaryOptionsMarketOrdersCids,
+        )
+          ? object.failedBinaryOptionsMarketOrdersCids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(
+                object?.failed_binary_options_market_orders_cids,
+              )
+            ? object.failed_binary_options_market_orders_cids.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: MsgBatchUpdateOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.spotCancelSuccess?.length) {
+        obj.spotCancelSuccess = message.spotCancelSuccess;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.derivativeCancelSuccess?.length) {
+        obj.derivativeCancelSuccess = message.derivativeCancelSuccess;
+      }
+      if (message.spotOrderHashes?.length) {
+        obj.spotOrderHashes = message.spotOrderHashes;
+      }
+      if (message.derivativeOrderHashes?.length) {
+        obj.derivativeOrderHashes = message.derivativeOrderHashes;
+      }
+      if (message.binaryOptionsCancelSuccess?.length) {
+        obj.binaryOptionsCancelSuccess = message.binaryOptionsCancelSuccess;
+      }
+      if (message.binaryOptionsOrderHashes?.length) {
+        obj.binaryOptionsOrderHashes = message.binaryOptionsOrderHashes;
+      }
+      if (message.createdSpotOrdersCids?.length) {
+        obj.createdSpotOrdersCids = message.createdSpotOrdersCids;
+      }
+      if (message.failedSpotOrdersCids?.length) {
+        obj.failedSpotOrdersCids = message.failedSpotOrdersCids;
+      }
+      if (message.createdDerivativeOrdersCids?.length) {
+        obj.createdDerivativeOrdersCids = message.createdDerivativeOrdersCids;
+      }
+      if (message.failedDerivativeOrdersCids?.length) {
+        obj.failedDerivativeOrdersCids = message.failedDerivativeOrdersCids;
+      }
+      if (message.createdBinaryOptionsOrdersCids?.length) {
+        obj.createdBinaryOptionsOrdersCids =
+          message.createdBinaryOptionsOrdersCids;
+      }
+      if (message.failedBinaryOptionsOrdersCids?.length) {
+        obj.failedBinaryOptionsOrdersCids =
+          message.failedBinaryOptionsOrdersCids;
+      }
+      if (message.spotMarketOrderHashes?.length) {
+        obj.spotMarketOrderHashes = message.spotMarketOrderHashes;
+      }
+      if (message.createdSpotMarketOrdersCids?.length) {
+        obj.createdSpotMarketOrdersCids = message.createdSpotMarketOrdersCids;
+      }
+      if (message.failedSpotMarketOrdersCids?.length) {
+        obj.failedSpotMarketOrdersCids = message.failedSpotMarketOrdersCids;
+      }
+      if (message.derivativeMarketOrderHashes?.length) {
+        obj.derivativeMarketOrderHashes = message.derivativeMarketOrderHashes;
+      }
+      if (message.createdDerivativeMarketOrdersCids?.length) {
+        obj.createdDerivativeMarketOrdersCids =
+          message.createdDerivativeMarketOrdersCids;
+      }
+      if (message.failedDerivativeMarketOrdersCids?.length) {
+        obj.failedDerivativeMarketOrdersCids =
+          message.failedDerivativeMarketOrdersCids;
+      }
+      if (message.binaryOptionsMarketOrderHashes?.length) {
+        obj.binaryOptionsMarketOrderHashes =
+          message.binaryOptionsMarketOrderHashes;
+      }
+      if (message.createdBinaryOptionsMarketOrdersCids?.length) {
+        obj.createdBinaryOptionsMarketOrdersCids =
+          message.createdBinaryOptionsMarketOrdersCids;
+      }
+      if (message.failedBinaryOptionsMarketOrdersCids?.length) {
+        obj.failedBinaryOptionsMarketOrdersCids =
+          message.failedBinaryOptionsMarketOrdersCids;
+      }
+      return obj;
+    },
 
-  fromJSON(object: any): MsgBatchUpdateOrdersResponse {
-    return {
-      spotCancelSuccess: globalThis.Array.isArray(object?.spotCancelSuccess)
-        ? object.spotCancelSuccess.map((e: any) => globalThis.Boolean(e))
-        : globalThis.Array.isArray(object?.spot_cancel_success)
-        ? object.spot_cancel_success.map((e: any) => globalThis.Boolean(e))
-        : [],
-      derivativeCancelSuccess: globalThis.Array.isArray(object?.derivativeCancelSuccess)
-        ? object.derivativeCancelSuccess.map((e: any) => globalThis.Boolean(e))
-        : globalThis.Array.isArray(object?.derivative_cancel_success)
-        ? object.derivative_cancel_success.map((e: any) => globalThis.Boolean(e))
-        : [],
-      spotOrderHashes: globalThis.Array.isArray(object?.spotOrderHashes)
-        ? object.spotOrderHashes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.spot_order_hashes)
-        ? object.spot_order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-      derivativeOrderHashes: globalThis.Array.isArray(object?.derivativeOrderHashes)
-        ? object.derivativeOrderHashes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.derivative_order_hashes)
-        ? object.derivative_order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-      binaryOptionsCancelSuccess: globalThis.Array.isArray(object?.binaryOptionsCancelSuccess)
-        ? object.binaryOptionsCancelSuccess.map((e: any) => globalThis.Boolean(e))
-        : globalThis.Array.isArray(object?.binary_options_cancel_success)
-        ? object.binary_options_cancel_success.map((e: any) => globalThis.Boolean(e))
-        : [],
-      binaryOptionsOrderHashes: globalThis.Array.isArray(object?.binaryOptionsOrderHashes)
-        ? object.binaryOptionsOrderHashes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.binary_options_order_hashes)
-        ? object.binary_options_order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-      createdSpotOrdersCids: globalThis.Array.isArray(object?.createdSpotOrdersCids)
-        ? object.createdSpotOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.created_spot_orders_cids)
-        ? object.created_spot_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      failedSpotOrdersCids: globalThis.Array.isArray(object?.failedSpotOrdersCids)
-        ? object.failedSpotOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.failed_spot_orders_cids)
-        ? object.failed_spot_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      createdDerivativeOrdersCids: globalThis.Array.isArray(object?.createdDerivativeOrdersCids)
-        ? object.createdDerivativeOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.created_derivative_orders_cids)
-        ? object.created_derivative_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      failedDerivativeOrdersCids: globalThis.Array.isArray(object?.failedDerivativeOrdersCids)
-        ? object.failedDerivativeOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.failed_derivative_orders_cids)
-        ? object.failed_derivative_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      createdBinaryOptionsOrdersCids: globalThis.Array.isArray(object?.createdBinaryOptionsOrdersCids)
-        ? object.createdBinaryOptionsOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.created_binary_options_orders_cids)
-        ? object.created_binary_options_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      failedBinaryOptionsOrdersCids: globalThis.Array.isArray(object?.failedBinaryOptionsOrdersCids)
-        ? object.failedBinaryOptionsOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.failed_binary_options_orders_cids)
-        ? object.failed_binary_options_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      spotMarketOrderHashes: globalThis.Array.isArray(object?.spotMarketOrderHashes)
-        ? object.spotMarketOrderHashes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.spot_market_order_hashes)
-        ? object.spot_market_order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-      createdSpotMarketOrdersCids: globalThis.Array.isArray(object?.createdSpotMarketOrdersCids)
-        ? object.createdSpotMarketOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.created_spot_market_orders_cids)
-        ? object.created_spot_market_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      failedSpotMarketOrdersCids: globalThis.Array.isArray(object?.failedSpotMarketOrdersCids)
-        ? object.failedSpotMarketOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.failed_spot_market_orders_cids)
-        ? object.failed_spot_market_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      derivativeMarketOrderHashes: globalThis.Array.isArray(object?.derivativeMarketOrderHashes)
-        ? object.derivativeMarketOrderHashes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.derivative_market_order_hashes)
-        ? object.derivative_market_order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-      createdDerivativeMarketOrdersCids: globalThis.Array.isArray(object?.createdDerivativeMarketOrdersCids)
-        ? object.createdDerivativeMarketOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.created_derivative_market_orders_cids)
-        ? object.created_derivative_market_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      failedDerivativeMarketOrdersCids: globalThis.Array.isArray(object?.failedDerivativeMarketOrdersCids)
-        ? object.failedDerivativeMarketOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.failed_derivative_market_orders_cids)
-        ? object.failed_derivative_market_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      binaryOptionsMarketOrderHashes: globalThis.Array.isArray(object?.binaryOptionsMarketOrderHashes)
-        ? object.binaryOptionsMarketOrderHashes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.binary_options_market_order_hashes)
-        ? object.binary_options_market_order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-      createdBinaryOptionsMarketOrdersCids: globalThis.Array.isArray(object?.createdBinaryOptionsMarketOrdersCids)
-        ? object.createdBinaryOptionsMarketOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.created_binary_options_market_orders_cids)
-        ? object.created_binary_options_market_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-      failedBinaryOptionsMarketOrdersCids: globalThis.Array.isArray(object?.failedBinaryOptionsMarketOrdersCids)
-        ? object.failedBinaryOptionsMarketOrdersCids.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.failed_binary_options_market_orders_cids)
-        ? object.failed_binary_options_market_orders_cids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
-  toJSON(message: MsgBatchUpdateOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.spotCancelSuccess?.length) {
-      obj.spotCancelSuccess = message.spotCancelSuccess;
-    }
-    if (message.derivativeCancelSuccess?.length) {
-      obj.derivativeCancelSuccess = message.derivativeCancelSuccess;
-    }
-    if (message.spotOrderHashes?.length) {
-      obj.spotOrderHashes = message.spotOrderHashes;
-    }
-    if (message.derivativeOrderHashes?.length) {
-      obj.derivativeOrderHashes = message.derivativeOrderHashes;
-    }
-    if (message.binaryOptionsCancelSuccess?.length) {
-      obj.binaryOptionsCancelSuccess = message.binaryOptionsCancelSuccess;
-    }
-    if (message.binaryOptionsOrderHashes?.length) {
-      obj.binaryOptionsOrderHashes = message.binaryOptionsOrderHashes;
-    }
-    if (message.createdSpotOrdersCids?.length) {
-      obj.createdSpotOrdersCids = message.createdSpotOrdersCids;
-    }
-    if (message.failedSpotOrdersCids?.length) {
-      obj.failedSpotOrdersCids = message.failedSpotOrdersCids;
-    }
-    if (message.createdDerivativeOrdersCids?.length) {
-      obj.createdDerivativeOrdersCids = message.createdDerivativeOrdersCids;
-    }
-    if (message.failedDerivativeOrdersCids?.length) {
-      obj.failedDerivativeOrdersCids = message.failedDerivativeOrdersCids;
-    }
-    if (message.createdBinaryOptionsOrdersCids?.length) {
-      obj.createdBinaryOptionsOrdersCids = message.createdBinaryOptionsOrdersCids;
-    }
-    if (message.failedBinaryOptionsOrdersCids?.length) {
-      obj.failedBinaryOptionsOrdersCids = message.failedBinaryOptionsOrdersCids;
-    }
-    if (message.spotMarketOrderHashes?.length) {
-      obj.spotMarketOrderHashes = message.spotMarketOrderHashes;
-    }
-    if (message.createdSpotMarketOrdersCids?.length) {
-      obj.createdSpotMarketOrdersCids = message.createdSpotMarketOrdersCids;
-    }
-    if (message.failedSpotMarketOrdersCids?.length) {
-      obj.failedSpotMarketOrdersCids = message.failedSpotMarketOrdersCids;
-    }
-    if (message.derivativeMarketOrderHashes?.length) {
-      obj.derivativeMarketOrderHashes = message.derivativeMarketOrderHashes;
-    }
-    if (message.createdDerivativeMarketOrdersCids?.length) {
-      obj.createdDerivativeMarketOrdersCids = message.createdDerivativeMarketOrdersCids;
-    }
-    if (message.failedDerivativeMarketOrdersCids?.length) {
-      obj.failedDerivativeMarketOrdersCids = message.failedDerivativeMarketOrdersCids;
-    }
-    if (message.binaryOptionsMarketOrderHashes?.length) {
-      obj.binaryOptionsMarketOrderHashes = message.binaryOptionsMarketOrderHashes;
-    }
-    if (message.createdBinaryOptionsMarketOrdersCids?.length) {
-      obj.createdBinaryOptionsMarketOrdersCids = message.createdBinaryOptionsMarketOrdersCids;
-    }
-    if (message.failedBinaryOptionsMarketOrdersCids?.length) {
-      obj.failedBinaryOptionsMarketOrdersCids = message.failedBinaryOptionsMarketOrdersCids;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<MsgBatchUpdateOrdersResponse>, I>>(base?: I): MsgBatchUpdateOrdersResponse {
-    return MsgBatchUpdateOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchUpdateOrdersResponse>, I>>(object: I): MsgBatchUpdateOrdersResponse {
-    const message = createBaseMsgBatchUpdateOrdersResponse();
-    message.spotCancelSuccess = object.spotCancelSuccess?.map((e) => e) || [];
-    message.derivativeCancelSuccess = object.derivativeCancelSuccess?.map((e) => e) || [];
-    message.spotOrderHashes = object.spotOrderHashes?.map((e) => e) || [];
-    message.derivativeOrderHashes = object.derivativeOrderHashes?.map((e) => e) || [];
-    message.binaryOptionsCancelSuccess = object.binaryOptionsCancelSuccess?.map((e) => e) || [];
-    message.binaryOptionsOrderHashes = object.binaryOptionsOrderHashes?.map((e) => e) || [];
-    message.createdSpotOrdersCids = object.createdSpotOrdersCids?.map((e) => e) || [];
-    message.failedSpotOrdersCids = object.failedSpotOrdersCids?.map((e) => e) || [];
-    message.createdDerivativeOrdersCids = object.createdDerivativeOrdersCids?.map((e) => e) || [];
-    message.failedDerivativeOrdersCids = object.failedDerivativeOrdersCids?.map((e) => e) || [];
-    message.createdBinaryOptionsOrdersCids = object.createdBinaryOptionsOrdersCids?.map((e) => e) || [];
-    message.failedBinaryOptionsOrdersCids = object.failedBinaryOptionsOrdersCids?.map((e) => e) || [];
-    message.spotMarketOrderHashes = object.spotMarketOrderHashes?.map((e) => e) || [];
-    message.createdSpotMarketOrdersCids = object.createdSpotMarketOrdersCids?.map((e) => e) || [];
-    message.failedSpotMarketOrdersCids = object.failedSpotMarketOrdersCids?.map((e) => e) || [];
-    message.derivativeMarketOrderHashes = object.derivativeMarketOrderHashes?.map((e) => e) || [];
-    message.createdDerivativeMarketOrdersCids = object.createdDerivativeMarketOrdersCids?.map((e) => e) || [];
-    message.failedDerivativeMarketOrdersCids = object.failedDerivativeMarketOrdersCids?.map((e) => e) || [];
-    message.binaryOptionsMarketOrderHashes = object.binaryOptionsMarketOrderHashes?.map((e) => e) || [];
-    message.createdBinaryOptionsMarketOrdersCids = object.createdBinaryOptionsMarketOrdersCids?.map((e) => e) || [];
-    message.failedBinaryOptionsMarketOrdersCids = object.failedBinaryOptionsMarketOrdersCids?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgBatchUpdateOrdersResponse>, I>>(
+      base?: I,
+    ): MsgBatchUpdateOrdersResponse {
+      return MsgBatchUpdateOrdersResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgBatchUpdateOrdersResponse>, I>>(
+      object: I,
+    ): MsgBatchUpdateOrdersResponse {
+      const message = createBaseMsgBatchUpdateOrdersResponse();
+      message.spotCancelSuccess = object.spotCancelSuccess?.map((e) => e) || [];
+      message.derivativeCancelSuccess =
+        object.derivativeCancelSuccess?.map((e) => e) || [];
+      message.spotOrderHashes = object.spotOrderHashes?.map((e) => e) || [];
+      message.derivativeOrderHashes =
+        object.derivativeOrderHashes?.map((e) => e) || [];
+      message.binaryOptionsCancelSuccess =
+        object.binaryOptionsCancelSuccess?.map((e) => e) || [];
+      message.binaryOptionsOrderHashes =
+        object.binaryOptionsOrderHashes?.map((e) => e) || [];
+      message.createdSpotOrdersCids =
+        object.createdSpotOrdersCids?.map((e) => e) || [];
+      message.failedSpotOrdersCids =
+        object.failedSpotOrdersCids?.map((e) => e) || [];
+      message.createdDerivativeOrdersCids =
+        object.createdDerivativeOrdersCids?.map((e) => e) || [];
+      message.failedDerivativeOrdersCids =
+        object.failedDerivativeOrdersCids?.map((e) => e) || [];
+      message.createdBinaryOptionsOrdersCids =
+        object.createdBinaryOptionsOrdersCids?.map((e) => e) || [];
+      message.failedBinaryOptionsOrdersCids =
+        object.failedBinaryOptionsOrdersCids?.map((e) => e) || [];
+      message.spotMarketOrderHashes =
+        object.spotMarketOrderHashes?.map((e) => e) || [];
+      message.createdSpotMarketOrdersCids =
+        object.createdSpotMarketOrdersCids?.map((e) => e) || [];
+      message.failedSpotMarketOrdersCids =
+        object.failedSpotMarketOrdersCids?.map((e) => e) || [];
+      message.derivativeMarketOrderHashes =
+        object.derivativeMarketOrderHashes?.map((e) => e) || [];
+      message.createdDerivativeMarketOrdersCids =
+        object.createdDerivativeMarketOrdersCids?.map((e) => e) || [];
+      message.failedDerivativeMarketOrdersCids =
+        object.failedDerivativeMarketOrdersCids?.map((e) => e) || [];
+      message.binaryOptionsMarketOrderHashes =
+        object.binaryOptionsMarketOrderHashes?.map((e) => e) || [];
+      message.createdBinaryOptionsMarketOrdersCids =
+        object.createdBinaryOptionsMarketOrdersCids?.map((e) => e) || [];
+      message.failedBinaryOptionsMarketOrdersCids =
+        object.failedBinaryOptionsMarketOrdersCids?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgCreateDerivativeMarketOrder(): MsgCreateDerivativeMarketOrder {
   return { sender: "", order: undefined };
 }
 
-export const MsgCreateDerivativeMarketOrder: MessageFns<MsgCreateDerivativeMarketOrder> = {
-  encode(message: MsgCreateDerivativeMarketOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.order !== undefined) {
-      DerivativeOrder.encode(message.order, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDerivativeMarketOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateDerivativeMarketOrder();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.order = DerivativeOrder.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgCreateDerivativeMarketOrder: MessageFns<MsgCreateDerivativeMarketOrder> =
+  {
+    encode(
+      message: MsgCreateDerivativeMarketOrder,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.order !== undefined) {
+        DerivativeOrder.encode(message.order, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCreateDerivativeMarketOrder {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      order: isSet(object.order) ? DerivativeOrder.fromJSON(object.order) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCreateDerivativeMarketOrder {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCreateDerivativeMarketOrder();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCreateDerivativeMarketOrder): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.order !== undefined) {
-      obj.order = DerivativeOrder.toJSON(message.order);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCreateDerivativeMarketOrder>, I>>(base?: I): MsgCreateDerivativeMarketOrder {
-    return MsgCreateDerivativeMarketOrder.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateDerivativeMarketOrder>, I>>(
-    object: I,
-  ): MsgCreateDerivativeMarketOrder {
-    const message = createBaseMsgCreateDerivativeMarketOrder();
-    message.sender = object.sender ?? "";
-    message.order = (object.order !== undefined && object.order !== null)
-      ? DerivativeOrder.fromPartial(object.order)
-      : undefined;
-    return message;
-  },
-};
+            message.order = DerivativeOrder.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCreateDerivativeMarketOrder {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        order: isSet(object.order)
+          ? DerivativeOrder.fromJSON(object.order)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgCreateDerivativeMarketOrder): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.order !== undefined) {
+        obj.order = DerivativeOrder.toJSON(message.order);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgCreateDerivativeMarketOrder>, I>>(
+      base?: I,
+    ): MsgCreateDerivativeMarketOrder {
+      return MsgCreateDerivativeMarketOrder.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgCreateDerivativeMarketOrder>, I>,
+    >(object: I): MsgCreateDerivativeMarketOrder {
+      const message = createBaseMsgCreateDerivativeMarketOrder();
+      message.sender = object.sender ?? "";
+      message.order =
+        object.order !== undefined && object.order !== null
+          ? DerivativeOrder.fromPartial(object.order)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgCreateDerivativeMarketOrderResponse(): MsgCreateDerivativeMarketOrderResponse {
   return { orderHash: "", results: undefined, cid: "" };
 }
 
-export const MsgCreateDerivativeMarketOrderResponse: MessageFns<MsgCreateDerivativeMarketOrderResponse> = {
-  encode(message: MsgCreateDerivativeMarketOrderResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.orderHash !== "") {
-      writer.uint32(10).string(message.orderHash);
-    }
-    if (message.results !== undefined) {
-      DerivativeMarketOrderResults.encode(message.results, writer.uint32(18).fork()).join();
-    }
-    if (message.cid !== "") {
-      writer.uint32(26).string(message.cid);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDerivativeMarketOrderResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateDerivativeMarketOrderResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orderHash = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.results = DerivativeMarketOrderResults.decode(reader, reader.uint32());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.cid = reader.string();
-          continue;
-        }
+export const MsgCreateDerivativeMarketOrderResponse: MessageFns<MsgCreateDerivativeMarketOrderResponse> =
+  {
+    encode(
+      message: MsgCreateDerivativeMarketOrderResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.orderHash !== "") {
+        writer.uint32(10).string(message.orderHash);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.results !== undefined) {
+        DerivativeMarketOrderResults.encode(
+          message.results,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.cid !== "") {
+        writer.uint32(26).string(message.cid);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCreateDerivativeMarketOrderResponse {
-    return {
-      orderHash: isSet(object.orderHash)
-        ? globalThis.String(object.orderHash)
-        : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
-      results: isSet(object.results) ? DerivativeMarketOrderResults.fromJSON(object.results) : undefined,
-      cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCreateDerivativeMarketOrderResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCreateDerivativeMarketOrderResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCreateDerivativeMarketOrderResponse): unknown {
-    const obj: any = {};
-    if (message.orderHash !== "") {
-      obj.orderHash = message.orderHash;
-    }
-    if (message.results !== undefined) {
-      obj.results = DerivativeMarketOrderResults.toJSON(message.results);
-    }
-    if (message.cid !== "") {
-      obj.cid = message.cid;
-    }
-    return obj;
-  },
+            message.orderHash = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCreateDerivativeMarketOrderResponse>, I>>(
-    base?: I,
-  ): MsgCreateDerivativeMarketOrderResponse {
-    return MsgCreateDerivativeMarketOrderResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateDerivativeMarketOrderResponse>, I>>(
-    object: I,
-  ): MsgCreateDerivativeMarketOrderResponse {
-    const message = createBaseMsgCreateDerivativeMarketOrderResponse();
-    message.orderHash = object.orderHash ?? "";
-    message.results = (object.results !== undefined && object.results !== null)
-      ? DerivativeMarketOrderResults.fromPartial(object.results)
-      : undefined;
-    message.cid = object.cid ?? "";
-    return message;
-  },
-};
+            message.results = DerivativeMarketOrderResults.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.cid = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCreateDerivativeMarketOrderResponse {
+      return {
+        orderHash: isSet(object.orderHash)
+          ? globalThis.String(object.orderHash)
+          : isSet(object.order_hash)
+            ? globalThis.String(object.order_hash)
+            : "",
+        results: isSet(object.results)
+          ? DerivativeMarketOrderResults.fromJSON(object.results)
+          : undefined,
+        cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
+      };
+    },
+
+    toJSON(message: MsgCreateDerivativeMarketOrderResponse): unknown {
+      const obj: any = {};
+      if (message.orderHash !== "") {
+        obj.orderHash = message.orderHash;
+      }
+      if (message.results !== undefined) {
+        obj.results = DerivativeMarketOrderResults.toJSON(message.results);
+      }
+      if (message.cid !== "") {
+        obj.cid = message.cid;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<MsgCreateDerivativeMarketOrderResponse>, I>,
+    >(base?: I): MsgCreateDerivativeMarketOrderResponse {
+      return MsgCreateDerivativeMarketOrderResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgCreateDerivativeMarketOrderResponse>, I>,
+    >(object: I): MsgCreateDerivativeMarketOrderResponse {
+      const message = createBaseMsgCreateDerivativeMarketOrderResponse();
+      message.orderHash = object.orderHash ?? "";
+      message.results =
+        object.results !== undefined && object.results !== null
+          ? DerivativeMarketOrderResults.fromPartial(object.results)
+          : undefined;
+      message.cid = object.cid ?? "";
+      return message;
+    },
+  };
 
 function createBaseDerivativeMarketOrderResults(): DerivativeMarketOrderResults {
-  return { quantity: "", price: "", fee: "", positionDelta: undefined, payout: "" };
+  return {
+    quantity: "",
+    price: "",
+    fee: "",
+    positionDelta: undefined,
+    payout: "",
+  };
 }
 
-export const DerivativeMarketOrderResults: MessageFns<DerivativeMarketOrderResults> = {
-  encode(message: DerivativeMarketOrderResults, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.quantity !== "") {
-      writer.uint32(10).string(message.quantity);
-    }
-    if (message.price !== "") {
-      writer.uint32(18).string(message.price);
-    }
-    if (message.fee !== "") {
-      writer.uint32(26).string(message.fee);
-    }
-    if (message.positionDelta !== undefined) {
-      PositionDelta.encode(message.positionDelta, writer.uint32(34).fork()).join();
-    }
-    if (message.payout !== "") {
-      writer.uint32(42).string(message.payout);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeMarketOrderResults {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDerivativeMarketOrderResults();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.quantity = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.price = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.fee = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.positionDelta = PositionDelta.decode(reader, reader.uint32());
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.payout = reader.string();
-          continue;
-        }
+export const DerivativeMarketOrderResults: MessageFns<DerivativeMarketOrderResults> =
+  {
+    encode(
+      message: DerivativeMarketOrderResults,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.quantity !== "") {
+        writer.uint32(10).string(message.quantity);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.price !== "") {
+        writer.uint32(18).string(message.price);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.fee !== "") {
+        writer.uint32(26).string(message.fee);
+      }
+      if (message.positionDelta !== undefined) {
+        PositionDelta.encode(
+          message.positionDelta,
+          writer.uint32(34).fork(),
+        ).join();
+      }
+      if (message.payout !== "") {
+        writer.uint32(42).string(message.payout);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): DerivativeMarketOrderResults {
-    return {
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
-      price: isSet(object.price) ? globalThis.String(object.price) : "",
-      fee: isSet(object.fee) ? globalThis.String(object.fee) : "",
-      positionDelta: isSet(object.positionDelta)
-        ? PositionDelta.fromJSON(object.positionDelta)
-        : isSet(object.position_delta)
-        ? PositionDelta.fromJSON(object.position_delta)
-        : undefined,
-      payout: isSet(object.payout) ? globalThis.String(object.payout) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): DerivativeMarketOrderResults {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseDerivativeMarketOrderResults();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: DerivativeMarketOrderResults): unknown {
-    const obj: any = {};
-    if (message.quantity !== "") {
-      obj.quantity = message.quantity;
-    }
-    if (message.price !== "") {
-      obj.price = message.price;
-    }
-    if (message.fee !== "") {
-      obj.fee = message.fee;
-    }
-    if (message.positionDelta !== undefined) {
-      obj.positionDelta = PositionDelta.toJSON(message.positionDelta);
-    }
-    if (message.payout !== "") {
-      obj.payout = message.payout;
-    }
-    return obj;
-  },
+            message.quantity = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<DerivativeMarketOrderResults>, I>>(base?: I): DerivativeMarketOrderResults {
-    return DerivativeMarketOrderResults.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DerivativeMarketOrderResults>, I>>(object: I): DerivativeMarketOrderResults {
-    const message = createBaseDerivativeMarketOrderResults();
-    message.quantity = object.quantity ?? "";
-    message.price = object.price ?? "";
-    message.fee = object.fee ?? "";
-    message.positionDelta = (object.positionDelta !== undefined && object.positionDelta !== null)
-      ? PositionDelta.fromPartial(object.positionDelta)
-      : undefined;
-    message.payout = object.payout ?? "";
-    return message;
-  },
-};
+            message.price = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.fee = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.positionDelta = PositionDelta.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.payout = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): DerivativeMarketOrderResults {
+      return {
+        quantity: isSet(object.quantity)
+          ? globalThis.String(object.quantity)
+          : "",
+        price: isSet(object.price) ? globalThis.String(object.price) : "",
+        fee: isSet(object.fee) ? globalThis.String(object.fee) : "",
+        positionDelta: isSet(object.positionDelta)
+          ? PositionDelta.fromJSON(object.positionDelta)
+          : isSet(object.position_delta)
+            ? PositionDelta.fromJSON(object.position_delta)
+            : undefined,
+        payout: isSet(object.payout) ? globalThis.String(object.payout) : "",
+      };
+    },
+
+    toJSON(message: DerivativeMarketOrderResults): unknown {
+      const obj: any = {};
+      if (message.quantity !== "") {
+        obj.quantity = message.quantity;
+      }
+      if (message.price !== "") {
+        obj.price = message.price;
+      }
+      if (message.fee !== "") {
+        obj.fee = message.fee;
+      }
+      if (message.positionDelta !== undefined) {
+        obj.positionDelta = PositionDelta.toJSON(message.positionDelta);
+      }
+      if (message.payout !== "") {
+        obj.payout = message.payout;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<DerivativeMarketOrderResults>, I>>(
+      base?: I,
+    ): DerivativeMarketOrderResults {
+      return DerivativeMarketOrderResults.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<DerivativeMarketOrderResults>, I>>(
+      object: I,
+    ): DerivativeMarketOrderResults {
+      const message = createBaseDerivativeMarketOrderResults();
+      message.quantity = object.quantity ?? "";
+      message.price = object.price ?? "";
+      message.fee = object.fee ?? "";
+      message.positionDelta =
+        object.positionDelta !== undefined && object.positionDelta !== null
+          ? PositionDelta.fromPartial(object.positionDelta)
+          : undefined;
+      message.payout = object.payout ?? "";
+      return message;
+    },
+  };
 
 function createBaseMsgCreateBinaryOptionsMarketOrder(): MsgCreateBinaryOptionsMarketOrder {
   return { sender: "", order: undefined };
 }
 
-export const MsgCreateBinaryOptionsMarketOrder: MessageFns<MsgCreateBinaryOptionsMarketOrder> = {
-  encode(message: MsgCreateBinaryOptionsMarketOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.order !== undefined) {
-      DerivativeOrder.encode(message.order, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBinaryOptionsMarketOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateBinaryOptionsMarketOrder();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.order = DerivativeOrder.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgCreateBinaryOptionsMarketOrder: MessageFns<MsgCreateBinaryOptionsMarketOrder> =
+  {
+    encode(
+      message: MsgCreateBinaryOptionsMarketOrder,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.order !== undefined) {
+        DerivativeOrder.encode(message.order, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCreateBinaryOptionsMarketOrder {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      order: isSet(object.order) ? DerivativeOrder.fromJSON(object.order) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCreateBinaryOptionsMarketOrder {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCreateBinaryOptionsMarketOrder();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCreateBinaryOptionsMarketOrder): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.order !== undefined) {
-      obj.order = DerivativeOrder.toJSON(message.order);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCreateBinaryOptionsMarketOrder>, I>>(
-    base?: I,
-  ): MsgCreateBinaryOptionsMarketOrder {
-    return MsgCreateBinaryOptionsMarketOrder.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateBinaryOptionsMarketOrder>, I>>(
-    object: I,
-  ): MsgCreateBinaryOptionsMarketOrder {
-    const message = createBaseMsgCreateBinaryOptionsMarketOrder();
-    message.sender = object.sender ?? "";
-    message.order = (object.order !== undefined && object.order !== null)
-      ? DerivativeOrder.fromPartial(object.order)
-      : undefined;
-    return message;
-  },
-};
+            message.order = DerivativeOrder.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCreateBinaryOptionsMarketOrder {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        order: isSet(object.order)
+          ? DerivativeOrder.fromJSON(object.order)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgCreateBinaryOptionsMarketOrder): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.order !== undefined) {
+        obj.order = DerivativeOrder.toJSON(message.order);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgCreateBinaryOptionsMarketOrder>, I>>(
+      base?: I,
+    ): MsgCreateBinaryOptionsMarketOrder {
+      return MsgCreateBinaryOptionsMarketOrder.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgCreateBinaryOptionsMarketOrder>, I>,
+    >(object: I): MsgCreateBinaryOptionsMarketOrder {
+      const message = createBaseMsgCreateBinaryOptionsMarketOrder();
+      message.sender = object.sender ?? "";
+      message.order =
+        object.order !== undefined && object.order !== null
+          ? DerivativeOrder.fromPartial(object.order)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgCreateBinaryOptionsMarketOrderResponse(): MsgCreateBinaryOptionsMarketOrderResponse {
   return { orderHash: "", results: undefined, cid: "" };
 }
 
-export const MsgCreateBinaryOptionsMarketOrderResponse: MessageFns<MsgCreateBinaryOptionsMarketOrderResponse> = {
-  encode(message: MsgCreateBinaryOptionsMarketOrderResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.orderHash !== "") {
-      writer.uint32(10).string(message.orderHash);
-    }
-    if (message.results !== undefined) {
-      DerivativeMarketOrderResults.encode(message.results, writer.uint32(18).fork()).join();
-    }
-    if (message.cid !== "") {
-      writer.uint32(26).string(message.cid);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBinaryOptionsMarketOrderResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCreateBinaryOptionsMarketOrderResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orderHash = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.results = DerivativeMarketOrderResults.decode(reader, reader.uint32());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.cid = reader.string();
-          continue;
-        }
+export const MsgCreateBinaryOptionsMarketOrderResponse: MessageFns<MsgCreateBinaryOptionsMarketOrderResponse> =
+  {
+    encode(
+      message: MsgCreateBinaryOptionsMarketOrderResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.orderHash !== "") {
+        writer.uint32(10).string(message.orderHash);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.results !== undefined) {
+        DerivativeMarketOrderResults.encode(
+          message.results,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.cid !== "") {
+        writer.uint32(26).string(message.cid);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCreateBinaryOptionsMarketOrderResponse {
-    return {
-      orderHash: isSet(object.orderHash)
-        ? globalThis.String(object.orderHash)
-        : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
-      results: isSet(object.results) ? DerivativeMarketOrderResults.fromJSON(object.results) : undefined,
-      cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCreateBinaryOptionsMarketOrderResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCreateBinaryOptionsMarketOrderResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCreateBinaryOptionsMarketOrderResponse): unknown {
-    const obj: any = {};
-    if (message.orderHash !== "") {
-      obj.orderHash = message.orderHash;
-    }
-    if (message.results !== undefined) {
-      obj.results = DerivativeMarketOrderResults.toJSON(message.results);
-    }
-    if (message.cid !== "") {
-      obj.cid = message.cid;
-    }
-    return obj;
-  },
+            message.orderHash = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCreateBinaryOptionsMarketOrderResponse>, I>>(
-    base?: I,
-  ): MsgCreateBinaryOptionsMarketOrderResponse {
-    return MsgCreateBinaryOptionsMarketOrderResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCreateBinaryOptionsMarketOrderResponse>, I>>(
-    object: I,
-  ): MsgCreateBinaryOptionsMarketOrderResponse {
-    const message = createBaseMsgCreateBinaryOptionsMarketOrderResponse();
-    message.orderHash = object.orderHash ?? "";
-    message.results = (object.results !== undefined && object.results !== null)
-      ? DerivativeMarketOrderResults.fromPartial(object.results)
-      : undefined;
-    message.cid = object.cid ?? "";
-    return message;
-  },
-};
+            message.results = DerivativeMarketOrderResults.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.cid = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCreateBinaryOptionsMarketOrderResponse {
+      return {
+        orderHash: isSet(object.orderHash)
+          ? globalThis.String(object.orderHash)
+          : isSet(object.order_hash)
+            ? globalThis.String(object.order_hash)
+            : "",
+        results: isSet(object.results)
+          ? DerivativeMarketOrderResults.fromJSON(object.results)
+          : undefined,
+        cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
+      };
+    },
+
+    toJSON(message: MsgCreateBinaryOptionsMarketOrderResponse): unknown {
+      const obj: any = {};
+      if (message.orderHash !== "") {
+        obj.orderHash = message.orderHash;
+      }
+      if (message.results !== undefined) {
+        obj.results = DerivativeMarketOrderResults.toJSON(message.results);
+      }
+      if (message.cid !== "") {
+        obj.cid = message.cid;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<
+        DeepPartial<MsgCreateBinaryOptionsMarketOrderResponse>,
+        I
+      >,
+    >(base?: I): MsgCreateBinaryOptionsMarketOrderResponse {
+      return MsgCreateBinaryOptionsMarketOrderResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgCreateBinaryOptionsMarketOrderResponse>,
+        I
+      >,
+    >(object: I): MsgCreateBinaryOptionsMarketOrderResponse {
+      const message = createBaseMsgCreateBinaryOptionsMarketOrderResponse();
+      message.orderHash = object.orderHash ?? "";
+      message.results =
+        object.results !== undefined && object.results !== null
+          ? DerivativeMarketOrderResults.fromPartial(object.results)
+          : undefined;
+      message.cid = object.cid ?? "";
+      return message;
+    },
+  };
 
 function createBaseMsgCancelDerivativeOrder(): MsgCancelDerivativeOrder {
-  return { sender: "", marketId: "", subaccountId: "", orderHash: "", orderMask: 0, cid: "" };
+  return {
+    sender: "",
+    marketId: "",
+    subaccountId: "",
+    orderHash: "",
+    orderMask: 0,
+    cid: "",
+  };
 }
 
 export const MsgCancelDerivativeOrder: MessageFns<MsgCancelDerivativeOrder> = {
-  encode(message: MsgCancelDerivativeOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgCancelDerivativeOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -6983,8 +7818,12 @@ export const MsgCancelDerivativeOrder: MessageFns<MsgCancelDerivativeOrder> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelDerivativeOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgCancelDerivativeOrder {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelDerivativeOrder();
     while (reader.pos < end) {
@@ -7053,23 +7892,23 @@ export const MsgCancelDerivativeOrder: MessageFns<MsgCancelDerivativeOrder> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       orderMask: isSet(object.orderMask)
         ? globalThis.Number(object.orderMask)
         : isSet(object.order_mask)
-        ? globalThis.Number(object.order_mask)
-        : 0,
+          ? globalThis.Number(object.order_mask)
+          : 0,
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -7097,10 +7936,14 @@ export const MsgCancelDerivativeOrder: MessageFns<MsgCancelDerivativeOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgCancelDerivativeOrder>, I>>(base?: I): MsgCancelDerivativeOrder {
+  create<I extends Exact<DeepPartial<MsgCancelDerivativeOrder>, I>>(
+    base?: I,
+  ): MsgCancelDerivativeOrder {
     return MsgCancelDerivativeOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgCancelDerivativeOrder>, I>>(object: I): MsgCancelDerivativeOrder {
+  fromPartial<I extends Exact<DeepPartial<MsgCancelDerivativeOrder>, I>>(
+    object: I,
+  ): MsgCancelDerivativeOrder {
     const message = createBaseMsgCancelDerivativeOrder();
     message.sender = object.sender ?? "";
     message.marketId = object.marketId ?? "";
@@ -7116,258 +7959,304 @@ function createBaseMsgCancelDerivativeOrderResponse(): MsgCancelDerivativeOrderR
   return {};
 }
 
-export const MsgCancelDerivativeOrderResponse: MessageFns<MsgCancelDerivativeOrderResponse> = {
-  encode(_: MsgCancelDerivativeOrderResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgCancelDerivativeOrderResponse: MessageFns<MsgCancelDerivativeOrderResponse> =
+  {
+    encode(
+      _: MsgCancelDerivativeOrderResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelDerivativeOrderResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCancelDerivativeOrderResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCancelDerivativeOrderResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCancelDerivativeOrderResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgCancelDerivativeOrderResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgCancelDerivativeOrderResponse {
+      return {};
+    },
 
-  toJSON(_: MsgCancelDerivativeOrderResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgCancelDerivativeOrderResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgCancelDerivativeOrderResponse>, I>>(
-    base?: I,
-  ): MsgCancelDerivativeOrderResponse {
-    return MsgCancelDerivativeOrderResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCancelDerivativeOrderResponse>, I>>(
-    _: I,
-  ): MsgCancelDerivativeOrderResponse {
-    const message = createBaseMsgCancelDerivativeOrderResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgCancelDerivativeOrderResponse>, I>>(
+      base?: I,
+    ): MsgCancelDerivativeOrderResponse {
+      return MsgCancelDerivativeOrderResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgCancelDerivativeOrderResponse>, I>,
+    >(_: I): MsgCancelDerivativeOrderResponse {
+      const message = createBaseMsgCancelDerivativeOrderResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgCancelBinaryOptionsOrder(): MsgCancelBinaryOptionsOrder {
-  return { sender: "", marketId: "", subaccountId: "", orderHash: "", orderMask: 0, cid: "" };
+  return {
+    sender: "",
+    marketId: "",
+    subaccountId: "",
+    orderHash: "",
+    orderMask: 0,
+    cid: "",
+  };
 }
 
-export const MsgCancelBinaryOptionsOrder: MessageFns<MsgCancelBinaryOptionsOrder> = {
-  encode(message: MsgCancelBinaryOptionsOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(26).string(message.subaccountId);
-    }
-    if (message.orderHash !== "") {
-      writer.uint32(34).string(message.orderHash);
-    }
-    if (message.orderMask !== 0) {
-      writer.uint32(40).int32(message.orderMask);
-    }
-    if (message.cid !== "") {
-      writer.uint32(50).string(message.cid);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelBinaryOptionsOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCancelBinaryOptionsOrder();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.orderHash = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.orderMask = reader.int32();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.cid = reader.string();
-          continue;
-        }
+export const MsgCancelBinaryOptionsOrder: MessageFns<MsgCancelBinaryOptionsOrder> =
+  {
+    encode(
+      message: MsgCancelBinaryOptionsOrder,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.subaccountId !== "") {
+        writer.uint32(26).string(message.subaccountId);
+      }
+      if (message.orderHash !== "") {
+        writer.uint32(34).string(message.orderHash);
+      }
+      if (message.orderMask !== 0) {
+        writer.uint32(40).int32(message.orderMask);
+      }
+      if (message.cid !== "") {
+        writer.uint32(50).string(message.cid);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgCancelBinaryOptionsOrder {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      orderHash: isSet(object.orderHash)
-        ? globalThis.String(object.orderHash)
-        : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
-      orderMask: isSet(object.orderMask)
-        ? globalThis.Number(object.orderMask)
-        : isSet(object.order_mask)
-        ? globalThis.Number(object.order_mask)
-        : 0,
-      cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCancelBinaryOptionsOrder {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCancelBinaryOptionsOrder();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgCancelBinaryOptionsOrder): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.orderHash !== "") {
-      obj.orderHash = message.orderHash;
-    }
-    if (message.orderMask !== 0) {
-      obj.orderMask = Math.round(message.orderMask);
-    }
-    if (message.cid !== "") {
-      obj.cid = message.cid;
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgCancelBinaryOptionsOrder>, I>>(base?: I): MsgCancelBinaryOptionsOrder {
-    return MsgCancelBinaryOptionsOrder.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCancelBinaryOptionsOrder>, I>>(object: I): MsgCancelBinaryOptionsOrder {
-    const message = createBaseMsgCancelBinaryOptionsOrder();
-    message.sender = object.sender ?? "";
-    message.marketId = object.marketId ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    message.orderHash = object.orderHash ?? "";
-    message.orderMask = object.orderMask ?? 0;
-    message.cid = object.cid ?? "";
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.orderHash = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.orderMask = reader.int32();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.cid = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgCancelBinaryOptionsOrder {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        orderHash: isSet(object.orderHash)
+          ? globalThis.String(object.orderHash)
+          : isSet(object.order_hash)
+            ? globalThis.String(object.order_hash)
+            : "",
+        orderMask: isSet(object.orderMask)
+          ? globalThis.Number(object.orderMask)
+          : isSet(object.order_mask)
+            ? globalThis.Number(object.order_mask)
+            : 0,
+        cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
+      };
+    },
+
+    toJSON(message: MsgCancelBinaryOptionsOrder): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.orderHash !== "") {
+        obj.orderHash = message.orderHash;
+      }
+      if (message.orderMask !== 0) {
+        obj.orderMask = Math.round(message.orderMask);
+      }
+      if (message.cid !== "") {
+        obj.cid = message.cid;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgCancelBinaryOptionsOrder>, I>>(
+      base?: I,
+    ): MsgCancelBinaryOptionsOrder {
+      return MsgCancelBinaryOptionsOrder.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgCancelBinaryOptionsOrder>, I>>(
+      object: I,
+    ): MsgCancelBinaryOptionsOrder {
+      const message = createBaseMsgCancelBinaryOptionsOrder();
+      message.sender = object.sender ?? "";
+      message.marketId = object.marketId ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      message.orderHash = object.orderHash ?? "";
+      message.orderMask = object.orderMask ?? 0;
+      message.cid = object.cid ?? "";
+      return message;
+    },
+  };
 
 function createBaseMsgCancelBinaryOptionsOrderResponse(): MsgCancelBinaryOptionsOrderResponse {
   return {};
 }
 
-export const MsgCancelBinaryOptionsOrderResponse: MessageFns<MsgCancelBinaryOptionsOrderResponse> = {
-  encode(_: MsgCancelBinaryOptionsOrderResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgCancelBinaryOptionsOrderResponse: MessageFns<MsgCancelBinaryOptionsOrderResponse> =
+  {
+    encode(
+      _: MsgCancelBinaryOptionsOrderResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelBinaryOptionsOrderResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCancelBinaryOptionsOrderResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCancelBinaryOptionsOrderResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCancelBinaryOptionsOrderResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgCancelBinaryOptionsOrderResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgCancelBinaryOptionsOrderResponse {
+      return {};
+    },
 
-  toJSON(_: MsgCancelBinaryOptionsOrderResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgCancelBinaryOptionsOrderResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgCancelBinaryOptionsOrderResponse>, I>>(
-    base?: I,
-  ): MsgCancelBinaryOptionsOrderResponse {
-    return MsgCancelBinaryOptionsOrderResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCancelBinaryOptionsOrderResponse>, I>>(
-    _: I,
-  ): MsgCancelBinaryOptionsOrderResponse {
-    const message = createBaseMsgCancelBinaryOptionsOrderResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgCancelBinaryOptionsOrderResponse>, I>,
+    >(base?: I): MsgCancelBinaryOptionsOrderResponse {
+      return MsgCancelBinaryOptionsOrderResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgCancelBinaryOptionsOrderResponse>, I>,
+    >(_: I): MsgCancelBinaryOptionsOrderResponse {
+      const message = createBaseMsgCancelBinaryOptionsOrderResponse();
+      return message;
+    },
+  };
 
 function createBaseOrderData(): OrderData {
-  return { marketId: "", subaccountId: "", orderHash: "", orderMask: 0, cid: "" };
+  return {
+    marketId: "",
+    subaccountId: "",
+    orderHash: "",
+    orderMask: 0,
+    cid: "",
+  };
 }
 
 export const OrderData: MessageFns<OrderData> = {
-  encode(message: OrderData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderData,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -7387,7 +8276,8 @@ export const OrderData: MessageFns<OrderData> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): OrderData {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderData();
     while (reader.pos < end) {
@@ -7447,23 +8337,23 @@ export const OrderData: MessageFns<OrderData> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       orderMask: isSet(object.orderMask)
         ? globalThis.Number(object.orderMask)
         : isSet(object.order_mask)
-        ? globalThis.Number(object.order_mask)
-        : 0,
+          ? globalThis.Number(object.order_mask)
+          : 0,
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -7491,7 +8381,9 @@ export const OrderData: MessageFns<OrderData> = {
   create<I extends Exact<DeepPartial<OrderData>, I>>(base?: I): OrderData {
     return OrderData.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderData>, I>>(object: I): OrderData {
+  fromPartial<I extends Exact<DeepPartial<OrderData>, I>>(
+    object: I,
+  ): OrderData {
     const message = createBaseOrderData();
     message.marketId = object.marketId ?? "";
     message.subaccountId = object.subaccountId ?? "";
@@ -7506,162 +8398,194 @@ function createBaseMsgBatchCancelDerivativeOrders(): MsgBatchCancelDerivativeOrd
   return { sender: "", data: [] };
 }
 
-export const MsgBatchCancelDerivativeOrders: MessageFns<MsgBatchCancelDerivativeOrders> = {
-  encode(message: MsgBatchCancelDerivativeOrders, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    for (const v of message.data) {
-      OrderData.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCancelDerivativeOrders {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCancelDerivativeOrders();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.data.push(OrderData.decode(reader, reader.uint32()));
-          continue;
-        }
+export const MsgBatchCancelDerivativeOrders: MessageFns<MsgBatchCancelDerivativeOrders> =
+  {
+    encode(
+      message: MsgBatchCancelDerivativeOrders,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.data) {
+        OrderData.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBatchCancelDerivativeOrders {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      data: globalThis.Array.isArray(object?.data) ? object.data.map((e: any) => OrderData.fromJSON(e)) : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCancelDerivativeOrders {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCancelDerivativeOrders();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBatchCancelDerivativeOrders): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.data?.length) {
-      obj.data = message.data.map((e) => OrderData.toJSON(e));
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBatchCancelDerivativeOrders>, I>>(base?: I): MsgBatchCancelDerivativeOrders {
-    return MsgBatchCancelDerivativeOrders.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCancelDerivativeOrders>, I>>(
-    object: I,
-  ): MsgBatchCancelDerivativeOrders {
-    const message = createBaseMsgBatchCancelDerivativeOrders();
-    message.sender = object.sender ?? "";
-    message.data = object.data?.map((e) => OrderData.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.data.push(OrderData.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchCancelDerivativeOrders {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        data: globalThis.Array.isArray(object?.data)
+          ? object.data.map((e: any) => OrderData.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: MsgBatchCancelDerivativeOrders): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.data?.length) {
+        obj.data = message.data.map((e) => OrderData.toJSON(e));
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgBatchCancelDerivativeOrders>, I>>(
+      base?: I,
+    ): MsgBatchCancelDerivativeOrders {
+      return MsgBatchCancelDerivativeOrders.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBatchCancelDerivativeOrders>, I>,
+    >(object: I): MsgBatchCancelDerivativeOrders {
+      const message = createBaseMsgBatchCancelDerivativeOrders();
+      message.sender = object.sender ?? "";
+      message.data = object.data?.map((e) => OrderData.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgBatchCancelDerivativeOrdersResponse(): MsgBatchCancelDerivativeOrdersResponse {
   return { success: [] };
 }
 
-export const MsgBatchCancelDerivativeOrdersResponse: MessageFns<MsgBatchCancelDerivativeOrdersResponse> = {
-  encode(message: MsgBatchCancelDerivativeOrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    writer.uint32(10).fork();
-    for (const v of message.success) {
-      writer.bool(v);
-    }
-    writer.join();
-    return writer;
-  },
+export const MsgBatchCancelDerivativeOrdersResponse: MessageFns<MsgBatchCancelDerivativeOrdersResponse> =
+  {
+    encode(
+      message: MsgBatchCancelDerivativeOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      writer.uint32(10).fork();
+      for (const v of message.success) {
+        writer.bool(v);
+      }
+      writer.join();
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCancelDerivativeOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCancelDerivativeOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag === 8) {
-            message.success.push(reader.bool());
-
-            continue;
-          }
-
-          if (tag === 10) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCancelDerivativeOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCancelDerivativeOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag === 8) {
               message.success.push(reader.bool());
+
+              continue;
             }
 
-            continue;
-          }
+            if (tag === 10) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.success.push(reader.bool());
+              }
 
+              continue;
+            }
+
+            break;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchCancelDerivativeOrdersResponse {
+      return {
+        success: globalThis.Array.isArray(object?.success)
+          ? object.success.map((e: any) => globalThis.Boolean(e))
+          : [],
+      };
+    },
+
+    toJSON(message: MsgBatchCancelDerivativeOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.success?.length) {
+        obj.success = message.success;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): MsgBatchCancelDerivativeOrdersResponse {
-    return {
-      success: globalThis.Array.isArray(object?.success) ? object.success.map((e: any) => globalThis.Boolean(e)) : [],
-    };
-  },
-
-  toJSON(message: MsgBatchCancelDerivativeOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.success?.length) {
-      obj.success = message.success;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<MsgBatchCancelDerivativeOrdersResponse>, I>>(
-    base?: I,
-  ): MsgBatchCancelDerivativeOrdersResponse {
-    return MsgBatchCancelDerivativeOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCancelDerivativeOrdersResponse>, I>>(
-    object: I,
-  ): MsgBatchCancelDerivativeOrdersResponse {
-    const message = createBaseMsgBatchCancelDerivativeOrdersResponse();
-    message.success = object.success?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgBatchCancelDerivativeOrdersResponse>, I>,
+    >(base?: I): MsgBatchCancelDerivativeOrdersResponse {
+      return MsgBatchCancelDerivativeOrdersResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBatchCancelDerivativeOrdersResponse>, I>,
+    >(object: I): MsgBatchCancelDerivativeOrdersResponse {
+      const message = createBaseMsgBatchCancelDerivativeOrdersResponse();
+      message.success = object.success?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgSubaccountTransfer(): MsgSubaccountTransfer {
-  return { sender: "", sourceSubaccountId: "", destinationSubaccountId: "", amount: undefined };
+  return {
+    sender: "",
+    sourceSubaccountId: "",
+    destinationSubaccountId: "",
+    amount: undefined,
+  };
 }
 
 export const MsgSubaccountTransfer: MessageFns<MsgSubaccountTransfer> = {
-  encode(message: MsgSubaccountTransfer, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgSubaccountTransfer,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -7677,8 +8601,12 @@ export const MsgSubaccountTransfer: MessageFns<MsgSubaccountTransfer> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubaccountTransfer {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgSubaccountTransfer {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubaccountTransfer();
     while (reader.pos < end) {
@@ -7731,13 +8659,13 @@ export const MsgSubaccountTransfer: MessageFns<MsgSubaccountTransfer> = {
       sourceSubaccountId: isSet(object.sourceSubaccountId)
         ? globalThis.String(object.sourceSubaccountId)
         : isSet(object.source_subaccount_id)
-        ? globalThis.String(object.source_subaccount_id)
-        : "",
+          ? globalThis.String(object.source_subaccount_id)
+          : "",
       destinationSubaccountId: isSet(object.destinationSubaccountId)
         ? globalThis.String(object.destinationSubaccountId)
         : isSet(object.destination_subaccount_id)
-        ? globalThis.String(object.destination_subaccount_id)
-        : "",
+          ? globalThis.String(object.destination_subaccount_id)
+          : "",
       amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
     };
   },
@@ -7759,17 +8687,22 @@ export const MsgSubaccountTransfer: MessageFns<MsgSubaccountTransfer> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgSubaccountTransfer>, I>>(base?: I): MsgSubaccountTransfer {
+  create<I extends Exact<DeepPartial<MsgSubaccountTransfer>, I>>(
+    base?: I,
+  ): MsgSubaccountTransfer {
     return MsgSubaccountTransfer.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgSubaccountTransfer>, I>>(object: I): MsgSubaccountTransfer {
+  fromPartial<I extends Exact<DeepPartial<MsgSubaccountTransfer>, I>>(
+    object: I,
+  ): MsgSubaccountTransfer {
     const message = createBaseMsgSubaccountTransfer();
     message.sender = object.sender ?? "";
     message.sourceSubaccountId = object.sourceSubaccountId ?? "";
     message.destinationSubaccountId = object.destinationSubaccountId ?? "";
-    message.amount = (object.amount !== undefined && object.amount !== null)
-      ? Coin.fromPartial(object.amount)
-      : undefined;
+    message.amount =
+      object.amount !== undefined && object.amount !== null
+        ? Coin.fromPartial(object.amount)
+        : undefined;
     return message;
   },
 };
@@ -7778,51 +8711,71 @@ function createBaseMsgSubaccountTransferResponse(): MsgSubaccountTransferRespons
   return {};
 }
 
-export const MsgSubaccountTransferResponse: MessageFns<MsgSubaccountTransferResponse> = {
-  encode(_: MsgSubaccountTransferResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgSubaccountTransferResponse: MessageFns<MsgSubaccountTransferResponse> =
+  {
+    encode(
+      _: MsgSubaccountTransferResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubaccountTransferResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgSubaccountTransferResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgSubaccountTransferResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgSubaccountTransferResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgSubaccountTransferResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgSubaccountTransferResponse {
+      return {};
+    },
 
-  toJSON(_: MsgSubaccountTransferResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgSubaccountTransferResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgSubaccountTransferResponse>, I>>(base?: I): MsgSubaccountTransferResponse {
-    return MsgSubaccountTransferResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgSubaccountTransferResponse>, I>>(_: I): MsgSubaccountTransferResponse {
-    const message = createBaseMsgSubaccountTransferResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgSubaccountTransferResponse>, I>>(
+      base?: I,
+    ): MsgSubaccountTransferResponse {
+      return MsgSubaccountTransferResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgSubaccountTransferResponse>, I>>(
+      _: I,
+    ): MsgSubaccountTransferResponse {
+      const message = createBaseMsgSubaccountTransferResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgExternalTransfer(): MsgExternalTransfer {
-  return { sender: "", sourceSubaccountId: "", destinationSubaccountId: "", amount: undefined };
+  return {
+    sender: "",
+    sourceSubaccountId: "",
+    destinationSubaccountId: "",
+    amount: undefined,
+  };
 }
 
 export const MsgExternalTransfer: MessageFns<MsgExternalTransfer> = {
-  encode(message: MsgExternalTransfer, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgExternalTransfer,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -7838,8 +8791,12 @@ export const MsgExternalTransfer: MessageFns<MsgExternalTransfer> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgExternalTransfer {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgExternalTransfer {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExternalTransfer();
     while (reader.pos < end) {
@@ -7892,13 +8849,13 @@ export const MsgExternalTransfer: MessageFns<MsgExternalTransfer> = {
       sourceSubaccountId: isSet(object.sourceSubaccountId)
         ? globalThis.String(object.sourceSubaccountId)
         : isSet(object.source_subaccount_id)
-        ? globalThis.String(object.source_subaccount_id)
-        : "",
+          ? globalThis.String(object.source_subaccount_id)
+          : "",
       destinationSubaccountId: isSet(object.destinationSubaccountId)
         ? globalThis.String(object.destinationSubaccountId)
         : isSet(object.destination_subaccount_id)
-        ? globalThis.String(object.destination_subaccount_id)
-        : "",
+          ? globalThis.String(object.destination_subaccount_id)
+          : "",
       amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
     };
   },
@@ -7920,17 +8877,22 @@ export const MsgExternalTransfer: MessageFns<MsgExternalTransfer> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgExternalTransfer>, I>>(base?: I): MsgExternalTransfer {
+  create<I extends Exact<DeepPartial<MsgExternalTransfer>, I>>(
+    base?: I,
+  ): MsgExternalTransfer {
     return MsgExternalTransfer.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgExternalTransfer>, I>>(object: I): MsgExternalTransfer {
+  fromPartial<I extends Exact<DeepPartial<MsgExternalTransfer>, I>>(
+    object: I,
+  ): MsgExternalTransfer {
     const message = createBaseMsgExternalTransfer();
     message.sender = object.sender ?? "";
     message.sourceSubaccountId = object.sourceSubaccountId ?? "";
     message.destinationSubaccountId = object.destinationSubaccountId ?? "";
-    message.amount = (object.amount !== undefined && object.amount !== null)
-      ? Coin.fromPartial(object.amount)
-      : undefined;
+    message.amount =
+      object.amount !== undefined && object.amount !== null
+        ? Coin.fromPartial(object.amount)
+        : undefined;
     return message;
   },
 };
@@ -7939,51 +8901,66 @@ function createBaseMsgExternalTransferResponse(): MsgExternalTransferResponse {
   return {};
 }
 
-export const MsgExternalTransferResponse: MessageFns<MsgExternalTransferResponse> = {
-  encode(_: MsgExternalTransferResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgExternalTransferResponse: MessageFns<MsgExternalTransferResponse> =
+  {
+    encode(
+      _: MsgExternalTransferResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgExternalTransferResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgExternalTransferResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgExternalTransferResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgExternalTransferResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgExternalTransferResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgExternalTransferResponse {
+      return {};
+    },
 
-  toJSON(_: MsgExternalTransferResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgExternalTransferResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgExternalTransferResponse>, I>>(base?: I): MsgExternalTransferResponse {
-    return MsgExternalTransferResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgExternalTransferResponse>, I>>(_: I): MsgExternalTransferResponse {
-    const message = createBaseMsgExternalTransferResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgExternalTransferResponse>, I>>(
+      base?: I,
+    ): MsgExternalTransferResponse {
+      return MsgExternalTransferResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgExternalTransferResponse>, I>>(
+      _: I,
+    ): MsgExternalTransferResponse {
+      const message = createBaseMsgExternalTransferResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgLiquidatePosition(): MsgLiquidatePosition {
   return { sender: "", subaccountId: "", marketId: "", order: undefined };
 }
 
 export const MsgLiquidatePosition: MessageFns<MsgLiquidatePosition> = {
-  encode(message: MsgLiquidatePosition, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgLiquidatePosition,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -7999,8 +8976,12 @@ export const MsgLiquidatePosition: MessageFns<MsgLiquidatePosition> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgLiquidatePosition {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgLiquidatePosition {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLiquidatePosition();
     while (reader.pos < end) {
@@ -8053,14 +9034,16 @@ export const MsgLiquidatePosition: MessageFns<MsgLiquidatePosition> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      order: isSet(object.order) ? DerivativeOrder.fromJSON(object.order) : undefined,
+          ? globalThis.String(object.market_id)
+          : "",
+      order: isSet(object.order)
+        ? DerivativeOrder.fromJSON(object.order)
+        : undefined,
     };
   },
 
@@ -8081,17 +9064,22 @@ export const MsgLiquidatePosition: MessageFns<MsgLiquidatePosition> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgLiquidatePosition>, I>>(base?: I): MsgLiquidatePosition {
+  create<I extends Exact<DeepPartial<MsgLiquidatePosition>, I>>(
+    base?: I,
+  ): MsgLiquidatePosition {
     return MsgLiquidatePosition.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgLiquidatePosition>, I>>(object: I): MsgLiquidatePosition {
+  fromPartial<I extends Exact<DeepPartial<MsgLiquidatePosition>, I>>(
+    object: I,
+  ): MsgLiquidatePosition {
     const message = createBaseMsgLiquidatePosition();
     message.sender = object.sender ?? "";
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
-    message.order = (object.order !== undefined && object.order !== null)
-      ? DerivativeOrder.fromPartial(object.order)
-      : undefined;
+    message.order =
+      object.order !== undefined && object.order !== null
+        ? DerivativeOrder.fromPartial(object.order)
+        : undefined;
     return message;
   },
 };
@@ -8100,51 +9088,66 @@ function createBaseMsgLiquidatePositionResponse(): MsgLiquidatePositionResponse 
   return {};
 }
 
-export const MsgLiquidatePositionResponse: MessageFns<MsgLiquidatePositionResponse> = {
-  encode(_: MsgLiquidatePositionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgLiquidatePositionResponse: MessageFns<MsgLiquidatePositionResponse> =
+  {
+    encode(
+      _: MsgLiquidatePositionResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgLiquidatePositionResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgLiquidatePositionResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgLiquidatePositionResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgLiquidatePositionResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgLiquidatePositionResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgLiquidatePositionResponse {
+      return {};
+    },
 
-  toJSON(_: MsgLiquidatePositionResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgLiquidatePositionResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgLiquidatePositionResponse>, I>>(base?: I): MsgLiquidatePositionResponse {
-    return MsgLiquidatePositionResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgLiquidatePositionResponse>, I>>(_: I): MsgLiquidatePositionResponse {
-    const message = createBaseMsgLiquidatePositionResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgLiquidatePositionResponse>, I>>(
+      base?: I,
+    ): MsgLiquidatePositionResponse {
+      return MsgLiquidatePositionResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgLiquidatePositionResponse>, I>>(
+      _: I,
+    ): MsgLiquidatePositionResponse {
+      const message = createBaseMsgLiquidatePositionResponse();
+      return message;
+    },
+  };
 
 function createBaseLiquidatePositionData(): LiquidatePositionData {
   return { subaccountId: "", marketId: "", order: undefined };
 }
 
 export const LiquidatePositionData: MessageFns<LiquidatePositionData> = {
-  encode(message: LiquidatePositionData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: LiquidatePositionData,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -8157,8 +9160,12 @@ export const LiquidatePositionData: MessageFns<LiquidatePositionData> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): LiquidatePositionData {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): LiquidatePositionData {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLiquidatePositionData();
     while (reader.pos < end) {
@@ -8202,14 +9209,16 @@ export const LiquidatePositionData: MessageFns<LiquidatePositionData> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      order: isSet(object.order) ? DerivativeOrder.fromJSON(object.order) : undefined,
+          ? globalThis.String(object.market_id)
+          : "",
+      order: isSet(object.order)
+        ? DerivativeOrder.fromJSON(object.order)
+        : undefined,
     };
   },
 
@@ -8227,16 +9236,21 @@ export const LiquidatePositionData: MessageFns<LiquidatePositionData> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<LiquidatePositionData>, I>>(base?: I): LiquidatePositionData {
+  create<I extends Exact<DeepPartial<LiquidatePositionData>, I>>(
+    base?: I,
+  ): LiquidatePositionData {
     return LiquidatePositionData.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<LiquidatePositionData>, I>>(object: I): LiquidatePositionData {
+  fromPartial<I extends Exact<DeepPartial<LiquidatePositionData>, I>>(
+    object: I,
+  ): LiquidatePositionData {
     const message = createBaseLiquidatePositionData();
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
-    message.order = (object.order !== undefined && object.order !== null)
-      ? DerivativeOrder.fromPartial(object.order)
-      : undefined;
+    message.order =
+      object.order !== undefined && object.order !== null
+        ? DerivativeOrder.fromPartial(object.order)
+        : undefined;
     return message;
   },
 };
@@ -8245,86 +9259,109 @@ function createBaseMsgBatchLiquidatePositions(): MsgBatchLiquidatePositions {
   return { sender: "", liquidations: [] };
 }
 
-export const MsgBatchLiquidatePositions: MessageFns<MsgBatchLiquidatePositions> = {
-  encode(message: MsgBatchLiquidatePositions, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    for (const v of message.liquidations) {
-      LiquidatePositionData.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchLiquidatePositions {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchLiquidatePositions();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.liquidations.push(LiquidatePositionData.decode(reader, reader.uint32()));
-          continue;
-        }
+export const MsgBatchLiquidatePositions: MessageFns<MsgBatchLiquidatePositions> =
+  {
+    encode(
+      message: MsgBatchLiquidatePositions,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.liquidations) {
+        LiquidatePositionData.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBatchLiquidatePositions {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      liquidations: globalThis.Array.isArray(object?.liquidations)
-        ? object.liquidations.map((e: any) => LiquidatePositionData.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchLiquidatePositions {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchLiquidatePositions();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBatchLiquidatePositions): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.liquidations?.length) {
-      obj.liquidations = message.liquidations.map((e) => LiquidatePositionData.toJSON(e));
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBatchLiquidatePositions>, I>>(base?: I): MsgBatchLiquidatePositions {
-    return MsgBatchLiquidatePositions.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchLiquidatePositions>, I>>(object: I): MsgBatchLiquidatePositions {
-    const message = createBaseMsgBatchLiquidatePositions();
-    message.sender = object.sender ?? "";
-    message.liquidations = object.liquidations?.map((e) => LiquidatePositionData.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.liquidations.push(
+              LiquidatePositionData.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchLiquidatePositions {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        liquidations: globalThis.Array.isArray(object?.liquidations)
+          ? object.liquidations.map((e: any) =>
+              LiquidatePositionData.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: MsgBatchLiquidatePositions): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.liquidations?.length) {
+        obj.liquidations = message.liquidations.map((e) =>
+          LiquidatePositionData.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgBatchLiquidatePositions>, I>>(
+      base?: I,
+    ): MsgBatchLiquidatePositions {
+      return MsgBatchLiquidatePositions.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgBatchLiquidatePositions>, I>>(
+      object: I,
+    ): MsgBatchLiquidatePositions {
+      const message = createBaseMsgBatchLiquidatePositions();
+      message.sender = object.sender ?? "";
+      message.liquidations =
+        object.liquidations?.map((e) => LiquidatePositionData.fromPartial(e)) ||
+        [];
+      return message;
+    },
+  };
 
 function createBaseLiquidatePositionResult(): LiquidatePositionResult {
   return { subaccountId: "", marketId: "", success: false, error: "" };
 }
 
 export const LiquidatePositionResult: MessageFns<LiquidatePositionResult> = {
-  encode(message: LiquidatePositionResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: LiquidatePositionResult,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -8340,8 +9377,12 @@ export const LiquidatePositionResult: MessageFns<LiquidatePositionResult> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): LiquidatePositionResult {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): LiquidatePositionResult {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLiquidatePositionResult();
     while (reader.pos < end) {
@@ -8393,14 +9434,16 @@ export const LiquidatePositionResult: MessageFns<LiquidatePositionResult> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      success: isSet(object.success) ? globalThis.Boolean(object.success) : false,
+          ? globalThis.String(object.market_id)
+          : "",
+      success: isSet(object.success)
+        ? globalThis.Boolean(object.success)
+        : false,
       error: isSet(object.error) ? globalThis.String(object.error) : "",
     };
   },
@@ -8422,10 +9465,14 @@ export const LiquidatePositionResult: MessageFns<LiquidatePositionResult> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<LiquidatePositionResult>, I>>(base?: I): LiquidatePositionResult {
+  create<I extends Exact<DeepPartial<LiquidatePositionResult>, I>>(
+    base?: I,
+  ): LiquidatePositionResult {
     return LiquidatePositionResult.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<LiquidatePositionResult>, I>>(object: I): LiquidatePositionResult {
+  fromPartial<I extends Exact<DeepPartial<LiquidatePositionResult>, I>>(
+    object: I,
+  ): LiquidatePositionResult {
     const message = createBaseLiquidatePositionResult();
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
@@ -8439,74 +9486,98 @@ function createBaseMsgBatchLiquidatePositionsResponse(): MsgBatchLiquidatePositi
   return { results: [] };
 }
 
-export const MsgBatchLiquidatePositionsResponse: MessageFns<MsgBatchLiquidatePositionsResponse> = {
-  encode(message: MsgBatchLiquidatePositionsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.results) {
-      LiquidatePositionResult.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const MsgBatchLiquidatePositionsResponse: MessageFns<MsgBatchLiquidatePositionsResponse> =
+  {
+    encode(
+      message: MsgBatchLiquidatePositionsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.results) {
+        LiquidatePositionResult.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchLiquidatePositionsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchLiquidatePositionsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchLiquidatePositionsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchLiquidatePositionsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.results.push(
+              LiquidatePositionResult.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.results.push(LiquidatePositionResult.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchLiquidatePositionsResponse {
+      return {
+        results: globalThis.Array.isArray(object?.results)
+          ? object.results.map((e: any) => LiquidatePositionResult.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: MsgBatchLiquidatePositionsResponse): unknown {
+      const obj: any = {};
+      if (message.results?.length) {
+        obj.results = message.results.map((e) =>
+          LiquidatePositionResult.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): MsgBatchLiquidatePositionsResponse {
-    return {
-      results: globalThis.Array.isArray(object?.results)
-        ? object.results.map((e: any) => LiquidatePositionResult.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: MsgBatchLiquidatePositionsResponse): unknown {
-    const obj: any = {};
-    if (message.results?.length) {
-      obj.results = message.results.map((e) => LiquidatePositionResult.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<MsgBatchLiquidatePositionsResponse>, I>>(
-    base?: I,
-  ): MsgBatchLiquidatePositionsResponse {
-    return MsgBatchLiquidatePositionsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchLiquidatePositionsResponse>, I>>(
-    object: I,
-  ): MsgBatchLiquidatePositionsResponse {
-    const message = createBaseMsgBatchLiquidatePositionsResponse();
-    message.results = object.results?.map((e) => LiquidatePositionResult.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgBatchLiquidatePositionsResponse>, I>>(
+      base?: I,
+    ): MsgBatchLiquidatePositionsResponse {
+      return MsgBatchLiquidatePositionsResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBatchLiquidatePositionsResponse>, I>,
+    >(object: I): MsgBatchLiquidatePositionsResponse {
+      const message = createBaseMsgBatchLiquidatePositionsResponse();
+      message.results =
+        object.results?.map((e) => LiquidatePositionResult.fromPartial(e)) ||
+        [];
+      return message;
+    },
+  };
 
 function createBaseMsgOffsetPosition(): MsgOffsetPosition {
-  return { sender: "", subaccountId: "", marketId: "", offsettingSubaccountIds: [] };
+  return {
+    sender: "",
+    subaccountId: "",
+    marketId: "",
+    offsettingSubaccountIds: [],
+  };
 }
 
 export const MsgOffsetPosition: MessageFns<MsgOffsetPosition> = {
-  encode(message: MsgOffsetPosition, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgOffsetPosition,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -8523,7 +9594,8 @@ export const MsgOffsetPosition: MessageFns<MsgOffsetPosition> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MsgOffsetPosition {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgOffsetPosition();
     while (reader.pos < end) {
@@ -8576,18 +9648,22 @@ export const MsgOffsetPosition: MessageFns<MsgOffsetPosition> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      offsettingSubaccountIds: globalThis.Array.isArray(object?.offsettingSubaccountIds)
+          ? globalThis.String(object.market_id)
+          : "",
+      offsettingSubaccountIds: globalThis.Array.isArray(
+        object?.offsettingSubaccountIds,
+      )
         ? object.offsettingSubaccountIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.offsetting_subaccount_ids)
-        ? object.offsetting_subaccount_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.offsetting_subaccount_ids.map((e: any) =>
+              globalThis.String(e),
+            )
+          : [],
     };
   },
 
@@ -8608,15 +9684,20 @@ export const MsgOffsetPosition: MessageFns<MsgOffsetPosition> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgOffsetPosition>, I>>(base?: I): MsgOffsetPosition {
+  create<I extends Exact<DeepPartial<MsgOffsetPosition>, I>>(
+    base?: I,
+  ): MsgOffsetPosition {
     return MsgOffsetPosition.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgOffsetPosition>, I>>(object: I): MsgOffsetPosition {
+  fromPartial<I extends Exact<DeepPartial<MsgOffsetPosition>, I>>(
+    object: I,
+  ): MsgOffsetPosition {
     const message = createBaseMsgOffsetPosition();
     message.sender = object.sender ?? "";
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
-    message.offsettingSubaccountIds = object.offsettingSubaccountIds?.map((e) => e) || [];
+    message.offsettingSubaccountIds =
+      object.offsettingSubaccountIds?.map((e) => e) || [];
     return message;
   },
 };
@@ -8625,51 +9706,66 @@ function createBaseMsgOffsetPositionResponse(): MsgOffsetPositionResponse {
   return {};
 }
 
-export const MsgOffsetPositionResponse: MessageFns<MsgOffsetPositionResponse> = {
-  encode(_: MsgOffsetPositionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgOffsetPositionResponse: MessageFns<MsgOffsetPositionResponse> =
+  {
+    encode(
+      _: MsgOffsetPositionResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgOffsetPositionResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgOffsetPositionResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgOffsetPositionResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgOffsetPositionResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgOffsetPositionResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgOffsetPositionResponse {
+      return {};
+    },
 
-  toJSON(_: MsgOffsetPositionResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgOffsetPositionResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgOffsetPositionResponse>, I>>(base?: I): MsgOffsetPositionResponse {
-    return MsgOffsetPositionResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgOffsetPositionResponse>, I>>(_: I): MsgOffsetPositionResponse {
-    const message = createBaseMsgOffsetPositionResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgOffsetPositionResponse>, I>>(
+      base?: I,
+    ): MsgOffsetPositionResponse {
+      return MsgOffsetPositionResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgOffsetPositionResponse>, I>>(
+      _: I,
+    ): MsgOffsetPositionResponse {
+      const message = createBaseMsgOffsetPositionResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgEmergencySettleMarket(): MsgEmergencySettleMarket {
   return { sender: "", subaccountId: "", marketId: "" };
 }
 
 export const MsgEmergencySettleMarket: MessageFns<MsgEmergencySettleMarket> = {
-  encode(message: MsgEmergencySettleMarket, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgEmergencySettleMarket,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -8682,8 +9778,12 @@ export const MsgEmergencySettleMarket: MessageFns<MsgEmergencySettleMarket> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgEmergencySettleMarket {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgEmergencySettleMarket {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgEmergencySettleMarket();
     while (reader.pos < end) {
@@ -8728,13 +9828,13 @@ export const MsgEmergencySettleMarket: MessageFns<MsgEmergencySettleMarket> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
     };
   },
 
@@ -8752,10 +9852,14 @@ export const MsgEmergencySettleMarket: MessageFns<MsgEmergencySettleMarket> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgEmergencySettleMarket>, I>>(base?: I): MsgEmergencySettleMarket {
+  create<I extends Exact<DeepPartial<MsgEmergencySettleMarket>, I>>(
+    base?: I,
+  ): MsgEmergencySettleMarket {
     return MsgEmergencySettleMarket.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgEmergencySettleMarket>, I>>(object: I): MsgEmergencySettleMarket {
+  fromPartial<I extends Exact<DeepPartial<MsgEmergencySettleMarket>, I>>(
+    object: I,
+  ): MsgEmergencySettleMarket {
     const message = createBaseMsgEmergencySettleMarket();
     message.sender = object.sender ?? "";
     message.subaccountId = object.subaccountId ?? "";
@@ -8768,601 +9872,687 @@ function createBaseMsgEmergencySettleMarketResponse(): MsgEmergencySettleMarketR
   return {};
 }
 
-export const MsgEmergencySettleMarketResponse: MessageFns<MsgEmergencySettleMarketResponse> = {
-  encode(_: MsgEmergencySettleMarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgEmergencySettleMarketResponse: MessageFns<MsgEmergencySettleMarketResponse> =
+  {
+    encode(
+      _: MsgEmergencySettleMarketResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgEmergencySettleMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgEmergencySettleMarketResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgEmergencySettleMarketResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgEmergencySettleMarketResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgEmergencySettleMarketResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgEmergencySettleMarketResponse {
+      return {};
+    },
 
-  toJSON(_: MsgEmergencySettleMarketResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgEmergencySettleMarketResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgEmergencySettleMarketResponse>, I>>(
-    base?: I,
-  ): MsgEmergencySettleMarketResponse {
-    return MsgEmergencySettleMarketResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgEmergencySettleMarketResponse>, I>>(
-    _: I,
-  ): MsgEmergencySettleMarketResponse {
-    const message = createBaseMsgEmergencySettleMarketResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgEmergencySettleMarketResponse>, I>>(
+      base?: I,
+    ): MsgEmergencySettleMarketResponse {
+      return MsgEmergencySettleMarketResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgEmergencySettleMarketResponse>, I>,
+    >(_: I): MsgEmergencySettleMarketResponse {
+      const message = createBaseMsgEmergencySettleMarketResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgIncreasePositionMargin(): MsgIncreasePositionMargin {
-  return { sender: "", sourceSubaccountId: "", destinationSubaccountId: "", marketId: "", amount: "" };
+  return {
+    sender: "",
+    sourceSubaccountId: "",
+    destinationSubaccountId: "",
+    marketId: "",
+    amount: "",
+  };
 }
 
-export const MsgIncreasePositionMargin: MessageFns<MsgIncreasePositionMargin> = {
-  encode(message: MsgIncreasePositionMargin, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.sourceSubaccountId !== "") {
-      writer.uint32(18).string(message.sourceSubaccountId);
-    }
-    if (message.destinationSubaccountId !== "") {
-      writer.uint32(26).string(message.destinationSubaccountId);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(34).string(message.marketId);
-    }
-    if (message.amount !== "") {
-      writer.uint32(42).string(message.amount);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgIncreasePositionMargin {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgIncreasePositionMargin();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.sourceSubaccountId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.destinationSubaccountId = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.amount = reader.string();
-          continue;
-        }
+export const MsgIncreasePositionMargin: MessageFns<MsgIncreasePositionMargin> =
+  {
+    encode(
+      message: MsgIncreasePositionMargin,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.sourceSubaccountId !== "") {
+        writer.uint32(18).string(message.sourceSubaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.destinationSubaccountId !== "") {
+        writer.uint32(26).string(message.destinationSubaccountId);
+      }
+      if (message.marketId !== "") {
+        writer.uint32(34).string(message.marketId);
+      }
+      if (message.amount !== "") {
+        writer.uint32(42).string(message.amount);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgIncreasePositionMargin {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      sourceSubaccountId: isSet(object.sourceSubaccountId)
-        ? globalThis.String(object.sourceSubaccountId)
-        : isSet(object.source_subaccount_id)
-        ? globalThis.String(object.source_subaccount_id)
-        : "",
-      destinationSubaccountId: isSet(object.destinationSubaccountId)
-        ? globalThis.String(object.destinationSubaccountId)
-        : isSet(object.destination_subaccount_id)
-        ? globalThis.String(object.destination_subaccount_id)
-        : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgIncreasePositionMargin {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgIncreasePositionMargin();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgIncreasePositionMargin): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.sourceSubaccountId !== "") {
-      obj.sourceSubaccountId = message.sourceSubaccountId;
-    }
-    if (message.destinationSubaccountId !== "") {
-      obj.destinationSubaccountId = message.destinationSubaccountId;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.amount !== "") {
-      obj.amount = message.amount;
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgIncreasePositionMargin>, I>>(base?: I): MsgIncreasePositionMargin {
-    return MsgIncreasePositionMargin.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgIncreasePositionMargin>, I>>(object: I): MsgIncreasePositionMargin {
-    const message = createBaseMsgIncreasePositionMargin();
-    message.sender = object.sender ?? "";
-    message.sourceSubaccountId = object.sourceSubaccountId ?? "";
-    message.destinationSubaccountId = object.destinationSubaccountId ?? "";
-    message.marketId = object.marketId ?? "";
-    message.amount = object.amount ?? "";
-    return message;
-  },
-};
+            message.sourceSubaccountId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.destinationSubaccountId = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.amount = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgIncreasePositionMargin {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        sourceSubaccountId: isSet(object.sourceSubaccountId)
+          ? globalThis.String(object.sourceSubaccountId)
+          : isSet(object.source_subaccount_id)
+            ? globalThis.String(object.source_subaccount_id)
+            : "",
+        destinationSubaccountId: isSet(object.destinationSubaccountId)
+          ? globalThis.String(object.destinationSubaccountId)
+          : isSet(object.destination_subaccount_id)
+            ? globalThis.String(object.destination_subaccount_id)
+            : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
+      };
+    },
+
+    toJSON(message: MsgIncreasePositionMargin): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.sourceSubaccountId !== "") {
+        obj.sourceSubaccountId = message.sourceSubaccountId;
+      }
+      if (message.destinationSubaccountId !== "") {
+        obj.destinationSubaccountId = message.destinationSubaccountId;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.amount !== "") {
+        obj.amount = message.amount;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgIncreasePositionMargin>, I>>(
+      base?: I,
+    ): MsgIncreasePositionMargin {
+      return MsgIncreasePositionMargin.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgIncreasePositionMargin>, I>>(
+      object: I,
+    ): MsgIncreasePositionMargin {
+      const message = createBaseMsgIncreasePositionMargin();
+      message.sender = object.sender ?? "";
+      message.sourceSubaccountId = object.sourceSubaccountId ?? "";
+      message.destinationSubaccountId = object.destinationSubaccountId ?? "";
+      message.marketId = object.marketId ?? "";
+      message.amount = object.amount ?? "";
+      return message;
+    },
+  };
 
 function createBaseMsgIncreasePositionMarginResponse(): MsgIncreasePositionMarginResponse {
   return {};
 }
 
-export const MsgIncreasePositionMarginResponse: MessageFns<MsgIncreasePositionMarginResponse> = {
-  encode(_: MsgIncreasePositionMarginResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgIncreasePositionMarginResponse: MessageFns<MsgIncreasePositionMarginResponse> =
+  {
+    encode(
+      _: MsgIncreasePositionMarginResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgIncreasePositionMarginResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgIncreasePositionMarginResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgIncreasePositionMarginResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgIncreasePositionMarginResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgIncreasePositionMarginResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgIncreasePositionMarginResponse {
+      return {};
+    },
 
-  toJSON(_: MsgIncreasePositionMarginResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgIncreasePositionMarginResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgIncreasePositionMarginResponse>, I>>(
-    base?: I,
-  ): MsgIncreasePositionMarginResponse {
-    return MsgIncreasePositionMarginResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgIncreasePositionMarginResponse>, I>>(
-    _: I,
-  ): MsgIncreasePositionMarginResponse {
-    const message = createBaseMsgIncreasePositionMarginResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgIncreasePositionMarginResponse>, I>>(
+      base?: I,
+    ): MsgIncreasePositionMarginResponse {
+      return MsgIncreasePositionMarginResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgIncreasePositionMarginResponse>, I>,
+    >(_: I): MsgIncreasePositionMarginResponse {
+      const message = createBaseMsgIncreasePositionMarginResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgDecreasePositionMargin(): MsgDecreasePositionMargin {
-  return { sender: "", sourceSubaccountId: "", destinationSubaccountId: "", marketId: "", amount: "" };
+  return {
+    sender: "",
+    sourceSubaccountId: "",
+    destinationSubaccountId: "",
+    marketId: "",
+    amount: "",
+  };
 }
 
-export const MsgDecreasePositionMargin: MessageFns<MsgDecreasePositionMargin> = {
-  encode(message: MsgDecreasePositionMargin, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.sourceSubaccountId !== "") {
-      writer.uint32(18).string(message.sourceSubaccountId);
-    }
-    if (message.destinationSubaccountId !== "") {
-      writer.uint32(26).string(message.destinationSubaccountId);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(34).string(message.marketId);
-    }
-    if (message.amount !== "") {
-      writer.uint32(42).string(message.amount);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDecreasePositionMargin {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgDecreasePositionMargin();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.sourceSubaccountId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.destinationSubaccountId = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.amount = reader.string();
-          continue;
-        }
+export const MsgDecreasePositionMargin: MessageFns<MsgDecreasePositionMargin> =
+  {
+    encode(
+      message: MsgDecreasePositionMargin,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.sourceSubaccountId !== "") {
+        writer.uint32(18).string(message.sourceSubaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.destinationSubaccountId !== "") {
+        writer.uint32(26).string(message.destinationSubaccountId);
+      }
+      if (message.marketId !== "") {
+        writer.uint32(34).string(message.marketId);
+      }
+      if (message.amount !== "") {
+        writer.uint32(42).string(message.amount);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgDecreasePositionMargin {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      sourceSubaccountId: isSet(object.sourceSubaccountId)
-        ? globalThis.String(object.sourceSubaccountId)
-        : isSet(object.source_subaccount_id)
-        ? globalThis.String(object.source_subaccount_id)
-        : "",
-      destinationSubaccountId: isSet(object.destinationSubaccountId)
-        ? globalThis.String(object.destinationSubaccountId)
-        : isSet(object.destination_subaccount_id)
-        ? globalThis.String(object.destination_subaccount_id)
-        : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgDecreasePositionMargin {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgDecreasePositionMargin();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgDecreasePositionMargin): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.sourceSubaccountId !== "") {
-      obj.sourceSubaccountId = message.sourceSubaccountId;
-    }
-    if (message.destinationSubaccountId !== "") {
-      obj.destinationSubaccountId = message.destinationSubaccountId;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.amount !== "") {
-      obj.amount = message.amount;
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgDecreasePositionMargin>, I>>(base?: I): MsgDecreasePositionMargin {
-    return MsgDecreasePositionMargin.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgDecreasePositionMargin>, I>>(object: I): MsgDecreasePositionMargin {
-    const message = createBaseMsgDecreasePositionMargin();
-    message.sender = object.sender ?? "";
-    message.sourceSubaccountId = object.sourceSubaccountId ?? "";
-    message.destinationSubaccountId = object.destinationSubaccountId ?? "";
-    message.marketId = object.marketId ?? "";
-    message.amount = object.amount ?? "";
-    return message;
-  },
-};
+            message.sourceSubaccountId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.destinationSubaccountId = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.amount = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgDecreasePositionMargin {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        sourceSubaccountId: isSet(object.sourceSubaccountId)
+          ? globalThis.String(object.sourceSubaccountId)
+          : isSet(object.source_subaccount_id)
+            ? globalThis.String(object.source_subaccount_id)
+            : "",
+        destinationSubaccountId: isSet(object.destinationSubaccountId)
+          ? globalThis.String(object.destinationSubaccountId)
+          : isSet(object.destination_subaccount_id)
+            ? globalThis.String(object.destination_subaccount_id)
+            : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
+      };
+    },
+
+    toJSON(message: MsgDecreasePositionMargin): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.sourceSubaccountId !== "") {
+        obj.sourceSubaccountId = message.sourceSubaccountId;
+      }
+      if (message.destinationSubaccountId !== "") {
+        obj.destinationSubaccountId = message.destinationSubaccountId;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.amount !== "") {
+        obj.amount = message.amount;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgDecreasePositionMargin>, I>>(
+      base?: I,
+    ): MsgDecreasePositionMargin {
+      return MsgDecreasePositionMargin.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgDecreasePositionMargin>, I>>(
+      object: I,
+    ): MsgDecreasePositionMargin {
+      const message = createBaseMsgDecreasePositionMargin();
+      message.sender = object.sender ?? "";
+      message.sourceSubaccountId = object.sourceSubaccountId ?? "";
+      message.destinationSubaccountId = object.destinationSubaccountId ?? "";
+      message.marketId = object.marketId ?? "";
+      message.amount = object.amount ?? "";
+      return message;
+    },
+  };
 
 function createBaseMsgDecreasePositionMarginResponse(): MsgDecreasePositionMarginResponse {
   return {};
 }
 
-export const MsgDecreasePositionMarginResponse: MessageFns<MsgDecreasePositionMarginResponse> = {
-  encode(_: MsgDecreasePositionMarginResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgDecreasePositionMarginResponse: MessageFns<MsgDecreasePositionMarginResponse> =
+  {
+    encode(
+      _: MsgDecreasePositionMarginResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDecreasePositionMarginResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgDecreasePositionMarginResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgDecreasePositionMarginResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgDecreasePositionMarginResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgDecreasePositionMarginResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgDecreasePositionMarginResponse {
+      return {};
+    },
 
-  toJSON(_: MsgDecreasePositionMarginResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgDecreasePositionMarginResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgDecreasePositionMarginResponse>, I>>(
-    base?: I,
-  ): MsgDecreasePositionMarginResponse {
-    return MsgDecreasePositionMarginResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgDecreasePositionMarginResponse>, I>>(
-    _: I,
-  ): MsgDecreasePositionMarginResponse {
-    const message = createBaseMsgDecreasePositionMarginResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgDecreasePositionMarginResponse>, I>>(
+      base?: I,
+    ): MsgDecreasePositionMarginResponse {
+      return MsgDecreasePositionMarginResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgDecreasePositionMarginResponse>, I>,
+    >(_: I): MsgDecreasePositionMarginResponse {
+      const message = createBaseMsgDecreasePositionMarginResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgPrivilegedExecuteContract(): MsgPrivilegedExecuteContract {
   return { sender: "", funds: "", contractAddress: "", data: "" };
 }
 
-export const MsgPrivilegedExecuteContract: MessageFns<MsgPrivilegedExecuteContract> = {
-  encode(message: MsgPrivilegedExecuteContract, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.funds !== "") {
-      writer.uint32(18).string(message.funds);
-    }
-    if (message.contractAddress !== "") {
-      writer.uint32(26).string(message.contractAddress);
-    }
-    if (message.data !== "") {
-      writer.uint32(34).string(message.data);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgPrivilegedExecuteContract {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgPrivilegedExecuteContract();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.funds = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.contractAddress = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.data = reader.string();
-          continue;
-        }
+export const MsgPrivilegedExecuteContract: MessageFns<MsgPrivilegedExecuteContract> =
+  {
+    encode(
+      message: MsgPrivilegedExecuteContract,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.funds !== "") {
+        writer.uint32(18).string(message.funds);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.contractAddress !== "") {
+        writer.uint32(26).string(message.contractAddress);
+      }
+      if (message.data !== "") {
+        writer.uint32(34).string(message.data);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgPrivilegedExecuteContract {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      funds: isSet(object.funds) ? globalThis.String(object.funds) : "",
-      contractAddress: isSet(object.contractAddress)
-        ? globalThis.String(object.contractAddress)
-        : isSet(object.contract_address)
-        ? globalThis.String(object.contract_address)
-        : "",
-      data: isSet(object.data) ? globalThis.String(object.data) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgPrivilegedExecuteContract {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgPrivilegedExecuteContract();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgPrivilegedExecuteContract): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.funds !== "") {
-      obj.funds = message.funds;
-    }
-    if (message.contractAddress !== "") {
-      obj.contractAddress = message.contractAddress;
-    }
-    if (message.data !== "") {
-      obj.data = message.data;
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgPrivilegedExecuteContract>, I>>(base?: I): MsgPrivilegedExecuteContract {
-    return MsgPrivilegedExecuteContract.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgPrivilegedExecuteContract>, I>>(object: I): MsgPrivilegedExecuteContract {
-    const message = createBaseMsgPrivilegedExecuteContract();
-    message.sender = object.sender ?? "";
-    message.funds = object.funds ?? "";
-    message.contractAddress = object.contractAddress ?? "";
-    message.data = object.data ?? "";
-    return message;
-  },
-};
+            message.funds = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.contractAddress = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.data = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgPrivilegedExecuteContract {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        funds: isSet(object.funds) ? globalThis.String(object.funds) : "",
+        contractAddress: isSet(object.contractAddress)
+          ? globalThis.String(object.contractAddress)
+          : isSet(object.contract_address)
+            ? globalThis.String(object.contract_address)
+            : "",
+        data: isSet(object.data) ? globalThis.String(object.data) : "",
+      };
+    },
+
+    toJSON(message: MsgPrivilegedExecuteContract): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.funds !== "") {
+        obj.funds = message.funds;
+      }
+      if (message.contractAddress !== "") {
+        obj.contractAddress = message.contractAddress;
+      }
+      if (message.data !== "") {
+        obj.data = message.data;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgPrivilegedExecuteContract>, I>>(
+      base?: I,
+    ): MsgPrivilegedExecuteContract {
+      return MsgPrivilegedExecuteContract.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgPrivilegedExecuteContract>, I>>(
+      object: I,
+    ): MsgPrivilegedExecuteContract {
+      const message = createBaseMsgPrivilegedExecuteContract();
+      message.sender = object.sender ?? "";
+      message.funds = object.funds ?? "";
+      message.contractAddress = object.contractAddress ?? "";
+      message.data = object.data ?? "";
+      return message;
+    },
+  };
 
 function createBaseMsgPrivilegedExecuteContractResponse(): MsgPrivilegedExecuteContractResponse {
   return { fundsDiff: [] };
 }
 
-export const MsgPrivilegedExecuteContractResponse: MessageFns<MsgPrivilegedExecuteContractResponse> = {
-  encode(message: MsgPrivilegedExecuteContractResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.fundsDiff) {
-      Coin.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const MsgPrivilegedExecuteContractResponse: MessageFns<MsgPrivilegedExecuteContractResponse> =
+  {
+    encode(
+      message: MsgPrivilegedExecuteContractResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.fundsDiff) {
+        Coin.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgPrivilegedExecuteContractResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgPrivilegedExecuteContractResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgPrivilegedExecuteContractResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgPrivilegedExecuteContractResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.fundsDiff.push(Coin.decode(reader, reader.uint32()));
+            continue;
           }
-
-          message.fundsDiff.push(Coin.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): MsgPrivilegedExecuteContractResponse {
+      return {
+        fundsDiff: globalThis.Array.isArray(object?.fundsDiff)
+          ? object.fundsDiff.map((e: any) => Coin.fromJSON(e))
+          : globalThis.Array.isArray(object?.funds_diff)
+            ? object.funds_diff.map((e: any) => Coin.fromJSON(e))
+            : [],
+      };
+    },
+
+    toJSON(message: MsgPrivilegedExecuteContractResponse): unknown {
+      const obj: any = {};
+      if (message.fundsDiff?.length) {
+        obj.fundsDiff = message.fundsDiff.map((e) => Coin.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): MsgPrivilegedExecuteContractResponse {
-    return {
-      fundsDiff: globalThis.Array.isArray(object?.fundsDiff)
-        ? object.fundsDiff.map((e: any) => Coin.fromJSON(e))
-        : globalThis.Array.isArray(object?.funds_diff)
-        ? object.funds_diff.map((e: any) => Coin.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: MsgPrivilegedExecuteContractResponse): unknown {
-    const obj: any = {};
-    if (message.fundsDiff?.length) {
-      obj.fundsDiff = message.fundsDiff.map((e) => Coin.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<MsgPrivilegedExecuteContractResponse>, I>>(
-    base?: I,
-  ): MsgPrivilegedExecuteContractResponse {
-    return MsgPrivilegedExecuteContractResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgPrivilegedExecuteContractResponse>, I>>(
-    object: I,
-  ): MsgPrivilegedExecuteContractResponse {
-    const message = createBaseMsgPrivilegedExecuteContractResponse();
-    message.fundsDiff = object.fundsDiff?.map((e) => Coin.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgPrivilegedExecuteContractResponse>, I>,
+    >(base?: I): MsgPrivilegedExecuteContractResponse {
+      return MsgPrivilegedExecuteContractResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgPrivilegedExecuteContractResponse>, I>,
+    >(object: I): MsgPrivilegedExecuteContractResponse {
+      const message = createBaseMsgPrivilegedExecuteContractResponse();
+      message.fundsDiff =
+        object.fundsDiff?.map((e) => Coin.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgRewardsOptOut(): MsgRewardsOptOut {
   return { sender: "" };
 }
 
 export const MsgRewardsOptOut: MessageFns<MsgRewardsOptOut> = {
-  encode(message: MsgRewardsOptOut, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgRewardsOptOut,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -9370,7 +10560,8 @@ export const MsgRewardsOptOut: MessageFns<MsgRewardsOptOut> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MsgRewardsOptOut {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRewardsOptOut();
     while (reader.pos < end) {
@@ -9394,7 +10585,9 @@ export const MsgRewardsOptOut: MessageFns<MsgRewardsOptOut> = {
   },
 
   fromJSON(object: any): MsgRewardsOptOut {
-    return { sender: isSet(object.sender) ? globalThis.String(object.sender) : "" };
+    return {
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+    };
   },
 
   toJSON(message: MsgRewardsOptOut): unknown {
@@ -9405,10 +10598,14 @@ export const MsgRewardsOptOut: MessageFns<MsgRewardsOptOut> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgRewardsOptOut>, I>>(base?: I): MsgRewardsOptOut {
+  create<I extends Exact<DeepPartial<MsgRewardsOptOut>, I>>(
+    base?: I,
+  ): MsgRewardsOptOut {
     return MsgRewardsOptOut.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgRewardsOptOut>, I>>(object: I): MsgRewardsOptOut {
+  fromPartial<I extends Exact<DeepPartial<MsgRewardsOptOut>, I>>(
+    object: I,
+  ): MsgRewardsOptOut {
     const message = createBaseMsgRewardsOptOut();
     message.sender = object.sender ?? "";
     return message;
@@ -9420,12 +10617,19 @@ function createBaseMsgRewardsOptOutResponse(): MsgRewardsOptOutResponse {
 }
 
 export const MsgRewardsOptOutResponse: MessageFns<MsgRewardsOptOutResponse> = {
-  encode(_: MsgRewardsOptOutResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: MsgRewardsOptOutResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgRewardsOptOutResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgRewardsOptOutResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRewardsOptOutResponse();
     while (reader.pos < end) {
@@ -9449,21 +10653,32 @@ export const MsgRewardsOptOutResponse: MessageFns<MsgRewardsOptOutResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgRewardsOptOutResponse>, I>>(base?: I): MsgRewardsOptOutResponse {
+  create<I extends Exact<DeepPartial<MsgRewardsOptOutResponse>, I>>(
+    base?: I,
+  ): MsgRewardsOptOutResponse {
     return MsgRewardsOptOutResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgRewardsOptOutResponse>, I>>(_: I): MsgRewardsOptOutResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgRewardsOptOutResponse>, I>>(
+    _: I,
+  ): MsgRewardsOptOutResponse {
     const message = createBaseMsgRewardsOptOutResponse();
     return message;
   },
 };
 
 function createBaseMsgReclaimLockedFunds(): MsgReclaimLockedFunds {
-  return { sender: "", lockedAccountPubKey: Buffer.alloc(0), signature: Buffer.alloc(0) };
+  return {
+    sender: "",
+    lockedAccountPubKey: Buffer.alloc(0),
+    signature: Buffer.alloc(0),
+  };
 }
 
 export const MsgReclaimLockedFunds: MessageFns<MsgReclaimLockedFunds> = {
-  encode(message: MsgReclaimLockedFunds, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgReclaimLockedFunds,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -9476,8 +10691,12 @@ export const MsgReclaimLockedFunds: MessageFns<MsgReclaimLockedFunds> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgReclaimLockedFunds {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgReclaimLockedFunds {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgReclaimLockedFunds();
     while (reader.pos < end) {
@@ -9522,7 +10741,9 @@ export const MsgReclaimLockedFunds: MessageFns<MsgReclaimLockedFunds> = {
       lockedAccountPubKey: isSet(object.lockedAccountPubKey)
         ? Buffer.from(bytesFromBase64(object.lockedAccountPubKey))
         : Buffer.alloc(0),
-      signature: isSet(object.signature) ? Buffer.from(bytesFromBase64(object.signature)) : Buffer.alloc(0),
+      signature: isSet(object.signature)
+        ? Buffer.from(bytesFromBase64(object.signature))
+        : Buffer.alloc(0),
     };
   },
 
@@ -9540,10 +10761,14 @@ export const MsgReclaimLockedFunds: MessageFns<MsgReclaimLockedFunds> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgReclaimLockedFunds>, I>>(base?: I): MsgReclaimLockedFunds {
+  create<I extends Exact<DeepPartial<MsgReclaimLockedFunds>, I>>(
+    base?: I,
+  ): MsgReclaimLockedFunds {
     return MsgReclaimLockedFunds.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgReclaimLockedFunds>, I>>(object: I): MsgReclaimLockedFunds {
+  fromPartial<I extends Exact<DeepPartial<MsgReclaimLockedFunds>, I>>(
+    object: I,
+  ): MsgReclaimLockedFunds {
     const message = createBaseMsgReclaimLockedFunds();
     message.sender = object.sender ?? "";
     message.lockedAccountPubKey = object.lockedAccountPubKey ?? Buffer.alloc(0);
@@ -9556,51 +10781,66 @@ function createBaseMsgReclaimLockedFundsResponse(): MsgReclaimLockedFundsRespons
   return {};
 }
 
-export const MsgReclaimLockedFundsResponse: MessageFns<MsgReclaimLockedFundsResponse> = {
-  encode(_: MsgReclaimLockedFundsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgReclaimLockedFundsResponse: MessageFns<MsgReclaimLockedFundsResponse> =
+  {
+    encode(
+      _: MsgReclaimLockedFundsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgReclaimLockedFundsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgReclaimLockedFundsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgReclaimLockedFundsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgReclaimLockedFundsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgReclaimLockedFundsResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgReclaimLockedFundsResponse {
+      return {};
+    },
 
-  toJSON(_: MsgReclaimLockedFundsResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgReclaimLockedFundsResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgReclaimLockedFundsResponse>, I>>(base?: I): MsgReclaimLockedFundsResponse {
-    return MsgReclaimLockedFundsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgReclaimLockedFundsResponse>, I>>(_: I): MsgReclaimLockedFundsResponse {
-    const message = createBaseMsgReclaimLockedFundsResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgReclaimLockedFundsResponse>, I>>(
+      base?: I,
+    ): MsgReclaimLockedFundsResponse {
+      return MsgReclaimLockedFundsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgReclaimLockedFundsResponse>, I>>(
+      _: I,
+    ): MsgReclaimLockedFundsResponse {
+      const message = createBaseMsgReclaimLockedFundsResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgSignData(): MsgSignData {
   return { Signer: Buffer.alloc(0), Data: Buffer.alloc(0) };
 }
 
 export const MsgSignData: MessageFns<MsgSignData> = {
-  encode(message: MsgSignData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgSignData,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.Signer.length !== 0) {
       writer.uint32(10).bytes(message.Signer);
     }
@@ -9611,7 +10851,8 @@ export const MsgSignData: MessageFns<MsgSignData> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MsgSignData {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSignData();
     while (reader.pos < end) {
@@ -9644,8 +10885,12 @@ export const MsgSignData: MessageFns<MsgSignData> = {
 
   fromJSON(object: any): MsgSignData {
     return {
-      Signer: isSet(object.Signer) ? Buffer.from(bytesFromBase64(object.Signer)) : Buffer.alloc(0),
-      Data: isSet(object.Data) ? Buffer.from(bytesFromBase64(object.Data)) : Buffer.alloc(0),
+      Signer: isSet(object.Signer)
+        ? Buffer.from(bytesFromBase64(object.Signer))
+        : Buffer.alloc(0),
+      Data: isSet(object.Data)
+        ? Buffer.from(bytesFromBase64(object.Data))
+        : Buffer.alloc(0),
     };
   },
 
@@ -9663,7 +10908,9 @@ export const MsgSignData: MessageFns<MsgSignData> = {
   create<I extends Exact<DeepPartial<MsgSignData>, I>>(base?: I): MsgSignData {
     return MsgSignData.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgSignData>, I>>(object: I): MsgSignData {
+  fromPartial<I extends Exact<DeepPartial<MsgSignData>, I>>(
+    object: I,
+  ): MsgSignData {
     const message = createBaseMsgSignData();
     message.Signer = object.Signer ?? Buffer.alloc(0);
     message.Data = object.Data ?? Buffer.alloc(0);
@@ -9676,7 +10923,10 @@ function createBaseMsgSignDoc(): MsgSignDoc {
 }
 
 export const MsgSignDoc: MessageFns<MsgSignDoc> = {
-  encode(message: MsgSignDoc, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgSignDoc,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.signType !== "") {
       writer.uint32(10).string(message.signType);
     }
@@ -9687,7 +10937,8 @@ export const MsgSignDoc: MessageFns<MsgSignDoc> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MsgSignDoc {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSignDoc();
     while (reader.pos < end) {
@@ -9723,9 +10974,11 @@ export const MsgSignDoc: MessageFns<MsgSignDoc> = {
       signType: isSet(object.signType)
         ? globalThis.String(object.signType)
         : isSet(object.sign_type)
-        ? globalThis.String(object.sign_type)
-        : "",
-      value: isSet(object.value) ? MsgSignData.fromJSON(object.value) : undefined,
+          ? globalThis.String(object.sign_type)
+          : "",
+      value: isSet(object.value)
+        ? MsgSignData.fromJSON(object.value)
+        : undefined,
     };
   },
 
@@ -9743,229 +10996,266 @@ export const MsgSignDoc: MessageFns<MsgSignDoc> = {
   create<I extends Exact<DeepPartial<MsgSignDoc>, I>>(base?: I): MsgSignDoc {
     return MsgSignDoc.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgSignDoc>, I>>(object: I): MsgSignDoc {
+  fromPartial<I extends Exact<DeepPartial<MsgSignDoc>, I>>(
+    object: I,
+  ): MsgSignDoc {
     const message = createBaseMsgSignDoc();
     message.signType = object.signType ?? "";
-    message.value = (object.value !== undefined && object.value !== null)
-      ? MsgSignData.fromPartial(object.value)
-      : undefined;
+    message.value =
+      object.value !== undefined && object.value !== null
+        ? MsgSignData.fromPartial(object.value)
+        : undefined;
     return message;
   },
 };
 
 function createBaseMsgAdminUpdateBinaryOptionsMarket(): MsgAdminUpdateBinaryOptionsMarket {
-  return { sender: "", marketId: "", settlementPrice: "", expirationTimestamp: 0, settlementTimestamp: 0, status: 0 };
+  return {
+    sender: "",
+    marketId: "",
+    settlementPrice: "",
+    expirationTimestamp: 0,
+    settlementTimestamp: 0,
+    status: 0,
+  };
 }
 
-export const MsgAdminUpdateBinaryOptionsMarket: MessageFns<MsgAdminUpdateBinaryOptionsMarket> = {
-  encode(message: MsgAdminUpdateBinaryOptionsMarket, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    if (message.settlementPrice !== "") {
-      writer.uint32(26).string(message.settlementPrice);
-    }
-    if (message.expirationTimestamp !== 0) {
-      writer.uint32(32).int64(message.expirationTimestamp);
-    }
-    if (message.settlementTimestamp !== 0) {
-      writer.uint32(40).int64(message.settlementTimestamp);
-    }
-    if (message.status !== 0) {
-      writer.uint32(48).int32(message.status);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgAdminUpdateBinaryOptionsMarket {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgAdminUpdateBinaryOptionsMarket();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.settlementPrice = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 32) {
-            break;
-          }
-
-          message.expirationTimestamp = longToNumber(reader.int64());
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.settlementTimestamp = longToNumber(reader.int64());
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.status = reader.int32() as any;
-          continue;
-        }
+export const MsgAdminUpdateBinaryOptionsMarket: MessageFns<MsgAdminUpdateBinaryOptionsMarket> =
+  {
+    encode(
+      message: MsgAdminUpdateBinaryOptionsMarket,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.settlementPrice !== "") {
+        writer.uint32(26).string(message.settlementPrice);
+      }
+      if (message.expirationTimestamp !== 0) {
+        writer.uint32(32).int64(message.expirationTimestamp);
+      }
+      if (message.settlementTimestamp !== 0) {
+        writer.uint32(40).int64(message.settlementTimestamp);
+      }
+      if (message.status !== 0) {
+        writer.uint32(48).int32(message.status);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgAdminUpdateBinaryOptionsMarket {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      settlementPrice: isSet(object.settlementPrice)
-        ? globalThis.String(object.settlementPrice)
-        : isSet(object.settlement_price)
-        ? globalThis.String(object.settlement_price)
-        : "",
-      expirationTimestamp: isSet(object.expirationTimestamp)
-        ? globalThis.Number(object.expirationTimestamp)
-        : isSet(object.expiration_timestamp)
-        ? globalThis.Number(object.expiration_timestamp)
-        : 0,
-      settlementTimestamp: isSet(object.settlementTimestamp)
-        ? globalThis.Number(object.settlementTimestamp)
-        : isSet(object.settlement_timestamp)
-        ? globalThis.Number(object.settlement_timestamp)
-        : 0,
-      status: isSet(object.status) ? marketStatusFromJSON(object.status) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgAdminUpdateBinaryOptionsMarket {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgAdminUpdateBinaryOptionsMarket();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgAdminUpdateBinaryOptionsMarket): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.settlementPrice !== "") {
-      obj.settlementPrice = message.settlementPrice;
-    }
-    if (message.expirationTimestamp !== 0) {
-      obj.expirationTimestamp = Math.round(message.expirationTimestamp);
-    }
-    if (message.settlementTimestamp !== 0) {
-      obj.settlementTimestamp = Math.round(message.settlementTimestamp);
-    }
-    if (message.status !== 0) {
-      obj.status = marketStatusToJSON(message.status);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgAdminUpdateBinaryOptionsMarket>, I>>(
-    base?: I,
-  ): MsgAdminUpdateBinaryOptionsMarket {
-    return MsgAdminUpdateBinaryOptionsMarket.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgAdminUpdateBinaryOptionsMarket>, I>>(
-    object: I,
-  ): MsgAdminUpdateBinaryOptionsMarket {
-    const message = createBaseMsgAdminUpdateBinaryOptionsMarket();
-    message.sender = object.sender ?? "";
-    message.marketId = object.marketId ?? "";
-    message.settlementPrice = object.settlementPrice ?? "";
-    message.expirationTimestamp = object.expirationTimestamp ?? 0;
-    message.settlementTimestamp = object.settlementTimestamp ?? 0;
-    message.status = object.status ?? 0;
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.settlementPrice = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 32) {
+              break;
+            }
+
+            message.expirationTimestamp = longToNumber(reader.int64());
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.settlementTimestamp = longToNumber(reader.int64());
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.status = reader.int32() as any;
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgAdminUpdateBinaryOptionsMarket {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        settlementPrice: isSet(object.settlementPrice)
+          ? globalThis.String(object.settlementPrice)
+          : isSet(object.settlement_price)
+            ? globalThis.String(object.settlement_price)
+            : "",
+        expirationTimestamp: isSet(object.expirationTimestamp)
+          ? globalThis.Number(object.expirationTimestamp)
+          : isSet(object.expiration_timestamp)
+            ? globalThis.Number(object.expiration_timestamp)
+            : 0,
+        settlementTimestamp: isSet(object.settlementTimestamp)
+          ? globalThis.Number(object.settlementTimestamp)
+          : isSet(object.settlement_timestamp)
+            ? globalThis.Number(object.settlement_timestamp)
+            : 0,
+        status: isSet(object.status) ? marketStatusFromJSON(object.status) : 0,
+      };
+    },
+
+    toJSON(message: MsgAdminUpdateBinaryOptionsMarket): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.settlementPrice !== "") {
+        obj.settlementPrice = message.settlementPrice;
+      }
+      if (message.expirationTimestamp !== 0) {
+        obj.expirationTimestamp = Math.round(message.expirationTimestamp);
+      }
+      if (message.settlementTimestamp !== 0) {
+        obj.settlementTimestamp = Math.round(message.settlementTimestamp);
+      }
+      if (message.status !== 0) {
+        obj.status = marketStatusToJSON(message.status);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgAdminUpdateBinaryOptionsMarket>, I>>(
+      base?: I,
+    ): MsgAdminUpdateBinaryOptionsMarket {
+      return MsgAdminUpdateBinaryOptionsMarket.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgAdminUpdateBinaryOptionsMarket>, I>,
+    >(object: I): MsgAdminUpdateBinaryOptionsMarket {
+      const message = createBaseMsgAdminUpdateBinaryOptionsMarket();
+      message.sender = object.sender ?? "";
+      message.marketId = object.marketId ?? "";
+      message.settlementPrice = object.settlementPrice ?? "";
+      message.expirationTimestamp = object.expirationTimestamp ?? 0;
+      message.settlementTimestamp = object.settlementTimestamp ?? 0;
+      message.status = object.status ?? 0;
+      return message;
+    },
+  };
 
 function createBaseMsgAdminUpdateBinaryOptionsMarketResponse(): MsgAdminUpdateBinaryOptionsMarketResponse {
   return {};
 }
 
-export const MsgAdminUpdateBinaryOptionsMarketResponse: MessageFns<MsgAdminUpdateBinaryOptionsMarketResponse> = {
-  encode(_: MsgAdminUpdateBinaryOptionsMarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgAdminUpdateBinaryOptionsMarketResponse: MessageFns<MsgAdminUpdateBinaryOptionsMarketResponse> =
+  {
+    encode(
+      _: MsgAdminUpdateBinaryOptionsMarketResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgAdminUpdateBinaryOptionsMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgAdminUpdateBinaryOptionsMarketResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgAdminUpdateBinaryOptionsMarketResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgAdminUpdateBinaryOptionsMarketResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgAdminUpdateBinaryOptionsMarketResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgAdminUpdateBinaryOptionsMarketResponse {
+      return {};
+    },
 
-  toJSON(_: MsgAdminUpdateBinaryOptionsMarketResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgAdminUpdateBinaryOptionsMarketResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgAdminUpdateBinaryOptionsMarketResponse>, I>>(
-    base?: I,
-  ): MsgAdminUpdateBinaryOptionsMarketResponse {
-    return MsgAdminUpdateBinaryOptionsMarketResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgAdminUpdateBinaryOptionsMarketResponse>, I>>(
-    _: I,
-  ): MsgAdminUpdateBinaryOptionsMarketResponse {
-    const message = createBaseMsgAdminUpdateBinaryOptionsMarketResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<MsgAdminUpdateBinaryOptionsMarketResponse>,
+        I
+      >,
+    >(base?: I): MsgAdminUpdateBinaryOptionsMarketResponse {
+      return MsgAdminUpdateBinaryOptionsMarketResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgAdminUpdateBinaryOptionsMarketResponse>,
+        I
+      >,
+    >(_: I): MsgAdminUpdateBinaryOptionsMarketResponse {
+      const message = createBaseMsgAdminUpdateBinaryOptionsMarketResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgAuthorizeStakeGrants(): MsgAuthorizeStakeGrants {
   return { sender: "", grants: [] };
 }
 
 export const MsgAuthorizeStakeGrants: MessageFns<MsgAuthorizeStakeGrants> = {
-  encode(message: MsgAuthorizeStakeGrants, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgAuthorizeStakeGrants,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -9975,8 +11265,12 @@ export const MsgAuthorizeStakeGrants: MessageFns<MsgAuthorizeStakeGrants> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgAuthorizeStakeGrants {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgAuthorizeStakeGrants {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAuthorizeStakeGrants();
     while (reader.pos < end) {
@@ -9995,7 +11289,9 @@ export const MsgAuthorizeStakeGrants: MessageFns<MsgAuthorizeStakeGrants> = {
             break;
           }
 
-          message.grants.push(GrantAuthorization.decode(reader, reader.uint32()));
+          message.grants.push(
+            GrantAuthorization.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -10027,13 +11323,18 @@ export const MsgAuthorizeStakeGrants: MessageFns<MsgAuthorizeStakeGrants> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgAuthorizeStakeGrants>, I>>(base?: I): MsgAuthorizeStakeGrants {
+  create<I extends Exact<DeepPartial<MsgAuthorizeStakeGrants>, I>>(
+    base?: I,
+  ): MsgAuthorizeStakeGrants {
     return MsgAuthorizeStakeGrants.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgAuthorizeStakeGrants>, I>>(object: I): MsgAuthorizeStakeGrants {
+  fromPartial<I extends Exact<DeepPartial<MsgAuthorizeStakeGrants>, I>>(
+    object: I,
+  ): MsgAuthorizeStakeGrants {
     const message = createBaseMsgAuthorizeStakeGrants();
     message.sender = object.sender ?? "";
-    message.grants = object.grants?.map((e) => GrantAuthorization.fromPartial(e)) || [];
+    message.grants =
+      object.grants?.map((e) => GrantAuthorization.fromPartial(e)) || [];
     return message;
   },
 };
@@ -10042,51 +11343,66 @@ function createBaseMsgAuthorizeStakeGrantsResponse(): MsgAuthorizeStakeGrantsRes
   return {};
 }
 
-export const MsgAuthorizeStakeGrantsResponse: MessageFns<MsgAuthorizeStakeGrantsResponse> = {
-  encode(_: MsgAuthorizeStakeGrantsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgAuthorizeStakeGrantsResponse: MessageFns<MsgAuthorizeStakeGrantsResponse> =
+  {
+    encode(
+      _: MsgAuthorizeStakeGrantsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgAuthorizeStakeGrantsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgAuthorizeStakeGrantsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgAuthorizeStakeGrantsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgAuthorizeStakeGrantsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgAuthorizeStakeGrantsResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgAuthorizeStakeGrantsResponse {
+      return {};
+    },
 
-  toJSON(_: MsgAuthorizeStakeGrantsResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgAuthorizeStakeGrantsResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgAuthorizeStakeGrantsResponse>, I>>(base?: I): MsgAuthorizeStakeGrantsResponse {
-    return MsgAuthorizeStakeGrantsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgAuthorizeStakeGrantsResponse>, I>>(_: I): MsgAuthorizeStakeGrantsResponse {
-    const message = createBaseMsgAuthorizeStakeGrantsResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgAuthorizeStakeGrantsResponse>, I>>(
+      base?: I,
+    ): MsgAuthorizeStakeGrantsResponse {
+      return MsgAuthorizeStakeGrantsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgAuthorizeStakeGrantsResponse>, I>,
+    >(_: I): MsgAuthorizeStakeGrantsResponse {
+      const message = createBaseMsgAuthorizeStakeGrantsResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgActivateStakeGrant(): MsgActivateStakeGrant {
   return { sender: "", granter: "" };
 }
 
 export const MsgActivateStakeGrant: MessageFns<MsgActivateStakeGrant> = {
-  encode(message: MsgActivateStakeGrant, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgActivateStakeGrant,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -10096,8 +11412,12 @@ export const MsgActivateStakeGrant: MessageFns<MsgActivateStakeGrant> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgActivateStakeGrant {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgActivateStakeGrant {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgActivateStakeGrant();
     while (reader.pos < end) {
@@ -10146,10 +11466,14 @@ export const MsgActivateStakeGrant: MessageFns<MsgActivateStakeGrant> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgActivateStakeGrant>, I>>(base?: I): MsgActivateStakeGrant {
+  create<I extends Exact<DeepPartial<MsgActivateStakeGrant>, I>>(
+    base?: I,
+  ): MsgActivateStakeGrant {
     return MsgActivateStakeGrant.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgActivateStakeGrant>, I>>(object: I): MsgActivateStakeGrant {
+  fromPartial<I extends Exact<DeepPartial<MsgActivateStakeGrant>, I>>(
+    object: I,
+  ): MsgActivateStakeGrant {
     const message = createBaseMsgActivateStakeGrant();
     message.sender = object.sender ?? "";
     message.granter = object.granter ?? "";
@@ -10161,187 +11485,242 @@ function createBaseMsgActivateStakeGrantResponse(): MsgActivateStakeGrantRespons
   return {};
 }
 
-export const MsgActivateStakeGrantResponse: MessageFns<MsgActivateStakeGrantResponse> = {
-  encode(_: MsgActivateStakeGrantResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgActivateStakeGrantResponse: MessageFns<MsgActivateStakeGrantResponse> =
+  {
+    encode(
+      _: MsgActivateStakeGrantResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgActivateStakeGrantResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgActivateStakeGrantResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgActivateStakeGrantResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgActivateStakeGrantResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgActivateStakeGrantResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgActivateStakeGrantResponse {
+      return {};
+    },
 
-  toJSON(_: MsgActivateStakeGrantResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgActivateStakeGrantResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgActivateStakeGrantResponse>, I>>(base?: I): MsgActivateStakeGrantResponse {
-    return MsgActivateStakeGrantResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgActivateStakeGrantResponse>, I>>(_: I): MsgActivateStakeGrantResponse {
-    const message = createBaseMsgActivateStakeGrantResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgActivateStakeGrantResponse>, I>>(
+      base?: I,
+    ): MsgActivateStakeGrantResponse {
+      return MsgActivateStakeGrantResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgActivateStakeGrantResponse>, I>>(
+      _: I,
+    ): MsgActivateStakeGrantResponse {
+      const message = createBaseMsgActivateStakeGrantResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgBatchExchangeModification(): MsgBatchExchangeModification {
   return { sender: "", proposal: undefined };
 }
 
-export const MsgBatchExchangeModification: MessageFns<MsgBatchExchangeModification> = {
-  encode(message: MsgBatchExchangeModification, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      BatchExchangeModificationProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchExchangeModification {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchExchangeModification();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = BatchExchangeModificationProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgBatchExchangeModification: MessageFns<MsgBatchExchangeModification> =
+  {
+    encode(
+      message: MsgBatchExchangeModification,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        BatchExchangeModificationProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBatchExchangeModification {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? BatchExchangeModificationProposal.fromJSON(object.proposal) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchExchangeModification {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchExchangeModification();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBatchExchangeModification): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = BatchExchangeModificationProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBatchExchangeModification>, I>>(base?: I): MsgBatchExchangeModification {
-    return MsgBatchExchangeModification.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchExchangeModification>, I>>(object: I): MsgBatchExchangeModification {
-    const message = createBaseMsgBatchExchangeModification();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? BatchExchangeModificationProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal = BatchExchangeModificationProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchExchangeModification {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? BatchExchangeModificationProposal.fromJSON(object.proposal)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgBatchExchangeModification): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = BatchExchangeModificationProposal.toJSON(
+          message.proposal,
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgBatchExchangeModification>, I>>(
+      base?: I,
+    ): MsgBatchExchangeModification {
+      return MsgBatchExchangeModification.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgBatchExchangeModification>, I>>(
+      object: I,
+    ): MsgBatchExchangeModification {
+      const message = createBaseMsgBatchExchangeModification();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? BatchExchangeModificationProposal.fromPartial(object.proposal)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgBatchExchangeModificationResponse(): MsgBatchExchangeModificationResponse {
   return {};
 }
 
-export const MsgBatchExchangeModificationResponse: MessageFns<MsgBatchExchangeModificationResponse> = {
-  encode(_: MsgBatchExchangeModificationResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgBatchExchangeModificationResponse: MessageFns<MsgBatchExchangeModificationResponse> =
+  {
+    encode(
+      _: MsgBatchExchangeModificationResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchExchangeModificationResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchExchangeModificationResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchExchangeModificationResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchExchangeModificationResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgBatchExchangeModificationResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgBatchExchangeModificationResponse {
+      return {};
+    },
 
-  toJSON(_: MsgBatchExchangeModificationResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgBatchExchangeModificationResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgBatchExchangeModificationResponse>, I>>(
-    base?: I,
-  ): MsgBatchExchangeModificationResponse {
-    return MsgBatchExchangeModificationResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchExchangeModificationResponse>, I>>(
-    _: I,
-  ): MsgBatchExchangeModificationResponse {
-    const message = createBaseMsgBatchExchangeModificationResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgBatchExchangeModificationResponse>, I>,
+    >(base?: I): MsgBatchExchangeModificationResponse {
+      return MsgBatchExchangeModificationResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBatchExchangeModificationResponse>, I>,
+    >(_: I): MsgBatchExchangeModificationResponse {
+      const message = createBaseMsgBatchExchangeModificationResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgSpotMarketLaunch(): MsgSpotMarketLaunch {
   return { sender: "", proposal: undefined };
 }
 
 export const MsgSpotMarketLaunch: MessageFns<MsgSpotMarketLaunch> = {
-  encode(message: MsgSpotMarketLaunch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgSpotMarketLaunch,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.proposal !== undefined) {
-      SpotMarketLaunchProposal.encode(message.proposal, writer.uint32(18).fork()).join();
+      SpotMarketLaunchProposal.encode(
+        message.proposal,
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSpotMarketLaunch {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgSpotMarketLaunch {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSpotMarketLaunch();
     while (reader.pos < end) {
@@ -10360,7 +11739,10 @@ export const MsgSpotMarketLaunch: MessageFns<MsgSpotMarketLaunch> = {
             break;
           }
 
-          message.proposal = SpotMarketLaunchProposal.decode(reader, reader.uint32());
+          message.proposal = SpotMarketLaunchProposal.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -10375,7 +11757,9 @@ export const MsgSpotMarketLaunch: MessageFns<MsgSpotMarketLaunch> = {
   fromJSON(object: any): MsgSpotMarketLaunch {
     return {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? SpotMarketLaunchProposal.fromJSON(object.proposal) : undefined,
+      proposal: isSet(object.proposal)
+        ? SpotMarketLaunchProposal.fromJSON(object.proposal)
+        : undefined,
     };
   },
 
@@ -10390,15 +11774,20 @@ export const MsgSpotMarketLaunch: MessageFns<MsgSpotMarketLaunch> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgSpotMarketLaunch>, I>>(base?: I): MsgSpotMarketLaunch {
+  create<I extends Exact<DeepPartial<MsgSpotMarketLaunch>, I>>(
+    base?: I,
+  ): MsgSpotMarketLaunch {
     return MsgSpotMarketLaunch.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgSpotMarketLaunch>, I>>(object: I): MsgSpotMarketLaunch {
+  fromPartial<I extends Exact<DeepPartial<MsgSpotMarketLaunch>, I>>(
+    object: I,
+  ): MsgSpotMarketLaunch {
     const message = createBaseMsgSpotMarketLaunch();
     message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? SpotMarketLaunchProposal.fromPartial(object.proposal)
-      : undefined;
+    message.proposal =
+      object.proposal !== undefined && object.proposal !== null
+        ? SpotMarketLaunchProposal.fromPartial(object.proposal)
+        : undefined;
     return message;
   },
 };
@@ -10407,62 +11796,84 @@ function createBaseMsgSpotMarketLaunchResponse(): MsgSpotMarketLaunchResponse {
   return {};
 }
 
-export const MsgSpotMarketLaunchResponse: MessageFns<MsgSpotMarketLaunchResponse> = {
-  encode(_: MsgSpotMarketLaunchResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgSpotMarketLaunchResponse: MessageFns<MsgSpotMarketLaunchResponse> =
+  {
+    encode(
+      _: MsgSpotMarketLaunchResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSpotMarketLaunchResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgSpotMarketLaunchResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgSpotMarketLaunchResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgSpotMarketLaunchResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgSpotMarketLaunchResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgSpotMarketLaunchResponse {
+      return {};
+    },
 
-  toJSON(_: MsgSpotMarketLaunchResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgSpotMarketLaunchResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgSpotMarketLaunchResponse>, I>>(base?: I): MsgSpotMarketLaunchResponse {
-    return MsgSpotMarketLaunchResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgSpotMarketLaunchResponse>, I>>(_: I): MsgSpotMarketLaunchResponse {
-    const message = createBaseMsgSpotMarketLaunchResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgSpotMarketLaunchResponse>, I>>(
+      base?: I,
+    ): MsgSpotMarketLaunchResponse {
+      return MsgSpotMarketLaunchResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgSpotMarketLaunchResponse>, I>>(
+      _: I,
+    ): MsgSpotMarketLaunchResponse {
+      const message = createBaseMsgSpotMarketLaunchResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgPerpetualMarketLaunch(): MsgPerpetualMarketLaunch {
   return { sender: "", proposal: undefined };
 }
 
 export const MsgPerpetualMarketLaunch: MessageFns<MsgPerpetualMarketLaunch> = {
-  encode(message: MsgPerpetualMarketLaunch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgPerpetualMarketLaunch,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.proposal !== undefined) {
-      PerpetualMarketLaunchProposal.encode(message.proposal, writer.uint32(18).fork()).join();
+      PerpetualMarketLaunchProposal.encode(
+        message.proposal,
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgPerpetualMarketLaunch {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgPerpetualMarketLaunch {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgPerpetualMarketLaunch();
     while (reader.pos < end) {
@@ -10481,7 +11892,10 @@ export const MsgPerpetualMarketLaunch: MessageFns<MsgPerpetualMarketLaunch> = {
             break;
           }
 
-          message.proposal = PerpetualMarketLaunchProposal.decode(reader, reader.uint32());
+          message.proposal = PerpetualMarketLaunchProposal.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -10496,7 +11910,9 @@ export const MsgPerpetualMarketLaunch: MessageFns<MsgPerpetualMarketLaunch> = {
   fromJSON(object: any): MsgPerpetualMarketLaunch {
     return {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? PerpetualMarketLaunchProposal.fromJSON(object.proposal) : undefined,
+      proposal: isSet(object.proposal)
+        ? PerpetualMarketLaunchProposal.fromJSON(object.proposal)
+        : undefined,
     };
   },
 
@@ -10511,15 +11927,20 @@ export const MsgPerpetualMarketLaunch: MessageFns<MsgPerpetualMarketLaunch> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgPerpetualMarketLaunch>, I>>(base?: I): MsgPerpetualMarketLaunch {
+  create<I extends Exact<DeepPartial<MsgPerpetualMarketLaunch>, I>>(
+    base?: I,
+  ): MsgPerpetualMarketLaunch {
     return MsgPerpetualMarketLaunch.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgPerpetualMarketLaunch>, I>>(object: I): MsgPerpetualMarketLaunch {
+  fromPartial<I extends Exact<DeepPartial<MsgPerpetualMarketLaunch>, I>>(
+    object: I,
+  ): MsgPerpetualMarketLaunch {
     const message = createBaseMsgPerpetualMarketLaunch();
     message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? PerpetualMarketLaunchProposal.fromPartial(object.proposal)
-      : undefined;
+    message.proposal =
+      object.proposal !== undefined && object.proposal !== null
+        ? PerpetualMarketLaunchProposal.fromPartial(object.proposal)
+        : undefined;
     return message;
   },
 };
@@ -10528,441 +11949,556 @@ function createBaseMsgPerpetualMarketLaunchResponse(): MsgPerpetualMarketLaunchR
   return {};
 }
 
-export const MsgPerpetualMarketLaunchResponse: MessageFns<MsgPerpetualMarketLaunchResponse> = {
-  encode(_: MsgPerpetualMarketLaunchResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgPerpetualMarketLaunchResponse: MessageFns<MsgPerpetualMarketLaunchResponse> =
+  {
+    encode(
+      _: MsgPerpetualMarketLaunchResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgPerpetualMarketLaunchResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgPerpetualMarketLaunchResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgPerpetualMarketLaunchResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgPerpetualMarketLaunchResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgPerpetualMarketLaunchResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgPerpetualMarketLaunchResponse {
+      return {};
+    },
 
-  toJSON(_: MsgPerpetualMarketLaunchResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgPerpetualMarketLaunchResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgPerpetualMarketLaunchResponse>, I>>(
-    base?: I,
-  ): MsgPerpetualMarketLaunchResponse {
-    return MsgPerpetualMarketLaunchResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgPerpetualMarketLaunchResponse>, I>>(
-    _: I,
-  ): MsgPerpetualMarketLaunchResponse {
-    const message = createBaseMsgPerpetualMarketLaunchResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgPerpetualMarketLaunchResponse>, I>>(
+      base?: I,
+    ): MsgPerpetualMarketLaunchResponse {
+      return MsgPerpetualMarketLaunchResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgPerpetualMarketLaunchResponse>, I>,
+    >(_: I): MsgPerpetualMarketLaunchResponse {
+      const message = createBaseMsgPerpetualMarketLaunchResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgExpiryFuturesMarketLaunch(): MsgExpiryFuturesMarketLaunch {
   return { sender: "", proposal: undefined };
 }
 
-export const MsgExpiryFuturesMarketLaunch: MessageFns<MsgExpiryFuturesMarketLaunch> = {
-  encode(message: MsgExpiryFuturesMarketLaunch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      ExpiryFuturesMarketLaunchProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgExpiryFuturesMarketLaunch {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgExpiryFuturesMarketLaunch();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = ExpiryFuturesMarketLaunchProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgExpiryFuturesMarketLaunch: MessageFns<MsgExpiryFuturesMarketLaunch> =
+  {
+    encode(
+      message: MsgExpiryFuturesMarketLaunch,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        ExpiryFuturesMarketLaunchProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgExpiryFuturesMarketLaunch {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? ExpiryFuturesMarketLaunchProposal.fromJSON(object.proposal) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgExpiryFuturesMarketLaunch {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgExpiryFuturesMarketLaunch();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgExpiryFuturesMarketLaunch): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = ExpiryFuturesMarketLaunchProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgExpiryFuturesMarketLaunch>, I>>(base?: I): MsgExpiryFuturesMarketLaunch {
-    return MsgExpiryFuturesMarketLaunch.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgExpiryFuturesMarketLaunch>, I>>(object: I): MsgExpiryFuturesMarketLaunch {
-    const message = createBaseMsgExpiryFuturesMarketLaunch();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? ExpiryFuturesMarketLaunchProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal = ExpiryFuturesMarketLaunchProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgExpiryFuturesMarketLaunch {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? ExpiryFuturesMarketLaunchProposal.fromJSON(object.proposal)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgExpiryFuturesMarketLaunch): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = ExpiryFuturesMarketLaunchProposal.toJSON(
+          message.proposal,
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgExpiryFuturesMarketLaunch>, I>>(
+      base?: I,
+    ): MsgExpiryFuturesMarketLaunch {
+      return MsgExpiryFuturesMarketLaunch.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgExpiryFuturesMarketLaunch>, I>>(
+      object: I,
+    ): MsgExpiryFuturesMarketLaunch {
+      const message = createBaseMsgExpiryFuturesMarketLaunch();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? ExpiryFuturesMarketLaunchProposal.fromPartial(object.proposal)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgExpiryFuturesMarketLaunchResponse(): MsgExpiryFuturesMarketLaunchResponse {
   return {};
 }
 
-export const MsgExpiryFuturesMarketLaunchResponse: MessageFns<MsgExpiryFuturesMarketLaunchResponse> = {
-  encode(_: MsgExpiryFuturesMarketLaunchResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgExpiryFuturesMarketLaunchResponse: MessageFns<MsgExpiryFuturesMarketLaunchResponse> =
+  {
+    encode(
+      _: MsgExpiryFuturesMarketLaunchResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgExpiryFuturesMarketLaunchResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgExpiryFuturesMarketLaunchResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgExpiryFuturesMarketLaunchResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgExpiryFuturesMarketLaunchResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgExpiryFuturesMarketLaunchResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgExpiryFuturesMarketLaunchResponse {
+      return {};
+    },
 
-  toJSON(_: MsgExpiryFuturesMarketLaunchResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgExpiryFuturesMarketLaunchResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgExpiryFuturesMarketLaunchResponse>, I>>(
-    base?: I,
-  ): MsgExpiryFuturesMarketLaunchResponse {
-    return MsgExpiryFuturesMarketLaunchResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgExpiryFuturesMarketLaunchResponse>, I>>(
-    _: I,
-  ): MsgExpiryFuturesMarketLaunchResponse {
-    const message = createBaseMsgExpiryFuturesMarketLaunchResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgExpiryFuturesMarketLaunchResponse>, I>,
+    >(base?: I): MsgExpiryFuturesMarketLaunchResponse {
+      return MsgExpiryFuturesMarketLaunchResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgExpiryFuturesMarketLaunchResponse>, I>,
+    >(_: I): MsgExpiryFuturesMarketLaunchResponse {
+      const message = createBaseMsgExpiryFuturesMarketLaunchResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgBinaryOptionsMarketLaunch(): MsgBinaryOptionsMarketLaunch {
   return { sender: "", proposal: undefined };
 }
 
-export const MsgBinaryOptionsMarketLaunch: MessageFns<MsgBinaryOptionsMarketLaunch> = {
-  encode(message: MsgBinaryOptionsMarketLaunch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      BinaryOptionsMarketLaunchProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBinaryOptionsMarketLaunch {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBinaryOptionsMarketLaunch();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = BinaryOptionsMarketLaunchProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgBinaryOptionsMarketLaunch: MessageFns<MsgBinaryOptionsMarketLaunch> =
+  {
+    encode(
+      message: MsgBinaryOptionsMarketLaunch,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        BinaryOptionsMarketLaunchProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBinaryOptionsMarketLaunch {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? BinaryOptionsMarketLaunchProposal.fromJSON(object.proposal) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBinaryOptionsMarketLaunch {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBinaryOptionsMarketLaunch();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBinaryOptionsMarketLaunch): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = BinaryOptionsMarketLaunchProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBinaryOptionsMarketLaunch>, I>>(base?: I): MsgBinaryOptionsMarketLaunch {
-    return MsgBinaryOptionsMarketLaunch.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBinaryOptionsMarketLaunch>, I>>(object: I): MsgBinaryOptionsMarketLaunch {
-    const message = createBaseMsgBinaryOptionsMarketLaunch();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? BinaryOptionsMarketLaunchProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal = BinaryOptionsMarketLaunchProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBinaryOptionsMarketLaunch {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? BinaryOptionsMarketLaunchProposal.fromJSON(object.proposal)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgBinaryOptionsMarketLaunch): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = BinaryOptionsMarketLaunchProposal.toJSON(
+          message.proposal,
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgBinaryOptionsMarketLaunch>, I>>(
+      base?: I,
+    ): MsgBinaryOptionsMarketLaunch {
+      return MsgBinaryOptionsMarketLaunch.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgBinaryOptionsMarketLaunch>, I>>(
+      object: I,
+    ): MsgBinaryOptionsMarketLaunch {
+      const message = createBaseMsgBinaryOptionsMarketLaunch();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? BinaryOptionsMarketLaunchProposal.fromPartial(object.proposal)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgBinaryOptionsMarketLaunchResponse(): MsgBinaryOptionsMarketLaunchResponse {
   return {};
 }
 
-export const MsgBinaryOptionsMarketLaunchResponse: MessageFns<MsgBinaryOptionsMarketLaunchResponse> = {
-  encode(_: MsgBinaryOptionsMarketLaunchResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgBinaryOptionsMarketLaunchResponse: MessageFns<MsgBinaryOptionsMarketLaunchResponse> =
+  {
+    encode(
+      _: MsgBinaryOptionsMarketLaunchResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBinaryOptionsMarketLaunchResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBinaryOptionsMarketLaunchResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBinaryOptionsMarketLaunchResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBinaryOptionsMarketLaunchResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgBinaryOptionsMarketLaunchResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgBinaryOptionsMarketLaunchResponse {
+      return {};
+    },
 
-  toJSON(_: MsgBinaryOptionsMarketLaunchResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgBinaryOptionsMarketLaunchResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgBinaryOptionsMarketLaunchResponse>, I>>(
-    base?: I,
-  ): MsgBinaryOptionsMarketLaunchResponse {
-    return MsgBinaryOptionsMarketLaunchResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBinaryOptionsMarketLaunchResponse>, I>>(
-    _: I,
-  ): MsgBinaryOptionsMarketLaunchResponse {
-    const message = createBaseMsgBinaryOptionsMarketLaunchResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgBinaryOptionsMarketLaunchResponse>, I>,
+    >(base?: I): MsgBinaryOptionsMarketLaunchResponse {
+      return MsgBinaryOptionsMarketLaunchResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBinaryOptionsMarketLaunchResponse>, I>,
+    >(_: I): MsgBinaryOptionsMarketLaunchResponse {
+      const message = createBaseMsgBinaryOptionsMarketLaunchResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgBatchCommunityPoolSpend(): MsgBatchCommunityPoolSpend {
   return { sender: "", proposal: undefined };
 }
 
-export const MsgBatchCommunityPoolSpend: MessageFns<MsgBatchCommunityPoolSpend> = {
-  encode(message: MsgBatchCommunityPoolSpend, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      BatchCommunityPoolSpendProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCommunityPoolSpend {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCommunityPoolSpend();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = BatchCommunityPoolSpendProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgBatchCommunityPoolSpend: MessageFns<MsgBatchCommunityPoolSpend> =
+  {
+    encode(
+      message: MsgBatchCommunityPoolSpend,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        BatchCommunityPoolSpendProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBatchCommunityPoolSpend {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? BatchCommunityPoolSpendProposal.fromJSON(object.proposal) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCommunityPoolSpend {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCommunityPoolSpend();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBatchCommunityPoolSpend): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = BatchCommunityPoolSpendProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBatchCommunityPoolSpend>, I>>(base?: I): MsgBatchCommunityPoolSpend {
-    return MsgBatchCommunityPoolSpend.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCommunityPoolSpend>, I>>(object: I): MsgBatchCommunityPoolSpend {
-    const message = createBaseMsgBatchCommunityPoolSpend();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? BatchCommunityPoolSpendProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal = BatchCommunityPoolSpendProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBatchCommunityPoolSpend {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? BatchCommunityPoolSpendProposal.fromJSON(object.proposal)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgBatchCommunityPoolSpend): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = BatchCommunityPoolSpendProposal.toJSON(message.proposal);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgBatchCommunityPoolSpend>, I>>(
+      base?: I,
+    ): MsgBatchCommunityPoolSpend {
+      return MsgBatchCommunityPoolSpend.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgBatchCommunityPoolSpend>, I>>(
+      object: I,
+    ): MsgBatchCommunityPoolSpend {
+      const message = createBaseMsgBatchCommunityPoolSpend();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? BatchCommunityPoolSpendProposal.fromPartial(object.proposal)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgBatchCommunityPoolSpendResponse(): MsgBatchCommunityPoolSpendResponse {
   return {};
 }
 
-export const MsgBatchCommunityPoolSpendResponse: MessageFns<MsgBatchCommunityPoolSpendResponse> = {
-  encode(_: MsgBatchCommunityPoolSpendResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgBatchCommunityPoolSpendResponse: MessageFns<MsgBatchCommunityPoolSpendResponse> =
+  {
+    encode(
+      _: MsgBatchCommunityPoolSpendResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBatchCommunityPoolSpendResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBatchCommunityPoolSpendResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBatchCommunityPoolSpendResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBatchCommunityPoolSpendResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgBatchCommunityPoolSpendResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgBatchCommunityPoolSpendResponse {
+      return {};
+    },
 
-  toJSON(_: MsgBatchCommunityPoolSpendResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgBatchCommunityPoolSpendResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgBatchCommunityPoolSpendResponse>, I>>(
-    base?: I,
-  ): MsgBatchCommunityPoolSpendResponse {
-    return MsgBatchCommunityPoolSpendResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBatchCommunityPoolSpendResponse>, I>>(
-    _: I,
-  ): MsgBatchCommunityPoolSpendResponse {
-    const message = createBaseMsgBatchCommunityPoolSpendResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgBatchCommunityPoolSpendResponse>, I>>(
+      base?: I,
+    ): MsgBatchCommunityPoolSpendResponse {
+      return MsgBatchCommunityPoolSpendResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBatchCommunityPoolSpendResponse>, I>,
+    >(_: I): MsgBatchCommunityPoolSpendResponse {
+      const message = createBaseMsgBatchCommunityPoolSpendResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgSpotMarketParamUpdate(): MsgSpotMarketParamUpdate {
   return { sender: "", proposal: undefined };
 }
 
 export const MsgSpotMarketParamUpdate: MessageFns<MsgSpotMarketParamUpdate> = {
-  encode(message: MsgSpotMarketParamUpdate, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgSpotMarketParamUpdate,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.proposal !== undefined) {
-      SpotMarketParamUpdateProposal.encode(message.proposal, writer.uint32(18).fork()).join();
+      SpotMarketParamUpdateProposal.encode(
+        message.proposal,
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSpotMarketParamUpdate {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgSpotMarketParamUpdate {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSpotMarketParamUpdate();
     while (reader.pos < end) {
@@ -10981,7 +12517,10 @@ export const MsgSpotMarketParamUpdate: MessageFns<MsgSpotMarketParamUpdate> = {
             break;
           }
 
-          message.proposal = SpotMarketParamUpdateProposal.decode(reader, reader.uint32());
+          message.proposal = SpotMarketParamUpdateProposal.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -10996,7 +12535,9 @@ export const MsgSpotMarketParamUpdate: MessageFns<MsgSpotMarketParamUpdate> = {
   fromJSON(object: any): MsgSpotMarketParamUpdate {
     return {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? SpotMarketParamUpdateProposal.fromJSON(object.proposal) : undefined,
+      proposal: isSet(object.proposal)
+        ? SpotMarketParamUpdateProposal.fromJSON(object.proposal)
+        : undefined,
     };
   },
 
@@ -11011,15 +12552,20 @@ export const MsgSpotMarketParamUpdate: MessageFns<MsgSpotMarketParamUpdate> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgSpotMarketParamUpdate>, I>>(base?: I): MsgSpotMarketParamUpdate {
+  create<I extends Exact<DeepPartial<MsgSpotMarketParamUpdate>, I>>(
+    base?: I,
+  ): MsgSpotMarketParamUpdate {
     return MsgSpotMarketParamUpdate.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgSpotMarketParamUpdate>, I>>(object: I): MsgSpotMarketParamUpdate {
+  fromPartial<I extends Exact<DeepPartial<MsgSpotMarketParamUpdate>, I>>(
+    object: I,
+  ): MsgSpotMarketParamUpdate {
     const message = createBaseMsgSpotMarketParamUpdate();
     message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? SpotMarketParamUpdateProposal.fromPartial(object.proposal)
-      : undefined;
+    message.proposal =
+      object.proposal !== undefined && object.proposal !== null
+        ? SpotMarketParamUpdateProposal.fromPartial(object.proposal)
+        : undefined;
     return message;
   },
 };
@@ -11028,574 +12574,715 @@ function createBaseMsgSpotMarketParamUpdateResponse(): MsgSpotMarketParamUpdateR
   return {};
 }
 
-export const MsgSpotMarketParamUpdateResponse: MessageFns<MsgSpotMarketParamUpdateResponse> = {
-  encode(_: MsgSpotMarketParamUpdateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgSpotMarketParamUpdateResponse: MessageFns<MsgSpotMarketParamUpdateResponse> =
+  {
+    encode(
+      _: MsgSpotMarketParamUpdateResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSpotMarketParamUpdateResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgSpotMarketParamUpdateResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgSpotMarketParamUpdateResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgSpotMarketParamUpdateResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgSpotMarketParamUpdateResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgSpotMarketParamUpdateResponse {
+      return {};
+    },
 
-  toJSON(_: MsgSpotMarketParamUpdateResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgSpotMarketParamUpdateResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgSpotMarketParamUpdateResponse>, I>>(
-    base?: I,
-  ): MsgSpotMarketParamUpdateResponse {
-    return MsgSpotMarketParamUpdateResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgSpotMarketParamUpdateResponse>, I>>(
-    _: I,
-  ): MsgSpotMarketParamUpdateResponse {
-    const message = createBaseMsgSpotMarketParamUpdateResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgSpotMarketParamUpdateResponse>, I>>(
+      base?: I,
+    ): MsgSpotMarketParamUpdateResponse {
+      return MsgSpotMarketParamUpdateResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgSpotMarketParamUpdateResponse>, I>,
+    >(_: I): MsgSpotMarketParamUpdateResponse {
+      const message = createBaseMsgSpotMarketParamUpdateResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgDerivativeMarketParamUpdate(): MsgDerivativeMarketParamUpdate {
   return { sender: "", proposal: undefined };
 }
 
-export const MsgDerivativeMarketParamUpdate: MessageFns<MsgDerivativeMarketParamUpdate> = {
-  encode(message: MsgDerivativeMarketParamUpdate, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      DerivativeMarketParamUpdateProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDerivativeMarketParamUpdate {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgDerivativeMarketParamUpdate();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = DerivativeMarketParamUpdateProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgDerivativeMarketParamUpdate: MessageFns<MsgDerivativeMarketParamUpdate> =
+  {
+    encode(
+      message: MsgDerivativeMarketParamUpdate,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        DerivativeMarketParamUpdateProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgDerivativeMarketParamUpdate {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? DerivativeMarketParamUpdateProposal.fromJSON(object.proposal) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgDerivativeMarketParamUpdate {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgDerivativeMarketParamUpdate();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgDerivativeMarketParamUpdate): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = DerivativeMarketParamUpdateProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgDerivativeMarketParamUpdate>, I>>(base?: I): MsgDerivativeMarketParamUpdate {
-    return MsgDerivativeMarketParamUpdate.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgDerivativeMarketParamUpdate>, I>>(
-    object: I,
-  ): MsgDerivativeMarketParamUpdate {
-    const message = createBaseMsgDerivativeMarketParamUpdate();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? DerivativeMarketParamUpdateProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal = DerivativeMarketParamUpdateProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgDerivativeMarketParamUpdate {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? DerivativeMarketParamUpdateProposal.fromJSON(object.proposal)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgDerivativeMarketParamUpdate): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = DerivativeMarketParamUpdateProposal.toJSON(
+          message.proposal,
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgDerivativeMarketParamUpdate>, I>>(
+      base?: I,
+    ): MsgDerivativeMarketParamUpdate {
+      return MsgDerivativeMarketParamUpdate.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgDerivativeMarketParamUpdate>, I>,
+    >(object: I): MsgDerivativeMarketParamUpdate {
+      const message = createBaseMsgDerivativeMarketParamUpdate();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? DerivativeMarketParamUpdateProposal.fromPartial(object.proposal)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgDerivativeMarketParamUpdateResponse(): MsgDerivativeMarketParamUpdateResponse {
   return {};
 }
 
-export const MsgDerivativeMarketParamUpdateResponse: MessageFns<MsgDerivativeMarketParamUpdateResponse> = {
-  encode(_: MsgDerivativeMarketParamUpdateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgDerivativeMarketParamUpdateResponse: MessageFns<MsgDerivativeMarketParamUpdateResponse> =
+  {
+    encode(
+      _: MsgDerivativeMarketParamUpdateResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDerivativeMarketParamUpdateResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgDerivativeMarketParamUpdateResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgDerivativeMarketParamUpdateResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgDerivativeMarketParamUpdateResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgDerivativeMarketParamUpdateResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgDerivativeMarketParamUpdateResponse {
+      return {};
+    },
 
-  toJSON(_: MsgDerivativeMarketParamUpdateResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgDerivativeMarketParamUpdateResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgDerivativeMarketParamUpdateResponse>, I>>(
-    base?: I,
-  ): MsgDerivativeMarketParamUpdateResponse {
-    return MsgDerivativeMarketParamUpdateResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgDerivativeMarketParamUpdateResponse>, I>>(
-    _: I,
-  ): MsgDerivativeMarketParamUpdateResponse {
-    const message = createBaseMsgDerivativeMarketParamUpdateResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgDerivativeMarketParamUpdateResponse>, I>,
+    >(base?: I): MsgDerivativeMarketParamUpdateResponse {
+      return MsgDerivativeMarketParamUpdateResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgDerivativeMarketParamUpdateResponse>, I>,
+    >(_: I): MsgDerivativeMarketParamUpdateResponse {
+      const message = createBaseMsgDerivativeMarketParamUpdateResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgBinaryOptionsMarketParamUpdate(): MsgBinaryOptionsMarketParamUpdate {
   return { sender: "", proposal: undefined };
 }
 
-export const MsgBinaryOptionsMarketParamUpdate: MessageFns<MsgBinaryOptionsMarketParamUpdate> = {
-  encode(message: MsgBinaryOptionsMarketParamUpdate, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      BinaryOptionsMarketParamUpdateProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBinaryOptionsMarketParamUpdate {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBinaryOptionsMarketParamUpdate();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = BinaryOptionsMarketParamUpdateProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgBinaryOptionsMarketParamUpdate: MessageFns<MsgBinaryOptionsMarketParamUpdate> =
+  {
+    encode(
+      message: MsgBinaryOptionsMarketParamUpdate,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        BinaryOptionsMarketParamUpdateProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgBinaryOptionsMarketParamUpdate {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? BinaryOptionsMarketParamUpdateProposal.fromJSON(object.proposal) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBinaryOptionsMarketParamUpdate {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBinaryOptionsMarketParamUpdate();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgBinaryOptionsMarketParamUpdate): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = BinaryOptionsMarketParamUpdateProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgBinaryOptionsMarketParamUpdate>, I>>(
-    base?: I,
-  ): MsgBinaryOptionsMarketParamUpdate {
-    return MsgBinaryOptionsMarketParamUpdate.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBinaryOptionsMarketParamUpdate>, I>>(
-    object: I,
-  ): MsgBinaryOptionsMarketParamUpdate {
-    const message = createBaseMsgBinaryOptionsMarketParamUpdate();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? BinaryOptionsMarketParamUpdateProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal = BinaryOptionsMarketParamUpdateProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgBinaryOptionsMarketParamUpdate {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? BinaryOptionsMarketParamUpdateProposal.fromJSON(object.proposal)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgBinaryOptionsMarketParamUpdate): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = BinaryOptionsMarketParamUpdateProposal.toJSON(
+          message.proposal,
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgBinaryOptionsMarketParamUpdate>, I>>(
+      base?: I,
+    ): MsgBinaryOptionsMarketParamUpdate {
+      return MsgBinaryOptionsMarketParamUpdate.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgBinaryOptionsMarketParamUpdate>, I>,
+    >(object: I): MsgBinaryOptionsMarketParamUpdate {
+      const message = createBaseMsgBinaryOptionsMarketParamUpdate();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? BinaryOptionsMarketParamUpdateProposal.fromPartial(object.proposal)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgBinaryOptionsMarketParamUpdateResponse(): MsgBinaryOptionsMarketParamUpdateResponse {
   return {};
 }
 
-export const MsgBinaryOptionsMarketParamUpdateResponse: MessageFns<MsgBinaryOptionsMarketParamUpdateResponse> = {
-  encode(_: MsgBinaryOptionsMarketParamUpdateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgBinaryOptionsMarketParamUpdateResponse: MessageFns<MsgBinaryOptionsMarketParamUpdateResponse> =
+  {
+    encode(
+      _: MsgBinaryOptionsMarketParamUpdateResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBinaryOptionsMarketParamUpdateResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgBinaryOptionsMarketParamUpdateResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgBinaryOptionsMarketParamUpdateResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgBinaryOptionsMarketParamUpdateResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgBinaryOptionsMarketParamUpdateResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgBinaryOptionsMarketParamUpdateResponse {
+      return {};
+    },
 
-  toJSON(_: MsgBinaryOptionsMarketParamUpdateResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgBinaryOptionsMarketParamUpdateResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgBinaryOptionsMarketParamUpdateResponse>, I>>(
-    base?: I,
-  ): MsgBinaryOptionsMarketParamUpdateResponse {
-    return MsgBinaryOptionsMarketParamUpdateResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgBinaryOptionsMarketParamUpdateResponse>, I>>(
-    _: I,
-  ): MsgBinaryOptionsMarketParamUpdateResponse {
-    const message = createBaseMsgBinaryOptionsMarketParamUpdateResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<MsgBinaryOptionsMarketParamUpdateResponse>,
+        I
+      >,
+    >(base?: I): MsgBinaryOptionsMarketParamUpdateResponse {
+      return MsgBinaryOptionsMarketParamUpdateResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgBinaryOptionsMarketParamUpdateResponse>,
+        I
+      >,
+    >(_: I): MsgBinaryOptionsMarketParamUpdateResponse {
+      const message = createBaseMsgBinaryOptionsMarketParamUpdateResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgMarketForcedSettlement(): MsgMarketForcedSettlement {
   return { sender: "", proposal: undefined };
 }
 
-export const MsgMarketForcedSettlement: MessageFns<MsgMarketForcedSettlement> = {
-  encode(message: MsgMarketForcedSettlement, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      MarketForcedSettlementProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgMarketForcedSettlement {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgMarketForcedSettlement();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = MarketForcedSettlementProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgMarketForcedSettlement: MessageFns<MsgMarketForcedSettlement> =
+  {
+    encode(
+      message: MsgMarketForcedSettlement,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        MarketForcedSettlementProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgMarketForcedSettlement {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? MarketForcedSettlementProposal.fromJSON(object.proposal) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgMarketForcedSettlement {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgMarketForcedSettlement();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgMarketForcedSettlement): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = MarketForcedSettlementProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgMarketForcedSettlement>, I>>(base?: I): MsgMarketForcedSettlement {
-    return MsgMarketForcedSettlement.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgMarketForcedSettlement>, I>>(object: I): MsgMarketForcedSettlement {
-    const message = createBaseMsgMarketForcedSettlement();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? MarketForcedSettlementProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal = MarketForcedSettlementProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgMarketForcedSettlement {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? MarketForcedSettlementProposal.fromJSON(object.proposal)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgMarketForcedSettlement): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = MarketForcedSettlementProposal.toJSON(message.proposal);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgMarketForcedSettlement>, I>>(
+      base?: I,
+    ): MsgMarketForcedSettlement {
+      return MsgMarketForcedSettlement.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgMarketForcedSettlement>, I>>(
+      object: I,
+    ): MsgMarketForcedSettlement {
+      const message = createBaseMsgMarketForcedSettlement();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? MarketForcedSettlementProposal.fromPartial(object.proposal)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgMarketForcedSettlementResponse(): MsgMarketForcedSettlementResponse {
   return {};
 }
 
-export const MsgMarketForcedSettlementResponse: MessageFns<MsgMarketForcedSettlementResponse> = {
-  encode(_: MsgMarketForcedSettlementResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgMarketForcedSettlementResponse: MessageFns<MsgMarketForcedSettlementResponse> =
+  {
+    encode(
+      _: MsgMarketForcedSettlementResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgMarketForcedSettlementResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgMarketForcedSettlementResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgMarketForcedSettlementResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgMarketForcedSettlementResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgMarketForcedSettlementResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgMarketForcedSettlementResponse {
+      return {};
+    },
 
-  toJSON(_: MsgMarketForcedSettlementResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgMarketForcedSettlementResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgMarketForcedSettlementResponse>, I>>(
-    base?: I,
-  ): MsgMarketForcedSettlementResponse {
-    return MsgMarketForcedSettlementResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgMarketForcedSettlementResponse>, I>>(
-    _: I,
-  ): MsgMarketForcedSettlementResponse {
-    const message = createBaseMsgMarketForcedSettlementResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgMarketForcedSettlementResponse>, I>>(
+      base?: I,
+    ): MsgMarketForcedSettlementResponse {
+      return MsgMarketForcedSettlementResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgMarketForcedSettlementResponse>, I>,
+    >(_: I): MsgMarketForcedSettlementResponse {
+      const message = createBaseMsgMarketForcedSettlementResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgTradingRewardCampaignLaunch(): MsgTradingRewardCampaignLaunch {
   return { sender: "", proposal: undefined };
 }
 
-export const MsgTradingRewardCampaignLaunch: MessageFns<MsgTradingRewardCampaignLaunch> = {
-  encode(message: MsgTradingRewardCampaignLaunch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      TradingRewardCampaignLaunchProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgTradingRewardCampaignLaunch {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgTradingRewardCampaignLaunch();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = TradingRewardCampaignLaunchProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgTradingRewardCampaignLaunch: MessageFns<MsgTradingRewardCampaignLaunch> =
+  {
+    encode(
+      message: MsgTradingRewardCampaignLaunch,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        TradingRewardCampaignLaunchProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgTradingRewardCampaignLaunch {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? TradingRewardCampaignLaunchProposal.fromJSON(object.proposal) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgTradingRewardCampaignLaunch {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgTradingRewardCampaignLaunch();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgTradingRewardCampaignLaunch): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = TradingRewardCampaignLaunchProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgTradingRewardCampaignLaunch>, I>>(base?: I): MsgTradingRewardCampaignLaunch {
-    return MsgTradingRewardCampaignLaunch.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgTradingRewardCampaignLaunch>, I>>(
-    object: I,
-  ): MsgTradingRewardCampaignLaunch {
-    const message = createBaseMsgTradingRewardCampaignLaunch();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? TradingRewardCampaignLaunchProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal = TradingRewardCampaignLaunchProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgTradingRewardCampaignLaunch {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? TradingRewardCampaignLaunchProposal.fromJSON(object.proposal)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgTradingRewardCampaignLaunch): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = TradingRewardCampaignLaunchProposal.toJSON(
+          message.proposal,
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgTradingRewardCampaignLaunch>, I>>(
+      base?: I,
+    ): MsgTradingRewardCampaignLaunch {
+      return MsgTradingRewardCampaignLaunch.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgTradingRewardCampaignLaunch>, I>,
+    >(object: I): MsgTradingRewardCampaignLaunch {
+      const message = createBaseMsgTradingRewardCampaignLaunch();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? TradingRewardCampaignLaunchProposal.fromPartial(object.proposal)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgTradingRewardCampaignLaunchResponse(): MsgTradingRewardCampaignLaunchResponse {
   return {};
 }
 
-export const MsgTradingRewardCampaignLaunchResponse: MessageFns<MsgTradingRewardCampaignLaunchResponse> = {
-  encode(_: MsgTradingRewardCampaignLaunchResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgTradingRewardCampaignLaunchResponse: MessageFns<MsgTradingRewardCampaignLaunchResponse> =
+  {
+    encode(
+      _: MsgTradingRewardCampaignLaunchResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgTradingRewardCampaignLaunchResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgTradingRewardCampaignLaunchResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgTradingRewardCampaignLaunchResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgTradingRewardCampaignLaunchResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgTradingRewardCampaignLaunchResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgTradingRewardCampaignLaunchResponse {
+      return {};
+    },
 
-  toJSON(_: MsgTradingRewardCampaignLaunchResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgTradingRewardCampaignLaunchResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgTradingRewardCampaignLaunchResponse>, I>>(
-    base?: I,
-  ): MsgTradingRewardCampaignLaunchResponse {
-    return MsgTradingRewardCampaignLaunchResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgTradingRewardCampaignLaunchResponse>, I>>(
-    _: I,
-  ): MsgTradingRewardCampaignLaunchResponse {
-    const message = createBaseMsgTradingRewardCampaignLaunchResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgTradingRewardCampaignLaunchResponse>, I>,
+    >(base?: I): MsgTradingRewardCampaignLaunchResponse {
+      return MsgTradingRewardCampaignLaunchResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgTradingRewardCampaignLaunchResponse>, I>,
+    >(_: I): MsgTradingRewardCampaignLaunchResponse {
+      const message = createBaseMsgTradingRewardCampaignLaunchResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgExchangeEnable(): MsgExchangeEnable {
   return { sender: "", proposal: undefined };
 }
 
 export const MsgExchangeEnable: MessageFns<MsgExchangeEnable> = {
-  encode(message: MsgExchangeEnable, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgExchangeEnable,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.proposal !== undefined) {
-      ExchangeEnableProposal.encode(message.proposal, writer.uint32(18).fork()).join();
+      ExchangeEnableProposal.encode(
+        message.proposal,
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MsgExchangeEnable {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExchangeEnable();
     while (reader.pos < end) {
@@ -11614,7 +13301,10 @@ export const MsgExchangeEnable: MessageFns<MsgExchangeEnable> = {
             break;
           }
 
-          message.proposal = ExchangeEnableProposal.decode(reader, reader.uint32());
+          message.proposal = ExchangeEnableProposal.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -11629,7 +13319,9 @@ export const MsgExchangeEnable: MessageFns<MsgExchangeEnable> = {
   fromJSON(object: any): MsgExchangeEnable {
     return {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? ExchangeEnableProposal.fromJSON(object.proposal) : undefined,
+      proposal: isSet(object.proposal)
+        ? ExchangeEnableProposal.fromJSON(object.proposal)
+        : undefined,
     };
   },
 
@@ -11644,15 +13336,20 @@ export const MsgExchangeEnable: MessageFns<MsgExchangeEnable> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgExchangeEnable>, I>>(base?: I): MsgExchangeEnable {
+  create<I extends Exact<DeepPartial<MsgExchangeEnable>, I>>(
+    base?: I,
+  ): MsgExchangeEnable {
     return MsgExchangeEnable.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgExchangeEnable>, I>>(object: I): MsgExchangeEnable {
+  fromPartial<I extends Exact<DeepPartial<MsgExchangeEnable>, I>>(
+    object: I,
+  ): MsgExchangeEnable {
     const message = createBaseMsgExchangeEnable();
     message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? ExchangeEnableProposal.fromPartial(object.proposal)
-      : undefined;
+    message.proposal =
+      object.proposal !== undefined && object.proposal !== null
+        ? ExchangeEnableProposal.fromPartial(object.proposal)
+        : undefined;
     return message;
   },
 };
@@ -11661,318 +13358,407 @@ function createBaseMsgExchangeEnableResponse(): MsgExchangeEnableResponse {
   return {};
 }
 
-export const MsgExchangeEnableResponse: MessageFns<MsgExchangeEnableResponse> = {
-  encode(_: MsgExchangeEnableResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgExchangeEnableResponse: MessageFns<MsgExchangeEnableResponse> =
+  {
+    encode(
+      _: MsgExchangeEnableResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgExchangeEnableResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgExchangeEnableResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgExchangeEnableResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgExchangeEnableResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgExchangeEnableResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgExchangeEnableResponse {
+      return {};
+    },
 
-  toJSON(_: MsgExchangeEnableResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgExchangeEnableResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgExchangeEnableResponse>, I>>(base?: I): MsgExchangeEnableResponse {
-    return MsgExchangeEnableResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgExchangeEnableResponse>, I>>(_: I): MsgExchangeEnableResponse {
-    const message = createBaseMsgExchangeEnableResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgExchangeEnableResponse>, I>>(
+      base?: I,
+    ): MsgExchangeEnableResponse {
+      return MsgExchangeEnableResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgExchangeEnableResponse>, I>>(
+      _: I,
+    ): MsgExchangeEnableResponse {
+      const message = createBaseMsgExchangeEnableResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgTradingRewardCampaignUpdate(): MsgTradingRewardCampaignUpdate {
   return { sender: "", proposal: undefined };
 }
 
-export const MsgTradingRewardCampaignUpdate: MessageFns<MsgTradingRewardCampaignUpdate> = {
-  encode(message: MsgTradingRewardCampaignUpdate, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      TradingRewardCampaignUpdateProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgTradingRewardCampaignUpdate {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgTradingRewardCampaignUpdate();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = TradingRewardCampaignUpdateProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgTradingRewardCampaignUpdate: MessageFns<MsgTradingRewardCampaignUpdate> =
+  {
+    encode(
+      message: MsgTradingRewardCampaignUpdate,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        TradingRewardCampaignUpdateProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgTradingRewardCampaignUpdate {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? TradingRewardCampaignUpdateProposal.fromJSON(object.proposal) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgTradingRewardCampaignUpdate {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgTradingRewardCampaignUpdate();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgTradingRewardCampaignUpdate): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = TradingRewardCampaignUpdateProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgTradingRewardCampaignUpdate>, I>>(base?: I): MsgTradingRewardCampaignUpdate {
-    return MsgTradingRewardCampaignUpdate.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgTradingRewardCampaignUpdate>, I>>(
-    object: I,
-  ): MsgTradingRewardCampaignUpdate {
-    const message = createBaseMsgTradingRewardCampaignUpdate();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? TradingRewardCampaignUpdateProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal = TradingRewardCampaignUpdateProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgTradingRewardCampaignUpdate {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? TradingRewardCampaignUpdateProposal.fromJSON(object.proposal)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgTradingRewardCampaignUpdate): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = TradingRewardCampaignUpdateProposal.toJSON(
+          message.proposal,
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgTradingRewardCampaignUpdate>, I>>(
+      base?: I,
+    ): MsgTradingRewardCampaignUpdate {
+      return MsgTradingRewardCampaignUpdate.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgTradingRewardCampaignUpdate>, I>,
+    >(object: I): MsgTradingRewardCampaignUpdate {
+      const message = createBaseMsgTradingRewardCampaignUpdate();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? TradingRewardCampaignUpdateProposal.fromPartial(object.proposal)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgTradingRewardCampaignUpdateResponse(): MsgTradingRewardCampaignUpdateResponse {
   return {};
 }
 
-export const MsgTradingRewardCampaignUpdateResponse: MessageFns<MsgTradingRewardCampaignUpdateResponse> = {
-  encode(_: MsgTradingRewardCampaignUpdateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgTradingRewardCampaignUpdateResponse: MessageFns<MsgTradingRewardCampaignUpdateResponse> =
+  {
+    encode(
+      _: MsgTradingRewardCampaignUpdateResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgTradingRewardCampaignUpdateResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgTradingRewardCampaignUpdateResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgTradingRewardCampaignUpdateResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgTradingRewardCampaignUpdateResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgTradingRewardCampaignUpdateResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgTradingRewardCampaignUpdateResponse {
+      return {};
+    },
 
-  toJSON(_: MsgTradingRewardCampaignUpdateResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgTradingRewardCampaignUpdateResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgTradingRewardCampaignUpdateResponse>, I>>(
-    base?: I,
-  ): MsgTradingRewardCampaignUpdateResponse {
-    return MsgTradingRewardCampaignUpdateResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgTradingRewardCampaignUpdateResponse>, I>>(
-    _: I,
-  ): MsgTradingRewardCampaignUpdateResponse {
-    const message = createBaseMsgTradingRewardCampaignUpdateResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgTradingRewardCampaignUpdateResponse>, I>,
+    >(base?: I): MsgTradingRewardCampaignUpdateResponse {
+      return MsgTradingRewardCampaignUpdateResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgTradingRewardCampaignUpdateResponse>, I>,
+    >(_: I): MsgTradingRewardCampaignUpdateResponse {
+      const message = createBaseMsgTradingRewardCampaignUpdateResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgTradingRewardPendingPointsUpdate(): MsgTradingRewardPendingPointsUpdate {
   return { sender: "", proposal: undefined };
 }
 
-export const MsgTradingRewardPendingPointsUpdate: MessageFns<MsgTradingRewardPendingPointsUpdate> = {
-  encode(message: MsgTradingRewardPendingPointsUpdate, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      TradingRewardPendingPointsUpdateProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgTradingRewardPendingPointsUpdate {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgTradingRewardPendingPointsUpdate();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = TradingRewardPendingPointsUpdateProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgTradingRewardPendingPointsUpdate: MessageFns<MsgTradingRewardPendingPointsUpdate> =
+  {
+    encode(
+      message: MsgTradingRewardPendingPointsUpdate,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        TradingRewardPendingPointsUpdateProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgTradingRewardPendingPointsUpdate {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? TradingRewardPendingPointsUpdateProposal.fromJSON(object.proposal) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgTradingRewardPendingPointsUpdate {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgTradingRewardPendingPointsUpdate();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgTradingRewardPendingPointsUpdate): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = TradingRewardPendingPointsUpdateProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgTradingRewardPendingPointsUpdate>, I>>(
-    base?: I,
-  ): MsgTradingRewardPendingPointsUpdate {
-    return MsgTradingRewardPendingPointsUpdate.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgTradingRewardPendingPointsUpdate>, I>>(
-    object: I,
-  ): MsgTradingRewardPendingPointsUpdate {
-    const message = createBaseMsgTradingRewardPendingPointsUpdate();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? TradingRewardPendingPointsUpdateProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal = TradingRewardPendingPointsUpdateProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgTradingRewardPendingPointsUpdate {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? TradingRewardPendingPointsUpdateProposal.fromJSON(object.proposal)
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgTradingRewardPendingPointsUpdate): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = TradingRewardPendingPointsUpdateProposal.toJSON(
+          message.proposal,
+        );
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<MsgTradingRewardPendingPointsUpdate>, I>,
+    >(base?: I): MsgTradingRewardPendingPointsUpdate {
+      return MsgTradingRewardPendingPointsUpdate.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgTradingRewardPendingPointsUpdate>, I>,
+    >(object: I): MsgTradingRewardPendingPointsUpdate {
+      const message = createBaseMsgTradingRewardPendingPointsUpdate();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? TradingRewardPendingPointsUpdateProposal.fromPartial(
+              object.proposal,
+            )
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgTradingRewardPendingPointsUpdateResponse(): MsgTradingRewardPendingPointsUpdateResponse {
   return {};
 }
 
-export const MsgTradingRewardPendingPointsUpdateResponse: MessageFns<MsgTradingRewardPendingPointsUpdateResponse> = {
-  encode(_: MsgTradingRewardPendingPointsUpdateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgTradingRewardPendingPointsUpdateResponse: MessageFns<MsgTradingRewardPendingPointsUpdateResponse> =
+  {
+    encode(
+      _: MsgTradingRewardPendingPointsUpdateResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgTradingRewardPendingPointsUpdateResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgTradingRewardPendingPointsUpdateResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgTradingRewardPendingPointsUpdateResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgTradingRewardPendingPointsUpdateResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgTradingRewardPendingPointsUpdateResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgTradingRewardPendingPointsUpdateResponse {
+      return {};
+    },
 
-  toJSON(_: MsgTradingRewardPendingPointsUpdateResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgTradingRewardPendingPointsUpdateResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgTradingRewardPendingPointsUpdateResponse>, I>>(
-    base?: I,
-  ): MsgTradingRewardPendingPointsUpdateResponse {
-    return MsgTradingRewardPendingPointsUpdateResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgTradingRewardPendingPointsUpdateResponse>, I>>(
-    _: I,
-  ): MsgTradingRewardPendingPointsUpdateResponse {
-    const message = createBaseMsgTradingRewardPendingPointsUpdateResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<MsgTradingRewardPendingPointsUpdateResponse>,
+        I
+      >,
+    >(base?: I): MsgTradingRewardPendingPointsUpdateResponse {
+      return MsgTradingRewardPendingPointsUpdateResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgTradingRewardPendingPointsUpdateResponse>,
+        I
+      >,
+    >(_: I): MsgTradingRewardPendingPointsUpdateResponse {
+      const message = createBaseMsgTradingRewardPendingPointsUpdateResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgFeeDiscount(): MsgFeeDiscount {
   return { sender: "", proposal: undefined };
 }
 
 export const MsgFeeDiscount: MessageFns<MsgFeeDiscount> = {
-  encode(message: MsgFeeDiscount, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgFeeDiscount,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     if (message.proposal !== undefined) {
-      FeeDiscountProposal.encode(message.proposal, writer.uint32(18).fork()).join();
+      FeeDiscountProposal.encode(
+        message.proposal,
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MsgFeeDiscount {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgFeeDiscount();
     while (reader.pos < end) {
@@ -11991,7 +13777,10 @@ export const MsgFeeDiscount: MessageFns<MsgFeeDiscount> = {
             break;
           }
 
-          message.proposal = FeeDiscountProposal.decode(reader, reader.uint32());
+          message.proposal = FeeDiscountProposal.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -12006,7 +13795,9 @@ export const MsgFeeDiscount: MessageFns<MsgFeeDiscount> = {
   fromJSON(object: any): MsgFeeDiscount {
     return {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal) ? FeeDiscountProposal.fromJSON(object.proposal) : undefined,
+      proposal: isSet(object.proposal)
+        ? FeeDiscountProposal.fromJSON(object.proposal)
+        : undefined,
     };
   },
 
@@ -12021,15 +13812,20 @@ export const MsgFeeDiscount: MessageFns<MsgFeeDiscount> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgFeeDiscount>, I>>(base?: I): MsgFeeDiscount {
+  create<I extends Exact<DeepPartial<MsgFeeDiscount>, I>>(
+    base?: I,
+  ): MsgFeeDiscount {
     return MsgFeeDiscount.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgFeeDiscount>, I>>(object: I): MsgFeeDiscount {
+  fromPartial<I extends Exact<DeepPartial<MsgFeeDiscount>, I>>(
+    object: I,
+  ): MsgFeeDiscount {
     const message = createBaseMsgFeeDiscount();
     message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? FeeDiscountProposal.fromPartial(object.proposal)
-      : undefined;
+    message.proposal =
+      object.proposal !== undefined && object.proposal !== null
+        ? FeeDiscountProposal.fromPartial(object.proposal)
+        : undefined;
     return message;
   },
 };
@@ -12039,12 +13835,19 @@ function createBaseMsgFeeDiscountResponse(): MsgFeeDiscountResponse {
 }
 
 export const MsgFeeDiscountResponse: MessageFns<MsgFeeDiscountResponse> = {
-  encode(_: MsgFeeDiscountResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: MsgFeeDiscountResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgFeeDiscountResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgFeeDiscountResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgFeeDiscountResponse();
     while (reader.pos < end) {
@@ -12068,10 +13871,14 @@ export const MsgFeeDiscountResponse: MessageFns<MsgFeeDiscountResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgFeeDiscountResponse>, I>>(base?: I): MsgFeeDiscountResponse {
+  create<I extends Exact<DeepPartial<MsgFeeDiscountResponse>, I>>(
+    base?: I,
+  ): MsgFeeDiscountResponse {
     return MsgFeeDiscountResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgFeeDiscountResponse>, I>>(_: I): MsgFeeDiscountResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgFeeDiscountResponse>, I>>(
+    _: I,
+  ): MsgFeeDiscountResponse {
     const message = createBaseMsgFeeDiscountResponse();
     return message;
   },
@@ -12081,281 +13888,355 @@ function createBaseMsgAtomicMarketOrderFeeMultiplierSchedule(): MsgAtomicMarketO
   return { sender: "", proposal: undefined };
 }
 
-export const MsgAtomicMarketOrderFeeMultiplierSchedule: MessageFns<MsgAtomicMarketOrderFeeMultiplierSchedule> = {
-  encode(message: MsgAtomicMarketOrderFeeMultiplierSchedule, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.proposal !== undefined) {
-      AtomicMarketOrderFeeMultiplierScheduleProposal.encode(message.proposal, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgAtomicMarketOrderFeeMultiplierSchedule {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgAtomicMarketOrderFeeMultiplierSchedule();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.proposal = AtomicMarketOrderFeeMultiplierScheduleProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const MsgAtomicMarketOrderFeeMultiplierSchedule: MessageFns<MsgAtomicMarketOrderFeeMultiplierSchedule> =
+  {
+    encode(
+      message: MsgAtomicMarketOrderFeeMultiplierSchedule,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.proposal !== undefined) {
+        AtomicMarketOrderFeeMultiplierScheduleProposal.encode(
+          message.proposal,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgAtomicMarketOrderFeeMultiplierSchedule {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      proposal: isSet(object.proposal)
-        ? AtomicMarketOrderFeeMultiplierScheduleProposal.fromJSON(object.proposal)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgAtomicMarketOrderFeeMultiplierSchedule {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgAtomicMarketOrderFeeMultiplierSchedule();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgAtomicMarketOrderFeeMultiplierSchedule): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.proposal !== undefined) {
-      obj.proposal = AtomicMarketOrderFeeMultiplierScheduleProposal.toJSON(message.proposal);
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgAtomicMarketOrderFeeMultiplierSchedule>, I>>(
-    base?: I,
-  ): MsgAtomicMarketOrderFeeMultiplierSchedule {
-    return MsgAtomicMarketOrderFeeMultiplierSchedule.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgAtomicMarketOrderFeeMultiplierSchedule>, I>>(
-    object: I,
-  ): MsgAtomicMarketOrderFeeMultiplierSchedule {
-    const message = createBaseMsgAtomicMarketOrderFeeMultiplierSchedule();
-    message.sender = object.sender ?? "";
-    message.proposal = (object.proposal !== undefined && object.proposal !== null)
-      ? AtomicMarketOrderFeeMultiplierScheduleProposal.fromPartial(object.proposal)
-      : undefined;
-    return message;
-  },
-};
+            message.proposal =
+              AtomicMarketOrderFeeMultiplierScheduleProposal.decode(
+                reader,
+                reader.uint32(),
+              );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgAtomicMarketOrderFeeMultiplierSchedule {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        proposal: isSet(object.proposal)
+          ? AtomicMarketOrderFeeMultiplierScheduleProposal.fromJSON(
+              object.proposal,
+            )
+          : undefined,
+      };
+    },
+
+    toJSON(message: MsgAtomicMarketOrderFeeMultiplierSchedule): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.proposal !== undefined) {
+        obj.proposal = AtomicMarketOrderFeeMultiplierScheduleProposal.toJSON(
+          message.proposal,
+        );
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<
+        DeepPartial<MsgAtomicMarketOrderFeeMultiplierSchedule>,
+        I
+      >,
+    >(base?: I): MsgAtomicMarketOrderFeeMultiplierSchedule {
+      return MsgAtomicMarketOrderFeeMultiplierSchedule.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgAtomicMarketOrderFeeMultiplierSchedule>,
+        I
+      >,
+    >(object: I): MsgAtomicMarketOrderFeeMultiplierSchedule {
+      const message = createBaseMsgAtomicMarketOrderFeeMultiplierSchedule();
+      message.sender = object.sender ?? "";
+      message.proposal =
+        object.proposal !== undefined && object.proposal !== null
+          ? AtomicMarketOrderFeeMultiplierScheduleProposal.fromPartial(
+              object.proposal,
+            )
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseMsgAtomicMarketOrderFeeMultiplierScheduleResponse(): MsgAtomicMarketOrderFeeMultiplierScheduleResponse {
   return {};
 }
 
-export const MsgAtomicMarketOrderFeeMultiplierScheduleResponse: MessageFns<
-  MsgAtomicMarketOrderFeeMultiplierScheduleResponse
-> = {
-  encode(
-    _: MsgAtomicMarketOrderFeeMultiplierScheduleResponse,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    return writer;
-  },
+export const MsgAtomicMarketOrderFeeMultiplierScheduleResponse: MessageFns<MsgAtomicMarketOrderFeeMultiplierScheduleResponse> =
+  {
+    encode(
+      _: MsgAtomicMarketOrderFeeMultiplierScheduleResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgAtomicMarketOrderFeeMultiplierScheduleResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgAtomicMarketOrderFeeMultiplierScheduleResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgAtomicMarketOrderFeeMultiplierScheduleResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseMsgAtomicMarketOrderFeeMultiplierScheduleResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgAtomicMarketOrderFeeMultiplierScheduleResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgAtomicMarketOrderFeeMultiplierScheduleResponse {
+      return {};
+    },
 
-  toJSON(_: MsgAtomicMarketOrderFeeMultiplierScheduleResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgAtomicMarketOrderFeeMultiplierScheduleResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgAtomicMarketOrderFeeMultiplierScheduleResponse>, I>>(
-    base?: I,
-  ): MsgAtomicMarketOrderFeeMultiplierScheduleResponse {
-    return MsgAtomicMarketOrderFeeMultiplierScheduleResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgAtomicMarketOrderFeeMultiplierScheduleResponse>, I>>(
-    _: I,
-  ): MsgAtomicMarketOrderFeeMultiplierScheduleResponse {
-    const message = createBaseMsgAtomicMarketOrderFeeMultiplierScheduleResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<MsgAtomicMarketOrderFeeMultiplierScheduleResponse>,
+        I
+      >,
+    >(base?: I): MsgAtomicMarketOrderFeeMultiplierScheduleResponse {
+      return MsgAtomicMarketOrderFeeMultiplierScheduleResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgAtomicMarketOrderFeeMultiplierScheduleResponse>,
+        I
+      >,
+    >(_: I): MsgAtomicMarketOrderFeeMultiplierScheduleResponse {
+      const message =
+        createBaseMsgAtomicMarketOrderFeeMultiplierScheduleResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgSetDelegationTransferReceivers(): MsgSetDelegationTransferReceivers {
   return { sender: "", receivers: [] };
 }
 
-export const MsgSetDelegationTransferReceivers: MessageFns<MsgSetDelegationTransferReceivers> = {
-  encode(message: MsgSetDelegationTransferReceivers, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    for (const v of message.receivers) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetDelegationTransferReceivers {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgSetDelegationTransferReceivers();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.receivers.push(reader.string());
-          continue;
-        }
+export const MsgSetDelegationTransferReceivers: MessageFns<MsgSetDelegationTransferReceivers> =
+  {
+    encode(
+      message: MsgSetDelegationTransferReceivers,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.receivers) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): MsgSetDelegationTransferReceivers {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      receivers: globalThis.Array.isArray(object?.receivers)
-        ? object.receivers.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgSetDelegationTransferReceivers {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgSetDelegationTransferReceivers();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgSetDelegationTransferReceivers): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.receivers?.length) {
-      obj.receivers = message.receivers;
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgSetDelegationTransferReceivers>, I>>(
-    base?: I,
-  ): MsgSetDelegationTransferReceivers {
-    return MsgSetDelegationTransferReceivers.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgSetDelegationTransferReceivers>, I>>(
-    object: I,
-  ): MsgSetDelegationTransferReceivers {
-    const message = createBaseMsgSetDelegationTransferReceivers();
-    message.sender = object.sender ?? "";
-    message.receivers = object.receivers?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.receivers.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgSetDelegationTransferReceivers {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        receivers: globalThis.Array.isArray(object?.receivers)
+          ? object.receivers.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
+
+    toJSON(message: MsgSetDelegationTransferReceivers): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.receivers?.length) {
+        obj.receivers = message.receivers;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgSetDelegationTransferReceivers>, I>>(
+      base?: I,
+    ): MsgSetDelegationTransferReceivers {
+      return MsgSetDelegationTransferReceivers.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgSetDelegationTransferReceivers>, I>,
+    >(object: I): MsgSetDelegationTransferReceivers {
+      const message = createBaseMsgSetDelegationTransferReceivers();
+      message.sender = object.sender ?? "";
+      message.receivers = object.receivers?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseMsgSetDelegationTransferReceiversResponse(): MsgSetDelegationTransferReceiversResponse {
   return {};
 }
 
-export const MsgSetDelegationTransferReceiversResponse: MessageFns<MsgSetDelegationTransferReceiversResponse> = {
-  encode(_: MsgSetDelegationTransferReceiversResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgSetDelegationTransferReceiversResponse: MessageFns<MsgSetDelegationTransferReceiversResponse> =
+  {
+    encode(
+      _: MsgSetDelegationTransferReceiversResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetDelegationTransferReceiversResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgSetDelegationTransferReceiversResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgSetDelegationTransferReceiversResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgSetDelegationTransferReceiversResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgSetDelegationTransferReceiversResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgSetDelegationTransferReceiversResponse {
+      return {};
+    },
 
-  toJSON(_: MsgSetDelegationTransferReceiversResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgSetDelegationTransferReceiversResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgSetDelegationTransferReceiversResponse>, I>>(
-    base?: I,
-  ): MsgSetDelegationTransferReceiversResponse {
-    return MsgSetDelegationTransferReceiversResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgSetDelegationTransferReceiversResponse>, I>>(
-    _: I,
-  ): MsgSetDelegationTransferReceiversResponse {
-    const message = createBaseMsgSetDelegationTransferReceiversResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<MsgSetDelegationTransferReceiversResponse>,
+        I
+      >,
+    >(base?: I): MsgSetDelegationTransferReceiversResponse {
+      return MsgSetDelegationTransferReceiversResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<MsgSetDelegationTransferReceiversResponse>,
+        I
+      >,
+    >(_: I): MsgSetDelegationTransferReceiversResponse {
+      const message = createBaseMsgSetDelegationTransferReceiversResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgCancelPostOnlyMode(): MsgCancelPostOnlyMode {
   return { sender: "" };
 }
 
 export const MsgCancelPostOnlyMode: MessageFns<MsgCancelPostOnlyMode> = {
-  encode(message: MsgCancelPostOnlyMode, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgCancelPostOnlyMode,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelPostOnlyMode {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgCancelPostOnlyMode {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelPostOnlyMode();
     while (reader.pos < end) {
@@ -12379,7 +14260,9 @@ export const MsgCancelPostOnlyMode: MessageFns<MsgCancelPostOnlyMode> = {
   },
 
   fromJSON(object: any): MsgCancelPostOnlyMode {
-    return { sender: isSet(object.sender) ? globalThis.String(object.sender) : "" };
+    return {
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+    };
   },
 
   toJSON(message: MsgCancelPostOnlyMode): unknown {
@@ -12390,10 +14273,14 @@ export const MsgCancelPostOnlyMode: MessageFns<MsgCancelPostOnlyMode> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgCancelPostOnlyMode>, I>>(base?: I): MsgCancelPostOnlyMode {
+  create<I extends Exact<DeepPartial<MsgCancelPostOnlyMode>, I>>(
+    base?: I,
+  ): MsgCancelPostOnlyMode {
     return MsgCancelPostOnlyMode.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgCancelPostOnlyMode>, I>>(object: I): MsgCancelPostOnlyMode {
+  fromPartial<I extends Exact<DeepPartial<MsgCancelPostOnlyMode>, I>>(
+    object: I,
+  ): MsgCancelPostOnlyMode {
     const message = createBaseMsgCancelPostOnlyMode();
     message.sender = object.sender ?? "";
     return message;
@@ -12404,51 +14291,66 @@ function createBaseMsgCancelPostOnlyModeResponse(): MsgCancelPostOnlyModeRespons
   return {};
 }
 
-export const MsgCancelPostOnlyModeResponse: MessageFns<MsgCancelPostOnlyModeResponse> = {
-  encode(_: MsgCancelPostOnlyModeResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgCancelPostOnlyModeResponse: MessageFns<MsgCancelPostOnlyModeResponse> =
+  {
+    encode(
+      _: MsgCancelPostOnlyModeResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelPostOnlyModeResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgCancelPostOnlyModeResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgCancelPostOnlyModeResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgCancelPostOnlyModeResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgCancelPostOnlyModeResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgCancelPostOnlyModeResponse {
+      return {};
+    },
 
-  toJSON(_: MsgCancelPostOnlyModeResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgCancelPostOnlyModeResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgCancelPostOnlyModeResponse>, I>>(base?: I): MsgCancelPostOnlyModeResponse {
-    return MsgCancelPostOnlyModeResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgCancelPostOnlyModeResponse>, I>>(_: I): MsgCancelPostOnlyModeResponse {
-    const message = createBaseMsgCancelPostOnlyModeResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgCancelPostOnlyModeResponse>, I>>(
+      base?: I,
+    ): MsgCancelPostOnlyModeResponse {
+      return MsgCancelPostOnlyModeResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgCancelPostOnlyModeResponse>, I>>(
+      _: I,
+    ): MsgCancelPostOnlyModeResponse {
+      const message = createBaseMsgCancelPostOnlyModeResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgActivatePostOnlyMode(): MsgActivatePostOnlyMode {
   return { sender: "", blocksAmount: 0 };
 }
 
 export const MsgActivatePostOnlyMode: MessageFns<MsgActivatePostOnlyMode> = {
-  encode(message: MsgActivatePostOnlyMode, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MsgActivatePostOnlyMode,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -12458,8 +14360,12 @@ export const MsgActivatePostOnlyMode: MessageFns<MsgActivatePostOnlyMode> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgActivatePostOnlyMode {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MsgActivatePostOnlyMode {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgActivatePostOnlyMode();
     while (reader.pos < end) {
@@ -12496,8 +14402,8 @@ export const MsgActivatePostOnlyMode: MessageFns<MsgActivatePostOnlyMode> = {
       blocksAmount: isSet(object.blocksAmount)
         ? globalThis.Number(object.blocksAmount)
         : isSet(object.blocks_amount)
-        ? globalThis.Number(object.blocks_amount)
-        : 0,
+          ? globalThis.Number(object.blocks_amount)
+          : 0,
     };
   },
 
@@ -12512,10 +14418,14 @@ export const MsgActivatePostOnlyMode: MessageFns<MsgActivatePostOnlyMode> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MsgActivatePostOnlyMode>, I>>(base?: I): MsgActivatePostOnlyMode {
+  create<I extends Exact<DeepPartial<MsgActivatePostOnlyMode>, I>>(
+    base?: I,
+  ): MsgActivatePostOnlyMode {
     return MsgActivatePostOnlyMode.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MsgActivatePostOnlyMode>, I>>(object: I): MsgActivatePostOnlyMode {
+  fromPartial<I extends Exact<DeepPartial<MsgActivatePostOnlyMode>, I>>(
+    object: I,
+  ): MsgActivatePostOnlyMode {
     const message = createBaseMsgActivatePostOnlyMode();
     message.sender = object.sender ?? "";
     message.blocksAmount = object.blocksAmount ?? 0;
@@ -12527,191 +14437,225 @@ function createBaseMsgActivatePostOnlyModeResponse(): MsgActivatePostOnlyModeRes
   return {};
 }
 
-export const MsgActivatePostOnlyModeResponse: MessageFns<MsgActivatePostOnlyModeResponse> = {
-  encode(_: MsgActivatePostOnlyModeResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgActivatePostOnlyModeResponse: MessageFns<MsgActivatePostOnlyModeResponse> =
+  {
+    encode(
+      _: MsgActivatePostOnlyModeResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgActivatePostOnlyModeResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgActivatePostOnlyModeResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgActivatePostOnlyModeResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgActivatePostOnlyModeResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgActivatePostOnlyModeResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgActivatePostOnlyModeResponse {
+      return {};
+    },
 
-  toJSON(_: MsgActivatePostOnlyModeResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgActivatePostOnlyModeResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgActivatePostOnlyModeResponse>, I>>(base?: I): MsgActivatePostOnlyModeResponse {
-    return MsgActivatePostOnlyModeResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgActivatePostOnlyModeResponse>, I>>(_: I): MsgActivatePostOnlyModeResponse {
-    const message = createBaseMsgActivatePostOnlyModeResponse();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MsgActivatePostOnlyModeResponse>, I>>(
+      base?: I,
+    ): MsgActivatePostOnlyModeResponse {
+      return MsgActivatePostOnlyModeResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgActivatePostOnlyModeResponse>, I>,
+    >(_: I): MsgActivatePostOnlyModeResponse {
+      const message = createBaseMsgActivatePostOnlyModeResponse();
+      return message;
+    },
+  };
 
 function createBaseMsgLiquidateCrossMarginPool(): MsgLiquidateCrossMarginPool {
   return { sender: "", subaccountId: "", quoteDenom: "" };
 }
 
-export const MsgLiquidateCrossMarginPool: MessageFns<MsgLiquidateCrossMarginPool> = {
-  encode(message: MsgLiquidateCrossMarginPool, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(18).string(message.subaccountId);
-    }
-    if (message.quoteDenom !== "") {
-      writer.uint32(26).string(message.quoteDenom);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgLiquidateCrossMarginPool {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgLiquidateCrossMarginPool();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sender = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.quoteDenom = reader.string();
-          continue;
-        }
+export const MsgLiquidateCrossMarginPool: MessageFns<MsgLiquidateCrossMarginPool> =
+  {
+    encode(
+      message: MsgLiquidateCrossMarginPool,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.sender !== "") {
+        writer.uint32(10).string(message.sender);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccountId !== "") {
+        writer.uint32(18).string(message.subaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.quoteDenom !== "") {
+        writer.uint32(26).string(message.quoteDenom);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MsgLiquidateCrossMarginPool {
-    return {
-      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      quoteDenom: isSet(object.quoteDenom)
-        ? globalThis.String(object.quoteDenom)
-        : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgLiquidateCrossMarginPool {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgLiquidateCrossMarginPool();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MsgLiquidateCrossMarginPool): unknown {
-    const obj: any = {};
-    if (message.sender !== "") {
-      obj.sender = message.sender;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.quoteDenom !== "") {
-      obj.quoteDenom = message.quoteDenom;
-    }
-    return obj;
-  },
+            message.sender = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MsgLiquidateCrossMarginPool>, I>>(base?: I): MsgLiquidateCrossMarginPool {
-    return MsgLiquidateCrossMarginPool.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgLiquidateCrossMarginPool>, I>>(object: I): MsgLiquidateCrossMarginPool {
-    const message = createBaseMsgLiquidateCrossMarginPool();
-    message.sender = object.sender ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    message.quoteDenom = object.quoteDenom ?? "";
-    return message;
-  },
-};
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.quoteDenom = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MsgLiquidateCrossMarginPool {
+      return {
+        sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        quoteDenom: isSet(object.quoteDenom)
+          ? globalThis.String(object.quoteDenom)
+          : isSet(object.quote_denom)
+            ? globalThis.String(object.quote_denom)
+            : "",
+      };
+    },
+
+    toJSON(message: MsgLiquidateCrossMarginPool): unknown {
+      const obj: any = {};
+      if (message.sender !== "") {
+        obj.sender = message.sender;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.quoteDenom !== "") {
+        obj.quoteDenom = message.quoteDenom;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MsgLiquidateCrossMarginPool>, I>>(
+      base?: I,
+    ): MsgLiquidateCrossMarginPool {
+      return MsgLiquidateCrossMarginPool.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MsgLiquidateCrossMarginPool>, I>>(
+      object: I,
+    ): MsgLiquidateCrossMarginPool {
+      const message = createBaseMsgLiquidateCrossMarginPool();
+      message.sender = object.sender ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      message.quoteDenom = object.quoteDenom ?? "";
+      return message;
+    },
+  };
 
 function createBaseMsgLiquidateCrossMarginPoolResponse(): MsgLiquidateCrossMarginPoolResponse {
   return {};
 }
 
-export const MsgLiquidateCrossMarginPoolResponse: MessageFns<MsgLiquidateCrossMarginPoolResponse> = {
-  encode(_: MsgLiquidateCrossMarginPoolResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const MsgLiquidateCrossMarginPoolResponse: MessageFns<MsgLiquidateCrossMarginPoolResponse> =
+  {
+    encode(
+      _: MsgLiquidateCrossMarginPoolResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgLiquidateCrossMarginPoolResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgLiquidateCrossMarginPoolResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MsgLiquidateCrossMarginPoolResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMsgLiquidateCrossMarginPoolResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): MsgLiquidateCrossMarginPoolResponse {
-    return {};
-  },
+    fromJSON(_: any): MsgLiquidateCrossMarginPoolResponse {
+      return {};
+    },
 
-  toJSON(_: MsgLiquidateCrossMarginPoolResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: MsgLiquidateCrossMarginPoolResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<MsgLiquidateCrossMarginPoolResponse>, I>>(
-    base?: I,
-  ): MsgLiquidateCrossMarginPoolResponse {
-    return MsgLiquidateCrossMarginPoolResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MsgLiquidateCrossMarginPoolResponse>, I>>(
-    _: I,
-  ): MsgLiquidateCrossMarginPoolResponse {
-    const message = createBaseMsgLiquidateCrossMarginPoolResponse();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<MsgLiquidateCrossMarginPoolResponse>, I>,
+    >(base?: I): MsgLiquidateCrossMarginPoolResponse {
+      return MsgLiquidateCrossMarginPoolResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MsgLiquidateCrossMarginPoolResponse>, I>,
+    >(_: I): MsgLiquidateCrossMarginPoolResponse {
+      const message = createBaseMsgLiquidateCrossMarginPoolResponse();
+      return message;
+    },
+  };
 
 /** Msg defines the exchange Msg service. */
 export type MsgService = typeof MsgService;
@@ -12724,10 +14668,13 @@ export const MsgService = {
     path: "/injective.exchange.v2.Msg/Deposit" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgDeposit): Buffer => Buffer.from(MsgDeposit.encode(value).finish()),
+    requestSerialize: (value: MsgDeposit): Buffer =>
+      Buffer.from(MsgDeposit.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgDeposit => MsgDeposit.decode(value),
-    responseSerialize: (value: MsgDepositResponse): Buffer => Buffer.from(MsgDepositResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgDepositResponse => MsgDepositResponse.decode(value),
+    responseSerialize: (value: MsgDepositResponse): Buffer =>
+      Buffer.from(MsgDepositResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): MsgDepositResponse =>
+      MsgDepositResponse.decode(value),
   },
   /**
    * Withdraw defines a method for withdrawing coins from a subaccount's
@@ -12737,10 +14684,14 @@ export const MsgService = {
     path: "/injective.exchange.v2.Msg/Withdraw" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgWithdraw): Buffer => Buffer.from(MsgWithdraw.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgWithdraw => MsgWithdraw.decode(value),
-    responseSerialize: (value: MsgWithdrawResponse): Buffer => Buffer.from(MsgWithdrawResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgWithdrawResponse => MsgWithdrawResponse.decode(value),
+    requestSerialize: (value: MsgWithdraw): Buffer =>
+      Buffer.from(MsgWithdraw.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgWithdraw =>
+      MsgWithdraw.decode(value),
+    responseSerialize: (value: MsgWithdrawResponse): Buffer =>
+      Buffer.from(MsgWithdrawResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): MsgWithdrawResponse =>
+      MsgWithdrawResponse.decode(value),
   },
   /**
    * InstantSpotMarketLaunch defines method for creating a spot market by paying
@@ -12752,7 +14703,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgInstantSpotMarketLaunch): Buffer =>
       Buffer.from(MsgInstantSpotMarketLaunch.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgInstantSpotMarketLaunch => MsgInstantSpotMarketLaunch.decode(value),
+    requestDeserialize: (value: Buffer): MsgInstantSpotMarketLaunch =>
+      MsgInstantSpotMarketLaunch.decode(value),
     responseSerialize: (value: MsgInstantSpotMarketLaunchResponse): Buffer =>
       Buffer.from(MsgInstantSpotMarketLaunchResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgInstantSpotMarketLaunchResponse =>
@@ -12770,9 +14722,15 @@ export const MsgService = {
       Buffer.from(MsgInstantPerpetualMarketLaunch.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgInstantPerpetualMarketLaunch =>
       MsgInstantPerpetualMarketLaunch.decode(value),
-    responseSerialize: (value: MsgInstantPerpetualMarketLaunchResponse): Buffer =>
-      Buffer.from(MsgInstantPerpetualMarketLaunchResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgInstantPerpetualMarketLaunchResponse =>
+    responseSerialize: (
+      value: MsgInstantPerpetualMarketLaunchResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgInstantPerpetualMarketLaunchResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgInstantPerpetualMarketLaunchResponse =>
       MsgInstantPerpetualMarketLaunchResponse.decode(value),
   },
   /**
@@ -12787,9 +14745,15 @@ export const MsgService = {
       Buffer.from(MsgInstantExpiryFuturesMarketLaunch.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgInstantExpiryFuturesMarketLaunch =>
       MsgInstantExpiryFuturesMarketLaunch.decode(value),
-    responseSerialize: (value: MsgInstantExpiryFuturesMarketLaunchResponse): Buffer =>
-      Buffer.from(MsgInstantExpiryFuturesMarketLaunchResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgInstantExpiryFuturesMarketLaunchResponse =>
+    responseSerialize: (
+      value: MsgInstantExpiryFuturesMarketLaunchResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgInstantExpiryFuturesMarketLaunchResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgInstantExpiryFuturesMarketLaunchResponse =>
       MsgInstantExpiryFuturesMarketLaunchResponse.decode(value),
   },
   /** CreateSpotLimitOrder defines a method for creating a new spot limit order. */
@@ -12799,7 +14763,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgCreateSpotLimitOrder): Buffer =>
       Buffer.from(MsgCreateSpotLimitOrder.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgCreateSpotLimitOrder => MsgCreateSpotLimitOrder.decode(value),
+    requestDeserialize: (value: Buffer): MsgCreateSpotLimitOrder =>
+      MsgCreateSpotLimitOrder.decode(value),
     responseSerialize: (value: MsgCreateSpotLimitOrderResponse): Buffer =>
       Buffer.from(MsgCreateSpotLimitOrderResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgCreateSpotLimitOrderResponse =>
@@ -12815,10 +14780,13 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgBatchCreateSpotLimitOrders): Buffer =>
       Buffer.from(MsgBatchCreateSpotLimitOrders.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgBatchCreateSpotLimitOrders => MsgBatchCreateSpotLimitOrders.decode(value),
+    requestDeserialize: (value: Buffer): MsgBatchCreateSpotLimitOrders =>
+      MsgBatchCreateSpotLimitOrders.decode(value),
     responseSerialize: (value: MsgBatchCreateSpotLimitOrdersResponse): Buffer =>
       Buffer.from(MsgBatchCreateSpotLimitOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgBatchCreateSpotLimitOrdersResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgBatchCreateSpotLimitOrdersResponse =>
       MsgBatchCreateSpotLimitOrdersResponse.decode(value),
   },
   /**
@@ -12831,7 +14799,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgCreateSpotMarketOrder): Buffer =>
       Buffer.from(MsgCreateSpotMarketOrder.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgCreateSpotMarketOrder => MsgCreateSpotMarketOrder.decode(value),
+    requestDeserialize: (value: Buffer): MsgCreateSpotMarketOrder =>
+      MsgCreateSpotMarketOrder.decode(value),
     responseSerialize: (value: MsgCreateSpotMarketOrderResponse): Buffer =>
       Buffer.from(MsgCreateSpotMarketOrderResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgCreateSpotMarketOrderResponse =>
@@ -12842,11 +14811,14 @@ export const MsgService = {
     path: "/injective.exchange.v2.Msg/CancelSpotOrder" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgCancelSpotOrder): Buffer => Buffer.from(MsgCancelSpotOrder.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgCancelSpotOrder => MsgCancelSpotOrder.decode(value),
+    requestSerialize: (value: MsgCancelSpotOrder): Buffer =>
+      Buffer.from(MsgCancelSpotOrder.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgCancelSpotOrder =>
+      MsgCancelSpotOrder.decode(value),
     responseSerialize: (value: MsgCancelSpotOrderResponse): Buffer =>
       Buffer.from(MsgCancelSpotOrderResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgCancelSpotOrderResponse => MsgCancelSpotOrderResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgCancelSpotOrderResponse =>
+      MsgCancelSpotOrderResponse.decode(value),
   },
   /**
    * BatchCancelSpotOrders defines a method for cancelling a batch of spot
@@ -12858,7 +14830,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgBatchCancelSpotOrders): Buffer =>
       Buffer.from(MsgBatchCancelSpotOrders.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgBatchCancelSpotOrders => MsgBatchCancelSpotOrders.decode(value),
+    requestDeserialize: (value: Buffer): MsgBatchCancelSpotOrders =>
+      MsgBatchCancelSpotOrders.decode(value),
     responseSerialize: (value: MsgBatchCancelSpotOrdersResponse): Buffer =>
       Buffer.from(MsgBatchCancelSpotOrdersResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgBatchCancelSpotOrdersResponse =>
@@ -12869,11 +14842,14 @@ export const MsgService = {
     path: "/injective.exchange.v2.Msg/BatchUpdateOrders" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgBatchUpdateOrders): Buffer => Buffer.from(MsgBatchUpdateOrders.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgBatchUpdateOrders => MsgBatchUpdateOrders.decode(value),
+    requestSerialize: (value: MsgBatchUpdateOrders): Buffer =>
+      Buffer.from(MsgBatchUpdateOrders.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgBatchUpdateOrders =>
+      MsgBatchUpdateOrders.decode(value),
     responseSerialize: (value: MsgBatchUpdateOrdersResponse): Buffer =>
       Buffer.from(MsgBatchUpdateOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgBatchUpdateOrdersResponse => MsgBatchUpdateOrdersResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgBatchUpdateOrdersResponse =>
+      MsgBatchUpdateOrdersResponse.decode(value),
   },
   /**
    * PrivilegedExecuteContract defines a method for executing a Cosmwasm
@@ -12885,10 +14861,13 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgPrivilegedExecuteContract): Buffer =>
       Buffer.from(MsgPrivilegedExecuteContract.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgPrivilegedExecuteContract => MsgPrivilegedExecuteContract.decode(value),
+    requestDeserialize: (value: Buffer): MsgPrivilegedExecuteContract =>
+      MsgPrivilegedExecuteContract.decode(value),
     responseSerialize: (value: MsgPrivilegedExecuteContractResponse): Buffer =>
       Buffer.from(MsgPrivilegedExecuteContractResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgPrivilegedExecuteContractResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgPrivilegedExecuteContractResponse =>
       MsgPrivilegedExecuteContractResponse.decode(value),
   },
   /**
@@ -12901,10 +14880,13 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgCreateDerivativeLimitOrder): Buffer =>
       Buffer.from(MsgCreateDerivativeLimitOrder.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgCreateDerivativeLimitOrder => MsgCreateDerivativeLimitOrder.decode(value),
+    requestDeserialize: (value: Buffer): MsgCreateDerivativeLimitOrder =>
+      MsgCreateDerivativeLimitOrder.decode(value),
     responseSerialize: (value: MsgCreateDerivativeLimitOrderResponse): Buffer =>
       Buffer.from(MsgCreateDerivativeLimitOrderResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgCreateDerivativeLimitOrderResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgCreateDerivativeLimitOrderResponse =>
       MsgCreateDerivativeLimitOrderResponse.decode(value),
   },
   /**
@@ -12919,9 +14901,15 @@ export const MsgService = {
       Buffer.from(MsgBatchCreateDerivativeLimitOrders.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgBatchCreateDerivativeLimitOrders =>
       MsgBatchCreateDerivativeLimitOrders.decode(value),
-    responseSerialize: (value: MsgBatchCreateDerivativeLimitOrdersResponse): Buffer =>
-      Buffer.from(MsgBatchCreateDerivativeLimitOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgBatchCreateDerivativeLimitOrdersResponse =>
+    responseSerialize: (
+      value: MsgBatchCreateDerivativeLimitOrdersResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgBatchCreateDerivativeLimitOrdersResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgBatchCreateDerivativeLimitOrdersResponse =>
       MsgBatchCreateDerivativeLimitOrdersResponse.decode(value),
   },
   /**
@@ -12934,10 +14922,17 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgCreateDerivativeMarketOrder): Buffer =>
       Buffer.from(MsgCreateDerivativeMarketOrder.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgCreateDerivativeMarketOrder => MsgCreateDerivativeMarketOrder.decode(value),
-    responseSerialize: (value: MsgCreateDerivativeMarketOrderResponse): Buffer =>
-      Buffer.from(MsgCreateDerivativeMarketOrderResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgCreateDerivativeMarketOrderResponse =>
+    requestDeserialize: (value: Buffer): MsgCreateDerivativeMarketOrder =>
+      MsgCreateDerivativeMarketOrder.decode(value),
+    responseSerialize: (
+      value: MsgCreateDerivativeMarketOrderResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgCreateDerivativeMarketOrderResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgCreateDerivativeMarketOrderResponse =>
       MsgCreateDerivativeMarketOrderResponse.decode(value),
   },
   /**
@@ -12950,7 +14945,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgCancelDerivativeOrder): Buffer =>
       Buffer.from(MsgCancelDerivativeOrder.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgCancelDerivativeOrder => MsgCancelDerivativeOrder.decode(value),
+    requestDeserialize: (value: Buffer): MsgCancelDerivativeOrder =>
+      MsgCancelDerivativeOrder.decode(value),
     responseSerialize: (value: MsgCancelDerivativeOrderResponse): Buffer =>
       Buffer.from(MsgCancelDerivativeOrderResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgCancelDerivativeOrderResponse =>
@@ -12966,10 +14962,17 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgBatchCancelDerivativeOrders): Buffer =>
       Buffer.from(MsgBatchCancelDerivativeOrders.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgBatchCancelDerivativeOrders => MsgBatchCancelDerivativeOrders.decode(value),
-    responseSerialize: (value: MsgBatchCancelDerivativeOrdersResponse): Buffer =>
-      Buffer.from(MsgBatchCancelDerivativeOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgBatchCancelDerivativeOrdersResponse =>
+    requestDeserialize: (value: Buffer): MsgBatchCancelDerivativeOrders =>
+      MsgBatchCancelDerivativeOrders.decode(value),
+    responseSerialize: (
+      value: MsgBatchCancelDerivativeOrdersResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgBatchCancelDerivativeOrdersResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgBatchCancelDerivativeOrdersResponse =>
       MsgBatchCancelDerivativeOrdersResponse.decode(value),
   },
   /**
@@ -12984,9 +14987,15 @@ export const MsgService = {
       Buffer.from(MsgInstantBinaryOptionsMarketLaunch.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgInstantBinaryOptionsMarketLaunch =>
       MsgInstantBinaryOptionsMarketLaunch.decode(value),
-    responseSerialize: (value: MsgInstantBinaryOptionsMarketLaunchResponse): Buffer =>
-      Buffer.from(MsgInstantBinaryOptionsMarketLaunchResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgInstantBinaryOptionsMarketLaunchResponse =>
+    responseSerialize: (
+      value: MsgInstantBinaryOptionsMarketLaunchResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgInstantBinaryOptionsMarketLaunchResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgInstantBinaryOptionsMarketLaunchResponse =>
       MsgInstantBinaryOptionsMarketLaunchResponse.decode(value),
   },
   /**
@@ -13001,9 +15010,15 @@ export const MsgService = {
       Buffer.from(MsgCreateBinaryOptionsLimitOrder.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgCreateBinaryOptionsLimitOrder =>
       MsgCreateBinaryOptionsLimitOrder.decode(value),
-    responseSerialize: (value: MsgCreateBinaryOptionsLimitOrderResponse): Buffer =>
-      Buffer.from(MsgCreateBinaryOptionsLimitOrderResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgCreateBinaryOptionsLimitOrderResponse =>
+    responseSerialize: (
+      value: MsgCreateBinaryOptionsLimitOrderResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgCreateBinaryOptionsLimitOrderResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgCreateBinaryOptionsLimitOrderResponse =>
       MsgCreateBinaryOptionsLimitOrderResponse.decode(value),
   },
   /**
@@ -13018,9 +15033,15 @@ export const MsgService = {
       Buffer.from(MsgCreateBinaryOptionsMarketOrder.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgCreateBinaryOptionsMarketOrder =>
       MsgCreateBinaryOptionsMarketOrder.decode(value),
-    responseSerialize: (value: MsgCreateBinaryOptionsMarketOrderResponse): Buffer =>
-      Buffer.from(MsgCreateBinaryOptionsMarketOrderResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgCreateBinaryOptionsMarketOrderResponse =>
+    responseSerialize: (
+      value: MsgCreateBinaryOptionsMarketOrderResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgCreateBinaryOptionsMarketOrderResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgCreateBinaryOptionsMarketOrderResponse =>
       MsgCreateBinaryOptionsMarketOrderResponse.decode(value),
   },
   /**
@@ -13033,7 +15054,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgCancelBinaryOptionsOrder): Buffer =>
       Buffer.from(MsgCancelBinaryOptionsOrder.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgCancelBinaryOptionsOrder => MsgCancelBinaryOptionsOrder.decode(value),
+    requestDeserialize: (value: Buffer): MsgCancelBinaryOptionsOrder =>
+      MsgCancelBinaryOptionsOrder.decode(value),
     responseSerialize: (value: MsgCancelBinaryOptionsOrderResponse): Buffer =>
       Buffer.from(MsgCancelBinaryOptionsOrderResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgCancelBinaryOptionsOrderResponse =>
@@ -13051,9 +15073,15 @@ export const MsgService = {
       Buffer.from(MsgBatchCancelBinaryOptionsOrders.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgBatchCancelBinaryOptionsOrders =>
       MsgBatchCancelBinaryOptionsOrders.decode(value),
-    responseSerialize: (value: MsgBatchCancelBinaryOptionsOrdersResponse): Buffer =>
-      Buffer.from(MsgBatchCancelBinaryOptionsOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgBatchCancelBinaryOptionsOrdersResponse =>
+    responseSerialize: (
+      value: MsgBatchCancelBinaryOptionsOrdersResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgBatchCancelBinaryOptionsOrdersResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgBatchCancelBinaryOptionsOrdersResponse =>
       MsgBatchCancelBinaryOptionsOrdersResponse.decode(value),
   },
   /** SubaccountTransfer defines a method for transfer between subaccounts */
@@ -13063,32 +15091,40 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgSubaccountTransfer): Buffer =>
       Buffer.from(MsgSubaccountTransfer.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgSubaccountTransfer => MsgSubaccountTransfer.decode(value),
+    requestDeserialize: (value: Buffer): MsgSubaccountTransfer =>
+      MsgSubaccountTransfer.decode(value),
     responseSerialize: (value: MsgSubaccountTransferResponse): Buffer =>
       Buffer.from(MsgSubaccountTransferResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgSubaccountTransferResponse => MsgSubaccountTransferResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgSubaccountTransferResponse =>
+      MsgSubaccountTransferResponse.decode(value),
   },
   /** ExternalTransfer defines a method for transfer between external accounts */
   externalTransfer: {
     path: "/injective.exchange.v2.Msg/ExternalTransfer" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgExternalTransfer): Buffer => Buffer.from(MsgExternalTransfer.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgExternalTransfer => MsgExternalTransfer.decode(value),
+    requestSerialize: (value: MsgExternalTransfer): Buffer =>
+      Buffer.from(MsgExternalTransfer.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgExternalTransfer =>
+      MsgExternalTransfer.decode(value),
     responseSerialize: (value: MsgExternalTransferResponse): Buffer =>
       Buffer.from(MsgExternalTransferResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgExternalTransferResponse => MsgExternalTransferResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgExternalTransferResponse =>
+      MsgExternalTransferResponse.decode(value),
   },
   /** LiquidatePosition defines a method for liquidating a position */
   liquidatePosition: {
     path: "/injective.exchange.v2.Msg/LiquidatePosition" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgLiquidatePosition): Buffer => Buffer.from(MsgLiquidatePosition.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgLiquidatePosition => MsgLiquidatePosition.decode(value),
+    requestSerialize: (value: MsgLiquidatePosition): Buffer =>
+      Buffer.from(MsgLiquidatePosition.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgLiquidatePosition =>
+      MsgLiquidatePosition.decode(value),
     responseSerialize: (value: MsgLiquidatePositionResponse): Buffer =>
       Buffer.from(MsgLiquidatePositionResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgLiquidatePositionResponse => MsgLiquidatePositionResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgLiquidatePositionResponse =>
+      MsgLiquidatePositionResponse.decode(value),
   },
   /**
    * BatchLiquidatePositions defines a method for liquidating multiple positions
@@ -13100,7 +15136,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgBatchLiquidatePositions): Buffer =>
       Buffer.from(MsgBatchLiquidatePositions.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgBatchLiquidatePositions => MsgBatchLiquidatePositions.decode(value),
+    requestDeserialize: (value: Buffer): MsgBatchLiquidatePositions =>
+      MsgBatchLiquidatePositions.decode(value),
     responseSerialize: (value: MsgBatchLiquidatePositionsResponse): Buffer =>
       Buffer.from(MsgBatchLiquidatePositionsResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgBatchLiquidatePositionsResponse =>
@@ -13113,7 +15150,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgEmergencySettleMarket): Buffer =>
       Buffer.from(MsgEmergencySettleMarket.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgEmergencySettleMarket => MsgEmergencySettleMarket.decode(value),
+    requestDeserialize: (value: Buffer): MsgEmergencySettleMarket =>
+      MsgEmergencySettleMarket.decode(value),
     responseSerialize: (value: MsgEmergencySettleMarketResponse): Buffer =>
       Buffer.from(MsgEmergencySettleMarketResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgEmergencySettleMarketResponse =>
@@ -13124,11 +15162,14 @@ export const MsgService = {
     path: "/injective.exchange.v2.Msg/OffsetPosition" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgOffsetPosition): Buffer => Buffer.from(MsgOffsetPosition.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgOffsetPosition => MsgOffsetPosition.decode(value),
+    requestSerialize: (value: MsgOffsetPosition): Buffer =>
+      Buffer.from(MsgOffsetPosition.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgOffsetPosition =>
+      MsgOffsetPosition.decode(value),
     responseSerialize: (value: MsgOffsetPositionResponse): Buffer =>
       Buffer.from(MsgOffsetPositionResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgOffsetPositionResponse => MsgOffsetPositionResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgOffsetPositionResponse =>
+      MsgOffsetPositionResponse.decode(value),
   },
   /** IncreasePositionMargin defines a method for increasing margin of a position */
   increasePositionMargin: {
@@ -13137,7 +15178,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgIncreasePositionMargin): Buffer =>
       Buffer.from(MsgIncreasePositionMargin.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgIncreasePositionMargin => MsgIncreasePositionMargin.decode(value),
+    requestDeserialize: (value: Buffer): MsgIncreasePositionMargin =>
+      MsgIncreasePositionMargin.decode(value),
     responseSerialize: (value: MsgIncreasePositionMarginResponse): Buffer =>
       Buffer.from(MsgIncreasePositionMarginResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgIncreasePositionMarginResponse =>
@@ -13150,7 +15192,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgDecreasePositionMargin): Buffer =>
       Buffer.from(MsgDecreasePositionMargin.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgDecreasePositionMargin => MsgDecreasePositionMargin.decode(value),
+    requestDeserialize: (value: Buffer): MsgDecreasePositionMargin =>
+      MsgDecreasePositionMargin.decode(value),
     responseSerialize: (value: MsgDecreasePositionMarginResponse): Buffer =>
       Buffer.from(MsgDecreasePositionMarginResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgDecreasePositionMarginResponse =>
@@ -13161,11 +15204,14 @@ export const MsgService = {
     path: "/injective.exchange.v2.Msg/RewardsOptOut" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgRewardsOptOut): Buffer => Buffer.from(MsgRewardsOptOut.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgRewardsOptOut => MsgRewardsOptOut.decode(value),
+    requestSerialize: (value: MsgRewardsOptOut): Buffer =>
+      Buffer.from(MsgRewardsOptOut.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgRewardsOptOut =>
+      MsgRewardsOptOut.decode(value),
     responseSerialize: (value: MsgRewardsOptOutResponse): Buffer =>
       Buffer.from(MsgRewardsOptOutResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgRewardsOptOutResponse => MsgRewardsOptOutResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgRewardsOptOutResponse =>
+      MsgRewardsOptOutResponse.decode(value),
   },
   /**
    * AdminUpdateBinaryOptionsMarket defines method for updating a binary options
@@ -13179,31 +15225,43 @@ export const MsgService = {
       Buffer.from(MsgAdminUpdateBinaryOptionsMarket.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgAdminUpdateBinaryOptionsMarket =>
       MsgAdminUpdateBinaryOptionsMarket.decode(value),
-    responseSerialize: (value: MsgAdminUpdateBinaryOptionsMarketResponse): Buffer =>
-      Buffer.from(MsgAdminUpdateBinaryOptionsMarketResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgAdminUpdateBinaryOptionsMarketResponse =>
+    responseSerialize: (
+      value: MsgAdminUpdateBinaryOptionsMarketResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgAdminUpdateBinaryOptionsMarketResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgAdminUpdateBinaryOptionsMarketResponse =>
       MsgAdminUpdateBinaryOptionsMarketResponse.decode(value),
   },
   updateParams: {
     path: "/injective.exchange.v2.Msg/UpdateParams" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgUpdateParams): Buffer => Buffer.from(MsgUpdateParams.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgUpdateParams => MsgUpdateParams.decode(value),
+    requestSerialize: (value: MsgUpdateParams): Buffer =>
+      Buffer.from(MsgUpdateParams.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgUpdateParams =>
+      MsgUpdateParams.decode(value),
     responseSerialize: (value: MsgUpdateParamsResponse): Buffer =>
       Buffer.from(MsgUpdateParamsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgUpdateParamsResponse => MsgUpdateParamsResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgUpdateParamsResponse =>
+      MsgUpdateParamsResponse.decode(value),
   },
   /** UpdateSpotMarket modifies certain spot market fields (admin only) */
   updateSpotMarket: {
     path: "/injective.exchange.v2.Msg/UpdateSpotMarket" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgUpdateSpotMarket): Buffer => Buffer.from(MsgUpdateSpotMarket.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgUpdateSpotMarket => MsgUpdateSpotMarket.decode(value),
+    requestSerialize: (value: MsgUpdateSpotMarket): Buffer =>
+      Buffer.from(MsgUpdateSpotMarket.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgUpdateSpotMarket =>
+      MsgUpdateSpotMarket.decode(value),
     responseSerialize: (value: MsgUpdateSpotMarketResponse): Buffer =>
       Buffer.from(MsgUpdateSpotMarketResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgUpdateSpotMarketResponse => MsgUpdateSpotMarketResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgUpdateSpotMarketResponse =>
+      MsgUpdateSpotMarketResponse.decode(value),
   },
   /**
    * UpdateDerivativeMarket modifies certain derivative market fields (admin
@@ -13215,7 +15273,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgUpdateDerivativeMarket): Buffer =>
       Buffer.from(MsgUpdateDerivativeMarket.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgUpdateDerivativeMarket => MsgUpdateDerivativeMarket.decode(value),
+    requestDeserialize: (value: Buffer): MsgUpdateDerivativeMarket =>
+      MsgUpdateDerivativeMarket.decode(value),
     responseSerialize: (value: MsgUpdateDerivativeMarketResponse): Buffer =>
       Buffer.from(MsgUpdateDerivativeMarketResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgUpdateDerivativeMarketResponse =>
@@ -13227,7 +15286,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgAuthorizeStakeGrants): Buffer =>
       Buffer.from(MsgAuthorizeStakeGrants.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgAuthorizeStakeGrants => MsgAuthorizeStakeGrants.decode(value),
+    requestDeserialize: (value: Buffer): MsgAuthorizeStakeGrants =>
+      MsgAuthorizeStakeGrants.decode(value),
     responseSerialize: (value: MsgAuthorizeStakeGrantsResponse): Buffer =>
       Buffer.from(MsgAuthorizeStakeGrantsResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgAuthorizeStakeGrantsResponse =>
@@ -13239,10 +15299,12 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgActivateStakeGrant): Buffer =>
       Buffer.from(MsgActivateStakeGrant.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgActivateStakeGrant => MsgActivateStakeGrant.decode(value),
+    requestDeserialize: (value: Buffer): MsgActivateStakeGrant =>
+      MsgActivateStakeGrant.decode(value),
     responseSerialize: (value: MsgActivateStakeGrantResponse): Buffer =>
       Buffer.from(MsgActivateStakeGrantResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgActivateStakeGrantResponse => MsgActivateStakeGrantResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgActivateStakeGrantResponse =>
+      MsgActivateStakeGrantResponse.decode(value),
   },
   batchExchangeModification: {
     path: "/injective.exchange.v2.Msg/BatchExchangeModification" as const,
@@ -13250,21 +15312,27 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgBatchExchangeModification): Buffer =>
       Buffer.from(MsgBatchExchangeModification.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgBatchExchangeModification => MsgBatchExchangeModification.decode(value),
+    requestDeserialize: (value: Buffer): MsgBatchExchangeModification =>
+      MsgBatchExchangeModification.decode(value),
     responseSerialize: (value: MsgBatchExchangeModificationResponse): Buffer =>
       Buffer.from(MsgBatchExchangeModificationResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgBatchExchangeModificationResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgBatchExchangeModificationResponse =>
       MsgBatchExchangeModificationResponse.decode(value),
   },
   launchSpotMarket: {
     path: "/injective.exchange.v2.Msg/LaunchSpotMarket" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgSpotMarketLaunch): Buffer => Buffer.from(MsgSpotMarketLaunch.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgSpotMarketLaunch => MsgSpotMarketLaunch.decode(value),
+    requestSerialize: (value: MsgSpotMarketLaunch): Buffer =>
+      Buffer.from(MsgSpotMarketLaunch.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgSpotMarketLaunch =>
+      MsgSpotMarketLaunch.decode(value),
     responseSerialize: (value: MsgSpotMarketLaunchResponse): Buffer =>
       Buffer.from(MsgSpotMarketLaunchResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgSpotMarketLaunchResponse => MsgSpotMarketLaunchResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgSpotMarketLaunchResponse =>
+      MsgSpotMarketLaunchResponse.decode(value),
   },
   launchPerpetualMarket: {
     path: "/injective.exchange.v2.Msg/LaunchPerpetualMarket" as const,
@@ -13272,7 +15340,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgPerpetualMarketLaunch): Buffer =>
       Buffer.from(MsgPerpetualMarketLaunch.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgPerpetualMarketLaunch => MsgPerpetualMarketLaunch.decode(value),
+    requestDeserialize: (value: Buffer): MsgPerpetualMarketLaunch =>
+      MsgPerpetualMarketLaunch.decode(value),
     responseSerialize: (value: MsgPerpetualMarketLaunchResponse): Buffer =>
       Buffer.from(MsgPerpetualMarketLaunchResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgPerpetualMarketLaunchResponse =>
@@ -13284,10 +15353,13 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgExpiryFuturesMarketLaunch): Buffer =>
       Buffer.from(MsgExpiryFuturesMarketLaunch.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgExpiryFuturesMarketLaunch => MsgExpiryFuturesMarketLaunch.decode(value),
+    requestDeserialize: (value: Buffer): MsgExpiryFuturesMarketLaunch =>
+      MsgExpiryFuturesMarketLaunch.decode(value),
     responseSerialize: (value: MsgExpiryFuturesMarketLaunchResponse): Buffer =>
       Buffer.from(MsgExpiryFuturesMarketLaunchResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgExpiryFuturesMarketLaunchResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgExpiryFuturesMarketLaunchResponse =>
       MsgExpiryFuturesMarketLaunchResponse.decode(value),
   },
   launchBinaryOptionsMarket: {
@@ -13296,10 +15368,13 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgBinaryOptionsMarketLaunch): Buffer =>
       Buffer.from(MsgBinaryOptionsMarketLaunch.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgBinaryOptionsMarketLaunch => MsgBinaryOptionsMarketLaunch.decode(value),
+    requestDeserialize: (value: Buffer): MsgBinaryOptionsMarketLaunch =>
+      MsgBinaryOptionsMarketLaunch.decode(value),
     responseSerialize: (value: MsgBinaryOptionsMarketLaunchResponse): Buffer =>
       Buffer.from(MsgBinaryOptionsMarketLaunchResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgBinaryOptionsMarketLaunchResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgBinaryOptionsMarketLaunchResponse =>
       MsgBinaryOptionsMarketLaunchResponse.decode(value),
   },
   batchSpendCommunityPool: {
@@ -13308,7 +15383,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgBatchCommunityPoolSpend): Buffer =>
       Buffer.from(MsgBatchCommunityPoolSpend.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgBatchCommunityPoolSpend => MsgBatchCommunityPoolSpend.decode(value),
+    requestDeserialize: (value: Buffer): MsgBatchCommunityPoolSpend =>
+      MsgBatchCommunityPoolSpend.decode(value),
     responseSerialize: (value: MsgBatchCommunityPoolSpendResponse): Buffer =>
       Buffer.from(MsgBatchCommunityPoolSpendResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgBatchCommunityPoolSpendResponse =>
@@ -13320,7 +15396,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgSpotMarketParamUpdate): Buffer =>
       Buffer.from(MsgSpotMarketParamUpdate.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgSpotMarketParamUpdate => MsgSpotMarketParamUpdate.decode(value),
+    requestDeserialize: (value: Buffer): MsgSpotMarketParamUpdate =>
+      MsgSpotMarketParamUpdate.decode(value),
     responseSerialize: (value: MsgSpotMarketParamUpdateResponse): Buffer =>
       Buffer.from(MsgSpotMarketParamUpdateResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgSpotMarketParamUpdateResponse =>
@@ -13332,10 +15409,17 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgDerivativeMarketParamUpdate): Buffer =>
       Buffer.from(MsgDerivativeMarketParamUpdate.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgDerivativeMarketParamUpdate => MsgDerivativeMarketParamUpdate.decode(value),
-    responseSerialize: (value: MsgDerivativeMarketParamUpdateResponse): Buffer =>
-      Buffer.from(MsgDerivativeMarketParamUpdateResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgDerivativeMarketParamUpdateResponse =>
+    requestDeserialize: (value: Buffer): MsgDerivativeMarketParamUpdate =>
+      MsgDerivativeMarketParamUpdate.decode(value),
+    responseSerialize: (
+      value: MsgDerivativeMarketParamUpdateResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgDerivativeMarketParamUpdateResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgDerivativeMarketParamUpdateResponse =>
       MsgDerivativeMarketParamUpdateResponse.decode(value),
   },
   binaryOptionsMarketParamUpdate: {
@@ -13346,9 +15430,15 @@ export const MsgService = {
       Buffer.from(MsgBinaryOptionsMarketParamUpdate.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgBinaryOptionsMarketParamUpdate =>
       MsgBinaryOptionsMarketParamUpdate.decode(value),
-    responseSerialize: (value: MsgBinaryOptionsMarketParamUpdateResponse): Buffer =>
-      Buffer.from(MsgBinaryOptionsMarketParamUpdateResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgBinaryOptionsMarketParamUpdateResponse =>
+    responseSerialize: (
+      value: MsgBinaryOptionsMarketParamUpdateResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgBinaryOptionsMarketParamUpdateResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgBinaryOptionsMarketParamUpdateResponse =>
       MsgBinaryOptionsMarketParamUpdateResponse.decode(value),
   },
   forceSettleMarket: {
@@ -13357,7 +15447,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgMarketForcedSettlement): Buffer =>
       Buffer.from(MsgMarketForcedSettlement.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgMarketForcedSettlement => MsgMarketForcedSettlement.decode(value),
+    requestDeserialize: (value: Buffer): MsgMarketForcedSettlement =>
+      MsgMarketForcedSettlement.decode(value),
     responseSerialize: (value: MsgMarketForcedSettlementResponse): Buffer =>
       Buffer.from(MsgMarketForcedSettlementResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgMarketForcedSettlementResponse =>
@@ -13369,21 +15460,31 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgTradingRewardCampaignLaunch): Buffer =>
       Buffer.from(MsgTradingRewardCampaignLaunch.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgTradingRewardCampaignLaunch => MsgTradingRewardCampaignLaunch.decode(value),
-    responseSerialize: (value: MsgTradingRewardCampaignLaunchResponse): Buffer =>
-      Buffer.from(MsgTradingRewardCampaignLaunchResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgTradingRewardCampaignLaunchResponse =>
+    requestDeserialize: (value: Buffer): MsgTradingRewardCampaignLaunch =>
+      MsgTradingRewardCampaignLaunch.decode(value),
+    responseSerialize: (
+      value: MsgTradingRewardCampaignLaunchResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgTradingRewardCampaignLaunchResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgTradingRewardCampaignLaunchResponse =>
       MsgTradingRewardCampaignLaunchResponse.decode(value),
   },
   enableExchange: {
     path: "/injective.exchange.v2.Msg/EnableExchange" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgExchangeEnable): Buffer => Buffer.from(MsgExchangeEnable.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgExchangeEnable => MsgExchangeEnable.decode(value),
+    requestSerialize: (value: MsgExchangeEnable): Buffer =>
+      Buffer.from(MsgExchangeEnable.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgExchangeEnable =>
+      MsgExchangeEnable.decode(value),
     responseSerialize: (value: MsgExchangeEnableResponse): Buffer =>
       Buffer.from(MsgExchangeEnableResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgExchangeEnableResponse => MsgExchangeEnableResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgExchangeEnableResponse =>
+      MsgExchangeEnableResponse.decode(value),
   },
   updateTradingRewardCampaign: {
     path: "/injective.exchange.v2.Msg/UpdateTradingRewardCampaign" as const,
@@ -13391,10 +15492,17 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgTradingRewardCampaignUpdate): Buffer =>
       Buffer.from(MsgTradingRewardCampaignUpdate.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgTradingRewardCampaignUpdate => MsgTradingRewardCampaignUpdate.decode(value),
-    responseSerialize: (value: MsgTradingRewardCampaignUpdateResponse): Buffer =>
-      Buffer.from(MsgTradingRewardCampaignUpdateResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgTradingRewardCampaignUpdateResponse =>
+    requestDeserialize: (value: Buffer): MsgTradingRewardCampaignUpdate =>
+      MsgTradingRewardCampaignUpdate.decode(value),
+    responseSerialize: (
+      value: MsgTradingRewardCampaignUpdateResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgTradingRewardCampaignUpdateResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgTradingRewardCampaignUpdateResponse =>
       MsgTradingRewardCampaignUpdateResponse.decode(value),
   },
   updateTradingRewardPendingPoints: {
@@ -13405,32 +15513,55 @@ export const MsgService = {
       Buffer.from(MsgTradingRewardPendingPointsUpdate.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgTradingRewardPendingPointsUpdate =>
       MsgTradingRewardPendingPointsUpdate.decode(value),
-    responseSerialize: (value: MsgTradingRewardPendingPointsUpdateResponse): Buffer =>
-      Buffer.from(MsgTradingRewardPendingPointsUpdateResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgTradingRewardPendingPointsUpdateResponse =>
+    responseSerialize: (
+      value: MsgTradingRewardPendingPointsUpdateResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgTradingRewardPendingPointsUpdateResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgTradingRewardPendingPointsUpdateResponse =>
       MsgTradingRewardPendingPointsUpdateResponse.decode(value),
   },
   updateFeeDiscount: {
     path: "/injective.exchange.v2.Msg/UpdateFeeDiscount" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgFeeDiscount): Buffer => Buffer.from(MsgFeeDiscount.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgFeeDiscount => MsgFeeDiscount.decode(value),
+    requestSerialize: (value: MsgFeeDiscount): Buffer =>
+      Buffer.from(MsgFeeDiscount.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MsgFeeDiscount =>
+      MsgFeeDiscount.decode(value),
     responseSerialize: (value: MsgFeeDiscountResponse): Buffer =>
       Buffer.from(MsgFeeDiscountResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgFeeDiscountResponse => MsgFeeDiscountResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgFeeDiscountResponse =>
+      MsgFeeDiscountResponse.decode(value),
   },
   updateAtomicMarketOrderFeeMultiplierSchedule: {
     path: "/injective.exchange.v2.Msg/UpdateAtomicMarketOrderFeeMultiplierSchedule" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MsgAtomicMarketOrderFeeMultiplierSchedule): Buffer =>
-      Buffer.from(MsgAtomicMarketOrderFeeMultiplierSchedule.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgAtomicMarketOrderFeeMultiplierSchedule =>
+    requestSerialize: (
+      value: MsgAtomicMarketOrderFeeMultiplierSchedule,
+    ): Buffer =>
+      Buffer.from(
+        MsgAtomicMarketOrderFeeMultiplierSchedule.encode(value).finish(),
+      ),
+    requestDeserialize: (
+      value: Buffer,
+    ): MsgAtomicMarketOrderFeeMultiplierSchedule =>
       MsgAtomicMarketOrderFeeMultiplierSchedule.decode(value),
-    responseSerialize: (value: MsgAtomicMarketOrderFeeMultiplierScheduleResponse): Buffer =>
-      Buffer.from(MsgAtomicMarketOrderFeeMultiplierScheduleResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgAtomicMarketOrderFeeMultiplierScheduleResponse =>
+    responseSerialize: (
+      value: MsgAtomicMarketOrderFeeMultiplierScheduleResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgAtomicMarketOrderFeeMultiplierScheduleResponse.encode(
+          value,
+        ).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgAtomicMarketOrderFeeMultiplierScheduleResponse =>
       MsgAtomicMarketOrderFeeMultiplierScheduleResponse.decode(value),
   },
   /** SetDelegationTransferReceivers adds delegation transfer receivers. */
@@ -13442,9 +15573,15 @@ export const MsgService = {
       Buffer.from(MsgSetDelegationTransferReceivers.encode(value).finish()),
     requestDeserialize: (value: Buffer): MsgSetDelegationTransferReceivers =>
       MsgSetDelegationTransferReceivers.decode(value),
-    responseSerialize: (value: MsgSetDelegationTransferReceiversResponse): Buffer =>
-      Buffer.from(MsgSetDelegationTransferReceiversResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgSetDelegationTransferReceiversResponse =>
+    responseSerialize: (
+      value: MsgSetDelegationTransferReceiversResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgSetDelegationTransferReceiversResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgSetDelegationTransferReceiversResponse =>
       MsgSetDelegationTransferReceiversResponse.decode(value),
   },
   /** MsgCancelPostOnlyMode defines a message to turn off the post-only mode */
@@ -13454,10 +15591,12 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgCancelPostOnlyMode): Buffer =>
       Buffer.from(MsgCancelPostOnlyMode.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgCancelPostOnlyMode => MsgCancelPostOnlyMode.decode(value),
+    requestDeserialize: (value: Buffer): MsgCancelPostOnlyMode =>
+      MsgCancelPostOnlyMode.decode(value),
     responseSerialize: (value: MsgCancelPostOnlyModeResponse): Buffer =>
       Buffer.from(MsgCancelPostOnlyModeResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgCancelPostOnlyModeResponse => MsgCancelPostOnlyModeResponse.decode(value),
+    responseDeserialize: (value: Buffer): MsgCancelPostOnlyModeResponse =>
+      MsgCancelPostOnlyModeResponse.decode(value),
   },
   /**
    * MsgActivatePostOnlyMode defines a message to turn on the post-only mode for
@@ -13469,7 +15608,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgActivatePostOnlyMode): Buffer =>
       Buffer.from(MsgActivatePostOnlyMode.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgActivatePostOnlyMode => MsgActivatePostOnlyMode.decode(value),
+    requestDeserialize: (value: Buffer): MsgActivatePostOnlyMode =>
+      MsgActivatePostOnlyMode.decode(value),
     responseSerialize: (value: MsgActivatePostOnlyModeResponse): Buffer =>
       Buffer.from(MsgActivatePostOnlyModeResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgActivatePostOnlyModeResponse =>
@@ -13486,7 +15626,8 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgLiquidateCrossMarginPool): Buffer =>
       Buffer.from(MsgLiquidateCrossMarginPool.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgLiquidateCrossMarginPool => MsgLiquidateCrossMarginPool.decode(value),
+    requestDeserialize: (value: Buffer): MsgLiquidateCrossMarginPool =>
+      MsgLiquidateCrossMarginPool.decode(value),
     responseSerialize: (value: MsgLiquidateCrossMarginPoolResponse): Buffer =>
       Buffer.from(MsgLiquidateCrossMarginPoolResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): MsgLiquidateCrossMarginPoolResponse =>
@@ -13502,10 +15643,17 @@ export const MsgService = {
     responseStream: false as const,
     requestSerialize: (value: MsgUpdateSubaccountRiskProfile): Buffer =>
       Buffer.from(MsgUpdateSubaccountRiskProfile.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MsgUpdateSubaccountRiskProfile => MsgUpdateSubaccountRiskProfile.decode(value),
-    responseSerialize: (value: MsgUpdateSubaccountRiskProfileResponse): Buffer =>
-      Buffer.from(MsgUpdateSubaccountRiskProfileResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MsgUpdateSubaccountRiskProfileResponse =>
+    requestDeserialize: (value: Buffer): MsgUpdateSubaccountRiskProfile =>
+      MsgUpdateSubaccountRiskProfile.decode(value),
+    responseSerialize: (
+      value: MsgUpdateSubaccountRiskProfileResponse,
+    ): Buffer =>
+      Buffer.from(
+        MsgUpdateSubaccountRiskProfileResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): MsgUpdateSubaccountRiskProfileResponse =>
       MsgUpdateSubaccountRiskProfileResponse.decode(value),
   },
 } as const;
@@ -13525,7 +15673,10 @@ export interface MsgServer extends UntypedServiceImplementation {
    * InstantSpotMarketLaunch defines method for creating a spot market by paying
    * listing fee without governance
    */
-  instantSpotMarketLaunch: handleUnaryCall<MsgInstantSpotMarketLaunch, MsgInstantSpotMarketLaunchResponse>;
+  instantSpotMarketLaunch: handleUnaryCall<
+    MsgInstantSpotMarketLaunch,
+    MsgInstantSpotMarketLaunchResponse
+  >;
   /**
    * InstantPerpetualMarketLaunch defines a method for creating a new perpetual
    * futures market by paying listing fee without governance
@@ -13543,36 +15694,60 @@ export interface MsgServer extends UntypedServiceImplementation {
     MsgInstantExpiryFuturesMarketLaunchResponse
   >;
   /** CreateSpotLimitOrder defines a method for creating a new spot limit order. */
-  createSpotLimitOrder: handleUnaryCall<MsgCreateSpotLimitOrder, MsgCreateSpotLimitOrderResponse>;
+  createSpotLimitOrder: handleUnaryCall<
+    MsgCreateSpotLimitOrder,
+    MsgCreateSpotLimitOrderResponse
+  >;
   /**
    * BatchCreateSpotLimitOrder defines a method for creating a new batch of spot
    * limit orders.
    */
-  batchCreateSpotLimitOrders: handleUnaryCall<MsgBatchCreateSpotLimitOrders, MsgBatchCreateSpotLimitOrdersResponse>;
+  batchCreateSpotLimitOrders: handleUnaryCall<
+    MsgBatchCreateSpotLimitOrders,
+    MsgBatchCreateSpotLimitOrdersResponse
+  >;
   /**
    * CreateSpotMarketOrder defines a method for creating a new spot market
    * order.
    */
-  createSpotMarketOrder: handleUnaryCall<MsgCreateSpotMarketOrder, MsgCreateSpotMarketOrderResponse>;
+  createSpotMarketOrder: handleUnaryCall<
+    MsgCreateSpotMarketOrder,
+    MsgCreateSpotMarketOrderResponse
+  >;
   /** MsgCancelSpotOrder defines a method for cancelling a spot order. */
-  cancelSpotOrder: handleUnaryCall<MsgCancelSpotOrder, MsgCancelSpotOrderResponse>;
+  cancelSpotOrder: handleUnaryCall<
+    MsgCancelSpotOrder,
+    MsgCancelSpotOrderResponse
+  >;
   /**
    * BatchCancelSpotOrders defines a method for cancelling a batch of spot
    * orders in a given market.
    */
-  batchCancelSpotOrders: handleUnaryCall<MsgBatchCancelSpotOrders, MsgBatchCancelSpotOrdersResponse>;
+  batchCancelSpotOrders: handleUnaryCall<
+    MsgBatchCancelSpotOrders,
+    MsgBatchCancelSpotOrdersResponse
+  >;
   /** BatchUpdateOrders defines a method for updating a batch of orders. */
-  batchUpdateOrders: handleUnaryCall<MsgBatchUpdateOrders, MsgBatchUpdateOrdersResponse>;
+  batchUpdateOrders: handleUnaryCall<
+    MsgBatchUpdateOrders,
+    MsgBatchUpdateOrdersResponse
+  >;
   /**
    * PrivilegedExecuteContract defines a method for executing a Cosmwasm
    * contract from the exchange module with privileged capabilities.
    */
-  privilegedExecuteContract: handleUnaryCall<MsgPrivilegedExecuteContract, MsgPrivilegedExecuteContractResponse>;
+  privilegedExecuteContract: handleUnaryCall<
+    MsgPrivilegedExecuteContract,
+    MsgPrivilegedExecuteContractResponse
+  >;
   /**
    * CreateDerivativeLimitOrder defines a method for creating a new derivative
    * limit order.
    */
-  createDerivativeLimitOrder: handleUnaryCall<MsgCreateDerivativeLimitOrder, MsgCreateDerivativeLimitOrderResponse>;
+  createDerivativeLimitOrder: handleUnaryCall<
+    MsgCreateDerivativeLimitOrder,
+    MsgCreateDerivativeLimitOrderResponse
+  >;
   /**
    * BatchCreateDerivativeLimitOrders defines a method for creating a new batch
    * of derivative limit orders.
@@ -13585,17 +15760,26 @@ export interface MsgServer extends UntypedServiceImplementation {
    * MsgCreateDerivativeLimitOrder defines a method for creating a new
    * derivative market order.
    */
-  createDerivativeMarketOrder: handleUnaryCall<MsgCreateDerivativeMarketOrder, MsgCreateDerivativeMarketOrderResponse>;
+  createDerivativeMarketOrder: handleUnaryCall<
+    MsgCreateDerivativeMarketOrder,
+    MsgCreateDerivativeMarketOrderResponse
+  >;
   /**
    * MsgCancelDerivativeOrder defines a method for cancelling a derivative
    * order.
    */
-  cancelDerivativeOrder: handleUnaryCall<MsgCancelDerivativeOrder, MsgCancelDerivativeOrderResponse>;
+  cancelDerivativeOrder: handleUnaryCall<
+    MsgCancelDerivativeOrder,
+    MsgCancelDerivativeOrderResponse
+  >;
   /**
    * MsgBatchCancelDerivativeOrders defines a method for cancelling a batch of
    * derivative limit orders.
    */
-  batchCancelDerivativeOrders: handleUnaryCall<MsgBatchCancelDerivativeOrders, MsgBatchCancelDerivativeOrdersResponse>;
+  batchCancelDerivativeOrders: handleUnaryCall<
+    MsgBatchCancelDerivativeOrders,
+    MsgBatchCancelDerivativeOrdersResponse
+  >;
   /**
    * InstantBinaryOptionsMarketLaunch defines method for creating a binary
    * options market by paying listing fee without governance
@@ -13624,7 +15808,10 @@ export interface MsgServer extends UntypedServiceImplementation {
    * MsgCancelBinaryOptionsOrder defines a method for cancelling a binary
    * options order.
    */
-  cancelBinaryOptionsOrder: handleUnaryCall<MsgCancelBinaryOptionsOrder, MsgCancelBinaryOptionsOrderResponse>;
+  cancelBinaryOptionsOrder: handleUnaryCall<
+    MsgCancelBinaryOptionsOrder,
+    MsgCancelBinaryOptionsOrderResponse
+  >;
   /**
    * BatchCancelBinaryOptionsOrders defines a method for cancelling a batch of
    * binary options limit orders.
@@ -13634,24 +15821,45 @@ export interface MsgServer extends UntypedServiceImplementation {
     MsgBatchCancelBinaryOptionsOrdersResponse
   >;
   /** SubaccountTransfer defines a method for transfer between subaccounts */
-  subaccountTransfer: handleUnaryCall<MsgSubaccountTransfer, MsgSubaccountTransferResponse>;
+  subaccountTransfer: handleUnaryCall<
+    MsgSubaccountTransfer,
+    MsgSubaccountTransferResponse
+  >;
   /** ExternalTransfer defines a method for transfer between external accounts */
-  externalTransfer: handleUnaryCall<MsgExternalTransfer, MsgExternalTransferResponse>;
+  externalTransfer: handleUnaryCall<
+    MsgExternalTransfer,
+    MsgExternalTransferResponse
+  >;
   /** LiquidatePosition defines a method for liquidating a position */
-  liquidatePosition: handleUnaryCall<MsgLiquidatePosition, MsgLiquidatePositionResponse>;
+  liquidatePosition: handleUnaryCall<
+    MsgLiquidatePosition,
+    MsgLiquidatePositionResponse
+  >;
   /**
    * BatchLiquidatePositions defines a method for liquidating multiple positions
    * in a best-effort manner
    */
-  batchLiquidatePositions: handleUnaryCall<MsgBatchLiquidatePositions, MsgBatchLiquidatePositionsResponse>;
+  batchLiquidatePositions: handleUnaryCall<
+    MsgBatchLiquidatePositions,
+    MsgBatchLiquidatePositionsResponse
+  >;
   /** EmergencySettleMarket defines a method for emergency settling a market */
-  emergencySettleMarket: handleUnaryCall<MsgEmergencySettleMarket, MsgEmergencySettleMarketResponse>;
+  emergencySettleMarket: handleUnaryCall<
+    MsgEmergencySettleMarket,
+    MsgEmergencySettleMarketResponse
+  >;
   /** OffsetPosition defines a method for offsetting a position */
   offsetPosition: handleUnaryCall<MsgOffsetPosition, MsgOffsetPositionResponse>;
   /** IncreasePositionMargin defines a method for increasing margin of a position */
-  increasePositionMargin: handleUnaryCall<MsgIncreasePositionMargin, MsgIncreasePositionMarginResponse>;
+  increasePositionMargin: handleUnaryCall<
+    MsgIncreasePositionMargin,
+    MsgIncreasePositionMarginResponse
+  >;
   /** DecreasePositionMargin defines a method for decreasing margin of a position */
-  decreasePositionMargin: handleUnaryCall<MsgDecreasePositionMargin, MsgDecreasePositionMarginResponse>;
+  decreasePositionMargin: handleUnaryCall<
+    MsgDecreasePositionMargin,
+    MsgDecreasePositionMarginResponse
+  >;
   /** RewardsOptOut defines a method for opting out of rewards */
   rewardsOptOut: handleUnaryCall<MsgRewardsOptOut, MsgRewardsOptOutResponse>;
   /**
@@ -13664,30 +15872,75 @@ export interface MsgServer extends UntypedServiceImplementation {
   >;
   updateParams: handleUnaryCall<MsgUpdateParams, MsgUpdateParamsResponse>;
   /** UpdateSpotMarket modifies certain spot market fields (admin only) */
-  updateSpotMarket: handleUnaryCall<MsgUpdateSpotMarket, MsgUpdateSpotMarketResponse>;
+  updateSpotMarket: handleUnaryCall<
+    MsgUpdateSpotMarket,
+    MsgUpdateSpotMarketResponse
+  >;
   /**
    * UpdateDerivativeMarket modifies certain derivative market fields (admin
    * only)
    */
-  updateDerivativeMarket: handleUnaryCall<MsgUpdateDerivativeMarket, MsgUpdateDerivativeMarketResponse>;
-  authorizeStakeGrants: handleUnaryCall<MsgAuthorizeStakeGrants, MsgAuthorizeStakeGrantsResponse>;
-  activateStakeGrant: handleUnaryCall<MsgActivateStakeGrant, MsgActivateStakeGrantResponse>;
-  batchExchangeModification: handleUnaryCall<MsgBatchExchangeModification, MsgBatchExchangeModificationResponse>;
-  launchSpotMarket: handleUnaryCall<MsgSpotMarketLaunch, MsgSpotMarketLaunchResponse>;
-  launchPerpetualMarket: handleUnaryCall<MsgPerpetualMarketLaunch, MsgPerpetualMarketLaunchResponse>;
-  launchExpiryFuturesMarket: handleUnaryCall<MsgExpiryFuturesMarketLaunch, MsgExpiryFuturesMarketLaunchResponse>;
-  launchBinaryOptionsMarket: handleUnaryCall<MsgBinaryOptionsMarketLaunch, MsgBinaryOptionsMarketLaunchResponse>;
-  batchSpendCommunityPool: handleUnaryCall<MsgBatchCommunityPoolSpend, MsgBatchCommunityPoolSpendResponse>;
-  spotMarketParamUpdate: handleUnaryCall<MsgSpotMarketParamUpdate, MsgSpotMarketParamUpdateResponse>;
-  derivativeMarketParamUpdate: handleUnaryCall<MsgDerivativeMarketParamUpdate, MsgDerivativeMarketParamUpdateResponse>;
+  updateDerivativeMarket: handleUnaryCall<
+    MsgUpdateDerivativeMarket,
+    MsgUpdateDerivativeMarketResponse
+  >;
+  authorizeStakeGrants: handleUnaryCall<
+    MsgAuthorizeStakeGrants,
+    MsgAuthorizeStakeGrantsResponse
+  >;
+  activateStakeGrant: handleUnaryCall<
+    MsgActivateStakeGrant,
+    MsgActivateStakeGrantResponse
+  >;
+  batchExchangeModification: handleUnaryCall<
+    MsgBatchExchangeModification,
+    MsgBatchExchangeModificationResponse
+  >;
+  launchSpotMarket: handleUnaryCall<
+    MsgSpotMarketLaunch,
+    MsgSpotMarketLaunchResponse
+  >;
+  launchPerpetualMarket: handleUnaryCall<
+    MsgPerpetualMarketLaunch,
+    MsgPerpetualMarketLaunchResponse
+  >;
+  launchExpiryFuturesMarket: handleUnaryCall<
+    MsgExpiryFuturesMarketLaunch,
+    MsgExpiryFuturesMarketLaunchResponse
+  >;
+  launchBinaryOptionsMarket: handleUnaryCall<
+    MsgBinaryOptionsMarketLaunch,
+    MsgBinaryOptionsMarketLaunchResponse
+  >;
+  batchSpendCommunityPool: handleUnaryCall<
+    MsgBatchCommunityPoolSpend,
+    MsgBatchCommunityPoolSpendResponse
+  >;
+  spotMarketParamUpdate: handleUnaryCall<
+    MsgSpotMarketParamUpdate,
+    MsgSpotMarketParamUpdateResponse
+  >;
+  derivativeMarketParamUpdate: handleUnaryCall<
+    MsgDerivativeMarketParamUpdate,
+    MsgDerivativeMarketParamUpdateResponse
+  >;
   binaryOptionsMarketParamUpdate: handleUnaryCall<
     MsgBinaryOptionsMarketParamUpdate,
     MsgBinaryOptionsMarketParamUpdateResponse
   >;
-  forceSettleMarket: handleUnaryCall<MsgMarketForcedSettlement, MsgMarketForcedSettlementResponse>;
-  launchTradingRewardCampaign: handleUnaryCall<MsgTradingRewardCampaignLaunch, MsgTradingRewardCampaignLaunchResponse>;
+  forceSettleMarket: handleUnaryCall<
+    MsgMarketForcedSettlement,
+    MsgMarketForcedSettlementResponse
+  >;
+  launchTradingRewardCampaign: handleUnaryCall<
+    MsgTradingRewardCampaignLaunch,
+    MsgTradingRewardCampaignLaunchResponse
+  >;
   enableExchange: handleUnaryCall<MsgExchangeEnable, MsgExchangeEnableResponse>;
-  updateTradingRewardCampaign: handleUnaryCall<MsgTradingRewardCampaignUpdate, MsgTradingRewardCampaignUpdateResponse>;
+  updateTradingRewardCampaign: handleUnaryCall<
+    MsgTradingRewardCampaignUpdate,
+    MsgTradingRewardCampaignUpdateResponse
+  >;
   updateTradingRewardPendingPoints: handleUnaryCall<
     MsgTradingRewardPendingPointsUpdate,
     MsgTradingRewardPendingPointsUpdateResponse
@@ -13703,23 +15956,35 @@ export interface MsgServer extends UntypedServiceImplementation {
     MsgSetDelegationTransferReceiversResponse
   >;
   /** MsgCancelPostOnlyMode defines a message to turn off the post-only mode */
-  cancelPostOnlyMode: handleUnaryCall<MsgCancelPostOnlyMode, MsgCancelPostOnlyModeResponse>;
+  cancelPostOnlyMode: handleUnaryCall<
+    MsgCancelPostOnlyMode,
+    MsgCancelPostOnlyModeResponse
+  >;
   /**
    * MsgActivatePostOnlyMode defines a message to turn on the post-only mode for
    * a number of blocks
    */
-  activatePostOnlyMode: handleUnaryCall<MsgActivatePostOnlyMode, MsgActivatePostOnlyModeResponse>;
+  activatePostOnlyMode: handleUnaryCall<
+    MsgActivatePostOnlyMode,
+    MsgActivatePostOnlyModeResponse
+  >;
   /**
    * LiquidateCrossMarginPool atomically closes all positions in a cross-margin
    * pool, netting surplus from profitable positions against deficits before
    * touching the insurance fund.
    */
-  liquidateCrossMarginPool: handleUnaryCall<MsgLiquidateCrossMarginPool, MsgLiquidateCrossMarginPoolResponse>;
+  liquidateCrossMarginPool: handleUnaryCall<
+    MsgLiquidateCrossMarginPool,
+    MsgLiquidateCrossMarginPoolResponse
+  >;
   /**
    * UpdateSubaccountRiskProfile allows a user (subject to eligibility & safety
    * gates) to set the subaccount's risk profile (e.g. opt into cross-margin).
    */
-  updateSubaccountRiskProfile: handleUnaryCall<MsgUpdateSubaccountRiskProfile, MsgUpdateSubaccountRiskProfileResponse>;
+  updateSubaccountRiskProfile: handleUnaryCall<
+    MsgUpdateSubaccountRiskProfile,
+    MsgUpdateSubaccountRiskProfileResponse
+  >;
 }
 
 export interface MsgClient extends Client {
@@ -13729,18 +15994,27 @@ export interface MsgClient extends Client {
    */
   deposit(
     request: MsgDeposit,
-    callback: (error: ServiceError | null, response: MsgDepositResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgDepositResponse,
+    ) => void,
   ): ClientUnaryCall;
   deposit(
     request: MsgDeposit,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgDepositResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgDepositResponse,
+    ) => void,
   ): ClientUnaryCall;
   deposit(
     request: MsgDeposit,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgDepositResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgDepositResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * Withdraw defines a method for withdrawing coins from a subaccount's
@@ -13748,18 +16022,27 @@ export interface MsgClient extends Client {
    */
   withdraw(
     request: MsgWithdraw,
-    callback: (error: ServiceError | null, response: MsgWithdrawResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgWithdrawResponse,
+    ) => void,
   ): ClientUnaryCall;
   withdraw(
     request: MsgWithdraw,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgWithdrawResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgWithdrawResponse,
+    ) => void,
   ): ClientUnaryCall;
   withdraw(
     request: MsgWithdraw,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgWithdrawResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgWithdrawResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * InstantSpotMarketLaunch defines method for creating a spot market by paying
@@ -13767,18 +16050,27 @@ export interface MsgClient extends Client {
    */
   instantSpotMarketLaunch(
     request: MsgInstantSpotMarketLaunch,
-    callback: (error: ServiceError | null, response: MsgInstantSpotMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantSpotMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   instantSpotMarketLaunch(
     request: MsgInstantSpotMarketLaunch,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgInstantSpotMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantSpotMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   instantSpotMarketLaunch(
     request: MsgInstantSpotMarketLaunch,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgInstantSpotMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantSpotMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * InstantPerpetualMarketLaunch defines a method for creating a new perpetual
@@ -13786,18 +16078,27 @@ export interface MsgClient extends Client {
    */
   instantPerpetualMarketLaunch(
     request: MsgInstantPerpetualMarketLaunch,
-    callback: (error: ServiceError | null, response: MsgInstantPerpetualMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantPerpetualMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   instantPerpetualMarketLaunch(
     request: MsgInstantPerpetualMarketLaunch,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgInstantPerpetualMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantPerpetualMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   instantPerpetualMarketLaunch(
     request: MsgInstantPerpetualMarketLaunch,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgInstantPerpetualMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantPerpetualMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * InstantExpiryFuturesMarketLaunch defines a method for creating a new expiry
@@ -13805,34 +16106,52 @@ export interface MsgClient extends Client {
    */
   instantExpiryFuturesMarketLaunch(
     request: MsgInstantExpiryFuturesMarketLaunch,
-    callback: (error: ServiceError | null, response: MsgInstantExpiryFuturesMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantExpiryFuturesMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   instantExpiryFuturesMarketLaunch(
     request: MsgInstantExpiryFuturesMarketLaunch,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgInstantExpiryFuturesMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantExpiryFuturesMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   instantExpiryFuturesMarketLaunch(
     request: MsgInstantExpiryFuturesMarketLaunch,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgInstantExpiryFuturesMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantExpiryFuturesMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** CreateSpotLimitOrder defines a method for creating a new spot limit order. */
   createSpotLimitOrder(
     request: MsgCreateSpotLimitOrder,
-    callback: (error: ServiceError | null, response: MsgCreateSpotLimitOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateSpotLimitOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createSpotLimitOrder(
     request: MsgCreateSpotLimitOrder,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgCreateSpotLimitOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateSpotLimitOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createSpotLimitOrder(
     request: MsgCreateSpotLimitOrder,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgCreateSpotLimitOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateSpotLimitOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * BatchCreateSpotLimitOrder defines a method for creating a new batch of spot
@@ -13840,18 +16159,27 @@ export interface MsgClient extends Client {
    */
   batchCreateSpotLimitOrders(
     request: MsgBatchCreateSpotLimitOrders,
-    callback: (error: ServiceError | null, response: MsgBatchCreateSpotLimitOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCreateSpotLimitOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchCreateSpotLimitOrders(
     request: MsgBatchCreateSpotLimitOrders,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBatchCreateSpotLimitOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCreateSpotLimitOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchCreateSpotLimitOrders(
     request: MsgBatchCreateSpotLimitOrders,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBatchCreateSpotLimitOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCreateSpotLimitOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * CreateSpotMarketOrder defines a method for creating a new spot market
@@ -13859,34 +16187,52 @@ export interface MsgClient extends Client {
    */
   createSpotMarketOrder(
     request: MsgCreateSpotMarketOrder,
-    callback: (error: ServiceError | null, response: MsgCreateSpotMarketOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateSpotMarketOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createSpotMarketOrder(
     request: MsgCreateSpotMarketOrder,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgCreateSpotMarketOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateSpotMarketOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createSpotMarketOrder(
     request: MsgCreateSpotMarketOrder,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgCreateSpotMarketOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateSpotMarketOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** MsgCancelSpotOrder defines a method for cancelling a spot order. */
   cancelSpotOrder(
     request: MsgCancelSpotOrder,
-    callback: (error: ServiceError | null, response: MsgCancelSpotOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelSpotOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   cancelSpotOrder(
     request: MsgCancelSpotOrder,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgCancelSpotOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelSpotOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   cancelSpotOrder(
     request: MsgCancelSpotOrder,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgCancelSpotOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelSpotOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * BatchCancelSpotOrders defines a method for cancelling a batch of spot
@@ -13894,34 +16240,52 @@ export interface MsgClient extends Client {
    */
   batchCancelSpotOrders(
     request: MsgBatchCancelSpotOrders,
-    callback: (error: ServiceError | null, response: MsgBatchCancelSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCancelSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchCancelSpotOrders(
     request: MsgBatchCancelSpotOrders,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBatchCancelSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCancelSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchCancelSpotOrders(
     request: MsgBatchCancelSpotOrders,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBatchCancelSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCancelSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** BatchUpdateOrders defines a method for updating a batch of orders. */
   batchUpdateOrders(
     request: MsgBatchUpdateOrders,
-    callback: (error: ServiceError | null, response: MsgBatchUpdateOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchUpdateOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchUpdateOrders(
     request: MsgBatchUpdateOrders,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBatchUpdateOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchUpdateOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchUpdateOrders(
     request: MsgBatchUpdateOrders,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBatchUpdateOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchUpdateOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * PrivilegedExecuteContract defines a method for executing a Cosmwasm
@@ -13929,18 +16293,27 @@ export interface MsgClient extends Client {
    */
   privilegedExecuteContract(
     request: MsgPrivilegedExecuteContract,
-    callback: (error: ServiceError | null, response: MsgPrivilegedExecuteContractResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgPrivilegedExecuteContractResponse,
+    ) => void,
   ): ClientUnaryCall;
   privilegedExecuteContract(
     request: MsgPrivilegedExecuteContract,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgPrivilegedExecuteContractResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgPrivilegedExecuteContractResponse,
+    ) => void,
   ): ClientUnaryCall;
   privilegedExecuteContract(
     request: MsgPrivilegedExecuteContract,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgPrivilegedExecuteContractResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgPrivilegedExecuteContractResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * CreateDerivativeLimitOrder defines a method for creating a new derivative
@@ -13948,18 +16321,27 @@ export interface MsgClient extends Client {
    */
   createDerivativeLimitOrder(
     request: MsgCreateDerivativeLimitOrder,
-    callback: (error: ServiceError | null, response: MsgCreateDerivativeLimitOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateDerivativeLimitOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createDerivativeLimitOrder(
     request: MsgCreateDerivativeLimitOrder,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgCreateDerivativeLimitOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateDerivativeLimitOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createDerivativeLimitOrder(
     request: MsgCreateDerivativeLimitOrder,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgCreateDerivativeLimitOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateDerivativeLimitOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * BatchCreateDerivativeLimitOrders defines a method for creating a new batch
@@ -13967,18 +16349,27 @@ export interface MsgClient extends Client {
    */
   batchCreateDerivativeLimitOrders(
     request: MsgBatchCreateDerivativeLimitOrders,
-    callback: (error: ServiceError | null, response: MsgBatchCreateDerivativeLimitOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCreateDerivativeLimitOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchCreateDerivativeLimitOrders(
     request: MsgBatchCreateDerivativeLimitOrders,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBatchCreateDerivativeLimitOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCreateDerivativeLimitOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchCreateDerivativeLimitOrders(
     request: MsgBatchCreateDerivativeLimitOrders,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBatchCreateDerivativeLimitOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCreateDerivativeLimitOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * MsgCreateDerivativeLimitOrder defines a method for creating a new
@@ -13986,18 +16377,27 @@ export interface MsgClient extends Client {
    */
   createDerivativeMarketOrder(
     request: MsgCreateDerivativeMarketOrder,
-    callback: (error: ServiceError | null, response: MsgCreateDerivativeMarketOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateDerivativeMarketOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createDerivativeMarketOrder(
     request: MsgCreateDerivativeMarketOrder,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgCreateDerivativeMarketOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateDerivativeMarketOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createDerivativeMarketOrder(
     request: MsgCreateDerivativeMarketOrder,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgCreateDerivativeMarketOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateDerivativeMarketOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * MsgCancelDerivativeOrder defines a method for cancelling a derivative
@@ -14005,18 +16405,27 @@ export interface MsgClient extends Client {
    */
   cancelDerivativeOrder(
     request: MsgCancelDerivativeOrder,
-    callback: (error: ServiceError | null, response: MsgCancelDerivativeOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelDerivativeOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   cancelDerivativeOrder(
     request: MsgCancelDerivativeOrder,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgCancelDerivativeOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelDerivativeOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   cancelDerivativeOrder(
     request: MsgCancelDerivativeOrder,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgCancelDerivativeOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelDerivativeOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * MsgBatchCancelDerivativeOrders defines a method for cancelling a batch of
@@ -14024,18 +16433,27 @@ export interface MsgClient extends Client {
    */
   batchCancelDerivativeOrders(
     request: MsgBatchCancelDerivativeOrders,
-    callback: (error: ServiceError | null, response: MsgBatchCancelDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCancelDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchCancelDerivativeOrders(
     request: MsgBatchCancelDerivativeOrders,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBatchCancelDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCancelDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchCancelDerivativeOrders(
     request: MsgBatchCancelDerivativeOrders,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBatchCancelDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCancelDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * InstantBinaryOptionsMarketLaunch defines method for creating a binary
@@ -14043,18 +16461,27 @@ export interface MsgClient extends Client {
    */
   instantBinaryOptionsMarketLaunch(
     request: MsgInstantBinaryOptionsMarketLaunch,
-    callback: (error: ServiceError | null, response: MsgInstantBinaryOptionsMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantBinaryOptionsMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   instantBinaryOptionsMarketLaunch(
     request: MsgInstantBinaryOptionsMarketLaunch,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgInstantBinaryOptionsMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantBinaryOptionsMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   instantBinaryOptionsMarketLaunch(
     request: MsgInstantBinaryOptionsMarketLaunch,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgInstantBinaryOptionsMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgInstantBinaryOptionsMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * CreateBinaryOptionsLimitOrder defines a method for creating a new binary
@@ -14062,18 +16489,27 @@ export interface MsgClient extends Client {
    */
   createBinaryOptionsLimitOrder(
     request: MsgCreateBinaryOptionsLimitOrder,
-    callback: (error: ServiceError | null, response: MsgCreateBinaryOptionsLimitOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateBinaryOptionsLimitOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createBinaryOptionsLimitOrder(
     request: MsgCreateBinaryOptionsLimitOrder,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgCreateBinaryOptionsLimitOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateBinaryOptionsLimitOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createBinaryOptionsLimitOrder(
     request: MsgCreateBinaryOptionsLimitOrder,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgCreateBinaryOptionsLimitOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateBinaryOptionsLimitOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * CreateBinaryOptionsMarketOrder defines a method for creating a new binary
@@ -14081,18 +16517,27 @@ export interface MsgClient extends Client {
    */
   createBinaryOptionsMarketOrder(
     request: MsgCreateBinaryOptionsMarketOrder,
-    callback: (error: ServiceError | null, response: MsgCreateBinaryOptionsMarketOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateBinaryOptionsMarketOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createBinaryOptionsMarketOrder(
     request: MsgCreateBinaryOptionsMarketOrder,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgCreateBinaryOptionsMarketOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateBinaryOptionsMarketOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   createBinaryOptionsMarketOrder(
     request: MsgCreateBinaryOptionsMarketOrder,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgCreateBinaryOptionsMarketOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCreateBinaryOptionsMarketOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * MsgCancelBinaryOptionsOrder defines a method for cancelling a binary
@@ -14100,18 +16545,27 @@ export interface MsgClient extends Client {
    */
   cancelBinaryOptionsOrder(
     request: MsgCancelBinaryOptionsOrder,
-    callback: (error: ServiceError | null, response: MsgCancelBinaryOptionsOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelBinaryOptionsOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   cancelBinaryOptionsOrder(
     request: MsgCancelBinaryOptionsOrder,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgCancelBinaryOptionsOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelBinaryOptionsOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   cancelBinaryOptionsOrder(
     request: MsgCancelBinaryOptionsOrder,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgCancelBinaryOptionsOrderResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelBinaryOptionsOrderResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * BatchCancelBinaryOptionsOrders defines a method for cancelling a batch of
@@ -14119,66 +16573,102 @@ export interface MsgClient extends Client {
    */
   batchCancelBinaryOptionsOrders(
     request: MsgBatchCancelBinaryOptionsOrders,
-    callback: (error: ServiceError | null, response: MsgBatchCancelBinaryOptionsOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCancelBinaryOptionsOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchCancelBinaryOptionsOrders(
     request: MsgBatchCancelBinaryOptionsOrders,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBatchCancelBinaryOptionsOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCancelBinaryOptionsOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchCancelBinaryOptionsOrders(
     request: MsgBatchCancelBinaryOptionsOrders,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBatchCancelBinaryOptionsOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCancelBinaryOptionsOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** SubaccountTransfer defines a method for transfer between subaccounts */
   subaccountTransfer(
     request: MsgSubaccountTransfer,
-    callback: (error: ServiceError | null, response: MsgSubaccountTransferResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSubaccountTransferResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountTransfer(
     request: MsgSubaccountTransfer,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgSubaccountTransferResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSubaccountTransferResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountTransfer(
     request: MsgSubaccountTransfer,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgSubaccountTransferResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSubaccountTransferResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** ExternalTransfer defines a method for transfer between external accounts */
   externalTransfer(
     request: MsgExternalTransfer,
-    callback: (error: ServiceError | null, response: MsgExternalTransferResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgExternalTransferResponse,
+    ) => void,
   ): ClientUnaryCall;
   externalTransfer(
     request: MsgExternalTransfer,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgExternalTransferResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgExternalTransferResponse,
+    ) => void,
   ): ClientUnaryCall;
   externalTransfer(
     request: MsgExternalTransfer,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgExternalTransferResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgExternalTransferResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** LiquidatePosition defines a method for liquidating a position */
   liquidatePosition(
     request: MsgLiquidatePosition,
-    callback: (error: ServiceError | null, response: MsgLiquidatePositionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgLiquidatePositionResponse,
+    ) => void,
   ): ClientUnaryCall;
   liquidatePosition(
     request: MsgLiquidatePosition,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgLiquidatePositionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgLiquidatePositionResponse,
+    ) => void,
   ): ClientUnaryCall;
   liquidatePosition(
     request: MsgLiquidatePosition,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgLiquidatePositionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgLiquidatePositionResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * BatchLiquidatePositions defines a method for liquidating multiple positions
@@ -14186,98 +16676,152 @@ export interface MsgClient extends Client {
    */
   batchLiquidatePositions(
     request: MsgBatchLiquidatePositions,
-    callback: (error: ServiceError | null, response: MsgBatchLiquidatePositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchLiquidatePositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchLiquidatePositions(
     request: MsgBatchLiquidatePositions,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBatchLiquidatePositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchLiquidatePositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchLiquidatePositions(
     request: MsgBatchLiquidatePositions,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBatchLiquidatePositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchLiquidatePositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** EmergencySettleMarket defines a method for emergency settling a market */
   emergencySettleMarket(
     request: MsgEmergencySettleMarket,
-    callback: (error: ServiceError | null, response: MsgEmergencySettleMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgEmergencySettleMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   emergencySettleMarket(
     request: MsgEmergencySettleMarket,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgEmergencySettleMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgEmergencySettleMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   emergencySettleMarket(
     request: MsgEmergencySettleMarket,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgEmergencySettleMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgEmergencySettleMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** OffsetPosition defines a method for offsetting a position */
   offsetPosition(
     request: MsgOffsetPosition,
-    callback: (error: ServiceError | null, response: MsgOffsetPositionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgOffsetPositionResponse,
+    ) => void,
   ): ClientUnaryCall;
   offsetPosition(
     request: MsgOffsetPosition,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgOffsetPositionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgOffsetPositionResponse,
+    ) => void,
   ): ClientUnaryCall;
   offsetPosition(
     request: MsgOffsetPosition,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgOffsetPositionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgOffsetPositionResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** IncreasePositionMargin defines a method for increasing margin of a position */
   increasePositionMargin(
     request: MsgIncreasePositionMargin,
-    callback: (error: ServiceError | null, response: MsgIncreasePositionMarginResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgIncreasePositionMarginResponse,
+    ) => void,
   ): ClientUnaryCall;
   increasePositionMargin(
     request: MsgIncreasePositionMargin,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgIncreasePositionMarginResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgIncreasePositionMarginResponse,
+    ) => void,
   ): ClientUnaryCall;
   increasePositionMargin(
     request: MsgIncreasePositionMargin,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgIncreasePositionMarginResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgIncreasePositionMarginResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** DecreasePositionMargin defines a method for decreasing margin of a position */
   decreasePositionMargin(
     request: MsgDecreasePositionMargin,
-    callback: (error: ServiceError | null, response: MsgDecreasePositionMarginResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgDecreasePositionMarginResponse,
+    ) => void,
   ): ClientUnaryCall;
   decreasePositionMargin(
     request: MsgDecreasePositionMargin,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgDecreasePositionMarginResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgDecreasePositionMarginResponse,
+    ) => void,
   ): ClientUnaryCall;
   decreasePositionMargin(
     request: MsgDecreasePositionMargin,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgDecreasePositionMarginResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgDecreasePositionMarginResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** RewardsOptOut defines a method for opting out of rewards */
   rewardsOptOut(
     request: MsgRewardsOptOut,
-    callback: (error: ServiceError | null, response: MsgRewardsOptOutResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgRewardsOptOutResponse,
+    ) => void,
   ): ClientUnaryCall;
   rewardsOptOut(
     request: MsgRewardsOptOut,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgRewardsOptOutResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgRewardsOptOutResponse,
+    ) => void,
   ): ClientUnaryCall;
   rewardsOptOut(
     request: MsgRewardsOptOut,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgRewardsOptOutResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgRewardsOptOutResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * AdminUpdateBinaryOptionsMarket defines method for updating a binary options
@@ -14285,49 +16829,76 @@ export interface MsgClient extends Client {
    */
   adminUpdateBinaryOptionsMarket(
     request: MsgAdminUpdateBinaryOptionsMarket,
-    callback: (error: ServiceError | null, response: MsgAdminUpdateBinaryOptionsMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgAdminUpdateBinaryOptionsMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   adminUpdateBinaryOptionsMarket(
     request: MsgAdminUpdateBinaryOptionsMarket,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgAdminUpdateBinaryOptionsMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgAdminUpdateBinaryOptionsMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   adminUpdateBinaryOptionsMarket(
     request: MsgAdminUpdateBinaryOptionsMarket,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgAdminUpdateBinaryOptionsMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgAdminUpdateBinaryOptionsMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateParams(
     request: MsgUpdateParams,
-    callback: (error: ServiceError | null, response: MsgUpdateParamsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateParamsResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateParams(
     request: MsgUpdateParams,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgUpdateParamsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateParamsResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateParams(
     request: MsgUpdateParams,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgUpdateParamsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateParamsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** UpdateSpotMarket modifies certain spot market fields (admin only) */
   updateSpotMarket(
     request: MsgUpdateSpotMarket,
-    callback: (error: ServiceError | null, response: MsgUpdateSpotMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateSpotMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateSpotMarket(
     request: MsgUpdateSpotMarket,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgUpdateSpotMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateSpotMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateSpotMarket(
     request: MsgUpdateSpotMarket,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgUpdateSpotMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateSpotMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * UpdateDerivativeMarket modifies certain derivative market fields (admin
@@ -14335,320 +16906,509 @@ export interface MsgClient extends Client {
    */
   updateDerivativeMarket(
     request: MsgUpdateDerivativeMarket,
-    callback: (error: ServiceError | null, response: MsgUpdateDerivativeMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateDerivativeMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateDerivativeMarket(
     request: MsgUpdateDerivativeMarket,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgUpdateDerivativeMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateDerivativeMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateDerivativeMarket(
     request: MsgUpdateDerivativeMarket,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgUpdateDerivativeMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateDerivativeMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   authorizeStakeGrants(
     request: MsgAuthorizeStakeGrants,
-    callback: (error: ServiceError | null, response: MsgAuthorizeStakeGrantsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgAuthorizeStakeGrantsResponse,
+    ) => void,
   ): ClientUnaryCall;
   authorizeStakeGrants(
     request: MsgAuthorizeStakeGrants,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgAuthorizeStakeGrantsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgAuthorizeStakeGrantsResponse,
+    ) => void,
   ): ClientUnaryCall;
   authorizeStakeGrants(
     request: MsgAuthorizeStakeGrants,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgAuthorizeStakeGrantsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgAuthorizeStakeGrantsResponse,
+    ) => void,
   ): ClientUnaryCall;
   activateStakeGrant(
     request: MsgActivateStakeGrant,
-    callback: (error: ServiceError | null, response: MsgActivateStakeGrantResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgActivateStakeGrantResponse,
+    ) => void,
   ): ClientUnaryCall;
   activateStakeGrant(
     request: MsgActivateStakeGrant,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgActivateStakeGrantResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgActivateStakeGrantResponse,
+    ) => void,
   ): ClientUnaryCall;
   activateStakeGrant(
     request: MsgActivateStakeGrant,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgActivateStakeGrantResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgActivateStakeGrantResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchExchangeModification(
     request: MsgBatchExchangeModification,
-    callback: (error: ServiceError | null, response: MsgBatchExchangeModificationResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchExchangeModificationResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchExchangeModification(
     request: MsgBatchExchangeModification,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBatchExchangeModificationResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchExchangeModificationResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchExchangeModification(
     request: MsgBatchExchangeModification,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBatchExchangeModificationResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchExchangeModificationResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchSpotMarket(
     request: MsgSpotMarketLaunch,
-    callback: (error: ServiceError | null, response: MsgSpotMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSpotMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchSpotMarket(
     request: MsgSpotMarketLaunch,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgSpotMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSpotMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchSpotMarket(
     request: MsgSpotMarketLaunch,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgSpotMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSpotMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchPerpetualMarket(
     request: MsgPerpetualMarketLaunch,
-    callback: (error: ServiceError | null, response: MsgPerpetualMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgPerpetualMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchPerpetualMarket(
     request: MsgPerpetualMarketLaunch,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgPerpetualMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgPerpetualMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchPerpetualMarket(
     request: MsgPerpetualMarketLaunch,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgPerpetualMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgPerpetualMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchExpiryFuturesMarket(
     request: MsgExpiryFuturesMarketLaunch,
-    callback: (error: ServiceError | null, response: MsgExpiryFuturesMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgExpiryFuturesMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchExpiryFuturesMarket(
     request: MsgExpiryFuturesMarketLaunch,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgExpiryFuturesMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgExpiryFuturesMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchExpiryFuturesMarket(
     request: MsgExpiryFuturesMarketLaunch,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgExpiryFuturesMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgExpiryFuturesMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchBinaryOptionsMarket(
     request: MsgBinaryOptionsMarketLaunch,
-    callback: (error: ServiceError | null, response: MsgBinaryOptionsMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBinaryOptionsMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchBinaryOptionsMarket(
     request: MsgBinaryOptionsMarketLaunch,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBinaryOptionsMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBinaryOptionsMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchBinaryOptionsMarket(
     request: MsgBinaryOptionsMarketLaunch,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBinaryOptionsMarketLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBinaryOptionsMarketLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchSpendCommunityPool(
     request: MsgBatchCommunityPoolSpend,
-    callback: (error: ServiceError | null, response: MsgBatchCommunityPoolSpendResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCommunityPoolSpendResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchSpendCommunityPool(
     request: MsgBatchCommunityPoolSpend,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBatchCommunityPoolSpendResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCommunityPoolSpendResponse,
+    ) => void,
   ): ClientUnaryCall;
   batchSpendCommunityPool(
     request: MsgBatchCommunityPoolSpend,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBatchCommunityPoolSpendResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBatchCommunityPoolSpendResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarketParamUpdate(
     request: MsgSpotMarketParamUpdate,
-    callback: (error: ServiceError | null, response: MsgSpotMarketParamUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSpotMarketParamUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarketParamUpdate(
     request: MsgSpotMarketParamUpdate,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgSpotMarketParamUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSpotMarketParamUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarketParamUpdate(
     request: MsgSpotMarketParamUpdate,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgSpotMarketParamUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSpotMarketParamUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarketParamUpdate(
     request: MsgDerivativeMarketParamUpdate,
-    callback: (error: ServiceError | null, response: MsgDerivativeMarketParamUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgDerivativeMarketParamUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarketParamUpdate(
     request: MsgDerivativeMarketParamUpdate,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgDerivativeMarketParamUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgDerivativeMarketParamUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarketParamUpdate(
     request: MsgDerivativeMarketParamUpdate,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgDerivativeMarketParamUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgDerivativeMarketParamUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   binaryOptionsMarketParamUpdate(
     request: MsgBinaryOptionsMarketParamUpdate,
-    callback: (error: ServiceError | null, response: MsgBinaryOptionsMarketParamUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBinaryOptionsMarketParamUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   binaryOptionsMarketParamUpdate(
     request: MsgBinaryOptionsMarketParamUpdate,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgBinaryOptionsMarketParamUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBinaryOptionsMarketParamUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   binaryOptionsMarketParamUpdate(
     request: MsgBinaryOptionsMarketParamUpdate,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgBinaryOptionsMarketParamUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgBinaryOptionsMarketParamUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   forceSettleMarket(
     request: MsgMarketForcedSettlement,
-    callback: (error: ServiceError | null, response: MsgMarketForcedSettlementResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgMarketForcedSettlementResponse,
+    ) => void,
   ): ClientUnaryCall;
   forceSettleMarket(
     request: MsgMarketForcedSettlement,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgMarketForcedSettlementResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgMarketForcedSettlementResponse,
+    ) => void,
   ): ClientUnaryCall;
   forceSettleMarket(
     request: MsgMarketForcedSettlement,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgMarketForcedSettlementResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgMarketForcedSettlementResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchTradingRewardCampaign(
     request: MsgTradingRewardCampaignLaunch,
-    callback: (error: ServiceError | null, response: MsgTradingRewardCampaignLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgTradingRewardCampaignLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchTradingRewardCampaign(
     request: MsgTradingRewardCampaignLaunch,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgTradingRewardCampaignLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgTradingRewardCampaignLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   launchTradingRewardCampaign(
     request: MsgTradingRewardCampaignLaunch,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgTradingRewardCampaignLaunchResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgTradingRewardCampaignLaunchResponse,
+    ) => void,
   ): ClientUnaryCall;
   enableExchange(
     request: MsgExchangeEnable,
-    callback: (error: ServiceError | null, response: MsgExchangeEnableResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgExchangeEnableResponse,
+    ) => void,
   ): ClientUnaryCall;
   enableExchange(
     request: MsgExchangeEnable,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgExchangeEnableResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgExchangeEnableResponse,
+    ) => void,
   ): ClientUnaryCall;
   enableExchange(
     request: MsgExchangeEnable,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgExchangeEnableResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgExchangeEnableResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateTradingRewardCampaign(
     request: MsgTradingRewardCampaignUpdate,
-    callback: (error: ServiceError | null, response: MsgTradingRewardCampaignUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgTradingRewardCampaignUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateTradingRewardCampaign(
     request: MsgTradingRewardCampaignUpdate,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgTradingRewardCampaignUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgTradingRewardCampaignUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateTradingRewardCampaign(
     request: MsgTradingRewardCampaignUpdate,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgTradingRewardCampaignUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgTradingRewardCampaignUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateTradingRewardPendingPoints(
     request: MsgTradingRewardPendingPointsUpdate,
-    callback: (error: ServiceError | null, response: MsgTradingRewardPendingPointsUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgTradingRewardPendingPointsUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateTradingRewardPendingPoints(
     request: MsgTradingRewardPendingPointsUpdate,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgTradingRewardPendingPointsUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgTradingRewardPendingPointsUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateTradingRewardPendingPoints(
     request: MsgTradingRewardPendingPointsUpdate,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgTradingRewardPendingPointsUpdateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgTradingRewardPendingPointsUpdateResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateFeeDiscount(
     request: MsgFeeDiscount,
-    callback: (error: ServiceError | null, response: MsgFeeDiscountResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgFeeDiscountResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateFeeDiscount(
     request: MsgFeeDiscount,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgFeeDiscountResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgFeeDiscountResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateFeeDiscount(
     request: MsgFeeDiscount,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgFeeDiscountResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgFeeDiscountResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateAtomicMarketOrderFeeMultiplierSchedule(
     request: MsgAtomicMarketOrderFeeMultiplierSchedule,
-    callback: (error: ServiceError | null, response: MsgAtomicMarketOrderFeeMultiplierScheduleResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgAtomicMarketOrderFeeMultiplierScheduleResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateAtomicMarketOrderFeeMultiplierSchedule(
     request: MsgAtomicMarketOrderFeeMultiplierSchedule,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgAtomicMarketOrderFeeMultiplierScheduleResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgAtomicMarketOrderFeeMultiplierScheduleResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateAtomicMarketOrderFeeMultiplierSchedule(
     request: MsgAtomicMarketOrderFeeMultiplierSchedule,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgAtomicMarketOrderFeeMultiplierScheduleResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgAtomicMarketOrderFeeMultiplierScheduleResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** SetDelegationTransferReceivers adds delegation transfer receivers. */
   setDelegationTransferReceivers(
     request: MsgSetDelegationTransferReceivers,
-    callback: (error: ServiceError | null, response: MsgSetDelegationTransferReceiversResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSetDelegationTransferReceiversResponse,
+    ) => void,
   ): ClientUnaryCall;
   setDelegationTransferReceivers(
     request: MsgSetDelegationTransferReceivers,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgSetDelegationTransferReceiversResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSetDelegationTransferReceiversResponse,
+    ) => void,
   ): ClientUnaryCall;
   setDelegationTransferReceivers(
     request: MsgSetDelegationTransferReceivers,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgSetDelegationTransferReceiversResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgSetDelegationTransferReceiversResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** MsgCancelPostOnlyMode defines a message to turn off the post-only mode */
   cancelPostOnlyMode(
     request: MsgCancelPostOnlyMode,
-    callback: (error: ServiceError | null, response: MsgCancelPostOnlyModeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelPostOnlyModeResponse,
+    ) => void,
   ): ClientUnaryCall;
   cancelPostOnlyMode(
     request: MsgCancelPostOnlyMode,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgCancelPostOnlyModeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelPostOnlyModeResponse,
+    ) => void,
   ): ClientUnaryCall;
   cancelPostOnlyMode(
     request: MsgCancelPostOnlyMode,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgCancelPostOnlyModeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgCancelPostOnlyModeResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * MsgActivatePostOnlyMode defines a message to turn on the post-only mode for
@@ -14656,18 +17416,27 @@ export interface MsgClient extends Client {
    */
   activatePostOnlyMode(
     request: MsgActivatePostOnlyMode,
-    callback: (error: ServiceError | null, response: MsgActivatePostOnlyModeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgActivatePostOnlyModeResponse,
+    ) => void,
   ): ClientUnaryCall;
   activatePostOnlyMode(
     request: MsgActivatePostOnlyMode,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgActivatePostOnlyModeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgActivatePostOnlyModeResponse,
+    ) => void,
   ): ClientUnaryCall;
   activatePostOnlyMode(
     request: MsgActivatePostOnlyMode,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgActivatePostOnlyModeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgActivatePostOnlyModeResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * LiquidateCrossMarginPool atomically closes all positions in a cross-margin
@@ -14676,18 +17445,27 @@ export interface MsgClient extends Client {
    */
   liquidateCrossMarginPool(
     request: MsgLiquidateCrossMarginPool,
-    callback: (error: ServiceError | null, response: MsgLiquidateCrossMarginPoolResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgLiquidateCrossMarginPoolResponse,
+    ) => void,
   ): ClientUnaryCall;
   liquidateCrossMarginPool(
     request: MsgLiquidateCrossMarginPool,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgLiquidateCrossMarginPoolResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgLiquidateCrossMarginPoolResponse,
+    ) => void,
   ): ClientUnaryCall;
   liquidateCrossMarginPool(
     request: MsgLiquidateCrossMarginPool,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgLiquidateCrossMarginPoolResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgLiquidateCrossMarginPoolResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * UpdateSubaccountRiskProfile allows a user (subject to eligibility & safety
@@ -14695,23 +17473,39 @@ export interface MsgClient extends Client {
    */
   updateSubaccountRiskProfile(
     request: MsgUpdateSubaccountRiskProfile,
-    callback: (error: ServiceError | null, response: MsgUpdateSubaccountRiskProfileResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateSubaccountRiskProfileResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateSubaccountRiskProfile(
     request: MsgUpdateSubaccountRiskProfile,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MsgUpdateSubaccountRiskProfileResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateSubaccountRiskProfileResponse,
+    ) => void,
   ): ClientUnaryCall;
   updateSubaccountRiskProfile(
     request: MsgUpdateSubaccountRiskProfile,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MsgUpdateSubaccountRiskProfileResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MsgUpdateSubaccountRiskProfileResponse,
+    ) => void,
   ): ClientUnaryCall;
 }
 
-export const MsgClient = makeGenericClientConstructor(MsgService, "injective.exchange.v2.Msg") as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): MsgClient;
+export const MsgClient = makeGenericClientConstructor(
+  MsgService,
+  "injective.exchange.v2.Msg",
+) as unknown as {
+  new (
+    address: string,
+    credentials: ChannelCredentials,
+    options?: Partial<ClientOptions>,
+  ): MsgClient;
   service: typeof MsgService;
   serviceName: string;
 };
@@ -14724,17 +17518,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

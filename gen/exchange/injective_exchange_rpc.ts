@@ -60,9 +60,7 @@ export interface PrepareTxRequest {
   /** Block height until which the transaction is valid. */
   timeoutHeight: number;
   /** Transaction fee details. */
-  fee:
-    | CosmosTxFee
-    | undefined;
+  fee: CosmosTxFee | undefined;
   /** List of Cosmos proto3-encoded Msgs to include in a single tx */
   msgs: Buffer[];
   /** The wrapper of the EIP712 message, 'v1'/'v2' or 'V1'/'V2' */
@@ -117,9 +115,7 @@ export interface PrepareEip712Request {
   /** Block height until which the transaction is valid. */
   timeoutHeight: number;
   /** Transaction fee details. */
-  fee:
-    | CosmosTxFee
-    | undefined;
+  fee: CosmosTxFee | undefined;
   /** List of Cosmos proto3-encoded Msgs to include in a single tx */
   msgs: Buffer[];
   /** The wrapper of the EIP712 message, 'v1'/'v2' or 'V1'/'V2' */
@@ -139,9 +135,7 @@ export interface BroadcastTxRequest {
   /** List of Cosmos proto3-encoded Msgs from tx */
   msgs: Buffer[];
   /** Specify ethsecp256k1 pubkey of the signer */
-  pubKey:
-    | CosmosPubKey
-    | undefined;
+  pubKey: CosmosPubKey | undefined;
   /** Hex-encoded ethsecp256k1 signature bytes */
   signature: string;
   /** Fee payer address provided by service */
@@ -191,9 +185,7 @@ export interface PrepareCosmosTxRequest {
   /** Block height until which the transaction is valid. */
   timeoutHeight: number;
   /** Transaction fee details. */
-  fee:
-    | CosmosTxFee
-    | undefined;
+  fee: CosmosTxFee | undefined;
   /** List of Cosmos proto3-encoded Msgs to include in a single tx */
   msgs: Buffer[];
 }
@@ -217,9 +209,7 @@ export interface BroadcastCosmosTxRequest {
   /** proto encoded tx */
   tx: Buffer;
   /** Specify ethsecp256k1 sender pubkey */
-  pubKey:
-    | CosmosPubKey
-    | undefined;
+  pubKey: CosmosPubKey | undefined;
   /** Hex-encoded ethsecp256k1 sender signature bytes */
   signature: string;
   /** sender address */
@@ -248,8 +238,7 @@ export interface BroadcastCosmosTxResponse {
   timestamp: string;
 }
 
-export interface GetFeePayerRequest {
-}
+export interface GetFeePayerRequest {}
 
 export interface GetFeePayerResponse {
   /** Fee payer address provided by service */
@@ -273,9 +262,7 @@ export interface PrepareFeeGrantResponse {
   /** Feegrant expiration timestamp in Unix milliseconds */
   expiration: number;
   /** Feegrant spend limit */
-  spendLimit:
-    | CosmosCoin
-    | undefined;
+  spendLimit: CosmosCoin | undefined;
   /** Message type URLs allowed by the feegrant */
   allowedMessages: string[];
 }
@@ -285,7 +272,10 @@ function createBaseGetTxRequest(): GetTxRequest {
 }
 
 export const GetTxRequest: MessageFns<GetTxRequest> = {
-  encode(message: GetTxRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetTxRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
     }
@@ -293,7 +283,8 @@ export const GetTxRequest: MessageFns<GetTxRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): GetTxRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxRequest();
     while (reader.pos < end) {
@@ -328,10 +319,14 @@ export const GetTxRequest: MessageFns<GetTxRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetTxRequest>, I>>(base?: I): GetTxRequest {
+  create<I extends Exact<DeepPartial<GetTxRequest>, I>>(
+    base?: I,
+  ): GetTxRequest {
     return GetTxRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<GetTxRequest>, I>>(object: I): GetTxRequest {
+  fromPartial<I extends Exact<DeepPartial<GetTxRequest>, I>>(
+    object: I,
+  ): GetTxRequest {
     const message = createBaseGetTxRequest();
     message.hash = object.hash ?? "";
     return message;
@@ -339,11 +334,23 @@ export const GetTxRequest: MessageFns<GetTxRequest> = {
 };
 
 function createBaseGetTxResponse(): GetTxResponse {
-  return { txHash: "", height: 0, index: 0, codespace: "", code: 0, data: Buffer.alloc(0), rawLog: "", timestamp: "" };
+  return {
+    txHash: "",
+    height: 0,
+    index: 0,
+    codespace: "",
+    code: 0,
+    data: Buffer.alloc(0),
+    rawLog: "",
+    timestamp: "",
+  };
 }
 
 export const GetTxResponse: MessageFns<GetTxResponse> = {
-  encode(message: GetTxResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetTxResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.txHash !== "") {
       writer.uint32(10).string(message.txHash);
     }
@@ -372,7 +379,8 @@ export const GetTxResponse: MessageFns<GetTxResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): GetTxResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxResponse();
     while (reader.pos < end) {
@@ -456,19 +464,25 @@ export const GetTxResponse: MessageFns<GetTxResponse> = {
       txHash: isSet(object.txHash)
         ? globalThis.String(object.txHash)
         : isSet(object.tx_hash)
-        ? globalThis.String(object.tx_hash)
-        : "",
+          ? globalThis.String(object.tx_hash)
+          : "",
       height: isSet(object.height) ? globalThis.Number(object.height) : 0,
       index: isSet(object.index) ? globalThis.Number(object.index) : 0,
-      codespace: isSet(object.codespace) ? globalThis.String(object.codespace) : "",
+      codespace: isSet(object.codespace)
+        ? globalThis.String(object.codespace)
+        : "",
       code: isSet(object.code) ? globalThis.Number(object.code) : 0,
-      data: isSet(object.data) ? Buffer.from(bytesFromBase64(object.data)) : Buffer.alloc(0),
+      data: isSet(object.data)
+        ? Buffer.from(bytesFromBase64(object.data))
+        : Buffer.alloc(0),
       rawLog: isSet(object.rawLog)
         ? globalThis.String(object.rawLog)
         : isSet(object.raw_log)
-        ? globalThis.String(object.raw_log)
+          ? globalThis.String(object.raw_log)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.String(object.timestamp)
         : "",
-      timestamp: isSet(object.timestamp) ? globalThis.String(object.timestamp) : "",
     };
   },
 
@@ -501,10 +515,14 @@ export const GetTxResponse: MessageFns<GetTxResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetTxResponse>, I>>(base?: I): GetTxResponse {
+  create<I extends Exact<DeepPartial<GetTxResponse>, I>>(
+    base?: I,
+  ): GetTxResponse {
     return GetTxResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<GetTxResponse>, I>>(object: I): GetTxResponse {
+  fromPartial<I extends Exact<DeepPartial<GetTxResponse>, I>>(
+    object: I,
+  ): GetTxResponse {
     const message = createBaseGetTxResponse();
     message.txHash = object.txHash ?? "";
     message.height = object.height ?? 0;
@@ -532,7 +550,10 @@ function createBasePrepareTxRequest(): PrepareTxRequest {
 }
 
 export const PrepareTxRequest: MessageFns<PrepareTxRequest> = {
-  encode(message: PrepareTxRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PrepareTxRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.chainId !== 0) {
       writer.uint32(8).uint64(message.chainId);
     }
@@ -561,7 +582,8 @@ export const PrepareTxRequest: MessageFns<PrepareTxRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PrepareTxRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrepareTxRequest();
     while (reader.pos < end) {
@@ -645,20 +667,20 @@ export const PrepareTxRequest: MessageFns<PrepareTxRequest> = {
       chainId: isSet(object.chainId)
         ? globalThis.Number(object.chainId)
         : isSet(object.chain_id)
-        ? globalThis.Number(object.chain_id)
-        : 0,
+          ? globalThis.Number(object.chain_id)
+          : 0,
       signerAddress: isSet(object.signerAddress)
         ? globalThis.String(object.signerAddress)
         : isSet(object.signer_address)
-        ? globalThis.String(object.signer_address)
-        : "",
+          ? globalThis.String(object.signer_address)
+          : "",
       sequence: isSet(object.sequence) ? globalThis.Number(object.sequence) : 0,
       memo: isSet(object.memo) ? globalThis.String(object.memo) : "",
       timeoutHeight: isSet(object.timeoutHeight)
         ? globalThis.Number(object.timeoutHeight)
         : isSet(object.timeout_height)
-        ? globalThis.Number(object.timeout_height)
-        : 0,
+          ? globalThis.Number(object.timeout_height)
+          : 0,
       fee: isSet(object.fee) ? CosmosTxFee.fromJSON(object.fee) : undefined,
       msgs: globalThis.Array.isArray(object?.msgs)
         ? object.msgs.map((e: any) => Buffer.from(bytesFromBase64(e)))
@@ -666,8 +688,8 @@ export const PrepareTxRequest: MessageFns<PrepareTxRequest> = {
       eip712Wrapper: isSet(object.eip712Wrapper)
         ? globalThis.String(object.eip712Wrapper)
         : isSet(object.eip712_wrapper)
-        ? globalThis.String(object.eip712_wrapper)
-        : "",
+          ? globalThis.String(object.eip712_wrapper)
+          : "",
     };
   },
 
@@ -700,17 +722,24 @@ export const PrepareTxRequest: MessageFns<PrepareTxRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PrepareTxRequest>, I>>(base?: I): PrepareTxRequest {
+  create<I extends Exact<DeepPartial<PrepareTxRequest>, I>>(
+    base?: I,
+  ): PrepareTxRequest {
     return PrepareTxRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PrepareTxRequest>, I>>(object: I): PrepareTxRequest {
+  fromPartial<I extends Exact<DeepPartial<PrepareTxRequest>, I>>(
+    object: I,
+  ): PrepareTxRequest {
     const message = createBasePrepareTxRequest();
     message.chainId = object.chainId ?? 0;
     message.signerAddress = object.signerAddress ?? "";
     message.sequence = object.sequence ?? 0;
     message.memo = object.memo ?? "";
     message.timeoutHeight = object.timeoutHeight ?? 0;
-    message.fee = (object.fee !== undefined && object.fee !== null) ? CosmosTxFee.fromPartial(object.fee) : undefined;
+    message.fee =
+      object.fee !== undefined && object.fee !== null
+        ? CosmosTxFee.fromPartial(object.fee)
+        : undefined;
     message.msgs = object.msgs?.map((e) => e) || [];
     message.eip712Wrapper = object.eip712Wrapper ?? "";
     return message;
@@ -722,7 +751,10 @@ function createBaseCosmosTxFee(): CosmosTxFee {
 }
 
 export const CosmosTxFee: MessageFns<CosmosTxFee> = {
-  encode(message: CosmosTxFee, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CosmosTxFee,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.price) {
       CosmosCoin.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -736,7 +768,8 @@ export const CosmosTxFee: MessageFns<CosmosTxFee> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): CosmosTxFee {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCosmosTxFee();
     while (reader.pos < end) {
@@ -777,13 +810,15 @@ export const CosmosTxFee: MessageFns<CosmosTxFee> = {
 
   fromJSON(object: any): CosmosTxFee {
     return {
-      price: globalThis.Array.isArray(object?.price) ? object.price.map((e: any) => CosmosCoin.fromJSON(e)) : [],
+      price: globalThis.Array.isArray(object?.price)
+        ? object.price.map((e: any) => CosmosCoin.fromJSON(e))
+        : [],
       gas: isSet(object.gas) ? globalThis.Number(object.gas) : 0,
       delegateFee: isSet(object.delegateFee)
         ? globalThis.Boolean(object.delegateFee)
         : isSet(object.delegate_fee)
-        ? globalThis.Boolean(object.delegate_fee)
-        : false,
+          ? globalThis.Boolean(object.delegate_fee)
+          : false,
     };
   },
 
@@ -804,7 +839,9 @@ export const CosmosTxFee: MessageFns<CosmosTxFee> = {
   create<I extends Exact<DeepPartial<CosmosTxFee>, I>>(base?: I): CosmosTxFee {
     return CosmosTxFee.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CosmosTxFee>, I>>(object: I): CosmosTxFee {
+  fromPartial<I extends Exact<DeepPartial<CosmosTxFee>, I>>(
+    object: I,
+  ): CosmosTxFee {
     const message = createBaseCosmosTxFee();
     message.price = object.price?.map((e) => CosmosCoin.fromPartial(e)) || [];
     message.gas = object.gas ?? 0;
@@ -818,7 +855,10 @@ function createBaseCosmosCoin(): CosmosCoin {
 }
 
 export const CosmosCoin: MessageFns<CosmosCoin> = {
-  encode(message: CosmosCoin, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CosmosCoin,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -829,7 +869,8 @@ export const CosmosCoin: MessageFns<CosmosCoin> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): CosmosCoin {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCosmosCoin();
     while (reader.pos < end) {
@@ -881,7 +922,9 @@ export const CosmosCoin: MessageFns<CosmosCoin> = {
   create<I extends Exact<DeepPartial<CosmosCoin>, I>>(base?: I): CosmosCoin {
     return CosmosCoin.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CosmosCoin>, I>>(object: I): CosmosCoin {
+  fromPartial<I extends Exact<DeepPartial<CosmosCoin>, I>>(
+    object: I,
+  ): CosmosCoin {
     const message = createBaseCosmosCoin();
     message.denom = object.denom ?? "";
     message.amount = object.amount ?? "";
@@ -890,11 +933,21 @@ export const CosmosCoin: MessageFns<CosmosCoin> = {
 };
 
 function createBasePrepareTxResponse(): PrepareTxResponse {
-  return { data: "", sequence: 0, signMode: "", pubKeyType: "", feePayer: "", feePayerSig: "" };
+  return {
+    data: "",
+    sequence: 0,
+    signMode: "",
+    pubKeyType: "",
+    feePayer: "",
+    feePayerSig: "",
+  };
 }
 
 export const PrepareTxResponse: MessageFns<PrepareTxResponse> = {
-  encode(message: PrepareTxResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PrepareTxResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.data !== "") {
       writer.uint32(10).string(message.data);
     }
@@ -917,7 +970,8 @@ export const PrepareTxResponse: MessageFns<PrepareTxResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PrepareTxResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrepareTxResponse();
     while (reader.pos < end) {
@@ -987,23 +1041,23 @@ export const PrepareTxResponse: MessageFns<PrepareTxResponse> = {
       signMode: isSet(object.signMode)
         ? globalThis.String(object.signMode)
         : isSet(object.sign_mode)
-        ? globalThis.String(object.sign_mode)
-        : "",
+          ? globalThis.String(object.sign_mode)
+          : "",
       pubKeyType: isSet(object.pubKeyType)
         ? globalThis.String(object.pubKeyType)
         : isSet(object.pub_key_type)
-        ? globalThis.String(object.pub_key_type)
-        : "",
+          ? globalThis.String(object.pub_key_type)
+          : "",
       feePayer: isSet(object.feePayer)
         ? globalThis.String(object.feePayer)
         : isSet(object.fee_payer)
-        ? globalThis.String(object.fee_payer)
-        : "",
+          ? globalThis.String(object.fee_payer)
+          : "",
       feePayerSig: isSet(object.feePayerSig)
         ? globalThis.String(object.feePayerSig)
         : isSet(object.fee_payer_sig)
-        ? globalThis.String(object.fee_payer_sig)
-        : "",
+          ? globalThis.String(object.fee_payer_sig)
+          : "",
     };
   },
 
@@ -1030,10 +1084,14 @@ export const PrepareTxResponse: MessageFns<PrepareTxResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PrepareTxResponse>, I>>(base?: I): PrepareTxResponse {
+  create<I extends Exact<DeepPartial<PrepareTxResponse>, I>>(
+    base?: I,
+  ): PrepareTxResponse {
     return PrepareTxResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PrepareTxResponse>, I>>(object: I): PrepareTxResponse {
+  fromPartial<I extends Exact<DeepPartial<PrepareTxResponse>, I>>(
+    object: I,
+  ): PrepareTxResponse {
     const message = createBasePrepareTxResponse();
     message.data = object.data ?? "";
     message.sequence = object.sequence ?? 0;
@@ -1060,7 +1118,10 @@ function createBasePrepareEip712Request(): PrepareEip712Request {
 }
 
 export const PrepareEip712Request: MessageFns<PrepareEip712Request> = {
-  encode(message: PrepareEip712Request, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PrepareEip712Request,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.chainId !== 0) {
       writer.uint32(8).uint64(message.chainId);
     }
@@ -1091,8 +1152,12 @@ export const PrepareEip712Request: MessageFns<PrepareEip712Request> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PrepareEip712Request {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PrepareEip712Request {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrepareEip712Request();
     while (reader.pos < end) {
@@ -1184,25 +1249,25 @@ export const PrepareEip712Request: MessageFns<PrepareEip712Request> = {
       chainId: isSet(object.chainId)
         ? globalThis.Number(object.chainId)
         : isSet(object.chain_id)
-        ? globalThis.Number(object.chain_id)
-        : 0,
+          ? globalThis.Number(object.chain_id)
+          : 0,
       signerAddress: isSet(object.signerAddress)
         ? globalThis.String(object.signerAddress)
         : isSet(object.signer_address)
-        ? globalThis.String(object.signer_address)
-        : "",
+          ? globalThis.String(object.signer_address)
+          : "",
       sequence: isSet(object.sequence) ? globalThis.Number(object.sequence) : 0,
       accountNumber: isSet(object.accountNumber)
         ? globalThis.Number(object.accountNumber)
         : isSet(object.account_number)
-        ? globalThis.Number(object.account_number)
-        : 0,
+          ? globalThis.Number(object.account_number)
+          : 0,
       memo: isSet(object.memo) ? globalThis.String(object.memo) : "",
       timeoutHeight: isSet(object.timeoutHeight)
         ? globalThis.Number(object.timeoutHeight)
         : isSet(object.timeout_height)
-        ? globalThis.Number(object.timeout_height)
-        : 0,
+          ? globalThis.Number(object.timeout_height)
+          : 0,
       fee: isSet(object.fee) ? CosmosTxFee.fromJSON(object.fee) : undefined,
       msgs: globalThis.Array.isArray(object?.msgs)
         ? object.msgs.map((e: any) => Buffer.from(bytesFromBase64(e)))
@@ -1210,8 +1275,8 @@ export const PrepareEip712Request: MessageFns<PrepareEip712Request> = {
       eip712Wrapper: isSet(object.eip712Wrapper)
         ? globalThis.String(object.eip712Wrapper)
         : isSet(object.eip712_wrapper)
-        ? globalThis.String(object.eip712_wrapper)
-        : "",
+          ? globalThis.String(object.eip712_wrapper)
+          : "",
     };
   },
 
@@ -1247,10 +1312,14 @@ export const PrepareEip712Request: MessageFns<PrepareEip712Request> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PrepareEip712Request>, I>>(base?: I): PrepareEip712Request {
+  create<I extends Exact<DeepPartial<PrepareEip712Request>, I>>(
+    base?: I,
+  ): PrepareEip712Request {
     return PrepareEip712Request.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PrepareEip712Request>, I>>(object: I): PrepareEip712Request {
+  fromPartial<I extends Exact<DeepPartial<PrepareEip712Request>, I>>(
+    object: I,
+  ): PrepareEip712Request {
     const message = createBasePrepareEip712Request();
     message.chainId = object.chainId ?? 0;
     message.signerAddress = object.signerAddress ?? "";
@@ -1258,7 +1327,10 @@ export const PrepareEip712Request: MessageFns<PrepareEip712Request> = {
     message.accountNumber = object.accountNumber ?? 0;
     message.memo = object.memo ?? "";
     message.timeoutHeight = object.timeoutHeight ?? 0;
-    message.fee = (object.fee !== undefined && object.fee !== null) ? CosmosTxFee.fromPartial(object.fee) : undefined;
+    message.fee =
+      object.fee !== undefined && object.fee !== null
+        ? CosmosTxFee.fromPartial(object.fee)
+        : undefined;
     message.msgs = object.msgs?.map((e) => e) || [];
     message.eip712Wrapper = object.eip712Wrapper ?? "";
     return message;
@@ -1270,15 +1342,22 @@ function createBasePrepareEip712Response(): PrepareEip712Response {
 }
 
 export const PrepareEip712Response: MessageFns<PrepareEip712Response> = {
-  encode(message: PrepareEip712Response, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PrepareEip712Response,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.data !== "") {
       writer.uint32(10).string(message.data);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PrepareEip712Response {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PrepareEip712Response {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrepareEip712Response();
     while (reader.pos < end) {
@@ -1313,10 +1392,14 @@ export const PrepareEip712Response: MessageFns<PrepareEip712Response> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PrepareEip712Response>, I>>(base?: I): PrepareEip712Response {
+  create<I extends Exact<DeepPartial<PrepareEip712Response>, I>>(
+    base?: I,
+  ): PrepareEip712Response {
     return PrepareEip712Response.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PrepareEip712Response>, I>>(object: I): PrepareEip712Response {
+  fromPartial<I extends Exact<DeepPartial<PrepareEip712Response>, I>>(
+    object: I,
+  ): PrepareEip712Response {
     const message = createBasePrepareEip712Response();
     message.data = object.data ?? "";
     return message;
@@ -1337,7 +1420,10 @@ function createBaseBroadcastTxRequest(): BroadcastTxRequest {
 }
 
 export const BroadcastTxRequest: MessageFns<BroadcastTxRequest> = {
-  encode(message: BroadcastTxRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BroadcastTxRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.chainId !== 0) {
       writer.uint32(8).uint64(message.chainId);
     }
@@ -1365,8 +1451,12 @@ export const BroadcastTxRequest: MessageFns<BroadcastTxRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BroadcastTxRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): BroadcastTxRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastTxRequest();
     while (reader.pos < end) {
@@ -1450,26 +1540,32 @@ export const BroadcastTxRequest: MessageFns<BroadcastTxRequest> = {
       chainId: isSet(object.chainId)
         ? globalThis.Number(object.chainId)
         : isSet(object.chain_id)
-        ? globalThis.Number(object.chain_id)
-        : 0,
-      tx: isSet(object.tx) ? Buffer.from(bytesFromBase64(object.tx)) : Buffer.alloc(0),
-      msgs: globalThis.Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Buffer.from(bytesFromBase64(e))) : [],
+          ? globalThis.Number(object.chain_id)
+          : 0,
+      tx: isSet(object.tx)
+        ? Buffer.from(bytesFromBase64(object.tx))
+        : Buffer.alloc(0),
+      msgs: globalThis.Array.isArray(object?.msgs)
+        ? object.msgs.map((e: any) => Buffer.from(bytesFromBase64(e)))
+        : [],
       pubKey: isSet(object.pubKey)
         ? CosmosPubKey.fromJSON(object.pubKey)
         : isSet(object.pub_key)
-        ? CosmosPubKey.fromJSON(object.pub_key)
-        : undefined,
-      signature: isSet(object.signature) ? globalThis.String(object.signature) : "",
+          ? CosmosPubKey.fromJSON(object.pub_key)
+          : undefined,
+      signature: isSet(object.signature)
+        ? globalThis.String(object.signature)
+        : "",
       feePayer: isSet(object.feePayer)
         ? globalThis.String(object.feePayer)
         : isSet(object.fee_payer)
-        ? globalThis.String(object.fee_payer)
-        : "",
+          ? globalThis.String(object.fee_payer)
+          : "",
       feePayerSig: isSet(object.feePayerSig)
         ? globalThis.String(object.feePayerSig)
         : isSet(object.fee_payer_sig)
-        ? globalThis.String(object.fee_payer_sig)
-        : "",
+          ? globalThis.String(object.fee_payer_sig)
+          : "",
       mode: isSet(object.mode) ? globalThis.String(object.mode) : "",
     };
   },
@@ -1503,17 +1599,22 @@ export const BroadcastTxRequest: MessageFns<BroadcastTxRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BroadcastTxRequest>, I>>(base?: I): BroadcastTxRequest {
+  create<I extends Exact<DeepPartial<BroadcastTxRequest>, I>>(
+    base?: I,
+  ): BroadcastTxRequest {
     return BroadcastTxRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BroadcastTxRequest>, I>>(object: I): BroadcastTxRequest {
+  fromPartial<I extends Exact<DeepPartial<BroadcastTxRequest>, I>>(
+    object: I,
+  ): BroadcastTxRequest {
     const message = createBaseBroadcastTxRequest();
     message.chainId = object.chainId ?? 0;
     message.tx = object.tx ?? Buffer.alloc(0);
     message.msgs = object.msgs?.map((e) => e) || [];
-    message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)
-      ? CosmosPubKey.fromPartial(object.pubKey)
-      : undefined;
+    message.pubKey =
+      object.pubKey !== undefined && object.pubKey !== null
+        ? CosmosPubKey.fromPartial(object.pubKey)
+        : undefined;
     message.signature = object.signature ?? "";
     message.feePayer = object.feePayer ?? "";
     message.feePayerSig = object.feePayerSig ?? "";
@@ -1527,7 +1628,10 @@ function createBaseCosmosPubKey(): CosmosPubKey {
 }
 
 export const CosmosPubKey: MessageFns<CosmosPubKey> = {
-  encode(message: CosmosPubKey, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CosmosPubKey,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -1538,7 +1642,8 @@ export const CosmosPubKey: MessageFns<CosmosPubKey> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): CosmosPubKey {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCosmosPubKey();
     while (reader.pos < end) {
@@ -1587,10 +1692,14 @@ export const CosmosPubKey: MessageFns<CosmosPubKey> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CosmosPubKey>, I>>(base?: I): CosmosPubKey {
+  create<I extends Exact<DeepPartial<CosmosPubKey>, I>>(
+    base?: I,
+  ): CosmosPubKey {
     return CosmosPubKey.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CosmosPubKey>, I>>(object: I): CosmosPubKey {
+  fromPartial<I extends Exact<DeepPartial<CosmosPubKey>, I>>(
+    object: I,
+  ): CosmosPubKey {
     const message = createBaseCosmosPubKey();
     message.type = object.type ?? "";
     message.key = object.key ?? "";
@@ -1599,11 +1708,23 @@ export const CosmosPubKey: MessageFns<CosmosPubKey> = {
 };
 
 function createBaseBroadcastTxResponse(): BroadcastTxResponse {
-  return { txHash: "", height: 0, index: 0, codespace: "", code: 0, data: Buffer.alloc(0), rawLog: "", timestamp: "" };
+  return {
+    txHash: "",
+    height: 0,
+    index: 0,
+    codespace: "",
+    code: 0,
+    data: Buffer.alloc(0),
+    rawLog: "",
+    timestamp: "",
+  };
 }
 
 export const BroadcastTxResponse: MessageFns<BroadcastTxResponse> = {
-  encode(message: BroadcastTxResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BroadcastTxResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.txHash !== "") {
       writer.uint32(10).string(message.txHash);
     }
@@ -1631,8 +1752,12 @@ export const BroadcastTxResponse: MessageFns<BroadcastTxResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BroadcastTxResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): BroadcastTxResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastTxResponse();
     while (reader.pos < end) {
@@ -1716,19 +1841,25 @@ export const BroadcastTxResponse: MessageFns<BroadcastTxResponse> = {
       txHash: isSet(object.txHash)
         ? globalThis.String(object.txHash)
         : isSet(object.tx_hash)
-        ? globalThis.String(object.tx_hash)
-        : "",
+          ? globalThis.String(object.tx_hash)
+          : "",
       height: isSet(object.height) ? globalThis.Number(object.height) : 0,
       index: isSet(object.index) ? globalThis.Number(object.index) : 0,
-      codespace: isSet(object.codespace) ? globalThis.String(object.codespace) : "",
+      codespace: isSet(object.codespace)
+        ? globalThis.String(object.codespace)
+        : "",
       code: isSet(object.code) ? globalThis.Number(object.code) : 0,
-      data: isSet(object.data) ? Buffer.from(bytesFromBase64(object.data)) : Buffer.alloc(0),
+      data: isSet(object.data)
+        ? Buffer.from(bytesFromBase64(object.data))
+        : Buffer.alloc(0),
       rawLog: isSet(object.rawLog)
         ? globalThis.String(object.rawLog)
         : isSet(object.raw_log)
-        ? globalThis.String(object.raw_log)
+          ? globalThis.String(object.raw_log)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.String(object.timestamp)
         : "",
-      timestamp: isSet(object.timestamp) ? globalThis.String(object.timestamp) : "",
     };
   },
 
@@ -1761,10 +1892,14 @@ export const BroadcastTxResponse: MessageFns<BroadcastTxResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BroadcastTxResponse>, I>>(base?: I): BroadcastTxResponse {
+  create<I extends Exact<DeepPartial<BroadcastTxResponse>, I>>(
+    base?: I,
+  ): BroadcastTxResponse {
     return BroadcastTxResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BroadcastTxResponse>, I>>(object: I): BroadcastTxResponse {
+  fromPartial<I extends Exact<DeepPartial<BroadcastTxResponse>, I>>(
+    object: I,
+  ): BroadcastTxResponse {
     const message = createBaseBroadcastTxResponse();
     message.txHash = object.txHash ?? "";
     message.height = object.height ?? 0;
@@ -1779,11 +1914,21 @@ export const BroadcastTxResponse: MessageFns<BroadcastTxResponse> = {
 };
 
 function createBasePrepareCosmosTxRequest(): PrepareCosmosTxRequest {
-  return { chainId: 0, senderAddress: "", memo: "", timeoutHeight: 0, fee: undefined, msgs: [] };
+  return {
+    chainId: 0,
+    senderAddress: "",
+    memo: "",
+    timeoutHeight: 0,
+    fee: undefined,
+    msgs: [],
+  };
 }
 
 export const PrepareCosmosTxRequest: MessageFns<PrepareCosmosTxRequest> = {
-  encode(message: PrepareCosmosTxRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PrepareCosmosTxRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.chainId !== 0) {
       writer.uint32(8).uint64(message.chainId);
     }
@@ -1805,8 +1950,12 @@ export const PrepareCosmosTxRequest: MessageFns<PrepareCosmosTxRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PrepareCosmosTxRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PrepareCosmosTxRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrepareCosmosTxRequest();
     while (reader.pos < end) {
@@ -1874,19 +2023,19 @@ export const PrepareCosmosTxRequest: MessageFns<PrepareCosmosTxRequest> = {
       chainId: isSet(object.chainId)
         ? globalThis.Number(object.chainId)
         : isSet(object.chain_id)
-        ? globalThis.Number(object.chain_id)
-        : 0,
+          ? globalThis.Number(object.chain_id)
+          : 0,
       senderAddress: isSet(object.senderAddress)
         ? globalThis.String(object.senderAddress)
         : isSet(object.sender_address)
-        ? globalThis.String(object.sender_address)
-        : "",
+          ? globalThis.String(object.sender_address)
+          : "",
       memo: isSet(object.memo) ? globalThis.String(object.memo) : "",
       timeoutHeight: isSet(object.timeoutHeight)
         ? globalThis.Number(object.timeoutHeight)
         : isSet(object.timeout_height)
-        ? globalThis.Number(object.timeout_height)
-        : 0,
+          ? globalThis.Number(object.timeout_height)
+          : 0,
       fee: isSet(object.fee) ? CosmosTxFee.fromJSON(object.fee) : undefined,
       msgs: globalThis.Array.isArray(object?.msgs)
         ? object.msgs.map((e: any) => Buffer.from(bytesFromBase64(e)))
@@ -1917,16 +2066,23 @@ export const PrepareCosmosTxRequest: MessageFns<PrepareCosmosTxRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PrepareCosmosTxRequest>, I>>(base?: I): PrepareCosmosTxRequest {
+  create<I extends Exact<DeepPartial<PrepareCosmosTxRequest>, I>>(
+    base?: I,
+  ): PrepareCosmosTxRequest {
     return PrepareCosmosTxRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PrepareCosmosTxRequest>, I>>(object: I): PrepareCosmosTxRequest {
+  fromPartial<I extends Exact<DeepPartial<PrepareCosmosTxRequest>, I>>(
+    object: I,
+  ): PrepareCosmosTxRequest {
     const message = createBasePrepareCosmosTxRequest();
     message.chainId = object.chainId ?? 0;
     message.senderAddress = object.senderAddress ?? "";
     message.memo = object.memo ?? "";
     message.timeoutHeight = object.timeoutHeight ?? 0;
-    message.fee = (object.fee !== undefined && object.fee !== null) ? CosmosTxFee.fromPartial(object.fee) : undefined;
+    message.fee =
+      object.fee !== undefined && object.fee !== null
+        ? CosmosTxFee.fromPartial(object.fee)
+        : undefined;
     message.msgs = object.msgs?.map((e) => e) || [];
     return message;
   },
@@ -1944,7 +2100,10 @@ function createBasePrepareCosmosTxResponse(): PrepareCosmosTxResponse {
 }
 
 export const PrepareCosmosTxResponse: MessageFns<PrepareCosmosTxResponse> = {
-  encode(message: PrepareCosmosTxResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PrepareCosmosTxResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.tx.length !== 0) {
       writer.uint32(10).bytes(message.tx);
     }
@@ -1961,13 +2120,20 @@ export const PrepareCosmosTxResponse: MessageFns<PrepareCosmosTxResponse> = {
       writer.uint32(42).string(message.feePayerSig);
     }
     if (message.feePayerPubKey !== undefined) {
-      CosmosPubKey.encode(message.feePayerPubKey, writer.uint32(50).fork()).join();
+      CosmosPubKey.encode(
+        message.feePayerPubKey,
+        writer.uint32(50).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PrepareCosmosTxResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PrepareCosmosTxResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrepareCosmosTxResponse();
     while (reader.pos < end) {
@@ -2032,32 +2198,34 @@ export const PrepareCosmosTxResponse: MessageFns<PrepareCosmosTxResponse> = {
 
   fromJSON(object: any): PrepareCosmosTxResponse {
     return {
-      tx: isSet(object.tx) ? Buffer.from(bytesFromBase64(object.tx)) : Buffer.alloc(0),
+      tx: isSet(object.tx)
+        ? Buffer.from(bytesFromBase64(object.tx))
+        : Buffer.alloc(0),
       signMode: isSet(object.signMode)
         ? globalThis.String(object.signMode)
         : isSet(object.sign_mode)
-        ? globalThis.String(object.sign_mode)
-        : "",
+          ? globalThis.String(object.sign_mode)
+          : "",
       pubKeyType: isSet(object.pubKeyType)
         ? globalThis.String(object.pubKeyType)
         : isSet(object.pub_key_type)
-        ? globalThis.String(object.pub_key_type)
-        : "",
+          ? globalThis.String(object.pub_key_type)
+          : "",
       feePayer: isSet(object.feePayer)
         ? globalThis.String(object.feePayer)
         : isSet(object.fee_payer)
-        ? globalThis.String(object.fee_payer)
-        : "",
+          ? globalThis.String(object.fee_payer)
+          : "",
       feePayerSig: isSet(object.feePayerSig)
         ? globalThis.String(object.feePayerSig)
         : isSet(object.fee_payer_sig)
-        ? globalThis.String(object.fee_payer_sig)
-        : "",
+          ? globalThis.String(object.fee_payer_sig)
+          : "",
       feePayerPubKey: isSet(object.feePayerPubKey)
         ? CosmosPubKey.fromJSON(object.feePayerPubKey)
         : isSet(object.fee_payer_pub_key)
-        ? CosmosPubKey.fromJSON(object.fee_payer_pub_key)
-        : undefined,
+          ? CosmosPubKey.fromJSON(object.fee_payer_pub_key)
+          : undefined,
     };
   },
 
@@ -2084,29 +2252,42 @@ export const PrepareCosmosTxResponse: MessageFns<PrepareCosmosTxResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PrepareCosmosTxResponse>, I>>(base?: I): PrepareCosmosTxResponse {
+  create<I extends Exact<DeepPartial<PrepareCosmosTxResponse>, I>>(
+    base?: I,
+  ): PrepareCosmosTxResponse {
     return PrepareCosmosTxResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PrepareCosmosTxResponse>, I>>(object: I): PrepareCosmosTxResponse {
+  fromPartial<I extends Exact<DeepPartial<PrepareCosmosTxResponse>, I>>(
+    object: I,
+  ): PrepareCosmosTxResponse {
     const message = createBasePrepareCosmosTxResponse();
     message.tx = object.tx ?? Buffer.alloc(0);
     message.signMode = object.signMode ?? "";
     message.pubKeyType = object.pubKeyType ?? "";
     message.feePayer = object.feePayer ?? "";
     message.feePayerSig = object.feePayerSig ?? "";
-    message.feePayerPubKey = (object.feePayerPubKey !== undefined && object.feePayerPubKey !== null)
-      ? CosmosPubKey.fromPartial(object.feePayerPubKey)
-      : undefined;
+    message.feePayerPubKey =
+      object.feePayerPubKey !== undefined && object.feePayerPubKey !== null
+        ? CosmosPubKey.fromPartial(object.feePayerPubKey)
+        : undefined;
     return message;
   },
 };
 
 function createBaseBroadcastCosmosTxRequest(): BroadcastCosmosTxRequest {
-  return { tx: Buffer.alloc(0), pubKey: undefined, signature: "", senderAddress: "" };
+  return {
+    tx: Buffer.alloc(0),
+    pubKey: undefined,
+    signature: "",
+    senderAddress: "",
+  };
 }
 
 export const BroadcastCosmosTxRequest: MessageFns<BroadcastCosmosTxRequest> = {
-  encode(message: BroadcastCosmosTxRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BroadcastCosmosTxRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.tx.length !== 0) {
       writer.uint32(10).bytes(message.tx);
     }
@@ -2122,8 +2303,12 @@ export const BroadcastCosmosTxRequest: MessageFns<BroadcastCosmosTxRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BroadcastCosmosTxRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): BroadcastCosmosTxRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastCosmosTxRequest();
     while (reader.pos < end) {
@@ -2172,18 +2357,22 @@ export const BroadcastCosmosTxRequest: MessageFns<BroadcastCosmosTxRequest> = {
 
   fromJSON(object: any): BroadcastCosmosTxRequest {
     return {
-      tx: isSet(object.tx) ? Buffer.from(bytesFromBase64(object.tx)) : Buffer.alloc(0),
+      tx: isSet(object.tx)
+        ? Buffer.from(bytesFromBase64(object.tx))
+        : Buffer.alloc(0),
       pubKey: isSet(object.pubKey)
         ? CosmosPubKey.fromJSON(object.pubKey)
         : isSet(object.pub_key)
-        ? CosmosPubKey.fromJSON(object.pub_key)
-        : undefined,
-      signature: isSet(object.signature) ? globalThis.String(object.signature) : "",
+          ? CosmosPubKey.fromJSON(object.pub_key)
+          : undefined,
+      signature: isSet(object.signature)
+        ? globalThis.String(object.signature)
+        : "",
       senderAddress: isSet(object.senderAddress)
         ? globalThis.String(object.senderAddress)
         : isSet(object.sender_address)
-        ? globalThis.String(object.sender_address)
-        : "",
+          ? globalThis.String(object.sender_address)
+          : "",
     };
   },
 
@@ -2204,15 +2393,20 @@ export const BroadcastCosmosTxRequest: MessageFns<BroadcastCosmosTxRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BroadcastCosmosTxRequest>, I>>(base?: I): BroadcastCosmosTxRequest {
+  create<I extends Exact<DeepPartial<BroadcastCosmosTxRequest>, I>>(
+    base?: I,
+  ): BroadcastCosmosTxRequest {
     return BroadcastCosmosTxRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BroadcastCosmosTxRequest>, I>>(object: I): BroadcastCosmosTxRequest {
+  fromPartial<I extends Exact<DeepPartial<BroadcastCosmosTxRequest>, I>>(
+    object: I,
+  ): BroadcastCosmosTxRequest {
     const message = createBaseBroadcastCosmosTxRequest();
     message.tx = object.tx ?? Buffer.alloc(0);
-    message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)
-      ? CosmosPubKey.fromPartial(object.pubKey)
-      : undefined;
+    message.pubKey =
+      object.pubKey !== undefined && object.pubKey !== null
+        ? CosmosPubKey.fromPartial(object.pubKey)
+        : undefined;
     message.signature = object.signature ?? "";
     message.senderAddress = object.senderAddress ?? "";
     return message;
@@ -2220,196 +2414,230 @@ export const BroadcastCosmosTxRequest: MessageFns<BroadcastCosmosTxRequest> = {
 };
 
 function createBaseBroadcastCosmosTxResponse(): BroadcastCosmosTxResponse {
-  return { txHash: "", height: 0, index: 0, codespace: "", code: 0, data: Buffer.alloc(0), rawLog: "", timestamp: "" };
+  return {
+    txHash: "",
+    height: 0,
+    index: 0,
+    codespace: "",
+    code: 0,
+    data: Buffer.alloc(0),
+    rawLog: "",
+    timestamp: "",
+  };
 }
 
-export const BroadcastCosmosTxResponse: MessageFns<BroadcastCosmosTxResponse> = {
-  encode(message: BroadcastCosmosTxResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.txHash !== "") {
-      writer.uint32(10).string(message.txHash);
-    }
-    if (message.height !== 0) {
-      writer.uint32(16).sint64(message.height);
-    }
-    if (message.index !== 0) {
-      writer.uint32(24).uint32(message.index);
-    }
-    if (message.codespace !== "") {
-      writer.uint32(34).string(message.codespace);
-    }
-    if (message.code !== 0) {
-      writer.uint32(40).uint32(message.code);
-    }
-    if (message.data.length !== 0) {
-      writer.uint32(50).bytes(message.data);
-    }
-    if (message.rawLog !== "") {
-      writer.uint32(58).string(message.rawLog);
-    }
-    if (message.timestamp !== "") {
-      writer.uint32(66).string(message.timestamp);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BroadcastCosmosTxResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBroadcastCosmosTxResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.txHash = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.height = longToNumber(reader.sint64());
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.index = reader.uint32();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.codespace = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.code = reader.uint32();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.data = Buffer.from(reader.bytes());
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.rawLog = reader.string();
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.timestamp = reader.string();
-          continue;
-        }
+export const BroadcastCosmosTxResponse: MessageFns<BroadcastCosmosTxResponse> =
+  {
+    encode(
+      message: BroadcastCosmosTxResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.txHash !== "") {
+        writer.uint32(10).string(message.txHash);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.height !== 0) {
+        writer.uint32(16).sint64(message.height);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.index !== 0) {
+        writer.uint32(24).uint32(message.index);
+      }
+      if (message.codespace !== "") {
+        writer.uint32(34).string(message.codespace);
+      }
+      if (message.code !== 0) {
+        writer.uint32(40).uint32(message.code);
+      }
+      if (message.data.length !== 0) {
+        writer.uint32(50).bytes(message.data);
+      }
+      if (message.rawLog !== "") {
+        writer.uint32(58).string(message.rawLog);
+      }
+      if (message.timestamp !== "") {
+        writer.uint32(66).string(message.timestamp);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): BroadcastCosmosTxResponse {
-    return {
-      txHash: isSet(object.txHash)
-        ? globalThis.String(object.txHash)
-        : isSet(object.tx_hash)
-        ? globalThis.String(object.tx_hash)
-        : "",
-      height: isSet(object.height) ? globalThis.Number(object.height) : 0,
-      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
-      codespace: isSet(object.codespace) ? globalThis.String(object.codespace) : "",
-      code: isSet(object.code) ? globalThis.Number(object.code) : 0,
-      data: isSet(object.data) ? Buffer.from(bytesFromBase64(object.data)) : Buffer.alloc(0),
-      rawLog: isSet(object.rawLog)
-        ? globalThis.String(object.rawLog)
-        : isSet(object.raw_log)
-        ? globalThis.String(object.raw_log)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.String(object.timestamp) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BroadcastCosmosTxResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBroadcastCosmosTxResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BroadcastCosmosTxResponse): unknown {
-    const obj: any = {};
-    if (message.txHash !== "") {
-      obj.txHash = message.txHash;
-    }
-    if (message.height !== 0) {
-      obj.height = Math.round(message.height);
-    }
-    if (message.index !== 0) {
-      obj.index = Math.round(message.index);
-    }
-    if (message.codespace !== "") {
-      obj.codespace = message.codespace;
-    }
-    if (message.code !== 0) {
-      obj.code = Math.round(message.code);
-    }
-    if (message.data.length !== 0) {
-      obj.data = base64FromBytes(message.data);
-    }
-    if (message.rawLog !== "") {
-      obj.rawLog = message.rawLog;
-    }
-    if (message.timestamp !== "") {
-      obj.timestamp = message.timestamp;
-    }
-    return obj;
-  },
+            message.txHash = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<BroadcastCosmosTxResponse>, I>>(base?: I): BroadcastCosmosTxResponse {
-    return BroadcastCosmosTxResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BroadcastCosmosTxResponse>, I>>(object: I): BroadcastCosmosTxResponse {
-    const message = createBaseBroadcastCosmosTxResponse();
-    message.txHash = object.txHash ?? "";
-    message.height = object.height ?? 0;
-    message.index = object.index ?? 0;
-    message.codespace = object.codespace ?? "";
-    message.code = object.code ?? 0;
-    message.data = object.data ?? Buffer.alloc(0);
-    message.rawLog = object.rawLog ?? "";
-    message.timestamp = object.timestamp ?? "";
-    return message;
-  },
-};
+            message.height = longToNumber(reader.sint64());
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.index = reader.uint32();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.codespace = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.code = reader.uint32();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.data = Buffer.from(reader.bytes());
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.rawLog = reader.string();
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.timestamp = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BroadcastCosmosTxResponse {
+      return {
+        txHash: isSet(object.txHash)
+          ? globalThis.String(object.txHash)
+          : isSet(object.tx_hash)
+            ? globalThis.String(object.tx_hash)
+            : "",
+        height: isSet(object.height) ? globalThis.Number(object.height) : 0,
+        index: isSet(object.index) ? globalThis.Number(object.index) : 0,
+        codespace: isSet(object.codespace)
+          ? globalThis.String(object.codespace)
+          : "",
+        code: isSet(object.code) ? globalThis.Number(object.code) : 0,
+        data: isSet(object.data)
+          ? Buffer.from(bytesFromBase64(object.data))
+          : Buffer.alloc(0),
+        rawLog: isSet(object.rawLog)
+          ? globalThis.String(object.rawLog)
+          : isSet(object.raw_log)
+            ? globalThis.String(object.raw_log)
+            : "",
+        timestamp: isSet(object.timestamp)
+          ? globalThis.String(object.timestamp)
+          : "",
+      };
+    },
+
+    toJSON(message: BroadcastCosmosTxResponse): unknown {
+      const obj: any = {};
+      if (message.txHash !== "") {
+        obj.txHash = message.txHash;
+      }
+      if (message.height !== 0) {
+        obj.height = Math.round(message.height);
+      }
+      if (message.index !== 0) {
+        obj.index = Math.round(message.index);
+      }
+      if (message.codespace !== "") {
+        obj.codespace = message.codespace;
+      }
+      if (message.code !== 0) {
+        obj.code = Math.round(message.code);
+      }
+      if (message.data.length !== 0) {
+        obj.data = base64FromBytes(message.data);
+      }
+      if (message.rawLog !== "") {
+        obj.rawLog = message.rawLog;
+      }
+      if (message.timestamp !== "") {
+        obj.timestamp = message.timestamp;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<BroadcastCosmosTxResponse>, I>>(
+      base?: I,
+    ): BroadcastCosmosTxResponse {
+      return BroadcastCosmosTxResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<BroadcastCosmosTxResponse>, I>>(
+      object: I,
+    ): BroadcastCosmosTxResponse {
+      const message = createBaseBroadcastCosmosTxResponse();
+      message.txHash = object.txHash ?? "";
+      message.height = object.height ?? 0;
+      message.index = object.index ?? 0;
+      message.codespace = object.codespace ?? "";
+      message.code = object.code ?? 0;
+      message.data = object.data ?? Buffer.alloc(0);
+      message.rawLog = object.rawLog ?? "";
+      message.timestamp = object.timestamp ?? "";
+      return message;
+    },
+  };
 
 function createBaseGetFeePayerRequest(): GetFeePayerRequest {
   return {};
 }
 
 export const GetFeePayerRequest: MessageFns<GetFeePayerRequest> = {
-  encode(_: GetFeePayerRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: GetFeePayerRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetFeePayerRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): GetFeePayerRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetFeePayerRequest();
     while (reader.pos < end) {
@@ -2433,10 +2661,14 @@ export const GetFeePayerRequest: MessageFns<GetFeePayerRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetFeePayerRequest>, I>>(base?: I): GetFeePayerRequest {
+  create<I extends Exact<DeepPartial<GetFeePayerRequest>, I>>(
+    base?: I,
+  ): GetFeePayerRequest {
     return GetFeePayerRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<GetFeePayerRequest>, I>>(_: I): GetFeePayerRequest {
+  fromPartial<I extends Exact<DeepPartial<GetFeePayerRequest>, I>>(
+    _: I,
+  ): GetFeePayerRequest {
     const message = createBaseGetFeePayerRequest();
     return message;
   },
@@ -2447,18 +2679,28 @@ function createBaseGetFeePayerResponse(): GetFeePayerResponse {
 }
 
 export const GetFeePayerResponse: MessageFns<GetFeePayerResponse> = {
-  encode(message: GetFeePayerResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetFeePayerResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.feePayer !== "") {
       writer.uint32(10).string(message.feePayer);
     }
     if (message.feePayerPubKey !== undefined) {
-      CosmosPubKey.encode(message.feePayerPubKey, writer.uint32(18).fork()).join();
+      CosmosPubKey.encode(
+        message.feePayerPubKey,
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetFeePayerResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): GetFeePayerResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetFeePayerResponse();
     while (reader.pos < end) {
@@ -2494,13 +2736,13 @@ export const GetFeePayerResponse: MessageFns<GetFeePayerResponse> = {
       feePayer: isSet(object.feePayer)
         ? globalThis.String(object.feePayer)
         : isSet(object.fee_payer)
-        ? globalThis.String(object.fee_payer)
-        : "",
+          ? globalThis.String(object.fee_payer)
+          : "",
       feePayerPubKey: isSet(object.feePayerPubKey)
         ? CosmosPubKey.fromJSON(object.feePayerPubKey)
         : isSet(object.fee_payer_pub_key)
-        ? CosmosPubKey.fromJSON(object.fee_payer_pub_key)
-        : undefined,
+          ? CosmosPubKey.fromJSON(object.fee_payer_pub_key)
+          : undefined,
     };
   },
 
@@ -2515,15 +2757,20 @@ export const GetFeePayerResponse: MessageFns<GetFeePayerResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetFeePayerResponse>, I>>(base?: I): GetFeePayerResponse {
+  create<I extends Exact<DeepPartial<GetFeePayerResponse>, I>>(
+    base?: I,
+  ): GetFeePayerResponse {
     return GetFeePayerResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<GetFeePayerResponse>, I>>(object: I): GetFeePayerResponse {
+  fromPartial<I extends Exact<DeepPartial<GetFeePayerResponse>, I>>(
+    object: I,
+  ): GetFeePayerResponse {
     const message = createBaseGetFeePayerResponse();
     message.feePayer = object.feePayer ?? "";
-    message.feePayerPubKey = (object.feePayerPubKey !== undefined && object.feePayerPubKey !== null)
-      ? CosmosPubKey.fromPartial(object.feePayerPubKey)
-      : undefined;
+    message.feePayerPubKey =
+      object.feePayerPubKey !== undefined && object.feePayerPubKey !== null
+        ? CosmosPubKey.fromPartial(object.feePayerPubKey)
+        : undefined;
     return message;
   },
 };
@@ -2533,15 +2780,22 @@ function createBasePrepareFeeGrantRequest(): PrepareFeeGrantRequest {
 }
 
 export const PrepareFeeGrantRequest: MessageFns<PrepareFeeGrantRequest> = {
-  encode(message: PrepareFeeGrantRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PrepareFeeGrantRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.granteeAddress !== "") {
       writer.uint32(10).string(message.granteeAddress);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PrepareFeeGrantRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PrepareFeeGrantRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrepareFeeGrantRequest();
     while (reader.pos < end) {
@@ -2569,8 +2823,8 @@ export const PrepareFeeGrantRequest: MessageFns<PrepareFeeGrantRequest> = {
       granteeAddress: isSet(object.granteeAddress)
         ? globalThis.String(object.granteeAddress)
         : isSet(object.grantee_address)
-        ? globalThis.String(object.grantee_address)
-        : "",
+          ? globalThis.String(object.grantee_address)
+          : "",
     };
   },
 
@@ -2582,10 +2836,14 @@ export const PrepareFeeGrantRequest: MessageFns<PrepareFeeGrantRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PrepareFeeGrantRequest>, I>>(base?: I): PrepareFeeGrantRequest {
+  create<I extends Exact<DeepPartial<PrepareFeeGrantRequest>, I>>(
+    base?: I,
+  ): PrepareFeeGrantRequest {
     return PrepareFeeGrantRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PrepareFeeGrantRequest>, I>>(object: I): PrepareFeeGrantRequest {
+  fromPartial<I extends Exact<DeepPartial<PrepareFeeGrantRequest>, I>>(
+    object: I,
+  ): PrepareFeeGrantRequest {
     const message = createBasePrepareFeeGrantRequest();
     message.granteeAddress = object.granteeAddress ?? "";
     return message;
@@ -2604,7 +2862,10 @@ function createBasePrepareFeeGrantResponse(): PrepareFeeGrantResponse {
 }
 
 export const PrepareFeeGrantResponse: MessageFns<PrepareFeeGrantResponse> = {
-  encode(message: PrepareFeeGrantResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PrepareFeeGrantResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.granterAddress !== "") {
       writer.uint32(10).string(message.granterAddress);
     }
@@ -2626,8 +2887,12 @@ export const PrepareFeeGrantResponse: MessageFns<PrepareFeeGrantResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PrepareFeeGrantResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PrepareFeeGrantResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrepareFeeGrantResponse();
     while (reader.pos < end) {
@@ -2695,29 +2960,31 @@ export const PrepareFeeGrantResponse: MessageFns<PrepareFeeGrantResponse> = {
       granterAddress: isSet(object.granterAddress)
         ? globalThis.String(object.granterAddress)
         : isSet(object.granter_address)
-        ? globalThis.String(object.granter_address)
-        : "",
+          ? globalThis.String(object.granter_address)
+          : "",
       granteeAddress: isSet(object.granteeAddress)
         ? globalThis.String(object.granteeAddress)
         : isSet(object.grantee_address)
-        ? globalThis.String(object.grantee_address)
-        : "",
+          ? globalThis.String(object.grantee_address)
+          : "",
       txHash: isSet(object.txHash)
         ? globalThis.String(object.txHash)
         : isSet(object.tx_hash)
-        ? globalThis.String(object.tx_hash)
-        : "",
-      expiration: isSet(object.expiration) ? globalThis.Number(object.expiration) : 0,
+          ? globalThis.String(object.tx_hash)
+          : "",
+      expiration: isSet(object.expiration)
+        ? globalThis.Number(object.expiration)
+        : 0,
       spendLimit: isSet(object.spendLimit)
         ? CosmosCoin.fromJSON(object.spendLimit)
         : isSet(object.spend_limit)
-        ? CosmosCoin.fromJSON(object.spend_limit)
-        : undefined,
+          ? CosmosCoin.fromJSON(object.spend_limit)
+          : undefined,
       allowedMessages: globalThis.Array.isArray(object?.allowedMessages)
         ? object.allowedMessages.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.allowed_messages)
-        ? object.allowed_messages.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.allowed_messages.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -2744,18 +3011,23 @@ export const PrepareFeeGrantResponse: MessageFns<PrepareFeeGrantResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PrepareFeeGrantResponse>, I>>(base?: I): PrepareFeeGrantResponse {
+  create<I extends Exact<DeepPartial<PrepareFeeGrantResponse>, I>>(
+    base?: I,
+  ): PrepareFeeGrantResponse {
     return PrepareFeeGrantResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PrepareFeeGrantResponse>, I>>(object: I): PrepareFeeGrantResponse {
+  fromPartial<I extends Exact<DeepPartial<PrepareFeeGrantResponse>, I>>(
+    object: I,
+  ): PrepareFeeGrantResponse {
     const message = createBasePrepareFeeGrantResponse();
     message.granterAddress = object.granterAddress ?? "";
     message.granteeAddress = object.granteeAddress ?? "";
     message.txHash = object.txHash ?? "";
     message.expiration = object.expiration ?? 0;
-    message.spendLimit = (object.spendLimit !== undefined && object.spendLimit !== null)
-      ? CosmosCoin.fromPartial(object.spendLimit)
-      : undefined;
+    message.spendLimit =
+      object.spendLimit !== undefined && object.spendLimit !== null
+        ? CosmosCoin.fromPartial(object.spendLimit)
+        : undefined;
     message.allowedMessages = object.allowedMessages?.map((e) => e) || [];
     return message;
   },
@@ -2769,41 +3041,56 @@ export const InjectiveExchangeRPCService = {
     path: "/injective_exchange_rpc.InjectiveExchangeRPC/GetTx" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: GetTxRequest): Buffer => Buffer.from(GetTxRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): GetTxRequest => GetTxRequest.decode(value),
-    responseSerialize: (value: GetTxResponse): Buffer => Buffer.from(GetTxResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): GetTxResponse => GetTxResponse.decode(value),
+    requestSerialize: (value: GetTxRequest): Buffer =>
+      Buffer.from(GetTxRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): GetTxRequest =>
+      GetTxRequest.decode(value),
+    responseSerialize: (value: GetTxResponse): Buffer =>
+      Buffer.from(GetTxResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): GetTxResponse =>
+      GetTxResponse.decode(value),
   },
   /** PrepareTx generates a Web3-signable body for a Cosmos transaction */
   prepareTx: {
     path: "/injective_exchange_rpc.InjectiveExchangeRPC/PrepareTx" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: PrepareTxRequest): Buffer => Buffer.from(PrepareTxRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): PrepareTxRequest => PrepareTxRequest.decode(value),
-    responseSerialize: (value: PrepareTxResponse): Buffer => Buffer.from(PrepareTxResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PrepareTxResponse => PrepareTxResponse.decode(value),
+    requestSerialize: (value: PrepareTxRequest): Buffer =>
+      Buffer.from(PrepareTxRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): PrepareTxRequest =>
+      PrepareTxRequest.decode(value),
+    responseSerialize: (value: PrepareTxResponse): Buffer =>
+      Buffer.from(PrepareTxResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): PrepareTxResponse =>
+      PrepareTxResponse.decode(value),
   },
   /** prepareEip712 generates EIP712 for an Injective Message */
   prepareEip712: {
     path: "/injective_exchange_rpc.InjectiveExchangeRPC/PrepareEip712" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: PrepareEip712Request): Buffer => Buffer.from(PrepareEip712Request.encode(value).finish()),
-    requestDeserialize: (value: Buffer): PrepareEip712Request => PrepareEip712Request.decode(value),
+    requestSerialize: (value: PrepareEip712Request): Buffer =>
+      Buffer.from(PrepareEip712Request.encode(value).finish()),
+    requestDeserialize: (value: Buffer): PrepareEip712Request =>
+      PrepareEip712Request.decode(value),
     responseSerialize: (value: PrepareEip712Response): Buffer =>
       Buffer.from(PrepareEip712Response.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PrepareEip712Response => PrepareEip712Response.decode(value),
+    responseDeserialize: (value: Buffer): PrepareEip712Response =>
+      PrepareEip712Response.decode(value),
   },
   /** BroadcastTx broadcasts a signed Web3 transaction */
   broadcastTx: {
     path: "/injective_exchange_rpc.InjectiveExchangeRPC/BroadcastTx" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: BroadcastTxRequest): Buffer => Buffer.from(BroadcastTxRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): BroadcastTxRequest => BroadcastTxRequest.decode(value),
-    responseSerialize: (value: BroadcastTxResponse): Buffer => Buffer.from(BroadcastTxResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): BroadcastTxResponse => BroadcastTxResponse.decode(value),
+    requestSerialize: (value: BroadcastTxRequest): Buffer =>
+      Buffer.from(BroadcastTxRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): BroadcastTxRequest =>
+      BroadcastTxRequest.decode(value),
+    responseSerialize: (value: BroadcastTxResponse): Buffer =>
+      Buffer.from(BroadcastTxResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): BroadcastTxResponse =>
+      BroadcastTxResponse.decode(value),
   },
   /** PrepareCosmosTx generates a Web3-signable body for a Cosmos transaction */
   prepareCosmosTx: {
@@ -2812,10 +3099,12 @@ export const InjectiveExchangeRPCService = {
     responseStream: false as const,
     requestSerialize: (value: PrepareCosmosTxRequest): Buffer =>
       Buffer.from(PrepareCosmosTxRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): PrepareCosmosTxRequest => PrepareCosmosTxRequest.decode(value),
+    requestDeserialize: (value: Buffer): PrepareCosmosTxRequest =>
+      PrepareCosmosTxRequest.decode(value),
     responseSerialize: (value: PrepareCosmosTxResponse): Buffer =>
       Buffer.from(PrepareCosmosTxResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PrepareCosmosTxResponse => PrepareCosmosTxResponse.decode(value),
+    responseDeserialize: (value: Buffer): PrepareCosmosTxResponse =>
+      PrepareCosmosTxResponse.decode(value),
   },
   /** BroadcastCosmosTx broadcasts a signed Web3 transaction */
   broadcastCosmosTx: {
@@ -2824,20 +3113,26 @@ export const InjectiveExchangeRPCService = {
     responseStream: false as const,
     requestSerialize: (value: BroadcastCosmosTxRequest): Buffer =>
       Buffer.from(BroadcastCosmosTxRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): BroadcastCosmosTxRequest => BroadcastCosmosTxRequest.decode(value),
+    requestDeserialize: (value: Buffer): BroadcastCosmosTxRequest =>
+      BroadcastCosmosTxRequest.decode(value),
     responseSerialize: (value: BroadcastCosmosTxResponse): Buffer =>
       Buffer.from(BroadcastCosmosTxResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): BroadcastCosmosTxResponse => BroadcastCosmosTxResponse.decode(value),
+    responseDeserialize: (value: Buffer): BroadcastCosmosTxResponse =>
+      BroadcastCosmosTxResponse.decode(value),
   },
   /** Return fee payer information's */
   getFeePayer: {
     path: "/injective_exchange_rpc.InjectiveExchangeRPC/GetFeePayer" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: GetFeePayerRequest): Buffer => Buffer.from(GetFeePayerRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): GetFeePayerRequest => GetFeePayerRequest.decode(value),
-    responseSerialize: (value: GetFeePayerResponse): Buffer => Buffer.from(GetFeePayerResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): GetFeePayerResponse => GetFeePayerResponse.decode(value),
+    requestSerialize: (value: GetFeePayerRequest): Buffer =>
+      Buffer.from(GetFeePayerRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): GetFeePayerRequest =>
+      GetFeePayerRequest.decode(value),
+    responseSerialize: (value: GetFeePayerResponse): Buffer =>
+      Buffer.from(GetFeePayerResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): GetFeePayerResponse =>
+      GetFeePayerResponse.decode(value),
   },
   /** PrepareFeeGrant creates or refreshes a feegrant for a grantee address */
   prepareFeeGrant: {
@@ -2846,10 +3141,12 @@ export const InjectiveExchangeRPCService = {
     responseStream: false as const,
     requestSerialize: (value: PrepareFeeGrantRequest): Buffer =>
       Buffer.from(PrepareFeeGrantRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): PrepareFeeGrantRequest => PrepareFeeGrantRequest.decode(value),
+    requestDeserialize: (value: Buffer): PrepareFeeGrantRequest =>
+      PrepareFeeGrantRequest.decode(value),
     responseSerialize: (value: PrepareFeeGrantResponse): Buffer =>
       Buffer.from(PrepareFeeGrantResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PrepareFeeGrantResponse => PrepareFeeGrantResponse.decode(value),
+    responseDeserialize: (value: Buffer): PrepareFeeGrantResponse =>
+      PrepareFeeGrantResponse.decode(value),
   },
 } as const;
 
@@ -2863,13 +3160,22 @@ export interface InjectiveExchangeRPCServer extends UntypedServiceImplementation
   /** BroadcastTx broadcasts a signed Web3 transaction */
   broadcastTx: handleUnaryCall<BroadcastTxRequest, BroadcastTxResponse>;
   /** PrepareCosmosTx generates a Web3-signable body for a Cosmos transaction */
-  prepareCosmosTx: handleUnaryCall<PrepareCosmosTxRequest, PrepareCosmosTxResponse>;
+  prepareCosmosTx: handleUnaryCall<
+    PrepareCosmosTxRequest,
+    PrepareCosmosTxResponse
+  >;
   /** BroadcastCosmosTx broadcasts a signed Web3 transaction */
-  broadcastCosmosTx: handleUnaryCall<BroadcastCosmosTxRequest, BroadcastCosmosTxResponse>;
+  broadcastCosmosTx: handleUnaryCall<
+    BroadcastCosmosTxRequest,
+    BroadcastCosmosTxResponse
+  >;
   /** Return fee payer information's */
   getFeePayer: handleUnaryCall<GetFeePayerRequest, GetFeePayerResponse>;
   /** PrepareFeeGrant creates or refreshes a feegrant for a grantee address */
-  prepareFeeGrant: handleUnaryCall<PrepareFeeGrantRequest, PrepareFeeGrantResponse>;
+  prepareFeeGrant: handleUnaryCall<
+    PrepareFeeGrantRequest,
+    PrepareFeeGrantResponse
+  >;
 }
 
 export interface InjectiveExchangeRPCClient extends Client {
@@ -2908,98 +3214,152 @@ export interface InjectiveExchangeRPCClient extends Client {
   /** prepareEip712 generates EIP712 for an Injective Message */
   prepareEip712(
     request: PrepareEip712Request,
-    callback: (error: ServiceError | null, response: PrepareEip712Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PrepareEip712Response,
+    ) => void,
   ): ClientUnaryCall;
   prepareEip712(
     request: PrepareEip712Request,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: PrepareEip712Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PrepareEip712Response,
+    ) => void,
   ): ClientUnaryCall;
   prepareEip712(
     request: PrepareEip712Request,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: PrepareEip712Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PrepareEip712Response,
+    ) => void,
   ): ClientUnaryCall;
   /** BroadcastTx broadcasts a signed Web3 transaction */
   broadcastTx(
     request: BroadcastTxRequest,
-    callback: (error: ServiceError | null, response: BroadcastTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BroadcastTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   broadcastTx(
     request: BroadcastTxRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: BroadcastTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BroadcastTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   broadcastTx(
     request: BroadcastTxRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: BroadcastTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BroadcastTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** PrepareCosmosTx generates a Web3-signable body for a Cosmos transaction */
   prepareCosmosTx(
     request: PrepareCosmosTxRequest,
-    callback: (error: ServiceError | null, response: PrepareCosmosTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PrepareCosmosTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   prepareCosmosTx(
     request: PrepareCosmosTxRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: PrepareCosmosTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PrepareCosmosTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   prepareCosmosTx(
     request: PrepareCosmosTxRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: PrepareCosmosTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PrepareCosmosTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** BroadcastCosmosTx broadcasts a signed Web3 transaction */
   broadcastCosmosTx(
     request: BroadcastCosmosTxRequest,
-    callback: (error: ServiceError | null, response: BroadcastCosmosTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BroadcastCosmosTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   broadcastCosmosTx(
     request: BroadcastCosmosTxRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: BroadcastCosmosTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BroadcastCosmosTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   broadcastCosmosTx(
     request: BroadcastCosmosTxRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: BroadcastCosmosTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BroadcastCosmosTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Return fee payer information's */
   getFeePayer(
     request: GetFeePayerRequest,
-    callback: (error: ServiceError | null, response: GetFeePayerResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: GetFeePayerResponse,
+    ) => void,
   ): ClientUnaryCall;
   getFeePayer(
     request: GetFeePayerRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: GetFeePayerResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: GetFeePayerResponse,
+    ) => void,
   ): ClientUnaryCall;
   getFeePayer(
     request: GetFeePayerRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: GetFeePayerResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: GetFeePayerResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** PrepareFeeGrant creates or refreshes a feegrant for a grantee address */
   prepareFeeGrant(
     request: PrepareFeeGrantRequest,
-    callback: (error: ServiceError | null, response: PrepareFeeGrantResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PrepareFeeGrantResponse,
+    ) => void,
   ): ClientUnaryCall;
   prepareFeeGrant(
     request: PrepareFeeGrantRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: PrepareFeeGrantResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PrepareFeeGrantResponse,
+    ) => void,
   ): ClientUnaryCall;
   prepareFeeGrant(
     request: PrepareFeeGrantRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: PrepareFeeGrantResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PrepareFeeGrantResponse,
+    ) => void,
   ): ClientUnaryCall;
 }
 
@@ -3007,7 +3367,11 @@ export const InjectiveExchangeRPCClient = makeGenericClientConstructor(
   InjectiveExchangeRPCService,
   "injective_exchange_rpc.InjectiveExchangeRPC",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): InjectiveExchangeRPCClient;
+  new (
+    address: string,
+    credentials: ChannelCredentials,
+    options?: Partial<ClientOptions>,
+  ): InjectiveExchangeRPCClient;
   service: typeof InjectiveExchangeRPCService;
   serviceName: string;
 };
@@ -3020,17 +3384,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

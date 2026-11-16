@@ -67,9 +67,7 @@ export interface DerivativeMarketInfo {
   /** Coin denom used for the quote asset. */
   quoteDenom: string;
   /** Token metadata for quote asset */
-  quoteTokenMeta:
-    | TokenMeta
-    | undefined;
+  quoteTokenMeta: TokenMeta | undefined;
   /** Defines the fee percentage makers pay when trading (in quote asset) */
   makerFeeRate: string;
   /** Defines the fee percentage takers pay when trading (in quote asset) */
@@ -84,9 +82,7 @@ export interface DerivativeMarketInfo {
   minQuantityTickSize: string;
   perpetualMarketInfo: PerpetualMarketInfo | undefined;
   perpetualMarketFunding: PerpetualMarketFunding | undefined;
-  expiryFuturesMarketInfo:
-    | ExpiryFuturesMarketInfo
-    | undefined;
+  expiryFuturesMarketInfo: ExpiryFuturesMarketInfo | undefined;
   /** Minimum notional value for the order */
   minNotional: string;
   /** Defines the reduce margin ratio of a derivative market */
@@ -176,9 +172,7 @@ export interface StreamMarketRequest {
 
 export interface StreamMarketResponse {
   /** Info about particular derivative market */
-  market:
-    | DerivativeMarketInfo
-    | undefined;
+  market: DerivativeMarketInfo | undefined;
   /** Update type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -227,9 +221,7 @@ export interface BinaryOptionsMarketInfo {
   /** Coin denom used for the quote asset. */
   quoteDenom: string;
   /** Token metadata for quote asset */
-  quoteTokenMeta:
-    | TokenMeta
-    | undefined;
+  quoteTokenMeta: TokenMeta | undefined;
   /** Defines the fee percentage makers pay when trading (in quote asset) */
   makerFeeRate: string;
   /** Defines the fee percentage takers pay when trading (in quote asset) */
@@ -332,9 +324,7 @@ export interface StreamOrderbookV2Request {
 
 export interface StreamOrderbookV2Response {
   /** Orderbook of a Derivative Market */
-  orderbook:
-    | DerivativeLimitOrderbookV2
-    | undefined;
+  orderbook: DerivativeLimitOrderbookV2 | undefined;
   /** Order update type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -353,9 +343,7 @@ export interface StreamOrderbookUpdateRequest {
 
 export interface StreamOrderbookUpdateResponse {
   /** Orderbook level updates of a Derivative Market */
-  orderbookLevelUpdates:
-    | OrderbookLevelUpdates
-    | undefined;
+  orderbookLevelUpdates: OrderbookLevelUpdates | undefined;
   /** Order update type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -731,9 +719,7 @@ export interface StreamPositionsRequest {
 
 export interface StreamPositionsResponse {
   /** Updated derivative Position */
-  position:
-    | DerivativePosition
-    | undefined;
+  position: DerivativePosition | undefined;
   /** Operation timestamp in UNIX millis. */
   timestamp: number;
 }
@@ -753,9 +739,7 @@ export interface StreamPositionsV2Request {
 
 export interface StreamPositionsV2Response {
   /** Updated derivative Position */
-  position:
-    | DerivativePositionV2
-    | undefined;
+  position: DerivativePositionV2 | undefined;
   /** Operation timestamp in UNIX millis. */
   timestamp: number;
   /** Position update type */
@@ -807,9 +791,7 @@ export interface StreamOrdersRequest {
 
 export interface StreamOrdersResponse {
   /** Updated market order */
-  order:
-    | DerivativeLimitOrder
-    | undefined;
+  order: DerivativeLimitOrder | undefined;
   /** Order update type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -875,9 +857,7 @@ export interface DerivativeTrade {
   /** True if the trade is a liquidation */
   isLiquidation: boolean;
   /** Position Delta from the trade */
-  positionDelta:
-    | PositionDelta
-    | undefined;
+  positionDelta: PositionDelta | undefined;
   /** The payout associated with the trade */
   payout: string;
   /** The fee associated with the trade */
@@ -997,9 +977,7 @@ export interface StreamTradesRequest {
 
 export interface StreamTradesResponse {
   /** New derivative market trade */
-  trade:
-    | DerivativeTrade
-    | undefined;
+  trade: DerivativeTrade | undefined;
   /** Executed trades update type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -1049,9 +1027,7 @@ export interface StreamTradesV2Request {
 
 export interface StreamTradesV2Response {
   /** New derivative market trade */
-  trade:
-    | DerivativeTrade
-    | undefined;
+  trade: DerivativeTrade | undefined;
   /** Executed trades update type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -1195,9 +1171,7 @@ export interface StreamOrdersHistoryRequest {
 
 export interface StreamOrdersHistoryResponse {
   /** Updated order */
-  order:
-    | DerivativeOrderHistory
-    | undefined;
+  order: DerivativeOrderHistory | undefined;
   /** Order update type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -1226,7 +1200,10 @@ function createBaseMarketsRequest(): MarketsRequest {
 }
 
 export const MarketsRequest: MessageFns<MarketsRequest> = {
-  encode(message: MarketsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MarketsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketStatus !== "") {
       writer.uint32(10).string(message.marketStatus);
     }
@@ -1240,7 +1217,8 @@ export const MarketsRequest: MessageFns<MarketsRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MarketsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMarketsRequest();
     while (reader.pos < end) {
@@ -1284,18 +1262,18 @@ export const MarketsRequest: MessageFns<MarketsRequest> = {
       marketStatus: isSet(object.marketStatus)
         ? globalThis.String(object.marketStatus)
         : isSet(object.market_status)
-        ? globalThis.String(object.market_status)
-        : "",
+          ? globalThis.String(object.market_status)
+          : "",
       quoteDenom: isSet(object.quoteDenom)
         ? globalThis.String(object.quoteDenom)
         : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
+          ? globalThis.String(object.quote_denom)
+          : "",
       marketStatuses: globalThis.Array.isArray(object?.marketStatuses)
         ? object.marketStatuses.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_statuses)
-        ? object.market_statuses.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_statuses.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -1313,10 +1291,14 @@ export const MarketsRequest: MessageFns<MarketsRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MarketsRequest>, I>>(base?: I): MarketsRequest {
+  create<I extends Exact<DeepPartial<MarketsRequest>, I>>(
+    base?: I,
+  ): MarketsRequest {
     return MarketsRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MarketsRequest>, I>>(object: I): MarketsRequest {
+  fromPartial<I extends Exact<DeepPartial<MarketsRequest>, I>>(
+    object: I,
+  ): MarketsRequest {
     const message = createBaseMarketsRequest();
     message.marketStatus = object.marketStatus ?? "";
     message.quoteDenom = object.quoteDenom ?? "";
@@ -1330,7 +1312,10 @@ function createBaseMarketsResponse(): MarketsResponse {
 }
 
 export const MarketsResponse: MessageFns<MarketsResponse> = {
-  encode(message: MarketsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MarketsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.markets) {
       DerivativeMarketInfo.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -1338,7 +1323,8 @@ export const MarketsResponse: MessageFns<MarketsResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MarketsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMarketsResponse();
     while (reader.pos < end) {
@@ -1349,7 +1335,9 @@ export const MarketsResponse: MessageFns<MarketsResponse> = {
             break;
           }
 
-          message.markets.push(DerivativeMarketInfo.decode(reader, reader.uint32()));
+          message.markets.push(
+            DerivativeMarketInfo.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -1377,12 +1365,17 @@ export const MarketsResponse: MessageFns<MarketsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MarketsResponse>, I>>(base?: I): MarketsResponse {
+  create<I extends Exact<DeepPartial<MarketsResponse>, I>>(
+    base?: I,
+  ): MarketsResponse {
     return MarketsResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MarketsResponse>, I>>(object: I): MarketsResponse {
+  fromPartial<I extends Exact<DeepPartial<MarketsResponse>, I>>(
+    object: I,
+  ): MarketsResponse {
     const message = createBaseMarketsResponse();
-    message.markets = object.markets?.map((e) => DerivativeMarketInfo.fromPartial(e)) || [];
+    message.markets =
+      object.markets?.map((e) => DerivativeMarketInfo.fromPartial(e)) || [];
     return message;
   },
 };
@@ -1416,7 +1409,10 @@ function createBaseDerivativeMarketInfo(): DerivativeMarketInfo {
 }
 
 export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
-  encode(message: DerivativeMarketInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativeMarketInfo,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -1469,13 +1465,22 @@ export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
       writer.uint32(138).string(message.minQuantityTickSize);
     }
     if (message.perpetualMarketInfo !== undefined) {
-      PerpetualMarketInfo.encode(message.perpetualMarketInfo, writer.uint32(146).fork()).join();
+      PerpetualMarketInfo.encode(
+        message.perpetualMarketInfo,
+        writer.uint32(146).fork(),
+      ).join();
     }
     if (message.perpetualMarketFunding !== undefined) {
-      PerpetualMarketFunding.encode(message.perpetualMarketFunding, writer.uint32(154).fork()).join();
+      PerpetualMarketFunding.encode(
+        message.perpetualMarketFunding,
+        writer.uint32(154).fork(),
+      ).join();
     }
     if (message.expiryFuturesMarketInfo !== undefined) {
-      ExpiryFuturesMarketInfo.encode(message.expiryFuturesMarketInfo, writer.uint32(162).fork()).join();
+      ExpiryFuturesMarketInfo.encode(
+        message.expiryFuturesMarketInfo,
+        writer.uint32(162).fork(),
+      ).join();
     }
     if (message.minNotional !== "") {
       writer.uint32(170).string(message.minNotional);
@@ -1484,13 +1489,20 @@ export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
       writer.uint32(178).string(message.reduceMarginRatio);
     }
     if (message.openNotionalCap !== undefined) {
-      OpenNotionalCap.encode(message.openNotionalCap, writer.uint32(186).fork()).join();
+      OpenNotionalCap.encode(
+        message.openNotionalCap,
+        writer.uint32(186).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeMarketInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DerivativeMarketInfo {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativeMarketInfo();
     while (reader.pos < end) {
@@ -1637,7 +1649,10 @@ export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
             break;
           }
 
-          message.perpetualMarketInfo = PerpetualMarketInfo.decode(reader, reader.uint32());
+          message.perpetualMarketInfo = PerpetualMarketInfo.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 19: {
@@ -1645,7 +1660,10 @@ export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
             break;
           }
 
-          message.perpetualMarketFunding = PerpetualMarketFunding.decode(reader, reader.uint32());
+          message.perpetualMarketFunding = PerpetualMarketFunding.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 20: {
@@ -1653,7 +1671,10 @@ export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
             break;
           }
 
-          message.expiryFuturesMarketInfo = ExpiryFuturesMarketInfo.decode(reader, reader.uint32());
+          message.expiryFuturesMarketInfo = ExpiryFuturesMarketInfo.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 21: {
@@ -1677,7 +1698,10 @@ export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
             break;
           }
 
-          message.openNotionalCap = OpenNotionalCap.decode(reader, reader.uint32());
+          message.openNotionalCap = OpenNotionalCap.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -1694,114 +1718,114 @@ export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       marketStatus: isSet(object.marketStatus)
         ? globalThis.String(object.marketStatus)
         : isSet(object.market_status)
-        ? globalThis.String(object.market_status)
-        : "",
+          ? globalThis.String(object.market_status)
+          : "",
       ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
       oracleBase: isSet(object.oracleBase)
         ? globalThis.String(object.oracleBase)
         : isSet(object.oracle_base)
-        ? globalThis.String(object.oracle_base)
-        : "",
+          ? globalThis.String(object.oracle_base)
+          : "",
       oracleQuote: isSet(object.oracleQuote)
         ? globalThis.String(object.oracleQuote)
         : isSet(object.oracle_quote)
-        ? globalThis.String(object.oracle_quote)
-        : "",
+          ? globalThis.String(object.oracle_quote)
+          : "",
       oracleType: isSet(object.oracleType)
         ? globalThis.String(object.oracleType)
         : isSet(object.oracle_type)
-        ? globalThis.String(object.oracle_type)
-        : "",
+          ? globalThis.String(object.oracle_type)
+          : "",
       oracleScaleFactor: isSet(object.oracleScaleFactor)
         ? globalThis.Number(object.oracleScaleFactor)
         : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
+          ? globalThis.Number(object.oracle_scale_factor)
+          : 0,
       initialMarginRatio: isSet(object.initialMarginRatio)
         ? globalThis.String(object.initialMarginRatio)
         : isSet(object.initial_margin_ratio)
-        ? globalThis.String(object.initial_margin_ratio)
-        : "",
+          ? globalThis.String(object.initial_margin_ratio)
+          : "",
       maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
         ? globalThis.String(object.maintenanceMarginRatio)
         : isSet(object.maintenance_margin_ratio)
-        ? globalThis.String(object.maintenance_margin_ratio)
-        : "",
+          ? globalThis.String(object.maintenance_margin_ratio)
+          : "",
       quoteDenom: isSet(object.quoteDenom)
         ? globalThis.String(object.quoteDenom)
         : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
+          ? globalThis.String(object.quote_denom)
+          : "",
       quoteTokenMeta: isSet(object.quoteTokenMeta)
         ? TokenMeta.fromJSON(object.quoteTokenMeta)
         : isSet(object.quote_token_meta)
-        ? TokenMeta.fromJSON(object.quote_token_meta)
-        : undefined,
+          ? TokenMeta.fromJSON(object.quote_token_meta)
+          : undefined,
       makerFeeRate: isSet(object.makerFeeRate)
         ? globalThis.String(object.makerFeeRate)
         : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
+          ? globalThis.String(object.maker_fee_rate)
+          : "",
       takerFeeRate: isSet(object.takerFeeRate)
         ? globalThis.String(object.takerFeeRate)
         : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
+          ? globalThis.String(object.taker_fee_rate)
+          : "",
       serviceProviderFee: isSet(object.serviceProviderFee)
         ? globalThis.String(object.serviceProviderFee)
         : isSet(object.service_provider_fee)
-        ? globalThis.String(object.service_provider_fee)
-        : "",
+          ? globalThis.String(object.service_provider_fee)
+          : "",
       isPerpetual: isSet(object.isPerpetual)
         ? globalThis.Boolean(object.isPerpetual)
         : isSet(object.is_perpetual)
-        ? globalThis.Boolean(object.is_perpetual)
-        : false,
+          ? globalThis.Boolean(object.is_perpetual)
+          : false,
       minPriceTickSize: isSet(object.minPriceTickSize)
         ? globalThis.String(object.minPriceTickSize)
         : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
+          ? globalThis.String(object.min_price_tick_size)
+          : "",
       minQuantityTickSize: isSet(object.minQuantityTickSize)
         ? globalThis.String(object.minQuantityTickSize)
         : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
+          ? globalThis.String(object.min_quantity_tick_size)
+          : "",
       perpetualMarketInfo: isSet(object.perpetualMarketInfo)
         ? PerpetualMarketInfo.fromJSON(object.perpetualMarketInfo)
         : isSet(object.perpetual_market_info)
-        ? PerpetualMarketInfo.fromJSON(object.perpetual_market_info)
-        : undefined,
+          ? PerpetualMarketInfo.fromJSON(object.perpetual_market_info)
+          : undefined,
       perpetualMarketFunding: isSet(object.perpetualMarketFunding)
         ? PerpetualMarketFunding.fromJSON(object.perpetualMarketFunding)
         : isSet(object.perpetual_market_funding)
-        ? PerpetualMarketFunding.fromJSON(object.perpetual_market_funding)
-        : undefined,
+          ? PerpetualMarketFunding.fromJSON(object.perpetual_market_funding)
+          : undefined,
       expiryFuturesMarketInfo: isSet(object.expiryFuturesMarketInfo)
         ? ExpiryFuturesMarketInfo.fromJSON(object.expiryFuturesMarketInfo)
         : isSet(object.expiry_futures_market_info)
-        ? ExpiryFuturesMarketInfo.fromJSON(object.expiry_futures_market_info)
-        : undefined,
+          ? ExpiryFuturesMarketInfo.fromJSON(object.expiry_futures_market_info)
+          : undefined,
       minNotional: isSet(object.minNotional)
         ? globalThis.String(object.minNotional)
         : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
+          ? globalThis.String(object.min_notional)
+          : "",
       reduceMarginRatio: isSet(object.reduceMarginRatio)
         ? globalThis.String(object.reduceMarginRatio)
         : isSet(object.reduce_margin_ratio)
-        ? globalThis.String(object.reduce_margin_ratio)
-        : "",
+          ? globalThis.String(object.reduce_margin_ratio)
+          : "",
       openNotionalCap: isSet(object.openNotionalCap)
         ? OpenNotionalCap.fromJSON(object.openNotionalCap)
         : isSet(object.open_notional_cap)
-        ? OpenNotionalCap.fromJSON(object.open_notional_cap)
-        : undefined,
+          ? OpenNotionalCap.fromJSON(object.open_notional_cap)
+          : undefined,
     };
   },
 
@@ -1859,13 +1883,19 @@ export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
       obj.minQuantityTickSize = message.minQuantityTickSize;
     }
     if (message.perpetualMarketInfo !== undefined) {
-      obj.perpetualMarketInfo = PerpetualMarketInfo.toJSON(message.perpetualMarketInfo);
+      obj.perpetualMarketInfo = PerpetualMarketInfo.toJSON(
+        message.perpetualMarketInfo,
+      );
     }
     if (message.perpetualMarketFunding !== undefined) {
-      obj.perpetualMarketFunding = PerpetualMarketFunding.toJSON(message.perpetualMarketFunding);
+      obj.perpetualMarketFunding = PerpetualMarketFunding.toJSON(
+        message.perpetualMarketFunding,
+      );
     }
     if (message.expiryFuturesMarketInfo !== undefined) {
-      obj.expiryFuturesMarketInfo = ExpiryFuturesMarketInfo.toJSON(message.expiryFuturesMarketInfo);
+      obj.expiryFuturesMarketInfo = ExpiryFuturesMarketInfo.toJSON(
+        message.expiryFuturesMarketInfo,
+      );
     }
     if (message.minNotional !== "") {
       obj.minNotional = message.minNotional;
@@ -1879,10 +1909,14 @@ export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativeMarketInfo>, I>>(base?: I): DerivativeMarketInfo {
+  create<I extends Exact<DeepPartial<DerivativeMarketInfo>, I>>(
+    base?: I,
+  ): DerivativeMarketInfo {
     return DerivativeMarketInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativeMarketInfo>, I>>(object: I): DerivativeMarketInfo {
+  fromPartial<I extends Exact<DeepPartial<DerivativeMarketInfo>, I>>(
+    object: I,
+  ): DerivativeMarketInfo {
     const message = createBaseDerivativeMarketInfo();
     message.marketId = object.marketId ?? "";
     message.marketStatus = object.marketStatus ?? "";
@@ -1894,41 +1928,57 @@ export const DerivativeMarketInfo: MessageFns<DerivativeMarketInfo> = {
     message.initialMarginRatio = object.initialMarginRatio ?? "";
     message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
     message.quoteDenom = object.quoteDenom ?? "";
-    message.quoteTokenMeta = (object.quoteTokenMeta !== undefined && object.quoteTokenMeta !== null)
-      ? TokenMeta.fromPartial(object.quoteTokenMeta)
-      : undefined;
+    message.quoteTokenMeta =
+      object.quoteTokenMeta !== undefined && object.quoteTokenMeta !== null
+        ? TokenMeta.fromPartial(object.quoteTokenMeta)
+        : undefined;
     message.makerFeeRate = object.makerFeeRate ?? "";
     message.takerFeeRate = object.takerFeeRate ?? "";
     message.serviceProviderFee = object.serviceProviderFee ?? "";
     message.isPerpetual = object.isPerpetual ?? false;
     message.minPriceTickSize = object.minPriceTickSize ?? "";
     message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.perpetualMarketInfo = (object.perpetualMarketInfo !== undefined && object.perpetualMarketInfo !== null)
-      ? PerpetualMarketInfo.fromPartial(object.perpetualMarketInfo)
-      : undefined;
+    message.perpetualMarketInfo =
+      object.perpetualMarketInfo !== undefined &&
+      object.perpetualMarketInfo !== null
+        ? PerpetualMarketInfo.fromPartial(object.perpetualMarketInfo)
+        : undefined;
     message.perpetualMarketFunding =
-      (object.perpetualMarketFunding !== undefined && object.perpetualMarketFunding !== null)
+      object.perpetualMarketFunding !== undefined &&
+      object.perpetualMarketFunding !== null
         ? PerpetualMarketFunding.fromPartial(object.perpetualMarketFunding)
         : undefined;
     message.expiryFuturesMarketInfo =
-      (object.expiryFuturesMarketInfo !== undefined && object.expiryFuturesMarketInfo !== null)
+      object.expiryFuturesMarketInfo !== undefined &&
+      object.expiryFuturesMarketInfo !== null
         ? ExpiryFuturesMarketInfo.fromPartial(object.expiryFuturesMarketInfo)
         : undefined;
     message.minNotional = object.minNotional ?? "";
     message.reduceMarginRatio = object.reduceMarginRatio ?? "";
-    message.openNotionalCap = (object.openNotionalCap !== undefined && object.openNotionalCap !== null)
-      ? OpenNotionalCap.fromPartial(object.openNotionalCap)
-      : undefined;
+    message.openNotionalCap =
+      object.openNotionalCap !== undefined && object.openNotionalCap !== null
+        ? OpenNotionalCap.fromPartial(object.openNotionalCap)
+        : undefined;
     return message;
   },
 };
 
 function createBaseTokenMeta(): TokenMeta {
-  return { name: "", address: "", symbol: "", logo: "", decimals: 0, updatedAt: 0 };
+  return {
+    name: "",
+    address: "",
+    symbol: "",
+    logo: "",
+    decimals: 0,
+    updatedAt: 0,
+  };
 }
 
 export const TokenMeta: MessageFns<TokenMeta> = {
-  encode(message: TokenMeta, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TokenMeta,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1951,7 +2001,8 @@ export const TokenMeta: MessageFns<TokenMeta> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TokenMeta {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTokenMeta();
     while (reader.pos < end) {
@@ -2024,8 +2075,8 @@ export const TokenMeta: MessageFns<TokenMeta> = {
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
     };
   },
 
@@ -2055,7 +2106,9 @@ export const TokenMeta: MessageFns<TokenMeta> = {
   create<I extends Exact<DeepPartial<TokenMeta>, I>>(base?: I): TokenMeta {
     return TokenMeta.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TokenMeta>, I>>(object: I): TokenMeta {
+  fromPartial<I extends Exact<DeepPartial<TokenMeta>, I>>(
+    object: I,
+  ): TokenMeta {
     const message = createBaseTokenMeta();
     message.name = object.name ?? "";
     message.address = object.address ?? "";
@@ -2068,11 +2121,19 @@ export const TokenMeta: MessageFns<TokenMeta> = {
 };
 
 function createBasePerpetualMarketInfo(): PerpetualMarketInfo {
-  return { hourlyFundingRateCap: "", hourlyInterestRate: "", nextFundingTimestamp: 0, fundingInterval: 0 };
+  return {
+    hourlyFundingRateCap: "",
+    hourlyInterestRate: "",
+    nextFundingTimestamp: 0,
+    fundingInterval: 0,
+  };
 }
 
 export const PerpetualMarketInfo: MessageFns<PerpetualMarketInfo> = {
-  encode(message: PerpetualMarketInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PerpetualMarketInfo,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.hourlyFundingRateCap !== "") {
       writer.uint32(10).string(message.hourlyFundingRateCap);
     }
@@ -2088,8 +2149,12 @@ export const PerpetualMarketInfo: MessageFns<PerpetualMarketInfo> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PerpetualMarketInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PerpetualMarketInfo {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePerpetualMarketInfo();
     while (reader.pos < end) {
@@ -2141,23 +2206,23 @@ export const PerpetualMarketInfo: MessageFns<PerpetualMarketInfo> = {
       hourlyFundingRateCap: isSet(object.hourlyFundingRateCap)
         ? globalThis.String(object.hourlyFundingRateCap)
         : isSet(object.hourly_funding_rate_cap)
-        ? globalThis.String(object.hourly_funding_rate_cap)
-        : "",
+          ? globalThis.String(object.hourly_funding_rate_cap)
+          : "",
       hourlyInterestRate: isSet(object.hourlyInterestRate)
         ? globalThis.String(object.hourlyInterestRate)
         : isSet(object.hourly_interest_rate)
-        ? globalThis.String(object.hourly_interest_rate)
-        : "",
+          ? globalThis.String(object.hourly_interest_rate)
+          : "",
       nextFundingTimestamp: isSet(object.nextFundingTimestamp)
         ? globalThis.Number(object.nextFundingTimestamp)
         : isSet(object.next_funding_timestamp)
-        ? globalThis.Number(object.next_funding_timestamp)
-        : 0,
+          ? globalThis.Number(object.next_funding_timestamp)
+          : 0,
       fundingInterval: isSet(object.fundingInterval)
         ? globalThis.Number(object.fundingInterval)
         : isSet(object.funding_interval)
-        ? globalThis.Number(object.funding_interval)
-        : 0,
+          ? globalThis.Number(object.funding_interval)
+          : 0,
     };
   },
 
@@ -2178,10 +2243,14 @@ export const PerpetualMarketInfo: MessageFns<PerpetualMarketInfo> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PerpetualMarketInfo>, I>>(base?: I): PerpetualMarketInfo {
+  create<I extends Exact<DeepPartial<PerpetualMarketInfo>, I>>(
+    base?: I,
+  ): PerpetualMarketInfo {
     return PerpetualMarketInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PerpetualMarketInfo>, I>>(object: I): PerpetualMarketInfo {
+  fromPartial<I extends Exact<DeepPartial<PerpetualMarketInfo>, I>>(
+    object: I,
+  ): PerpetualMarketInfo {
     const message = createBasePerpetualMarketInfo();
     message.hourlyFundingRateCap = object.hourlyFundingRateCap ?? "";
     message.hourlyInterestRate = object.hourlyInterestRate ?? "";
@@ -2192,11 +2261,19 @@ export const PerpetualMarketInfo: MessageFns<PerpetualMarketInfo> = {
 };
 
 function createBasePerpetualMarketFunding(): PerpetualMarketFunding {
-  return { cumulativeFunding: "", cumulativePrice: "", lastTimestamp: 0, lastFundingRate: "" };
+  return {
+    cumulativeFunding: "",
+    cumulativePrice: "",
+    lastTimestamp: 0,
+    lastFundingRate: "",
+  };
 }
 
 export const PerpetualMarketFunding: MessageFns<PerpetualMarketFunding> = {
-  encode(message: PerpetualMarketFunding, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PerpetualMarketFunding,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.cumulativeFunding !== "") {
       writer.uint32(10).string(message.cumulativeFunding);
     }
@@ -2212,8 +2289,12 @@ export const PerpetualMarketFunding: MessageFns<PerpetualMarketFunding> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PerpetualMarketFunding {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PerpetualMarketFunding {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePerpetualMarketFunding();
     while (reader.pos < end) {
@@ -2265,23 +2346,23 @@ export const PerpetualMarketFunding: MessageFns<PerpetualMarketFunding> = {
       cumulativeFunding: isSet(object.cumulativeFunding)
         ? globalThis.String(object.cumulativeFunding)
         : isSet(object.cumulative_funding)
-        ? globalThis.String(object.cumulative_funding)
-        : "",
+          ? globalThis.String(object.cumulative_funding)
+          : "",
       cumulativePrice: isSet(object.cumulativePrice)
         ? globalThis.String(object.cumulativePrice)
         : isSet(object.cumulative_price)
-        ? globalThis.String(object.cumulative_price)
-        : "",
+          ? globalThis.String(object.cumulative_price)
+          : "",
       lastTimestamp: isSet(object.lastTimestamp)
         ? globalThis.Number(object.lastTimestamp)
         : isSet(object.last_timestamp)
-        ? globalThis.Number(object.last_timestamp)
-        : 0,
+          ? globalThis.Number(object.last_timestamp)
+          : 0,
       lastFundingRate: isSet(object.lastFundingRate)
         ? globalThis.String(object.lastFundingRate)
         : isSet(object.last_funding_rate)
-        ? globalThis.String(object.last_funding_rate)
-        : "",
+          ? globalThis.String(object.last_funding_rate)
+          : "",
     };
   },
 
@@ -2302,10 +2383,14 @@ export const PerpetualMarketFunding: MessageFns<PerpetualMarketFunding> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PerpetualMarketFunding>, I>>(base?: I): PerpetualMarketFunding {
+  create<I extends Exact<DeepPartial<PerpetualMarketFunding>, I>>(
+    base?: I,
+  ): PerpetualMarketFunding {
     return PerpetualMarketFunding.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PerpetualMarketFunding>, I>>(object: I): PerpetualMarketFunding {
+  fromPartial<I extends Exact<DeepPartial<PerpetualMarketFunding>, I>>(
+    object: I,
+  ): PerpetualMarketFunding {
     const message = createBasePerpetualMarketFunding();
     message.cumulativeFunding = object.cumulativeFunding ?? "";
     message.cumulativePrice = object.cumulativePrice ?? "";
@@ -2320,7 +2405,10 @@ function createBaseExpiryFuturesMarketInfo(): ExpiryFuturesMarketInfo {
 }
 
 export const ExpiryFuturesMarketInfo: MessageFns<ExpiryFuturesMarketInfo> = {
-  encode(message: ExpiryFuturesMarketInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ExpiryFuturesMarketInfo,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.expirationTimestamp !== 0) {
       writer.uint32(8).sint64(message.expirationTimestamp);
     }
@@ -2330,8 +2418,12 @@ export const ExpiryFuturesMarketInfo: MessageFns<ExpiryFuturesMarketInfo> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ExpiryFuturesMarketInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ExpiryFuturesMarketInfo {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpiryFuturesMarketInfo();
     while (reader.pos < end) {
@@ -2367,13 +2459,13 @@ export const ExpiryFuturesMarketInfo: MessageFns<ExpiryFuturesMarketInfo> = {
       expirationTimestamp: isSet(object.expirationTimestamp)
         ? globalThis.Number(object.expirationTimestamp)
         : isSet(object.expiration_timestamp)
-        ? globalThis.Number(object.expiration_timestamp)
-        : 0,
+          ? globalThis.Number(object.expiration_timestamp)
+          : 0,
       settlementPrice: isSet(object.settlementPrice)
         ? globalThis.String(object.settlementPrice)
         : isSet(object.settlement_price)
-        ? globalThis.String(object.settlement_price)
-        : "",
+          ? globalThis.String(object.settlement_price)
+          : "",
     };
   },
 
@@ -2388,10 +2480,14 @@ export const ExpiryFuturesMarketInfo: MessageFns<ExpiryFuturesMarketInfo> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ExpiryFuturesMarketInfo>, I>>(base?: I): ExpiryFuturesMarketInfo {
+  create<I extends Exact<DeepPartial<ExpiryFuturesMarketInfo>, I>>(
+    base?: I,
+  ): ExpiryFuturesMarketInfo {
     return ExpiryFuturesMarketInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ExpiryFuturesMarketInfo>, I>>(object: I): ExpiryFuturesMarketInfo {
+  fromPartial<I extends Exact<DeepPartial<ExpiryFuturesMarketInfo>, I>>(
+    object: I,
+  ): ExpiryFuturesMarketInfo {
     const message = createBaseExpiryFuturesMarketInfo();
     message.expirationTimestamp = object.expirationTimestamp ?? 0;
     message.settlementPrice = object.settlementPrice ?? "";
@@ -2404,7 +2500,10 @@ function createBaseOpenNotionalCap(): OpenNotionalCap {
 }
 
 export const OpenNotionalCap: MessageFns<OpenNotionalCap> = {
-  encode(message: OpenNotionalCap, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OpenNotionalCap,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.cap !== "") {
       writer.uint32(10).string(message.cap);
     }
@@ -2412,7 +2511,8 @@ export const OpenNotionalCap: MessageFns<OpenNotionalCap> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): OpenNotionalCap {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOpenNotionalCap();
     while (reader.pos < end) {
@@ -2447,10 +2547,14 @@ export const OpenNotionalCap: MessageFns<OpenNotionalCap> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OpenNotionalCap>, I>>(base?: I): OpenNotionalCap {
+  create<I extends Exact<DeepPartial<OpenNotionalCap>, I>>(
+    base?: I,
+  ): OpenNotionalCap {
     return OpenNotionalCap.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OpenNotionalCap>, I>>(object: I): OpenNotionalCap {
+  fromPartial<I extends Exact<DeepPartial<OpenNotionalCap>, I>>(
+    object: I,
+  ): OpenNotionalCap {
     const message = createBaseOpenNotionalCap();
     message.cap = object.cap ?? "";
     return message;
@@ -2462,7 +2566,10 @@ function createBaseMarketRequest(): MarketRequest {
 }
 
 export const MarketRequest: MessageFns<MarketRequest> = {
-  encode(message: MarketRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MarketRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -2470,7 +2577,8 @@ export const MarketRequest: MessageFns<MarketRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MarketRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMarketRequest();
     while (reader.pos < end) {
@@ -2498,8 +2606,8 @@ export const MarketRequest: MessageFns<MarketRequest> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
     };
   },
 
@@ -2511,10 +2619,14 @@ export const MarketRequest: MessageFns<MarketRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MarketRequest>, I>>(base?: I): MarketRequest {
+  create<I extends Exact<DeepPartial<MarketRequest>, I>>(
+    base?: I,
+  ): MarketRequest {
     return MarketRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MarketRequest>, I>>(object: I): MarketRequest {
+  fromPartial<I extends Exact<DeepPartial<MarketRequest>, I>>(
+    object: I,
+  ): MarketRequest {
     const message = createBaseMarketRequest();
     message.marketId = object.marketId ?? "";
     return message;
@@ -2526,15 +2638,22 @@ function createBaseMarketResponse(): MarketResponse {
 }
 
 export const MarketResponse: MessageFns<MarketResponse> = {
-  encode(message: MarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MarketResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.market !== undefined) {
-      DerivativeMarketInfo.encode(message.market, writer.uint32(10).fork()).join();
+      DerivativeMarketInfo.encode(
+        message.market,
+        writer.uint32(10).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMarketResponse();
     while (reader.pos < end) {
@@ -2558,7 +2677,11 @@ export const MarketResponse: MessageFns<MarketResponse> = {
   },
 
   fromJSON(object: any): MarketResponse {
-    return { market: isSet(object.market) ? DerivativeMarketInfo.fromJSON(object.market) : undefined };
+    return {
+      market: isSet(object.market)
+        ? DerivativeMarketInfo.fromJSON(object.market)
+        : undefined,
+    };
   },
 
   toJSON(message: MarketResponse): unknown {
@@ -2569,14 +2692,19 @@ export const MarketResponse: MessageFns<MarketResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MarketResponse>, I>>(base?: I): MarketResponse {
+  create<I extends Exact<DeepPartial<MarketResponse>, I>>(
+    base?: I,
+  ): MarketResponse {
     return MarketResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MarketResponse>, I>>(object: I): MarketResponse {
+  fromPartial<I extends Exact<DeepPartial<MarketResponse>, I>>(
+    object: I,
+  ): MarketResponse {
     const message = createBaseMarketResponse();
-    message.market = (object.market !== undefined && object.market !== null)
-      ? DerivativeMarketInfo.fromPartial(object.market)
-      : undefined;
+    message.market =
+      object.market !== undefined && object.market !== null
+        ? DerivativeMarketInfo.fromPartial(object.market)
+        : undefined;
     return message;
   },
 };
@@ -2586,15 +2714,22 @@ function createBaseStreamMarketRequest(): StreamMarketRequest {
 }
 
 export const StreamMarketRequest: MessageFns<StreamMarketRequest> = {
-  encode(message: StreamMarketRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamMarketRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.marketIds) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamMarketRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamMarketRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamMarketRequest();
     while (reader.pos < end) {
@@ -2622,8 +2757,8 @@ export const StreamMarketRequest: MessageFns<StreamMarketRequest> = {
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -2635,10 +2770,14 @@ export const StreamMarketRequest: MessageFns<StreamMarketRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamMarketRequest>, I>>(base?: I): StreamMarketRequest {
+  create<I extends Exact<DeepPartial<StreamMarketRequest>, I>>(
+    base?: I,
+  ): StreamMarketRequest {
     return StreamMarketRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamMarketRequest>, I>>(object: I): StreamMarketRequest {
+  fromPartial<I extends Exact<DeepPartial<StreamMarketRequest>, I>>(
+    object: I,
+  ): StreamMarketRequest {
     const message = createBaseStreamMarketRequest();
     message.marketIds = object.marketIds?.map((e) => e) || [];
     return message;
@@ -2650,9 +2789,15 @@ function createBaseStreamMarketResponse(): StreamMarketResponse {
 }
 
 export const StreamMarketResponse: MessageFns<StreamMarketResponse> = {
-  encode(message: StreamMarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamMarketResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.market !== undefined) {
-      DerivativeMarketInfo.encode(message.market, writer.uint32(10).fork()).join();
+      DerivativeMarketInfo.encode(
+        message.market,
+        writer.uint32(10).fork(),
+      ).join();
     }
     if (message.operationType !== "") {
       writer.uint32(18).string(message.operationType);
@@ -2663,8 +2808,12 @@ export const StreamMarketResponse: MessageFns<StreamMarketResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamMarketResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamMarketResponse();
     while (reader.pos < end) {
@@ -2705,13 +2854,17 @@ export const StreamMarketResponse: MessageFns<StreamMarketResponse> = {
 
   fromJSON(object: any): StreamMarketResponse {
     return {
-      market: isSet(object.market) ? DerivativeMarketInfo.fromJSON(object.market) : undefined,
+      market: isSet(object.market)
+        ? DerivativeMarketInfo.fromJSON(object.market)
+        : undefined,
       operationType: isSet(object.operationType)
         ? globalThis.String(object.operationType)
         : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.operation_type)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -2729,14 +2882,19 @@ export const StreamMarketResponse: MessageFns<StreamMarketResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamMarketResponse>, I>>(base?: I): StreamMarketResponse {
+  create<I extends Exact<DeepPartial<StreamMarketResponse>, I>>(
+    base?: I,
+  ): StreamMarketResponse {
     return StreamMarketResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamMarketResponse>, I>>(object: I): StreamMarketResponse {
+  fromPartial<I extends Exact<DeepPartial<StreamMarketResponse>, I>>(
+    object: I,
+  ): StreamMarketResponse {
     const message = createBaseStreamMarketResponse();
-    message.market = (object.market !== undefined && object.market !== null)
-      ? DerivativeMarketInfo.fromPartial(object.market)
-      : undefined;
+    message.market =
+      object.market !== undefined && object.market !== null
+        ? DerivativeMarketInfo.fromPartial(object.market)
+        : undefined;
     message.operationType = object.operationType ?? "";
     message.timestamp = object.timestamp ?? 0;
     return message;
@@ -2747,197 +2905,230 @@ function createBaseBinaryOptionsMarketsRequest(): BinaryOptionsMarketsRequest {
   return { marketStatus: "", quoteDenom: "", skip: 0, limit: 0 };
 }
 
-export const BinaryOptionsMarketsRequest: MessageFns<BinaryOptionsMarketsRequest> = {
-  encode(message: BinaryOptionsMarketsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketStatus !== "") {
-      writer.uint32(10).string(message.marketStatus);
-    }
-    if (message.quoteDenom !== "") {
-      writer.uint32(18).string(message.quoteDenom);
-    }
-    if (message.skip !== 0) {
-      writer.uint32(24).uint64(message.skip);
-    }
-    if (message.limit !== 0) {
-      writer.uint32(32).sint32(message.limit);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BinaryOptionsMarketsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBinaryOptionsMarketsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketStatus = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.quoteDenom = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.skip = longToNumber(reader.uint64());
-          continue;
-        }
-        case 4: {
-          if (tag !== 32) {
-            break;
-          }
-
-          message.limit = reader.sint32();
-          continue;
-        }
+export const BinaryOptionsMarketsRequest: MessageFns<BinaryOptionsMarketsRequest> =
+  {
+    encode(
+      message: BinaryOptionsMarketsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketStatus !== "") {
+        writer.uint32(10).string(message.marketStatus);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.quoteDenom !== "") {
+        writer.uint32(18).string(message.quoteDenom);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.skip !== 0) {
+        writer.uint32(24).uint64(message.skip);
+      }
+      if (message.limit !== 0) {
+        writer.uint32(32).sint32(message.limit);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): BinaryOptionsMarketsRequest {
-    return {
-      marketStatus: isSet(object.marketStatus)
-        ? globalThis.String(object.marketStatus)
-        : isSet(object.market_status)
-        ? globalThis.String(object.market_status)
-        : "",
-      quoteDenom: isSet(object.quoteDenom)
-        ? globalThis.String(object.quoteDenom)
-        : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
-      skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
-      limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BinaryOptionsMarketsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBinaryOptionsMarketsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BinaryOptionsMarketsRequest): unknown {
-    const obj: any = {};
-    if (message.marketStatus !== "") {
-      obj.marketStatus = message.marketStatus;
-    }
-    if (message.quoteDenom !== "") {
-      obj.quoteDenom = message.quoteDenom;
-    }
-    if (message.skip !== 0) {
-      obj.skip = Math.round(message.skip);
-    }
-    if (message.limit !== 0) {
-      obj.limit = Math.round(message.limit);
-    }
-    return obj;
-  },
+            message.marketStatus = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<BinaryOptionsMarketsRequest>, I>>(base?: I): BinaryOptionsMarketsRequest {
-    return BinaryOptionsMarketsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketsRequest>, I>>(object: I): BinaryOptionsMarketsRequest {
-    const message = createBaseBinaryOptionsMarketsRequest();
-    message.marketStatus = object.marketStatus ?? "";
-    message.quoteDenom = object.quoteDenom ?? "";
-    message.skip = object.skip ?? 0;
-    message.limit = object.limit ?? 0;
-    return message;
-  },
-};
+            message.quoteDenom = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.skip = longToNumber(reader.uint64());
+            continue;
+          }
+          case 4: {
+            if (tag !== 32) {
+              break;
+            }
+
+            message.limit = reader.sint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BinaryOptionsMarketsRequest {
+      return {
+        marketStatus: isSet(object.marketStatus)
+          ? globalThis.String(object.marketStatus)
+          : isSet(object.market_status)
+            ? globalThis.String(object.market_status)
+            : "",
+        quoteDenom: isSet(object.quoteDenom)
+          ? globalThis.String(object.quoteDenom)
+          : isSet(object.quote_denom)
+            ? globalThis.String(object.quote_denom)
+            : "",
+        skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
+        limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
+      };
+    },
+
+    toJSON(message: BinaryOptionsMarketsRequest): unknown {
+      const obj: any = {};
+      if (message.marketStatus !== "") {
+        obj.marketStatus = message.marketStatus;
+      }
+      if (message.quoteDenom !== "") {
+        obj.quoteDenom = message.quoteDenom;
+      }
+      if (message.skip !== 0) {
+        obj.skip = Math.round(message.skip);
+      }
+      if (message.limit !== 0) {
+        obj.limit = Math.round(message.limit);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<BinaryOptionsMarketsRequest>, I>>(
+      base?: I,
+    ): BinaryOptionsMarketsRequest {
+      return BinaryOptionsMarketsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketsRequest>, I>>(
+      object: I,
+    ): BinaryOptionsMarketsRequest {
+      const message = createBaseBinaryOptionsMarketsRequest();
+      message.marketStatus = object.marketStatus ?? "";
+      message.quoteDenom = object.quoteDenom ?? "";
+      message.skip = object.skip ?? 0;
+      message.limit = object.limit ?? 0;
+      return message;
+    },
+  };
 
 function createBaseBinaryOptionsMarketsResponse(): BinaryOptionsMarketsResponse {
   return { markets: [], paging: undefined };
 }
 
-export const BinaryOptionsMarketsResponse: MessageFns<BinaryOptionsMarketsResponse> = {
-  encode(message: BinaryOptionsMarketsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.markets) {
-      BinaryOptionsMarketInfo.encode(v!, writer.uint32(10).fork()).join();
-    }
-    if (message.paging !== undefined) {
-      Paging.encode(message.paging, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BinaryOptionsMarketsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBinaryOptionsMarketsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.markets.push(BinaryOptionsMarketInfo.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.paging = Paging.decode(reader, reader.uint32());
-          continue;
-        }
+export const BinaryOptionsMarketsResponse: MessageFns<BinaryOptionsMarketsResponse> =
+  {
+    encode(
+      message: BinaryOptionsMarketsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.markets) {
+        BinaryOptionsMarketInfo.encode(v!, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.paging !== undefined) {
+        Paging.encode(message.paging, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): BinaryOptionsMarketsResponse {
-    return {
-      markets: globalThis.Array.isArray(object?.markets)
-        ? object.markets.map((e: any) => BinaryOptionsMarketInfo.fromJSON(e))
-        : [],
-      paging: isSet(object.paging) ? Paging.fromJSON(object.paging) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BinaryOptionsMarketsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBinaryOptionsMarketsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BinaryOptionsMarketsResponse): unknown {
-    const obj: any = {};
-    if (message.markets?.length) {
-      obj.markets = message.markets.map((e) => BinaryOptionsMarketInfo.toJSON(e));
-    }
-    if (message.paging !== undefined) {
-      obj.paging = Paging.toJSON(message.paging);
-    }
-    return obj;
-  },
+            message.markets.push(
+              BinaryOptionsMarketInfo.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<BinaryOptionsMarketsResponse>, I>>(base?: I): BinaryOptionsMarketsResponse {
-    return BinaryOptionsMarketsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketsResponse>, I>>(object: I): BinaryOptionsMarketsResponse {
-    const message = createBaseBinaryOptionsMarketsResponse();
-    message.markets = object.markets?.map((e) => BinaryOptionsMarketInfo.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
-    return message;
-  },
-};
+            message.paging = Paging.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BinaryOptionsMarketsResponse {
+      return {
+        markets: globalThis.Array.isArray(object?.markets)
+          ? object.markets.map((e: any) => BinaryOptionsMarketInfo.fromJSON(e))
+          : [],
+        paging: isSet(object.paging)
+          ? Paging.fromJSON(object.paging)
+          : undefined,
+      };
+    },
+
+    toJSON(message: BinaryOptionsMarketsResponse): unknown {
+      const obj: any = {};
+      if (message.markets?.length) {
+        obj.markets = message.markets.map((e) =>
+          BinaryOptionsMarketInfo.toJSON(e),
+        );
+      }
+      if (message.paging !== undefined) {
+        obj.paging = Paging.toJSON(message.paging);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<BinaryOptionsMarketsResponse>, I>>(
+      base?: I,
+    ): BinaryOptionsMarketsResponse {
+      return BinaryOptionsMarketsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketsResponse>, I>>(
+      object: I,
+    ): BinaryOptionsMarketsResponse {
+      const message = createBaseBinaryOptionsMarketsResponse();
+      message.markets =
+        object.markets?.map((e) => BinaryOptionsMarketInfo.fromPartial(e)) ||
+        [];
+      message.paging =
+        object.paging !== undefined && object.paging !== null
+          ? Paging.fromPartial(object.paging)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseBinaryOptionsMarketInfo(): BinaryOptionsMarketInfo {
   return {
@@ -2963,7 +3154,10 @@ function createBaseBinaryOptionsMarketInfo(): BinaryOptionsMarketInfo {
 }
 
 export const BinaryOptionsMarketInfo: MessageFns<BinaryOptionsMarketInfo> = {
-  encode(message: BinaryOptionsMarketInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BinaryOptionsMarketInfo,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -3021,8 +3215,12 @@ export const BinaryOptionsMarketInfo: MessageFns<BinaryOptionsMarketInfo> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BinaryOptionsMarketInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): BinaryOptionsMarketInfo {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBinaryOptionsMarketInfo();
     while (reader.pos < end) {
@@ -3186,89 +3384,89 @@ export const BinaryOptionsMarketInfo: MessageFns<BinaryOptionsMarketInfo> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       marketStatus: isSet(object.marketStatus)
         ? globalThis.String(object.marketStatus)
         : isSet(object.market_status)
-        ? globalThis.String(object.market_status)
-        : "",
+          ? globalThis.String(object.market_status)
+          : "",
       ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
       oracleSymbol: isSet(object.oracleSymbol)
         ? globalThis.String(object.oracleSymbol)
         : isSet(object.oracle_symbol)
-        ? globalThis.String(object.oracle_symbol)
-        : "",
+          ? globalThis.String(object.oracle_symbol)
+          : "",
       oracleProvider: isSet(object.oracleProvider)
         ? globalThis.String(object.oracleProvider)
         : isSet(object.oracle_provider)
-        ? globalThis.String(object.oracle_provider)
-        : "",
+          ? globalThis.String(object.oracle_provider)
+          : "",
       oracleType: isSet(object.oracleType)
         ? globalThis.String(object.oracleType)
         : isSet(object.oracle_type)
-        ? globalThis.String(object.oracle_type)
-        : "",
+          ? globalThis.String(object.oracle_type)
+          : "",
       oracleScaleFactor: isSet(object.oracleScaleFactor)
         ? globalThis.Number(object.oracleScaleFactor)
         : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
+          ? globalThis.Number(object.oracle_scale_factor)
+          : 0,
       expirationTimestamp: isSet(object.expirationTimestamp)
         ? globalThis.Number(object.expirationTimestamp)
         : isSet(object.expiration_timestamp)
-        ? globalThis.Number(object.expiration_timestamp)
-        : 0,
+          ? globalThis.Number(object.expiration_timestamp)
+          : 0,
       settlementTimestamp: isSet(object.settlementTimestamp)
         ? globalThis.Number(object.settlementTimestamp)
         : isSet(object.settlement_timestamp)
-        ? globalThis.Number(object.settlement_timestamp)
-        : 0,
+          ? globalThis.Number(object.settlement_timestamp)
+          : 0,
       quoteDenom: isSet(object.quoteDenom)
         ? globalThis.String(object.quoteDenom)
         : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
+          ? globalThis.String(object.quote_denom)
+          : "",
       quoteTokenMeta: isSet(object.quoteTokenMeta)
         ? TokenMeta.fromJSON(object.quoteTokenMeta)
         : isSet(object.quote_token_meta)
-        ? TokenMeta.fromJSON(object.quote_token_meta)
-        : undefined,
+          ? TokenMeta.fromJSON(object.quote_token_meta)
+          : undefined,
       makerFeeRate: isSet(object.makerFeeRate)
         ? globalThis.String(object.makerFeeRate)
         : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
+          ? globalThis.String(object.maker_fee_rate)
+          : "",
       takerFeeRate: isSet(object.takerFeeRate)
         ? globalThis.String(object.takerFeeRate)
         : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
+          ? globalThis.String(object.taker_fee_rate)
+          : "",
       serviceProviderFee: isSet(object.serviceProviderFee)
         ? globalThis.String(object.serviceProviderFee)
         : isSet(object.service_provider_fee)
-        ? globalThis.String(object.service_provider_fee)
-        : "",
+          ? globalThis.String(object.service_provider_fee)
+          : "",
       minPriceTickSize: isSet(object.minPriceTickSize)
         ? globalThis.String(object.minPriceTickSize)
         : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
+          ? globalThis.String(object.min_price_tick_size)
+          : "",
       minQuantityTickSize: isSet(object.minQuantityTickSize)
         ? globalThis.String(object.minQuantityTickSize)
         : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
+          ? globalThis.String(object.min_quantity_tick_size)
+          : "",
       settlementPrice: isSet(object.settlementPrice)
         ? globalThis.String(object.settlementPrice)
         : isSet(object.settlement_price)
-        ? globalThis.String(object.settlement_price)
-        : "",
+          ? globalThis.String(object.settlement_price)
+          : "",
       minNotional: isSet(object.minNotional)
         ? globalThis.String(object.minNotional)
         : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
+          ? globalThis.String(object.min_notional)
+          : "",
     };
   },
 
@@ -3331,10 +3529,14 @@ export const BinaryOptionsMarketInfo: MessageFns<BinaryOptionsMarketInfo> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BinaryOptionsMarketInfo>, I>>(base?: I): BinaryOptionsMarketInfo {
+  create<I extends Exact<DeepPartial<BinaryOptionsMarketInfo>, I>>(
+    base?: I,
+  ): BinaryOptionsMarketInfo {
     return BinaryOptionsMarketInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketInfo>, I>>(object: I): BinaryOptionsMarketInfo {
+  fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketInfo>, I>>(
+    object: I,
+  ): BinaryOptionsMarketInfo {
     const message = createBaseBinaryOptionsMarketInfo();
     message.marketId = object.marketId ?? "";
     message.marketStatus = object.marketStatus ?? "";
@@ -3346,9 +3548,10 @@ export const BinaryOptionsMarketInfo: MessageFns<BinaryOptionsMarketInfo> = {
     message.expirationTimestamp = object.expirationTimestamp ?? 0;
     message.settlementTimestamp = object.settlementTimestamp ?? 0;
     message.quoteDenom = object.quoteDenom ?? "";
-    message.quoteTokenMeta = (object.quoteTokenMeta !== undefined && object.quoteTokenMeta !== null)
-      ? TokenMeta.fromPartial(object.quoteTokenMeta)
-      : undefined;
+    message.quoteTokenMeta =
+      object.quoteTokenMeta !== undefined && object.quoteTokenMeta !== null
+        ? TokenMeta.fromPartial(object.quoteTokenMeta)
+        : undefined;
     message.makerFeeRate = object.makerFeeRate ?? "";
     message.takerFeeRate = object.takerFeeRate ?? "";
     message.serviceProviderFee = object.serviceProviderFee ?? "";
@@ -3365,7 +3568,10 @@ function createBasePaging(): Paging {
 }
 
 export const Paging: MessageFns<Paging> = {
-  encode(message: Paging, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Paging,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.total !== 0) {
       writer.uint32(8).sint64(message.total);
     }
@@ -3385,7 +3591,8 @@ export const Paging: MessageFns<Paging> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Paging {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePaging();
     while (reader.pos < end) {
@@ -3448,9 +3655,11 @@ export const Paging: MessageFns<Paging> = {
       countBySubaccount: isSet(object.countBySubaccount)
         ? globalThis.Number(object.countBySubaccount)
         : isSet(object.count_by_subaccount)
-        ? globalThis.Number(object.count_by_subaccount)
-        : 0,
-      next: globalThis.Array.isArray(object?.next) ? object.next.map((e: any) => globalThis.String(e)) : [],
+          ? globalThis.Number(object.count_by_subaccount)
+          : 0,
+      next: globalThis.Array.isArray(object?.next)
+        ? object.next.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -3492,132 +3701,170 @@ function createBaseBinaryOptionsMarketRequest(): BinaryOptionsMarketRequest {
   return { marketId: "" };
 }
 
-export const BinaryOptionsMarketRequest: MessageFns<BinaryOptionsMarketRequest> = {
-  encode(message: BinaryOptionsMarketRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const BinaryOptionsMarketRequest: MessageFns<BinaryOptionsMarketRequest> =
+  {
+    encode(
+      message: BinaryOptionsMarketRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BinaryOptionsMarketRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBinaryOptionsMarketRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BinaryOptionsMarketRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBinaryOptionsMarketRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): BinaryOptionsMarketRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: BinaryOptionsMarketRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): BinaryOptionsMarketRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: BinaryOptionsMarketRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<BinaryOptionsMarketRequest>, I>>(base?: I): BinaryOptionsMarketRequest {
-    return BinaryOptionsMarketRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketRequest>, I>>(object: I): BinaryOptionsMarketRequest {
-    const message = createBaseBinaryOptionsMarketRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<BinaryOptionsMarketRequest>, I>>(
+      base?: I,
+    ): BinaryOptionsMarketRequest {
+      return BinaryOptionsMarketRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketRequest>, I>>(
+      object: I,
+    ): BinaryOptionsMarketRequest {
+      const message = createBaseBinaryOptionsMarketRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseBinaryOptionsMarketResponse(): BinaryOptionsMarketResponse {
   return { market: undefined };
 }
 
-export const BinaryOptionsMarketResponse: MessageFns<BinaryOptionsMarketResponse> = {
-  encode(message: BinaryOptionsMarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.market !== undefined) {
-      BinaryOptionsMarketInfo.encode(message.market, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const BinaryOptionsMarketResponse: MessageFns<BinaryOptionsMarketResponse> =
+  {
+    encode(
+      message: BinaryOptionsMarketResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.market !== undefined) {
+        BinaryOptionsMarketInfo.encode(
+          message.market,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BinaryOptionsMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBinaryOptionsMarketResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BinaryOptionsMarketResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBinaryOptionsMarketResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.market = BinaryOptionsMarketInfo.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
           }
-
-          message.market = BinaryOptionsMarketInfo.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): BinaryOptionsMarketResponse {
+      return {
+        market: isSet(object.market)
+          ? BinaryOptionsMarketInfo.fromJSON(object.market)
+          : undefined,
+      };
+    },
+
+    toJSON(message: BinaryOptionsMarketResponse): unknown {
+      const obj: any = {};
+      if (message.market !== undefined) {
+        obj.market = BinaryOptionsMarketInfo.toJSON(message.market);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): BinaryOptionsMarketResponse {
-    return { market: isSet(object.market) ? BinaryOptionsMarketInfo.fromJSON(object.market) : undefined };
-  },
-
-  toJSON(message: BinaryOptionsMarketResponse): unknown {
-    const obj: any = {};
-    if (message.market !== undefined) {
-      obj.market = BinaryOptionsMarketInfo.toJSON(message.market);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<BinaryOptionsMarketResponse>, I>>(base?: I): BinaryOptionsMarketResponse {
-    return BinaryOptionsMarketResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketResponse>, I>>(object: I): BinaryOptionsMarketResponse {
-    const message = createBaseBinaryOptionsMarketResponse();
-    message.market = (object.market !== undefined && object.market !== null)
-      ? BinaryOptionsMarketInfo.fromPartial(object.market)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<BinaryOptionsMarketResponse>, I>>(
+      base?: I,
+    ): BinaryOptionsMarketResponse {
+      return BinaryOptionsMarketResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketResponse>, I>>(
+      object: I,
+    ): BinaryOptionsMarketResponse {
+      const message = createBaseBinaryOptionsMarketResponse();
+      message.market =
+        object.market !== undefined && object.market !== null
+          ? BinaryOptionsMarketInfo.fromPartial(object.market)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseOrderbookV2Request(): OrderbookV2Request {
   return { marketId: "", depth: 0 };
 }
 
 export const OrderbookV2Request: MessageFns<OrderbookV2Request> = {
-  encode(message: OrderbookV2Request, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderbookV2Request,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -3627,8 +3874,12 @@ export const OrderbookV2Request: MessageFns<OrderbookV2Request> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OrderbookV2Request {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OrderbookV2Request {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderbookV2Request();
     while (reader.pos < end) {
@@ -3664,8 +3915,8 @@ export const OrderbookV2Request: MessageFns<OrderbookV2Request> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       depth: isSet(object.depth) ? globalThis.Number(object.depth) : 0,
     };
   },
@@ -3681,10 +3932,14 @@ export const OrderbookV2Request: MessageFns<OrderbookV2Request> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrderbookV2Request>, I>>(base?: I): OrderbookV2Request {
+  create<I extends Exact<DeepPartial<OrderbookV2Request>, I>>(
+    base?: I,
+  ): OrderbookV2Request {
     return OrderbookV2Request.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderbookV2Request>, I>>(object: I): OrderbookV2Request {
+  fromPartial<I extends Exact<DeepPartial<OrderbookV2Request>, I>>(
+    object: I,
+  ): OrderbookV2Request {
     const message = createBaseOrderbookV2Request();
     message.marketId = object.marketId ?? "";
     message.depth = object.depth ?? 0;
@@ -3697,15 +3952,25 @@ function createBaseOrderbookV2Response(): OrderbookV2Response {
 }
 
 export const OrderbookV2Response: MessageFns<OrderbookV2Response> = {
-  encode(message: OrderbookV2Response, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderbookV2Response,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderbook !== undefined) {
-      DerivativeLimitOrderbookV2.encode(message.orderbook, writer.uint32(10).fork()).join();
+      DerivativeLimitOrderbookV2.encode(
+        message.orderbook,
+        writer.uint32(10).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OrderbookV2Response {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OrderbookV2Response {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderbookV2Response();
     while (reader.pos < end) {
@@ -3716,7 +3981,10 @@ export const OrderbookV2Response: MessageFns<OrderbookV2Response> = {
             break;
           }
 
-          message.orderbook = DerivativeLimitOrderbookV2.decode(reader, reader.uint32());
+          message.orderbook = DerivativeLimitOrderbookV2.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -3729,7 +3997,11 @@ export const OrderbookV2Response: MessageFns<OrderbookV2Response> = {
   },
 
   fromJSON(object: any): OrderbookV2Response {
-    return { orderbook: isSet(object.orderbook) ? DerivativeLimitOrderbookV2.fromJSON(object.orderbook) : undefined };
+    return {
+      orderbook: isSet(object.orderbook)
+        ? DerivativeLimitOrderbookV2.fromJSON(object.orderbook)
+        : undefined,
+    };
   },
 
   toJSON(message: OrderbookV2Response): unknown {
@@ -3740,14 +4012,19 @@ export const OrderbookV2Response: MessageFns<OrderbookV2Response> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrderbookV2Response>, I>>(base?: I): OrderbookV2Response {
+  create<I extends Exact<DeepPartial<OrderbookV2Response>, I>>(
+    base?: I,
+  ): OrderbookV2Response {
     return OrderbookV2Response.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderbookV2Response>, I>>(object: I): OrderbookV2Response {
+  fromPartial<I extends Exact<DeepPartial<OrderbookV2Response>, I>>(
+    object: I,
+  ): OrderbookV2Response {
     const message = createBaseOrderbookV2Response();
-    message.orderbook = (object.orderbook !== undefined && object.orderbook !== null)
-      ? DerivativeLimitOrderbookV2.fromPartial(object.orderbook)
-      : undefined;
+    message.orderbook =
+      object.orderbook !== undefined && object.orderbook !== null
+        ? DerivativeLimitOrderbookV2.fromPartial(object.orderbook)
+        : undefined;
     return message;
   },
 };
@@ -3756,132 +4033,155 @@ function createBaseDerivativeLimitOrderbookV2(): DerivativeLimitOrderbookV2 {
   return { buys: [], sells: [], sequence: 0, timestamp: 0, height: 0 };
 }
 
-export const DerivativeLimitOrderbookV2: MessageFns<DerivativeLimitOrderbookV2> = {
-  encode(message: DerivativeLimitOrderbookV2, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.buys) {
-      PriceLevel.encode(v!, writer.uint32(10).fork()).join();
-    }
-    for (const v of message.sells) {
-      PriceLevel.encode(v!, writer.uint32(18).fork()).join();
-    }
-    if (message.sequence !== 0) {
-      writer.uint32(24).uint64(message.sequence);
-    }
-    if (message.timestamp !== 0) {
-      writer.uint32(32).sint64(message.timestamp);
-    }
-    if (message.height !== 0) {
-      writer.uint32(40).sint64(message.height);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeLimitOrderbookV2 {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDerivativeLimitOrderbookV2();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.buys.push(PriceLevel.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.sells.push(PriceLevel.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.sequence = longToNumber(reader.uint64());
-          continue;
-        }
-        case 4: {
-          if (tag !== 32) {
-            break;
-          }
-
-          message.timestamp = longToNumber(reader.sint64());
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.height = longToNumber(reader.sint64());
-          continue;
-        }
+export const DerivativeLimitOrderbookV2: MessageFns<DerivativeLimitOrderbookV2> =
+  {
+    encode(
+      message: DerivativeLimitOrderbookV2,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.buys) {
+        PriceLevel.encode(v!, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.sells) {
+        PriceLevel.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.sequence !== 0) {
+        writer.uint32(24).uint64(message.sequence);
+      }
+      if (message.timestamp !== 0) {
+        writer.uint32(32).sint64(message.timestamp);
+      }
+      if (message.height !== 0) {
+        writer.uint32(40).sint64(message.height);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): DerivativeLimitOrderbookV2 {
-    return {
-      buys: globalThis.Array.isArray(object?.buys) ? object.buys.map((e: any) => PriceLevel.fromJSON(e)) : [],
-      sells: globalThis.Array.isArray(object?.sells) ? object.sells.map((e: any) => PriceLevel.fromJSON(e)) : [],
-      sequence: isSet(object.sequence) ? globalThis.Number(object.sequence) : 0,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-      height: isSet(object.height) ? globalThis.Number(object.height) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): DerivativeLimitOrderbookV2 {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseDerivativeLimitOrderbookV2();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: DerivativeLimitOrderbookV2): unknown {
-    const obj: any = {};
-    if (message.buys?.length) {
-      obj.buys = message.buys.map((e) => PriceLevel.toJSON(e));
-    }
-    if (message.sells?.length) {
-      obj.sells = message.sells.map((e) => PriceLevel.toJSON(e));
-    }
-    if (message.sequence !== 0) {
-      obj.sequence = Math.round(message.sequence);
-    }
-    if (message.timestamp !== 0) {
-      obj.timestamp = Math.round(message.timestamp);
-    }
-    if (message.height !== 0) {
-      obj.height = Math.round(message.height);
-    }
-    return obj;
-  },
+            message.buys.push(PriceLevel.decode(reader, reader.uint32()));
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<DerivativeLimitOrderbookV2>, I>>(base?: I): DerivativeLimitOrderbookV2 {
-    return DerivativeLimitOrderbookV2.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DerivativeLimitOrderbookV2>, I>>(object: I): DerivativeLimitOrderbookV2 {
-    const message = createBaseDerivativeLimitOrderbookV2();
-    message.buys = object.buys?.map((e) => PriceLevel.fromPartial(e)) || [];
-    message.sells = object.sells?.map((e) => PriceLevel.fromPartial(e)) || [];
-    message.sequence = object.sequence ?? 0;
-    message.timestamp = object.timestamp ?? 0;
-    message.height = object.height ?? 0;
-    return message;
-  },
-};
+            message.sells.push(PriceLevel.decode(reader, reader.uint32()));
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.sequence = longToNumber(reader.uint64());
+            continue;
+          }
+          case 4: {
+            if (tag !== 32) {
+              break;
+            }
+
+            message.timestamp = longToNumber(reader.sint64());
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.height = longToNumber(reader.sint64());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): DerivativeLimitOrderbookV2 {
+      return {
+        buys: globalThis.Array.isArray(object?.buys)
+          ? object.buys.map((e: any) => PriceLevel.fromJSON(e))
+          : [],
+        sells: globalThis.Array.isArray(object?.sells)
+          ? object.sells.map((e: any) => PriceLevel.fromJSON(e))
+          : [],
+        sequence: isSet(object.sequence)
+          ? globalThis.Number(object.sequence)
+          : 0,
+        timestamp: isSet(object.timestamp)
+          ? globalThis.Number(object.timestamp)
+          : 0,
+        height: isSet(object.height) ? globalThis.Number(object.height) : 0,
+      };
+    },
+
+    toJSON(message: DerivativeLimitOrderbookV2): unknown {
+      const obj: any = {};
+      if (message.buys?.length) {
+        obj.buys = message.buys.map((e) => PriceLevel.toJSON(e));
+      }
+      if (message.sells?.length) {
+        obj.sells = message.sells.map((e) => PriceLevel.toJSON(e));
+      }
+      if (message.sequence !== 0) {
+        obj.sequence = Math.round(message.sequence);
+      }
+      if (message.timestamp !== 0) {
+        obj.timestamp = Math.round(message.timestamp);
+      }
+      if (message.height !== 0) {
+        obj.height = Math.round(message.height);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<DerivativeLimitOrderbookV2>, I>>(
+      base?: I,
+    ): DerivativeLimitOrderbookV2 {
+      return DerivativeLimitOrderbookV2.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<DerivativeLimitOrderbookV2>, I>>(
+      object: I,
+    ): DerivativeLimitOrderbookV2 {
+      const message = createBaseDerivativeLimitOrderbookV2();
+      message.buys = object.buys?.map((e) => PriceLevel.fromPartial(e)) || [];
+      message.sells = object.sells?.map((e) => PriceLevel.fromPartial(e)) || [];
+      message.sequence = object.sequence ?? 0;
+      message.timestamp = object.timestamp ?? 0;
+      message.height = object.height ?? 0;
+      return message;
+    },
+  };
 
 function createBasePriceLevel(): PriceLevel {
   return { price: "", quantity: "", timestamp: 0 };
 }
 
 export const PriceLevel: MessageFns<PriceLevel> = {
-  encode(message: PriceLevel, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceLevel,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -3895,7 +4195,8 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceLevel {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceLevel();
     while (reader.pos < end) {
@@ -3937,8 +4238,12 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   fromJSON(object: any): PriceLevel {
     return {
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -3959,7 +4264,9 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   create<I extends Exact<DeepPartial<PriceLevel>, I>>(base?: I): PriceLevel {
     return PriceLevel.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceLevel>, I>>(object: I): PriceLevel {
+  fromPartial<I extends Exact<DeepPartial<PriceLevel>, I>>(
+    object: I,
+  ): PriceLevel {
     const message = createBasePriceLevel();
     message.price = object.price ?? "";
     message.quantity = object.quantity ?? "";
@@ -3973,7 +4280,10 @@ function createBaseOrderbooksV2Request(): OrderbooksV2Request {
 }
 
 export const OrderbooksV2Request: MessageFns<OrderbooksV2Request> = {
-  encode(message: OrderbooksV2Request, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderbooksV2Request,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.marketIds) {
       writer.uint32(10).string(v!);
     }
@@ -3983,8 +4293,12 @@ export const OrderbooksV2Request: MessageFns<OrderbooksV2Request> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OrderbooksV2Request {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OrderbooksV2Request {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderbooksV2Request();
     while (reader.pos < end) {
@@ -4020,8 +4334,8 @@ export const OrderbooksV2Request: MessageFns<OrderbooksV2Request> = {
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
       depth: isSet(object.depth) ? globalThis.Number(object.depth) : 0,
     };
   },
@@ -4037,10 +4351,14 @@ export const OrderbooksV2Request: MessageFns<OrderbooksV2Request> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrderbooksV2Request>, I>>(base?: I): OrderbooksV2Request {
+  create<I extends Exact<DeepPartial<OrderbooksV2Request>, I>>(
+    base?: I,
+  ): OrderbooksV2Request {
     return OrderbooksV2Request.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderbooksV2Request>, I>>(object: I): OrderbooksV2Request {
+  fromPartial<I extends Exact<DeepPartial<OrderbooksV2Request>, I>>(
+    object: I,
+  ): OrderbooksV2Request {
     const message = createBaseOrderbooksV2Request();
     message.marketIds = object.marketIds?.map((e) => e) || [];
     message.depth = object.depth ?? 0;
@@ -4053,15 +4371,25 @@ function createBaseOrderbooksV2Response(): OrderbooksV2Response {
 }
 
 export const OrderbooksV2Response: MessageFns<OrderbooksV2Response> = {
-  encode(message: OrderbooksV2Response, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderbooksV2Response,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.orderbooks) {
-      SingleDerivativeLimitOrderbookV2.encode(v!, writer.uint32(10).fork()).join();
+      SingleDerivativeLimitOrderbookV2.encode(
+        v!,
+        writer.uint32(10).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OrderbooksV2Response {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OrderbooksV2Response {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderbooksV2Response();
     while (reader.pos < end) {
@@ -4072,7 +4400,9 @@ export const OrderbooksV2Response: MessageFns<OrderbooksV2Response> = {
             break;
           }
 
-          message.orderbooks.push(SingleDerivativeLimitOrderbookV2.decode(reader, reader.uint32()));
+          message.orderbooks.push(
+            SingleDerivativeLimitOrderbookV2.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -4087,7 +4417,9 @@ export const OrderbooksV2Response: MessageFns<OrderbooksV2Response> = {
   fromJSON(object: any): OrderbooksV2Response {
     return {
       orderbooks: globalThis.Array.isArray(object?.orderbooks)
-        ? object.orderbooks.map((e: any) => SingleDerivativeLimitOrderbookV2.fromJSON(e))
+        ? object.orderbooks.map((e: any) =>
+            SingleDerivativeLimitOrderbookV2.fromJSON(e),
+          )
         : [],
     };
   },
@@ -4095,17 +4427,26 @@ export const OrderbooksV2Response: MessageFns<OrderbooksV2Response> = {
   toJSON(message: OrderbooksV2Response): unknown {
     const obj: any = {};
     if (message.orderbooks?.length) {
-      obj.orderbooks = message.orderbooks.map((e) => SingleDerivativeLimitOrderbookV2.toJSON(e));
+      obj.orderbooks = message.orderbooks.map((e) =>
+        SingleDerivativeLimitOrderbookV2.toJSON(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrderbooksV2Response>, I>>(base?: I): OrderbooksV2Response {
+  create<I extends Exact<DeepPartial<OrderbooksV2Response>, I>>(
+    base?: I,
+  ): OrderbooksV2Response {
     return OrderbooksV2Response.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderbooksV2Response>, I>>(object: I): OrderbooksV2Response {
+  fromPartial<I extends Exact<DeepPartial<OrderbooksV2Response>, I>>(
+    object: I,
+  ): OrderbooksV2Response {
     const message = createBaseOrderbooksV2Response();
-    message.orderbooks = object.orderbooks?.map((e) => SingleDerivativeLimitOrderbookV2.fromPartial(e)) || [];
+    message.orderbooks =
+      object.orderbooks?.map((e) =>
+        SingleDerivativeLimitOrderbookV2.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -4114,102 +4455,126 @@ function createBaseSingleDerivativeLimitOrderbookV2(): SingleDerivativeLimitOrde
   return { marketId: "", orderbook: undefined };
 }
 
-export const SingleDerivativeLimitOrderbookV2: MessageFns<SingleDerivativeLimitOrderbookV2> = {
-  encode(message: SingleDerivativeLimitOrderbookV2, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.orderbook !== undefined) {
-      DerivativeLimitOrderbookV2.encode(message.orderbook, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SingleDerivativeLimitOrderbookV2 {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSingleDerivativeLimitOrderbookV2();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.orderbook = DerivativeLimitOrderbookV2.decode(reader, reader.uint32());
-          continue;
-        }
+export const SingleDerivativeLimitOrderbookV2: MessageFns<SingleDerivativeLimitOrderbookV2> =
+  {
+    encode(
+      message: SingleDerivativeLimitOrderbookV2,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.orderbook !== undefined) {
+        DerivativeLimitOrderbookV2.encode(
+          message.orderbook,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): SingleDerivativeLimitOrderbookV2 {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      orderbook: isSet(object.orderbook) ? DerivativeLimitOrderbookV2.fromJSON(object.orderbook) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SingleDerivativeLimitOrderbookV2 {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSingleDerivativeLimitOrderbookV2();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SingleDerivativeLimitOrderbookV2): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.orderbook !== undefined) {
-      obj.orderbook = DerivativeLimitOrderbookV2.toJSON(message.orderbook);
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SingleDerivativeLimitOrderbookV2>, I>>(
-    base?: I,
-  ): SingleDerivativeLimitOrderbookV2 {
-    return SingleDerivativeLimitOrderbookV2.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SingleDerivativeLimitOrderbookV2>, I>>(
-    object: I,
-  ): SingleDerivativeLimitOrderbookV2 {
-    const message = createBaseSingleDerivativeLimitOrderbookV2();
-    message.marketId = object.marketId ?? "";
-    message.orderbook = (object.orderbook !== undefined && object.orderbook !== null)
-      ? DerivativeLimitOrderbookV2.fromPartial(object.orderbook)
-      : undefined;
-    return message;
-  },
-};
+            message.orderbook = DerivativeLimitOrderbookV2.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SingleDerivativeLimitOrderbookV2 {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        orderbook: isSet(object.orderbook)
+          ? DerivativeLimitOrderbookV2.fromJSON(object.orderbook)
+          : undefined,
+      };
+    },
+
+    toJSON(message: SingleDerivativeLimitOrderbookV2): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.orderbook !== undefined) {
+        obj.orderbook = DerivativeLimitOrderbookV2.toJSON(message.orderbook);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SingleDerivativeLimitOrderbookV2>, I>>(
+      base?: I,
+    ): SingleDerivativeLimitOrderbookV2 {
+      return SingleDerivativeLimitOrderbookV2.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<SingleDerivativeLimitOrderbookV2>, I>,
+    >(object: I): SingleDerivativeLimitOrderbookV2 {
+      const message = createBaseSingleDerivativeLimitOrderbookV2();
+      message.marketId = object.marketId ?? "";
+      message.orderbook =
+        object.orderbook !== undefined && object.orderbook !== null
+          ? DerivativeLimitOrderbookV2.fromPartial(object.orderbook)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseStreamOrderbookV2Request(): StreamOrderbookV2Request {
   return { marketIds: [] };
 }
 
 export const StreamOrderbookV2Request: MessageFns<StreamOrderbookV2Request> = {
-  encode(message: StreamOrderbookV2Request, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamOrderbookV2Request,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.marketIds) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamOrderbookV2Request {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamOrderbookV2Request {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamOrderbookV2Request();
     while (reader.pos < end) {
@@ -4237,8 +4602,8 @@ export const StreamOrderbookV2Request: MessageFns<StreamOrderbookV2Request> = {
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -4250,10 +4615,14 @@ export const StreamOrderbookV2Request: MessageFns<StreamOrderbookV2Request> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamOrderbookV2Request>, I>>(base?: I): StreamOrderbookV2Request {
+  create<I extends Exact<DeepPartial<StreamOrderbookV2Request>, I>>(
+    base?: I,
+  ): StreamOrderbookV2Request {
     return StreamOrderbookV2Request.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamOrderbookV2Request>, I>>(object: I): StreamOrderbookV2Request {
+  fromPartial<I extends Exact<DeepPartial<StreamOrderbookV2Request>, I>>(
+    object: I,
+  ): StreamOrderbookV2Request {
     const message = createBaseStreamOrderbookV2Request();
     message.marketIds = object.marketIds?.map((e) => e) || [];
     return message;
@@ -4261,318 +4630,387 @@ export const StreamOrderbookV2Request: MessageFns<StreamOrderbookV2Request> = {
 };
 
 function createBaseStreamOrderbookV2Response(): StreamOrderbookV2Response {
-  return { orderbook: undefined, operationType: "", timestamp: 0, marketId: "" };
+  return {
+    orderbook: undefined,
+    operationType: "",
+    timestamp: 0,
+    marketId: "",
+  };
 }
 
-export const StreamOrderbookV2Response: MessageFns<StreamOrderbookV2Response> = {
-  encode(message: StreamOrderbookV2Response, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.orderbook !== undefined) {
-      DerivativeLimitOrderbookV2.encode(message.orderbook, writer.uint32(10).fork()).join();
-    }
-    if (message.operationType !== "") {
-      writer.uint32(18).string(message.operationType);
-    }
-    if (message.timestamp !== 0) {
-      writer.uint32(24).sint64(message.timestamp);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(34).string(message.marketId);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamOrderbookV2Response {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamOrderbookV2Response();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orderbook = DerivativeLimitOrderbookV2.decode(reader, reader.uint32());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.operationType = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.timestamp = longToNumber(reader.sint64());
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
+export const StreamOrderbookV2Response: MessageFns<StreamOrderbookV2Response> =
+  {
+    encode(
+      message: StreamOrderbookV2Response,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.orderbook !== undefined) {
+        DerivativeLimitOrderbookV2.encode(
+          message.orderbook,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.operationType !== "") {
+        writer.uint32(18).string(message.operationType);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.timestamp !== 0) {
+        writer.uint32(24).sint64(message.timestamp);
+      }
+      if (message.marketId !== "") {
+        writer.uint32(34).string(message.marketId);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): StreamOrderbookV2Response {
-    return {
-      orderbook: isSet(object.orderbook) ? DerivativeLimitOrderbookV2.fromJSON(object.orderbook) : undefined,
-      operationType: isSet(object.operationType)
-        ? globalThis.String(object.operationType)
-        : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamOrderbookV2Response {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamOrderbookV2Response();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamOrderbookV2Response): unknown {
-    const obj: any = {};
-    if (message.orderbook !== undefined) {
-      obj.orderbook = DerivativeLimitOrderbookV2.toJSON(message.orderbook);
-    }
-    if (message.operationType !== "") {
-      obj.operationType = message.operationType;
-    }
-    if (message.timestamp !== 0) {
-      obj.timestamp = Math.round(message.timestamp);
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
+            message.orderbook = DerivativeLimitOrderbookV2.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamOrderbookV2Response>, I>>(base?: I): StreamOrderbookV2Response {
-    return StreamOrderbookV2Response.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamOrderbookV2Response>, I>>(object: I): StreamOrderbookV2Response {
-    const message = createBaseStreamOrderbookV2Response();
-    message.orderbook = (object.orderbook !== undefined && object.orderbook !== null)
-      ? DerivativeLimitOrderbookV2.fromPartial(object.orderbook)
-      : undefined;
-    message.operationType = object.operationType ?? "";
-    message.timestamp = object.timestamp ?? 0;
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+            message.operationType = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.timestamp = longToNumber(reader.sint64());
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamOrderbookV2Response {
+      return {
+        orderbook: isSet(object.orderbook)
+          ? DerivativeLimitOrderbookV2.fromJSON(object.orderbook)
+          : undefined,
+        operationType: isSet(object.operationType)
+          ? globalThis.String(object.operationType)
+          : isSet(object.operation_type)
+            ? globalThis.String(object.operation_type)
+            : "",
+        timestamp: isSet(object.timestamp)
+          ? globalThis.Number(object.timestamp)
+          : 0,
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: StreamOrderbookV2Response): unknown {
+      const obj: any = {};
+      if (message.orderbook !== undefined) {
+        obj.orderbook = DerivativeLimitOrderbookV2.toJSON(message.orderbook);
+      }
+      if (message.operationType !== "") {
+        obj.operationType = message.operationType;
+      }
+      if (message.timestamp !== 0) {
+        obj.timestamp = Math.round(message.timestamp);
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamOrderbookV2Response>, I>>(
+      base?: I,
+    ): StreamOrderbookV2Response {
+      return StreamOrderbookV2Response.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<StreamOrderbookV2Response>, I>>(
+      object: I,
+    ): StreamOrderbookV2Response {
+      const message = createBaseStreamOrderbookV2Response();
+      message.orderbook =
+        object.orderbook !== undefined && object.orderbook !== null
+          ? DerivativeLimitOrderbookV2.fromPartial(object.orderbook)
+          : undefined;
+      message.operationType = object.operationType ?? "";
+      message.timestamp = object.timestamp ?? 0;
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseStreamOrderbookUpdateRequest(): StreamOrderbookUpdateRequest {
   return { marketIds: [] };
 }
 
-export const StreamOrderbookUpdateRequest: MessageFns<StreamOrderbookUpdateRequest> = {
-  encode(message: StreamOrderbookUpdateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.marketIds) {
-      writer.uint32(10).string(v!);
-    }
-    return writer;
-  },
+export const StreamOrderbookUpdateRequest: MessageFns<StreamOrderbookUpdateRequest> =
+  {
+    encode(
+      message: StreamOrderbookUpdateRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.marketIds) {
+        writer.uint32(10).string(v!);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamOrderbookUpdateRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamOrderbookUpdateRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamOrderbookUpdateRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamOrderbookUpdateRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketIds.push(reader.string());
+            continue;
           }
-
-          message.marketIds.push(reader.string());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): StreamOrderbookUpdateRequest {
+      return {
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: StreamOrderbookUpdateRequest): unknown {
+      const obj: any = {};
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): StreamOrderbookUpdateRequest {
-    return {
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
-  toJSON(message: StreamOrderbookUpdateRequest): unknown {
-    const obj: any = {};
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<StreamOrderbookUpdateRequest>, I>>(base?: I): StreamOrderbookUpdateRequest {
-    return StreamOrderbookUpdateRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamOrderbookUpdateRequest>, I>>(object: I): StreamOrderbookUpdateRequest {
-    const message = createBaseStreamOrderbookUpdateRequest();
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<StreamOrderbookUpdateRequest>, I>>(
+      base?: I,
+    ): StreamOrderbookUpdateRequest {
+      return StreamOrderbookUpdateRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<StreamOrderbookUpdateRequest>, I>>(
+      object: I,
+    ): StreamOrderbookUpdateRequest {
+      const message = createBaseStreamOrderbookUpdateRequest();
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseStreamOrderbookUpdateResponse(): StreamOrderbookUpdateResponse {
-  return { orderbookLevelUpdates: undefined, operationType: "", timestamp: 0, marketId: "" };
+  return {
+    orderbookLevelUpdates: undefined,
+    operationType: "",
+    timestamp: 0,
+    marketId: "",
+  };
 }
 
-export const StreamOrderbookUpdateResponse: MessageFns<StreamOrderbookUpdateResponse> = {
-  encode(message: StreamOrderbookUpdateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.orderbookLevelUpdates !== undefined) {
-      OrderbookLevelUpdates.encode(message.orderbookLevelUpdates, writer.uint32(10).fork()).join();
-    }
-    if (message.operationType !== "") {
-      writer.uint32(18).string(message.operationType);
-    }
-    if (message.timestamp !== 0) {
-      writer.uint32(24).sint64(message.timestamp);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(34).string(message.marketId);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamOrderbookUpdateResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamOrderbookUpdateResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orderbookLevelUpdates = OrderbookLevelUpdates.decode(reader, reader.uint32());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.operationType = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.timestamp = longToNumber(reader.sint64());
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
+export const StreamOrderbookUpdateResponse: MessageFns<StreamOrderbookUpdateResponse> =
+  {
+    encode(
+      message: StreamOrderbookUpdateResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.orderbookLevelUpdates !== undefined) {
+        OrderbookLevelUpdates.encode(
+          message.orderbookLevelUpdates,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.operationType !== "") {
+        writer.uint32(18).string(message.operationType);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.timestamp !== 0) {
+        writer.uint32(24).sint64(message.timestamp);
+      }
+      if (message.marketId !== "") {
+        writer.uint32(34).string(message.marketId);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): StreamOrderbookUpdateResponse {
-    return {
-      orderbookLevelUpdates: isSet(object.orderbookLevelUpdates)
-        ? OrderbookLevelUpdates.fromJSON(object.orderbookLevelUpdates)
-        : isSet(object.orderbook_level_updates)
-        ? OrderbookLevelUpdates.fromJSON(object.orderbook_level_updates)
-        : undefined,
-      operationType: isSet(object.operationType)
-        ? globalThis.String(object.operationType)
-        : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamOrderbookUpdateResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamOrderbookUpdateResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamOrderbookUpdateResponse): unknown {
-    const obj: any = {};
-    if (message.orderbookLevelUpdates !== undefined) {
-      obj.orderbookLevelUpdates = OrderbookLevelUpdates.toJSON(message.orderbookLevelUpdates);
-    }
-    if (message.operationType !== "") {
-      obj.operationType = message.operationType;
-    }
-    if (message.timestamp !== 0) {
-      obj.timestamp = Math.round(message.timestamp);
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
+            message.orderbookLevelUpdates = OrderbookLevelUpdates.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamOrderbookUpdateResponse>, I>>(base?: I): StreamOrderbookUpdateResponse {
-    return StreamOrderbookUpdateResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamOrderbookUpdateResponse>, I>>(
-    object: I,
-  ): StreamOrderbookUpdateResponse {
-    const message = createBaseStreamOrderbookUpdateResponse();
-    message.orderbookLevelUpdates =
-      (object.orderbookLevelUpdates !== undefined && object.orderbookLevelUpdates !== null)
-        ? OrderbookLevelUpdates.fromPartial(object.orderbookLevelUpdates)
-        : undefined;
-    message.operationType = object.operationType ?? "";
-    message.timestamp = object.timestamp ?? 0;
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+            message.operationType = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.timestamp = longToNumber(reader.sint64());
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamOrderbookUpdateResponse {
+      return {
+        orderbookLevelUpdates: isSet(object.orderbookLevelUpdates)
+          ? OrderbookLevelUpdates.fromJSON(object.orderbookLevelUpdates)
+          : isSet(object.orderbook_level_updates)
+            ? OrderbookLevelUpdates.fromJSON(object.orderbook_level_updates)
+            : undefined,
+        operationType: isSet(object.operationType)
+          ? globalThis.String(object.operationType)
+          : isSet(object.operation_type)
+            ? globalThis.String(object.operation_type)
+            : "",
+        timestamp: isSet(object.timestamp)
+          ? globalThis.Number(object.timestamp)
+          : 0,
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: StreamOrderbookUpdateResponse): unknown {
+      const obj: any = {};
+      if (message.orderbookLevelUpdates !== undefined) {
+        obj.orderbookLevelUpdates = OrderbookLevelUpdates.toJSON(
+          message.orderbookLevelUpdates,
+        );
+      }
+      if (message.operationType !== "") {
+        obj.operationType = message.operationType;
+      }
+      if (message.timestamp !== 0) {
+        obj.timestamp = Math.round(message.timestamp);
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamOrderbookUpdateResponse>, I>>(
+      base?: I,
+    ): StreamOrderbookUpdateResponse {
+      return StreamOrderbookUpdateResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<StreamOrderbookUpdateResponse>, I>>(
+      object: I,
+    ): StreamOrderbookUpdateResponse {
+      const message = createBaseStreamOrderbookUpdateResponse();
+      message.orderbookLevelUpdates =
+        object.orderbookLevelUpdates !== undefined &&
+        object.orderbookLevelUpdates !== null
+          ? OrderbookLevelUpdates.fromPartial(object.orderbookLevelUpdates)
+          : undefined;
+      message.operationType = object.operationType ?? "";
+      message.timestamp = object.timestamp ?? 0;
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseOrderbookLevelUpdates(): OrderbookLevelUpdates {
   return { marketId: "", sequence: 0, buys: [], sells: [], updatedAt: 0 };
 }
 
 export const OrderbookLevelUpdates: MessageFns<OrderbookLevelUpdates> = {
-  encode(message: OrderbookLevelUpdates, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderbookLevelUpdates,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -4591,8 +5029,12 @@ export const OrderbookLevelUpdates: MessageFns<OrderbookLevelUpdates> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OrderbookLevelUpdates {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OrderbookLevelUpdates {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderbookLevelUpdates();
     while (reader.pos < end) {
@@ -4652,16 +5094,20 @@ export const OrderbookLevelUpdates: MessageFns<OrderbookLevelUpdates> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       sequence: isSet(object.sequence) ? globalThis.Number(object.sequence) : 0,
-      buys: globalThis.Array.isArray(object?.buys) ? object.buys.map((e: any) => PriceLevelUpdate.fromJSON(e)) : [],
-      sells: globalThis.Array.isArray(object?.sells) ? object.sells.map((e: any) => PriceLevelUpdate.fromJSON(e)) : [],
+      buys: globalThis.Array.isArray(object?.buys)
+        ? object.buys.map((e: any) => PriceLevelUpdate.fromJSON(e))
+        : [],
+      sells: globalThis.Array.isArray(object?.sells)
+        ? object.sells.map((e: any) => PriceLevelUpdate.fromJSON(e))
+        : [],
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
     };
   },
 
@@ -4685,15 +5131,21 @@ export const OrderbookLevelUpdates: MessageFns<OrderbookLevelUpdates> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrderbookLevelUpdates>, I>>(base?: I): OrderbookLevelUpdates {
+  create<I extends Exact<DeepPartial<OrderbookLevelUpdates>, I>>(
+    base?: I,
+  ): OrderbookLevelUpdates {
     return OrderbookLevelUpdates.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderbookLevelUpdates>, I>>(object: I): OrderbookLevelUpdates {
+  fromPartial<I extends Exact<DeepPartial<OrderbookLevelUpdates>, I>>(
+    object: I,
+  ): OrderbookLevelUpdates {
     const message = createBaseOrderbookLevelUpdates();
     message.marketId = object.marketId ?? "";
     message.sequence = object.sequence ?? 0;
-    message.buys = object.buys?.map((e) => PriceLevelUpdate.fromPartial(e)) || [];
-    message.sells = object.sells?.map((e) => PriceLevelUpdate.fromPartial(e)) || [];
+    message.buys =
+      object.buys?.map((e) => PriceLevelUpdate.fromPartial(e)) || [];
+    message.sells =
+      object.sells?.map((e) => PriceLevelUpdate.fromPartial(e)) || [];
     message.updatedAt = object.updatedAt ?? 0;
     return message;
   },
@@ -4704,7 +5156,10 @@ function createBasePriceLevelUpdate(): PriceLevelUpdate {
 }
 
 export const PriceLevelUpdate: MessageFns<PriceLevelUpdate> = {
-  encode(message: PriceLevelUpdate, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceLevelUpdate,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -4721,7 +5176,8 @@ export const PriceLevelUpdate: MessageFns<PriceLevelUpdate> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceLevelUpdate {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceLevelUpdate();
     while (reader.pos < end) {
@@ -4771,13 +5227,17 @@ export const PriceLevelUpdate: MessageFns<PriceLevelUpdate> = {
   fromJSON(object: any): PriceLevelUpdate {
     return {
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       isActive: isSet(object.isActive)
         ? globalThis.Boolean(object.isActive)
         : isSet(object.is_active)
-        ? globalThis.Boolean(object.is_active)
-        : false,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.Boolean(object.is_active)
+          : false,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -4798,10 +5258,14 @@ export const PriceLevelUpdate: MessageFns<PriceLevelUpdate> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceLevelUpdate>, I>>(base?: I): PriceLevelUpdate {
+  create<I extends Exact<DeepPartial<PriceLevelUpdate>, I>>(
+    base?: I,
+  ): PriceLevelUpdate {
     return PriceLevelUpdate.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceLevelUpdate>, I>>(object: I): PriceLevelUpdate {
+  fromPartial<I extends Exact<DeepPartial<PriceLevelUpdate>, I>>(
+    object: I,
+  ): PriceLevelUpdate {
     const message = createBasePriceLevelUpdate();
     message.price = object.price ?? "";
     message.quantity = object.quantity ?? "";
@@ -4831,7 +5295,10 @@ function createBaseOrdersRequest(): OrdersRequest {
 }
 
 export const OrdersRequest: MessageFns<OrdersRequest> = {
-  encode(message: OrdersRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrdersRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -4878,7 +5345,8 @@ export const OrdersRequest: MessageFns<OrdersRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): OrdersRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrdersRequest();
     while (reader.pos < end) {
@@ -5010,60 +5478,60 @@ export const OrdersRequest: MessageFns<OrdersRequest> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       orderSide: isSet(object.orderSide)
         ? globalThis.String(object.orderSide)
         : isSet(object.order_side)
-        ? globalThis.String(object.order_side)
-        : "",
+          ? globalThis.String(object.order_side)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       startTime: isSet(object.startTime)
         ? globalThis.Number(object.startTime)
         : isSet(object.start_time)
-        ? globalThis.Number(object.start_time)
-        : 0,
+          ? globalThis.Number(object.start_time)
+          : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
       isConditional: isSet(object.isConditional)
         ? globalThis.String(object.isConditional)
         : isSet(object.is_conditional)
-        ? globalThis.String(object.is_conditional)
-        : "",
+          ? globalThis.String(object.is_conditional)
+          : "",
       orderType: isSet(object.orderType)
         ? globalThis.String(object.orderType)
         : isSet(object.order_type)
-        ? globalThis.String(object.order_type)
-        : "",
+          ? globalThis.String(object.order_type)
+          : "",
       includeInactive: isSet(object.includeInactive)
         ? globalThis.Boolean(object.includeInactive)
         : isSet(object.include_inactive)
-        ? globalThis.Boolean(object.include_inactive)
-        : false,
+          ? globalThis.Boolean(object.include_inactive)
+          : false,
       subaccountTotalOrders: isSet(object.subaccountTotalOrders)
         ? globalThis.Boolean(object.subaccountTotalOrders)
         : isSet(object.subaccount_total_orders)
-        ? globalThis.Boolean(object.subaccount_total_orders)
-        : false,
+          ? globalThis.Boolean(object.subaccount_total_orders)
+          : false,
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -5115,10 +5583,14 @@ export const OrdersRequest: MessageFns<OrdersRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrdersRequest>, I>>(base?: I): OrdersRequest {
+  create<I extends Exact<DeepPartial<OrdersRequest>, I>>(
+    base?: I,
+  ): OrdersRequest {
     return OrdersRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrdersRequest>, I>>(object: I): OrdersRequest {
+  fromPartial<I extends Exact<DeepPartial<OrdersRequest>, I>>(
+    object: I,
+  ): OrdersRequest {
     const message = createBaseOrdersRequest();
     message.marketId = object.marketId ?? "";
     message.orderSide = object.orderSide ?? "";
@@ -5143,7 +5615,10 @@ function createBaseOrdersResponse(): OrdersResponse {
 }
 
 export const OrdersResponse: MessageFns<OrdersResponse> = {
-  encode(message: OrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrdersResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.orders) {
       DerivativeLimitOrder.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -5154,7 +5629,8 @@ export const OrdersResponse: MessageFns<OrdersResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): OrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrdersResponse();
     while (reader.pos < end) {
@@ -5165,7 +5641,9 @@ export const OrdersResponse: MessageFns<OrdersResponse> = {
             break;
           }
 
-          message.orders.push(DerivativeLimitOrder.decode(reader, reader.uint32()));
+          message.orders.push(
+            DerivativeLimitOrder.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 2: {
@@ -5205,15 +5683,21 @@ export const OrdersResponse: MessageFns<OrdersResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrdersResponse>, I>>(base?: I): OrdersResponse {
+  create<I extends Exact<DeepPartial<OrdersResponse>, I>>(
+    base?: I,
+  ): OrdersResponse {
     return OrdersResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrdersResponse>, I>>(object: I): OrdersResponse {
+  fromPartial<I extends Exact<DeepPartial<OrdersResponse>, I>>(
+    object: I,
+  ): OrdersResponse {
     const message = createBaseOrdersResponse();
-    message.orders = object.orders?.map((e) => DerivativeLimitOrder.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
+    message.orders =
+      object.orders?.map((e) => DerivativeLimitOrder.fromPartial(e)) || [];
+    message.paging =
+      object.paging !== undefined && object.paging !== null
+        ? Paging.fromPartial(object.paging)
+        : undefined;
     return message;
   },
 };
@@ -5247,7 +5731,10 @@ function createBaseDerivativeLimitOrder(): DerivativeLimitOrder {
 }
 
 export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
-  encode(message: DerivativeLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativeLimitOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderHash !== "") {
       writer.uint32(10).string(message.orderHash);
     }
@@ -5320,8 +5807,12 @@ export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DerivativeLimitOrder {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativeLimitOrder();
     while (reader.pos < end) {
@@ -5525,98 +6016,100 @@ export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       orderSide: isSet(object.orderSide)
         ? globalThis.String(object.orderSide)
         : isSet(object.order_side)
-        ? globalThis.String(object.order_side)
-        : "",
+          ? globalThis.String(object.order_side)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       isReduceOnly: isSet(object.isReduceOnly)
         ? globalThis.Boolean(object.isReduceOnly)
         : isSet(object.is_reduce_only)
-        ? globalThis.Boolean(object.is_reduce_only)
-        : false,
+          ? globalThis.Boolean(object.is_reduce_only)
+          : false,
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       unfilledQuantity: isSet(object.unfilledQuantity)
         ? globalThis.String(object.unfilledQuantity)
         : isSet(object.unfilled_quantity)
-        ? globalThis.String(object.unfilled_quantity)
-        : "",
+          ? globalThis.String(object.unfilled_quantity)
+          : "",
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
-        : "",
+          ? globalThis.String(object.trigger_price)
+          : "",
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
       state: isSet(object.state) ? globalThis.String(object.state) : "",
       createdAt: isSet(object.createdAt)
         ? globalThis.Number(object.createdAt)
         : isSet(object.created_at)
-        ? globalThis.Number(object.created_at)
-        : 0,
+          ? globalThis.Number(object.created_at)
+          : 0,
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
       orderNumber: isSet(object.orderNumber)
         ? globalThis.Number(object.orderNumber)
         : isSet(object.order_number)
-        ? globalThis.Number(object.order_number)
-        : 0,
+          ? globalThis.Number(object.order_number)
+          : 0,
       orderType: isSet(object.orderType)
         ? globalThis.String(object.orderType)
         : isSet(object.order_type)
-        ? globalThis.String(object.order_type)
-        : "",
+          ? globalThis.String(object.order_type)
+          : "",
       isConditional: isSet(object.isConditional)
         ? globalThis.Boolean(object.isConditional)
         : isSet(object.is_conditional)
-        ? globalThis.Boolean(object.is_conditional)
-        : false,
+          ? globalThis.Boolean(object.is_conditional)
+          : false,
       triggerAt: isSet(object.triggerAt)
         ? globalThis.Number(object.triggerAt)
         : isSet(object.trigger_at)
-        ? globalThis.Number(object.trigger_at)
-        : 0,
+          ? globalThis.Number(object.trigger_at)
+          : 0,
       placedOrderHash: isSet(object.placedOrderHash)
         ? globalThis.String(object.placedOrderHash)
         : isSet(object.placed_order_hash)
-        ? globalThis.String(object.placed_order_hash)
-        : "",
+          ? globalThis.String(object.placed_order_hash)
+          : "",
       executionType: isSet(object.executionType)
         ? globalThis.String(object.executionType)
         : isSet(object.execution_type)
-        ? globalThis.String(object.execution_type)
-        : "",
+          ? globalThis.String(object.execution_type)
+          : "",
       txHash: isSet(object.txHash)
         ? globalThis.String(object.txHash)
         : isSet(object.tx_hash)
-        ? globalThis.String(object.tx_hash)
-        : "",
+          ? globalThis.String(object.tx_hash)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -5694,10 +6187,14 @@ export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(base?: I): DerivativeLimitOrder {
+  create<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(
+    base?: I,
+  ): DerivativeLimitOrder {
     return DerivativeLimitOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(object: I): DerivativeLimitOrder {
+  fromPartial<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(
+    object: I,
+  ): DerivativeLimitOrder {
     const message = createBaseDerivativeLimitOrder();
     message.orderHash = object.orderHash ?? "";
     message.orderSide = object.orderSide ?? "";
@@ -5742,7 +6239,10 @@ function createBasePositionsRequest(): PositionsRequest {
 }
 
 export const PositionsRequest: MessageFns<PositionsRequest> = {
-  encode(message: PositionsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PositionsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -5777,7 +6277,8 @@ export const PositionsRequest: MessageFns<PositionsRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PositionsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePositionsRequest();
     while (reader.pos < end) {
@@ -5877,41 +6378,43 @@ export const PositionsRequest: MessageFns<PositionsRequest> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       startTime: isSet(object.startTime)
         ? globalThis.Number(object.startTime)
         : isSet(object.start_time)
-        ? globalThis.Number(object.start_time)
-        : 0,
+          ? globalThis.Number(object.start_time)
+          : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
+        : "",
       subaccountTotalPositions: isSet(object.subaccountTotalPositions)
         ? globalThis.Boolean(object.subaccountTotalPositions)
         : isSet(object.subaccount_total_positions)
-        ? globalThis.Boolean(object.subaccount_total_positions)
-        : false,
+          ? globalThis.Boolean(object.subaccount_total_positions)
+          : false,
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -5950,10 +6453,14 @@ export const PositionsRequest: MessageFns<PositionsRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PositionsRequest>, I>>(base?: I): PositionsRequest {
+  create<I extends Exact<DeepPartial<PositionsRequest>, I>>(
+    base?: I,
+  ): PositionsRequest {
     return PositionsRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PositionsRequest>, I>>(object: I): PositionsRequest {
+  fromPartial<I extends Exact<DeepPartial<PositionsRequest>, I>>(
+    object: I,
+  ): PositionsRequest {
     const message = createBasePositionsRequest();
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
@@ -5974,7 +6481,10 @@ function createBasePositionsResponse(): PositionsResponse {
 }
 
 export const PositionsResponse: MessageFns<PositionsResponse> = {
-  encode(message: PositionsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PositionsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.positions) {
       DerivativePosition.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -5985,7 +6495,8 @@ export const PositionsResponse: MessageFns<PositionsResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PositionsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePositionsResponse();
     while (reader.pos < end) {
@@ -5996,7 +6507,9 @@ export const PositionsResponse: MessageFns<PositionsResponse> = {
             break;
           }
 
-          message.positions.push(DerivativePosition.decode(reader, reader.uint32()));
+          message.positions.push(
+            DerivativePosition.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 2: {
@@ -6028,7 +6541,9 @@ export const PositionsResponse: MessageFns<PositionsResponse> = {
   toJSON(message: PositionsResponse): unknown {
     const obj: any = {};
     if (message.positions?.length) {
-      obj.positions = message.positions.map((e) => DerivativePosition.toJSON(e));
+      obj.positions = message.positions.map((e) =>
+        DerivativePosition.toJSON(e),
+      );
     }
     if (message.paging !== undefined) {
       obj.paging = Paging.toJSON(message.paging);
@@ -6036,15 +6551,21 @@ export const PositionsResponse: MessageFns<PositionsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PositionsResponse>, I>>(base?: I): PositionsResponse {
+  create<I extends Exact<DeepPartial<PositionsResponse>, I>>(
+    base?: I,
+  ): PositionsResponse {
     return PositionsResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PositionsResponse>, I>>(object: I): PositionsResponse {
+  fromPartial<I extends Exact<DeepPartial<PositionsResponse>, I>>(
+    object: I,
+  ): PositionsResponse {
     const message = createBasePositionsResponse();
-    message.positions = object.positions?.map((e) => DerivativePosition.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
+    message.positions =
+      object.positions?.map((e) => DerivativePosition.fromPartial(e)) || [];
+    message.paging =
+      object.paging !== undefined && object.paging !== null
+        ? Paging.fromPartial(object.paging)
+        : undefined;
     return message;
   },
 };
@@ -6071,7 +6592,10 @@ function createBaseDerivativePosition(): DerivativePosition {
 }
 
 export const DerivativePosition: MessageFns<DerivativePosition> = {
-  encode(message: DerivativePosition, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativePosition,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.ticker !== "") {
       writer.uint32(10).string(message.ticker);
     }
@@ -6123,8 +6647,12 @@ export const DerivativePosition: MessageFns<DerivativePosition> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativePosition {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DerivativePosition {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativePosition();
     while (reader.pos < end) {
@@ -6273,66 +6801,72 @@ export const DerivativePosition: MessageFns<DerivativePosition> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
+          ? globalThis.String(object.subaccount_id)
+          : "",
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
         : "",
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       entryPrice: isSet(object.entryPrice)
         ? globalThis.String(object.entryPrice)
         : isSet(object.entry_price)
-        ? globalThis.String(object.entry_price)
-        : "",
+          ? globalThis.String(object.entry_price)
+          : "",
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
       liquidationPrice: isSet(object.liquidationPrice)
         ? globalThis.String(object.liquidationPrice)
         : isSet(object.liquidation_price)
-        ? globalThis.String(object.liquidation_price)
-        : "",
+          ? globalThis.String(object.liquidation_price)
+          : "",
       markPrice: isSet(object.markPrice)
         ? globalThis.String(object.markPrice)
         : isSet(object.mark_price)
-        ? globalThis.String(object.mark_price)
-        : "",
+          ? globalThis.String(object.mark_price)
+          : "",
       aggregateReduceOnlyQuantity: isSet(object.aggregateReduceOnlyQuantity)
         ? globalThis.String(object.aggregateReduceOnlyQuantity)
         : isSet(object.aggregate_reduce_only_quantity)
-        ? globalThis.String(object.aggregate_reduce_only_quantity)
-        : "",
+          ? globalThis.String(object.aggregate_reduce_only_quantity)
+          : "",
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
       createdAt: isSet(object.createdAt)
         ? globalThis.Number(object.createdAt)
         : isSet(object.created_at)
-        ? globalThis.Number(object.created_at)
-        : 0,
+          ? globalThis.Number(object.created_at)
+          : 0,
       fundingLast: isSet(object.fundingLast)
         ? globalThis.String(object.fundingLast)
         : isSet(object.funding_last)
-        ? globalThis.String(object.funding_last)
-        : "",
+          ? globalThis.String(object.funding_last)
+          : "",
       fundingSum: isSet(object.fundingSum)
         ? globalThis.String(object.fundingSum)
         : isSet(object.funding_sum)
-        ? globalThis.String(object.funding_sum)
-        : "",
+          ? globalThis.String(object.funding_sum)
+          : "",
       cumulativeFundingEntry: isSet(object.cumulativeFundingEntry)
         ? globalThis.String(object.cumulativeFundingEntry)
         : isSet(object.cumulative_funding_entry)
-        ? globalThis.String(object.cumulative_funding_entry)
-        : "",
-      effectiveCumulativeFundingEntry: isSet(object.effectiveCumulativeFundingEntry)
+          ? globalThis.String(object.cumulative_funding_entry)
+          : "",
+      effectiveCumulativeFundingEntry: isSet(
+        object.effectiveCumulativeFundingEntry,
+      )
         ? globalThis.String(object.effectiveCumulativeFundingEntry)
         : isSet(object.effective_cumulative_funding_entry)
-        ? globalThis.String(object.effective_cumulative_funding_entry)
-        : "",
+          ? globalThis.String(object.effective_cumulative_funding_entry)
+          : "",
     };
   },
 
@@ -6384,15 +6918,20 @@ export const DerivativePosition: MessageFns<DerivativePosition> = {
       obj.cumulativeFundingEntry = message.cumulativeFundingEntry;
     }
     if (message.effectiveCumulativeFundingEntry !== "") {
-      obj.effectiveCumulativeFundingEntry = message.effectiveCumulativeFundingEntry;
+      obj.effectiveCumulativeFundingEntry =
+        message.effectiveCumulativeFundingEntry;
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativePosition>, I>>(base?: I): DerivativePosition {
+  create<I extends Exact<DeepPartial<DerivativePosition>, I>>(
+    base?: I,
+  ): DerivativePosition {
     return DerivativePosition.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativePosition>, I>>(object: I): DerivativePosition {
+  fromPartial<I extends Exact<DeepPartial<DerivativePosition>, I>>(
+    object: I,
+  ): DerivativePosition {
     const message = createBaseDerivativePosition();
     message.ticker = object.ticker ?? "";
     message.marketId = object.marketId ?? "";
@@ -6403,13 +6942,15 @@ export const DerivativePosition: MessageFns<DerivativePosition> = {
     message.margin = object.margin ?? "";
     message.liquidationPrice = object.liquidationPrice ?? "";
     message.markPrice = object.markPrice ?? "";
-    message.aggregateReduceOnlyQuantity = object.aggregateReduceOnlyQuantity ?? "";
+    message.aggregateReduceOnlyQuantity =
+      object.aggregateReduceOnlyQuantity ?? "";
     message.updatedAt = object.updatedAt ?? 0;
     message.createdAt = object.createdAt ?? 0;
     message.fundingLast = object.fundingLast ?? "";
     message.fundingSum = object.fundingSum ?? "";
     message.cumulativeFundingEntry = object.cumulativeFundingEntry ?? "";
-    message.effectiveCumulativeFundingEntry = object.effectiveCumulativeFundingEntry ?? "";
+    message.effectiveCumulativeFundingEntry =
+      object.effectiveCumulativeFundingEntry ?? "";
     return message;
   },
 };
@@ -6430,7 +6971,10 @@ function createBasePositionsV2Request(): PositionsV2Request {
 }
 
 export const PositionsV2Request: MessageFns<PositionsV2Request> = {
-  encode(message: PositionsV2Request, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PositionsV2Request,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -6464,8 +7008,12 @@ export const PositionsV2Request: MessageFns<PositionsV2Request> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PositionsV2Request {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PositionsV2Request {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePositionsV2Request();
     while (reader.pos < end) {
@@ -6565,41 +7113,43 @@ export const PositionsV2Request: MessageFns<PositionsV2Request> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       startTime: isSet(object.startTime)
         ? globalThis.Number(object.startTime)
         : isSet(object.start_time)
-        ? globalThis.Number(object.start_time)
-        : 0,
+          ? globalThis.Number(object.start_time)
+          : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
+        : "",
       subaccountTotalPositions: isSet(object.subaccountTotalPositions)
         ? globalThis.Boolean(object.subaccountTotalPositions)
         : isSet(object.subaccount_total_positions)
-        ? globalThis.Boolean(object.subaccount_total_positions)
-        : false,
+          ? globalThis.Boolean(object.subaccount_total_positions)
+          : false,
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -6638,10 +7188,14 @@ export const PositionsV2Request: MessageFns<PositionsV2Request> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PositionsV2Request>, I>>(base?: I): PositionsV2Request {
+  create<I extends Exact<DeepPartial<PositionsV2Request>, I>>(
+    base?: I,
+  ): PositionsV2Request {
     return PositionsV2Request.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PositionsV2Request>, I>>(object: I): PositionsV2Request {
+  fromPartial<I extends Exact<DeepPartial<PositionsV2Request>, I>>(
+    object: I,
+  ): PositionsV2Request {
     const message = createBasePositionsV2Request();
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
@@ -6662,7 +7216,10 @@ function createBasePositionsV2Response(): PositionsV2Response {
 }
 
 export const PositionsV2Response: MessageFns<PositionsV2Response> = {
-  encode(message: PositionsV2Response, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PositionsV2Response,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.positions) {
       DerivativePositionV2.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -6672,8 +7229,12 @@ export const PositionsV2Response: MessageFns<PositionsV2Response> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PositionsV2Response {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PositionsV2Response {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePositionsV2Response();
     while (reader.pos < end) {
@@ -6684,7 +7245,9 @@ export const PositionsV2Response: MessageFns<PositionsV2Response> = {
             break;
           }
 
-          message.positions.push(DerivativePositionV2.decode(reader, reader.uint32()));
+          message.positions.push(
+            DerivativePositionV2.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 2: {
@@ -6716,7 +7279,9 @@ export const PositionsV2Response: MessageFns<PositionsV2Response> = {
   toJSON(message: PositionsV2Response): unknown {
     const obj: any = {};
     if (message.positions?.length) {
-      obj.positions = message.positions.map((e) => DerivativePositionV2.toJSON(e));
+      obj.positions = message.positions.map((e) =>
+        DerivativePositionV2.toJSON(e),
+      );
     }
     if (message.paging !== undefined) {
       obj.paging = Paging.toJSON(message.paging);
@@ -6724,15 +7289,21 @@ export const PositionsV2Response: MessageFns<PositionsV2Response> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PositionsV2Response>, I>>(base?: I): PositionsV2Response {
+  create<I extends Exact<DeepPartial<PositionsV2Response>, I>>(
+    base?: I,
+  ): PositionsV2Response {
     return PositionsV2Response.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PositionsV2Response>, I>>(object: I): PositionsV2Response {
+  fromPartial<I extends Exact<DeepPartial<PositionsV2Response>, I>>(
+    object: I,
+  ): PositionsV2Response {
     const message = createBasePositionsV2Response();
-    message.positions = object.positions?.map((e) => DerivativePositionV2.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
+    message.positions =
+      object.positions?.map((e) => DerivativePositionV2.fromPartial(e)) || [];
+    message.paging =
+      object.paging !== undefined && object.paging !== null
+        ? Paging.fromPartial(object.paging)
+        : undefined;
     return message;
   },
 };
@@ -6759,7 +7330,10 @@ function createBaseDerivativePositionV2(): DerivativePositionV2 {
 }
 
 export const DerivativePositionV2: MessageFns<DerivativePositionV2> = {
-  encode(message: DerivativePositionV2, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativePositionV2,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.ticker !== "") {
       writer.uint32(10).string(message.ticker);
     }
@@ -6811,8 +7385,12 @@ export const DerivativePositionV2: MessageFns<DerivativePositionV2> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativePositionV2 {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DerivativePositionV2 {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativePositionV2();
     while (reader.pos < end) {
@@ -6961,57 +7539,63 @@ export const DerivativePositionV2: MessageFns<DerivativePositionV2> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
+          ? globalThis.String(object.subaccount_id)
+          : "",
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
         : "",
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       entryPrice: isSet(object.entryPrice)
         ? globalThis.String(object.entryPrice)
         : isSet(object.entry_price)
-        ? globalThis.String(object.entry_price)
-        : "",
+          ? globalThis.String(object.entry_price)
+          : "",
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
       liquidationPrice: isSet(object.liquidationPrice)
         ? globalThis.String(object.liquidationPrice)
         : isSet(object.liquidation_price)
-        ? globalThis.String(object.liquidation_price)
-        : "",
+          ? globalThis.String(object.liquidation_price)
+          : "",
       markPrice: isSet(object.markPrice)
         ? globalThis.String(object.markPrice)
         : isSet(object.mark_price)
-        ? globalThis.String(object.mark_price)
-        : "",
+          ? globalThis.String(object.mark_price)
+          : "",
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
       denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
       fundingLast: isSet(object.fundingLast)
         ? globalThis.String(object.fundingLast)
         : isSet(object.funding_last)
-        ? globalThis.String(object.funding_last)
-        : "",
+          ? globalThis.String(object.funding_last)
+          : "",
       fundingSum: isSet(object.fundingSum)
         ? globalThis.String(object.fundingSum)
         : isSet(object.funding_sum)
-        ? globalThis.String(object.funding_sum)
-        : "",
+          ? globalThis.String(object.funding_sum)
+          : "",
       cumulativeFundingEntry: isSet(object.cumulativeFundingEntry)
         ? globalThis.String(object.cumulativeFundingEntry)
         : isSet(object.cumulative_funding_entry)
-        ? globalThis.String(object.cumulative_funding_entry)
-        : "",
-      effectiveCumulativeFundingEntry: isSet(object.effectiveCumulativeFundingEntry)
+          ? globalThis.String(object.cumulative_funding_entry)
+          : "",
+      effectiveCumulativeFundingEntry: isSet(
+        object.effectiveCumulativeFundingEntry,
+      )
         ? globalThis.String(object.effectiveCumulativeFundingEntry)
         : isSet(object.effective_cumulative_funding_entry)
-        ? globalThis.String(object.effective_cumulative_funding_entry)
-        : "",
+          ? globalThis.String(object.effective_cumulative_funding_entry)
+          : "",
       upnl: isSet(object.upnl) ? globalThis.String(object.upnl) : "",
     };
   },
@@ -7061,7 +7645,8 @@ export const DerivativePositionV2: MessageFns<DerivativePositionV2> = {
       obj.cumulativeFundingEntry = message.cumulativeFundingEntry;
     }
     if (message.effectiveCumulativeFundingEntry !== "") {
-      obj.effectiveCumulativeFundingEntry = message.effectiveCumulativeFundingEntry;
+      obj.effectiveCumulativeFundingEntry =
+        message.effectiveCumulativeFundingEntry;
     }
     if (message.upnl !== "") {
       obj.upnl = message.upnl;
@@ -7069,10 +7654,14 @@ export const DerivativePositionV2: MessageFns<DerivativePositionV2> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativePositionV2>, I>>(base?: I): DerivativePositionV2 {
+  create<I extends Exact<DeepPartial<DerivativePositionV2>, I>>(
+    base?: I,
+  ): DerivativePositionV2 {
     return DerivativePositionV2.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativePositionV2>, I>>(object: I): DerivativePositionV2 {
+  fromPartial<I extends Exact<DeepPartial<DerivativePositionV2>, I>>(
+    object: I,
+  ): DerivativePositionV2 {
     const message = createBaseDerivativePositionV2();
     message.ticker = object.ticker ?? "";
     message.marketId = object.marketId ?? "";
@@ -7088,7 +7677,8 @@ export const DerivativePositionV2: MessageFns<DerivativePositionV2> = {
     message.fundingLast = object.fundingLast ?? "";
     message.fundingSum = object.fundingSum ?? "";
     message.cumulativeFundingEntry = object.cumulativeFundingEntry ?? "";
-    message.effectiveCumulativeFundingEntry = object.effectiveCumulativeFundingEntry ?? "";
+    message.effectiveCumulativeFundingEntry =
+      object.effectiveCumulativeFundingEntry ?? "";
     message.upnl = object.upnl ?? "";
     return message;
   },
@@ -7098,166 +7688,205 @@ function createBaseLiquidablePositionsRequest(): LiquidablePositionsRequest {
   return { marketId: "", skip: 0, limit: 0 };
 }
 
-export const LiquidablePositionsRequest: MessageFns<LiquidablePositionsRequest> = {
-  encode(message: LiquidablePositionsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.skip !== 0) {
-      writer.uint32(16).uint64(message.skip);
-    }
-    if (message.limit !== 0) {
-      writer.uint32(24).sint32(message.limit);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): LiquidablePositionsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLiquidablePositionsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.skip = longToNumber(reader.uint64());
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.limit = reader.sint32();
-          continue;
-        }
+export const LiquidablePositionsRequest: MessageFns<LiquidablePositionsRequest> =
+  {
+    encode(
+      message: LiquidablePositionsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.skip !== 0) {
+        writer.uint32(16).uint64(message.skip);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.limit !== 0) {
+        writer.uint32(24).sint32(message.limit);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): LiquidablePositionsRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
-      limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): LiquidablePositionsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseLiquidablePositionsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: LiquidablePositionsRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.skip !== 0) {
-      obj.skip = Math.round(message.skip);
-    }
-    if (message.limit !== 0) {
-      obj.limit = Math.round(message.limit);
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<LiquidablePositionsRequest>, I>>(base?: I): LiquidablePositionsRequest {
-    return LiquidablePositionsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<LiquidablePositionsRequest>, I>>(object: I): LiquidablePositionsRequest {
-    const message = createBaseLiquidablePositionsRequest();
-    message.marketId = object.marketId ?? "";
-    message.skip = object.skip ?? 0;
-    message.limit = object.limit ?? 0;
-    return message;
-  },
-};
+            message.skip = longToNumber(reader.uint64());
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.limit = reader.sint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): LiquidablePositionsRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
+        limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
+      };
+    },
+
+    toJSON(message: LiquidablePositionsRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.skip !== 0) {
+        obj.skip = Math.round(message.skip);
+      }
+      if (message.limit !== 0) {
+        obj.limit = Math.round(message.limit);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<LiquidablePositionsRequest>, I>>(
+      base?: I,
+    ): LiquidablePositionsRequest {
+      return LiquidablePositionsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<LiquidablePositionsRequest>, I>>(
+      object: I,
+    ): LiquidablePositionsRequest {
+      const message = createBaseLiquidablePositionsRequest();
+      message.marketId = object.marketId ?? "";
+      message.skip = object.skip ?? 0;
+      message.limit = object.limit ?? 0;
+      return message;
+    },
+  };
 
 function createBaseLiquidablePositionsResponse(): LiquidablePositionsResponse {
   return { positions: [] };
 }
 
-export const LiquidablePositionsResponse: MessageFns<LiquidablePositionsResponse> = {
-  encode(message: LiquidablePositionsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.positions) {
-      DerivativePosition.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const LiquidablePositionsResponse: MessageFns<LiquidablePositionsResponse> =
+  {
+    encode(
+      message: LiquidablePositionsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.positions) {
+        DerivativePosition.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): LiquidablePositionsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseLiquidablePositionsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): LiquidablePositionsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseLiquidablePositionsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.positions.push(
+              DerivativePosition.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.positions.push(DerivativePosition.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): LiquidablePositionsResponse {
+      return {
+        positions: globalThis.Array.isArray(object?.positions)
+          ? object.positions.map((e: any) => DerivativePosition.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: LiquidablePositionsResponse): unknown {
+      const obj: any = {};
+      if (message.positions?.length) {
+        obj.positions = message.positions.map((e) =>
+          DerivativePosition.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): LiquidablePositionsResponse {
-    return {
-      positions: globalThis.Array.isArray(object?.positions)
-        ? object.positions.map((e: any) => DerivativePosition.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: LiquidablePositionsResponse): unknown {
-    const obj: any = {};
-    if (message.positions?.length) {
-      obj.positions = message.positions.map((e) => DerivativePosition.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<LiquidablePositionsResponse>, I>>(base?: I): LiquidablePositionsResponse {
-    return LiquidablePositionsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<LiquidablePositionsResponse>, I>>(object: I): LiquidablePositionsResponse {
-    const message = createBaseLiquidablePositionsResponse();
-    message.positions = object.positions?.map((e) => DerivativePosition.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<LiquidablePositionsResponse>, I>>(
+      base?: I,
+    ): LiquidablePositionsResponse {
+      return LiquidablePositionsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<LiquidablePositionsResponse>, I>>(
+      object: I,
+    ): LiquidablePositionsResponse {
+      const message = createBaseLiquidablePositionsResponse();
+      message.positions =
+        object.positions?.map((e) => DerivativePosition.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseFundingPaymentsRequest(): FundingPaymentsRequest {
-  return { subaccountId: "", marketId: "", skip: 0, limit: 0, endTime: 0, marketIds: [] };
+  return {
+    subaccountId: "",
+    marketId: "",
+    skip: 0,
+    limit: 0,
+    endTime: 0,
+    marketIds: [],
+  };
 }
 
 export const FundingPaymentsRequest: MessageFns<FundingPaymentsRequest> = {
-  encode(message: FundingPaymentsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FundingPaymentsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -7279,8 +7908,12 @@ export const FundingPaymentsRequest: MessageFns<FundingPaymentsRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): FundingPaymentsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): FundingPaymentsRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFundingPaymentsRequest();
     while (reader.pos < end) {
@@ -7348,25 +7981,25 @@ export const FundingPaymentsRequest: MessageFns<FundingPaymentsRequest> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -7393,10 +8026,14 @@ export const FundingPaymentsRequest: MessageFns<FundingPaymentsRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FundingPaymentsRequest>, I>>(base?: I): FundingPaymentsRequest {
+  create<I extends Exact<DeepPartial<FundingPaymentsRequest>, I>>(
+    base?: I,
+  ): FundingPaymentsRequest {
     return FundingPaymentsRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FundingPaymentsRequest>, I>>(object: I): FundingPaymentsRequest {
+  fromPartial<I extends Exact<DeepPartial<FundingPaymentsRequest>, I>>(
+    object: I,
+  ): FundingPaymentsRequest {
     const message = createBaseFundingPaymentsRequest();
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
@@ -7413,7 +8050,10 @@ function createBaseFundingPaymentsResponse(): FundingPaymentsResponse {
 }
 
 export const FundingPaymentsResponse: MessageFns<FundingPaymentsResponse> = {
-  encode(message: FundingPaymentsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FundingPaymentsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.payments) {
       FundingPayment.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -7423,8 +8063,12 @@ export const FundingPaymentsResponse: MessageFns<FundingPaymentsResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): FundingPaymentsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): FundingPaymentsResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFundingPaymentsResponse();
     while (reader.pos < end) {
@@ -7475,15 +8119,21 @@ export const FundingPaymentsResponse: MessageFns<FundingPaymentsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FundingPaymentsResponse>, I>>(base?: I): FundingPaymentsResponse {
+  create<I extends Exact<DeepPartial<FundingPaymentsResponse>, I>>(
+    base?: I,
+  ): FundingPaymentsResponse {
     return FundingPaymentsResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FundingPaymentsResponse>, I>>(object: I): FundingPaymentsResponse {
+  fromPartial<I extends Exact<DeepPartial<FundingPaymentsResponse>, I>>(
+    object: I,
+  ): FundingPaymentsResponse {
     const message = createBaseFundingPaymentsResponse();
-    message.payments = object.payments?.map((e) => FundingPayment.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
+    message.payments =
+      object.payments?.map((e) => FundingPayment.fromPartial(e)) || [];
+    message.paging =
+      object.paging !== undefined && object.paging !== null
+        ? Paging.fromPartial(object.paging)
+        : undefined;
     return message;
   },
 };
@@ -7493,7 +8143,10 @@ function createBaseFundingPayment(): FundingPayment {
 }
 
 export const FundingPayment: MessageFns<FundingPayment> = {
-  encode(message: FundingPayment, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FundingPayment,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -7510,7 +8163,8 @@ export const FundingPayment: MessageFns<FundingPayment> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): FundingPayment {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFundingPayment();
     while (reader.pos < end) {
@@ -7562,15 +8216,17 @@ export const FundingPayment: MessageFns<FundingPayment> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -7591,10 +8247,14 @@ export const FundingPayment: MessageFns<FundingPayment> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FundingPayment>, I>>(base?: I): FundingPayment {
+  create<I extends Exact<DeepPartial<FundingPayment>, I>>(
+    base?: I,
+  ): FundingPayment {
     return FundingPayment.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FundingPayment>, I>>(object: I): FundingPayment {
+  fromPartial<I extends Exact<DeepPartial<FundingPayment>, I>>(
+    object: I,
+  ): FundingPayment {
     const message = createBaseFundingPayment();
     message.marketId = object.marketId ?? "";
     message.subaccountId = object.subaccountId ?? "";
@@ -7609,7 +8269,10 @@ function createBaseFundingRatesRequest(): FundingRatesRequest {
 }
 
 export const FundingRatesRequest: MessageFns<FundingRatesRequest> = {
-  encode(message: FundingRatesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FundingRatesRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -7625,8 +8288,12 @@ export const FundingRatesRequest: MessageFns<FundingRatesRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): FundingRatesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): FundingRatesRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFundingRatesRequest();
     while (reader.pos < end) {
@@ -7678,15 +8345,15 @@ export const FundingRatesRequest: MessageFns<FundingRatesRequest> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
     };
   },
 
@@ -7707,10 +8374,14 @@ export const FundingRatesRequest: MessageFns<FundingRatesRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FundingRatesRequest>, I>>(base?: I): FundingRatesRequest {
+  create<I extends Exact<DeepPartial<FundingRatesRequest>, I>>(
+    base?: I,
+  ): FundingRatesRequest {
     return FundingRatesRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FundingRatesRequest>, I>>(object: I): FundingRatesRequest {
+  fromPartial<I extends Exact<DeepPartial<FundingRatesRequest>, I>>(
+    object: I,
+  ): FundingRatesRequest {
     const message = createBaseFundingRatesRequest();
     message.marketId = object.marketId ?? "";
     message.skip = object.skip ?? 0;
@@ -7725,7 +8396,10 @@ function createBaseFundingRatesResponse(): FundingRatesResponse {
 }
 
 export const FundingRatesResponse: MessageFns<FundingRatesResponse> = {
-  encode(message: FundingRatesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FundingRatesResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.fundingRates) {
       FundingRate.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -7735,8 +8409,12 @@ export const FundingRatesResponse: MessageFns<FundingRatesResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): FundingRatesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): FundingRatesResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFundingRatesResponse();
     while (reader.pos < end) {
@@ -7747,7 +8425,9 @@ export const FundingRatesResponse: MessageFns<FundingRatesResponse> = {
             break;
           }
 
-          message.fundingRates.push(FundingRate.decode(reader, reader.uint32()));
+          message.fundingRates.push(
+            FundingRate.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 2: {
@@ -7772,8 +8452,8 @@ export const FundingRatesResponse: MessageFns<FundingRatesResponse> = {
       fundingRates: globalThis.Array.isArray(object?.fundingRates)
         ? object.fundingRates.map((e: any) => FundingRate.fromJSON(e))
         : globalThis.Array.isArray(object?.funding_rates)
-        ? object.funding_rates.map((e: any) => FundingRate.fromJSON(e))
-        : [],
+          ? object.funding_rates.map((e: any) => FundingRate.fromJSON(e))
+          : [],
       paging: isSet(object.paging) ? Paging.fromJSON(object.paging) : undefined,
     };
   },
@@ -7789,15 +8469,21 @@ export const FundingRatesResponse: MessageFns<FundingRatesResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FundingRatesResponse>, I>>(base?: I): FundingRatesResponse {
+  create<I extends Exact<DeepPartial<FundingRatesResponse>, I>>(
+    base?: I,
+  ): FundingRatesResponse {
     return FundingRatesResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FundingRatesResponse>, I>>(object: I): FundingRatesResponse {
+  fromPartial<I extends Exact<DeepPartial<FundingRatesResponse>, I>>(
+    object: I,
+  ): FundingRatesResponse {
     const message = createBaseFundingRatesResponse();
-    message.fundingRates = object.fundingRates?.map((e) => FundingRate.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
+    message.fundingRates =
+      object.fundingRates?.map((e) => FundingRate.fromPartial(e)) || [];
+    message.paging =
+      object.paging !== undefined && object.paging !== null
+        ? Paging.fromPartial(object.paging)
+        : undefined;
     return message;
   },
 };
@@ -7807,7 +8493,10 @@ function createBaseFundingRate(): FundingRate {
 }
 
 export const FundingRate: MessageFns<FundingRate> = {
-  encode(message: FundingRate, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FundingRate,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -7821,7 +8510,8 @@ export const FundingRate: MessageFns<FundingRate> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): FundingRate {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFundingRate();
     while (reader.pos < end) {
@@ -7865,10 +8555,12 @@ export const FundingRate: MessageFns<FundingRate> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       rate: isSet(object.rate) ? globalThis.String(object.rate) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -7889,7 +8581,9 @@ export const FundingRate: MessageFns<FundingRate> = {
   create<I extends Exact<DeepPartial<FundingRate>, I>>(base?: I): FundingRate {
     return FundingRate.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FundingRate>, I>>(object: I): FundingRate {
+  fromPartial<I extends Exact<DeepPartial<FundingRate>, I>>(
+    object: I,
+  ): FundingRate {
     const message = createBaseFundingRate();
     message.marketId = object.marketId ?? "";
     message.rate = object.rate ?? "";
@@ -7899,11 +8593,20 @@ export const FundingRate: MessageFns<FundingRate> = {
 };
 
 function createBaseStreamPositionsRequest(): StreamPositionsRequest {
-  return { subaccountId: "", marketId: "", marketIds: [], subaccountIds: [], accountAddress: "" };
+  return {
+    subaccountId: "",
+    marketId: "",
+    marketIds: [],
+    subaccountIds: [],
+    accountAddress: "",
+  };
 }
 
 export const StreamPositionsRequest: MessageFns<StreamPositionsRequest> = {
-  encode(message: StreamPositionsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamPositionsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -7922,8 +8625,12 @@ export const StreamPositionsRequest: MessageFns<StreamPositionsRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamPositionsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamPositionsRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamPositionsRequest();
     while (reader.pos < end) {
@@ -7983,28 +8690,28 @@ export const StreamPositionsRequest: MessageFns<StreamPositionsRequest> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
       subaccountIds: globalThis.Array.isArray(object?.subaccountIds)
         ? object.subaccountIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.subaccount_ids)
-        ? object.subaccount_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.subaccount_ids.map((e: any) => globalThis.String(e))
+          : [],
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -8028,10 +8735,14 @@ export const StreamPositionsRequest: MessageFns<StreamPositionsRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamPositionsRequest>, I>>(base?: I): StreamPositionsRequest {
+  create<I extends Exact<DeepPartial<StreamPositionsRequest>, I>>(
+    base?: I,
+  ): StreamPositionsRequest {
     return StreamPositionsRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamPositionsRequest>, I>>(object: I): StreamPositionsRequest {
+  fromPartial<I extends Exact<DeepPartial<StreamPositionsRequest>, I>>(
+    object: I,
+  ): StreamPositionsRequest {
     const message = createBaseStreamPositionsRequest();
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
@@ -8047,9 +8758,15 @@ function createBaseStreamPositionsResponse(): StreamPositionsResponse {
 }
 
 export const StreamPositionsResponse: MessageFns<StreamPositionsResponse> = {
-  encode(message: StreamPositionsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamPositionsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.position !== undefined) {
-      DerivativePosition.encode(message.position, writer.uint32(10).fork()).join();
+      DerivativePosition.encode(
+        message.position,
+        writer.uint32(10).fork(),
+      ).join();
     }
     if (message.timestamp !== 0) {
       writer.uint32(16).sint64(message.timestamp);
@@ -8057,8 +8774,12 @@ export const StreamPositionsResponse: MessageFns<StreamPositionsResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamPositionsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamPositionsResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamPositionsResponse();
     while (reader.pos < end) {
@@ -8091,8 +8812,12 @@ export const StreamPositionsResponse: MessageFns<StreamPositionsResponse> = {
 
   fromJSON(object: any): StreamPositionsResponse {
     return {
-      position: isSet(object.position) ? DerivativePosition.fromJSON(object.position) : undefined,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      position: isSet(object.position)
+        ? DerivativePosition.fromJSON(object.position)
+        : undefined,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -8107,25 +8832,39 @@ export const StreamPositionsResponse: MessageFns<StreamPositionsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamPositionsResponse>, I>>(base?: I): StreamPositionsResponse {
+  create<I extends Exact<DeepPartial<StreamPositionsResponse>, I>>(
+    base?: I,
+  ): StreamPositionsResponse {
     return StreamPositionsResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamPositionsResponse>, I>>(object: I): StreamPositionsResponse {
+  fromPartial<I extends Exact<DeepPartial<StreamPositionsResponse>, I>>(
+    object: I,
+  ): StreamPositionsResponse {
     const message = createBaseStreamPositionsResponse();
-    message.position = (object.position !== undefined && object.position !== null)
-      ? DerivativePosition.fromPartial(object.position)
-      : undefined;
+    message.position =
+      object.position !== undefined && object.position !== null
+        ? DerivativePosition.fromPartial(object.position)
+        : undefined;
     message.timestamp = object.timestamp ?? 0;
     return message;
   },
 };
 
 function createBaseStreamPositionsV2Request(): StreamPositionsV2Request {
-  return { subaccountId: "", marketId: "", marketIds: [], subaccountIds: [], accountAddress: "" };
+  return {
+    subaccountId: "",
+    marketId: "",
+    marketIds: [],
+    subaccountIds: [],
+    accountAddress: "",
+  };
 }
 
 export const StreamPositionsV2Request: MessageFns<StreamPositionsV2Request> = {
-  encode(message: StreamPositionsV2Request, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamPositionsV2Request,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -8144,8 +8883,12 @@ export const StreamPositionsV2Request: MessageFns<StreamPositionsV2Request> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamPositionsV2Request {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamPositionsV2Request {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamPositionsV2Request();
     while (reader.pos < end) {
@@ -8205,28 +8948,28 @@ export const StreamPositionsV2Request: MessageFns<StreamPositionsV2Request> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
       subaccountIds: globalThis.Array.isArray(object?.subaccountIds)
         ? object.subaccountIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.subaccount_ids)
-        ? object.subaccount_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.subaccount_ids.map((e: any) => globalThis.String(e))
+          : [],
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -8250,10 +8993,14 @@ export const StreamPositionsV2Request: MessageFns<StreamPositionsV2Request> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamPositionsV2Request>, I>>(base?: I): StreamPositionsV2Request {
+  create<I extends Exact<DeepPartial<StreamPositionsV2Request>, I>>(
+    base?: I,
+  ): StreamPositionsV2Request {
     return StreamPositionsV2Request.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamPositionsV2Request>, I>>(object: I): StreamPositionsV2Request {
+  fromPartial<I extends Exact<DeepPartial<StreamPositionsV2Request>, I>>(
+    object: I,
+  ): StreamPositionsV2Request {
     const message = createBaseStreamPositionsV2Request();
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
@@ -8268,99 +9015,122 @@ function createBaseStreamPositionsV2Response(): StreamPositionsV2Response {
   return { position: undefined, timestamp: 0, operationType: "" };
 }
 
-export const StreamPositionsV2Response: MessageFns<StreamPositionsV2Response> = {
-  encode(message: StreamPositionsV2Response, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.position !== undefined) {
-      DerivativePositionV2.encode(message.position, writer.uint32(10).fork()).join();
-    }
-    if (message.timestamp !== 0) {
-      writer.uint32(16).sint64(message.timestamp);
-    }
-    if (message.operationType !== "") {
-      writer.uint32(26).string(message.operationType);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamPositionsV2Response {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamPositionsV2Response();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.position = DerivativePositionV2.decode(reader, reader.uint32());
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.timestamp = longToNumber(reader.sint64());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.operationType = reader.string();
-          continue;
-        }
+export const StreamPositionsV2Response: MessageFns<StreamPositionsV2Response> =
+  {
+    encode(
+      message: StreamPositionsV2Response,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.position !== undefined) {
+        DerivativePositionV2.encode(
+          message.position,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.timestamp !== 0) {
+        writer.uint32(16).sint64(message.timestamp);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.operationType !== "") {
+        writer.uint32(26).string(message.operationType);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): StreamPositionsV2Response {
-    return {
-      position: isSet(object.position) ? DerivativePositionV2.fromJSON(object.position) : undefined,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-      operationType: isSet(object.operationType)
-        ? globalThis.String(object.operationType)
-        : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamPositionsV2Response {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamPositionsV2Response();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamPositionsV2Response): unknown {
-    const obj: any = {};
-    if (message.position !== undefined) {
-      obj.position = DerivativePositionV2.toJSON(message.position);
-    }
-    if (message.timestamp !== 0) {
-      obj.timestamp = Math.round(message.timestamp);
-    }
-    if (message.operationType !== "") {
-      obj.operationType = message.operationType;
-    }
-    return obj;
-  },
+            message.position = DerivativePositionV2.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamPositionsV2Response>, I>>(base?: I): StreamPositionsV2Response {
-    return StreamPositionsV2Response.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamPositionsV2Response>, I>>(object: I): StreamPositionsV2Response {
-    const message = createBaseStreamPositionsV2Response();
-    message.position = (object.position !== undefined && object.position !== null)
-      ? DerivativePositionV2.fromPartial(object.position)
-      : undefined;
-    message.timestamp = object.timestamp ?? 0;
-    message.operationType = object.operationType ?? "";
-    return message;
-  },
-};
+            message.timestamp = longToNumber(reader.sint64());
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.operationType = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamPositionsV2Response {
+      return {
+        position: isSet(object.position)
+          ? DerivativePositionV2.fromJSON(object.position)
+          : undefined,
+        timestamp: isSet(object.timestamp)
+          ? globalThis.Number(object.timestamp)
+          : 0,
+        operationType: isSet(object.operationType)
+          ? globalThis.String(object.operationType)
+          : isSet(object.operation_type)
+            ? globalThis.String(object.operation_type)
+            : "",
+      };
+    },
+
+    toJSON(message: StreamPositionsV2Response): unknown {
+      const obj: any = {};
+      if (message.position !== undefined) {
+        obj.position = DerivativePositionV2.toJSON(message.position);
+      }
+      if (message.timestamp !== 0) {
+        obj.timestamp = Math.round(message.timestamp);
+      }
+      if (message.operationType !== "") {
+        obj.operationType = message.operationType;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamPositionsV2Response>, I>>(
+      base?: I,
+    ): StreamPositionsV2Response {
+      return StreamPositionsV2Response.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<StreamPositionsV2Response>, I>>(
+      object: I,
+    ): StreamPositionsV2Response {
+      const message = createBaseStreamPositionsV2Response();
+      message.position =
+        object.position !== undefined && object.position !== null
+          ? DerivativePositionV2.fromPartial(object.position)
+          : undefined;
+      message.timestamp = object.timestamp ?? 0;
+      message.operationType = object.operationType ?? "";
+      return message;
+    },
+  };
 
 function createBaseStreamOrdersRequest(): StreamOrdersRequest {
   return {
@@ -8382,7 +9152,10 @@ function createBaseStreamOrdersRequest(): StreamOrdersRequest {
 }
 
 export const StreamOrdersRequest: MessageFns<StreamOrdersRequest> = {
-  encode(message: StreamOrdersRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamOrdersRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -8428,8 +9201,12 @@ export const StreamOrdersRequest: MessageFns<StreamOrdersRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamOrdersRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamOrdersRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamOrdersRequest();
     while (reader.pos < end) {
@@ -8561,60 +9338,60 @@ export const StreamOrdersRequest: MessageFns<StreamOrdersRequest> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       orderSide: isSet(object.orderSide)
         ? globalThis.String(object.orderSide)
         : isSet(object.order_side)
-        ? globalThis.String(object.order_side)
-        : "",
+          ? globalThis.String(object.order_side)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       startTime: isSet(object.startTime)
         ? globalThis.Number(object.startTime)
         : isSet(object.start_time)
-        ? globalThis.Number(object.start_time)
-        : 0,
+          ? globalThis.Number(object.start_time)
+          : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
       isConditional: isSet(object.isConditional)
         ? globalThis.String(object.isConditional)
         : isSet(object.is_conditional)
-        ? globalThis.String(object.is_conditional)
-        : "",
+          ? globalThis.String(object.is_conditional)
+          : "",
       orderType: isSet(object.orderType)
         ? globalThis.String(object.orderType)
         : isSet(object.order_type)
-        ? globalThis.String(object.order_type)
-        : "",
+          ? globalThis.String(object.order_type)
+          : "",
       includeInactive: isSet(object.includeInactive)
         ? globalThis.Boolean(object.includeInactive)
         : isSet(object.include_inactive)
-        ? globalThis.Boolean(object.include_inactive)
-        : false,
+          ? globalThis.Boolean(object.include_inactive)
+          : false,
       subaccountTotalOrders: isSet(object.subaccountTotalOrders)
         ? globalThis.Boolean(object.subaccountTotalOrders)
         : isSet(object.subaccount_total_orders)
-        ? globalThis.Boolean(object.subaccount_total_orders)
-        : false,
+          ? globalThis.Boolean(object.subaccount_total_orders)
+          : false,
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -8666,10 +9443,14 @@ export const StreamOrdersRequest: MessageFns<StreamOrdersRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamOrdersRequest>, I>>(base?: I): StreamOrdersRequest {
+  create<I extends Exact<DeepPartial<StreamOrdersRequest>, I>>(
+    base?: I,
+  ): StreamOrdersRequest {
     return StreamOrdersRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamOrdersRequest>, I>>(object: I): StreamOrdersRequest {
+  fromPartial<I extends Exact<DeepPartial<StreamOrdersRequest>, I>>(
+    object: I,
+  ): StreamOrdersRequest {
     const message = createBaseStreamOrdersRequest();
     message.marketId = object.marketId ?? "";
     message.orderSide = object.orderSide ?? "";
@@ -8694,9 +9475,15 @@ function createBaseStreamOrdersResponse(): StreamOrdersResponse {
 }
 
 export const StreamOrdersResponse: MessageFns<StreamOrdersResponse> = {
-  encode(message: StreamOrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamOrdersResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.order !== undefined) {
-      DerivativeLimitOrder.encode(message.order, writer.uint32(10).fork()).join();
+      DerivativeLimitOrder.encode(
+        message.order,
+        writer.uint32(10).fork(),
+      ).join();
     }
     if (message.operationType !== "") {
       writer.uint32(18).string(message.operationType);
@@ -8707,8 +9494,12 @@ export const StreamOrdersResponse: MessageFns<StreamOrdersResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamOrdersResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamOrdersResponse();
     while (reader.pos < end) {
@@ -8749,13 +9540,17 @@ export const StreamOrdersResponse: MessageFns<StreamOrdersResponse> = {
 
   fromJSON(object: any): StreamOrdersResponse {
     return {
-      order: isSet(object.order) ? DerivativeLimitOrder.fromJSON(object.order) : undefined,
+      order: isSet(object.order)
+        ? DerivativeLimitOrder.fromJSON(object.order)
+        : undefined,
       operationType: isSet(object.operationType)
         ? globalThis.String(object.operationType)
         : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.operation_type)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -8773,14 +9568,19 @@ export const StreamOrdersResponse: MessageFns<StreamOrdersResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamOrdersResponse>, I>>(base?: I): StreamOrdersResponse {
+  create<I extends Exact<DeepPartial<StreamOrdersResponse>, I>>(
+    base?: I,
+  ): StreamOrdersResponse {
     return StreamOrdersResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamOrdersResponse>, I>>(object: I): StreamOrdersResponse {
+  fromPartial<I extends Exact<DeepPartial<StreamOrdersResponse>, I>>(
+    object: I,
+  ): StreamOrdersResponse {
     const message = createBaseStreamOrdersResponse();
-    message.order = (object.order !== undefined && object.order !== null)
-      ? DerivativeLimitOrder.fromPartial(object.order)
-      : undefined;
+    message.order =
+      object.order !== undefined && object.order !== null
+        ? DerivativeLimitOrder.fromPartial(object.order)
+        : undefined;
     message.operationType = object.operationType ?? "";
     message.timestamp = object.timestamp ?? 0;
     return message;
@@ -8808,7 +9608,10 @@ function createBaseTradesRequest(): TradesRequest {
 }
 
 export const TradesRequest: MessageFns<TradesRequest> = {
-  encode(message: TradesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TradesRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -8858,7 +9661,8 @@ export const TradesRequest: MessageFns<TradesRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TradesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTradesRequest();
     while (reader.pos < end) {
@@ -8998,62 +9802,64 @@ export const TradesRequest: MessageFns<TradesRequest> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       executionSide: isSet(object.executionSide)
         ? globalThis.String(object.executionSide)
         : isSet(object.execution_side)
-        ? globalThis.String(object.execution_side)
+          ? globalThis.String(object.execution_side)
+          : "",
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
         : "",
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       startTime: isSet(object.startTime)
         ? globalThis.Number(object.startTime)
         : isSet(object.start_time)
-        ? globalThis.Number(object.start_time)
-        : 0,
+          ? globalThis.Number(object.start_time)
+          : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
       subaccountIds: globalThis.Array.isArray(object?.subaccountIds)
         ? object.subaccountIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.subaccount_ids)
-        ? object.subaccount_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.subaccount_ids.map((e: any) => globalThis.String(e))
+          : [],
       executionTypes: globalThis.Array.isArray(object?.executionTypes)
         ? object.executionTypes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.execution_types)
-        ? object.execution_types.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.execution_types.map((e: any) => globalThis.String(e))
+          : [],
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
     };
   },
 
@@ -9107,10 +9913,14 @@ export const TradesRequest: MessageFns<TradesRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TradesRequest>, I>>(base?: I): TradesRequest {
+  create<I extends Exact<DeepPartial<TradesRequest>, I>>(
+    base?: I,
+  ): TradesRequest {
     return TradesRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TradesRequest>, I>>(object: I): TradesRequest {
+  fromPartial<I extends Exact<DeepPartial<TradesRequest>, I>>(
+    object: I,
+  ): TradesRequest {
     const message = createBaseTradesRequest();
     message.marketId = object.marketId ?? "";
     message.executionSide = object.executionSide ?? "";
@@ -9136,7 +9946,10 @@ function createBaseTradesResponse(): TradesResponse {
 }
 
 export const TradesResponse: MessageFns<TradesResponse> = {
-  encode(message: TradesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TradesResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.trades) {
       DerivativeTrade.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -9147,7 +9960,8 @@ export const TradesResponse: MessageFns<TradesResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TradesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTradesResponse();
     while (reader.pos < end) {
@@ -9198,15 +10012,21 @@ export const TradesResponse: MessageFns<TradesResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TradesResponse>, I>>(base?: I): TradesResponse {
+  create<I extends Exact<DeepPartial<TradesResponse>, I>>(
+    base?: I,
+  ): TradesResponse {
     return TradesResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TradesResponse>, I>>(object: I): TradesResponse {
+  fromPartial<I extends Exact<DeepPartial<TradesResponse>, I>>(
+    object: I,
+  ): TradesResponse {
     const message = createBaseTradesResponse();
-    message.trades = object.trades?.map((e) => DerivativeTrade.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
+    message.trades =
+      object.trades?.map((e) => DerivativeTrade.fromPartial(e)) || [];
+    message.paging =
+      object.paging !== undefined && object.paging !== null
+        ? Paging.fromPartial(object.paging)
+        : undefined;
     return message;
   },
 };
@@ -9231,7 +10051,10 @@ function createBaseDerivativeTrade(): DerivativeTrade {
 }
 
 export const DerivativeTrade: MessageFns<DerivativeTrade> = {
-  encode(message: DerivativeTrade, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativeTrade,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderHash !== "") {
       writer.uint32(10).string(message.orderHash);
     }
@@ -9248,7 +10071,10 @@ export const DerivativeTrade: MessageFns<DerivativeTrade> = {
       writer.uint32(40).bool(message.isLiquidation);
     }
     if (message.positionDelta !== undefined) {
-      PositionDelta.encode(message.positionDelta, writer.uint32(50).fork()).join();
+      PositionDelta.encode(
+        message.positionDelta,
+        writer.uint32(50).fork(),
+      ).join();
     }
     if (message.payout !== "") {
       writer.uint32(58).string(message.payout);
@@ -9278,7 +10104,8 @@ export const DerivativeTrade: MessageFns<DerivativeTrade> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DerivativeTrade {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativeTrade();
     while (reader.pos < end) {
@@ -9410,55 +10237,55 @@ export const DerivativeTrade: MessageFns<DerivativeTrade> = {
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       tradeExecutionType: isSet(object.tradeExecutionType)
         ? globalThis.String(object.tradeExecutionType)
         : isSet(object.trade_execution_type)
-        ? globalThis.String(object.trade_execution_type)
-        : "",
+          ? globalThis.String(object.trade_execution_type)
+          : "",
       isLiquidation: isSet(object.isLiquidation)
         ? globalThis.Boolean(object.isLiquidation)
         : isSet(object.is_liquidation)
-        ? globalThis.Boolean(object.is_liquidation)
-        : false,
+          ? globalThis.Boolean(object.is_liquidation)
+          : false,
       positionDelta: isSet(object.positionDelta)
         ? PositionDelta.fromJSON(object.positionDelta)
         : isSet(object.position_delta)
-        ? PositionDelta.fromJSON(object.position_delta)
-        : undefined,
+          ? PositionDelta.fromJSON(object.position_delta)
+          : undefined,
       payout: isSet(object.payout) ? globalThis.String(object.payout) : "",
       fee: isSet(object.fee) ? globalThis.String(object.fee) : "",
       executedAt: isSet(object.executedAt)
         ? globalThis.Number(object.executedAt)
         : isSet(object.executed_at)
-        ? globalThis.Number(object.executed_at)
-        : 0,
+          ? globalThis.Number(object.executed_at)
+          : 0,
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       executionSide: isSet(object.executionSide)
         ? globalThis.String(object.executionSide)
         : isSet(object.execution_side)
-        ? globalThis.String(object.execution_side)
-        : "",
+          ? globalThis.String(object.execution_side)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
       pnl: isSet(object.pnl) ? globalThis.String(object.pnl) : "",
     };
@@ -9511,19 +10338,24 @@ export const DerivativeTrade: MessageFns<DerivativeTrade> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativeTrade>, I>>(base?: I): DerivativeTrade {
+  create<I extends Exact<DeepPartial<DerivativeTrade>, I>>(
+    base?: I,
+  ): DerivativeTrade {
     return DerivativeTrade.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativeTrade>, I>>(object: I): DerivativeTrade {
+  fromPartial<I extends Exact<DeepPartial<DerivativeTrade>, I>>(
+    object: I,
+  ): DerivativeTrade {
     const message = createBaseDerivativeTrade();
     message.orderHash = object.orderHash ?? "";
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
     message.tradeExecutionType = object.tradeExecutionType ?? "";
     message.isLiquidation = object.isLiquidation ?? false;
-    message.positionDelta = (object.positionDelta !== undefined && object.positionDelta !== null)
-      ? PositionDelta.fromPartial(object.positionDelta)
-      : undefined;
+    message.positionDelta =
+      object.positionDelta !== undefined && object.positionDelta !== null
+        ? PositionDelta.fromPartial(object.positionDelta)
+        : undefined;
     message.payout = object.payout ?? "";
     message.fee = object.fee ?? "";
     message.executedAt = object.executedAt ?? 0;
@@ -9537,11 +10369,19 @@ export const DerivativeTrade: MessageFns<DerivativeTrade> = {
 };
 
 function createBasePositionDelta(): PositionDelta {
-  return { tradeDirection: "", executionPrice: "", executionQuantity: "", executionMargin: "" };
+  return {
+    tradeDirection: "",
+    executionPrice: "",
+    executionQuantity: "",
+    executionMargin: "",
+  };
 }
 
 export const PositionDelta: MessageFns<PositionDelta> = {
-  encode(message: PositionDelta, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PositionDelta,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.tradeDirection !== "") {
       writer.uint32(10).string(message.tradeDirection);
     }
@@ -9558,7 +10398,8 @@ export const PositionDelta: MessageFns<PositionDelta> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PositionDelta {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePositionDelta();
     while (reader.pos < end) {
@@ -9610,23 +10451,23 @@ export const PositionDelta: MessageFns<PositionDelta> = {
       tradeDirection: isSet(object.tradeDirection)
         ? globalThis.String(object.tradeDirection)
         : isSet(object.trade_direction)
-        ? globalThis.String(object.trade_direction)
-        : "",
+          ? globalThis.String(object.trade_direction)
+          : "",
       executionPrice: isSet(object.executionPrice)
         ? globalThis.String(object.executionPrice)
         : isSet(object.execution_price)
-        ? globalThis.String(object.execution_price)
-        : "",
+          ? globalThis.String(object.execution_price)
+          : "",
       executionQuantity: isSet(object.executionQuantity)
         ? globalThis.String(object.executionQuantity)
         : isSet(object.execution_quantity)
-        ? globalThis.String(object.execution_quantity)
-        : "",
+          ? globalThis.String(object.execution_quantity)
+          : "",
       executionMargin: isSet(object.executionMargin)
         ? globalThis.String(object.executionMargin)
         : isSet(object.execution_margin)
-        ? globalThis.String(object.execution_margin)
-        : "",
+          ? globalThis.String(object.execution_margin)
+          : "",
     };
   },
 
@@ -9647,10 +10488,14 @@ export const PositionDelta: MessageFns<PositionDelta> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PositionDelta>, I>>(base?: I): PositionDelta {
+  create<I extends Exact<DeepPartial<PositionDelta>, I>>(
+    base?: I,
+  ): PositionDelta {
     return PositionDelta.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PositionDelta>, I>>(object: I): PositionDelta {
+  fromPartial<I extends Exact<DeepPartial<PositionDelta>, I>>(
+    object: I,
+  ): PositionDelta {
     const message = createBasePositionDelta();
     message.tradeDirection = object.tradeDirection ?? "";
     message.executionPrice = object.executionPrice ?? "";
@@ -9681,7 +10526,10 @@ function createBaseTradesV2Request(): TradesV2Request {
 }
 
 export const TradesV2Request: MessageFns<TradesV2Request> = {
-  encode(message: TradesV2Request, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TradesV2Request,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -9731,7 +10579,8 @@ export const TradesV2Request: MessageFns<TradesV2Request> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TradesV2Request {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTradesV2Request();
     while (reader.pos < end) {
@@ -9871,62 +10720,64 @@ export const TradesV2Request: MessageFns<TradesV2Request> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       executionSide: isSet(object.executionSide)
         ? globalThis.String(object.executionSide)
         : isSet(object.execution_side)
-        ? globalThis.String(object.execution_side)
+          ? globalThis.String(object.execution_side)
+          : "",
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
         : "",
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       startTime: isSet(object.startTime)
         ? globalThis.Number(object.startTime)
         : isSet(object.start_time)
-        ? globalThis.Number(object.start_time)
-        : 0,
+          ? globalThis.Number(object.start_time)
+          : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
       subaccountIds: globalThis.Array.isArray(object?.subaccountIds)
         ? object.subaccountIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.subaccount_ids)
-        ? object.subaccount_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.subaccount_ids.map((e: any) => globalThis.String(e))
+          : [],
       executionTypes: globalThis.Array.isArray(object?.executionTypes)
         ? object.executionTypes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.execution_types)
-        ? object.execution_types.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.execution_types.map((e: any) => globalThis.String(e))
+          : [],
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
     };
   },
 
@@ -9980,10 +10831,14 @@ export const TradesV2Request: MessageFns<TradesV2Request> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TradesV2Request>, I>>(base?: I): TradesV2Request {
+  create<I extends Exact<DeepPartial<TradesV2Request>, I>>(
+    base?: I,
+  ): TradesV2Request {
     return TradesV2Request.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TradesV2Request>, I>>(object: I): TradesV2Request {
+  fromPartial<I extends Exact<DeepPartial<TradesV2Request>, I>>(
+    object: I,
+  ): TradesV2Request {
     const message = createBaseTradesV2Request();
     message.marketId = object.marketId ?? "";
     message.executionSide = object.executionSide ?? "";
@@ -10009,7 +10864,10 @@ function createBaseTradesV2Response(): TradesV2Response {
 }
 
 export const TradesV2Response: MessageFns<TradesV2Response> = {
-  encode(message: TradesV2Response, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TradesV2Response,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.trades) {
       DerivativeTrade.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -10020,7 +10878,8 @@ export const TradesV2Response: MessageFns<TradesV2Response> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TradesV2Response {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTradesV2Response();
     while (reader.pos < end) {
@@ -10071,15 +10930,21 @@ export const TradesV2Response: MessageFns<TradesV2Response> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TradesV2Response>, I>>(base?: I): TradesV2Response {
+  create<I extends Exact<DeepPartial<TradesV2Response>, I>>(
+    base?: I,
+  ): TradesV2Response {
     return TradesV2Response.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TradesV2Response>, I>>(object: I): TradesV2Response {
+  fromPartial<I extends Exact<DeepPartial<TradesV2Response>, I>>(
+    object: I,
+  ): TradesV2Response {
     const message = createBaseTradesV2Response();
-    message.trades = object.trades?.map((e) => DerivativeTrade.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
+    message.trades =
+      object.trades?.map((e) => DerivativeTrade.fromPartial(e)) || [];
+    message.paging =
+      object.paging !== undefined && object.paging !== null
+        ? Paging.fromPartial(object.paging)
+        : undefined;
     return message;
   },
 };
@@ -10105,7 +10970,10 @@ function createBaseStreamTradesRequest(): StreamTradesRequest {
 }
 
 export const StreamTradesRequest: MessageFns<StreamTradesRequest> = {
-  encode(message: StreamTradesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamTradesRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -10154,8 +11022,12 @@ export const StreamTradesRequest: MessageFns<StreamTradesRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamTradesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamTradesRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamTradesRequest();
     while (reader.pos < end) {
@@ -10295,62 +11167,64 @@ export const StreamTradesRequest: MessageFns<StreamTradesRequest> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       executionSide: isSet(object.executionSide)
         ? globalThis.String(object.executionSide)
         : isSet(object.execution_side)
-        ? globalThis.String(object.execution_side)
+          ? globalThis.String(object.execution_side)
+          : "",
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
         : "",
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       startTime: isSet(object.startTime)
         ? globalThis.Number(object.startTime)
         : isSet(object.start_time)
-        ? globalThis.Number(object.start_time)
-        : 0,
+          ? globalThis.Number(object.start_time)
+          : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
       subaccountIds: globalThis.Array.isArray(object?.subaccountIds)
         ? object.subaccountIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.subaccount_ids)
-        ? object.subaccount_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.subaccount_ids.map((e: any) => globalThis.String(e))
+          : [],
       executionTypes: globalThis.Array.isArray(object?.executionTypes)
         ? object.executionTypes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.execution_types)
-        ? object.execution_types.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.execution_types.map((e: any) => globalThis.String(e))
+          : [],
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
     };
   },
 
@@ -10404,10 +11278,14 @@ export const StreamTradesRequest: MessageFns<StreamTradesRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamTradesRequest>, I>>(base?: I): StreamTradesRequest {
+  create<I extends Exact<DeepPartial<StreamTradesRequest>, I>>(
+    base?: I,
+  ): StreamTradesRequest {
     return StreamTradesRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamTradesRequest>, I>>(object: I): StreamTradesRequest {
+  fromPartial<I extends Exact<DeepPartial<StreamTradesRequest>, I>>(
+    object: I,
+  ): StreamTradesRequest {
     const message = createBaseStreamTradesRequest();
     message.marketId = object.marketId ?? "";
     message.executionSide = object.executionSide ?? "";
@@ -10433,7 +11311,10 @@ function createBaseStreamTradesResponse(): StreamTradesResponse {
 }
 
 export const StreamTradesResponse: MessageFns<StreamTradesResponse> = {
-  encode(message: StreamTradesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamTradesResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.trade !== undefined) {
       DerivativeTrade.encode(message.trade, writer.uint32(10).fork()).join();
     }
@@ -10446,8 +11327,12 @@ export const StreamTradesResponse: MessageFns<StreamTradesResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamTradesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamTradesResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamTradesResponse();
     while (reader.pos < end) {
@@ -10488,13 +11373,17 @@ export const StreamTradesResponse: MessageFns<StreamTradesResponse> = {
 
   fromJSON(object: any): StreamTradesResponse {
     return {
-      trade: isSet(object.trade) ? DerivativeTrade.fromJSON(object.trade) : undefined,
+      trade: isSet(object.trade)
+        ? DerivativeTrade.fromJSON(object.trade)
+        : undefined,
       operationType: isSet(object.operationType)
         ? globalThis.String(object.operationType)
         : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.operation_type)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -10512,14 +11401,19 @@ export const StreamTradesResponse: MessageFns<StreamTradesResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamTradesResponse>, I>>(base?: I): StreamTradesResponse {
+  create<I extends Exact<DeepPartial<StreamTradesResponse>, I>>(
+    base?: I,
+  ): StreamTradesResponse {
     return StreamTradesResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamTradesResponse>, I>>(object: I): StreamTradesResponse {
+  fromPartial<I extends Exact<DeepPartial<StreamTradesResponse>, I>>(
+    object: I,
+  ): StreamTradesResponse {
     const message = createBaseStreamTradesResponse();
-    message.trade = (object.trade !== undefined && object.trade !== null)
-      ? DerivativeTrade.fromPartial(object.trade)
-      : undefined;
+    message.trade =
+      object.trade !== undefined && object.trade !== null
+        ? DerivativeTrade.fromPartial(object.trade)
+        : undefined;
     message.operationType = object.operationType ?? "";
     message.timestamp = object.timestamp ?? 0;
     return message;
@@ -10547,7 +11441,10 @@ function createBaseStreamTradesV2Request(): StreamTradesV2Request {
 }
 
 export const StreamTradesV2Request: MessageFns<StreamTradesV2Request> = {
-  encode(message: StreamTradesV2Request, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamTradesV2Request,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -10596,8 +11493,12 @@ export const StreamTradesV2Request: MessageFns<StreamTradesV2Request> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamTradesV2Request {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamTradesV2Request {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamTradesV2Request();
     while (reader.pos < end) {
@@ -10737,62 +11638,64 @@ export const StreamTradesV2Request: MessageFns<StreamTradesV2Request> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       executionSide: isSet(object.executionSide)
         ? globalThis.String(object.executionSide)
         : isSet(object.execution_side)
-        ? globalThis.String(object.execution_side)
+          ? globalThis.String(object.execution_side)
+          : "",
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
         : "",
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       startTime: isSet(object.startTime)
         ? globalThis.Number(object.startTime)
         : isSet(object.start_time)
-        ? globalThis.Number(object.start_time)
-        : 0,
+          ? globalThis.Number(object.start_time)
+          : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
       subaccountIds: globalThis.Array.isArray(object?.subaccountIds)
         ? object.subaccountIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.subaccount_ids)
-        ? object.subaccount_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.subaccount_ids.map((e: any) => globalThis.String(e))
+          : [],
       executionTypes: globalThis.Array.isArray(object?.executionTypes)
         ? object.executionTypes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.execution_types)
-        ? object.execution_types.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.execution_types.map((e: any) => globalThis.String(e))
+          : [],
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
     };
   },
 
@@ -10846,10 +11749,14 @@ export const StreamTradesV2Request: MessageFns<StreamTradesV2Request> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamTradesV2Request>, I>>(base?: I): StreamTradesV2Request {
+  create<I extends Exact<DeepPartial<StreamTradesV2Request>, I>>(
+    base?: I,
+  ): StreamTradesV2Request {
     return StreamTradesV2Request.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamTradesV2Request>, I>>(object: I): StreamTradesV2Request {
+  fromPartial<I extends Exact<DeepPartial<StreamTradesV2Request>, I>>(
+    object: I,
+  ): StreamTradesV2Request {
     const message = createBaseStreamTradesV2Request();
     message.marketId = object.marketId ?? "";
     message.executionSide = object.executionSide ?? "";
@@ -10875,7 +11782,10 @@ function createBaseStreamTradesV2Response(): StreamTradesV2Response {
 }
 
 export const StreamTradesV2Response: MessageFns<StreamTradesV2Response> = {
-  encode(message: StreamTradesV2Response, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamTradesV2Response,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.trade !== undefined) {
       DerivativeTrade.encode(message.trade, writer.uint32(10).fork()).join();
     }
@@ -10888,8 +11798,12 @@ export const StreamTradesV2Response: MessageFns<StreamTradesV2Response> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamTradesV2Response {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamTradesV2Response {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamTradesV2Response();
     while (reader.pos < end) {
@@ -10930,13 +11844,17 @@ export const StreamTradesV2Response: MessageFns<StreamTradesV2Response> = {
 
   fromJSON(object: any): StreamTradesV2Response {
     return {
-      trade: isSet(object.trade) ? DerivativeTrade.fromJSON(object.trade) : undefined,
+      trade: isSet(object.trade)
+        ? DerivativeTrade.fromJSON(object.trade)
+        : undefined,
       operationType: isSet(object.operationType)
         ? globalThis.String(object.operationType)
         : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.operation_type)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -10954,14 +11872,19 @@ export const StreamTradesV2Response: MessageFns<StreamTradesV2Response> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamTradesV2Response>, I>>(base?: I): StreamTradesV2Response {
+  create<I extends Exact<DeepPartial<StreamTradesV2Response>, I>>(
+    base?: I,
+  ): StreamTradesV2Response {
     return StreamTradesV2Response.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamTradesV2Response>, I>>(object: I): StreamTradesV2Response {
+  fromPartial<I extends Exact<DeepPartial<StreamTradesV2Response>, I>>(
+    object: I,
+  ): StreamTradesV2Response {
     const message = createBaseStreamTradesV2Response();
-    message.trade = (object.trade !== undefined && object.trade !== null)
-      ? DerivativeTrade.fromPartial(object.trade)
-      : undefined;
+    message.trade =
+      object.trade !== undefined && object.trade !== null
+        ? DerivativeTrade.fromPartial(object.trade)
+        : undefined;
     message.operationType = object.operationType ?? "";
     message.timestamp = object.timestamp ?? 0;
     return message;
@@ -10972,411 +11895,477 @@ function createBaseSubaccountOrdersListRequest(): SubaccountOrdersListRequest {
   return { subaccountId: "", marketId: "", skip: 0, limit: 0 };
 }
 
-export const SubaccountOrdersListRequest: MessageFns<SubaccountOrdersListRequest> = {
-  encode(message: SubaccountOrdersListRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    if (message.skip !== 0) {
-      writer.uint32(24).uint64(message.skip);
-    }
-    if (message.limit !== 0) {
-      writer.uint32(32).sint32(message.limit);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountOrdersListRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountOrdersListRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.skip = longToNumber(reader.uint64());
-          continue;
-        }
-        case 4: {
-          if (tag !== 32) {
-            break;
-          }
-
-          message.limit = reader.sint32();
-          continue;
-        }
+export const SubaccountOrdersListRequest: MessageFns<SubaccountOrdersListRequest> =
+  {
+    encode(
+      message: SubaccountOrdersListRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.skip !== 0) {
+        writer.uint32(24).uint64(message.skip);
+      }
+      if (message.limit !== 0) {
+        writer.uint32(32).sint32(message.limit);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): SubaccountOrdersListRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
-      limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountOrdersListRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountOrdersListRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SubaccountOrdersListRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.skip !== 0) {
-      obj.skip = Math.round(message.skip);
-    }
-    if (message.limit !== 0) {
-      obj.limit = Math.round(message.limit);
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SubaccountOrdersListRequest>, I>>(base?: I): SubaccountOrdersListRequest {
-    return SubaccountOrdersListRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountOrdersListRequest>, I>>(object: I): SubaccountOrdersListRequest {
-    const message = createBaseSubaccountOrdersListRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketId = object.marketId ?? "";
-    message.skip = object.skip ?? 0;
-    message.limit = object.limit ?? 0;
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.skip = longToNumber(reader.uint64());
+            continue;
+          }
+          case 4: {
+            if (tag !== 32) {
+              break;
+            }
+
+            message.limit = reader.sint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountOrdersListRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
+        limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
+      };
+    },
+
+    toJSON(message: SubaccountOrdersListRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.skip !== 0) {
+        obj.skip = Math.round(message.skip);
+      }
+      if (message.limit !== 0) {
+        obj.limit = Math.round(message.limit);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SubaccountOrdersListRequest>, I>>(
+      base?: I,
+    ): SubaccountOrdersListRequest {
+      return SubaccountOrdersListRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SubaccountOrdersListRequest>, I>>(
+      object: I,
+    ): SubaccountOrdersListRequest {
+      const message = createBaseSubaccountOrdersListRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketId = object.marketId ?? "";
+      message.skip = object.skip ?? 0;
+      message.limit = object.limit ?? 0;
+      return message;
+    },
+  };
 
 function createBaseSubaccountOrdersListResponse(): SubaccountOrdersListResponse {
   return { orders: [], paging: undefined };
 }
 
-export const SubaccountOrdersListResponse: MessageFns<SubaccountOrdersListResponse> = {
-  encode(message: SubaccountOrdersListResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.orders) {
-      DerivativeLimitOrder.encode(v!, writer.uint32(10).fork()).join();
-    }
-    if (message.paging !== undefined) {
-      Paging.encode(message.paging, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountOrdersListResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountOrdersListResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.orders.push(DerivativeLimitOrder.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.paging = Paging.decode(reader, reader.uint32());
-          continue;
-        }
+export const SubaccountOrdersListResponse: MessageFns<SubaccountOrdersListResponse> =
+  {
+    encode(
+      message: SubaccountOrdersListResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.orders) {
+        DerivativeLimitOrder.encode(v!, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.paging !== undefined) {
+        Paging.encode(message.paging, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): SubaccountOrdersListResponse {
-    return {
-      orders: globalThis.Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => DerivativeLimitOrder.fromJSON(e))
-        : [],
-      paging: isSet(object.paging) ? Paging.fromJSON(object.paging) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountOrdersListResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountOrdersListResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SubaccountOrdersListResponse): unknown {
-    const obj: any = {};
-    if (message.orders?.length) {
-      obj.orders = message.orders.map((e) => DerivativeLimitOrder.toJSON(e));
-    }
-    if (message.paging !== undefined) {
-      obj.paging = Paging.toJSON(message.paging);
-    }
-    return obj;
-  },
+            message.orders.push(
+              DerivativeLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SubaccountOrdersListResponse>, I>>(base?: I): SubaccountOrdersListResponse {
-    return SubaccountOrdersListResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountOrdersListResponse>, I>>(object: I): SubaccountOrdersListResponse {
-    const message = createBaseSubaccountOrdersListResponse();
-    message.orders = object.orders?.map((e) => DerivativeLimitOrder.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
-    return message;
-  },
-};
+            message.paging = Paging.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountOrdersListResponse {
+      return {
+        orders: globalThis.Array.isArray(object?.orders)
+          ? object.orders.map((e: any) => DerivativeLimitOrder.fromJSON(e))
+          : [],
+        paging: isSet(object.paging)
+          ? Paging.fromJSON(object.paging)
+          : undefined,
+      };
+    },
+
+    toJSON(message: SubaccountOrdersListResponse): unknown {
+      const obj: any = {};
+      if (message.orders?.length) {
+        obj.orders = message.orders.map((e) => DerivativeLimitOrder.toJSON(e));
+      }
+      if (message.paging !== undefined) {
+        obj.paging = Paging.toJSON(message.paging);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SubaccountOrdersListResponse>, I>>(
+      base?: I,
+    ): SubaccountOrdersListResponse {
+      return SubaccountOrdersListResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SubaccountOrdersListResponse>, I>>(
+      object: I,
+    ): SubaccountOrdersListResponse {
+      const message = createBaseSubaccountOrdersListResponse();
+      message.orders =
+        object.orders?.map((e) => DerivativeLimitOrder.fromPartial(e)) || [];
+      message.paging =
+        object.paging !== undefined && object.paging !== null
+          ? Paging.fromPartial(object.paging)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseSubaccountTradesListRequest(): SubaccountTradesListRequest {
-  return { subaccountId: "", marketId: "", executionType: "", direction: "", skip: 0, limit: 0 };
+  return {
+    subaccountId: "",
+    marketId: "",
+    executionType: "",
+    direction: "",
+    skip: 0,
+    limit: 0,
+  };
 }
 
-export const SubaccountTradesListRequest: MessageFns<SubaccountTradesListRequest> = {
-  encode(message: SubaccountTradesListRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    if (message.executionType !== "") {
-      writer.uint32(26).string(message.executionType);
-    }
-    if (message.direction !== "") {
-      writer.uint32(34).string(message.direction);
-    }
-    if (message.skip !== 0) {
-      writer.uint32(40).uint64(message.skip);
-    }
-    if (message.limit !== 0) {
-      writer.uint32(48).sint32(message.limit);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountTradesListRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountTradesListRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.executionType = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.direction = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.skip = longToNumber(reader.uint64());
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.limit = reader.sint32();
-          continue;
-        }
+export const SubaccountTradesListRequest: MessageFns<SubaccountTradesListRequest> =
+  {
+    encode(
+      message: SubaccountTradesListRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.executionType !== "") {
+        writer.uint32(26).string(message.executionType);
+      }
+      if (message.direction !== "") {
+        writer.uint32(34).string(message.direction);
+      }
+      if (message.skip !== 0) {
+        writer.uint32(40).uint64(message.skip);
+      }
+      if (message.limit !== 0) {
+        writer.uint32(48).sint32(message.limit);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): SubaccountTradesListRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      executionType: isSet(object.executionType)
-        ? globalThis.String(object.executionType)
-        : isSet(object.execution_type)
-        ? globalThis.String(object.execution_type)
-        : "",
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
-      skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
-      limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountTradesListRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountTradesListRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SubaccountTradesListRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.executionType !== "") {
-      obj.executionType = message.executionType;
-    }
-    if (message.direction !== "") {
-      obj.direction = message.direction;
-    }
-    if (message.skip !== 0) {
-      obj.skip = Math.round(message.skip);
-    }
-    if (message.limit !== 0) {
-      obj.limit = Math.round(message.limit);
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SubaccountTradesListRequest>, I>>(base?: I): SubaccountTradesListRequest {
-    return SubaccountTradesListRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountTradesListRequest>, I>>(object: I): SubaccountTradesListRequest {
-    const message = createBaseSubaccountTradesListRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketId = object.marketId ?? "";
-    message.executionType = object.executionType ?? "";
-    message.direction = object.direction ?? "";
-    message.skip = object.skip ?? 0;
-    message.limit = object.limit ?? 0;
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.executionType = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.direction = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.skip = longToNumber(reader.uint64());
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.limit = reader.sint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountTradesListRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        executionType: isSet(object.executionType)
+          ? globalThis.String(object.executionType)
+          : isSet(object.execution_type)
+            ? globalThis.String(object.execution_type)
+            : "",
+        direction: isSet(object.direction)
+          ? globalThis.String(object.direction)
+          : "",
+        skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
+        limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
+      };
+    },
+
+    toJSON(message: SubaccountTradesListRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.executionType !== "") {
+        obj.executionType = message.executionType;
+      }
+      if (message.direction !== "") {
+        obj.direction = message.direction;
+      }
+      if (message.skip !== 0) {
+        obj.skip = Math.round(message.skip);
+      }
+      if (message.limit !== 0) {
+        obj.limit = Math.round(message.limit);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SubaccountTradesListRequest>, I>>(
+      base?: I,
+    ): SubaccountTradesListRequest {
+      return SubaccountTradesListRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SubaccountTradesListRequest>, I>>(
+      object: I,
+    ): SubaccountTradesListRequest {
+      const message = createBaseSubaccountTradesListRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketId = object.marketId ?? "";
+      message.executionType = object.executionType ?? "";
+      message.direction = object.direction ?? "";
+      message.skip = object.skip ?? 0;
+      message.limit = object.limit ?? 0;
+      return message;
+    },
+  };
 
 function createBaseSubaccountTradesListResponse(): SubaccountTradesListResponse {
   return { trades: [] };
 }
 
-export const SubaccountTradesListResponse: MessageFns<SubaccountTradesListResponse> = {
-  encode(message: SubaccountTradesListResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.trades) {
-      DerivativeTrade.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const SubaccountTradesListResponse: MessageFns<SubaccountTradesListResponse> =
+  {
+    encode(
+      message: SubaccountTradesListResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.trades) {
+        DerivativeTrade.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountTradesListResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountTradesListResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountTradesListResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountTradesListResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.trades.push(
+              DerivativeTrade.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.trades.push(DerivativeTrade.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountTradesListResponse {
+      return {
+        trades: globalThis.Array.isArray(object?.trades)
+          ? object.trades.map((e: any) => DerivativeTrade.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: SubaccountTradesListResponse): unknown {
+      const obj: any = {};
+      if (message.trades?.length) {
+        obj.trades = message.trades.map((e) => DerivativeTrade.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): SubaccountTradesListResponse {
-    return {
-      trades: globalThis.Array.isArray(object?.trades)
-        ? object.trades.map((e: any) => DerivativeTrade.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: SubaccountTradesListResponse): unknown {
-    const obj: any = {};
-    if (message.trades?.length) {
-      obj.trades = message.trades.map((e) => DerivativeTrade.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<SubaccountTradesListResponse>, I>>(base?: I): SubaccountTradesListResponse {
-    return SubaccountTradesListResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountTradesListResponse>, I>>(object: I): SubaccountTradesListResponse {
-    const message = createBaseSubaccountTradesListResponse();
-    message.trades = object.trades?.map((e) => DerivativeTrade.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<SubaccountTradesListResponse>, I>>(
+      base?: I,
+    ): SubaccountTradesListResponse {
+      return SubaccountTradesListResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SubaccountTradesListResponse>, I>>(
+      object: I,
+    ): SubaccountTradesListResponse {
+      const message = createBaseSubaccountTradesListResponse();
+      message.trades =
+        object.trades?.map((e) => DerivativeTrade.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseOrdersHistoryRequest(): OrdersHistoryRequest {
   return {
@@ -11400,7 +12389,10 @@ function createBaseOrdersHistoryRequest(): OrdersHistoryRequest {
 }
 
 export const OrdersHistoryRequest: MessageFns<OrdersHistoryRequest> = {
-  encode(message: OrdersHistoryRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrdersHistoryRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -11452,8 +12444,12 @@ export const OrdersHistoryRequest: MessageFns<OrdersHistoryRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OrdersHistoryRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OrdersHistoryRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrdersHistoryRequest();
     while (reader.pos < end) {
@@ -11601,62 +12597,64 @@ export const OrdersHistoryRequest: MessageFns<OrdersHistoryRequest> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       orderTypes: globalThis.Array.isArray(object?.orderTypes)
         ? object.orderTypes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.order_types)
-        ? object.order_types.map((e: any) => globalThis.String(e))
-        : [],
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
+          ? object.order_types.map((e: any) => globalThis.String(e))
+          : [],
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
+        : "",
       startTime: isSet(object.startTime)
         ? globalThis.Number(object.startTime)
         : isSet(object.start_time)
-        ? globalThis.Number(object.start_time)
-        : 0,
+          ? globalThis.Number(object.start_time)
+          : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       isConditional: isSet(object.isConditional)
         ? globalThis.String(object.isConditional)
         : isSet(object.is_conditional)
-        ? globalThis.String(object.is_conditional)
-        : "",
+          ? globalThis.String(object.is_conditional)
+          : "",
       orderType: isSet(object.orderType)
         ? globalThis.String(object.orderType)
         : isSet(object.order_type)
-        ? globalThis.String(object.order_type)
-        : "",
+          ? globalThis.String(object.order_type)
+          : "",
       state: isSet(object.state) ? globalThis.String(object.state) : "",
       executionTypes: globalThis.Array.isArray(object?.executionTypes)
         ? object.executionTypes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.execution_types)
-        ? object.execution_types.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.execution_types.map((e: any) => globalThis.String(e))
+          : [],
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       activeMarketsOnly: isSet(object.activeMarketsOnly)
         ? globalThis.Boolean(object.activeMarketsOnly)
         : isSet(object.active_markets_only)
-        ? globalThis.Boolean(object.active_markets_only)
-        : false,
+          ? globalThis.Boolean(object.active_markets_only)
+          : false,
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -11714,10 +12712,14 @@ export const OrdersHistoryRequest: MessageFns<OrdersHistoryRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrdersHistoryRequest>, I>>(base?: I): OrdersHistoryRequest {
+  create<I extends Exact<DeepPartial<OrdersHistoryRequest>, I>>(
+    base?: I,
+  ): OrdersHistoryRequest {
     return OrdersHistoryRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrdersHistoryRequest>, I>>(object: I): OrdersHistoryRequest {
+  fromPartial<I extends Exact<DeepPartial<OrdersHistoryRequest>, I>>(
+    object: I,
+  ): OrdersHistoryRequest {
     const message = createBaseOrdersHistoryRequest();
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
@@ -11744,7 +12746,10 @@ function createBaseOrdersHistoryResponse(): OrdersHistoryResponse {
 }
 
 export const OrdersHistoryResponse: MessageFns<OrdersHistoryResponse> = {
-  encode(message: OrdersHistoryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrdersHistoryResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.orders) {
       DerivativeOrderHistory.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -11754,8 +12759,12 @@ export const OrdersHistoryResponse: MessageFns<OrdersHistoryResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OrdersHistoryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OrdersHistoryResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrdersHistoryResponse();
     while (reader.pos < end) {
@@ -11766,7 +12775,9 @@ export const OrdersHistoryResponse: MessageFns<OrdersHistoryResponse> = {
             break;
           }
 
-          message.orders.push(DerivativeOrderHistory.decode(reader, reader.uint32()));
+          message.orders.push(
+            DerivativeOrderHistory.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 2: {
@@ -11806,15 +12817,21 @@ export const OrdersHistoryResponse: MessageFns<OrdersHistoryResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrdersHistoryResponse>, I>>(base?: I): OrdersHistoryResponse {
+  create<I extends Exact<DeepPartial<OrdersHistoryResponse>, I>>(
+    base?: I,
+  ): OrdersHistoryResponse {
     return OrdersHistoryResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrdersHistoryResponse>, I>>(object: I): OrdersHistoryResponse {
+  fromPartial<I extends Exact<DeepPartial<OrdersHistoryResponse>, I>>(
+    object: I,
+  ): OrdersHistoryResponse {
     const message = createBaseOrdersHistoryResponse();
-    message.orders = object.orders?.map((e) => DerivativeOrderHistory.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
+    message.orders =
+      object.orders?.map((e) => DerivativeOrderHistory.fromPartial(e)) || [];
+    message.paging =
+      object.paging !== undefined && object.paging !== null
+        ? Paging.fromPartial(object.paging)
+        : undefined;
     return message;
   },
 };
@@ -11846,7 +12863,10 @@ function createBaseDerivativeOrderHistory(): DerivativeOrderHistory {
 }
 
 export const DerivativeOrderHistory: MessageFns<DerivativeOrderHistory> = {
-  encode(message: DerivativeOrderHistory, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativeOrderHistory,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderHash !== "") {
       writer.uint32(10).string(message.orderHash);
     }
@@ -11913,8 +12933,12 @@ export const DerivativeOrderHistory: MessageFns<DerivativeOrderHistory> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeOrderHistory {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DerivativeOrderHistory {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativeOrderHistory();
     while (reader.pos < end) {
@@ -12102,83 +13126,87 @@ export const DerivativeOrderHistory: MessageFns<DerivativeOrderHistory> = {
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       isActive: isSet(object.isActive)
         ? globalThis.Boolean(object.isActive)
         : isSet(object.is_active)
-        ? globalThis.Boolean(object.is_active)
-        : false,
+          ? globalThis.Boolean(object.is_active)
+          : false,
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       executionType: isSet(object.executionType)
         ? globalThis.String(object.executionType)
         : isSet(object.execution_type)
-        ? globalThis.String(object.execution_type)
-        : "",
+          ? globalThis.String(object.execution_type)
+          : "",
       orderType: isSet(object.orderType)
         ? globalThis.String(object.orderType)
         : isSet(object.order_type)
-        ? globalThis.String(object.order_type)
-        : "",
+          ? globalThis.String(object.order_type)
+          : "",
       price: isSet(object.price) ? globalThis.String(object.price) : "",
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
+          ? globalThis.String(object.trigger_price)
+          : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
         : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
       filledQuantity: isSet(object.filledQuantity)
         ? globalThis.String(object.filledQuantity)
         : isSet(object.filled_quantity)
-        ? globalThis.String(object.filled_quantity)
-        : "",
+          ? globalThis.String(object.filled_quantity)
+          : "",
       state: isSet(object.state) ? globalThis.String(object.state) : "",
       createdAt: isSet(object.createdAt)
         ? globalThis.Number(object.createdAt)
         : isSet(object.created_at)
-        ? globalThis.Number(object.created_at)
-        : 0,
+          ? globalThis.Number(object.created_at)
+          : 0,
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
       isReduceOnly: isSet(object.isReduceOnly)
         ? globalThis.Boolean(object.isReduceOnly)
         : isSet(object.is_reduce_only)
-        ? globalThis.Boolean(object.is_reduce_only)
-        : false,
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
+          ? globalThis.Boolean(object.is_reduce_only)
+          : false,
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
+        : "",
       isConditional: isSet(object.isConditional)
         ? globalThis.Boolean(object.isConditional)
         : isSet(object.is_conditional)
-        ? globalThis.Boolean(object.is_conditional)
-        : false,
+          ? globalThis.Boolean(object.is_conditional)
+          : false,
       triggerAt: isSet(object.triggerAt)
         ? globalThis.Number(object.triggerAt)
         : isSet(object.trigger_at)
-        ? globalThis.Number(object.trigger_at)
-        : 0,
+          ? globalThis.Number(object.trigger_at)
+          : 0,
       placedOrderHash: isSet(object.placedOrderHash)
         ? globalThis.String(object.placedOrderHash)
         : isSet(object.placed_order_hash)
-        ? globalThis.String(object.placed_order_hash)
-        : "",
+          ? globalThis.String(object.placed_order_hash)
+          : "",
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
       txHash: isSet(object.txHash)
         ? globalThis.String(object.txHash)
         : isSet(object.tx_hash)
-        ? globalThis.String(object.tx_hash)
-        : "",
+          ? globalThis.String(object.tx_hash)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -12251,10 +13279,14 @@ export const DerivativeOrderHistory: MessageFns<DerivativeOrderHistory> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativeOrderHistory>, I>>(base?: I): DerivativeOrderHistory {
+  create<I extends Exact<DeepPartial<DerivativeOrderHistory>, I>>(
+    base?: I,
+  ): DerivativeOrderHistory {
     return DerivativeOrderHistory.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativeOrderHistory>, I>>(object: I): DerivativeOrderHistory {
+  fromPartial<I extends Exact<DeepPartial<DerivativeOrderHistory>, I>>(
+    object: I,
+  ): DerivativeOrderHistory {
     const message = createBaseDerivativeOrderHistory();
     message.orderHash = object.orderHash ?? "";
     message.marketId = object.marketId ?? "";
@@ -12282,273 +13314,324 @@ export const DerivativeOrderHistory: MessageFns<DerivativeOrderHistory> = {
 };
 
 function createBaseStreamOrdersHistoryRequest(): StreamOrdersHistoryRequest {
-  return { subaccountId: "", marketId: "", orderTypes: [], direction: "", state: "", executionTypes: [] };
+  return {
+    subaccountId: "",
+    marketId: "",
+    orderTypes: [],
+    direction: "",
+    state: "",
+    executionTypes: [],
+  };
 }
 
-export const StreamOrdersHistoryRequest: MessageFns<StreamOrdersHistoryRequest> = {
-  encode(message: StreamOrdersHistoryRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    for (const v of message.orderTypes) {
-      writer.uint32(26).string(v!);
-    }
-    if (message.direction !== "") {
-      writer.uint32(34).string(message.direction);
-    }
-    if (message.state !== "") {
-      writer.uint32(42).string(message.state);
-    }
-    for (const v of message.executionTypes) {
-      writer.uint32(50).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamOrdersHistoryRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamOrdersHistoryRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.orderTypes.push(reader.string());
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.direction = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.state = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.executionTypes.push(reader.string());
-          continue;
-        }
+export const StreamOrdersHistoryRequest: MessageFns<StreamOrdersHistoryRequest> =
+  {
+    encode(
+      message: StreamOrdersHistoryRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.orderTypes) {
+        writer.uint32(26).string(v!);
+      }
+      if (message.direction !== "") {
+        writer.uint32(34).string(message.direction);
+      }
+      if (message.state !== "") {
+        writer.uint32(42).string(message.state);
+      }
+      for (const v of message.executionTypes) {
+        writer.uint32(50).string(v!);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): StreamOrdersHistoryRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      orderTypes: globalThis.Array.isArray(object?.orderTypes)
-        ? object.orderTypes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.order_types)
-        ? object.order_types.map((e: any) => globalThis.String(e))
-        : [],
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
-      state: isSet(object.state) ? globalThis.String(object.state) : "",
-      executionTypes: globalThis.Array.isArray(object?.executionTypes)
-        ? object.executionTypes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.execution_types)
-        ? object.execution_types.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamOrdersHistoryRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamOrdersHistoryRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamOrdersHistoryRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.orderTypes?.length) {
-      obj.orderTypes = message.orderTypes;
-    }
-    if (message.direction !== "") {
-      obj.direction = message.direction;
-    }
-    if (message.state !== "") {
-      obj.state = message.state;
-    }
-    if (message.executionTypes?.length) {
-      obj.executionTypes = message.executionTypes;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamOrdersHistoryRequest>, I>>(base?: I): StreamOrdersHistoryRequest {
-    return StreamOrdersHistoryRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamOrdersHistoryRequest>, I>>(object: I): StreamOrdersHistoryRequest {
-    const message = createBaseStreamOrdersHistoryRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketId = object.marketId ?? "";
-    message.orderTypes = object.orderTypes?.map((e) => e) || [];
-    message.direction = object.direction ?? "";
-    message.state = object.state ?? "";
-    message.executionTypes = object.executionTypes?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.orderTypes.push(reader.string());
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.direction = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.state = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.executionTypes.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamOrdersHistoryRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        orderTypes: globalThis.Array.isArray(object?.orderTypes)
+          ? object.orderTypes.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.order_types)
+            ? object.order_types.map((e: any) => globalThis.String(e))
+            : [],
+        direction: isSet(object.direction)
+          ? globalThis.String(object.direction)
+          : "",
+        state: isSet(object.state) ? globalThis.String(object.state) : "",
+        executionTypes: globalThis.Array.isArray(object?.executionTypes)
+          ? object.executionTypes.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.execution_types)
+            ? object.execution_types.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: StreamOrdersHistoryRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.orderTypes?.length) {
+        obj.orderTypes = message.orderTypes;
+      }
+      if (message.direction !== "") {
+        obj.direction = message.direction;
+      }
+      if (message.state !== "") {
+        obj.state = message.state;
+      }
+      if (message.executionTypes?.length) {
+        obj.executionTypes = message.executionTypes;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamOrdersHistoryRequest>, I>>(
+      base?: I,
+    ): StreamOrdersHistoryRequest {
+      return StreamOrdersHistoryRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<StreamOrdersHistoryRequest>, I>>(
+      object: I,
+    ): StreamOrdersHistoryRequest {
+      const message = createBaseStreamOrdersHistoryRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketId = object.marketId ?? "";
+      message.orderTypes = object.orderTypes?.map((e) => e) || [];
+      message.direction = object.direction ?? "";
+      message.state = object.state ?? "";
+      message.executionTypes = object.executionTypes?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseStreamOrdersHistoryResponse(): StreamOrdersHistoryResponse {
   return { order: undefined, operationType: "", timestamp: 0 };
 }
 
-export const StreamOrdersHistoryResponse: MessageFns<StreamOrdersHistoryResponse> = {
-  encode(message: StreamOrdersHistoryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.order !== undefined) {
-      DerivativeOrderHistory.encode(message.order, writer.uint32(10).fork()).join();
-    }
-    if (message.operationType !== "") {
-      writer.uint32(18).string(message.operationType);
-    }
-    if (message.timestamp !== 0) {
-      writer.uint32(24).sint64(message.timestamp);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamOrdersHistoryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamOrdersHistoryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.order = DerivativeOrderHistory.decode(reader, reader.uint32());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.operationType = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.timestamp = longToNumber(reader.sint64());
-          continue;
-        }
+export const StreamOrdersHistoryResponse: MessageFns<StreamOrdersHistoryResponse> =
+  {
+    encode(
+      message: StreamOrdersHistoryResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.order !== undefined) {
+        DerivativeOrderHistory.encode(
+          message.order,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.operationType !== "") {
+        writer.uint32(18).string(message.operationType);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.timestamp !== 0) {
+        writer.uint32(24).sint64(message.timestamp);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): StreamOrdersHistoryResponse {
-    return {
-      order: isSet(object.order) ? DerivativeOrderHistory.fromJSON(object.order) : undefined,
-      operationType: isSet(object.operationType)
-        ? globalThis.String(object.operationType)
-        : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamOrdersHistoryResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamOrdersHistoryResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamOrdersHistoryResponse): unknown {
-    const obj: any = {};
-    if (message.order !== undefined) {
-      obj.order = DerivativeOrderHistory.toJSON(message.order);
-    }
-    if (message.operationType !== "") {
-      obj.operationType = message.operationType;
-    }
-    if (message.timestamp !== 0) {
-      obj.timestamp = Math.round(message.timestamp);
-    }
-    return obj;
-  },
+            message.order = DerivativeOrderHistory.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamOrdersHistoryResponse>, I>>(base?: I): StreamOrdersHistoryResponse {
-    return StreamOrdersHistoryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamOrdersHistoryResponse>, I>>(object: I): StreamOrdersHistoryResponse {
-    const message = createBaseStreamOrdersHistoryResponse();
-    message.order = (object.order !== undefined && object.order !== null)
-      ? DerivativeOrderHistory.fromPartial(object.order)
-      : undefined;
-    message.operationType = object.operationType ?? "";
-    message.timestamp = object.timestamp ?? 0;
-    return message;
-  },
-};
+            message.operationType = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.timestamp = longToNumber(reader.sint64());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamOrdersHistoryResponse {
+      return {
+        order: isSet(object.order)
+          ? DerivativeOrderHistory.fromJSON(object.order)
+          : undefined,
+        operationType: isSet(object.operationType)
+          ? globalThis.String(object.operationType)
+          : isSet(object.operation_type)
+            ? globalThis.String(object.operation_type)
+            : "",
+        timestamp: isSet(object.timestamp)
+          ? globalThis.Number(object.timestamp)
+          : 0,
+      };
+    },
+
+    toJSON(message: StreamOrdersHistoryResponse): unknown {
+      const obj: any = {};
+      if (message.order !== undefined) {
+        obj.order = DerivativeOrderHistory.toJSON(message.order);
+      }
+      if (message.operationType !== "") {
+        obj.operationType = message.operationType;
+      }
+      if (message.timestamp !== 0) {
+        obj.timestamp = Math.round(message.timestamp);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamOrdersHistoryResponse>, I>>(
+      base?: I,
+    ): StreamOrdersHistoryResponse {
+      return StreamOrdersHistoryResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<StreamOrdersHistoryResponse>, I>>(
+      object: I,
+    ): StreamOrdersHistoryResponse {
+      const message = createBaseStreamOrdersHistoryResponse();
+      message.order =
+        object.order !== undefined && object.order !== null
+          ? DerivativeOrderHistory.fromPartial(object.order)
+          : undefined;
+      message.operationType = object.operationType ?? "";
+      message.timestamp = object.timestamp ?? 0;
+      return message;
+    },
+  };
 
 function createBaseOpenInterestRequest(): OpenInterestRequest {
   return { marketIDs: [] };
 }
 
 export const OpenInterestRequest: MessageFns<OpenInterestRequest> = {
-  encode(message: OpenInterestRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OpenInterestRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.marketIDs) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OpenInterestRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OpenInterestRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOpenInterestRequest();
     while (reader.pos < end) {
@@ -12576,8 +13659,8 @@ export const OpenInterestRequest: MessageFns<OpenInterestRequest> = {
       marketIDs: globalThis.Array.isArray(object?.marketIDs)
         ? object.marketIDs.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_i_ds)
-        ? object.market_i_ds.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_i_ds.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -12589,10 +13672,14 @@ export const OpenInterestRequest: MessageFns<OpenInterestRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OpenInterestRequest>, I>>(base?: I): OpenInterestRequest {
+  create<I extends Exact<DeepPartial<OpenInterestRequest>, I>>(
+    base?: I,
+  ): OpenInterestRequest {
     return OpenInterestRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OpenInterestRequest>, I>>(object: I): OpenInterestRequest {
+  fromPartial<I extends Exact<DeepPartial<OpenInterestRequest>, I>>(
+    object: I,
+  ): OpenInterestRequest {
     const message = createBaseOpenInterestRequest();
     message.marketIDs = object.marketIDs?.map((e) => e) || [];
     return message;
@@ -12604,15 +13691,22 @@ function createBaseOpenInterestResponse(): OpenInterestResponse {
 }
 
 export const OpenInterestResponse: MessageFns<OpenInterestResponse> = {
-  encode(message: OpenInterestResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OpenInterestResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.openInterests) {
       MarketOpenInterest.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OpenInterestResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OpenInterestResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOpenInterestResponse();
     while (reader.pos < end) {
@@ -12623,7 +13717,9 @@ export const OpenInterestResponse: MessageFns<OpenInterestResponse> = {
             break;
           }
 
-          message.openInterests.push(MarketOpenInterest.decode(reader, reader.uint32()));
+          message.openInterests.push(
+            MarketOpenInterest.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -12640,25 +13736,34 @@ export const OpenInterestResponse: MessageFns<OpenInterestResponse> = {
       openInterests: globalThis.Array.isArray(object?.openInterests)
         ? object.openInterests.map((e: any) => MarketOpenInterest.fromJSON(e))
         : globalThis.Array.isArray(object?.open_interests)
-        ? object.open_interests.map((e: any) => MarketOpenInterest.fromJSON(e))
-        : [],
+          ? object.open_interests.map((e: any) =>
+              MarketOpenInterest.fromJSON(e),
+            )
+          : [],
     };
   },
 
   toJSON(message: OpenInterestResponse): unknown {
     const obj: any = {};
     if (message.openInterests?.length) {
-      obj.openInterests = message.openInterests.map((e) => MarketOpenInterest.toJSON(e));
+      obj.openInterests = message.openInterests.map((e) =>
+        MarketOpenInterest.toJSON(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OpenInterestResponse>, I>>(base?: I): OpenInterestResponse {
+  create<I extends Exact<DeepPartial<OpenInterestResponse>, I>>(
+    base?: I,
+  ): OpenInterestResponse {
     return OpenInterestResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OpenInterestResponse>, I>>(object: I): OpenInterestResponse {
+  fromPartial<I extends Exact<DeepPartial<OpenInterestResponse>, I>>(
+    object: I,
+  ): OpenInterestResponse {
     const message = createBaseOpenInterestResponse();
-    message.openInterests = object.openInterests?.map((e) => MarketOpenInterest.fromPartial(e)) || [];
+    message.openInterests =
+      object.openInterests?.map((e) => MarketOpenInterest.fromPartial(e)) || [];
     return message;
   },
 };
@@ -12668,7 +13773,10 @@ function createBaseMarketOpenInterest(): MarketOpenInterest {
 }
 
 export const MarketOpenInterest: MessageFns<MarketOpenInterest> = {
-  encode(message: MarketOpenInterest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MarketOpenInterest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -12678,8 +13786,12 @@ export const MarketOpenInterest: MessageFns<MarketOpenInterest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MarketOpenInterest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MarketOpenInterest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMarketOpenInterest();
     while (reader.pos < end) {
@@ -12715,13 +13827,13 @@ export const MarketOpenInterest: MessageFns<MarketOpenInterest> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       openInterest: isSet(object.openInterest)
         ? globalThis.String(object.openInterest)
         : isSet(object.open_interest)
-        ? globalThis.String(object.open_interest)
-        : "",
+          ? globalThis.String(object.open_interest)
+          : "",
     };
   },
 
@@ -12736,10 +13848,14 @@ export const MarketOpenInterest: MessageFns<MarketOpenInterest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MarketOpenInterest>, I>>(base?: I): MarketOpenInterest {
+  create<I extends Exact<DeepPartial<MarketOpenInterest>, I>>(
+    base?: I,
+  ): MarketOpenInterest {
     return MarketOpenInterest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MarketOpenInterest>, I>>(object: I): MarketOpenInterest {
+  fromPartial<I extends Exact<DeepPartial<MarketOpenInterest>, I>>(
+    object: I,
+  ): MarketOpenInterest {
     const message = createBaseMarketOpenInterest();
     message.marketId = object.marketId ?? "";
     message.openInterest = object.openInterest ?? "";
@@ -12751,38 +13867,50 @@ export const MarketOpenInterest: MessageFns<MarketOpenInterest> = {
  * InjectiveDerivativeExchangeRPC defines gRPC API of Derivative Markets
  * provider.
  */
-export type InjectiveDerivativeExchangeRPCService = typeof InjectiveDerivativeExchangeRPCService;
+export type InjectiveDerivativeExchangeRPCService =
+  typeof InjectiveDerivativeExchangeRPCService;
 export const InjectiveDerivativeExchangeRPCService = {
   /** Markets gets a list of Derivative Markets */
   markets: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/Markets" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MarketsRequest): Buffer => Buffer.from(MarketsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MarketsRequest => MarketsRequest.decode(value),
-    responseSerialize: (value: MarketsResponse): Buffer => Buffer.from(MarketsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MarketsResponse => MarketsResponse.decode(value),
+    requestSerialize: (value: MarketsRequest): Buffer =>
+      Buffer.from(MarketsRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MarketsRequest =>
+      MarketsRequest.decode(value),
+    responseSerialize: (value: MarketsResponse): Buffer =>
+      Buffer.from(MarketsResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): MarketsResponse =>
+      MarketsResponse.decode(value),
   },
   /** Market gets details of a single derivative market */
   market: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/Market" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: MarketRequest): Buffer => Buffer.from(MarketRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MarketRequest => MarketRequest.decode(value),
-    responseSerialize: (value: MarketResponse): Buffer => Buffer.from(MarketResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MarketResponse => MarketResponse.decode(value),
+    requestSerialize: (value: MarketRequest): Buffer =>
+      Buffer.from(MarketRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): MarketRequest =>
+      MarketRequest.decode(value),
+    responseSerialize: (value: MarketResponse): Buffer =>
+      Buffer.from(MarketResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): MarketResponse =>
+      MarketResponse.decode(value),
   },
   /** StreamMarket streams live updates of selected derivative markets */
   streamMarket: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/StreamMarket" as const,
     requestStream: false as const,
     responseStream: true as const,
-    requestSerialize: (value: StreamMarketRequest): Buffer => Buffer.from(StreamMarketRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamMarketRequest => StreamMarketRequest.decode(value),
+    requestSerialize: (value: StreamMarketRequest): Buffer =>
+      Buffer.from(StreamMarketRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): StreamMarketRequest =>
+      StreamMarketRequest.decode(value),
     responseSerialize: (value: StreamMarketResponse): Buffer =>
       Buffer.from(StreamMarketResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamMarketResponse => StreamMarketResponse.decode(value),
+    responseDeserialize: (value: Buffer): StreamMarketResponse =>
+      StreamMarketResponse.decode(value),
   },
   /** BinaryOptionsMarkets gets a list of Binary Options Markets */
   binaryOptionsMarkets: {
@@ -12791,10 +13919,12 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: false as const,
     requestSerialize: (value: BinaryOptionsMarketsRequest): Buffer =>
       Buffer.from(BinaryOptionsMarketsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): BinaryOptionsMarketsRequest => BinaryOptionsMarketsRequest.decode(value),
+    requestDeserialize: (value: Buffer): BinaryOptionsMarketsRequest =>
+      BinaryOptionsMarketsRequest.decode(value),
     responseSerialize: (value: BinaryOptionsMarketsResponse): Buffer =>
       Buffer.from(BinaryOptionsMarketsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): BinaryOptionsMarketsResponse => BinaryOptionsMarketsResponse.decode(value),
+    responseDeserialize: (value: Buffer): BinaryOptionsMarketsResponse =>
+      BinaryOptionsMarketsResponse.decode(value),
   },
   /** BinaryOptionMarket gets details of a single binary options market */
   binaryOptionsMarket: {
@@ -12803,31 +13933,40 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: false as const,
     requestSerialize: (value: BinaryOptionsMarketRequest): Buffer =>
       Buffer.from(BinaryOptionsMarketRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): BinaryOptionsMarketRequest => BinaryOptionsMarketRequest.decode(value),
+    requestDeserialize: (value: Buffer): BinaryOptionsMarketRequest =>
+      BinaryOptionsMarketRequest.decode(value),
     responseSerialize: (value: BinaryOptionsMarketResponse): Buffer =>
       Buffer.from(BinaryOptionsMarketResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): BinaryOptionsMarketResponse => BinaryOptionsMarketResponse.decode(value),
+    responseDeserialize: (value: Buffer): BinaryOptionsMarketResponse =>
+      BinaryOptionsMarketResponse.decode(value),
   },
   /** Orderbook gets the Orderbook of a Derivative Market */
   orderbookV2: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/OrderbookV2" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: OrderbookV2Request): Buffer => Buffer.from(OrderbookV2Request.encode(value).finish()),
-    requestDeserialize: (value: Buffer): OrderbookV2Request => OrderbookV2Request.decode(value),
-    responseSerialize: (value: OrderbookV2Response): Buffer => Buffer.from(OrderbookV2Response.encode(value).finish()),
-    responseDeserialize: (value: Buffer): OrderbookV2Response => OrderbookV2Response.decode(value),
+    requestSerialize: (value: OrderbookV2Request): Buffer =>
+      Buffer.from(OrderbookV2Request.encode(value).finish()),
+    requestDeserialize: (value: Buffer): OrderbookV2Request =>
+      OrderbookV2Request.decode(value),
+    responseSerialize: (value: OrderbookV2Response): Buffer =>
+      Buffer.from(OrderbookV2Response.encode(value).finish()),
+    responseDeserialize: (value: Buffer): OrderbookV2Response =>
+      OrderbookV2Response.decode(value),
   },
   /** Orderbooks gets the Orderbooks of requested derivative markets */
   orderbooksV2: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/OrderbooksV2" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: OrderbooksV2Request): Buffer => Buffer.from(OrderbooksV2Request.encode(value).finish()),
-    requestDeserialize: (value: Buffer): OrderbooksV2Request => OrderbooksV2Request.decode(value),
+    requestSerialize: (value: OrderbooksV2Request): Buffer =>
+      Buffer.from(OrderbooksV2Request.encode(value).finish()),
+    requestDeserialize: (value: Buffer): OrderbooksV2Request =>
+      OrderbooksV2Request.decode(value),
     responseSerialize: (value: OrderbooksV2Response): Buffer =>
       Buffer.from(OrderbooksV2Response.encode(value).finish()),
-    responseDeserialize: (value: Buffer): OrderbooksV2Response => OrderbooksV2Response.decode(value),
+    responseDeserialize: (value: Buffer): OrderbooksV2Response =>
+      OrderbooksV2Response.decode(value),
   },
   /** Stream live snapshot updates of selected derivative market orderbook */
   streamOrderbookV2: {
@@ -12836,10 +13975,12 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamOrderbookV2Request): Buffer =>
       Buffer.from(StreamOrderbookV2Request.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamOrderbookV2Request => StreamOrderbookV2Request.decode(value),
+    requestDeserialize: (value: Buffer): StreamOrderbookV2Request =>
+      StreamOrderbookV2Request.decode(value),
     responseSerialize: (value: StreamOrderbookV2Response): Buffer =>
       Buffer.from(StreamOrderbookV2Response.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamOrderbookV2Response => StreamOrderbookV2Response.decode(value),
+    responseDeserialize: (value: Buffer): StreamOrderbookV2Response =>
+      StreamOrderbookV2Response.decode(value),
   },
   /** Stream live level updates of selected derivative market orderbook */
   streamOrderbookUpdate: {
@@ -12848,30 +13989,40 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamOrderbookUpdateRequest): Buffer =>
       Buffer.from(StreamOrderbookUpdateRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamOrderbookUpdateRequest => StreamOrderbookUpdateRequest.decode(value),
+    requestDeserialize: (value: Buffer): StreamOrderbookUpdateRequest =>
+      StreamOrderbookUpdateRequest.decode(value),
     responseSerialize: (value: StreamOrderbookUpdateResponse): Buffer =>
       Buffer.from(StreamOrderbookUpdateResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamOrderbookUpdateResponse => StreamOrderbookUpdateResponse.decode(value),
+    responseDeserialize: (value: Buffer): StreamOrderbookUpdateResponse =>
+      StreamOrderbookUpdateResponse.decode(value),
   },
   /** DerivativeLimitOrders gets the limit orders of a derivative Market. */
   orders: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/Orders" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: OrdersRequest): Buffer => Buffer.from(OrdersRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): OrdersRequest => OrdersRequest.decode(value),
-    responseSerialize: (value: OrdersResponse): Buffer => Buffer.from(OrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): OrdersResponse => OrdersResponse.decode(value),
+    requestSerialize: (value: OrdersRequest): Buffer =>
+      Buffer.from(OrdersRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): OrdersRequest =>
+      OrdersRequest.decode(value),
+    responseSerialize: (value: OrdersResponse): Buffer =>
+      Buffer.from(OrdersResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): OrdersResponse =>
+      OrdersResponse.decode(value),
   },
   /** Positions gets the positions for a trader. */
   positions: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/Positions" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: PositionsRequest): Buffer => Buffer.from(PositionsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): PositionsRequest => PositionsRequest.decode(value),
-    responseSerialize: (value: PositionsResponse): Buffer => Buffer.from(PositionsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PositionsResponse => PositionsResponse.decode(value),
+    requestSerialize: (value: PositionsRequest): Buffer =>
+      Buffer.from(PositionsRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): PositionsRequest =>
+      PositionsRequest.decode(value),
+    responseSerialize: (value: PositionsResponse): Buffer =>
+      Buffer.from(PositionsResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): PositionsResponse =>
+      PositionsResponse.decode(value),
   },
   /**
    * Positions gets the positions for a trader. V2 removed some redundant fields
@@ -12881,10 +14032,14 @@ export const InjectiveDerivativeExchangeRPCService = {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/PositionsV2" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: PositionsV2Request): Buffer => Buffer.from(PositionsV2Request.encode(value).finish()),
-    requestDeserialize: (value: Buffer): PositionsV2Request => PositionsV2Request.decode(value),
-    responseSerialize: (value: PositionsV2Response): Buffer => Buffer.from(PositionsV2Response.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PositionsV2Response => PositionsV2Response.decode(value),
+    requestSerialize: (value: PositionsV2Request): Buffer =>
+      Buffer.from(PositionsV2Request.encode(value).finish()),
+    requestDeserialize: (value: Buffer): PositionsV2Request =>
+      PositionsV2Request.decode(value),
+    responseSerialize: (value: PositionsV2Response): Buffer =>
+      Buffer.from(PositionsV2Response.encode(value).finish()),
+    responseDeserialize: (value: Buffer): PositionsV2Response =>
+      PositionsV2Response.decode(value),
   },
   /** LiquidablePositions gets all the liquidable positions. */
   liquidablePositions: {
@@ -12893,10 +14048,12 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: false as const,
     requestSerialize: (value: LiquidablePositionsRequest): Buffer =>
       Buffer.from(LiquidablePositionsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): LiquidablePositionsRequest => LiquidablePositionsRequest.decode(value),
+    requestDeserialize: (value: Buffer): LiquidablePositionsRequest =>
+      LiquidablePositionsRequest.decode(value),
     responseSerialize: (value: LiquidablePositionsResponse): Buffer =>
       Buffer.from(LiquidablePositionsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): LiquidablePositionsResponse => LiquidablePositionsResponse.decode(value),
+    responseDeserialize: (value: Buffer): LiquidablePositionsResponse =>
+      LiquidablePositionsResponse.decode(value),
   },
   /** FundingPayments gets the funding payments for a trader. */
   fundingPayments: {
@@ -12905,21 +14062,26 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: false as const,
     requestSerialize: (value: FundingPaymentsRequest): Buffer =>
       Buffer.from(FundingPaymentsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): FundingPaymentsRequest => FundingPaymentsRequest.decode(value),
+    requestDeserialize: (value: Buffer): FundingPaymentsRequest =>
+      FundingPaymentsRequest.decode(value),
     responseSerialize: (value: FundingPaymentsResponse): Buffer =>
       Buffer.from(FundingPaymentsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): FundingPaymentsResponse => FundingPaymentsResponse.decode(value),
+    responseDeserialize: (value: Buffer): FundingPaymentsResponse =>
+      FundingPaymentsResponse.decode(value),
   },
   /** FundingRates gets the historical funding rates for a market. */
   fundingRates: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/FundingRates" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: FundingRatesRequest): Buffer => Buffer.from(FundingRatesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): FundingRatesRequest => FundingRatesRequest.decode(value),
+    requestSerialize: (value: FundingRatesRequest): Buffer =>
+      Buffer.from(FundingRatesRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): FundingRatesRequest =>
+      FundingRatesRequest.decode(value),
     responseSerialize: (value: FundingRatesResponse): Buffer =>
       Buffer.from(FundingRatesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): FundingRatesResponse => FundingRatesResponse.decode(value),
+    responseDeserialize: (value: Buffer): FundingRatesResponse =>
+      FundingRatesResponse.decode(value),
   },
   /**
    * StreamPositions streams derivatives position updates. This is the legacy
@@ -12931,10 +14093,12 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamPositionsRequest): Buffer =>
       Buffer.from(StreamPositionsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamPositionsRequest => StreamPositionsRequest.decode(value),
+    requestDeserialize: (value: Buffer): StreamPositionsRequest =>
+      StreamPositionsRequest.decode(value),
     responseSerialize: (value: StreamPositionsResponse): Buffer =>
       Buffer.from(StreamPositionsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamPositionsResponse => StreamPositionsResponse.decode(value),
+    responseDeserialize: (value: Buffer): StreamPositionsResponse =>
+      StreamPositionsResponse.decode(value),
   },
   /** StreamPositionsV2 streams derivatives position updates. */
   streamPositionsV2: {
@@ -12943,52 +14107,68 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamPositionsV2Request): Buffer =>
       Buffer.from(StreamPositionsV2Request.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamPositionsV2Request => StreamPositionsV2Request.decode(value),
+    requestDeserialize: (value: Buffer): StreamPositionsV2Request =>
+      StreamPositionsV2Request.decode(value),
     responseSerialize: (value: StreamPositionsV2Response): Buffer =>
       Buffer.from(StreamPositionsV2Response.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamPositionsV2Response => StreamPositionsV2Response.decode(value),
+    responseDeserialize: (value: Buffer): StreamPositionsV2Response =>
+      StreamPositionsV2Response.decode(value),
   },
   /** StreamOrders streams updates to individual orders of a Derivative Market. */
   streamOrders: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/StreamOrders" as const,
     requestStream: false as const,
     responseStream: true as const,
-    requestSerialize: (value: StreamOrdersRequest): Buffer => Buffer.from(StreamOrdersRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamOrdersRequest => StreamOrdersRequest.decode(value),
+    requestSerialize: (value: StreamOrdersRequest): Buffer =>
+      Buffer.from(StreamOrdersRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): StreamOrdersRequest =>
+      StreamOrdersRequest.decode(value),
     responseSerialize: (value: StreamOrdersResponse): Buffer =>
       Buffer.from(StreamOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamOrdersResponse => StreamOrdersResponse.decode(value),
+    responseDeserialize: (value: Buffer): StreamOrdersResponse =>
+      StreamOrdersResponse.decode(value),
   },
   /** Trades gets the trades of a Derivative Market. */
   trades: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/Trades" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: TradesRequest): Buffer => Buffer.from(TradesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): TradesRequest => TradesRequest.decode(value),
-    responseSerialize: (value: TradesResponse): Buffer => Buffer.from(TradesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): TradesResponse => TradesResponse.decode(value),
+    requestSerialize: (value: TradesRequest): Buffer =>
+      Buffer.from(TradesRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): TradesRequest =>
+      TradesRequest.decode(value),
+    responseSerialize: (value: TradesResponse): Buffer =>
+      Buffer.from(TradesResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): TradesResponse =>
+      TradesResponse.decode(value),
   },
   /** Trades gets the trades of a Derivative Market. */
   tradesV2: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/TradesV2" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: TradesV2Request): Buffer => Buffer.from(TradesV2Request.encode(value).finish()),
-    requestDeserialize: (value: Buffer): TradesV2Request => TradesV2Request.decode(value),
-    responseSerialize: (value: TradesV2Response): Buffer => Buffer.from(TradesV2Response.encode(value).finish()),
-    responseDeserialize: (value: Buffer): TradesV2Response => TradesV2Response.decode(value),
+    requestSerialize: (value: TradesV2Request): Buffer =>
+      Buffer.from(TradesV2Request.encode(value).finish()),
+    requestDeserialize: (value: Buffer): TradesV2Request =>
+      TradesV2Request.decode(value),
+    responseSerialize: (value: TradesV2Response): Buffer =>
+      Buffer.from(TradesV2Response.encode(value).finish()),
+    responseDeserialize: (value: Buffer): TradesV2Response =>
+      TradesV2Response.decode(value),
   },
   /** StreamTrades streams newly executed trades from Derivative Market. */
   streamTrades: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/StreamTrades" as const,
     requestStream: false as const,
     responseStream: true as const,
-    requestSerialize: (value: StreamTradesRequest): Buffer => Buffer.from(StreamTradesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamTradesRequest => StreamTradesRequest.decode(value),
+    requestSerialize: (value: StreamTradesRequest): Buffer =>
+      Buffer.from(StreamTradesRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): StreamTradesRequest =>
+      StreamTradesRequest.decode(value),
     responseSerialize: (value: StreamTradesResponse): Buffer =>
       Buffer.from(StreamTradesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamTradesResponse => StreamTradesResponse.decode(value),
+    responseDeserialize: (value: Buffer): StreamTradesResponse =>
+      StreamTradesResponse.decode(value),
   },
   /** StreamTrades streams newly executed trades from Derivative Market. */
   streamTradesV2: {
@@ -12997,10 +14177,12 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamTradesV2Request): Buffer =>
       Buffer.from(StreamTradesV2Request.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamTradesV2Request => StreamTradesV2Request.decode(value),
+    requestDeserialize: (value: Buffer): StreamTradesV2Request =>
+      StreamTradesV2Request.decode(value),
     responseSerialize: (value: StreamTradesV2Response): Buffer =>
       Buffer.from(StreamTradesV2Response.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamTradesV2Response => StreamTradesV2Response.decode(value),
+    responseDeserialize: (value: Buffer): StreamTradesV2Response =>
+      StreamTradesV2Response.decode(value),
   },
   /** SubaccountOrdersList lists orders posted from this subaccount. */
   subaccountOrdersList: {
@@ -13009,10 +14191,12 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: false as const,
     requestSerialize: (value: SubaccountOrdersListRequest): Buffer =>
       Buffer.from(SubaccountOrdersListRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): SubaccountOrdersListRequest => SubaccountOrdersListRequest.decode(value),
+    requestDeserialize: (value: Buffer): SubaccountOrdersListRequest =>
+      SubaccountOrdersListRequest.decode(value),
     responseSerialize: (value: SubaccountOrdersListResponse): Buffer =>
       Buffer.from(SubaccountOrdersListResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): SubaccountOrdersListResponse => SubaccountOrdersListResponse.decode(value),
+    responseDeserialize: (value: Buffer): SubaccountOrdersListResponse =>
+      SubaccountOrdersListResponse.decode(value),
   },
   /**
    * SubaccountTradesList gets a list of derivatives trades executed by this
@@ -13024,21 +14208,26 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: false as const,
     requestSerialize: (value: SubaccountTradesListRequest): Buffer =>
       Buffer.from(SubaccountTradesListRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): SubaccountTradesListRequest => SubaccountTradesListRequest.decode(value),
+    requestDeserialize: (value: Buffer): SubaccountTradesListRequest =>
+      SubaccountTradesListRequest.decode(value),
     responseSerialize: (value: SubaccountTradesListResponse): Buffer =>
       Buffer.from(SubaccountTradesListResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): SubaccountTradesListResponse => SubaccountTradesListResponse.decode(value),
+    responseDeserialize: (value: Buffer): SubaccountTradesListResponse =>
+      SubaccountTradesListResponse.decode(value),
   },
   /** Lists history orders posted from a subaccount */
   ordersHistory: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/OrdersHistory" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: OrdersHistoryRequest): Buffer => Buffer.from(OrdersHistoryRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): OrdersHistoryRequest => OrdersHistoryRequest.decode(value),
+    requestSerialize: (value: OrdersHistoryRequest): Buffer =>
+      Buffer.from(OrdersHistoryRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): OrdersHistoryRequest =>
+      OrdersHistoryRequest.decode(value),
     responseSerialize: (value: OrdersHistoryResponse): Buffer =>
       Buffer.from(OrdersHistoryResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): OrdersHistoryResponse => OrdersHistoryResponse.decode(value),
+    responseDeserialize: (value: Buffer): OrdersHistoryResponse =>
+      OrdersHistoryResponse.decode(value),
   },
   /** Stream updates to historical orders of a derivative Market */
   streamOrdersHistory: {
@@ -13047,21 +14236,26 @@ export const InjectiveDerivativeExchangeRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamOrdersHistoryRequest): Buffer =>
       Buffer.from(StreamOrdersHistoryRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamOrdersHistoryRequest => StreamOrdersHistoryRequest.decode(value),
+    requestDeserialize: (value: Buffer): StreamOrdersHistoryRequest =>
+      StreamOrdersHistoryRequest.decode(value),
     responseSerialize: (value: StreamOrdersHistoryResponse): Buffer =>
       Buffer.from(StreamOrdersHistoryResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamOrdersHistoryResponse => StreamOrdersHistoryResponse.decode(value),
+    responseDeserialize: (value: Buffer): StreamOrdersHistoryResponse =>
+      StreamOrdersHistoryResponse.decode(value),
   },
   /** OpenInterest gets the open interest for a derivative market. */
   openInterest: {
     path: "/injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC/OpenInterest" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: OpenInterestRequest): Buffer => Buffer.from(OpenInterestRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): OpenInterestRequest => OpenInterestRequest.decode(value),
+    requestSerialize: (value: OpenInterestRequest): Buffer =>
+      Buffer.from(OpenInterestRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): OpenInterestRequest =>
+      OpenInterestRequest.decode(value),
     responseSerialize: (value: OpenInterestResponse): Buffer =>
       Buffer.from(OpenInterestResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): OpenInterestResponse => OpenInterestResponse.decode(value),
+    responseDeserialize: (value: Buffer): OpenInterestResponse =>
+      OpenInterestResponse.decode(value),
   },
 } as const;
 
@@ -13071,19 +14265,34 @@ export interface InjectiveDerivativeExchangeRPCServer extends UntypedServiceImpl
   /** Market gets details of a single derivative market */
   market: handleUnaryCall<MarketRequest, MarketResponse>;
   /** StreamMarket streams live updates of selected derivative markets */
-  streamMarket: handleServerStreamingCall<StreamMarketRequest, StreamMarketResponse>;
+  streamMarket: handleServerStreamingCall<
+    StreamMarketRequest,
+    StreamMarketResponse
+  >;
   /** BinaryOptionsMarkets gets a list of Binary Options Markets */
-  binaryOptionsMarkets: handleUnaryCall<BinaryOptionsMarketsRequest, BinaryOptionsMarketsResponse>;
+  binaryOptionsMarkets: handleUnaryCall<
+    BinaryOptionsMarketsRequest,
+    BinaryOptionsMarketsResponse
+  >;
   /** BinaryOptionMarket gets details of a single binary options market */
-  binaryOptionsMarket: handleUnaryCall<BinaryOptionsMarketRequest, BinaryOptionsMarketResponse>;
+  binaryOptionsMarket: handleUnaryCall<
+    BinaryOptionsMarketRequest,
+    BinaryOptionsMarketResponse
+  >;
   /** Orderbook gets the Orderbook of a Derivative Market */
   orderbookV2: handleUnaryCall<OrderbookV2Request, OrderbookV2Response>;
   /** Orderbooks gets the Orderbooks of requested derivative markets */
   orderbooksV2: handleUnaryCall<OrderbooksV2Request, OrderbooksV2Response>;
   /** Stream live snapshot updates of selected derivative market orderbook */
-  streamOrderbookV2: handleServerStreamingCall<StreamOrderbookV2Request, StreamOrderbookV2Response>;
+  streamOrderbookV2: handleServerStreamingCall<
+    StreamOrderbookV2Request,
+    StreamOrderbookV2Response
+  >;
   /** Stream live level updates of selected derivative market orderbook */
-  streamOrderbookUpdate: handleServerStreamingCall<StreamOrderbookUpdateRequest, StreamOrderbookUpdateResponse>;
+  streamOrderbookUpdate: handleServerStreamingCall<
+    StreamOrderbookUpdateRequest,
+    StreamOrderbookUpdateResponse
+  >;
   /** DerivativeLimitOrders gets the limit orders of a derivative Market. */
   orders: handleUnaryCall<OrdersRequest, OrdersResponse>;
   /** Positions gets the positions for a trader. */
@@ -13094,39 +14303,69 @@ export interface InjectiveDerivativeExchangeRPCServer extends UntypedServiceImpl
    */
   positionsV2: handleUnaryCall<PositionsV2Request, PositionsV2Response>;
   /** LiquidablePositions gets all the liquidable positions. */
-  liquidablePositions: handleUnaryCall<LiquidablePositionsRequest, LiquidablePositionsResponse>;
+  liquidablePositions: handleUnaryCall<
+    LiquidablePositionsRequest,
+    LiquidablePositionsResponse
+  >;
   /** FundingPayments gets the funding payments for a trader. */
-  fundingPayments: handleUnaryCall<FundingPaymentsRequest, FundingPaymentsResponse>;
+  fundingPayments: handleUnaryCall<
+    FundingPaymentsRequest,
+    FundingPaymentsResponse
+  >;
   /** FundingRates gets the historical funding rates for a market. */
   fundingRates: handleUnaryCall<FundingRatesRequest, FundingRatesResponse>;
   /**
    * StreamPositions streams derivatives position updates. This is the legacy
    * version of the streamPositionsV2 endpoint. Use streamPositionsV2 instead.
    */
-  streamPositions: handleServerStreamingCall<StreamPositionsRequest, StreamPositionsResponse>;
+  streamPositions: handleServerStreamingCall<
+    StreamPositionsRequest,
+    StreamPositionsResponse
+  >;
   /** StreamPositionsV2 streams derivatives position updates. */
-  streamPositionsV2: handleServerStreamingCall<StreamPositionsV2Request, StreamPositionsV2Response>;
+  streamPositionsV2: handleServerStreamingCall<
+    StreamPositionsV2Request,
+    StreamPositionsV2Response
+  >;
   /** StreamOrders streams updates to individual orders of a Derivative Market. */
-  streamOrders: handleServerStreamingCall<StreamOrdersRequest, StreamOrdersResponse>;
+  streamOrders: handleServerStreamingCall<
+    StreamOrdersRequest,
+    StreamOrdersResponse
+  >;
   /** Trades gets the trades of a Derivative Market. */
   trades: handleUnaryCall<TradesRequest, TradesResponse>;
   /** Trades gets the trades of a Derivative Market. */
   tradesV2: handleUnaryCall<TradesV2Request, TradesV2Response>;
   /** StreamTrades streams newly executed trades from Derivative Market. */
-  streamTrades: handleServerStreamingCall<StreamTradesRequest, StreamTradesResponse>;
+  streamTrades: handleServerStreamingCall<
+    StreamTradesRequest,
+    StreamTradesResponse
+  >;
   /** StreamTrades streams newly executed trades from Derivative Market. */
-  streamTradesV2: handleServerStreamingCall<StreamTradesV2Request, StreamTradesV2Response>;
+  streamTradesV2: handleServerStreamingCall<
+    StreamTradesV2Request,
+    StreamTradesV2Response
+  >;
   /** SubaccountOrdersList lists orders posted from this subaccount. */
-  subaccountOrdersList: handleUnaryCall<SubaccountOrdersListRequest, SubaccountOrdersListResponse>;
+  subaccountOrdersList: handleUnaryCall<
+    SubaccountOrdersListRequest,
+    SubaccountOrdersListResponse
+  >;
   /**
    * SubaccountTradesList gets a list of derivatives trades executed by this
    * subaccount.
    */
-  subaccountTradesList: handleUnaryCall<SubaccountTradesListRequest, SubaccountTradesListResponse>;
+  subaccountTradesList: handleUnaryCall<
+    SubaccountTradesListRequest,
+    SubaccountTradesListResponse
+  >;
   /** Lists history orders posted from a subaccount */
   ordersHistory: handleUnaryCall<OrdersHistoryRequest, OrdersHistoryResponse>;
   /** Stream updates to historical orders of a derivative Market */
-  streamOrdersHistory: handleServerStreamingCall<StreamOrdersHistoryRequest, StreamOrdersHistoryResponse>;
+  streamOrdersHistory: handleServerStreamingCall<
+    StreamOrdersHistoryRequest,
+    StreamOrdersHistoryResponse
+  >;
   /** OpenInterest gets the open interest for a derivative market. */
   openInterest: handleUnaryCall<OpenInterestRequest, OpenInterestResponse>;
 }
@@ -13177,66 +14416,102 @@ export interface InjectiveDerivativeExchangeRPCClient extends Client {
   /** BinaryOptionsMarkets gets a list of Binary Options Markets */
   binaryOptionsMarkets(
     request: BinaryOptionsMarketsRequest,
-    callback: (error: ServiceError | null, response: BinaryOptionsMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BinaryOptionsMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   binaryOptionsMarkets(
     request: BinaryOptionsMarketsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: BinaryOptionsMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BinaryOptionsMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   binaryOptionsMarkets(
     request: BinaryOptionsMarketsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: BinaryOptionsMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BinaryOptionsMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** BinaryOptionMarket gets details of a single binary options market */
   binaryOptionsMarket(
     request: BinaryOptionsMarketRequest,
-    callback: (error: ServiceError | null, response: BinaryOptionsMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BinaryOptionsMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   binaryOptionsMarket(
     request: BinaryOptionsMarketRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: BinaryOptionsMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BinaryOptionsMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   binaryOptionsMarket(
     request: BinaryOptionsMarketRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: BinaryOptionsMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BinaryOptionsMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Orderbook gets the Orderbook of a Derivative Market */
   orderbookV2(
     request: OrderbookV2Request,
-    callback: (error: ServiceError | null, response: OrderbookV2Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrderbookV2Response,
+    ) => void,
   ): ClientUnaryCall;
   orderbookV2(
     request: OrderbookV2Request,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: OrderbookV2Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrderbookV2Response,
+    ) => void,
   ): ClientUnaryCall;
   orderbookV2(
     request: OrderbookV2Request,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: OrderbookV2Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrderbookV2Response,
+    ) => void,
   ): ClientUnaryCall;
   /** Orderbooks gets the Orderbooks of requested derivative markets */
   orderbooksV2(
     request: OrderbooksV2Request,
-    callback: (error: ServiceError | null, response: OrderbooksV2Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrderbooksV2Response,
+    ) => void,
   ): ClientUnaryCall;
   orderbooksV2(
     request: OrderbooksV2Request,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: OrderbooksV2Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrderbooksV2Response,
+    ) => void,
   ): ClientUnaryCall;
   orderbooksV2(
     request: OrderbooksV2Request,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: OrderbooksV2Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrderbooksV2Response,
+    ) => void,
   ): ClientUnaryCall;
   /** Stream live snapshot updates of selected derivative market orderbook */
   streamOrderbookV2(
@@ -13296,66 +14571,102 @@ export interface InjectiveDerivativeExchangeRPCClient extends Client {
    */
   positionsV2(
     request: PositionsV2Request,
-    callback: (error: ServiceError | null, response: PositionsV2Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PositionsV2Response,
+    ) => void,
   ): ClientUnaryCall;
   positionsV2(
     request: PositionsV2Request,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: PositionsV2Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PositionsV2Response,
+    ) => void,
   ): ClientUnaryCall;
   positionsV2(
     request: PositionsV2Request,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: PositionsV2Response) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PositionsV2Response,
+    ) => void,
   ): ClientUnaryCall;
   /** LiquidablePositions gets all the liquidable positions. */
   liquidablePositions(
     request: LiquidablePositionsRequest,
-    callback: (error: ServiceError | null, response: LiquidablePositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: LiquidablePositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   liquidablePositions(
     request: LiquidablePositionsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: LiquidablePositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: LiquidablePositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   liquidablePositions(
     request: LiquidablePositionsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: LiquidablePositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: LiquidablePositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** FundingPayments gets the funding payments for a trader. */
   fundingPayments(
     request: FundingPaymentsRequest,
-    callback: (error: ServiceError | null, response: FundingPaymentsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: FundingPaymentsResponse,
+    ) => void,
   ): ClientUnaryCall;
   fundingPayments(
     request: FundingPaymentsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: FundingPaymentsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: FundingPaymentsResponse,
+    ) => void,
   ): ClientUnaryCall;
   fundingPayments(
     request: FundingPaymentsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: FundingPaymentsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: FundingPaymentsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** FundingRates gets the historical funding rates for a market. */
   fundingRates(
     request: FundingRatesRequest,
-    callback: (error: ServiceError | null, response: FundingRatesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: FundingRatesResponse,
+    ) => void,
   ): ClientUnaryCall;
   fundingRates(
     request: FundingRatesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: FundingRatesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: FundingRatesResponse,
+    ) => void,
   ): ClientUnaryCall;
   fundingRates(
     request: FundingRatesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: FundingRatesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: FundingRatesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * StreamPositions streams derivatives position updates. This is the legacy
@@ -13445,18 +14756,27 @@ export interface InjectiveDerivativeExchangeRPCClient extends Client {
   /** SubaccountOrdersList lists orders posted from this subaccount. */
   subaccountOrdersList(
     request: SubaccountOrdersListRequest,
-    callback: (error: ServiceError | null, response: SubaccountOrdersListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountOrdersListResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountOrdersList(
     request: SubaccountOrdersListRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: SubaccountOrdersListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountOrdersListResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountOrdersList(
     request: SubaccountOrdersListRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: SubaccountOrdersListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountOrdersListResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * SubaccountTradesList gets a list of derivatives trades executed by this
@@ -13464,34 +14784,52 @@ export interface InjectiveDerivativeExchangeRPCClient extends Client {
    */
   subaccountTradesList(
     request: SubaccountTradesListRequest,
-    callback: (error: ServiceError | null, response: SubaccountTradesListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountTradesListResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountTradesList(
     request: SubaccountTradesListRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: SubaccountTradesListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountTradesListResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountTradesList(
     request: SubaccountTradesListRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: SubaccountTradesListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountTradesListResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Lists history orders posted from a subaccount */
   ordersHistory(
     request: OrdersHistoryRequest,
-    callback: (error: ServiceError | null, response: OrdersHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrdersHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   ordersHistory(
     request: OrdersHistoryRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: OrdersHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrdersHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   ordersHistory(
     request: OrdersHistoryRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: OrdersHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrdersHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Stream updates to historical orders of a derivative Market */
   streamOrdersHistory(
@@ -13506,45 +14844,63 @@ export interface InjectiveDerivativeExchangeRPCClient extends Client {
   /** OpenInterest gets the open interest for a derivative market. */
   openInterest(
     request: OpenInterestRequest,
-    callback: (error: ServiceError | null, response: OpenInterestResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OpenInterestResponse,
+    ) => void,
   ): ClientUnaryCall;
   openInterest(
     request: OpenInterestRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: OpenInterestResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OpenInterestResponse,
+    ) => void,
   ): ClientUnaryCall;
   openInterest(
     request: OpenInterestRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: OpenInterestResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OpenInterestResponse,
+    ) => void,
   ): ClientUnaryCall;
 }
 
-export const InjectiveDerivativeExchangeRPCClient = makeGenericClientConstructor(
-  InjectiveDerivativeExchangeRPCService,
-  "injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC",
-) as unknown as {
-  new (
-    address: string,
-    credentials: ChannelCredentials,
-    options?: Partial<ClientOptions>,
-  ): InjectiveDerivativeExchangeRPCClient;
-  service: typeof InjectiveDerivativeExchangeRPCService;
-  serviceName: string;
-};
+export const InjectiveDerivativeExchangeRPCClient =
+  makeGenericClientConstructor(
+    InjectiveDerivativeExchangeRPCService,
+    "injective_derivative_exchange_rpc.InjectiveDerivativeExchangeRPC",
+  ) as unknown as {
+    new (
+      address: string,
+      credentials: ChannelCredentials,
+      options?: Partial<ClientOptions>,
+    ): InjectiveDerivativeExchangeRPCClient;
+    service: typeof InjectiveDerivativeExchangeRPCService;
+    serviceName: string;
+  };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

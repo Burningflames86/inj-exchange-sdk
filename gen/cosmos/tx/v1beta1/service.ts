@@ -191,9 +191,7 @@ export interface GetTxsEventResponse {
    *
    * @deprecated
    */
-  pagination:
-    | PageResponse
-    | undefined;
+  pagination: PageResponse | undefined;
   /** total is total number of results available */
   total: number;
 }
@@ -228,9 +226,7 @@ export interface SimulateRequest {
    *
    * @deprecated
    */
-  tx:
-    | Tx
-    | undefined;
+  tx: Tx | undefined;
   /**
    * tx_bytes is the raw transaction.
    *
@@ -245,9 +241,7 @@ export interface SimulateRequest {
  */
 export interface SimulateResponse {
   /** gas_info is the information about gas used in the simulation. */
-  gasInfo:
-    | GasInfo
-    | undefined;
+  gasInfo: GasInfo | undefined;
   /** result is the result of the simulation. */
   result: Result | undefined;
 }
@@ -264,9 +258,7 @@ export interface GetTxRequest {
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponse {
   /** tx is the queried transaction. */
-  tx:
-    | Tx
-    | undefined;
+  tx: Tx | undefined;
   /** tx_response is the queried TxResponses. */
   txResponse: TxResponse | undefined;
 }
@@ -294,9 +286,7 @@ export interface GetBlockWithTxsResponse {
   /** txs are the transactions in the block. */
   txs: Tx[];
   blockId: BlockID | undefined;
-  block:
-    | Block
-    | undefined;
+  block: Block | undefined;
   /** pagination defines a pagination for the response. */
   pagination: PageResponse | undefined;
 }
@@ -386,11 +376,21 @@ export interface TxDecodeAminoResponse {
 }
 
 function createBaseGetTxsEventRequest(): GetTxsEventRequest {
-  return { events: [], pagination: undefined, orderBy: 0, page: 0, limit: 0, query: "" };
+  return {
+    events: [],
+    pagination: undefined,
+    orderBy: 0,
+    page: 0,
+    limit: 0,
+    query: "",
+  };
 }
 
 export const GetTxsEventRequest: MessageFns<GetTxsEventRequest> = {
-  encode(message: GetTxsEventRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetTxsEventRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.events) {
       writer.uint32(10).string(v!);
     }
@@ -412,8 +412,12 @@ export const GetTxsEventRequest: MessageFns<GetTxsEventRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetTxsEventRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): GetTxsEventRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxsEventRequest();
     while (reader.pos < end) {
@@ -478,13 +482,17 @@ export const GetTxsEventRequest: MessageFns<GetTxsEventRequest> = {
 
   fromJSON(object: any): GetTxsEventRequest {
     return {
-      events: globalThis.Array.isArray(object?.events) ? object.events.map((e: any) => globalThis.String(e)) : [],
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
+      events: globalThis.Array.isArray(object?.events)
+        ? object.events.map((e: any) => globalThis.String(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
       orderBy: isSet(object.orderBy)
         ? orderByFromJSON(object.orderBy)
         : isSet(object.order_by)
-        ? orderByFromJSON(object.order_by)
-        : 0,
+          ? orderByFromJSON(object.order_by)
+          : 0,
       page: isSet(object.page) ? globalThis.Number(object.page) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       query: isSet(object.query) ? globalThis.String(object.query) : "",
@@ -514,15 +522,20 @@ export const GetTxsEventRequest: MessageFns<GetTxsEventRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetTxsEventRequest>, I>>(base?: I): GetTxsEventRequest {
+  create<I extends Exact<DeepPartial<GetTxsEventRequest>, I>>(
+    base?: I,
+  ): GetTxsEventRequest {
     return GetTxsEventRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<GetTxsEventRequest>, I>>(object: I): GetTxsEventRequest {
+  fromPartial<I extends Exact<DeepPartial<GetTxsEventRequest>, I>>(
+    object: I,
+  ): GetTxsEventRequest {
     const message = createBaseGetTxsEventRequest();
     message.events = object.events?.map((e) => e) || [];
-    message.pagination = (object.pagination !== undefined && object.pagination !== null)
-      ? PageRequest.fromPartial(object.pagination)
-      : undefined;
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
     message.orderBy = object.orderBy ?? 0;
     message.page = object.page ?? 0;
     message.limit = object.limit ?? 0;
@@ -536,7 +549,10 @@ function createBaseGetTxsEventResponse(): GetTxsEventResponse {
 }
 
 export const GetTxsEventResponse: MessageFns<GetTxsEventResponse> = {
-  encode(message: GetTxsEventResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetTxsEventResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.txs) {
       Tx.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -552,8 +568,12 @@ export const GetTxsEventResponse: MessageFns<GetTxsEventResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetTxsEventResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): GetTxsEventResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxsEventResponse();
     while (reader.pos < end) {
@@ -602,13 +622,17 @@ export const GetTxsEventResponse: MessageFns<GetTxsEventResponse> = {
 
   fromJSON(object: any): GetTxsEventResponse {
     return {
-      txs: globalThis.Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromJSON(e)) : [],
+      txs: globalThis.Array.isArray(object?.txs)
+        ? object.txs.map((e: any) => Tx.fromJSON(e))
+        : [],
       txResponses: globalThis.Array.isArray(object?.txResponses)
         ? object.txResponses.map((e: any) => TxResponse.fromJSON(e))
         : globalThis.Array.isArray(object?.tx_responses)
-        ? object.tx_responses.map((e: any) => TxResponse.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
+          ? object.tx_responses.map((e: any) => TxResponse.fromJSON(e))
+          : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
       total: isSet(object.total) ? globalThis.Number(object.total) : 0,
     };
   },
@@ -630,16 +654,22 @@ export const GetTxsEventResponse: MessageFns<GetTxsEventResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetTxsEventResponse>, I>>(base?: I): GetTxsEventResponse {
+  create<I extends Exact<DeepPartial<GetTxsEventResponse>, I>>(
+    base?: I,
+  ): GetTxsEventResponse {
     return GetTxsEventResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<GetTxsEventResponse>, I>>(object: I): GetTxsEventResponse {
+  fromPartial<I extends Exact<DeepPartial<GetTxsEventResponse>, I>>(
+    object: I,
+  ): GetTxsEventResponse {
     const message = createBaseGetTxsEventResponse();
     message.txs = object.txs?.map((e) => Tx.fromPartial(e)) || [];
-    message.txResponses = object.txResponses?.map((e) => TxResponse.fromPartial(e)) || [];
-    message.pagination = (object.pagination !== undefined && object.pagination !== null)
-      ? PageResponse.fromPartial(object.pagination)
-      : undefined;
+    message.txResponses =
+      object.txResponses?.map((e) => TxResponse.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
     message.total = object.total ?? 0;
     return message;
   },
@@ -650,7 +680,10 @@ function createBaseBroadcastTxRequest(): BroadcastTxRequest {
 }
 
 export const BroadcastTxRequest: MessageFns<BroadcastTxRequest> = {
-  encode(message: BroadcastTxRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BroadcastTxRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.txBytes.length !== 0) {
       writer.uint32(10).bytes(message.txBytes);
     }
@@ -660,8 +693,12 @@ export const BroadcastTxRequest: MessageFns<BroadcastTxRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BroadcastTxRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): BroadcastTxRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastTxRequest();
     while (reader.pos < end) {
@@ -697,8 +734,8 @@ export const BroadcastTxRequest: MessageFns<BroadcastTxRequest> = {
       txBytes: isSet(object.txBytes)
         ? Buffer.from(bytesFromBase64(object.txBytes))
         : isSet(object.tx_bytes)
-        ? Buffer.from(bytesFromBase64(object.tx_bytes))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.tx_bytes))
+          : Buffer.alloc(0),
       mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : 0,
     };
   },
@@ -714,10 +751,14 @@ export const BroadcastTxRequest: MessageFns<BroadcastTxRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BroadcastTxRequest>, I>>(base?: I): BroadcastTxRequest {
+  create<I extends Exact<DeepPartial<BroadcastTxRequest>, I>>(
+    base?: I,
+  ): BroadcastTxRequest {
     return BroadcastTxRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BroadcastTxRequest>, I>>(object: I): BroadcastTxRequest {
+  fromPartial<I extends Exact<DeepPartial<BroadcastTxRequest>, I>>(
+    object: I,
+  ): BroadcastTxRequest {
     const message = createBaseBroadcastTxRequest();
     message.txBytes = object.txBytes ?? Buffer.alloc(0);
     message.mode = object.mode ?? 0;
@@ -730,15 +771,22 @@ function createBaseBroadcastTxResponse(): BroadcastTxResponse {
 }
 
 export const BroadcastTxResponse: MessageFns<BroadcastTxResponse> = {
-  encode(message: BroadcastTxResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BroadcastTxResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.txResponse !== undefined) {
       TxResponse.encode(message.txResponse, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BroadcastTxResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): BroadcastTxResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastTxResponse();
     while (reader.pos < end) {
@@ -766,8 +814,8 @@ export const BroadcastTxResponse: MessageFns<BroadcastTxResponse> = {
       txResponse: isSet(object.txResponse)
         ? TxResponse.fromJSON(object.txResponse)
         : isSet(object.tx_response)
-        ? TxResponse.fromJSON(object.tx_response)
-        : undefined,
+          ? TxResponse.fromJSON(object.tx_response)
+          : undefined,
     };
   },
 
@@ -779,14 +827,19 @@ export const BroadcastTxResponse: MessageFns<BroadcastTxResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BroadcastTxResponse>, I>>(base?: I): BroadcastTxResponse {
+  create<I extends Exact<DeepPartial<BroadcastTxResponse>, I>>(
+    base?: I,
+  ): BroadcastTxResponse {
     return BroadcastTxResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BroadcastTxResponse>, I>>(object: I): BroadcastTxResponse {
+  fromPartial<I extends Exact<DeepPartial<BroadcastTxResponse>, I>>(
+    object: I,
+  ): BroadcastTxResponse {
     const message = createBaseBroadcastTxResponse();
-    message.txResponse = (object.txResponse !== undefined && object.txResponse !== null)
-      ? TxResponse.fromPartial(object.txResponse)
-      : undefined;
+    message.txResponse =
+      object.txResponse !== undefined && object.txResponse !== null
+        ? TxResponse.fromPartial(object.txResponse)
+        : undefined;
     return message;
   },
 };
@@ -796,7 +849,10 @@ function createBaseSimulateRequest(): SimulateRequest {
 }
 
 export const SimulateRequest: MessageFns<SimulateRequest> = {
-  encode(message: SimulateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SimulateRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).join();
     }
@@ -807,7 +863,8 @@ export const SimulateRequest: MessageFns<SimulateRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SimulateRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimulateRequest();
     while (reader.pos < end) {
@@ -844,8 +901,8 @@ export const SimulateRequest: MessageFns<SimulateRequest> = {
       txBytes: isSet(object.txBytes)
         ? Buffer.from(bytesFromBase64(object.txBytes))
         : isSet(object.tx_bytes)
-        ? Buffer.from(bytesFromBase64(object.tx_bytes))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.tx_bytes))
+          : Buffer.alloc(0),
     };
   },
 
@@ -860,12 +917,19 @@ export const SimulateRequest: MessageFns<SimulateRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SimulateRequest>, I>>(base?: I): SimulateRequest {
+  create<I extends Exact<DeepPartial<SimulateRequest>, I>>(
+    base?: I,
+  ): SimulateRequest {
     return SimulateRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SimulateRequest>, I>>(object: I): SimulateRequest {
+  fromPartial<I extends Exact<DeepPartial<SimulateRequest>, I>>(
+    object: I,
+  ): SimulateRequest {
     const message = createBaseSimulateRequest();
-    message.tx = (object.tx !== undefined && object.tx !== null) ? Tx.fromPartial(object.tx) : undefined;
+    message.tx =
+      object.tx !== undefined && object.tx !== null
+        ? Tx.fromPartial(object.tx)
+        : undefined;
     message.txBytes = object.txBytes ?? Buffer.alloc(0);
     return message;
   },
@@ -876,7 +940,10 @@ function createBaseSimulateResponse(): SimulateResponse {
 }
 
 export const SimulateResponse: MessageFns<SimulateResponse> = {
-  encode(message: SimulateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SimulateResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.gasInfo !== undefined) {
       GasInfo.encode(message.gasInfo, writer.uint32(10).fork()).join();
     }
@@ -887,7 +954,8 @@ export const SimulateResponse: MessageFns<SimulateResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SimulateResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimulateResponse();
     while (reader.pos < end) {
@@ -923,8 +991,8 @@ export const SimulateResponse: MessageFns<SimulateResponse> = {
       gasInfo: isSet(object.gasInfo)
         ? GasInfo.fromJSON(object.gasInfo)
         : isSet(object.gas_info)
-        ? GasInfo.fromJSON(object.gas_info)
-        : undefined,
+          ? GasInfo.fromJSON(object.gas_info)
+          : undefined,
       result: isSet(object.result) ? Result.fromJSON(object.result) : undefined,
     };
   },
@@ -940,17 +1008,23 @@ export const SimulateResponse: MessageFns<SimulateResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SimulateResponse>, I>>(base?: I): SimulateResponse {
+  create<I extends Exact<DeepPartial<SimulateResponse>, I>>(
+    base?: I,
+  ): SimulateResponse {
     return SimulateResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SimulateResponse>, I>>(object: I): SimulateResponse {
+  fromPartial<I extends Exact<DeepPartial<SimulateResponse>, I>>(
+    object: I,
+  ): SimulateResponse {
     const message = createBaseSimulateResponse();
-    message.gasInfo = (object.gasInfo !== undefined && object.gasInfo !== null)
-      ? GasInfo.fromPartial(object.gasInfo)
-      : undefined;
-    message.result = (object.result !== undefined && object.result !== null)
-      ? Result.fromPartial(object.result)
-      : undefined;
+    message.gasInfo =
+      object.gasInfo !== undefined && object.gasInfo !== null
+        ? GasInfo.fromPartial(object.gasInfo)
+        : undefined;
+    message.result =
+      object.result !== undefined && object.result !== null
+        ? Result.fromPartial(object.result)
+        : undefined;
     return message;
   },
 };
@@ -960,7 +1034,10 @@ function createBaseGetTxRequest(): GetTxRequest {
 }
 
 export const GetTxRequest: MessageFns<GetTxRequest> = {
-  encode(message: GetTxRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetTxRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
     }
@@ -968,7 +1045,8 @@ export const GetTxRequest: MessageFns<GetTxRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): GetTxRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxRequest();
     while (reader.pos < end) {
@@ -1003,10 +1081,14 @@ export const GetTxRequest: MessageFns<GetTxRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetTxRequest>, I>>(base?: I): GetTxRequest {
+  create<I extends Exact<DeepPartial<GetTxRequest>, I>>(
+    base?: I,
+  ): GetTxRequest {
     return GetTxRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<GetTxRequest>, I>>(object: I): GetTxRequest {
+  fromPartial<I extends Exact<DeepPartial<GetTxRequest>, I>>(
+    object: I,
+  ): GetTxRequest {
     const message = createBaseGetTxRequest();
     message.hash = object.hash ?? "";
     return message;
@@ -1018,7 +1100,10 @@ function createBaseGetTxResponse(): GetTxResponse {
 }
 
 export const GetTxResponse: MessageFns<GetTxResponse> = {
-  encode(message: GetTxResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetTxResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).join();
     }
@@ -1029,7 +1114,8 @@ export const GetTxResponse: MessageFns<GetTxResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): GetTxResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxResponse();
     while (reader.pos < end) {
@@ -1066,8 +1152,8 @@ export const GetTxResponse: MessageFns<GetTxResponse> = {
       txResponse: isSet(object.txResponse)
         ? TxResponse.fromJSON(object.txResponse)
         : isSet(object.tx_response)
-        ? TxResponse.fromJSON(object.tx_response)
-        : undefined,
+          ? TxResponse.fromJSON(object.tx_response)
+          : undefined,
     };
   },
 
@@ -1082,15 +1168,23 @@ export const GetTxResponse: MessageFns<GetTxResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetTxResponse>, I>>(base?: I): GetTxResponse {
+  create<I extends Exact<DeepPartial<GetTxResponse>, I>>(
+    base?: I,
+  ): GetTxResponse {
     return GetTxResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<GetTxResponse>, I>>(object: I): GetTxResponse {
+  fromPartial<I extends Exact<DeepPartial<GetTxResponse>, I>>(
+    object: I,
+  ): GetTxResponse {
     const message = createBaseGetTxResponse();
-    message.tx = (object.tx !== undefined && object.tx !== null) ? Tx.fromPartial(object.tx) : undefined;
-    message.txResponse = (object.txResponse !== undefined && object.txResponse !== null)
-      ? TxResponse.fromPartial(object.txResponse)
-      : undefined;
+    message.tx =
+      object.tx !== undefined && object.tx !== null
+        ? Tx.fromPartial(object.tx)
+        : undefined;
+    message.txResponse =
+      object.txResponse !== undefined && object.txResponse !== null
+        ? TxResponse.fromPartial(object.txResponse)
+        : undefined;
     return message;
   },
 };
@@ -1100,7 +1194,10 @@ function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
 }
 
 export const GetBlockWithTxsRequest: MessageFns<GetBlockWithTxsRequest> = {
-  encode(message: GetBlockWithTxsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetBlockWithTxsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.height !== 0) {
       writer.uint32(8).int64(message.height);
     }
@@ -1110,8 +1207,12 @@ export const GetBlockWithTxsRequest: MessageFns<GetBlockWithTxsRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockWithTxsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): GetBlockWithTxsRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockWithTxsRequest();
     while (reader.pos < end) {
@@ -1145,7 +1246,9 @@ export const GetBlockWithTxsRequest: MessageFns<GetBlockWithTxsRequest> = {
   fromJSON(object: any): GetBlockWithTxsRequest {
     return {
       height: isSet(object.height) ? globalThis.Number(object.height) : 0,
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
     };
   },
 
@@ -1160,25 +1263,38 @@ export const GetBlockWithTxsRequest: MessageFns<GetBlockWithTxsRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetBlockWithTxsRequest>, I>>(base?: I): GetBlockWithTxsRequest {
+  create<I extends Exact<DeepPartial<GetBlockWithTxsRequest>, I>>(
+    base?: I,
+  ): GetBlockWithTxsRequest {
     return GetBlockWithTxsRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<GetBlockWithTxsRequest>, I>>(object: I): GetBlockWithTxsRequest {
+  fromPartial<I extends Exact<DeepPartial<GetBlockWithTxsRequest>, I>>(
+    object: I,
+  ): GetBlockWithTxsRequest {
     const message = createBaseGetBlockWithTxsRequest();
     message.height = object.height ?? 0;
-    message.pagination = (object.pagination !== undefined && object.pagination !== null)
-      ? PageRequest.fromPartial(object.pagination)
-      : undefined;
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
 
 function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
-  return { txs: [], blockId: undefined, block: undefined, pagination: undefined };
+  return {
+    txs: [],
+    blockId: undefined,
+    block: undefined,
+    pagination: undefined,
+  };
 }
 
 export const GetBlockWithTxsResponse: MessageFns<GetBlockWithTxsResponse> = {
-  encode(message: GetBlockWithTxsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetBlockWithTxsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.txs) {
       Tx.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -1194,8 +1310,12 @@ export const GetBlockWithTxsResponse: MessageFns<GetBlockWithTxsResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockWithTxsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): GetBlockWithTxsResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockWithTxsResponse();
     while (reader.pos < end) {
@@ -1244,14 +1364,18 @@ export const GetBlockWithTxsResponse: MessageFns<GetBlockWithTxsResponse> = {
 
   fromJSON(object: any): GetBlockWithTxsResponse {
     return {
-      txs: globalThis.Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromJSON(e)) : [],
+      txs: globalThis.Array.isArray(object?.txs)
+        ? object.txs.map((e: any) => Tx.fromJSON(e))
+        : [],
       blockId: isSet(object.blockId)
         ? BlockID.fromJSON(object.blockId)
         : isSet(object.block_id)
-        ? BlockID.fromJSON(object.block_id)
-        : undefined,
+          ? BlockID.fromJSON(object.block_id)
+          : undefined,
       block: isSet(object.block) ? Block.fromJSON(object.block) : undefined,
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
     };
   },
 
@@ -1272,19 +1396,28 @@ export const GetBlockWithTxsResponse: MessageFns<GetBlockWithTxsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<GetBlockWithTxsResponse>, I>>(base?: I): GetBlockWithTxsResponse {
+  create<I extends Exact<DeepPartial<GetBlockWithTxsResponse>, I>>(
+    base?: I,
+  ): GetBlockWithTxsResponse {
     return GetBlockWithTxsResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<GetBlockWithTxsResponse>, I>>(object: I): GetBlockWithTxsResponse {
+  fromPartial<I extends Exact<DeepPartial<GetBlockWithTxsResponse>, I>>(
+    object: I,
+  ): GetBlockWithTxsResponse {
     const message = createBaseGetBlockWithTxsResponse();
     message.txs = object.txs?.map((e) => Tx.fromPartial(e)) || [];
-    message.blockId = (object.blockId !== undefined && object.blockId !== null)
-      ? BlockID.fromPartial(object.blockId)
-      : undefined;
-    message.block = (object.block !== undefined && object.block !== null) ? Block.fromPartial(object.block) : undefined;
-    message.pagination = (object.pagination !== undefined && object.pagination !== null)
-      ? PageResponse.fromPartial(object.pagination)
-      : undefined;
+    message.blockId =
+      object.blockId !== undefined && object.blockId !== null
+        ? BlockID.fromPartial(object.blockId)
+        : undefined;
+    message.block =
+      object.block !== undefined && object.block !== null
+        ? Block.fromPartial(object.block)
+        : undefined;
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
@@ -1294,7 +1427,10 @@ function createBaseTxDecodeRequest(): TxDecodeRequest {
 }
 
 export const TxDecodeRequest: MessageFns<TxDecodeRequest> = {
-  encode(message: TxDecodeRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxDecodeRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.txBytes.length !== 0) {
       writer.uint32(10).bytes(message.txBytes);
     }
@@ -1302,7 +1438,8 @@ export const TxDecodeRequest: MessageFns<TxDecodeRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TxDecodeRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxDecodeRequest();
     while (reader.pos < end) {
@@ -1330,8 +1467,8 @@ export const TxDecodeRequest: MessageFns<TxDecodeRequest> = {
       txBytes: isSet(object.txBytes)
         ? Buffer.from(bytesFromBase64(object.txBytes))
         : isSet(object.tx_bytes)
-        ? Buffer.from(bytesFromBase64(object.tx_bytes))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.tx_bytes))
+          : Buffer.alloc(0),
     };
   },
 
@@ -1343,10 +1480,14 @@ export const TxDecodeRequest: MessageFns<TxDecodeRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TxDecodeRequest>, I>>(base?: I): TxDecodeRequest {
+  create<I extends Exact<DeepPartial<TxDecodeRequest>, I>>(
+    base?: I,
+  ): TxDecodeRequest {
     return TxDecodeRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TxDecodeRequest>, I>>(object: I): TxDecodeRequest {
+  fromPartial<I extends Exact<DeepPartial<TxDecodeRequest>, I>>(
+    object: I,
+  ): TxDecodeRequest {
     const message = createBaseTxDecodeRequest();
     message.txBytes = object.txBytes ?? Buffer.alloc(0);
     return message;
@@ -1358,7 +1499,10 @@ function createBaseTxDecodeResponse(): TxDecodeResponse {
 }
 
 export const TxDecodeResponse: MessageFns<TxDecodeResponse> = {
-  encode(message: TxDecodeResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxDecodeResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).join();
     }
@@ -1366,7 +1510,8 @@ export const TxDecodeResponse: MessageFns<TxDecodeResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TxDecodeResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxDecodeResponse();
     while (reader.pos < end) {
@@ -1401,12 +1546,19 @@ export const TxDecodeResponse: MessageFns<TxDecodeResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TxDecodeResponse>, I>>(base?: I): TxDecodeResponse {
+  create<I extends Exact<DeepPartial<TxDecodeResponse>, I>>(
+    base?: I,
+  ): TxDecodeResponse {
     return TxDecodeResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TxDecodeResponse>, I>>(object: I): TxDecodeResponse {
+  fromPartial<I extends Exact<DeepPartial<TxDecodeResponse>, I>>(
+    object: I,
+  ): TxDecodeResponse {
     const message = createBaseTxDecodeResponse();
-    message.tx = (object.tx !== undefined && object.tx !== null) ? Tx.fromPartial(object.tx) : undefined;
+    message.tx =
+      object.tx !== undefined && object.tx !== null
+        ? Tx.fromPartial(object.tx)
+        : undefined;
     return message;
   },
 };
@@ -1416,7 +1568,10 @@ function createBaseTxEncodeRequest(): TxEncodeRequest {
 }
 
 export const TxEncodeRequest: MessageFns<TxEncodeRequest> = {
-  encode(message: TxEncodeRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxEncodeRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).join();
     }
@@ -1424,7 +1579,8 @@ export const TxEncodeRequest: MessageFns<TxEncodeRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TxEncodeRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxEncodeRequest();
     while (reader.pos < end) {
@@ -1459,12 +1615,19 @@ export const TxEncodeRequest: MessageFns<TxEncodeRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TxEncodeRequest>, I>>(base?: I): TxEncodeRequest {
+  create<I extends Exact<DeepPartial<TxEncodeRequest>, I>>(
+    base?: I,
+  ): TxEncodeRequest {
     return TxEncodeRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TxEncodeRequest>, I>>(object: I): TxEncodeRequest {
+  fromPartial<I extends Exact<DeepPartial<TxEncodeRequest>, I>>(
+    object: I,
+  ): TxEncodeRequest {
     const message = createBaseTxEncodeRequest();
-    message.tx = (object.tx !== undefined && object.tx !== null) ? Tx.fromPartial(object.tx) : undefined;
+    message.tx =
+      object.tx !== undefined && object.tx !== null
+        ? Tx.fromPartial(object.tx)
+        : undefined;
     return message;
   },
 };
@@ -1474,7 +1637,10 @@ function createBaseTxEncodeResponse(): TxEncodeResponse {
 }
 
 export const TxEncodeResponse: MessageFns<TxEncodeResponse> = {
-  encode(message: TxEncodeResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxEncodeResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.txBytes.length !== 0) {
       writer.uint32(10).bytes(message.txBytes);
     }
@@ -1482,7 +1648,8 @@ export const TxEncodeResponse: MessageFns<TxEncodeResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TxEncodeResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxEncodeResponse();
     while (reader.pos < end) {
@@ -1510,8 +1677,8 @@ export const TxEncodeResponse: MessageFns<TxEncodeResponse> = {
       txBytes: isSet(object.txBytes)
         ? Buffer.from(bytesFromBase64(object.txBytes))
         : isSet(object.tx_bytes)
-        ? Buffer.from(bytesFromBase64(object.tx_bytes))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.tx_bytes))
+          : Buffer.alloc(0),
     };
   },
 
@@ -1523,10 +1690,14 @@ export const TxEncodeResponse: MessageFns<TxEncodeResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TxEncodeResponse>, I>>(base?: I): TxEncodeResponse {
+  create<I extends Exact<DeepPartial<TxEncodeResponse>, I>>(
+    base?: I,
+  ): TxEncodeResponse {
     return TxEncodeResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TxEncodeResponse>, I>>(object: I): TxEncodeResponse {
+  fromPartial<I extends Exact<DeepPartial<TxEncodeResponse>, I>>(
+    object: I,
+  ): TxEncodeResponse {
     const message = createBaseTxEncodeResponse();
     message.txBytes = object.txBytes ?? Buffer.alloc(0);
     return message;
@@ -1538,15 +1709,22 @@ function createBaseTxEncodeAminoRequest(): TxEncodeAminoRequest {
 }
 
 export const TxEncodeAminoRequest: MessageFns<TxEncodeAminoRequest> = {
-  encode(message: TxEncodeAminoRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxEncodeAminoRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.aminoJson !== "") {
       writer.uint32(10).string(message.aminoJson);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TxEncodeAminoRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TxEncodeAminoRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxEncodeAminoRequest();
     while (reader.pos < end) {
@@ -1574,8 +1752,8 @@ export const TxEncodeAminoRequest: MessageFns<TxEncodeAminoRequest> = {
       aminoJson: isSet(object.aminoJson)
         ? globalThis.String(object.aminoJson)
         : isSet(object.amino_json)
-        ? globalThis.String(object.amino_json)
-        : "",
+          ? globalThis.String(object.amino_json)
+          : "",
     };
   },
 
@@ -1587,10 +1765,14 @@ export const TxEncodeAminoRequest: MessageFns<TxEncodeAminoRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TxEncodeAminoRequest>, I>>(base?: I): TxEncodeAminoRequest {
+  create<I extends Exact<DeepPartial<TxEncodeAminoRequest>, I>>(
+    base?: I,
+  ): TxEncodeAminoRequest {
     return TxEncodeAminoRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TxEncodeAminoRequest>, I>>(object: I): TxEncodeAminoRequest {
+  fromPartial<I extends Exact<DeepPartial<TxEncodeAminoRequest>, I>>(
+    object: I,
+  ): TxEncodeAminoRequest {
     const message = createBaseTxEncodeAminoRequest();
     message.aminoJson = object.aminoJson ?? "";
     return message;
@@ -1602,15 +1784,22 @@ function createBaseTxEncodeAminoResponse(): TxEncodeAminoResponse {
 }
 
 export const TxEncodeAminoResponse: MessageFns<TxEncodeAminoResponse> = {
-  encode(message: TxEncodeAminoResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxEncodeAminoResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.aminoBinary.length !== 0) {
       writer.uint32(10).bytes(message.aminoBinary);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TxEncodeAminoResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TxEncodeAminoResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxEncodeAminoResponse();
     while (reader.pos < end) {
@@ -1638,8 +1827,8 @@ export const TxEncodeAminoResponse: MessageFns<TxEncodeAminoResponse> = {
       aminoBinary: isSet(object.aminoBinary)
         ? Buffer.from(bytesFromBase64(object.aminoBinary))
         : isSet(object.amino_binary)
-        ? Buffer.from(bytesFromBase64(object.amino_binary))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.amino_binary))
+          : Buffer.alloc(0),
     };
   },
 
@@ -1651,10 +1840,14 @@ export const TxEncodeAminoResponse: MessageFns<TxEncodeAminoResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TxEncodeAminoResponse>, I>>(base?: I): TxEncodeAminoResponse {
+  create<I extends Exact<DeepPartial<TxEncodeAminoResponse>, I>>(
+    base?: I,
+  ): TxEncodeAminoResponse {
     return TxEncodeAminoResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TxEncodeAminoResponse>, I>>(object: I): TxEncodeAminoResponse {
+  fromPartial<I extends Exact<DeepPartial<TxEncodeAminoResponse>, I>>(
+    object: I,
+  ): TxEncodeAminoResponse {
     const message = createBaseTxEncodeAminoResponse();
     message.aminoBinary = object.aminoBinary ?? Buffer.alloc(0);
     return message;
@@ -1666,15 +1859,22 @@ function createBaseTxDecodeAminoRequest(): TxDecodeAminoRequest {
 }
 
 export const TxDecodeAminoRequest: MessageFns<TxDecodeAminoRequest> = {
-  encode(message: TxDecodeAminoRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxDecodeAminoRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.aminoBinary.length !== 0) {
       writer.uint32(10).bytes(message.aminoBinary);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TxDecodeAminoRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TxDecodeAminoRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxDecodeAminoRequest();
     while (reader.pos < end) {
@@ -1702,8 +1902,8 @@ export const TxDecodeAminoRequest: MessageFns<TxDecodeAminoRequest> = {
       aminoBinary: isSet(object.aminoBinary)
         ? Buffer.from(bytesFromBase64(object.aminoBinary))
         : isSet(object.amino_binary)
-        ? Buffer.from(bytesFromBase64(object.amino_binary))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.amino_binary))
+          : Buffer.alloc(0),
     };
   },
 
@@ -1715,10 +1915,14 @@ export const TxDecodeAminoRequest: MessageFns<TxDecodeAminoRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TxDecodeAminoRequest>, I>>(base?: I): TxDecodeAminoRequest {
+  create<I extends Exact<DeepPartial<TxDecodeAminoRequest>, I>>(
+    base?: I,
+  ): TxDecodeAminoRequest {
     return TxDecodeAminoRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TxDecodeAminoRequest>, I>>(object: I): TxDecodeAminoRequest {
+  fromPartial<I extends Exact<DeepPartial<TxDecodeAminoRequest>, I>>(
+    object: I,
+  ): TxDecodeAminoRequest {
     const message = createBaseTxDecodeAminoRequest();
     message.aminoBinary = object.aminoBinary ?? Buffer.alloc(0);
     return message;
@@ -1730,15 +1934,22 @@ function createBaseTxDecodeAminoResponse(): TxDecodeAminoResponse {
 }
 
 export const TxDecodeAminoResponse: MessageFns<TxDecodeAminoResponse> = {
-  encode(message: TxDecodeAminoResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxDecodeAminoResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.aminoJson !== "") {
       writer.uint32(10).string(message.aminoJson);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TxDecodeAminoResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TxDecodeAminoResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxDecodeAminoResponse();
     while (reader.pos < end) {
@@ -1766,8 +1977,8 @@ export const TxDecodeAminoResponse: MessageFns<TxDecodeAminoResponse> = {
       aminoJson: isSet(object.aminoJson)
         ? globalThis.String(object.aminoJson)
         : isSet(object.amino_json)
-        ? globalThis.String(object.amino_json)
-        : "",
+          ? globalThis.String(object.amino_json)
+          : "",
     };
   },
 
@@ -1779,10 +1990,14 @@ export const TxDecodeAminoResponse: MessageFns<TxDecodeAminoResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TxDecodeAminoResponse>, I>>(base?: I): TxDecodeAminoResponse {
+  create<I extends Exact<DeepPartial<TxDecodeAminoResponse>, I>>(
+    base?: I,
+  ): TxDecodeAminoResponse {
     return TxDecodeAminoResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TxDecodeAminoResponse>, I>>(object: I): TxDecodeAminoResponse {
+  fromPartial<I extends Exact<DeepPartial<TxDecodeAminoResponse>, I>>(
+    object: I,
+  ): TxDecodeAminoResponse {
     const message = createBaseTxDecodeAminoResponse();
     message.aminoJson = object.aminoJson ?? "";
     return message;
@@ -1797,40 +2012,56 @@ export const ServiceService = {
     path: "/cosmos.tx.v1beta1.Service/Simulate" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: SimulateRequest): Buffer => Buffer.from(SimulateRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): SimulateRequest => SimulateRequest.decode(value),
-    responseSerialize: (value: SimulateResponse): Buffer => Buffer.from(SimulateResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): SimulateResponse => SimulateResponse.decode(value),
+    requestSerialize: (value: SimulateRequest): Buffer =>
+      Buffer.from(SimulateRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): SimulateRequest =>
+      SimulateRequest.decode(value),
+    responseSerialize: (value: SimulateResponse): Buffer =>
+      Buffer.from(SimulateResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): SimulateResponse =>
+      SimulateResponse.decode(value),
   },
   /** GetTx fetches a tx by hash. */
   getTx: {
     path: "/cosmos.tx.v1beta1.Service/GetTx" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: GetTxRequest): Buffer => Buffer.from(GetTxRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): GetTxRequest => GetTxRequest.decode(value),
-    responseSerialize: (value: GetTxResponse): Buffer => Buffer.from(GetTxResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): GetTxResponse => GetTxResponse.decode(value),
+    requestSerialize: (value: GetTxRequest): Buffer =>
+      Buffer.from(GetTxRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): GetTxRequest =>
+      GetTxRequest.decode(value),
+    responseSerialize: (value: GetTxResponse): Buffer =>
+      Buffer.from(GetTxResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): GetTxResponse =>
+      GetTxResponse.decode(value),
   },
   /** BroadcastTx broadcast transaction. */
   broadcastTx: {
     path: "/cosmos.tx.v1beta1.Service/BroadcastTx" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: BroadcastTxRequest): Buffer => Buffer.from(BroadcastTxRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): BroadcastTxRequest => BroadcastTxRequest.decode(value),
-    responseSerialize: (value: BroadcastTxResponse): Buffer => Buffer.from(BroadcastTxResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): BroadcastTxResponse => BroadcastTxResponse.decode(value),
+    requestSerialize: (value: BroadcastTxRequest): Buffer =>
+      Buffer.from(BroadcastTxRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): BroadcastTxRequest =>
+      BroadcastTxRequest.decode(value),
+    responseSerialize: (value: BroadcastTxResponse): Buffer =>
+      Buffer.from(BroadcastTxResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): BroadcastTxResponse =>
+      BroadcastTxResponse.decode(value),
   },
   /** GetTxsEvent fetches txs by event. */
   getTxsEvent: {
     path: "/cosmos.tx.v1beta1.Service/GetTxsEvent" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: GetTxsEventRequest): Buffer => Buffer.from(GetTxsEventRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): GetTxsEventRequest => GetTxsEventRequest.decode(value),
-    responseSerialize: (value: GetTxsEventResponse): Buffer => Buffer.from(GetTxsEventResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): GetTxsEventResponse => GetTxsEventResponse.decode(value),
+    requestSerialize: (value: GetTxsEventRequest): Buffer =>
+      Buffer.from(GetTxsEventRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): GetTxsEventRequest =>
+      GetTxsEventRequest.decode(value),
+    responseSerialize: (value: GetTxsEventResponse): Buffer =>
+      Buffer.from(GetTxsEventResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): GetTxsEventResponse =>
+      GetTxsEventResponse.decode(value),
   },
   /**
    * GetBlockWithTxs fetches a block with decoded txs.
@@ -1843,10 +2074,12 @@ export const ServiceService = {
     responseStream: false as const,
     requestSerialize: (value: GetBlockWithTxsRequest): Buffer =>
       Buffer.from(GetBlockWithTxsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): GetBlockWithTxsRequest => GetBlockWithTxsRequest.decode(value),
+    requestDeserialize: (value: Buffer): GetBlockWithTxsRequest =>
+      GetBlockWithTxsRequest.decode(value),
     responseSerialize: (value: GetBlockWithTxsResponse): Buffer =>
       Buffer.from(GetBlockWithTxsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): GetBlockWithTxsResponse => GetBlockWithTxsResponse.decode(value),
+    responseDeserialize: (value: Buffer): GetBlockWithTxsResponse =>
+      GetBlockWithTxsResponse.decode(value),
   },
   /**
    * TxDecode decodes the transaction.
@@ -1857,10 +2090,14 @@ export const ServiceService = {
     path: "/cosmos.tx.v1beta1.Service/TxDecode" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: TxDecodeRequest): Buffer => Buffer.from(TxDecodeRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): TxDecodeRequest => TxDecodeRequest.decode(value),
-    responseSerialize: (value: TxDecodeResponse): Buffer => Buffer.from(TxDecodeResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): TxDecodeResponse => TxDecodeResponse.decode(value),
+    requestSerialize: (value: TxDecodeRequest): Buffer =>
+      Buffer.from(TxDecodeRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): TxDecodeRequest =>
+      TxDecodeRequest.decode(value),
+    responseSerialize: (value: TxDecodeResponse): Buffer =>
+      Buffer.from(TxDecodeResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): TxDecodeResponse =>
+      TxDecodeResponse.decode(value),
   },
   /**
    * TxEncode encodes the transaction.
@@ -1871,10 +2108,14 @@ export const ServiceService = {
     path: "/cosmos.tx.v1beta1.Service/TxEncode" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: TxEncodeRequest): Buffer => Buffer.from(TxEncodeRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): TxEncodeRequest => TxEncodeRequest.decode(value),
-    responseSerialize: (value: TxEncodeResponse): Buffer => Buffer.from(TxEncodeResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): TxEncodeResponse => TxEncodeResponse.decode(value),
+    requestSerialize: (value: TxEncodeRequest): Buffer =>
+      Buffer.from(TxEncodeRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): TxEncodeRequest =>
+      TxEncodeRequest.decode(value),
+    responseSerialize: (value: TxEncodeResponse): Buffer =>
+      Buffer.from(TxEncodeResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): TxEncodeResponse =>
+      TxEncodeResponse.decode(value),
   },
   /**
    * TxEncodeAmino encodes an Amino transaction from JSON to encoded bytes.
@@ -1885,11 +2126,14 @@ export const ServiceService = {
     path: "/cosmos.tx.v1beta1.Service/TxEncodeAmino" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: TxEncodeAminoRequest): Buffer => Buffer.from(TxEncodeAminoRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): TxEncodeAminoRequest => TxEncodeAminoRequest.decode(value),
+    requestSerialize: (value: TxEncodeAminoRequest): Buffer =>
+      Buffer.from(TxEncodeAminoRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): TxEncodeAminoRequest =>
+      TxEncodeAminoRequest.decode(value),
     responseSerialize: (value: TxEncodeAminoResponse): Buffer =>
       Buffer.from(TxEncodeAminoResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): TxEncodeAminoResponse => TxEncodeAminoResponse.decode(value),
+    responseDeserialize: (value: Buffer): TxEncodeAminoResponse =>
+      TxEncodeAminoResponse.decode(value),
   },
   /**
    * TxDecodeAmino decodes an Amino transaction from encoded bytes to JSON.
@@ -1900,11 +2144,14 @@ export const ServiceService = {
     path: "/cosmos.tx.v1beta1.Service/TxDecodeAmino" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: TxDecodeAminoRequest): Buffer => Buffer.from(TxDecodeAminoRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): TxDecodeAminoRequest => TxDecodeAminoRequest.decode(value),
+    requestSerialize: (value: TxDecodeAminoRequest): Buffer =>
+      Buffer.from(TxDecodeAminoRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): TxDecodeAminoRequest =>
+      TxDecodeAminoRequest.decode(value),
     responseSerialize: (value: TxDecodeAminoResponse): Buffer =>
       Buffer.from(TxDecodeAminoResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): TxDecodeAminoResponse => TxDecodeAminoResponse.decode(value),
+    responseDeserialize: (value: Buffer): TxDecodeAminoResponse =>
+      TxDecodeAminoResponse.decode(value),
   },
 } as const;
 
@@ -1922,7 +2169,10 @@ export interface ServiceServer extends UntypedServiceImplementation {
    *
    * Since: cosmos-sdk 0.45.2
    */
-  getBlockWithTxs: handleUnaryCall<GetBlockWithTxsRequest, GetBlockWithTxsResponse>;
+  getBlockWithTxs: handleUnaryCall<
+    GetBlockWithTxsRequest,
+    GetBlockWithTxsResponse
+  >;
   /**
    * TxDecode decodes the transaction.
    *
@@ -1985,34 +2235,52 @@ export interface ServiceClient extends Client {
   /** BroadcastTx broadcast transaction. */
   broadcastTx(
     request: BroadcastTxRequest,
-    callback: (error: ServiceError | null, response: BroadcastTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BroadcastTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   broadcastTx(
     request: BroadcastTxRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: BroadcastTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BroadcastTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   broadcastTx(
     request: BroadcastTxRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: BroadcastTxResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: BroadcastTxResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** GetTxsEvent fetches txs by event. */
   getTxsEvent(
     request: GetTxsEventRequest,
-    callback: (error: ServiceError | null, response: GetTxsEventResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: GetTxsEventResponse,
+    ) => void,
   ): ClientUnaryCall;
   getTxsEvent(
     request: GetTxsEventRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: GetTxsEventResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: GetTxsEventResponse,
+    ) => void,
   ): ClientUnaryCall;
   getTxsEvent(
     request: GetTxsEventRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: GetTxsEventResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: GetTxsEventResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * GetBlockWithTxs fetches a block with decoded txs.
@@ -2021,18 +2289,27 @@ export interface ServiceClient extends Client {
    */
   getBlockWithTxs(
     request: GetBlockWithTxsRequest,
-    callback: (error: ServiceError | null, response: GetBlockWithTxsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: GetBlockWithTxsResponse,
+    ) => void,
   ): ClientUnaryCall;
   getBlockWithTxs(
     request: GetBlockWithTxsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: GetBlockWithTxsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: GetBlockWithTxsResponse,
+    ) => void,
   ): ClientUnaryCall;
   getBlockWithTxs(
     request: GetBlockWithTxsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: GetBlockWithTxsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: GetBlockWithTxsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * TxDecode decodes the transaction.
@@ -2081,18 +2358,27 @@ export interface ServiceClient extends Client {
    */
   txEncodeAmino(
     request: TxEncodeAminoRequest,
-    callback: (error: ServiceError | null, response: TxEncodeAminoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: TxEncodeAminoResponse,
+    ) => void,
   ): ClientUnaryCall;
   txEncodeAmino(
     request: TxEncodeAminoRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: TxEncodeAminoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: TxEncodeAminoResponse,
+    ) => void,
   ): ClientUnaryCall;
   txEncodeAmino(
     request: TxEncodeAminoRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: TxEncodeAminoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: TxEncodeAminoResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * TxDecodeAmino decodes an Amino transaction from encoded bytes to JSON.
@@ -2101,23 +2387,39 @@ export interface ServiceClient extends Client {
    */
   txDecodeAmino(
     request: TxDecodeAminoRequest,
-    callback: (error: ServiceError | null, response: TxDecodeAminoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: TxDecodeAminoResponse,
+    ) => void,
   ): ClientUnaryCall;
   txDecodeAmino(
     request: TxDecodeAminoRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: TxDecodeAminoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: TxDecodeAminoResponse,
+    ) => void,
   ): ClientUnaryCall;
   txDecodeAmino(
     request: TxDecodeAminoRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: TxDecodeAminoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: TxDecodeAminoResponse,
+    ) => void,
   ): ClientUnaryCall;
 }
 
-export const ServiceClient = makeGenericClientConstructor(ServiceService, "cosmos.tx.v1beta1.Service") as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): ServiceClient;
+export const ServiceClient = makeGenericClientConstructor(
+  ServiceService,
+  "cosmos.tx.v1beta1.Service",
+) as unknown as {
+  new (
+    address: string,
+    credentials: ChannelCredentials,
+    options?: Partial<ClientOptions>,
+  ): ServiceClient;
   service: typeof ServiceService;
   serviceName: string;
 };
@@ -2130,17 +2432,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

@@ -251,11 +251,22 @@ export interface MarketSnapshotHistoryResponse {
 }
 
 function createBaseSpotMarketHistoryRequest(): SpotMarketHistoryRequest {
-  return { symbol: "", marketId: "", resolution: "", from: 0, to: 0, countback: 0, fillGaps: false };
+  return {
+    symbol: "",
+    marketId: "",
+    resolution: "",
+    from: 0,
+    to: 0,
+    countback: 0,
+    fillGaps: false,
+  };
 }
 
 export const SpotMarketHistoryRequest: MessageFns<SpotMarketHistoryRequest> = {
-  encode(message: SpotMarketHistoryRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotMarketHistoryRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.symbol !== "") {
       writer.uint32(10).string(message.symbol);
     }
@@ -280,8 +291,12 @@ export const SpotMarketHistoryRequest: MessageFns<SpotMarketHistoryRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SpotMarketHistoryRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SpotMarketHistoryRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotMarketHistoryRequest();
     while (reader.pos < end) {
@@ -358,17 +373,21 @@ export const SpotMarketHistoryRequest: MessageFns<SpotMarketHistoryRequest> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
+          ? globalThis.String(object.market_id)
+          : "",
+      resolution: isSet(object.resolution)
+        ? globalThis.String(object.resolution)
         : "",
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
       from: isSet(object.from) ? globalThis.Number(object.from) : 0,
       to: isSet(object.to) ? globalThis.Number(object.to) : 0,
-      countback: isSet(object.countback) ? globalThis.Number(object.countback) : 0,
+      countback: isSet(object.countback)
+        ? globalThis.Number(object.countback)
+        : 0,
       fillGaps: isSet(object.fillGaps)
         ? globalThis.Boolean(object.fillGaps)
         : isSet(object.fill_gaps)
-        ? globalThis.Boolean(object.fill_gaps)
-        : false,
+          ? globalThis.Boolean(object.fill_gaps)
+          : false,
     };
   },
 
@@ -398,10 +417,14 @@ export const SpotMarketHistoryRequest: MessageFns<SpotMarketHistoryRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SpotMarketHistoryRequest>, I>>(base?: I): SpotMarketHistoryRequest {
+  create<I extends Exact<DeepPartial<SpotMarketHistoryRequest>, I>>(
+    base?: I,
+  ): SpotMarketHistoryRequest {
     return SpotMarketHistoryRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotMarketHistoryRequest>, I>>(object: I): SpotMarketHistoryRequest {
+  fromPartial<I extends Exact<DeepPartial<SpotMarketHistoryRequest>, I>>(
+    object: I,
+  ): SpotMarketHistoryRequest {
     const message = createBaseSpotMarketHistoryRequest();
     message.symbol = object.symbol ?? "";
     message.marketId = object.marketId ?? "";
@@ -418,229 +441,253 @@ function createBaseSpotMarketHistoryResponse(): SpotMarketHistoryResponse {
   return { t: [], o: [], h: [], l: [], c: [], v: [], s: "" };
 }
 
-export const SpotMarketHistoryResponse: MessageFns<SpotMarketHistoryResponse> = {
-  encode(message: SpotMarketHistoryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    writer.uint32(10).fork();
-    for (const v of message.t) {
-      writer.sint32(v);
-    }
-    writer.join();
-    writer.uint32(18).fork();
-    for (const v of message.o) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(26).fork();
-    for (const v of message.h) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(34).fork();
-    for (const v of message.l) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(42).fork();
-    for (const v of message.c) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(50).fork();
-    for (const v of message.v) {
-      writer.double(v);
-    }
-    writer.join();
-    if (message.s !== "") {
-      writer.uint32(58).string(message.s);
-    }
-    return writer;
-  },
+export const SpotMarketHistoryResponse: MessageFns<SpotMarketHistoryResponse> =
+  {
+    encode(
+      message: SpotMarketHistoryResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      writer.uint32(10).fork();
+      for (const v of message.t) {
+        writer.sint32(v);
+      }
+      writer.join();
+      writer.uint32(18).fork();
+      for (const v of message.o) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(26).fork();
+      for (const v of message.h) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(34).fork();
+      for (const v of message.l) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(42).fork();
+      for (const v of message.c) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(50).fork();
+      for (const v of message.v) {
+        writer.double(v);
+      }
+      writer.join();
+      if (message.s !== "") {
+        writer.uint32(58).string(message.s);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SpotMarketHistoryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSpotMarketHistoryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag === 8) {
-            message.t.push(reader.sint32());
-
-            continue;
-          }
-
-          if (tag === 10) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SpotMarketHistoryResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSpotMarketHistoryResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag === 8) {
               message.t.push(reader.sint32());
+
+              continue;
             }
 
-            continue;
-          }
+            if (tag === 10) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.t.push(reader.sint32());
+              }
 
-          break;
-        }
-        case 2: {
-          if (tag === 17) {
-            message.o.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 18) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.o.push(reader.double());
+              continue;
             }
 
-            continue;
-          }
-
-          break;
-        }
-        case 3: {
-          if (tag === 25) {
-            message.h.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 26) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.h.push(reader.double());
-            }
-
-            continue;
-          }
-
-          break;
-        }
-        case 4: {
-          if (tag === 33) {
-            message.l.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 34) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.l.push(reader.double());
-            }
-
-            continue;
-          }
-
-          break;
-        }
-        case 5: {
-          if (tag === 41) {
-            message.c.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 42) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.c.push(reader.double());
-            }
-
-            continue;
-          }
-
-          break;
-        }
-        case 6: {
-          if (tag === 49) {
-            message.v.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 50) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.v.push(reader.double());
-            }
-
-            continue;
-          }
-
-          break;
-        }
-        case 7: {
-          if (tag !== 58) {
             break;
           }
+          case 2: {
+            if (tag === 17) {
+              message.o.push(reader.double());
 
-          message.s = reader.string();
-          continue;
+              continue;
+            }
+
+            if (tag === 18) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.o.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 3: {
+            if (tag === 25) {
+              message.h.push(reader.double());
+
+              continue;
+            }
+
+            if (tag === 26) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.h.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 4: {
+            if (tag === 33) {
+              message.l.push(reader.double());
+
+              continue;
+            }
+
+            if (tag === 34) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.l.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 5: {
+            if (tag === 41) {
+              message.c.push(reader.double());
+
+              continue;
+            }
+
+            if (tag === 42) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.c.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 6: {
+            if (tag === 49) {
+              message.v.push(reader.double());
+
+              continue;
+            }
+
+            if (tag === 50) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.v.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.s = reader.string();
+            continue;
+          }
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): SpotMarketHistoryResponse {
+      return {
+        t: globalThis.Array.isArray(object?.t)
+          ? object.t.map((e: any) => globalThis.Number(e))
+          : [],
+        o: globalThis.Array.isArray(object?.o)
+          ? object.o.map((e: any) => globalThis.Number(e))
+          : [],
+        h: globalThis.Array.isArray(object?.h)
+          ? object.h.map((e: any) => globalThis.Number(e))
+          : [],
+        l: globalThis.Array.isArray(object?.l)
+          ? object.l.map((e: any) => globalThis.Number(e))
+          : [],
+        c: globalThis.Array.isArray(object?.c)
+          ? object.c.map((e: any) => globalThis.Number(e))
+          : [],
+        v: globalThis.Array.isArray(object?.v)
+          ? object.v.map((e: any) => globalThis.Number(e))
+          : [],
+        s: isSet(object.s) ? globalThis.String(object.s) : "",
+      };
+    },
+
+    toJSON(message: SpotMarketHistoryResponse): unknown {
+      const obj: any = {};
+      if (message.t?.length) {
+        obj.t = message.t.map((e) => Math.round(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.o?.length) {
+        obj.o = message.o;
+      }
+      if (message.h?.length) {
+        obj.h = message.h;
+      }
+      if (message.l?.length) {
+        obj.l = message.l;
+      }
+      if (message.c?.length) {
+        obj.c = message.c;
+      }
+      if (message.v?.length) {
+        obj.v = message.v;
+      }
+      if (message.s !== "") {
+        obj.s = message.s;
+      }
+      return obj;
+    },
 
-  fromJSON(object: any): SpotMarketHistoryResponse {
-    return {
-      t: globalThis.Array.isArray(object?.t) ? object.t.map((e: any) => globalThis.Number(e)) : [],
-      o: globalThis.Array.isArray(object?.o) ? object.o.map((e: any) => globalThis.Number(e)) : [],
-      h: globalThis.Array.isArray(object?.h) ? object.h.map((e: any) => globalThis.Number(e)) : [],
-      l: globalThis.Array.isArray(object?.l) ? object.l.map((e: any) => globalThis.Number(e)) : [],
-      c: globalThis.Array.isArray(object?.c) ? object.c.map((e: any) => globalThis.Number(e)) : [],
-      v: globalThis.Array.isArray(object?.v) ? object.v.map((e: any) => globalThis.Number(e)) : [],
-      s: isSet(object.s) ? globalThis.String(object.s) : "",
-    };
-  },
-
-  toJSON(message: SpotMarketHistoryResponse): unknown {
-    const obj: any = {};
-    if (message.t?.length) {
-      obj.t = message.t.map((e) => Math.round(e));
-    }
-    if (message.o?.length) {
-      obj.o = message.o;
-    }
-    if (message.h?.length) {
-      obj.h = message.h;
-    }
-    if (message.l?.length) {
-      obj.l = message.l;
-    }
-    if (message.c?.length) {
-      obj.c = message.c;
-    }
-    if (message.v?.length) {
-      obj.v = message.v;
-    }
-    if (message.s !== "") {
-      obj.s = message.s;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<SpotMarketHistoryResponse>, I>>(base?: I): SpotMarketHistoryResponse {
-    return SpotMarketHistoryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SpotMarketHistoryResponse>, I>>(object: I): SpotMarketHistoryResponse {
-    const message = createBaseSpotMarketHistoryResponse();
-    message.t = object.t?.map((e) => e) || [];
-    message.o = object.o?.map((e) => e) || [];
-    message.h = object.h?.map((e) => e) || [];
-    message.l = object.l?.map((e) => e) || [];
-    message.c = object.c?.map((e) => e) || [];
-    message.v = object.v?.map((e) => e) || [];
-    message.s = object.s ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<SpotMarketHistoryResponse>, I>>(
+      base?: I,
+    ): SpotMarketHistoryResponse {
+      return SpotMarketHistoryResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SpotMarketHistoryResponse>, I>>(
+      object: I,
+    ): SpotMarketHistoryResponse {
+      const message = createBaseSpotMarketHistoryResponse();
+      message.t = object.t?.map((e) => e) || [];
+      message.o = object.o?.map((e) => e) || [];
+      message.h = object.h?.map((e) => e) || [];
+      message.l = object.l?.map((e) => e) || [];
+      message.c = object.c?.map((e) => e) || [];
+      message.v = object.v?.map((e) => e) || [];
+      message.s = object.s ?? "";
+      return message;
+    },
+  };
 
 function createBaseDerivativeMarketHistoryRequest(): DerivativeMarketHistoryRequest {
   return {
@@ -656,444 +703,483 @@ function createBaseDerivativeMarketHistoryRequest(): DerivativeMarketHistoryRequ
   };
 }
 
-export const DerivativeMarketHistoryRequest: MessageFns<DerivativeMarketHistoryRequest> = {
-  encode(message: DerivativeMarketHistoryRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.symbol !== "") {
-      writer.uint32(10).string(message.symbol);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    if (message.resolution !== "") {
-      writer.uint32(26).string(message.resolution);
-    }
-    if (message.from !== 0) {
-      writer.uint32(32).sint32(message.from);
-    }
-    if (message.to !== 0) {
-      writer.uint32(40).sint32(message.to);
-    }
-    if (message.countback !== 0) {
-      writer.uint32(48).sint32(message.countback);
-    }
-    if (message.useOraclePrices !== false) {
-      writer.uint32(56).bool(message.useOraclePrices);
-    }
-    if (message.fillGaps !== false) {
-      writer.uint32(64).bool(message.fillGaps);
-    }
-    if (message.indexPrices !== false) {
-      writer.uint32(72).bool(message.indexPrices);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeMarketHistoryRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDerivativeMarketHistoryRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.symbol = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.resolution = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 32) {
-            break;
-          }
-
-          message.from = reader.sint32();
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.to = reader.sint32();
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.countback = reader.sint32();
-          continue;
-        }
-        case 7: {
-          if (tag !== 56) {
-            break;
-          }
-
-          message.useOraclePrices = reader.bool();
-          continue;
-        }
-        case 8: {
-          if (tag !== 64) {
-            break;
-          }
-
-          message.fillGaps = reader.bool();
-          continue;
-        }
-        case 9: {
-          if (tag !== 72) {
-            break;
-          }
-
-          message.indexPrices = reader.bool();
-          continue;
-        }
+export const DerivativeMarketHistoryRequest: MessageFns<DerivativeMarketHistoryRequest> =
+  {
+    encode(
+      message: DerivativeMarketHistoryRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.symbol !== "") {
+        writer.uint32(10).string(message.symbol);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.resolution !== "") {
+        writer.uint32(26).string(message.resolution);
+      }
+      if (message.from !== 0) {
+        writer.uint32(32).sint32(message.from);
+      }
+      if (message.to !== 0) {
+        writer.uint32(40).sint32(message.to);
+      }
+      if (message.countback !== 0) {
+        writer.uint32(48).sint32(message.countback);
+      }
+      if (message.useOraclePrices !== false) {
+        writer.uint32(56).bool(message.useOraclePrices);
+      }
+      if (message.fillGaps !== false) {
+        writer.uint32(64).bool(message.fillGaps);
+      }
+      if (message.indexPrices !== false) {
+        writer.uint32(72).bool(message.indexPrices);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): DerivativeMarketHistoryRequest {
-    return {
-      symbol: isSet(object.symbol) ? globalThis.String(object.symbol) : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
-      from: isSet(object.from) ? globalThis.Number(object.from) : 0,
-      to: isSet(object.to) ? globalThis.Number(object.to) : 0,
-      countback: isSet(object.countback) ? globalThis.Number(object.countback) : 0,
-      useOraclePrices: isSet(object.useOraclePrices)
-        ? globalThis.Boolean(object.useOraclePrices)
-        : isSet(object.use_oracle_prices)
-        ? globalThis.Boolean(object.use_oracle_prices)
-        : false,
-      fillGaps: isSet(object.fillGaps)
-        ? globalThis.Boolean(object.fillGaps)
-        : isSet(object.fill_gaps)
-        ? globalThis.Boolean(object.fill_gaps)
-        : false,
-      indexPrices: isSet(object.indexPrices)
-        ? globalThis.Boolean(object.indexPrices)
-        : isSet(object.index_prices)
-        ? globalThis.Boolean(object.index_prices)
-        : false,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): DerivativeMarketHistoryRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseDerivativeMarketHistoryRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: DerivativeMarketHistoryRequest): unknown {
-    const obj: any = {};
-    if (message.symbol !== "") {
-      obj.symbol = message.symbol;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.resolution !== "") {
-      obj.resolution = message.resolution;
-    }
-    if (message.from !== 0) {
-      obj.from = Math.round(message.from);
-    }
-    if (message.to !== 0) {
-      obj.to = Math.round(message.to);
-    }
-    if (message.countback !== 0) {
-      obj.countback = Math.round(message.countback);
-    }
-    if (message.useOraclePrices !== false) {
-      obj.useOraclePrices = message.useOraclePrices;
-    }
-    if (message.fillGaps !== false) {
-      obj.fillGaps = message.fillGaps;
-    }
-    if (message.indexPrices !== false) {
-      obj.indexPrices = message.indexPrices;
-    }
-    return obj;
-  },
+            message.symbol = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<DerivativeMarketHistoryRequest>, I>>(base?: I): DerivativeMarketHistoryRequest {
-    return DerivativeMarketHistoryRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DerivativeMarketHistoryRequest>, I>>(
-    object: I,
-  ): DerivativeMarketHistoryRequest {
-    const message = createBaseDerivativeMarketHistoryRequest();
-    message.symbol = object.symbol ?? "";
-    message.marketId = object.marketId ?? "";
-    message.resolution = object.resolution ?? "";
-    message.from = object.from ?? 0;
-    message.to = object.to ?? 0;
-    message.countback = object.countback ?? 0;
-    message.useOraclePrices = object.useOraclePrices ?? false;
-    message.fillGaps = object.fillGaps ?? false;
-    message.indexPrices = object.indexPrices ?? false;
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.resolution = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 32) {
+              break;
+            }
+
+            message.from = reader.sint32();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.to = reader.sint32();
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.countback = reader.sint32();
+            continue;
+          }
+          case 7: {
+            if (tag !== 56) {
+              break;
+            }
+
+            message.useOraclePrices = reader.bool();
+            continue;
+          }
+          case 8: {
+            if (tag !== 64) {
+              break;
+            }
+
+            message.fillGaps = reader.bool();
+            continue;
+          }
+          case 9: {
+            if (tag !== 72) {
+              break;
+            }
+
+            message.indexPrices = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): DerivativeMarketHistoryRequest {
+      return {
+        symbol: isSet(object.symbol) ? globalThis.String(object.symbol) : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        resolution: isSet(object.resolution)
+          ? globalThis.String(object.resolution)
+          : "",
+        from: isSet(object.from) ? globalThis.Number(object.from) : 0,
+        to: isSet(object.to) ? globalThis.Number(object.to) : 0,
+        countback: isSet(object.countback)
+          ? globalThis.Number(object.countback)
+          : 0,
+        useOraclePrices: isSet(object.useOraclePrices)
+          ? globalThis.Boolean(object.useOraclePrices)
+          : isSet(object.use_oracle_prices)
+            ? globalThis.Boolean(object.use_oracle_prices)
+            : false,
+        fillGaps: isSet(object.fillGaps)
+          ? globalThis.Boolean(object.fillGaps)
+          : isSet(object.fill_gaps)
+            ? globalThis.Boolean(object.fill_gaps)
+            : false,
+        indexPrices: isSet(object.indexPrices)
+          ? globalThis.Boolean(object.indexPrices)
+          : isSet(object.index_prices)
+            ? globalThis.Boolean(object.index_prices)
+            : false,
+      };
+    },
+
+    toJSON(message: DerivativeMarketHistoryRequest): unknown {
+      const obj: any = {};
+      if (message.symbol !== "") {
+        obj.symbol = message.symbol;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.resolution !== "") {
+        obj.resolution = message.resolution;
+      }
+      if (message.from !== 0) {
+        obj.from = Math.round(message.from);
+      }
+      if (message.to !== 0) {
+        obj.to = Math.round(message.to);
+      }
+      if (message.countback !== 0) {
+        obj.countback = Math.round(message.countback);
+      }
+      if (message.useOraclePrices !== false) {
+        obj.useOraclePrices = message.useOraclePrices;
+      }
+      if (message.fillGaps !== false) {
+        obj.fillGaps = message.fillGaps;
+      }
+      if (message.indexPrices !== false) {
+        obj.indexPrices = message.indexPrices;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<DerivativeMarketHistoryRequest>, I>>(
+      base?: I,
+    ): DerivativeMarketHistoryRequest {
+      return DerivativeMarketHistoryRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<DerivativeMarketHistoryRequest>, I>,
+    >(object: I): DerivativeMarketHistoryRequest {
+      const message = createBaseDerivativeMarketHistoryRequest();
+      message.symbol = object.symbol ?? "";
+      message.marketId = object.marketId ?? "";
+      message.resolution = object.resolution ?? "";
+      message.from = object.from ?? 0;
+      message.to = object.to ?? 0;
+      message.countback = object.countback ?? 0;
+      message.useOraclePrices = object.useOraclePrices ?? false;
+      message.fillGaps = object.fillGaps ?? false;
+      message.indexPrices = object.indexPrices ?? false;
+      return message;
+    },
+  };
 
 function createBaseDerivativeMarketHistoryResponse(): DerivativeMarketHistoryResponse {
   return { t: [], o: [], h: [], l: [], c: [], v: [], s: "" };
 }
 
-export const DerivativeMarketHistoryResponse: MessageFns<DerivativeMarketHistoryResponse> = {
-  encode(message: DerivativeMarketHistoryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    writer.uint32(10).fork();
-    for (const v of message.t) {
-      writer.sint32(v);
-    }
-    writer.join();
-    writer.uint32(18).fork();
-    for (const v of message.o) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(26).fork();
-    for (const v of message.h) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(34).fork();
-    for (const v of message.l) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(42).fork();
-    for (const v of message.c) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(50).fork();
-    for (const v of message.v) {
-      writer.double(v);
-    }
-    writer.join();
-    if (message.s !== "") {
-      writer.uint32(58).string(message.s);
-    }
-    return writer;
-  },
+export const DerivativeMarketHistoryResponse: MessageFns<DerivativeMarketHistoryResponse> =
+  {
+    encode(
+      message: DerivativeMarketHistoryResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      writer.uint32(10).fork();
+      for (const v of message.t) {
+        writer.sint32(v);
+      }
+      writer.join();
+      writer.uint32(18).fork();
+      for (const v of message.o) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(26).fork();
+      for (const v of message.h) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(34).fork();
+      for (const v of message.l) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(42).fork();
+      for (const v of message.c) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(50).fork();
+      for (const v of message.v) {
+        writer.double(v);
+      }
+      writer.join();
+      if (message.s !== "") {
+        writer.uint32(58).string(message.s);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeMarketHistoryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDerivativeMarketHistoryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag === 8) {
-            message.t.push(reader.sint32());
-
-            continue;
-          }
-
-          if (tag === 10) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): DerivativeMarketHistoryResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseDerivativeMarketHistoryResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag === 8) {
               message.t.push(reader.sint32());
+
+              continue;
             }
 
-            continue;
-          }
+            if (tag === 10) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.t.push(reader.sint32());
+              }
 
-          break;
-        }
-        case 2: {
-          if (tag === 17) {
-            message.o.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 18) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.o.push(reader.double());
+              continue;
             }
 
-            continue;
-          }
-
-          break;
-        }
-        case 3: {
-          if (tag === 25) {
-            message.h.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 26) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.h.push(reader.double());
-            }
-
-            continue;
-          }
-
-          break;
-        }
-        case 4: {
-          if (tag === 33) {
-            message.l.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 34) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.l.push(reader.double());
-            }
-
-            continue;
-          }
-
-          break;
-        }
-        case 5: {
-          if (tag === 41) {
-            message.c.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 42) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.c.push(reader.double());
-            }
-
-            continue;
-          }
-
-          break;
-        }
-        case 6: {
-          if (tag === 49) {
-            message.v.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 50) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.v.push(reader.double());
-            }
-
-            continue;
-          }
-
-          break;
-        }
-        case 7: {
-          if (tag !== 58) {
             break;
           }
+          case 2: {
+            if (tag === 17) {
+              message.o.push(reader.double());
 
-          message.s = reader.string();
-          continue;
+              continue;
+            }
+
+            if (tag === 18) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.o.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 3: {
+            if (tag === 25) {
+              message.h.push(reader.double());
+
+              continue;
+            }
+
+            if (tag === 26) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.h.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 4: {
+            if (tag === 33) {
+              message.l.push(reader.double());
+
+              continue;
+            }
+
+            if (tag === 34) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.l.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 5: {
+            if (tag === 41) {
+              message.c.push(reader.double());
+
+              continue;
+            }
+
+            if (tag === 42) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.c.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 6: {
+            if (tag === 49) {
+              message.v.push(reader.double());
+
+              continue;
+            }
+
+            if (tag === 50) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.v.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.s = reader.string();
+            continue;
+          }
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): DerivativeMarketHistoryResponse {
+      return {
+        t: globalThis.Array.isArray(object?.t)
+          ? object.t.map((e: any) => globalThis.Number(e))
+          : [],
+        o: globalThis.Array.isArray(object?.o)
+          ? object.o.map((e: any) => globalThis.Number(e))
+          : [],
+        h: globalThis.Array.isArray(object?.h)
+          ? object.h.map((e: any) => globalThis.Number(e))
+          : [],
+        l: globalThis.Array.isArray(object?.l)
+          ? object.l.map((e: any) => globalThis.Number(e))
+          : [],
+        c: globalThis.Array.isArray(object?.c)
+          ? object.c.map((e: any) => globalThis.Number(e))
+          : [],
+        v: globalThis.Array.isArray(object?.v)
+          ? object.v.map((e: any) => globalThis.Number(e))
+          : [],
+        s: isSet(object.s) ? globalThis.String(object.s) : "",
+      };
+    },
+
+    toJSON(message: DerivativeMarketHistoryResponse): unknown {
+      const obj: any = {};
+      if (message.t?.length) {
+        obj.t = message.t.map((e) => Math.round(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.o?.length) {
+        obj.o = message.o;
+      }
+      if (message.h?.length) {
+        obj.h = message.h;
+      }
+      if (message.l?.length) {
+        obj.l = message.l;
+      }
+      if (message.c?.length) {
+        obj.c = message.c;
+      }
+      if (message.v?.length) {
+        obj.v = message.v;
+      }
+      if (message.s !== "") {
+        obj.s = message.s;
+      }
+      return obj;
+    },
 
-  fromJSON(object: any): DerivativeMarketHistoryResponse {
-    return {
-      t: globalThis.Array.isArray(object?.t) ? object.t.map((e: any) => globalThis.Number(e)) : [],
-      o: globalThis.Array.isArray(object?.o) ? object.o.map((e: any) => globalThis.Number(e)) : [],
-      h: globalThis.Array.isArray(object?.h) ? object.h.map((e: any) => globalThis.Number(e)) : [],
-      l: globalThis.Array.isArray(object?.l) ? object.l.map((e: any) => globalThis.Number(e)) : [],
-      c: globalThis.Array.isArray(object?.c) ? object.c.map((e: any) => globalThis.Number(e)) : [],
-      v: globalThis.Array.isArray(object?.v) ? object.v.map((e: any) => globalThis.Number(e)) : [],
-      s: isSet(object.s) ? globalThis.String(object.s) : "",
-    };
-  },
-
-  toJSON(message: DerivativeMarketHistoryResponse): unknown {
-    const obj: any = {};
-    if (message.t?.length) {
-      obj.t = message.t.map((e) => Math.round(e));
-    }
-    if (message.o?.length) {
-      obj.o = message.o;
-    }
-    if (message.h?.length) {
-      obj.h = message.h;
-    }
-    if (message.l?.length) {
-      obj.l = message.l;
-    }
-    if (message.c?.length) {
-      obj.c = message.c;
-    }
-    if (message.v?.length) {
-      obj.v = message.v;
-    }
-    if (message.s !== "") {
-      obj.s = message.s;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<DerivativeMarketHistoryResponse>, I>>(base?: I): DerivativeMarketHistoryResponse {
-    return DerivativeMarketHistoryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DerivativeMarketHistoryResponse>, I>>(
-    object: I,
-  ): DerivativeMarketHistoryResponse {
-    const message = createBaseDerivativeMarketHistoryResponse();
-    message.t = object.t?.map((e) => e) || [];
-    message.o = object.o?.map((e) => e) || [];
-    message.h = object.h?.map((e) => e) || [];
-    message.l = object.l?.map((e) => e) || [];
-    message.c = object.c?.map((e) => e) || [];
-    message.v = object.v?.map((e) => e) || [];
-    message.s = object.s ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<DerivativeMarketHistoryResponse>, I>>(
+      base?: I,
+    ): DerivativeMarketHistoryResponse {
+      return DerivativeMarketHistoryResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<DerivativeMarketHistoryResponse>, I>,
+    >(object: I): DerivativeMarketHistoryResponse {
+      const message = createBaseDerivativeMarketHistoryResponse();
+      message.t = object.t?.map((e) => e) || [];
+      message.o = object.o?.map((e) => e) || [];
+      message.h = object.h?.map((e) => e) || [];
+      message.l = object.l?.map((e) => e) || [];
+      message.c = object.c?.map((e) => e) || [];
+      message.v = object.v?.map((e) => e) || [];
+      message.s = object.s ?? "";
+      return message;
+    },
+  };
 
 function createBaseSpotMarketSummaryRequest(): SpotMarketSummaryRequest {
   return { marketId: "", resolution: "" };
 }
 
 export const SpotMarketSummaryRequest: MessageFns<SpotMarketSummaryRequest> = {
-  encode(message: SpotMarketSummaryRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotMarketSummaryRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -1103,8 +1189,12 @@ export const SpotMarketSummaryRequest: MessageFns<SpotMarketSummaryRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SpotMarketSummaryRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SpotMarketSummaryRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotMarketSummaryRequest();
     while (reader.pos < end) {
@@ -1140,9 +1230,11 @@ export const SpotMarketSummaryRequest: MessageFns<SpotMarketSummaryRequest> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
+          ? globalThis.String(object.market_id)
+          : "",
+      resolution: isSet(object.resolution)
+        ? globalThis.String(object.resolution)
         : "",
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
     };
   },
 
@@ -1157,10 +1249,14 @@ export const SpotMarketSummaryRequest: MessageFns<SpotMarketSummaryRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SpotMarketSummaryRequest>, I>>(base?: I): SpotMarketSummaryRequest {
+  create<I extends Exact<DeepPartial<SpotMarketSummaryRequest>, I>>(
+    base?: I,
+  ): SpotMarketSummaryRequest {
     return SpotMarketSummaryRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotMarketSummaryRequest>, I>>(object: I): SpotMarketSummaryRequest {
+  fromPartial<I extends Exact<DeepPartial<SpotMarketSummaryRequest>, I>>(
+    object: I,
+  ): SpotMarketSummaryRequest {
     const message = createBaseSpotMarketSummaryRequest();
     message.marketId = object.marketId ?? "";
     message.resolution = object.resolution ?? "";
@@ -1169,289 +1265,353 @@ export const SpotMarketSummaryRequest: MessageFns<SpotMarketSummaryRequest> = {
 };
 
 function createBaseSpotMarketSummaryResponse(): SpotMarketSummaryResponse {
-  return { marketId: "", open: 0, high: 0, low: 0, volume: 0, price: 0, change: 0 };
+  return {
+    marketId: "",
+    open: 0,
+    high: 0,
+    low: 0,
+    volume: 0,
+    price: 0,
+    change: 0,
+  };
 }
 
-export const SpotMarketSummaryResponse: MessageFns<SpotMarketSummaryResponse> = {
-  encode(message: SpotMarketSummaryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.open !== 0) {
-      writer.uint32(17).double(message.open);
-    }
-    if (message.high !== 0) {
-      writer.uint32(25).double(message.high);
-    }
-    if (message.low !== 0) {
-      writer.uint32(33).double(message.low);
-    }
-    if (message.volume !== 0) {
-      writer.uint32(41).double(message.volume);
-    }
-    if (message.price !== 0) {
-      writer.uint32(49).double(message.price);
-    }
-    if (message.change !== 0) {
-      writer.uint32(57).double(message.change);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SpotMarketSummaryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSpotMarketSummaryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 17) {
-            break;
-          }
-
-          message.open = reader.double();
-          continue;
-        }
-        case 3: {
-          if (tag !== 25) {
-            break;
-          }
-
-          message.high = reader.double();
-          continue;
-        }
-        case 4: {
-          if (tag !== 33) {
-            break;
-          }
-
-          message.low = reader.double();
-          continue;
-        }
-        case 5: {
-          if (tag !== 41) {
-            break;
-          }
-
-          message.volume = reader.double();
-          continue;
-        }
-        case 6: {
-          if (tag !== 49) {
-            break;
-          }
-
-          message.price = reader.double();
-          continue;
-        }
-        case 7: {
-          if (tag !== 57) {
-            break;
-          }
-
-          message.change = reader.double();
-          continue;
-        }
+export const SpotMarketSummaryResponse: MessageFns<SpotMarketSummaryResponse> =
+  {
+    encode(
+      message: SpotMarketSummaryResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.open !== 0) {
+        writer.uint32(17).double(message.open);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.high !== 0) {
+        writer.uint32(25).double(message.high);
+      }
+      if (message.low !== 0) {
+        writer.uint32(33).double(message.low);
+      }
+      if (message.volume !== 0) {
+        writer.uint32(41).double(message.volume);
+      }
+      if (message.price !== 0) {
+        writer.uint32(49).double(message.price);
+      }
+      if (message.change !== 0) {
+        writer.uint32(57).double(message.change);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): SpotMarketSummaryResponse {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      open: isSet(object.open) ? globalThis.Number(object.open) : 0,
-      high: isSet(object.high) ? globalThis.Number(object.high) : 0,
-      low: isSet(object.low) ? globalThis.Number(object.low) : 0,
-      volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
-      price: isSet(object.price) ? globalThis.Number(object.price) : 0,
-      change: isSet(object.change) ? globalThis.Number(object.change) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SpotMarketSummaryResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSpotMarketSummaryResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SpotMarketSummaryResponse): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.open !== 0) {
-      obj.open = message.open;
-    }
-    if (message.high !== 0) {
-      obj.high = message.high;
-    }
-    if (message.low !== 0) {
-      obj.low = message.low;
-    }
-    if (message.volume !== 0) {
-      obj.volume = message.volume;
-    }
-    if (message.price !== 0) {
-      obj.price = message.price;
-    }
-    if (message.change !== 0) {
-      obj.change = message.change;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 17) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SpotMarketSummaryResponse>, I>>(base?: I): SpotMarketSummaryResponse {
-    return SpotMarketSummaryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SpotMarketSummaryResponse>, I>>(object: I): SpotMarketSummaryResponse {
-    const message = createBaseSpotMarketSummaryResponse();
-    message.marketId = object.marketId ?? "";
-    message.open = object.open ?? 0;
-    message.high = object.high ?? 0;
-    message.low = object.low ?? 0;
-    message.volume = object.volume ?? 0;
-    message.price = object.price ?? 0;
-    message.change = object.change ?? 0;
-    return message;
-  },
-};
+            message.open = reader.double();
+            continue;
+          }
+          case 3: {
+            if (tag !== 25) {
+              break;
+            }
+
+            message.high = reader.double();
+            continue;
+          }
+          case 4: {
+            if (tag !== 33) {
+              break;
+            }
+
+            message.low = reader.double();
+            continue;
+          }
+          case 5: {
+            if (tag !== 41) {
+              break;
+            }
+
+            message.volume = reader.double();
+            continue;
+          }
+          case 6: {
+            if (tag !== 49) {
+              break;
+            }
+
+            message.price = reader.double();
+            continue;
+          }
+          case 7: {
+            if (tag !== 57) {
+              break;
+            }
+
+            message.change = reader.double();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SpotMarketSummaryResponse {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        open: isSet(object.open) ? globalThis.Number(object.open) : 0,
+        high: isSet(object.high) ? globalThis.Number(object.high) : 0,
+        low: isSet(object.low) ? globalThis.Number(object.low) : 0,
+        volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
+        price: isSet(object.price) ? globalThis.Number(object.price) : 0,
+        change: isSet(object.change) ? globalThis.Number(object.change) : 0,
+      };
+    },
+
+    toJSON(message: SpotMarketSummaryResponse): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.open !== 0) {
+        obj.open = message.open;
+      }
+      if (message.high !== 0) {
+        obj.high = message.high;
+      }
+      if (message.low !== 0) {
+        obj.low = message.low;
+      }
+      if (message.volume !== 0) {
+        obj.volume = message.volume;
+      }
+      if (message.price !== 0) {
+        obj.price = message.price;
+      }
+      if (message.change !== 0) {
+        obj.change = message.change;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SpotMarketSummaryResponse>, I>>(
+      base?: I,
+    ): SpotMarketSummaryResponse {
+      return SpotMarketSummaryResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SpotMarketSummaryResponse>, I>>(
+      object: I,
+    ): SpotMarketSummaryResponse {
+      const message = createBaseSpotMarketSummaryResponse();
+      message.marketId = object.marketId ?? "";
+      message.open = object.open ?? 0;
+      message.high = object.high ?? 0;
+      message.low = object.low ?? 0;
+      message.volume = object.volume ?? 0;
+      message.price = object.price ?? 0;
+      message.change = object.change ?? 0;
+      return message;
+    },
+  };
 
 function createBaseAllSpotMarketSummaryRequest(): AllSpotMarketSummaryRequest {
   return { resolution: "" };
 }
 
-export const AllSpotMarketSummaryRequest: MessageFns<AllSpotMarketSummaryRequest> = {
-  encode(message: AllSpotMarketSummaryRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.resolution !== "") {
-      writer.uint32(10).string(message.resolution);
-    }
-    return writer;
-  },
+export const AllSpotMarketSummaryRequest: MessageFns<AllSpotMarketSummaryRequest> =
+  {
+    encode(
+      message: AllSpotMarketSummaryRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.resolution !== "") {
+        writer.uint32(10).string(message.resolution);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AllSpotMarketSummaryRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAllSpotMarketSummaryRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): AllSpotMarketSummaryRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseAllSpotMarketSummaryRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.resolution = reader.string();
+            continue;
           }
-
-          message.resolution = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): AllSpotMarketSummaryRequest {
+      return {
+        resolution: isSet(object.resolution)
+          ? globalThis.String(object.resolution)
+          : "",
+      };
+    },
+
+    toJSON(message: AllSpotMarketSummaryRequest): unknown {
+      const obj: any = {};
+      if (message.resolution !== "") {
+        obj.resolution = message.resolution;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): AllSpotMarketSummaryRequest {
-    return { resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "" };
-  },
-
-  toJSON(message: AllSpotMarketSummaryRequest): unknown {
-    const obj: any = {};
-    if (message.resolution !== "") {
-      obj.resolution = message.resolution;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<AllSpotMarketSummaryRequest>, I>>(base?: I): AllSpotMarketSummaryRequest {
-    return AllSpotMarketSummaryRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AllSpotMarketSummaryRequest>, I>>(object: I): AllSpotMarketSummaryRequest {
-    const message = createBaseAllSpotMarketSummaryRequest();
-    message.resolution = object.resolution ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<AllSpotMarketSummaryRequest>, I>>(
+      base?: I,
+    ): AllSpotMarketSummaryRequest {
+      return AllSpotMarketSummaryRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<AllSpotMarketSummaryRequest>, I>>(
+      object: I,
+    ): AllSpotMarketSummaryRequest {
+      const message = createBaseAllSpotMarketSummaryRequest();
+      message.resolution = object.resolution ?? "";
+      return message;
+    },
+  };
 
 function createBaseAllSpotMarketSummaryResponse(): AllSpotMarketSummaryResponse {
   return { field: [] };
 }
 
-export const AllSpotMarketSummaryResponse: MessageFns<AllSpotMarketSummaryResponse> = {
-  encode(message: AllSpotMarketSummaryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.field) {
-      MarketSummaryResp.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const AllSpotMarketSummaryResponse: MessageFns<AllSpotMarketSummaryResponse> =
+  {
+    encode(
+      message: AllSpotMarketSummaryResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.field) {
+        MarketSummaryResp.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AllSpotMarketSummaryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAllSpotMarketSummaryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): AllSpotMarketSummaryResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseAllSpotMarketSummaryResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.field.push(
+              MarketSummaryResp.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.field.push(MarketSummaryResp.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): AllSpotMarketSummaryResponse {
+      return {
+        field: globalThis.Array.isArray(object?.field)
+          ? object.field.map((e: any) => MarketSummaryResp.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: AllSpotMarketSummaryResponse): unknown {
+      const obj: any = {};
+      if (message.field?.length) {
+        obj.field = message.field.map((e) => MarketSummaryResp.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): AllSpotMarketSummaryResponse {
-    return {
-      field: globalThis.Array.isArray(object?.field) ? object.field.map((e: any) => MarketSummaryResp.fromJSON(e)) : [],
-    };
-  },
-
-  toJSON(message: AllSpotMarketSummaryResponse): unknown {
-    const obj: any = {};
-    if (message.field?.length) {
-      obj.field = message.field.map((e) => MarketSummaryResp.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<AllSpotMarketSummaryResponse>, I>>(base?: I): AllSpotMarketSummaryResponse {
-    return AllSpotMarketSummaryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AllSpotMarketSummaryResponse>, I>>(object: I): AllSpotMarketSummaryResponse {
-    const message = createBaseAllSpotMarketSummaryResponse();
-    message.field = object.field?.map((e) => MarketSummaryResp.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<AllSpotMarketSummaryResponse>, I>>(
+      base?: I,
+    ): AllSpotMarketSummaryResponse {
+      return AllSpotMarketSummaryResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<AllSpotMarketSummaryResponse>, I>>(
+      object: I,
+    ): AllSpotMarketSummaryResponse {
+      const message = createBaseAllSpotMarketSummaryResponse();
+      message.field =
+        object.field?.map((e) => MarketSummaryResp.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseMarketSummaryResp(): MarketSummaryResp {
-  return { marketId: "", open: 0, high: 0, low: 0, volume: 0, price: 0, change: 0 };
+  return {
+    marketId: "",
+    open: 0,
+    high: 0,
+    low: 0,
+    volume: 0,
+    price: 0,
+    change: 0,
+  };
 }
 
 export const MarketSummaryResp: MessageFns<MarketSummaryResp> = {
-  encode(message: MarketSummaryResp, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MarketSummaryResp,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -1477,7 +1637,8 @@ export const MarketSummaryResp: MessageFns<MarketSummaryResp> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MarketSummaryResp {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMarketSummaryResp();
     while (reader.pos < end) {
@@ -1553,8 +1714,8 @@ export const MarketSummaryResp: MessageFns<MarketSummaryResp> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       open: isSet(object.open) ? globalThis.Number(object.open) : 0,
       high: isSet(object.high) ? globalThis.Number(object.high) : 0,
       low: isSet(object.low) ? globalThis.Number(object.low) : 0,
@@ -1590,10 +1751,14 @@ export const MarketSummaryResp: MessageFns<MarketSummaryResp> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MarketSummaryResp>, I>>(base?: I): MarketSummaryResp {
+  create<I extends Exact<DeepPartial<MarketSummaryResp>, I>>(
+    base?: I,
+  ): MarketSummaryResp {
     return MarketSummaryResp.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MarketSummaryResp>, I>>(object: I): MarketSummaryResp {
+  fromPartial<I extends Exact<DeepPartial<MarketSummaryResp>, I>>(
+    object: I,
+  ): MarketSummaryResp {
     const message = createBaseMarketSummaryResp();
     message.marketId = object.marketId ?? "";
     message.open = object.open ?? 0;
@@ -1610,398 +1775,458 @@ function createBaseDerivativeMarketSummaryRequest(): DerivativeMarketSummaryRequ
   return { marketId: "", indexPrice: false, resolution: "" };
 }
 
-export const DerivativeMarketSummaryRequest: MessageFns<DerivativeMarketSummaryRequest> = {
-  encode(message: DerivativeMarketSummaryRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.indexPrice !== false) {
-      writer.uint32(16).bool(message.indexPrice);
-    }
-    if (message.resolution !== "") {
-      writer.uint32(26).string(message.resolution);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeMarketSummaryRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDerivativeMarketSummaryRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.indexPrice = reader.bool();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.resolution = reader.string();
-          continue;
-        }
+export const DerivativeMarketSummaryRequest: MessageFns<DerivativeMarketSummaryRequest> =
+  {
+    encode(
+      message: DerivativeMarketSummaryRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.indexPrice !== false) {
+        writer.uint32(16).bool(message.indexPrice);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.resolution !== "") {
+        writer.uint32(26).string(message.resolution);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): DerivativeMarketSummaryRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      indexPrice: isSet(object.indexPrice)
-        ? globalThis.Boolean(object.indexPrice)
-        : isSet(object.index_price)
-        ? globalThis.Boolean(object.index_price)
-        : false,
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): DerivativeMarketSummaryRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseDerivativeMarketSummaryRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: DerivativeMarketSummaryRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.indexPrice !== false) {
-      obj.indexPrice = message.indexPrice;
-    }
-    if (message.resolution !== "") {
-      obj.resolution = message.resolution;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<DerivativeMarketSummaryRequest>, I>>(base?: I): DerivativeMarketSummaryRequest {
-    return DerivativeMarketSummaryRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DerivativeMarketSummaryRequest>, I>>(
-    object: I,
-  ): DerivativeMarketSummaryRequest {
-    const message = createBaseDerivativeMarketSummaryRequest();
-    message.marketId = object.marketId ?? "";
-    message.indexPrice = object.indexPrice ?? false;
-    message.resolution = object.resolution ?? "";
-    return message;
-  },
-};
+            message.indexPrice = reader.bool();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.resolution = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): DerivativeMarketSummaryRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        indexPrice: isSet(object.indexPrice)
+          ? globalThis.Boolean(object.indexPrice)
+          : isSet(object.index_price)
+            ? globalThis.Boolean(object.index_price)
+            : false,
+        resolution: isSet(object.resolution)
+          ? globalThis.String(object.resolution)
+          : "",
+      };
+    },
+
+    toJSON(message: DerivativeMarketSummaryRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.indexPrice !== false) {
+        obj.indexPrice = message.indexPrice;
+      }
+      if (message.resolution !== "") {
+        obj.resolution = message.resolution;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<DerivativeMarketSummaryRequest>, I>>(
+      base?: I,
+    ): DerivativeMarketSummaryRequest {
+      return DerivativeMarketSummaryRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<DerivativeMarketSummaryRequest>, I>,
+    >(object: I): DerivativeMarketSummaryRequest {
+      const message = createBaseDerivativeMarketSummaryRequest();
+      message.marketId = object.marketId ?? "";
+      message.indexPrice = object.indexPrice ?? false;
+      message.resolution = object.resolution ?? "";
+      return message;
+    },
+  };
 
 function createBaseDerivativeMarketSummaryResponse(): DerivativeMarketSummaryResponse {
-  return { marketId: "", open: 0, high: 0, low: 0, volume: 0, price: 0, change: 0 };
+  return {
+    marketId: "",
+    open: 0,
+    high: 0,
+    low: 0,
+    volume: 0,
+    price: 0,
+    change: 0,
+  };
 }
 
-export const DerivativeMarketSummaryResponse: MessageFns<DerivativeMarketSummaryResponse> = {
-  encode(message: DerivativeMarketSummaryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.open !== 0) {
-      writer.uint32(17).double(message.open);
-    }
-    if (message.high !== 0) {
-      writer.uint32(25).double(message.high);
-    }
-    if (message.low !== 0) {
-      writer.uint32(33).double(message.low);
-    }
-    if (message.volume !== 0) {
-      writer.uint32(41).double(message.volume);
-    }
-    if (message.price !== 0) {
-      writer.uint32(49).double(message.price);
-    }
-    if (message.change !== 0) {
-      writer.uint32(57).double(message.change);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeMarketSummaryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDerivativeMarketSummaryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 17) {
-            break;
-          }
-
-          message.open = reader.double();
-          continue;
-        }
-        case 3: {
-          if (tag !== 25) {
-            break;
-          }
-
-          message.high = reader.double();
-          continue;
-        }
-        case 4: {
-          if (tag !== 33) {
-            break;
-          }
-
-          message.low = reader.double();
-          continue;
-        }
-        case 5: {
-          if (tag !== 41) {
-            break;
-          }
-
-          message.volume = reader.double();
-          continue;
-        }
-        case 6: {
-          if (tag !== 49) {
-            break;
-          }
-
-          message.price = reader.double();
-          continue;
-        }
-        case 7: {
-          if (tag !== 57) {
-            break;
-          }
-
-          message.change = reader.double();
-          continue;
-        }
+export const DerivativeMarketSummaryResponse: MessageFns<DerivativeMarketSummaryResponse> =
+  {
+    encode(
+      message: DerivativeMarketSummaryResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.open !== 0) {
+        writer.uint32(17).double(message.open);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.high !== 0) {
+        writer.uint32(25).double(message.high);
+      }
+      if (message.low !== 0) {
+        writer.uint32(33).double(message.low);
+      }
+      if (message.volume !== 0) {
+        writer.uint32(41).double(message.volume);
+      }
+      if (message.price !== 0) {
+        writer.uint32(49).double(message.price);
+      }
+      if (message.change !== 0) {
+        writer.uint32(57).double(message.change);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): DerivativeMarketSummaryResponse {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      open: isSet(object.open) ? globalThis.Number(object.open) : 0,
-      high: isSet(object.high) ? globalThis.Number(object.high) : 0,
-      low: isSet(object.low) ? globalThis.Number(object.low) : 0,
-      volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
-      price: isSet(object.price) ? globalThis.Number(object.price) : 0,
-      change: isSet(object.change) ? globalThis.Number(object.change) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): DerivativeMarketSummaryResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseDerivativeMarketSummaryResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: DerivativeMarketSummaryResponse): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.open !== 0) {
-      obj.open = message.open;
-    }
-    if (message.high !== 0) {
-      obj.high = message.high;
-    }
-    if (message.low !== 0) {
-      obj.low = message.low;
-    }
-    if (message.volume !== 0) {
-      obj.volume = message.volume;
-    }
-    if (message.price !== 0) {
-      obj.price = message.price;
-    }
-    if (message.change !== 0) {
-      obj.change = message.change;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 17) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<DerivativeMarketSummaryResponse>, I>>(base?: I): DerivativeMarketSummaryResponse {
-    return DerivativeMarketSummaryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DerivativeMarketSummaryResponse>, I>>(
-    object: I,
-  ): DerivativeMarketSummaryResponse {
-    const message = createBaseDerivativeMarketSummaryResponse();
-    message.marketId = object.marketId ?? "";
-    message.open = object.open ?? 0;
-    message.high = object.high ?? 0;
-    message.low = object.low ?? 0;
-    message.volume = object.volume ?? 0;
-    message.price = object.price ?? 0;
-    message.change = object.change ?? 0;
-    return message;
-  },
-};
+            message.open = reader.double();
+            continue;
+          }
+          case 3: {
+            if (tag !== 25) {
+              break;
+            }
+
+            message.high = reader.double();
+            continue;
+          }
+          case 4: {
+            if (tag !== 33) {
+              break;
+            }
+
+            message.low = reader.double();
+            continue;
+          }
+          case 5: {
+            if (tag !== 41) {
+              break;
+            }
+
+            message.volume = reader.double();
+            continue;
+          }
+          case 6: {
+            if (tag !== 49) {
+              break;
+            }
+
+            message.price = reader.double();
+            continue;
+          }
+          case 7: {
+            if (tag !== 57) {
+              break;
+            }
+
+            message.change = reader.double();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): DerivativeMarketSummaryResponse {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        open: isSet(object.open) ? globalThis.Number(object.open) : 0,
+        high: isSet(object.high) ? globalThis.Number(object.high) : 0,
+        low: isSet(object.low) ? globalThis.Number(object.low) : 0,
+        volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
+        price: isSet(object.price) ? globalThis.Number(object.price) : 0,
+        change: isSet(object.change) ? globalThis.Number(object.change) : 0,
+      };
+    },
+
+    toJSON(message: DerivativeMarketSummaryResponse): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.open !== 0) {
+        obj.open = message.open;
+      }
+      if (message.high !== 0) {
+        obj.high = message.high;
+      }
+      if (message.low !== 0) {
+        obj.low = message.low;
+      }
+      if (message.volume !== 0) {
+        obj.volume = message.volume;
+      }
+      if (message.price !== 0) {
+        obj.price = message.price;
+      }
+      if (message.change !== 0) {
+        obj.change = message.change;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<DerivativeMarketSummaryResponse>, I>>(
+      base?: I,
+    ): DerivativeMarketSummaryResponse {
+      return DerivativeMarketSummaryResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<DerivativeMarketSummaryResponse>, I>,
+    >(object: I): DerivativeMarketSummaryResponse {
+      const message = createBaseDerivativeMarketSummaryResponse();
+      message.marketId = object.marketId ?? "";
+      message.open = object.open ?? 0;
+      message.high = object.high ?? 0;
+      message.low = object.low ?? 0;
+      message.volume = object.volume ?? 0;
+      message.price = object.price ?? 0;
+      message.change = object.change ?? 0;
+      return message;
+    },
+  };
 
 function createBaseAllDerivativeMarketSummaryRequest(): AllDerivativeMarketSummaryRequest {
   return { resolution: "" };
 }
 
-export const AllDerivativeMarketSummaryRequest: MessageFns<AllDerivativeMarketSummaryRequest> = {
-  encode(message: AllDerivativeMarketSummaryRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.resolution !== "") {
-      writer.uint32(10).string(message.resolution);
-    }
-    return writer;
-  },
+export const AllDerivativeMarketSummaryRequest: MessageFns<AllDerivativeMarketSummaryRequest> =
+  {
+    encode(
+      message: AllDerivativeMarketSummaryRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.resolution !== "") {
+        writer.uint32(10).string(message.resolution);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AllDerivativeMarketSummaryRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAllDerivativeMarketSummaryRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): AllDerivativeMarketSummaryRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseAllDerivativeMarketSummaryRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.resolution = reader.string();
+            continue;
           }
-
-          message.resolution = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): AllDerivativeMarketSummaryRequest {
+      return {
+        resolution: isSet(object.resolution)
+          ? globalThis.String(object.resolution)
+          : "",
+      };
+    },
+
+    toJSON(message: AllDerivativeMarketSummaryRequest): unknown {
+      const obj: any = {};
+      if (message.resolution !== "") {
+        obj.resolution = message.resolution;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): AllDerivativeMarketSummaryRequest {
-    return { resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "" };
-  },
-
-  toJSON(message: AllDerivativeMarketSummaryRequest): unknown {
-    const obj: any = {};
-    if (message.resolution !== "") {
-      obj.resolution = message.resolution;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<AllDerivativeMarketSummaryRequest>, I>>(
-    base?: I,
-  ): AllDerivativeMarketSummaryRequest {
-    return AllDerivativeMarketSummaryRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AllDerivativeMarketSummaryRequest>, I>>(
-    object: I,
-  ): AllDerivativeMarketSummaryRequest {
-    const message = createBaseAllDerivativeMarketSummaryRequest();
-    message.resolution = object.resolution ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<AllDerivativeMarketSummaryRequest>, I>>(
+      base?: I,
+    ): AllDerivativeMarketSummaryRequest {
+      return AllDerivativeMarketSummaryRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<AllDerivativeMarketSummaryRequest>, I>,
+    >(object: I): AllDerivativeMarketSummaryRequest {
+      const message = createBaseAllDerivativeMarketSummaryRequest();
+      message.resolution = object.resolution ?? "";
+      return message;
+    },
+  };
 
 function createBaseAllDerivativeMarketSummaryResponse(): AllDerivativeMarketSummaryResponse {
   return { field: [] };
 }
 
-export const AllDerivativeMarketSummaryResponse: MessageFns<AllDerivativeMarketSummaryResponse> = {
-  encode(message: AllDerivativeMarketSummaryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.field) {
-      MarketSummaryResp.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const AllDerivativeMarketSummaryResponse: MessageFns<AllDerivativeMarketSummaryResponse> =
+  {
+    encode(
+      message: AllDerivativeMarketSummaryResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.field) {
+        MarketSummaryResp.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AllDerivativeMarketSummaryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAllDerivativeMarketSummaryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): AllDerivativeMarketSummaryResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseAllDerivativeMarketSummaryResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.field.push(
+              MarketSummaryResp.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.field.push(MarketSummaryResp.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): AllDerivativeMarketSummaryResponse {
+      return {
+        field: globalThis.Array.isArray(object?.field)
+          ? object.field.map((e: any) => MarketSummaryResp.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: AllDerivativeMarketSummaryResponse): unknown {
+      const obj: any = {};
+      if (message.field?.length) {
+        obj.field = message.field.map((e) => MarketSummaryResp.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): AllDerivativeMarketSummaryResponse {
-    return {
-      field: globalThis.Array.isArray(object?.field) ? object.field.map((e: any) => MarketSummaryResp.fromJSON(e)) : [],
-    };
-  },
-
-  toJSON(message: AllDerivativeMarketSummaryResponse): unknown {
-    const obj: any = {};
-    if (message.field?.length) {
-      obj.field = message.field.map((e) => MarketSummaryResp.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<AllDerivativeMarketSummaryResponse>, I>>(
-    base?: I,
-  ): AllDerivativeMarketSummaryResponse {
-    return AllDerivativeMarketSummaryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AllDerivativeMarketSummaryResponse>, I>>(
-    object: I,
-  ): AllDerivativeMarketSummaryResponse {
-    const message = createBaseAllDerivativeMarketSummaryResponse();
-    message.field = object.field?.map((e) => MarketSummaryResp.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<AllDerivativeMarketSummaryResponse>, I>>(
+      base?: I,
+    ): AllDerivativeMarketSummaryResponse {
+      return AllDerivativeMarketSummaryResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<AllDerivativeMarketSummaryResponse>, I>,
+    >(object: I): AllDerivativeMarketSummaryResponse {
+      const message = createBaseAllDerivativeMarketSummaryResponse();
+      message.field =
+        object.field?.map((e) => MarketSummaryResp.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseMarketSnapshotRequest(): MarketSnapshotRequest {
   return { marketIDs: [], resolution: "", countback: 0 };
 }
 
 export const MarketSnapshotRequest: MessageFns<MarketSnapshotRequest> = {
-  encode(message: MarketSnapshotRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MarketSnapshotRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.marketIDs) {
       writer.uint32(10).string(v!);
     }
@@ -2014,8 +2239,12 @@ export const MarketSnapshotRequest: MessageFns<MarketSnapshotRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MarketSnapshotRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MarketSnapshotRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMarketSnapshotRequest();
     while (reader.pos < end) {
@@ -2059,10 +2288,14 @@ export const MarketSnapshotRequest: MessageFns<MarketSnapshotRequest> = {
       marketIDs: globalThis.Array.isArray(object?.marketIDs)
         ? object.marketIDs.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_i_ds)
-        ? object.market_i_ds.map((e: any) => globalThis.String(e))
-        : [],
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
-      countback: isSet(object.countback) ? globalThis.Number(object.countback) : 0,
+          ? object.market_i_ds.map((e: any) => globalThis.String(e))
+          : [],
+      resolution: isSet(object.resolution)
+        ? globalThis.String(object.resolution)
+        : "",
+      countback: isSet(object.countback)
+        ? globalThis.Number(object.countback)
+        : 0,
     };
   },
 
@@ -2080,10 +2313,14 @@ export const MarketSnapshotRequest: MessageFns<MarketSnapshotRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MarketSnapshotRequest>, I>>(base?: I): MarketSnapshotRequest {
+  create<I extends Exact<DeepPartial<MarketSnapshotRequest>, I>>(
+    base?: I,
+  ): MarketSnapshotRequest {
     return MarketSnapshotRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MarketSnapshotRequest>, I>>(object: I): MarketSnapshotRequest {
+  fromPartial<I extends Exact<DeepPartial<MarketSnapshotRequest>, I>>(
+    object: I,
+  ): MarketSnapshotRequest {
     const message = createBaseMarketSnapshotRequest();
     message.marketIDs = object.marketIDs?.map((e) => e) || [];
     message.resolution = object.resolution ?? "";
@@ -2097,15 +2334,22 @@ function createBaseMarketSnapshotResponse(): MarketSnapshotResponse {
 }
 
 export const MarketSnapshotResponse: MessageFns<MarketSnapshotResponse> = {
-  encode(message: MarketSnapshotResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MarketSnapshotResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.field) {
       MarketSnapshotHistoryResponse.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MarketSnapshotResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MarketSnapshotResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMarketSnapshotResponse();
     while (reader.pos < end) {
@@ -2116,7 +2360,9 @@ export const MarketSnapshotResponse: MessageFns<MarketSnapshotResponse> = {
             break;
           }
 
-          message.field.push(MarketSnapshotHistoryResponse.decode(reader, reader.uint32()));
+          message.field.push(
+            MarketSnapshotHistoryResponse.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -2131,7 +2377,9 @@ export const MarketSnapshotResponse: MessageFns<MarketSnapshotResponse> = {
   fromJSON(object: any): MarketSnapshotResponse {
     return {
       field: globalThis.Array.isArray(object?.field)
-        ? object.field.map((e: any) => MarketSnapshotHistoryResponse.fromJSON(e))
+        ? object.field.map((e: any) =>
+            MarketSnapshotHistoryResponse.fromJSON(e),
+          )
         : [],
     };
   },
@@ -2139,270 +2387,311 @@ export const MarketSnapshotResponse: MessageFns<MarketSnapshotResponse> = {
   toJSON(message: MarketSnapshotResponse): unknown {
     const obj: any = {};
     if (message.field?.length) {
-      obj.field = message.field.map((e) => MarketSnapshotHistoryResponse.toJSON(e));
+      obj.field = message.field.map((e) =>
+        MarketSnapshotHistoryResponse.toJSON(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MarketSnapshotResponse>, I>>(base?: I): MarketSnapshotResponse {
+  create<I extends Exact<DeepPartial<MarketSnapshotResponse>, I>>(
+    base?: I,
+  ): MarketSnapshotResponse {
     return MarketSnapshotResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MarketSnapshotResponse>, I>>(object: I): MarketSnapshotResponse {
+  fromPartial<I extends Exact<DeepPartial<MarketSnapshotResponse>, I>>(
+    object: I,
+  ): MarketSnapshotResponse {
     const message = createBaseMarketSnapshotResponse();
-    message.field = object.field?.map((e) => MarketSnapshotHistoryResponse.fromPartial(e)) || [];
+    message.field =
+      object.field?.map((e) => MarketSnapshotHistoryResponse.fromPartial(e)) ||
+      [];
     return message;
   },
 };
 
 function createBaseMarketSnapshotHistoryResponse(): MarketSnapshotHistoryResponse {
-  return { marketId: "", resolution: "", t: [], o: [], h: [], l: [], c: [], v: [] };
+  return {
+    marketId: "",
+    resolution: "",
+    t: [],
+    o: [],
+    h: [],
+    l: [],
+    c: [],
+    v: [],
+  };
 }
 
-export const MarketSnapshotHistoryResponse: MessageFns<MarketSnapshotHistoryResponse> = {
-  encode(message: MarketSnapshotHistoryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.resolution !== "") {
-      writer.uint32(18).string(message.resolution);
-    }
-    writer.uint32(26).fork();
-    for (const v of message.t) {
-      writer.sint32(v);
-    }
-    writer.join();
-    writer.uint32(34).fork();
-    for (const v of message.o) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(42).fork();
-    for (const v of message.h) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(50).fork();
-    for (const v of message.l) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(58).fork();
-    for (const v of message.c) {
-      writer.double(v);
-    }
-    writer.join();
-    writer.uint32(66).fork();
-    for (const v of message.v) {
-      writer.double(v);
-    }
-    writer.join();
-    return writer;
-  },
+export const MarketSnapshotHistoryResponse: MessageFns<MarketSnapshotHistoryResponse> =
+  {
+    encode(
+      message: MarketSnapshotHistoryResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      if (message.resolution !== "") {
+        writer.uint32(18).string(message.resolution);
+      }
+      writer.uint32(26).fork();
+      for (const v of message.t) {
+        writer.sint32(v);
+      }
+      writer.join();
+      writer.uint32(34).fork();
+      for (const v of message.o) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(42).fork();
+      for (const v of message.h) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(50).fork();
+      for (const v of message.l) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(58).fork();
+      for (const v of message.c) {
+        writer.double(v);
+      }
+      writer.join();
+      writer.uint32(66).fork();
+      for (const v of message.v) {
+        writer.double(v);
+      }
+      writer.join();
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MarketSnapshotHistoryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMarketSnapshotHistoryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MarketSnapshotHistoryResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMarketSnapshotHistoryResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.resolution = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag === 24) {
-            message.t.push(reader.sint32());
-
+            message.marketId = reader.string();
             continue;
           }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-          if (tag === 26) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+            message.resolution = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag === 24) {
               message.t.push(reader.sint32());
+
+              continue;
             }
 
-            continue;
+            if (tag === 26) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.t.push(reader.sint32());
+              }
+
+              continue;
+            }
+
+            break;
           }
-
-          break;
-        }
-        case 4: {
-          if (tag === 33) {
-            message.o.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 34) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+          case 4: {
+            if (tag === 33) {
               message.o.push(reader.double());
+
+              continue;
             }
 
-            continue;
+            if (tag === 34) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.o.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
           }
-
-          break;
-        }
-        case 5: {
-          if (tag === 41) {
-            message.h.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 42) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+          case 5: {
+            if (tag === 41) {
               message.h.push(reader.double());
+
+              continue;
             }
 
-            continue;
+            if (tag === 42) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.h.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
           }
-
-          break;
-        }
-        case 6: {
-          if (tag === 49) {
-            message.l.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 50) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+          case 6: {
+            if (tag === 49) {
               message.l.push(reader.double());
+
+              continue;
             }
 
-            continue;
+            if (tag === 50) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.l.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
           }
-
-          break;
-        }
-        case 7: {
-          if (tag === 57) {
-            message.c.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 58) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+          case 7: {
+            if (tag === 57) {
               message.c.push(reader.double());
+
+              continue;
             }
 
-            continue;
+            if (tag === 58) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.c.push(reader.double());
+              }
+
+              continue;
+            }
+
+            break;
           }
-
-          break;
-        }
-        case 8: {
-          if (tag === 65) {
-            message.v.push(reader.double());
-
-            continue;
-          }
-
-          if (tag === 66) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
+          case 8: {
+            if (tag === 65) {
               message.v.push(reader.double());
+
+              continue;
             }
 
-            continue;
-          }
+            if (tag === 66) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.v.push(reader.double());
+              }
 
+              continue;
+            }
+
+            break;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): MarketSnapshotHistoryResponse {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        resolution: isSet(object.resolution)
+          ? globalThis.String(object.resolution)
+          : "",
+        t: globalThis.Array.isArray(object?.t)
+          ? object.t.map((e: any) => globalThis.Number(e))
+          : [],
+        o: globalThis.Array.isArray(object?.o)
+          ? object.o.map((e: any) => globalThis.Number(e))
+          : [],
+        h: globalThis.Array.isArray(object?.h)
+          ? object.h.map((e: any) => globalThis.Number(e))
+          : [],
+        l: globalThis.Array.isArray(object?.l)
+          ? object.l.map((e: any) => globalThis.Number(e))
+          : [],
+        c: globalThis.Array.isArray(object?.c)
+          ? object.c.map((e: any) => globalThis.Number(e))
+          : [],
+        v: globalThis.Array.isArray(object?.v)
+          ? object.v.map((e: any) => globalThis.Number(e))
+          : [],
+      };
+    },
+
+    toJSON(message: MarketSnapshotHistoryResponse): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.resolution !== "") {
+        obj.resolution = message.resolution;
+      }
+      if (message.t?.length) {
+        obj.t = message.t.map((e) => Math.round(e));
+      }
+      if (message.o?.length) {
+        obj.o = message.o;
+      }
+      if (message.h?.length) {
+        obj.h = message.h;
+      }
+      if (message.l?.length) {
+        obj.l = message.l;
+      }
+      if (message.c?.length) {
+        obj.c = message.c;
+      }
+      if (message.v?.length) {
+        obj.v = message.v;
+      }
+      return obj;
+    },
 
-  fromJSON(object: any): MarketSnapshotHistoryResponse {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
-      t: globalThis.Array.isArray(object?.t) ? object.t.map((e: any) => globalThis.Number(e)) : [],
-      o: globalThis.Array.isArray(object?.o) ? object.o.map((e: any) => globalThis.Number(e)) : [],
-      h: globalThis.Array.isArray(object?.h) ? object.h.map((e: any) => globalThis.Number(e)) : [],
-      l: globalThis.Array.isArray(object?.l) ? object.l.map((e: any) => globalThis.Number(e)) : [],
-      c: globalThis.Array.isArray(object?.c) ? object.c.map((e: any) => globalThis.Number(e)) : [],
-      v: globalThis.Array.isArray(object?.v) ? object.v.map((e: any) => globalThis.Number(e)) : [],
-    };
-  },
-
-  toJSON(message: MarketSnapshotHistoryResponse): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.resolution !== "") {
-      obj.resolution = message.resolution;
-    }
-    if (message.t?.length) {
-      obj.t = message.t.map((e) => Math.round(e));
-    }
-    if (message.o?.length) {
-      obj.o = message.o;
-    }
-    if (message.h?.length) {
-      obj.h = message.h;
-    }
-    if (message.l?.length) {
-      obj.l = message.l;
-    }
-    if (message.c?.length) {
-      obj.c = message.c;
-    }
-    if (message.v?.length) {
-      obj.v = message.v;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<MarketSnapshotHistoryResponse>, I>>(base?: I): MarketSnapshotHistoryResponse {
-    return MarketSnapshotHistoryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MarketSnapshotHistoryResponse>, I>>(
-    object: I,
-  ): MarketSnapshotHistoryResponse {
-    const message = createBaseMarketSnapshotHistoryResponse();
-    message.marketId = object.marketId ?? "";
-    message.resolution = object.resolution ?? "";
-    message.t = object.t?.map((e) => e) || [];
-    message.o = object.o?.map((e) => e) || [];
-    message.h = object.h?.map((e) => e) || [];
-    message.l = object.l?.map((e) => e) || [];
-    message.c = object.c?.map((e) => e) || [];
-    message.v = object.v?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<MarketSnapshotHistoryResponse>, I>>(
+      base?: I,
+    ): MarketSnapshotHistoryResponse {
+      return MarketSnapshotHistoryResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<MarketSnapshotHistoryResponse>, I>>(
+      object: I,
+    ): MarketSnapshotHistoryResponse {
+      const message = createBaseMarketSnapshotHistoryResponse();
+      message.marketId = object.marketId ?? "";
+      message.resolution = object.resolution ?? "";
+      message.t = object.t?.map((e) => e) || [];
+      message.o = object.o?.map((e) => e) || [];
+      message.h = object.h?.map((e) => e) || [];
+      message.l = object.l?.map((e) => e) || [];
+      message.c = object.c?.map((e) => e) || [];
+      message.v = object.v?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 /** InjectiveChartRPC implements historical chart data retrieval. */
 export type InjectiveChartRPCService = typeof InjectiveChartRPCService;
@@ -2414,10 +2703,12 @@ export const InjectiveChartRPCService = {
     responseStream: false as const,
     requestSerialize: (value: SpotMarketHistoryRequest): Buffer =>
       Buffer.from(SpotMarketHistoryRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): SpotMarketHistoryRequest => SpotMarketHistoryRequest.decode(value),
+    requestDeserialize: (value: Buffer): SpotMarketHistoryRequest =>
+      SpotMarketHistoryRequest.decode(value),
     responseSerialize: (value: SpotMarketHistoryResponse): Buffer =>
       Buffer.from(SpotMarketHistoryResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): SpotMarketHistoryResponse => SpotMarketHistoryResponse.decode(value),
+    responseDeserialize: (value: Buffer): SpotMarketHistoryResponse =>
+      SpotMarketHistoryResponse.decode(value),
   },
   /** Request for history bars of derivativeMarket for TradingView. */
   derivativeMarketHistory: {
@@ -2426,7 +2717,8 @@ export const InjectiveChartRPCService = {
     responseStream: false as const,
     requestSerialize: (value: DerivativeMarketHistoryRequest): Buffer =>
       Buffer.from(DerivativeMarketHistoryRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): DerivativeMarketHistoryRequest => DerivativeMarketHistoryRequest.decode(value),
+    requestDeserialize: (value: Buffer): DerivativeMarketHistoryRequest =>
+      DerivativeMarketHistoryRequest.decode(value),
     responseSerialize: (value: DerivativeMarketHistoryResponse): Buffer =>
       Buffer.from(DerivativeMarketHistoryResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): DerivativeMarketHistoryResponse =>
@@ -2439,10 +2731,12 @@ export const InjectiveChartRPCService = {
     responseStream: false as const,
     requestSerialize: (value: SpotMarketSummaryRequest): Buffer =>
       Buffer.from(SpotMarketSummaryRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): SpotMarketSummaryRequest => SpotMarketSummaryRequest.decode(value),
+    requestDeserialize: (value: Buffer): SpotMarketSummaryRequest =>
+      SpotMarketSummaryRequest.decode(value),
     responseSerialize: (value: SpotMarketSummaryResponse): Buffer =>
       Buffer.from(SpotMarketSummaryResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): SpotMarketSummaryResponse => SpotMarketSummaryResponse.decode(value),
+    responseDeserialize: (value: Buffer): SpotMarketSummaryResponse =>
+      SpotMarketSummaryResponse.decode(value),
   },
   /**
    * Gets batch summary for all active markets, for the latest interval (hour,
@@ -2454,10 +2748,12 @@ export const InjectiveChartRPCService = {
     responseStream: false as const,
     requestSerialize: (value: AllSpotMarketSummaryRequest): Buffer =>
       Buffer.from(AllSpotMarketSummaryRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): AllSpotMarketSummaryRequest => AllSpotMarketSummaryRequest.decode(value),
+    requestDeserialize: (value: Buffer): AllSpotMarketSummaryRequest =>
+      AllSpotMarketSummaryRequest.decode(value),
     responseSerialize: (value: AllSpotMarketSummaryResponse): Buffer =>
       Buffer.from(AllSpotMarketSummaryResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): AllSpotMarketSummaryResponse => AllSpotMarketSummaryResponse.decode(value),
+    responseDeserialize: (value: Buffer): AllSpotMarketSummaryResponse =>
+      AllSpotMarketSummaryResponse.decode(value),
   },
   /** Gets derivative market summary for the latest interval (hour, day, month) */
   derivativeMarketSummary: {
@@ -2466,7 +2762,8 @@ export const InjectiveChartRPCService = {
     responseStream: false as const,
     requestSerialize: (value: DerivativeMarketSummaryRequest): Buffer =>
       Buffer.from(DerivativeMarketSummaryRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): DerivativeMarketSummaryRequest => DerivativeMarketSummaryRequest.decode(value),
+    requestDeserialize: (value: Buffer): DerivativeMarketSummaryRequest =>
+      DerivativeMarketSummaryRequest.decode(value),
     responseSerialize: (value: DerivativeMarketSummaryResponse): Buffer =>
       Buffer.from(DerivativeMarketSummaryResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): DerivativeMarketSummaryResponse =>
@@ -2496,84 +2793,134 @@ export const InjectiveChartRPCService = {
     responseStream: false as const,
     requestSerialize: (value: MarketSnapshotRequest): Buffer =>
       Buffer.from(MarketSnapshotRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MarketSnapshotRequest => MarketSnapshotRequest.decode(value),
+    requestDeserialize: (value: Buffer): MarketSnapshotRequest =>
+      MarketSnapshotRequest.decode(value),
     responseSerialize: (value: MarketSnapshotResponse): Buffer =>
       Buffer.from(MarketSnapshotResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MarketSnapshotResponse => MarketSnapshotResponse.decode(value),
+    responseDeserialize: (value: Buffer): MarketSnapshotResponse =>
+      MarketSnapshotResponse.decode(value),
   },
 } as const;
 
 export interface InjectiveChartRPCServer extends UntypedServiceImplementation {
   /** Request for history bars of spotMarket for TradingView. */
-  spotMarketHistory: handleUnaryCall<SpotMarketHistoryRequest, SpotMarketHistoryResponse>;
+  spotMarketHistory: handleUnaryCall<
+    SpotMarketHistoryRequest,
+    SpotMarketHistoryResponse
+  >;
   /** Request for history bars of derivativeMarket for TradingView. */
-  derivativeMarketHistory: handleUnaryCall<DerivativeMarketHistoryRequest, DerivativeMarketHistoryResponse>;
+  derivativeMarketHistory: handleUnaryCall<
+    DerivativeMarketHistoryRequest,
+    DerivativeMarketHistoryResponse
+  >;
   /** Gets spot market summary for the latest interval (hour, day, month) */
-  spotMarketSummary: handleUnaryCall<SpotMarketSummaryRequest, SpotMarketSummaryResponse>;
+  spotMarketSummary: handleUnaryCall<
+    SpotMarketSummaryRequest,
+    SpotMarketSummaryResponse
+  >;
   /**
    * Gets batch summary for all active markets, for the latest interval (hour,
    * day, month)
    */
-  allSpotMarketSummary: handleUnaryCall<AllSpotMarketSummaryRequest, AllSpotMarketSummaryResponse>;
+  allSpotMarketSummary: handleUnaryCall<
+    AllSpotMarketSummaryRequest,
+    AllSpotMarketSummaryResponse
+  >;
   /** Gets derivative market summary for the latest interval (hour, day, month) */
-  derivativeMarketSummary: handleUnaryCall<DerivativeMarketSummaryRequest, DerivativeMarketSummaryResponse>;
+  derivativeMarketSummary: handleUnaryCall<
+    DerivativeMarketSummaryRequest,
+    DerivativeMarketSummaryResponse
+  >;
   /**
    * Gets batch summary for all active markets, for the latest interval (hour,
    * day, month)
    */
-  allDerivativeMarketSummary: handleUnaryCall<AllDerivativeMarketSummaryRequest, AllDerivativeMarketSummaryResponse>;
+  allDerivativeMarketSummary: handleUnaryCall<
+    AllDerivativeMarketSummaryRequest,
+    AllDerivativeMarketSummaryResponse
+  >;
   /** Request for cached markets history bars. Max age is 1h. */
-  marketSnapshot: handleUnaryCall<MarketSnapshotRequest, MarketSnapshotResponse>;
+  marketSnapshot: handleUnaryCall<
+    MarketSnapshotRequest,
+    MarketSnapshotResponse
+  >;
 }
 
 export interface InjectiveChartRPCClient extends Client {
   /** Request for history bars of spotMarket for TradingView. */
   spotMarketHistory(
     request: SpotMarketHistoryRequest,
-    callback: (error: ServiceError | null, response: SpotMarketHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SpotMarketHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarketHistory(
     request: SpotMarketHistoryRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: SpotMarketHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SpotMarketHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarketHistory(
     request: SpotMarketHistoryRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: SpotMarketHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SpotMarketHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Request for history bars of derivativeMarket for TradingView. */
   derivativeMarketHistory(
     request: DerivativeMarketHistoryRequest,
-    callback: (error: ServiceError | null, response: DerivativeMarketHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: DerivativeMarketHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarketHistory(
     request: DerivativeMarketHistoryRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: DerivativeMarketHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: DerivativeMarketHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarketHistory(
     request: DerivativeMarketHistoryRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: DerivativeMarketHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: DerivativeMarketHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Gets spot market summary for the latest interval (hour, day, month) */
   spotMarketSummary(
     request: SpotMarketSummaryRequest,
-    callback: (error: ServiceError | null, response: SpotMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SpotMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarketSummary(
     request: SpotMarketSummaryRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: SpotMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SpotMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarketSummary(
     request: SpotMarketSummaryRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: SpotMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SpotMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * Gets batch summary for all active markets, for the latest interval (hour,
@@ -2581,34 +2928,52 @@ export interface InjectiveChartRPCClient extends Client {
    */
   allSpotMarketSummary(
     request: AllSpotMarketSummaryRequest,
-    callback: (error: ServiceError | null, response: AllSpotMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AllSpotMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   allSpotMarketSummary(
     request: AllSpotMarketSummaryRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: AllSpotMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AllSpotMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   allSpotMarketSummary(
     request: AllSpotMarketSummaryRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: AllSpotMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AllSpotMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Gets derivative market summary for the latest interval (hour, day, month) */
   derivativeMarketSummary(
     request: DerivativeMarketSummaryRequest,
-    callback: (error: ServiceError | null, response: DerivativeMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: DerivativeMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarketSummary(
     request: DerivativeMarketSummaryRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: DerivativeMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: DerivativeMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarketSummary(
     request: DerivativeMarketSummaryRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: DerivativeMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: DerivativeMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * Gets batch summary for all active markets, for the latest interval (hour,
@@ -2616,34 +2981,52 @@ export interface InjectiveChartRPCClient extends Client {
    */
   allDerivativeMarketSummary(
     request: AllDerivativeMarketSummaryRequest,
-    callback: (error: ServiceError | null, response: AllDerivativeMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AllDerivativeMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   allDerivativeMarketSummary(
     request: AllDerivativeMarketSummaryRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: AllDerivativeMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AllDerivativeMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   allDerivativeMarketSummary(
     request: AllDerivativeMarketSummaryRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: AllDerivativeMarketSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AllDerivativeMarketSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Request for cached markets history bars. Max age is 1h. */
   marketSnapshot(
     request: MarketSnapshotRequest,
-    callback: (error: ServiceError | null, response: MarketSnapshotResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MarketSnapshotResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketSnapshot(
     request: MarketSnapshotRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MarketSnapshotResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MarketSnapshotResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketSnapshot(
     request: MarketSnapshotRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MarketSnapshotResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MarketSnapshotResponse,
+    ) => void,
   ): ClientUnaryCall;
 }
 
@@ -2651,22 +3034,34 @@ export const InjectiveChartRPCClient = makeGenericClientConstructor(
   InjectiveChartRPCService,
   "injective_chart_rpc.InjectiveChartRPC",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): InjectiveChartRPCClient;
+  new (
+    address: string,
+    credentials: ChannelCredentials,
+    options?: Partial<ClientOptions>,
+  ): InjectiveChartRPCClient;
   service: typeof InjectiveChartRPCService;
   serviceName: string;
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

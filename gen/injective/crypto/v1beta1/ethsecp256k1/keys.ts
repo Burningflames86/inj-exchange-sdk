@@ -31,7 +31,10 @@ function createBasePubKey(): PubKey {
 }
 
 export const PubKey: MessageFns<PubKey> = {
-  encode(message: PubKey, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PubKey,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -39,7 +42,8 @@ export const PubKey: MessageFns<PubKey> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PubKey {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePubKey();
     while (reader.pos < end) {
@@ -63,7 +67,11 @@ export const PubKey: MessageFns<PubKey> = {
   },
 
   fromJSON(object: any): PubKey {
-    return { key: isSet(object.key) ? Buffer.from(bytesFromBase64(object.key)) : Buffer.alloc(0) };
+    return {
+      key: isSet(object.key)
+        ? Buffer.from(bytesFromBase64(object.key))
+        : Buffer.alloc(0),
+    };
   },
 
   toJSON(message: PubKey): unknown {
@@ -89,7 +97,10 @@ function createBasePrivKey(): PrivKey {
 }
 
 export const PrivKey: MessageFns<PrivKey> = {
-  encode(message: PrivKey, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PrivKey,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -97,7 +108,8 @@ export const PrivKey: MessageFns<PrivKey> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PrivKey {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrivKey();
     while (reader.pos < end) {
@@ -121,7 +133,11 @@ export const PrivKey: MessageFns<PrivKey> = {
   },
 
   fromJSON(object: any): PrivKey {
-    return { key: isSet(object.key) ? Buffer.from(bytesFromBase64(object.key)) : Buffer.alloc(0) };
+    return {
+      key: isSet(object.key)
+        ? Buffer.from(bytesFromBase64(object.key))
+        : Buffer.alloc(0),
+    };
   },
 
   toJSON(message: PrivKey): unknown {
@@ -150,17 +166,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

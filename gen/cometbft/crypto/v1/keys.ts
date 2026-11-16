@@ -21,7 +21,10 @@ function createBasePublicKey(): PublicKey {
 }
 
 export const PublicKey: MessageFns<PublicKey> = {
-  encode(message: PublicKey, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PublicKey,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.ed25519 !== undefined) {
       writer.uint32(10).bytes(message.ed25519);
     }
@@ -35,7 +38,8 @@ export const PublicKey: MessageFns<PublicKey> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PublicKey {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePublicKey();
     while (reader.pos < end) {
@@ -76,9 +80,15 @@ export const PublicKey: MessageFns<PublicKey> = {
 
   fromJSON(object: any): PublicKey {
     return {
-      ed25519: isSet(object.ed25519) ? Buffer.from(bytesFromBase64(object.ed25519)) : undefined,
-      secp256k1: isSet(object.secp256k1) ? Buffer.from(bytesFromBase64(object.secp256k1)) : undefined,
-      bls12381: isSet(object.bls12381) ? Buffer.from(bytesFromBase64(object.bls12381)) : undefined,
+      ed25519: isSet(object.ed25519)
+        ? Buffer.from(bytesFromBase64(object.ed25519))
+        : undefined,
+      secp256k1: isSet(object.secp256k1)
+        ? Buffer.from(bytesFromBase64(object.secp256k1))
+        : undefined,
+      bls12381: isSet(object.bls12381)
+        ? Buffer.from(bytesFromBase64(object.bls12381))
+        : undefined,
     };
   },
 
@@ -99,7 +109,9 @@ export const PublicKey: MessageFns<PublicKey> = {
   create<I extends Exact<DeepPartial<PublicKey>, I>>(base?: I): PublicKey {
     return PublicKey.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PublicKey>, I>>(object: I): PublicKey {
+  fromPartial<I extends Exact<DeepPartial<PublicKey>, I>>(
+    object: I,
+  ): PublicKey {
     const message = createBasePublicKey();
     message.ed25519 = object.ed25519 ?? undefined;
     message.secp256k1 = object.secp256k1 ?? undefined;
@@ -116,17 +128,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

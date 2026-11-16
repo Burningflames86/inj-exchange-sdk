@@ -9,7 +9,12 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Proof } from "../../crypto/v1/proof";
 import { Consensus } from "../../version/v1/types";
-import { BlockIDFlag, blockIDFlagFromJSON, blockIDFlagToJSON, ValidatorSet } from "./validator";
+import {
+  BlockIDFlag,
+  blockIDFlagFromJSON,
+  blockIDFlagToJSON,
+  ValidatorSet,
+} from "./validator";
 
 export const protobufPackage = "cometbft.types.v1";
 
@@ -88,13 +93,9 @@ export interface Header {
   version: Consensus | undefined;
   chainId: string;
   height: number;
-  time:
-    | Date
-    | undefined;
+  time: Date | undefined;
   /** prev block info */
-  lastBlockId:
-    | BlockID
-    | undefined;
+  lastBlockId: BlockID | undefined;
   /** hashes of block data */
   lastCommitHash: Buffer;
   /** transactions */
@@ -239,7 +240,10 @@ function createBasePartSetHeader(): PartSetHeader {
 }
 
 export const PartSetHeader: MessageFns<PartSetHeader> = {
-  encode(message: PartSetHeader, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PartSetHeader,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.total !== 0) {
       writer.uint32(8).uint32(message.total);
     }
@@ -250,7 +254,8 @@ export const PartSetHeader: MessageFns<PartSetHeader> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PartSetHeader {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePartSetHeader();
     while (reader.pos < end) {
@@ -284,7 +289,9 @@ export const PartSetHeader: MessageFns<PartSetHeader> = {
   fromJSON(object: any): PartSetHeader {
     return {
       total: isSet(object.total) ? globalThis.Number(object.total) : 0,
-      hash: isSet(object.hash) ? Buffer.from(bytesFromBase64(object.hash)) : Buffer.alloc(0),
+      hash: isSet(object.hash)
+        ? Buffer.from(bytesFromBase64(object.hash))
+        : Buffer.alloc(0),
     };
   },
 
@@ -299,10 +306,14 @@ export const PartSetHeader: MessageFns<PartSetHeader> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PartSetHeader>, I>>(base?: I): PartSetHeader {
+  create<I extends Exact<DeepPartial<PartSetHeader>, I>>(
+    base?: I,
+  ): PartSetHeader {
     return PartSetHeader.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PartSetHeader>, I>>(object: I): PartSetHeader {
+  fromPartial<I extends Exact<DeepPartial<PartSetHeader>, I>>(
+    object: I,
+  ): PartSetHeader {
     const message = createBasePartSetHeader();
     message.total = object.total ?? 0;
     message.hash = object.hash ?? Buffer.alloc(0);
@@ -315,7 +326,10 @@ function createBasePart(): Part {
 }
 
 export const Part: MessageFns<Part> = {
-  encode(message: Part, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Part,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.index !== 0) {
       writer.uint32(8).uint32(message.index);
     }
@@ -329,7 +343,8 @@ export const Part: MessageFns<Part> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Part {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePart();
     while (reader.pos < end) {
@@ -371,7 +386,9 @@ export const Part: MessageFns<Part> = {
   fromJSON(object: any): Part {
     return {
       index: isSet(object.index) ? globalThis.Number(object.index) : 0,
-      bytes: isSet(object.bytes) ? Buffer.from(bytesFromBase64(object.bytes)) : Buffer.alloc(0),
+      bytes: isSet(object.bytes)
+        ? Buffer.from(bytesFromBase64(object.bytes))
+        : Buffer.alloc(0),
       proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined,
     };
   },
@@ -397,7 +414,10 @@ export const Part: MessageFns<Part> = {
     const message = createBasePart();
     message.index = object.index ?? 0;
     message.bytes = object.bytes ?? Buffer.alloc(0);
-    message.proof = (object.proof !== undefined && object.proof !== null) ? Proof.fromPartial(object.proof) : undefined;
+    message.proof =
+      object.proof !== undefined && object.proof !== null
+        ? Proof.fromPartial(object.proof)
+        : undefined;
     return message;
   },
 };
@@ -407,18 +427,25 @@ function createBaseBlockID(): BlockID {
 }
 
 export const BlockID: MessageFns<BlockID> = {
-  encode(message: BlockID, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BlockID,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
     }
     if (message.partSetHeader !== undefined) {
-      PartSetHeader.encode(message.partSetHeader, writer.uint32(18).fork()).join();
+      PartSetHeader.encode(
+        message.partSetHeader,
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): BlockID {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlockID();
     while (reader.pos < end) {
@@ -451,12 +478,14 @@ export const BlockID: MessageFns<BlockID> = {
 
   fromJSON(object: any): BlockID {
     return {
-      hash: isSet(object.hash) ? Buffer.from(bytesFromBase64(object.hash)) : Buffer.alloc(0),
+      hash: isSet(object.hash)
+        ? Buffer.from(bytesFromBase64(object.hash))
+        : Buffer.alloc(0),
       partSetHeader: isSet(object.partSetHeader)
         ? PartSetHeader.fromJSON(object.partSetHeader)
         : isSet(object.part_set_header)
-        ? PartSetHeader.fromJSON(object.part_set_header)
-        : undefined,
+          ? PartSetHeader.fromJSON(object.part_set_header)
+          : undefined,
     };
   },
 
@@ -477,9 +506,10 @@ export const BlockID: MessageFns<BlockID> = {
   fromPartial<I extends Exact<DeepPartial<BlockID>, I>>(object: I): BlockID {
     const message = createBaseBlockID();
     message.hash = object.hash ?? Buffer.alloc(0);
-    message.partSetHeader = (object.partSetHeader !== undefined && object.partSetHeader !== null)
-      ? PartSetHeader.fromPartial(object.partSetHeader)
-      : undefined;
+    message.partSetHeader =
+      object.partSetHeader !== undefined && object.partSetHeader !== null
+        ? PartSetHeader.fromPartial(object.partSetHeader)
+        : undefined;
     return message;
   },
 };
@@ -504,7 +534,10 @@ function createBaseHeader(): Header {
 }
 
 export const Header: MessageFns<Header> = {
-  encode(message: Header, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Header,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.version !== undefined) {
       Consensus.encode(message.version, writer.uint32(10).fork()).join();
     }
@@ -515,7 +548,10 @@ export const Header: MessageFns<Header> = {
       writer.uint32(24).int64(message.height);
     }
     if (message.time !== undefined) {
-      Timestamp.encode(toTimestamp(message.time), writer.uint32(34).fork()).join();
+      Timestamp.encode(
+        toTimestamp(message.time),
+        writer.uint32(34).fork(),
+      ).join();
     }
     if (message.lastBlockId !== undefined) {
       BlockID.encode(message.lastBlockId, writer.uint32(42).fork()).join();
@@ -551,7 +587,8 @@ export const Header: MessageFns<Header> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Header {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeader();
     while (reader.pos < end) {
@@ -586,7 +623,9 @@ export const Header: MessageFns<Header> = {
             break;
           }
 
-          message.time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.time = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 5: {
@@ -680,64 +719,66 @@ export const Header: MessageFns<Header> = {
 
   fromJSON(object: any): Header {
     return {
-      version: isSet(object.version) ? Consensus.fromJSON(object.version) : undefined,
+      version: isSet(object.version)
+        ? Consensus.fromJSON(object.version)
+        : undefined,
       chainId: isSet(object.chainId)
         ? globalThis.String(object.chainId)
         : isSet(object.chain_id)
-        ? globalThis.String(object.chain_id)
-        : "",
+          ? globalThis.String(object.chain_id)
+          : "",
       height: isSet(object.height) ? globalThis.Number(object.height) : 0,
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
       lastBlockId: isSet(object.lastBlockId)
         ? BlockID.fromJSON(object.lastBlockId)
         : isSet(object.last_block_id)
-        ? BlockID.fromJSON(object.last_block_id)
-        : undefined,
+          ? BlockID.fromJSON(object.last_block_id)
+          : undefined,
       lastCommitHash: isSet(object.lastCommitHash)
         ? Buffer.from(bytesFromBase64(object.lastCommitHash))
         : isSet(object.last_commit_hash)
-        ? Buffer.from(bytesFromBase64(object.last_commit_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.last_commit_hash))
+          : Buffer.alloc(0),
       dataHash: isSet(object.dataHash)
         ? Buffer.from(bytesFromBase64(object.dataHash))
         : isSet(object.data_hash)
-        ? Buffer.from(bytesFromBase64(object.data_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.data_hash))
+          : Buffer.alloc(0),
       validatorsHash: isSet(object.validatorsHash)
         ? Buffer.from(bytesFromBase64(object.validatorsHash))
         : isSet(object.validators_hash)
-        ? Buffer.from(bytesFromBase64(object.validators_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.validators_hash))
+          : Buffer.alloc(0),
       nextValidatorsHash: isSet(object.nextValidatorsHash)
         ? Buffer.from(bytesFromBase64(object.nextValidatorsHash))
         : isSet(object.next_validators_hash)
-        ? Buffer.from(bytesFromBase64(object.next_validators_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.next_validators_hash))
+          : Buffer.alloc(0),
       consensusHash: isSet(object.consensusHash)
         ? Buffer.from(bytesFromBase64(object.consensusHash))
         : isSet(object.consensus_hash)
-        ? Buffer.from(bytesFromBase64(object.consensus_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.consensus_hash))
+          : Buffer.alloc(0),
       appHash: isSet(object.appHash)
         ? Buffer.from(bytesFromBase64(object.appHash))
         : isSet(object.app_hash)
-        ? Buffer.from(bytesFromBase64(object.app_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.app_hash))
+          : Buffer.alloc(0),
       lastResultsHash: isSet(object.lastResultsHash)
         ? Buffer.from(bytesFromBase64(object.lastResultsHash))
         : isSet(object.last_results_hash)
-        ? Buffer.from(bytesFromBase64(object.last_results_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.last_results_hash))
+          : Buffer.alloc(0),
       evidenceHash: isSet(object.evidenceHash)
         ? Buffer.from(bytesFromBase64(object.evidenceHash))
         : isSet(object.evidence_hash)
-        ? Buffer.from(bytesFromBase64(object.evidence_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.evidence_hash))
+          : Buffer.alloc(0),
       proposerAddress: isSet(object.proposerAddress)
         ? Buffer.from(bytesFromBase64(object.proposerAddress))
         : isSet(object.proposer_address)
-        ? Buffer.from(bytesFromBase64(object.proposer_address))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.proposer_address))
+          : Buffer.alloc(0),
     };
   },
 
@@ -793,15 +834,17 @@ export const Header: MessageFns<Header> = {
   },
   fromPartial<I extends Exact<DeepPartial<Header>, I>>(object: I): Header {
     const message = createBaseHeader();
-    message.version = (object.version !== undefined && object.version !== null)
-      ? Consensus.fromPartial(object.version)
-      : undefined;
+    message.version =
+      object.version !== undefined && object.version !== null
+        ? Consensus.fromPartial(object.version)
+        : undefined;
     message.chainId = object.chainId ?? "";
     message.height = object.height ?? 0;
     message.time = object.time ?? undefined;
-    message.lastBlockId = (object.lastBlockId !== undefined && object.lastBlockId !== null)
-      ? BlockID.fromPartial(object.lastBlockId)
-      : undefined;
+    message.lastBlockId =
+      object.lastBlockId !== undefined && object.lastBlockId !== null
+        ? BlockID.fromPartial(object.lastBlockId)
+        : undefined;
     message.lastCommitHash = object.lastCommitHash ?? Buffer.alloc(0);
     message.dataHash = object.dataHash ?? Buffer.alloc(0);
     message.validatorsHash = object.validatorsHash ?? Buffer.alloc(0);
@@ -820,7 +863,10 @@ function createBaseData(): Data {
 }
 
 export const Data: MessageFns<Data> = {
-  encode(message: Data, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Data,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.txs) {
       writer.uint32(10).bytes(v!);
     }
@@ -828,7 +874,8 @@ export const Data: MessageFns<Data> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Data {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseData();
     while (reader.pos < end) {
@@ -853,7 +900,9 @@ export const Data: MessageFns<Data> = {
 
   fromJSON(object: any): Data {
     return {
-      txs: globalThis.Array.isArray(object?.txs) ? object.txs.map((e: any) => Buffer.from(bytesFromBase64(e))) : [],
+      txs: globalThis.Array.isArray(object?.txs)
+        ? object.txs.map((e: any) => Buffer.from(bytesFromBase64(e)))
+        : [],
     };
   },
 
@@ -891,7 +940,10 @@ function createBaseVote(): Vote {
 }
 
 export const Vote: MessageFns<Vote> = {
-  encode(message: Vote, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Vote,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
@@ -905,7 +957,10 @@ export const Vote: MessageFns<Vote> = {
       BlockID.encode(message.blockId, writer.uint32(34).fork()).join();
     }
     if (message.timestamp !== undefined) {
-      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(42).fork()).join();
+      Timestamp.encode(
+        toTimestamp(message.timestamp),
+        writer.uint32(42).fork(),
+      ).join();
     }
     if (message.validatorAddress.length !== 0) {
       writer.uint32(50).bytes(message.validatorAddress);
@@ -926,7 +981,8 @@ export const Vote: MessageFns<Vote> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Vote {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVote();
     while (reader.pos < end) {
@@ -969,7 +1025,9 @@ export const Vote: MessageFns<Vote> = {
             break;
           }
 
-          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.timestamp = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 6: {
@@ -1029,26 +1087,32 @@ export const Vote: MessageFns<Vote> = {
       blockId: isSet(object.blockId)
         ? BlockID.fromJSON(object.blockId)
         : isSet(object.block_id)
-        ? BlockID.fromJSON(object.block_id)
+          ? BlockID.fromJSON(object.block_id)
+          : undefined,
+      timestamp: isSet(object.timestamp)
+        ? fromJsonTimestamp(object.timestamp)
         : undefined,
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       validatorAddress: isSet(object.validatorAddress)
         ? Buffer.from(bytesFromBase64(object.validatorAddress))
         : isSet(object.validator_address)
-        ? Buffer.from(bytesFromBase64(object.validator_address))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.validator_address))
+          : Buffer.alloc(0),
       validatorIndex: isSet(object.validatorIndex)
         ? globalThis.Number(object.validatorIndex)
         : isSet(object.validator_index)
-        ? globalThis.Number(object.validator_index)
-        : 0,
-      signature: isSet(object.signature) ? Buffer.from(bytesFromBase64(object.signature)) : Buffer.alloc(0),
-      extension: isSet(object.extension) ? Buffer.from(bytesFromBase64(object.extension)) : Buffer.alloc(0),
+          ? globalThis.Number(object.validator_index)
+          : 0,
+      signature: isSet(object.signature)
+        ? Buffer.from(bytesFromBase64(object.signature))
+        : Buffer.alloc(0),
+      extension: isSet(object.extension)
+        ? Buffer.from(bytesFromBase64(object.extension))
+        : Buffer.alloc(0),
       extensionSignature: isSet(object.extensionSignature)
         ? Buffer.from(bytesFromBase64(object.extensionSignature))
         : isSet(object.extension_signature)
-        ? Buffer.from(bytesFromBase64(object.extension_signature))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.extension_signature))
+          : Buffer.alloc(0),
     };
   },
 
@@ -1095,9 +1159,10 @@ export const Vote: MessageFns<Vote> = {
     message.type = object.type ?? 0;
     message.height = object.height ?? 0;
     message.round = object.round ?? 0;
-    message.blockId = (object.blockId !== undefined && object.blockId !== null)
-      ? BlockID.fromPartial(object.blockId)
-      : undefined;
+    message.blockId =
+      object.blockId !== undefined && object.blockId !== null
+        ? BlockID.fromPartial(object.blockId)
+        : undefined;
     message.timestamp = object.timestamp ?? undefined;
     message.validatorAddress = object.validatorAddress ?? Buffer.alloc(0);
     message.validatorIndex = object.validatorIndex ?? 0;
@@ -1113,7 +1178,10 @@ function createBaseCommit(): Commit {
 }
 
 export const Commit: MessageFns<Commit> = {
-  encode(message: Commit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Commit,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.height !== 0) {
       writer.uint32(8).int64(message.height);
     }
@@ -1130,7 +1198,8 @@ export const Commit: MessageFns<Commit> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Commit {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommit();
     while (reader.pos < end) {
@@ -1184,8 +1253,8 @@ export const Commit: MessageFns<Commit> = {
       blockId: isSet(object.blockId)
         ? BlockID.fromJSON(object.blockId)
         : isSet(object.block_id)
-        ? BlockID.fromJSON(object.block_id)
-        : undefined,
+          ? BlockID.fromJSON(object.block_id)
+          : undefined,
       signatures: globalThis.Array.isArray(object?.signatures)
         ? object.signatures.map((e: any) => CommitSig.fromJSON(e))
         : [],
@@ -1216,20 +1285,30 @@ export const Commit: MessageFns<Commit> = {
     const message = createBaseCommit();
     message.height = object.height ?? 0;
     message.round = object.round ?? 0;
-    message.blockId = (object.blockId !== undefined && object.blockId !== null)
-      ? BlockID.fromPartial(object.blockId)
-      : undefined;
-    message.signatures = object.signatures?.map((e) => CommitSig.fromPartial(e)) || [];
+    message.blockId =
+      object.blockId !== undefined && object.blockId !== null
+        ? BlockID.fromPartial(object.blockId)
+        : undefined;
+    message.signatures =
+      object.signatures?.map((e) => CommitSig.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseCommitSig(): CommitSig {
-  return { blockIdFlag: 0, validatorAddress: Buffer.alloc(0), timestamp: undefined, signature: Buffer.alloc(0) };
+  return {
+    blockIdFlag: 0,
+    validatorAddress: Buffer.alloc(0),
+    timestamp: undefined,
+    signature: Buffer.alloc(0),
+  };
 }
 
 export const CommitSig: MessageFns<CommitSig> = {
-  encode(message: CommitSig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CommitSig,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.blockIdFlag !== 0) {
       writer.uint32(8).int32(message.blockIdFlag);
     }
@@ -1237,7 +1316,10 @@ export const CommitSig: MessageFns<CommitSig> = {
       writer.uint32(18).bytes(message.validatorAddress);
     }
     if (message.timestamp !== undefined) {
-      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(26).fork()).join();
+      Timestamp.encode(
+        toTimestamp(message.timestamp),
+        writer.uint32(26).fork(),
+      ).join();
     }
     if (message.signature.length !== 0) {
       writer.uint32(34).bytes(message.signature);
@@ -1246,7 +1328,8 @@ export const CommitSig: MessageFns<CommitSig> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): CommitSig {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommitSig();
     while (reader.pos < end) {
@@ -1273,7 +1356,9 @@ export const CommitSig: MessageFns<CommitSig> = {
             break;
           }
 
-          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.timestamp = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 4: {
@@ -1298,15 +1383,19 @@ export const CommitSig: MessageFns<CommitSig> = {
       blockIdFlag: isSet(object.blockIdFlag)
         ? blockIDFlagFromJSON(object.blockIdFlag)
         : isSet(object.block_id_flag)
-        ? blockIDFlagFromJSON(object.block_id_flag)
-        : 0,
+          ? blockIDFlagFromJSON(object.block_id_flag)
+          : 0,
       validatorAddress: isSet(object.validatorAddress)
         ? Buffer.from(bytesFromBase64(object.validatorAddress))
         : isSet(object.validator_address)
-        ? Buffer.from(bytesFromBase64(object.validator_address))
+          ? Buffer.from(bytesFromBase64(object.validator_address))
+          : Buffer.alloc(0),
+      timestamp: isSet(object.timestamp)
+        ? fromJsonTimestamp(object.timestamp)
+        : undefined,
+      signature: isSet(object.signature)
+        ? Buffer.from(bytesFromBase64(object.signature))
         : Buffer.alloc(0),
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
-      signature: isSet(object.signature) ? Buffer.from(bytesFromBase64(object.signature)) : Buffer.alloc(0),
     };
   },
 
@@ -1330,7 +1419,9 @@ export const CommitSig: MessageFns<CommitSig> = {
   create<I extends Exact<DeepPartial<CommitSig>, I>>(base?: I): CommitSig {
     return CommitSig.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CommitSig>, I>>(object: I): CommitSig {
+  fromPartial<I extends Exact<DeepPartial<CommitSig>, I>>(
+    object: I,
+  ): CommitSig {
     const message = createBaseCommitSig();
     message.blockIdFlag = object.blockIdFlag ?? 0;
     message.validatorAddress = object.validatorAddress ?? Buffer.alloc(0);
@@ -1345,7 +1436,10 @@ function createBaseExtendedCommit(): ExtendedCommit {
 }
 
 export const ExtendedCommit: MessageFns<ExtendedCommit> = {
-  encode(message: ExtendedCommit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ExtendedCommit,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.height !== 0) {
       writer.uint32(8).int64(message.height);
     }
@@ -1362,7 +1456,8 @@ export const ExtendedCommit: MessageFns<ExtendedCommit> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ExtendedCommit {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExtendedCommit();
     while (reader.pos < end) {
@@ -1397,7 +1492,9 @@ export const ExtendedCommit: MessageFns<ExtendedCommit> = {
             break;
           }
 
-          message.extendedSignatures.push(ExtendedCommitSig.decode(reader, reader.uint32()));
+          message.extendedSignatures.push(
+            ExtendedCommitSig.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -1416,13 +1513,17 @@ export const ExtendedCommit: MessageFns<ExtendedCommit> = {
       blockId: isSet(object.blockId)
         ? BlockID.fromJSON(object.blockId)
         : isSet(object.block_id)
-        ? BlockID.fromJSON(object.block_id)
-        : undefined,
+          ? BlockID.fromJSON(object.block_id)
+          : undefined,
       extendedSignatures: globalThis.Array.isArray(object?.extendedSignatures)
-        ? object.extendedSignatures.map((e: any) => ExtendedCommitSig.fromJSON(e))
+        ? object.extendedSignatures.map((e: any) =>
+            ExtendedCommitSig.fromJSON(e),
+          )
         : globalThis.Array.isArray(object?.extended_signatures)
-        ? object.extended_signatures.map((e: any) => ExtendedCommitSig.fromJSON(e))
-        : [],
+          ? object.extended_signatures.map((e: any) =>
+              ExtendedCommitSig.fromJSON(e),
+            )
+          : [],
     };
   },
 
@@ -1438,22 +1539,31 @@ export const ExtendedCommit: MessageFns<ExtendedCommit> = {
       obj.blockId = BlockID.toJSON(message.blockId);
     }
     if (message.extendedSignatures?.length) {
-      obj.extendedSignatures = message.extendedSignatures.map((e) => ExtendedCommitSig.toJSON(e));
+      obj.extendedSignatures = message.extendedSignatures.map((e) =>
+        ExtendedCommitSig.toJSON(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ExtendedCommit>, I>>(base?: I): ExtendedCommit {
+  create<I extends Exact<DeepPartial<ExtendedCommit>, I>>(
+    base?: I,
+  ): ExtendedCommit {
     return ExtendedCommit.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ExtendedCommit>, I>>(object: I): ExtendedCommit {
+  fromPartial<I extends Exact<DeepPartial<ExtendedCommit>, I>>(
+    object: I,
+  ): ExtendedCommit {
     const message = createBaseExtendedCommit();
     message.height = object.height ?? 0;
     message.round = object.round ?? 0;
-    message.blockId = (object.blockId !== undefined && object.blockId !== null)
-      ? BlockID.fromPartial(object.blockId)
-      : undefined;
-    message.extendedSignatures = object.extendedSignatures?.map((e) => ExtendedCommitSig.fromPartial(e)) || [];
+    message.blockId =
+      object.blockId !== undefined && object.blockId !== null
+        ? BlockID.fromPartial(object.blockId)
+        : undefined;
+    message.extendedSignatures =
+      object.extendedSignatures?.map((e) => ExtendedCommitSig.fromPartial(e)) ||
+      [];
     return message;
   },
 };
@@ -1470,7 +1580,10 @@ function createBaseExtendedCommitSig(): ExtendedCommitSig {
 }
 
 export const ExtendedCommitSig: MessageFns<ExtendedCommitSig> = {
-  encode(message: ExtendedCommitSig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ExtendedCommitSig,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.blockIdFlag !== 0) {
       writer.uint32(8).int32(message.blockIdFlag);
     }
@@ -1478,7 +1591,10 @@ export const ExtendedCommitSig: MessageFns<ExtendedCommitSig> = {
       writer.uint32(18).bytes(message.validatorAddress);
     }
     if (message.timestamp !== undefined) {
-      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(26).fork()).join();
+      Timestamp.encode(
+        toTimestamp(message.timestamp),
+        writer.uint32(26).fork(),
+      ).join();
     }
     if (message.signature.length !== 0) {
       writer.uint32(34).bytes(message.signature);
@@ -1493,7 +1609,8 @@ export const ExtendedCommitSig: MessageFns<ExtendedCommitSig> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ExtendedCommitSig {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExtendedCommitSig();
     while (reader.pos < end) {
@@ -1520,7 +1637,9 @@ export const ExtendedCommitSig: MessageFns<ExtendedCommitSig> = {
             break;
           }
 
-          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.timestamp = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 4: {
@@ -1561,21 +1680,27 @@ export const ExtendedCommitSig: MessageFns<ExtendedCommitSig> = {
       blockIdFlag: isSet(object.blockIdFlag)
         ? blockIDFlagFromJSON(object.blockIdFlag)
         : isSet(object.block_id_flag)
-        ? blockIDFlagFromJSON(object.block_id_flag)
-        : 0,
+          ? blockIDFlagFromJSON(object.block_id_flag)
+          : 0,
       validatorAddress: isSet(object.validatorAddress)
         ? Buffer.from(bytesFromBase64(object.validatorAddress))
         : isSet(object.validator_address)
-        ? Buffer.from(bytesFromBase64(object.validator_address))
+          ? Buffer.from(bytesFromBase64(object.validator_address))
+          : Buffer.alloc(0),
+      timestamp: isSet(object.timestamp)
+        ? fromJsonTimestamp(object.timestamp)
+        : undefined,
+      signature: isSet(object.signature)
+        ? Buffer.from(bytesFromBase64(object.signature))
         : Buffer.alloc(0),
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
-      signature: isSet(object.signature) ? Buffer.from(bytesFromBase64(object.signature)) : Buffer.alloc(0),
-      extension: isSet(object.extension) ? Buffer.from(bytesFromBase64(object.extension)) : Buffer.alloc(0),
+      extension: isSet(object.extension)
+        ? Buffer.from(bytesFromBase64(object.extension))
+        : Buffer.alloc(0),
       extensionSignature: isSet(object.extensionSignature)
         ? Buffer.from(bytesFromBase64(object.extensionSignature))
         : isSet(object.extension_signature)
-        ? Buffer.from(bytesFromBase64(object.extension_signature))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.extension_signature))
+          : Buffer.alloc(0),
     };
   },
 
@@ -1602,10 +1727,14 @@ export const ExtendedCommitSig: MessageFns<ExtendedCommitSig> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ExtendedCommitSig>, I>>(base?: I): ExtendedCommitSig {
+  create<I extends Exact<DeepPartial<ExtendedCommitSig>, I>>(
+    base?: I,
+  ): ExtendedCommitSig {
     return ExtendedCommitSig.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ExtendedCommitSig>, I>>(object: I): ExtendedCommitSig {
+  fromPartial<I extends Exact<DeepPartial<ExtendedCommitSig>, I>>(
+    object: I,
+  ): ExtendedCommitSig {
     const message = createBaseExtendedCommitSig();
     message.blockIdFlag = object.blockIdFlag ?? 0;
     message.validatorAddress = object.validatorAddress ?? Buffer.alloc(0);
@@ -1630,7 +1759,10 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal: MessageFns<Proposal> = {
-  encode(message: Proposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Proposal,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
@@ -1647,7 +1779,10 @@ export const Proposal: MessageFns<Proposal> = {
       BlockID.encode(message.blockId, writer.uint32(42).fork()).join();
     }
     if (message.timestamp !== undefined) {
-      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(50).fork()).join();
+      Timestamp.encode(
+        toTimestamp(message.timestamp),
+        writer.uint32(50).fork(),
+      ).join();
     }
     if (message.signature.length !== 0) {
       writer.uint32(58).bytes(message.signature);
@@ -1656,7 +1791,8 @@ export const Proposal: MessageFns<Proposal> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Proposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProposal();
     while (reader.pos < end) {
@@ -1707,7 +1843,9 @@ export const Proposal: MessageFns<Proposal> = {
             break;
           }
 
-          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.timestamp = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 7: {
@@ -1735,15 +1873,19 @@ export const Proposal: MessageFns<Proposal> = {
       polRound: isSet(object.polRound)
         ? globalThis.Number(object.polRound)
         : isSet(object.pol_round)
-        ? globalThis.Number(object.pol_round)
-        : 0,
+          ? globalThis.Number(object.pol_round)
+          : 0,
       blockId: isSet(object.blockId)
         ? BlockID.fromJSON(object.blockId)
         : isSet(object.block_id)
-        ? BlockID.fromJSON(object.block_id)
+          ? BlockID.fromJSON(object.block_id)
+          : undefined,
+      timestamp: isSet(object.timestamp)
+        ? fromJsonTimestamp(object.timestamp)
         : undefined,
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
-      signature: isSet(object.signature) ? Buffer.from(bytesFromBase64(object.signature)) : Buffer.alloc(0),
+      signature: isSet(object.signature)
+        ? Buffer.from(bytesFromBase64(object.signature))
+        : Buffer.alloc(0),
     };
   },
 
@@ -1782,9 +1924,10 @@ export const Proposal: MessageFns<Proposal> = {
     message.height = object.height ?? 0;
     message.round = object.round ?? 0;
     message.polRound = object.polRound ?? 0;
-    message.blockId = (object.blockId !== undefined && object.blockId !== null)
-      ? BlockID.fromPartial(object.blockId)
-      : undefined;
+    message.blockId =
+      object.blockId !== undefined && object.blockId !== null
+        ? BlockID.fromPartial(object.blockId)
+        : undefined;
     message.timestamp = object.timestamp ?? undefined;
     message.signature = object.signature ?? Buffer.alloc(0);
     return message;
@@ -1796,7 +1939,10 @@ function createBaseSignedHeader(): SignedHeader {
 }
 
 export const SignedHeader: MessageFns<SignedHeader> = {
-  encode(message: SignedHeader, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SignedHeader,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(10).fork()).join();
     }
@@ -1807,7 +1953,8 @@ export const SignedHeader: MessageFns<SignedHeader> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SignedHeader {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignedHeader();
     while (reader.pos < end) {
@@ -1856,17 +2003,23 @@ export const SignedHeader: MessageFns<SignedHeader> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SignedHeader>, I>>(base?: I): SignedHeader {
+  create<I extends Exact<DeepPartial<SignedHeader>, I>>(
+    base?: I,
+  ): SignedHeader {
     return SignedHeader.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SignedHeader>, I>>(object: I): SignedHeader {
+  fromPartial<I extends Exact<DeepPartial<SignedHeader>, I>>(
+    object: I,
+  ): SignedHeader {
     const message = createBaseSignedHeader();
-    message.header = (object.header !== undefined && object.header !== null)
-      ? Header.fromPartial(object.header)
-      : undefined;
-    message.commit = (object.commit !== undefined && object.commit !== null)
-      ? Commit.fromPartial(object.commit)
-      : undefined;
+    message.header =
+      object.header !== undefined && object.header !== null
+        ? Header.fromPartial(object.header)
+        : undefined;
+    message.commit =
+      object.commit !== undefined && object.commit !== null
+        ? Commit.fromPartial(object.commit)
+        : undefined;
     return message;
   },
 };
@@ -1876,18 +2029,28 @@ function createBaseLightBlock(): LightBlock {
 }
 
 export const LightBlock: MessageFns<LightBlock> = {
-  encode(message: LightBlock, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: LightBlock,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.signedHeader !== undefined) {
-      SignedHeader.encode(message.signedHeader, writer.uint32(10).fork()).join();
+      SignedHeader.encode(
+        message.signedHeader,
+        writer.uint32(10).fork(),
+      ).join();
     }
     if (message.validatorSet !== undefined) {
-      ValidatorSet.encode(message.validatorSet, writer.uint32(18).fork()).join();
+      ValidatorSet.encode(
+        message.validatorSet,
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): LightBlock {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLightBlock();
     while (reader.pos < end) {
@@ -1923,13 +2086,13 @@ export const LightBlock: MessageFns<LightBlock> = {
       signedHeader: isSet(object.signedHeader)
         ? SignedHeader.fromJSON(object.signedHeader)
         : isSet(object.signed_header)
-        ? SignedHeader.fromJSON(object.signed_header)
-        : undefined,
+          ? SignedHeader.fromJSON(object.signed_header)
+          : undefined,
       validatorSet: isSet(object.validatorSet)
         ? ValidatorSet.fromJSON(object.validatorSet)
         : isSet(object.validator_set)
-        ? ValidatorSet.fromJSON(object.validator_set)
-        : undefined,
+          ? ValidatorSet.fromJSON(object.validator_set)
+          : undefined,
     };
   },
 
@@ -1947,14 +2110,18 @@ export const LightBlock: MessageFns<LightBlock> = {
   create<I extends Exact<DeepPartial<LightBlock>, I>>(base?: I): LightBlock {
     return LightBlock.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<LightBlock>, I>>(object: I): LightBlock {
+  fromPartial<I extends Exact<DeepPartial<LightBlock>, I>>(
+    object: I,
+  ): LightBlock {
     const message = createBaseLightBlock();
-    message.signedHeader = (object.signedHeader !== undefined && object.signedHeader !== null)
-      ? SignedHeader.fromPartial(object.signedHeader)
-      : undefined;
-    message.validatorSet = (object.validatorSet !== undefined && object.validatorSet !== null)
-      ? ValidatorSet.fromPartial(object.validatorSet)
-      : undefined;
+    message.signedHeader =
+      object.signedHeader !== undefined && object.signedHeader !== null
+        ? SignedHeader.fromPartial(object.signedHeader)
+        : undefined;
+    message.validatorSet =
+      object.validatorSet !== undefined && object.validatorSet !== null
+        ? ValidatorSet.fromPartial(object.validatorSet)
+        : undefined;
     return message;
   },
 };
@@ -1964,7 +2131,10 @@ function createBaseBlockMeta(): BlockMeta {
 }
 
 export const BlockMeta: MessageFns<BlockMeta> = {
-  encode(message: BlockMeta, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BlockMeta,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).join();
     }
@@ -1981,7 +2151,8 @@ export const BlockMeta: MessageFns<BlockMeta> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): BlockMeta {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlockMeta();
     while (reader.pos < end) {
@@ -2033,19 +2204,19 @@ export const BlockMeta: MessageFns<BlockMeta> = {
       blockId: isSet(object.blockId)
         ? BlockID.fromJSON(object.blockId)
         : isSet(object.block_id)
-        ? BlockID.fromJSON(object.block_id)
-        : undefined,
+          ? BlockID.fromJSON(object.block_id)
+          : undefined,
       blockSize: isSet(object.blockSize)
         ? globalThis.Number(object.blockSize)
         : isSet(object.block_size)
-        ? globalThis.Number(object.block_size)
-        : 0,
+          ? globalThis.Number(object.block_size)
+          : 0,
       header: isSet(object.header) ? Header.fromJSON(object.header) : undefined,
       numTxs: isSet(object.numTxs)
         ? globalThis.Number(object.numTxs)
         : isSet(object.num_txs)
-        ? globalThis.Number(object.num_txs)
-        : 0,
+          ? globalThis.Number(object.num_txs)
+          : 0,
     };
   },
 
@@ -2069,15 +2240,19 @@ export const BlockMeta: MessageFns<BlockMeta> = {
   create<I extends Exact<DeepPartial<BlockMeta>, I>>(base?: I): BlockMeta {
     return BlockMeta.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BlockMeta>, I>>(object: I): BlockMeta {
+  fromPartial<I extends Exact<DeepPartial<BlockMeta>, I>>(
+    object: I,
+  ): BlockMeta {
     const message = createBaseBlockMeta();
-    message.blockId = (object.blockId !== undefined && object.blockId !== null)
-      ? BlockID.fromPartial(object.blockId)
-      : undefined;
+    message.blockId =
+      object.blockId !== undefined && object.blockId !== null
+        ? BlockID.fromPartial(object.blockId)
+        : undefined;
     message.blockSize = object.blockSize ?? 0;
-    message.header = (object.header !== undefined && object.header !== null)
-      ? Header.fromPartial(object.header)
-      : undefined;
+    message.header =
+      object.header !== undefined && object.header !== null
+        ? Header.fromPartial(object.header)
+        : undefined;
     message.numTxs = object.numTxs ?? 0;
     return message;
   },
@@ -2088,7 +2263,10 @@ function createBaseTxProof(): TxProof {
 }
 
 export const TxProof: MessageFns<TxProof> = {
-  encode(message: TxProof, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TxProof,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.rootHash.length !== 0) {
       writer.uint32(10).bytes(message.rootHash);
     }
@@ -2102,7 +2280,8 @@ export const TxProof: MessageFns<TxProof> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TxProof {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxProof();
     while (reader.pos < end) {
@@ -2146,9 +2325,11 @@ export const TxProof: MessageFns<TxProof> = {
       rootHash: isSet(object.rootHash)
         ? Buffer.from(bytesFromBase64(object.rootHash))
         : isSet(object.root_hash)
-        ? Buffer.from(bytesFromBase64(object.root_hash))
+          ? Buffer.from(bytesFromBase64(object.root_hash))
+          : Buffer.alloc(0),
+      data: isSet(object.data)
+        ? Buffer.from(bytesFromBase64(object.data))
         : Buffer.alloc(0),
-      data: isSet(object.data) ? Buffer.from(bytesFromBase64(object.data)) : Buffer.alloc(0),
       proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined,
     };
   },
@@ -2174,7 +2355,10 @@ export const TxProof: MessageFns<TxProof> = {
     const message = createBaseTxProof();
     message.rootHash = object.rootHash ?? Buffer.alloc(0);
     message.data = object.data ?? Buffer.alloc(0);
-    message.proof = (object.proof !== undefined && object.proof !== null) ? Proof.fromPartial(object.proof) : undefined;
+    message.proof =
+      object.proof !== undefined && object.proof !== null
+        ? Proof.fromPartial(object.proof)
+        : undefined;
     return message;
   },
 };
@@ -2187,17 +2371,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = Math.trunc(date.getTime() / 1_000);

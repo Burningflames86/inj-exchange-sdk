@@ -34,7 +34,10 @@ function createBaseMultiSignature(): MultiSignature {
 }
 
 export const MultiSignature: MessageFns<MultiSignature> = {
-  encode(message: MultiSignature, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MultiSignature,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.signatures) {
       writer.uint32(10).bytes(v!);
     }
@@ -42,7 +45,8 @@ export const MultiSignature: MessageFns<MultiSignature> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MultiSignature {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMultiSignature();
     while (reader.pos < end) {
@@ -81,10 +85,14 @@ export const MultiSignature: MessageFns<MultiSignature> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MultiSignature>, I>>(base?: I): MultiSignature {
+  create<I extends Exact<DeepPartial<MultiSignature>, I>>(
+    base?: I,
+  ): MultiSignature {
     return MultiSignature.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MultiSignature>, I>>(object: I): MultiSignature {
+  fromPartial<I extends Exact<DeepPartial<MultiSignature>, I>>(
+    object: I,
+  ): MultiSignature {
     const message = createBaseMultiSignature();
     message.signatures = object.signatures?.map((e) => e) || [];
     return message;
@@ -96,7 +104,10 @@ function createBaseCompactBitArray(): CompactBitArray {
 }
 
 export const CompactBitArray: MessageFns<CompactBitArray> = {
-  encode(message: CompactBitArray, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CompactBitArray,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.extraBitsStored !== 0) {
       writer.uint32(8).uint32(message.extraBitsStored);
     }
@@ -107,7 +118,8 @@ export const CompactBitArray: MessageFns<CompactBitArray> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): CompactBitArray {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCompactBitArray();
     while (reader.pos < end) {
@@ -143,9 +155,11 @@ export const CompactBitArray: MessageFns<CompactBitArray> = {
       extraBitsStored: isSet(object.extraBitsStored)
         ? globalThis.Number(object.extraBitsStored)
         : isSet(object.extra_bits_stored)
-        ? globalThis.Number(object.extra_bits_stored)
-        : 0,
-      elems: isSet(object.elems) ? Buffer.from(bytesFromBase64(object.elems)) : Buffer.alloc(0),
+          ? globalThis.Number(object.extra_bits_stored)
+          : 0,
+      elems: isSet(object.elems)
+        ? Buffer.from(bytesFromBase64(object.elems))
+        : Buffer.alloc(0),
     };
   },
 
@@ -160,10 +174,14 @@ export const CompactBitArray: MessageFns<CompactBitArray> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CompactBitArray>, I>>(base?: I): CompactBitArray {
+  create<I extends Exact<DeepPartial<CompactBitArray>, I>>(
+    base?: I,
+  ): CompactBitArray {
     return CompactBitArray.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CompactBitArray>, I>>(object: I): CompactBitArray {
+  fromPartial<I extends Exact<DeepPartial<CompactBitArray>, I>>(
+    object: I,
+  ): CompactBitArray {
     const message = createBaseCompactBitArray();
     message.extraBitsStored = object.extraBitsStored ?? 0;
     message.elems = object.elems ?? Buffer.alloc(0);
@@ -179,17 +197,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

@@ -157,7 +157,10 @@ function createBaseOracleListRequest(): OracleListRequest {
 }
 
 export const OracleListRequest: MessageFns<OracleListRequest> = {
-  encode(message: OracleListRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OracleListRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.symbol !== "") {
       writer.uint32(10).string(message.symbol);
     }
@@ -174,7 +177,8 @@ export const OracleListRequest: MessageFns<OracleListRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): OracleListRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOracleListRequest();
     while (reader.pos < end) {
@@ -227,13 +231,13 @@ export const OracleListRequest: MessageFns<OracleListRequest> = {
       oracleType: isSet(object.oracleType)
         ? globalThis.String(object.oracleType)
         : isSet(object.oracle_type)
-        ? globalThis.String(object.oracle_type)
-        : "",
+          ? globalThis.String(object.oracle_type)
+          : "",
       perPage: isSet(object.perPage)
         ? globalThis.Number(object.perPage)
         : isSet(object.per_page)
-        ? globalThis.Number(object.per_page)
-        : 0,
+          ? globalThis.Number(object.per_page)
+          : 0,
       token: isSet(object.token) ? globalThis.String(object.token) : "",
     };
   },
@@ -255,10 +259,14 @@ export const OracleListRequest: MessageFns<OracleListRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OracleListRequest>, I>>(base?: I): OracleListRequest {
+  create<I extends Exact<DeepPartial<OracleListRequest>, I>>(
+    base?: I,
+  ): OracleListRequest {
     return OracleListRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OracleListRequest>, I>>(object: I): OracleListRequest {
+  fromPartial<I extends Exact<DeepPartial<OracleListRequest>, I>>(
+    object: I,
+  ): OracleListRequest {
     const message = createBaseOracleListRequest();
     message.symbol = object.symbol ?? "";
     message.oracleType = object.oracleType ?? "";
@@ -273,7 +281,10 @@ function createBaseOracleListResponse(): OracleListResponse {
 }
 
 export const OracleListResponse: MessageFns<OracleListResponse> = {
-  encode(message: OracleListResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OracleListResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.oracles) {
       Oracle.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -283,8 +294,12 @@ export const OracleListResponse: MessageFns<OracleListResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OracleListResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OracleListResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOracleListResponse();
     while (reader.pos < end) {
@@ -317,8 +332,12 @@ export const OracleListResponse: MessageFns<OracleListResponse> = {
 
   fromJSON(object: any): OracleListResponse {
     return {
-      oracles: globalThis.Array.isArray(object?.oracles) ? object.oracles.map((e: any) => Oracle.fromJSON(e)) : [],
-      next: globalThis.Array.isArray(object?.next) ? object.next.map((e: any) => globalThis.String(e)) : [],
+      oracles: globalThis.Array.isArray(object?.oracles)
+        ? object.oracles.map((e: any) => Oracle.fromJSON(e))
+        : [],
+      next: globalThis.Array.isArray(object?.next)
+        ? object.next.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -333,10 +352,14 @@ export const OracleListResponse: MessageFns<OracleListResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OracleListResponse>, I>>(base?: I): OracleListResponse {
+  create<I extends Exact<DeepPartial<OracleListResponse>, I>>(
+    base?: I,
+  ): OracleListResponse {
     return OracleListResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OracleListResponse>, I>>(object: I): OracleListResponse {
+  fromPartial<I extends Exact<DeepPartial<OracleListResponse>, I>>(
+    object: I,
+  ): OracleListResponse {
     const message = createBaseOracleListResponse();
     message.oracles = object.oracles?.map((e) => Oracle.fromPartial(e)) || [];
     message.next = object.next?.map((e) => e) || [];
@@ -345,11 +368,20 @@ export const OracleListResponse: MessageFns<OracleListResponse> = {
 };
 
 function createBaseOracle(): Oracle {
-  return { symbol: "", baseSymbol: "", quoteSymbol: "", oracleType: "", price: "" };
+  return {
+    symbol: "",
+    baseSymbol: "",
+    quoteSymbol: "",
+    oracleType: "",
+    price: "",
+  };
 }
 
 export const Oracle: MessageFns<Oracle> = {
-  encode(message: Oracle, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Oracle,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.symbol !== "") {
       writer.uint32(10).string(message.symbol);
     }
@@ -369,7 +401,8 @@ export const Oracle: MessageFns<Oracle> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Oracle {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOracle();
     while (reader.pos < end) {
@@ -430,18 +463,18 @@ export const Oracle: MessageFns<Oracle> = {
       baseSymbol: isSet(object.baseSymbol)
         ? globalThis.String(object.baseSymbol)
         : isSet(object.base_symbol)
-        ? globalThis.String(object.base_symbol)
-        : "",
+          ? globalThis.String(object.base_symbol)
+          : "",
       quoteSymbol: isSet(object.quoteSymbol)
         ? globalThis.String(object.quoteSymbol)
         : isSet(object.quote_symbol)
-        ? globalThis.String(object.quote_symbol)
-        : "",
+          ? globalThis.String(object.quote_symbol)
+          : "",
       oracleType: isSet(object.oracleType)
         ? globalThis.String(object.oracleType)
         : isSet(object.oracle_type)
-        ? globalThis.String(object.oracle_type)
-        : "",
+          ? globalThis.String(object.oracle_type)
+          : "",
       price: isSet(object.price) ? globalThis.String(object.price) : "",
     };
   },
@@ -481,11 +514,19 @@ export const Oracle: MessageFns<Oracle> = {
 };
 
 function createBasePriceRequest(): PriceRequest {
-  return { baseSymbol: "", quoteSymbol: "", oracleType: "", oracleScaleFactor: 0 };
+  return {
+    baseSymbol: "",
+    quoteSymbol: "",
+    oracleType: "",
+    oracleScaleFactor: 0,
+  };
 }
 
 export const PriceRequest: MessageFns<PriceRequest> = {
-  encode(message: PriceRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.baseSymbol !== "") {
       writer.uint32(10).string(message.baseSymbol);
     }
@@ -502,7 +543,8 @@ export const PriceRequest: MessageFns<PriceRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceRequest();
     while (reader.pos < end) {
@@ -554,23 +596,23 @@ export const PriceRequest: MessageFns<PriceRequest> = {
       baseSymbol: isSet(object.baseSymbol)
         ? globalThis.String(object.baseSymbol)
         : isSet(object.base_symbol)
-        ? globalThis.String(object.base_symbol)
-        : "",
+          ? globalThis.String(object.base_symbol)
+          : "",
       quoteSymbol: isSet(object.quoteSymbol)
         ? globalThis.String(object.quoteSymbol)
         : isSet(object.quote_symbol)
-        ? globalThis.String(object.quote_symbol)
-        : "",
+          ? globalThis.String(object.quote_symbol)
+          : "",
       oracleType: isSet(object.oracleType)
         ? globalThis.String(object.oracleType)
         : isSet(object.oracle_type)
-        ? globalThis.String(object.oracle_type)
-        : "",
+          ? globalThis.String(object.oracle_type)
+          : "",
       oracleScaleFactor: isSet(object.oracleScaleFactor)
         ? globalThis.Number(object.oracleScaleFactor)
         : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
+          ? globalThis.Number(object.oracle_scale_factor)
+          : 0,
     };
   },
 
@@ -591,10 +633,14 @@ export const PriceRequest: MessageFns<PriceRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceRequest>, I>>(base?: I): PriceRequest {
+  create<I extends Exact<DeepPartial<PriceRequest>, I>>(
+    base?: I,
+  ): PriceRequest {
     return PriceRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceRequest>, I>>(object: I): PriceRequest {
+  fromPartial<I extends Exact<DeepPartial<PriceRequest>, I>>(
+    object: I,
+  ): PriceRequest {
     const message = createBasePriceRequest();
     message.baseSymbol = object.baseSymbol ?? "";
     message.quoteSymbol = object.quoteSymbol ?? "";
@@ -609,7 +655,10 @@ function createBasePriceResponse(): PriceResponse {
 }
 
 export const PriceResponse: MessageFns<PriceResponse> = {
-  encode(message: PriceResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -617,7 +666,8 @@ export const PriceResponse: MessageFns<PriceResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceResponse();
     while (reader.pos < end) {
@@ -641,7 +691,9 @@ export const PriceResponse: MessageFns<PriceResponse> = {
   },
 
   fromJSON(object: any): PriceResponse {
-    return { price: isSet(object.price) ? globalThis.String(object.price) : "" };
+    return {
+      price: isSet(object.price) ? globalThis.String(object.price) : "",
+    };
   },
 
   toJSON(message: PriceResponse): unknown {
@@ -652,10 +704,14 @@ export const PriceResponse: MessageFns<PriceResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceResponse>, I>>(base?: I): PriceResponse {
+  create<I extends Exact<DeepPartial<PriceResponse>, I>>(
+    base?: I,
+  ): PriceResponse {
     return PriceResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceResponse>, I>>(object: I): PriceResponse {
+  fromPartial<I extends Exact<DeepPartial<PriceResponse>, I>>(
+    object: I,
+  ): PriceResponse {
     const message = createBasePriceResponse();
     message.price = object.price ?? "";
     return message;
@@ -667,7 +723,10 @@ function createBasePriceV2Request(): PriceV2Request {
 }
 
 export const PriceV2Request: MessageFns<PriceV2Request> = {
-  encode(message: PriceV2Request, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceV2Request,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.filters) {
       PricePayloadV2.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -675,7 +734,8 @@ export const PriceV2Request: MessageFns<PriceV2Request> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceV2Request {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceV2Request();
     while (reader.pos < end) {
@@ -714,22 +774,35 @@ export const PriceV2Request: MessageFns<PriceV2Request> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceV2Request>, I>>(base?: I): PriceV2Request {
+  create<I extends Exact<DeepPartial<PriceV2Request>, I>>(
+    base?: I,
+  ): PriceV2Request {
     return PriceV2Request.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceV2Request>, I>>(object: I): PriceV2Request {
+  fromPartial<I extends Exact<DeepPartial<PriceV2Request>, I>>(
+    object: I,
+  ): PriceV2Request {
     const message = createBasePriceV2Request();
-    message.filters = object.filters?.map((e) => PricePayloadV2.fromPartial(e)) || [];
+    message.filters =
+      object.filters?.map((e) => PricePayloadV2.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBasePricePayloadV2(): PricePayloadV2 {
-  return { baseSymbol: "", quoteSymbol: "", oracleType: "", oracleScaleFactor: 0 };
+  return {
+    baseSymbol: "",
+    quoteSymbol: "",
+    oracleType: "",
+    oracleScaleFactor: 0,
+  };
 }
 
 export const PricePayloadV2: MessageFns<PricePayloadV2> = {
-  encode(message: PricePayloadV2, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PricePayloadV2,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.baseSymbol !== "") {
       writer.uint32(10).string(message.baseSymbol);
     }
@@ -746,7 +819,8 @@ export const PricePayloadV2: MessageFns<PricePayloadV2> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PricePayloadV2 {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePricePayloadV2();
     while (reader.pos < end) {
@@ -798,23 +872,23 @@ export const PricePayloadV2: MessageFns<PricePayloadV2> = {
       baseSymbol: isSet(object.baseSymbol)
         ? globalThis.String(object.baseSymbol)
         : isSet(object.base_symbol)
-        ? globalThis.String(object.base_symbol)
-        : "",
+          ? globalThis.String(object.base_symbol)
+          : "",
       quoteSymbol: isSet(object.quoteSymbol)
         ? globalThis.String(object.quoteSymbol)
         : isSet(object.quote_symbol)
-        ? globalThis.String(object.quote_symbol)
-        : "",
+          ? globalThis.String(object.quote_symbol)
+          : "",
       oracleType: isSet(object.oracleType)
         ? globalThis.String(object.oracleType)
         : isSet(object.oracle_type)
-        ? globalThis.String(object.oracle_type)
-        : "",
+          ? globalThis.String(object.oracle_type)
+          : "",
       oracleScaleFactor: isSet(object.oracleScaleFactor)
         ? globalThis.Number(object.oracleScaleFactor)
         : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
+          ? globalThis.Number(object.oracle_scale_factor)
+          : 0,
     };
   },
 
@@ -835,10 +909,14 @@ export const PricePayloadV2: MessageFns<PricePayloadV2> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PricePayloadV2>, I>>(base?: I): PricePayloadV2 {
+  create<I extends Exact<DeepPartial<PricePayloadV2>, I>>(
+    base?: I,
+  ): PricePayloadV2 {
     return PricePayloadV2.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PricePayloadV2>, I>>(object: I): PricePayloadV2 {
+  fromPartial<I extends Exact<DeepPartial<PricePayloadV2>, I>>(
+    object: I,
+  ): PricePayloadV2 {
     const message = createBasePricePayloadV2();
     message.baseSymbol = object.baseSymbol ?? "";
     message.quoteSymbol = object.quoteSymbol ?? "";
@@ -853,7 +931,10 @@ function createBasePriceV2Response(): PriceV2Response {
 }
 
 export const PriceV2Response: MessageFns<PriceV2Response> = {
-  encode(message: PriceV2Response, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceV2Response,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.prices) {
       PriceV2Result.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -861,7 +942,8 @@ export const PriceV2Response: MessageFns<PriceV2Response> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceV2Response {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceV2Response();
     while (reader.pos < end) {
@@ -886,7 +968,9 @@ export const PriceV2Response: MessageFns<PriceV2Response> = {
 
   fromJSON(object: any): PriceV2Response {
     return {
-      prices: globalThis.Array.isArray(object?.prices) ? object.prices.map((e: any) => PriceV2Result.fromJSON(e)) : [],
+      prices: globalThis.Array.isArray(object?.prices)
+        ? object.prices.map((e: any) => PriceV2Result.fromJSON(e))
+        : [],
     };
   },
 
@@ -898,22 +982,37 @@ export const PriceV2Response: MessageFns<PriceV2Response> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceV2Response>, I>>(base?: I): PriceV2Response {
+  create<I extends Exact<DeepPartial<PriceV2Response>, I>>(
+    base?: I,
+  ): PriceV2Response {
     return PriceV2Response.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceV2Response>, I>>(object: I): PriceV2Response {
+  fromPartial<I extends Exact<DeepPartial<PriceV2Response>, I>>(
+    object: I,
+  ): PriceV2Response {
     const message = createBasePriceV2Response();
-    message.prices = object.prices?.map((e) => PriceV2Result.fromPartial(e)) || [];
+    message.prices =
+      object.prices?.map((e) => PriceV2Result.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBasePriceV2Result(): PriceV2Result {
-  return { baseSymbol: "", quoteSymbol: "", oracleType: "", oracleScaleFactor: 0, price: "", marketId: "" };
+  return {
+    baseSymbol: "",
+    quoteSymbol: "",
+    oracleType: "",
+    oracleScaleFactor: 0,
+    price: "",
+    marketId: "",
+  };
 }
 
 export const PriceV2Result: MessageFns<PriceV2Result> = {
-  encode(message: PriceV2Result, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceV2Result,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.baseSymbol !== "") {
       writer.uint32(10).string(message.baseSymbol);
     }
@@ -936,7 +1035,8 @@ export const PriceV2Result: MessageFns<PriceV2Result> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceV2Result {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceV2Result();
     while (reader.pos < end) {
@@ -1004,29 +1104,29 @@ export const PriceV2Result: MessageFns<PriceV2Result> = {
       baseSymbol: isSet(object.baseSymbol)
         ? globalThis.String(object.baseSymbol)
         : isSet(object.base_symbol)
-        ? globalThis.String(object.base_symbol)
-        : "",
+          ? globalThis.String(object.base_symbol)
+          : "",
       quoteSymbol: isSet(object.quoteSymbol)
         ? globalThis.String(object.quoteSymbol)
         : isSet(object.quote_symbol)
-        ? globalThis.String(object.quote_symbol)
-        : "",
+          ? globalThis.String(object.quote_symbol)
+          : "",
       oracleType: isSet(object.oracleType)
         ? globalThis.String(object.oracleType)
         : isSet(object.oracle_type)
-        ? globalThis.String(object.oracle_type)
-        : "",
+          ? globalThis.String(object.oracle_type)
+          : "",
       oracleScaleFactor: isSet(object.oracleScaleFactor)
         ? globalThis.Number(object.oracleScaleFactor)
         : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
+          ? globalThis.Number(object.oracle_scale_factor)
+          : 0,
       price: isSet(object.price) ? globalThis.String(object.price) : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
     };
   },
 
@@ -1053,10 +1153,14 @@ export const PriceV2Result: MessageFns<PriceV2Result> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PriceV2Result>, I>>(base?: I): PriceV2Result {
+  create<I extends Exact<DeepPartial<PriceV2Result>, I>>(
+    base?: I,
+  ): PriceV2Result {
     return PriceV2Result.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceV2Result>, I>>(object: I): PriceV2Result {
+  fromPartial<I extends Exact<DeepPartial<PriceV2Result>, I>>(
+    object: I,
+  ): PriceV2Result {
     const message = createBasePriceV2Result();
     message.baseSymbol = object.baseSymbol ?? "";
     message.quoteSymbol = object.quoteSymbol ?? "";
@@ -1073,7 +1177,10 @@ function createBaseStreamPricesRequest(): StreamPricesRequest {
 }
 
 export const StreamPricesRequest: MessageFns<StreamPricesRequest> = {
-  encode(message: StreamPricesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamPricesRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.baseSymbol !== "") {
       writer.uint32(10).string(message.baseSymbol);
     }
@@ -1086,8 +1193,12 @@ export const StreamPricesRequest: MessageFns<StreamPricesRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamPricesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamPricesRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamPricesRequest();
     while (reader.pos < end) {
@@ -1131,18 +1242,18 @@ export const StreamPricesRequest: MessageFns<StreamPricesRequest> = {
       baseSymbol: isSet(object.baseSymbol)
         ? globalThis.String(object.baseSymbol)
         : isSet(object.base_symbol)
-        ? globalThis.String(object.base_symbol)
-        : "",
+          ? globalThis.String(object.base_symbol)
+          : "",
       quoteSymbol: isSet(object.quoteSymbol)
         ? globalThis.String(object.quoteSymbol)
         : isSet(object.quote_symbol)
-        ? globalThis.String(object.quote_symbol)
-        : "",
+          ? globalThis.String(object.quote_symbol)
+          : "",
       oracleType: isSet(object.oracleType)
         ? globalThis.String(object.oracleType)
         : isSet(object.oracle_type)
-        ? globalThis.String(object.oracle_type)
-        : "",
+          ? globalThis.String(object.oracle_type)
+          : "",
     };
   },
 
@@ -1160,10 +1271,14 @@ export const StreamPricesRequest: MessageFns<StreamPricesRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamPricesRequest>, I>>(base?: I): StreamPricesRequest {
+  create<I extends Exact<DeepPartial<StreamPricesRequest>, I>>(
+    base?: I,
+  ): StreamPricesRequest {
     return StreamPricesRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamPricesRequest>, I>>(object: I): StreamPricesRequest {
+  fromPartial<I extends Exact<DeepPartial<StreamPricesRequest>, I>>(
+    object: I,
+  ): StreamPricesRequest {
     const message = createBaseStreamPricesRequest();
     message.baseSymbol = object.baseSymbol ?? "";
     message.quoteSymbol = object.quoteSymbol ?? "";
@@ -1177,7 +1292,10 @@ function createBaseStreamPricesResponse(): StreamPricesResponse {
 }
 
 export const StreamPricesResponse: MessageFns<StreamPricesResponse> = {
-  encode(message: StreamPricesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamPricesResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -1187,8 +1305,12 @@ export const StreamPricesResponse: MessageFns<StreamPricesResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamPricesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamPricesResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamPricesResponse();
     while (reader.pos < end) {
@@ -1222,7 +1344,9 @@ export const StreamPricesResponse: MessageFns<StreamPricesResponse> = {
   fromJSON(object: any): StreamPricesResponse {
     return {
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -1237,10 +1361,14 @@ export const StreamPricesResponse: MessageFns<StreamPricesResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamPricesResponse>, I>>(base?: I): StreamPricesResponse {
+  create<I extends Exact<DeepPartial<StreamPricesResponse>, I>>(
+    base?: I,
+  ): StreamPricesResponse {
     return StreamPricesResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamPricesResponse>, I>>(object: I): StreamPricesResponse {
+  fromPartial<I extends Exact<DeepPartial<StreamPricesResponse>, I>>(
+    object: I,
+  ): StreamPricesResponse {
     const message = createBaseStreamPricesResponse();
     message.price = object.price ?? "";
     message.timestamp = object.timestamp ?? 0;
@@ -1253,7 +1381,10 @@ function createBaseStreamOracleListRequest(): StreamOracleListRequest {
 }
 
 export const StreamOracleListRequest: MessageFns<StreamOracleListRequest> = {
-  encode(message: StreamOracleListRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamOracleListRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.oracleType !== "") {
       writer.uint32(10).string(message.oracleType);
     }
@@ -1263,8 +1394,12 @@ export const StreamOracleListRequest: MessageFns<StreamOracleListRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamOracleListRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamOracleListRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamOracleListRequest();
     while (reader.pos < end) {
@@ -1300,9 +1435,11 @@ export const StreamOracleListRequest: MessageFns<StreamOracleListRequest> = {
       oracleType: isSet(object.oracleType)
         ? globalThis.String(object.oracleType)
         : isSet(object.oracle_type)
-        ? globalThis.String(object.oracle_type)
-        : "",
-      symbols: globalThis.Array.isArray(object?.symbols) ? object.symbols.map((e: any) => globalThis.String(e)) : [],
+          ? globalThis.String(object.oracle_type)
+          : "",
+      symbols: globalThis.Array.isArray(object?.symbols)
+        ? object.symbols.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -1317,10 +1454,14 @@ export const StreamOracleListRequest: MessageFns<StreamOracleListRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamOracleListRequest>, I>>(base?: I): StreamOracleListRequest {
+  create<I extends Exact<DeepPartial<StreamOracleListRequest>, I>>(
+    base?: I,
+  ): StreamOracleListRequest {
     return StreamOracleListRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamOracleListRequest>, I>>(object: I): StreamOracleListRequest {
+  fromPartial<I extends Exact<DeepPartial<StreamOracleListRequest>, I>>(
+    object: I,
+  ): StreamOracleListRequest {
     const message = createBaseStreamOracleListRequest();
     message.oracleType = object.oracleType ?? "";
     message.symbols = object.symbols?.map((e) => e) || [];
@@ -1333,7 +1474,10 @@ function createBaseStreamOracleListResponse(): StreamOracleListResponse {
 }
 
 export const StreamOracleListResponse: MessageFns<StreamOracleListResponse> = {
-  encode(message: StreamOracleListResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamOracleListResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.symbol !== "") {
       writer.uint32(10).string(message.symbol);
     }
@@ -1349,8 +1493,12 @@ export const StreamOracleListResponse: MessageFns<StreamOracleListResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamOracleListResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamOracleListResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamOracleListResponse();
     while (reader.pos < end) {
@@ -1403,10 +1551,12 @@ export const StreamOracleListResponse: MessageFns<StreamOracleListResponse> = {
       oracleType: isSet(object.oracleType)
         ? globalThis.String(object.oracleType)
         : isSet(object.oracle_type)
-        ? globalThis.String(object.oracle_type)
-        : "",
+          ? globalThis.String(object.oracle_type)
+          : "",
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -1427,10 +1577,14 @@ export const StreamOracleListResponse: MessageFns<StreamOracleListResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamOracleListResponse>, I>>(base?: I): StreamOracleListResponse {
+  create<I extends Exact<DeepPartial<StreamOracleListResponse>, I>>(
+    base?: I,
+  ): StreamOracleListResponse {
     return StreamOracleListResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamOracleListResponse>, I>>(object: I): StreamOracleListResponse {
+  fromPartial<I extends Exact<DeepPartial<StreamOracleListResponse>, I>>(
+    object: I,
+  ): StreamOracleListResponse {
     const message = createBaseStreamOracleListResponse();
     message.symbol = object.symbol ?? "";
     message.oracleType = object.oracleType ?? "";
@@ -1444,163 +1598,187 @@ function createBaseStreamPricesByMarketsRequest(): StreamPricesByMarketsRequest 
   return { marketIds: [] };
 }
 
-export const StreamPricesByMarketsRequest: MessageFns<StreamPricesByMarketsRequest> = {
-  encode(message: StreamPricesByMarketsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.marketIds) {
-      writer.uint32(10).string(v!);
-    }
-    return writer;
-  },
+export const StreamPricesByMarketsRequest: MessageFns<StreamPricesByMarketsRequest> =
+  {
+    encode(
+      message: StreamPricesByMarketsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.marketIds) {
+        writer.uint32(10).string(v!);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamPricesByMarketsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamPricesByMarketsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamPricesByMarketsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamPricesByMarketsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketIds.push(reader.string());
+            continue;
           }
-
-          message.marketIds.push(reader.string());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): StreamPricesByMarketsRequest {
+      return {
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: StreamPricesByMarketsRequest): unknown {
+      const obj: any = {};
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): StreamPricesByMarketsRequest {
-    return {
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
-  toJSON(message: StreamPricesByMarketsRequest): unknown {
-    const obj: any = {};
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<StreamPricesByMarketsRequest>, I>>(base?: I): StreamPricesByMarketsRequest {
-    return StreamPricesByMarketsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamPricesByMarketsRequest>, I>>(object: I): StreamPricesByMarketsRequest {
-    const message = createBaseStreamPricesByMarketsRequest();
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<StreamPricesByMarketsRequest>, I>>(
+      base?: I,
+    ): StreamPricesByMarketsRequest {
+      return StreamPricesByMarketsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<StreamPricesByMarketsRequest>, I>>(
+      object: I,
+    ): StreamPricesByMarketsRequest {
+      const message = createBaseStreamPricesByMarketsRequest();
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseStreamPricesByMarketsResponse(): StreamPricesByMarketsResponse {
   return { price: "", timestamp: 0, marketId: "" };
 }
 
-export const StreamPricesByMarketsResponse: MessageFns<StreamPricesByMarketsResponse> = {
-  encode(message: StreamPricesByMarketsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.price !== "") {
-      writer.uint32(10).string(message.price);
-    }
-    if (message.timestamp !== 0) {
-      writer.uint32(16).sint64(message.timestamp);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(26).string(message.marketId);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamPricesByMarketsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamPricesByMarketsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.price = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.timestamp = longToNumber(reader.sint64());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
+export const StreamPricesByMarketsResponse: MessageFns<StreamPricesByMarketsResponse> =
+  {
+    encode(
+      message: StreamPricesByMarketsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.price !== "") {
+        writer.uint32(10).string(message.price);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.timestamp !== 0) {
+        writer.uint32(16).sint64(message.timestamp);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.marketId !== "") {
+        writer.uint32(26).string(message.marketId);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): StreamPricesByMarketsResponse {
-    return {
-      price: isSet(object.price) ? globalThis.String(object.price) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamPricesByMarketsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamPricesByMarketsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamPricesByMarketsResponse): unknown {
-    const obj: any = {};
-    if (message.price !== "") {
-      obj.price = message.price;
-    }
-    if (message.timestamp !== 0) {
-      obj.timestamp = Math.round(message.timestamp);
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
+            message.price = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamPricesByMarketsResponse>, I>>(base?: I): StreamPricesByMarketsResponse {
-    return StreamPricesByMarketsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamPricesByMarketsResponse>, I>>(
-    object: I,
-  ): StreamPricesByMarketsResponse {
-    const message = createBaseStreamPricesByMarketsResponse();
-    message.price = object.price ?? "";
-    message.timestamp = object.timestamp ?? 0;
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+            message.timestamp = longToNumber(reader.sint64());
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamPricesByMarketsResponse {
+      return {
+        price: isSet(object.price) ? globalThis.String(object.price) : "",
+        timestamp: isSet(object.timestamp)
+          ? globalThis.Number(object.timestamp)
+          : 0,
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: StreamPricesByMarketsResponse): unknown {
+      const obj: any = {};
+      if (message.price !== "") {
+        obj.price = message.price;
+      }
+      if (message.timestamp !== 0) {
+        obj.timestamp = Math.round(message.timestamp);
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamPricesByMarketsResponse>, I>>(
+      base?: I,
+    ): StreamPricesByMarketsResponse {
+      return StreamPricesByMarketsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<StreamPricesByMarketsResponse>, I>>(
+      object: I,
+    ): StreamPricesByMarketsResponse {
+      const message = createBaseStreamPricesByMarketsResponse();
+      message.price = object.price ?? "";
+      message.timestamp = object.timestamp ?? 0;
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 /** InjectiveOracleRPC defines gRPC API of Exchange Oracle provider. */
 export type InjectiveOracleRPCService = typeof InjectiveOracleRPCService;
@@ -1610,30 +1788,42 @@ export const InjectiveOracleRPCService = {
     path: "/injective_oracle_rpc.InjectiveOracleRPC/OracleList" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: OracleListRequest): Buffer => Buffer.from(OracleListRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): OracleListRequest => OracleListRequest.decode(value),
-    responseSerialize: (value: OracleListResponse): Buffer => Buffer.from(OracleListResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): OracleListResponse => OracleListResponse.decode(value),
+    requestSerialize: (value: OracleListRequest): Buffer =>
+      Buffer.from(OracleListRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): OracleListRequest =>
+      OracleListRequest.decode(value),
+    responseSerialize: (value: OracleListResponse): Buffer =>
+      Buffer.from(OracleListResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): OracleListResponse =>
+      OracleListResponse.decode(value),
   },
   /** Gets the price of the oracle */
   price: {
     path: "/injective_oracle_rpc.InjectiveOracleRPC/Price" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: PriceRequest): Buffer => Buffer.from(PriceRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): PriceRequest => PriceRequest.decode(value),
-    responseSerialize: (value: PriceResponse): Buffer => Buffer.from(PriceResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PriceResponse => PriceResponse.decode(value),
+    requestSerialize: (value: PriceRequest): Buffer =>
+      Buffer.from(PriceRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): PriceRequest =>
+      PriceRequest.decode(value),
+    responseSerialize: (value: PriceResponse): Buffer =>
+      Buffer.from(PriceResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): PriceResponse =>
+      PriceResponse.decode(value),
   },
   /** Gets prices of the oracle */
   priceV2: {
     path: "/injective_oracle_rpc.InjectiveOracleRPC/PriceV2" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: PriceV2Request): Buffer => Buffer.from(PriceV2Request.encode(value).finish()),
-    requestDeserialize: (value: Buffer): PriceV2Request => PriceV2Request.decode(value),
-    responseSerialize: (value: PriceV2Response): Buffer => Buffer.from(PriceV2Response.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PriceV2Response => PriceV2Response.decode(value),
+    requestSerialize: (value: PriceV2Request): Buffer =>
+      Buffer.from(PriceV2Request.encode(value).finish()),
+    requestDeserialize: (value: Buffer): PriceV2Request =>
+      PriceV2Request.decode(value),
+    responseSerialize: (value: PriceV2Response): Buffer =>
+      Buffer.from(PriceV2Response.encode(value).finish()),
+    responseDeserialize: (value: Buffer): PriceV2Response =>
+      PriceV2Response.decode(value),
   },
   /**
    * StreamPrices streams new price changes for a specified oracle. If no oracles
@@ -1643,11 +1833,14 @@ export const InjectiveOracleRPCService = {
     path: "/injective_oracle_rpc.InjectiveOracleRPC/StreamPrices" as const,
     requestStream: false as const,
     responseStream: true as const,
-    requestSerialize: (value: StreamPricesRequest): Buffer => Buffer.from(StreamPricesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamPricesRequest => StreamPricesRequest.decode(value),
+    requestSerialize: (value: StreamPricesRequest): Buffer =>
+      Buffer.from(StreamPricesRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): StreamPricesRequest =>
+      StreamPricesRequest.decode(value),
     responseSerialize: (value: StreamPricesResponse): Buffer =>
       Buffer.from(StreamPricesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamPricesResponse => StreamPricesResponse.decode(value),
+    responseDeserialize: (value: Buffer): StreamPricesResponse =>
+      StreamPricesResponse.decode(value),
   },
   /**
    * StreamOracleList streams oracle data updates filtered by oracle type and
@@ -1659,10 +1852,12 @@ export const InjectiveOracleRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamOracleListRequest): Buffer =>
       Buffer.from(StreamOracleListRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamOracleListRequest => StreamOracleListRequest.decode(value),
+    requestDeserialize: (value: Buffer): StreamOracleListRequest =>
+      StreamOracleListRequest.decode(value),
     responseSerialize: (value: StreamOracleListResponse): Buffer =>
       Buffer.from(StreamOracleListResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamOracleListResponse => StreamOracleListResponse.decode(value),
+    responseDeserialize: (value: Buffer): StreamOracleListResponse =>
+      StreamOracleListResponse.decode(value),
   },
   /** StreamPrices streams new price changes markets */
   streamPricesByMarkets: {
@@ -1671,10 +1866,12 @@ export const InjectiveOracleRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamPricesByMarketsRequest): Buffer =>
       Buffer.from(StreamPricesByMarketsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamPricesByMarketsRequest => StreamPricesByMarketsRequest.decode(value),
+    requestDeserialize: (value: Buffer): StreamPricesByMarketsRequest =>
+      StreamPricesByMarketsRequest.decode(value),
     responseSerialize: (value: StreamPricesByMarketsResponse): Buffer =>
       Buffer.from(StreamPricesByMarketsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamPricesByMarketsResponse => StreamPricesByMarketsResponse.decode(value),
+    responseDeserialize: (value: Buffer): StreamPricesByMarketsResponse =>
+      StreamPricesByMarketsResponse.decode(value),
   },
 } as const;
 
@@ -1689,32 +1886,50 @@ export interface InjectiveOracleRPCServer extends UntypedServiceImplementation {
    * StreamPrices streams new price changes for a specified oracle. If no oracles
    * are provided, all price changes are streamed.
    */
-  streamPrices: handleServerStreamingCall<StreamPricesRequest, StreamPricesResponse>;
+  streamPrices: handleServerStreamingCall<
+    StreamPricesRequest,
+    StreamPricesResponse
+  >;
   /**
    * StreamOracleList streams oracle data updates filtered by oracle type and
    * optionally by symbols.
    */
-  streamOracleList: handleServerStreamingCall<StreamOracleListRequest, StreamOracleListResponse>;
+  streamOracleList: handleServerStreamingCall<
+    StreamOracleListRequest,
+    StreamOracleListResponse
+  >;
   /** StreamPrices streams new price changes markets */
-  streamPricesByMarkets: handleServerStreamingCall<StreamPricesByMarketsRequest, StreamPricesByMarketsResponse>;
+  streamPricesByMarkets: handleServerStreamingCall<
+    StreamPricesByMarketsRequest,
+    StreamPricesByMarketsResponse
+  >;
 }
 
 export interface InjectiveOracleRPCClient extends Client {
   /** List all oracles */
   oracleList(
     request: OracleListRequest,
-    callback: (error: ServiceError | null, response: OracleListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OracleListResponse,
+    ) => void,
   ): ClientUnaryCall;
   oracleList(
     request: OracleListRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: OracleListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OracleListResponse,
+    ) => void,
   ): ClientUnaryCall;
   oracleList(
     request: OracleListRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: OracleListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OracleListResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Gets the price of the oracle */
   price(
@@ -1790,22 +2005,34 @@ export const InjectiveOracleRPCClient = makeGenericClientConstructor(
   InjectiveOracleRPCService,
   "injective_oracle_rpc.InjectiveOracleRPC",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): InjectiveOracleRPCClient;
+  new (
+    address: string,
+    credentials: ChannelCredentials,
+    options?: Partial<ClientOptions>,
+  ): InjectiveOracleRPCClient;
   service: typeof InjectiveOracleRPCService;
   serviceName: string;
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

@@ -130,7 +130,10 @@ function createBaseParams(): Params {
 }
 
 export const Params: MessageFns<Params> = {
-  encode(message: Params, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Params,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.sendEnabled) {
       SendEnabled.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -141,7 +144,8 @@ export const Params: MessageFns<Params> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Params {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -177,13 +181,13 @@ export const Params: MessageFns<Params> = {
       sendEnabled: globalThis.Array.isArray(object?.sendEnabled)
         ? object.sendEnabled.map((e: any) => SendEnabled.fromJSON(e))
         : globalThis.Array.isArray(object?.send_enabled)
-        ? object.send_enabled.map((e: any) => SendEnabled.fromJSON(e))
-        : [],
+          ? object.send_enabled.map((e: any) => SendEnabled.fromJSON(e))
+          : [],
       defaultSendEnabled: isSet(object.defaultSendEnabled)
         ? globalThis.Boolean(object.defaultSendEnabled)
         : isSet(object.default_send_enabled)
-        ? globalThis.Boolean(object.default_send_enabled)
-        : false,
+          ? globalThis.Boolean(object.default_send_enabled)
+          : false,
     };
   },
 
@@ -203,7 +207,8 @@ export const Params: MessageFns<Params> = {
   },
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
-    message.sendEnabled = object.sendEnabled?.map((e) => SendEnabled.fromPartial(e)) || [];
+    message.sendEnabled =
+      object.sendEnabled?.map((e) => SendEnabled.fromPartial(e)) || [];
     message.defaultSendEnabled = object.defaultSendEnabled ?? false;
     return message;
   },
@@ -214,7 +219,10 @@ function createBaseSendEnabled(): SendEnabled {
 }
 
 export const SendEnabled: MessageFns<SendEnabled> = {
-  encode(message: SendEnabled, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SendEnabled,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -225,7 +233,8 @@ export const SendEnabled: MessageFns<SendEnabled> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SendEnabled {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSendEnabled();
     while (reader.pos < end) {
@@ -259,7 +268,9 @@ export const SendEnabled: MessageFns<SendEnabled> = {
   fromJSON(object: any): SendEnabled {
     return {
       denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
-      enabled: isSet(object.enabled) ? globalThis.Boolean(object.enabled) : false,
+      enabled: isSet(object.enabled)
+        ? globalThis.Boolean(object.enabled)
+        : false,
     };
   },
 
@@ -277,7 +288,9 @@ export const SendEnabled: MessageFns<SendEnabled> = {
   create<I extends Exact<DeepPartial<SendEnabled>, I>>(base?: I): SendEnabled {
     return SendEnabled.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SendEnabled>, I>>(object: I): SendEnabled {
+  fromPartial<I extends Exact<DeepPartial<SendEnabled>, I>>(
+    object: I,
+  ): SendEnabled {
     const message = createBaseSendEnabled();
     message.denom = object.denom ?? "";
     message.enabled = object.enabled ?? false;
@@ -290,7 +303,10 @@ function createBaseInput(): Input {
 }
 
 export const Input: MessageFns<Input> = {
-  encode(message: Input, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Input,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -301,7 +317,8 @@ export const Input: MessageFns<Input> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Input {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInput();
     while (reader.pos < end) {
@@ -335,7 +352,9 @@ export const Input: MessageFns<Input> = {
   fromJSON(object: any): Input {
     return {
       address: isSet(object.address) ? globalThis.String(object.address) : "",
-      coins: globalThis.Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
+      coins: globalThis.Array.isArray(object?.coins)
+        ? object.coins.map((e: any) => Coin.fromJSON(e))
+        : [],
     };
   },
 
@@ -366,7 +385,10 @@ function createBaseOutput(): Output {
 }
 
 export const Output: MessageFns<Output> = {
-  encode(message: Output, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Output,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -377,7 +399,8 @@ export const Output: MessageFns<Output> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Output {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOutput();
     while (reader.pos < end) {
@@ -411,7 +434,9 @@ export const Output: MessageFns<Output> = {
   fromJSON(object: any): Output {
     return {
       address: isSet(object.address) ? globalThis.String(object.address) : "",
-      coins: globalThis.Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
+      coins: globalThis.Array.isArray(object?.coins)
+        ? object.coins.map((e: any) => Coin.fromJSON(e))
+        : [],
     };
   },
 
@@ -442,7 +467,10 @@ function createBaseSupply(): Supply {
 }
 
 export const Supply: MessageFns<Supply> = {
-  encode(message: Supply, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Supply,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.total) {
       Coin.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -450,7 +478,8 @@ export const Supply: MessageFns<Supply> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Supply {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSupply();
     while (reader.pos < end) {
@@ -474,7 +503,11 @@ export const Supply: MessageFns<Supply> = {
   },
 
   fromJSON(object: any): Supply {
-    return { total: globalThis.Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromJSON(e)) : [] };
+    return {
+      total: globalThis.Array.isArray(object?.total)
+        ? object.total.map((e: any) => Coin.fromJSON(e))
+        : [],
+    };
   },
 
   toJSON(message: Supply): unknown {
@@ -500,7 +533,10 @@ function createBaseDenomUnit(): DenomUnit {
 }
 
 export const DenomUnit: MessageFns<DenomUnit> = {
-  encode(message: DenomUnit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DenomUnit,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -514,7 +550,8 @@ export const DenomUnit: MessageFns<DenomUnit> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DenomUnit {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomUnit();
     while (reader.pos < end) {
@@ -557,7 +594,9 @@ export const DenomUnit: MessageFns<DenomUnit> = {
     return {
       denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
       exponent: isSet(object.exponent) ? globalThis.Number(object.exponent) : 0,
-      aliases: globalThis.Array.isArray(object?.aliases) ? object.aliases.map((e: any) => globalThis.String(e)) : [],
+      aliases: globalThis.Array.isArray(object?.aliases)
+        ? object.aliases.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -578,7 +617,9 @@ export const DenomUnit: MessageFns<DenomUnit> = {
   create<I extends Exact<DeepPartial<DenomUnit>, I>>(base?: I): DenomUnit {
     return DenomUnit.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DenomUnit>, I>>(object: I): DenomUnit {
+  fromPartial<I extends Exact<DeepPartial<DenomUnit>, I>>(
+    object: I,
+  ): DenomUnit {
     const message = createBaseDenomUnit();
     message.denom = object.denom ?? "";
     message.exponent = object.exponent ?? 0;
@@ -602,7 +643,10 @@ function createBaseMetadata(): Metadata {
 }
 
 export const Metadata: MessageFns<Metadata> = {
-  encode(message: Metadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Metadata,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
     }
@@ -634,7 +678,8 @@ export const Metadata: MessageFns<Metadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Metadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetadata();
     while (reader.pos < end) {
@@ -723,12 +768,14 @@ export const Metadata: MessageFns<Metadata> = {
 
   fromJSON(object: any): Metadata {
     return {
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
       denomUnits: globalThis.Array.isArray(object?.denomUnits)
         ? object.denomUnits.map((e: any) => DenomUnit.fromJSON(e))
         : globalThis.Array.isArray(object?.denom_units)
-        ? object.denom_units.map((e: any) => DenomUnit.fromJSON(e))
-        : [],
+          ? object.denom_units.map((e: any) => DenomUnit.fromJSON(e))
+          : [],
       base: isSet(object.base) ? globalThis.String(object.base) : "",
       display: isSet(object.display) ? globalThis.String(object.display) : "",
       name: isSet(object.name) ? globalThis.String(object.name) : "",
@@ -737,8 +784,8 @@ export const Metadata: MessageFns<Metadata> = {
       uriHash: isSet(object.uriHash)
         ? globalThis.String(object.uriHash)
         : isSet(object.uri_hash)
-        ? globalThis.String(object.uri_hash)
-        : "",
+          ? globalThis.String(object.uri_hash)
+          : "",
       decimals: isSet(object.decimals) ? globalThis.Number(object.decimals) : 0,
     };
   },
@@ -781,7 +828,8 @@ export const Metadata: MessageFns<Metadata> = {
   fromPartial<I extends Exact<DeepPartial<Metadata>, I>>(object: I): Metadata {
     const message = createBaseMetadata();
     message.description = object.description ?? "";
-    message.denomUnits = object.denomUnits?.map((e) => DenomUnit.fromPartial(e)) || [];
+    message.denomUnits =
+      object.denomUnits?.map((e) => DenomUnit.fromPartial(e)) || [];
     message.base = object.base ?? "";
     message.display = object.display ?? "";
     message.name = object.name ?? "";
@@ -793,17 +841,25 @@ export const Metadata: MessageFns<Metadata> = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

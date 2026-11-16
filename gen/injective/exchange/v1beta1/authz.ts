@@ -106,262 +106,299 @@ function createBaseCreateSpotLimitOrderAuthz(): CreateSpotLimitOrderAuthz {
   return { subaccountId: "", marketIds: [] };
 }
 
-export const CreateSpotLimitOrderAuthz: MessageFns<CreateSpotLimitOrderAuthz> = {
-  encode(message: CreateSpotLimitOrderAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateSpotLimitOrderAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreateSpotLimitOrderAuthz();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
+export const CreateSpotLimitOrderAuthz: MessageFns<CreateSpotLimitOrderAuthz> =
+  {
+    encode(
+      message: CreateSpotLimitOrderAuthz,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CreateSpotLimitOrderAuthz {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CreateSpotLimitOrderAuthz {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCreateSpotLimitOrderAuthz();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CreateSpotLimitOrderAuthz): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<CreateSpotLimitOrderAuthz>, I>>(base?: I): CreateSpotLimitOrderAuthz {
-    return CreateSpotLimitOrderAuthz.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<CreateSpotLimitOrderAuthz>, I>>(object: I): CreateSpotLimitOrderAuthz {
-    const message = createBaseCreateSpotLimitOrderAuthz();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CreateSpotLimitOrderAuthz {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: CreateSpotLimitOrderAuthz): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<CreateSpotLimitOrderAuthz>, I>>(
+      base?: I,
+    ): CreateSpotLimitOrderAuthz {
+      return CreateSpotLimitOrderAuthz.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<CreateSpotLimitOrderAuthz>, I>>(
+      object: I,
+    ): CreateSpotLimitOrderAuthz {
+      const message = createBaseCreateSpotLimitOrderAuthz();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseCreateSpotMarketOrderAuthz(): CreateSpotMarketOrderAuthz {
   return { subaccountId: "", marketIds: [] };
 }
 
-export const CreateSpotMarketOrderAuthz: MessageFns<CreateSpotMarketOrderAuthz> = {
-  encode(message: CreateSpotMarketOrderAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateSpotMarketOrderAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreateSpotMarketOrderAuthz();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
+export const CreateSpotMarketOrderAuthz: MessageFns<CreateSpotMarketOrderAuthz> =
+  {
+    encode(
+      message: CreateSpotMarketOrderAuthz,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CreateSpotMarketOrderAuthz {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CreateSpotMarketOrderAuthz {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCreateSpotMarketOrderAuthz();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CreateSpotMarketOrderAuthz): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<CreateSpotMarketOrderAuthz>, I>>(base?: I): CreateSpotMarketOrderAuthz {
-    return CreateSpotMarketOrderAuthz.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<CreateSpotMarketOrderAuthz>, I>>(object: I): CreateSpotMarketOrderAuthz {
-    const message = createBaseCreateSpotMarketOrderAuthz();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CreateSpotMarketOrderAuthz {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: CreateSpotMarketOrderAuthz): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<CreateSpotMarketOrderAuthz>, I>>(
+      base?: I,
+    ): CreateSpotMarketOrderAuthz {
+      return CreateSpotMarketOrderAuthz.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<CreateSpotMarketOrderAuthz>, I>>(
+      object: I,
+    ): CreateSpotMarketOrderAuthz {
+      const message = createBaseCreateSpotMarketOrderAuthz();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseBatchCreateSpotLimitOrdersAuthz(): BatchCreateSpotLimitOrdersAuthz {
   return { subaccountId: "", marketIds: [] };
 }
 
-export const BatchCreateSpotLimitOrdersAuthz: MessageFns<BatchCreateSpotLimitOrdersAuthz> = {
-  encode(message: BatchCreateSpotLimitOrdersAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchCreateSpotLimitOrdersAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBatchCreateSpotLimitOrdersAuthz();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
+export const BatchCreateSpotLimitOrdersAuthz: MessageFns<BatchCreateSpotLimitOrdersAuthz> =
+  {
+    encode(
+      message: BatchCreateSpotLimitOrdersAuthz,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): BatchCreateSpotLimitOrdersAuthz {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BatchCreateSpotLimitOrdersAuthz {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBatchCreateSpotLimitOrdersAuthz();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BatchCreateSpotLimitOrdersAuthz): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<BatchCreateSpotLimitOrdersAuthz>, I>>(base?: I): BatchCreateSpotLimitOrdersAuthz {
-    return BatchCreateSpotLimitOrdersAuthz.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BatchCreateSpotLimitOrdersAuthz>, I>>(
-    object: I,
-  ): BatchCreateSpotLimitOrdersAuthz {
-    const message = createBaseBatchCreateSpotLimitOrdersAuthz();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BatchCreateSpotLimitOrdersAuthz {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: BatchCreateSpotLimitOrdersAuthz): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<BatchCreateSpotLimitOrdersAuthz>, I>>(
+      base?: I,
+    ): BatchCreateSpotLimitOrdersAuthz {
+      return BatchCreateSpotLimitOrdersAuthz.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<BatchCreateSpotLimitOrdersAuthz>, I>,
+    >(object: I): BatchCreateSpotLimitOrdersAuthz {
+      const message = createBaseBatchCreateSpotLimitOrdersAuthz();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseCancelSpotOrderAuthz(): CancelSpotOrderAuthz {
   return { subaccountId: "", marketIds: [] };
 }
 
 export const CancelSpotOrderAuthz: MessageFns<CancelSpotOrderAuthz> = {
-  encode(message: CancelSpotOrderAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CancelSpotOrderAuthz,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -371,8 +408,12 @@ export const CancelSpotOrderAuthz: MessageFns<CancelSpotOrderAuthz> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): CancelSpotOrderAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): CancelSpotOrderAuthz {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelSpotOrderAuthz();
     while (reader.pos < end) {
@@ -408,13 +449,13 @@ export const CancelSpotOrderAuthz: MessageFns<CancelSpotOrderAuthz> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -429,10 +470,14 @@ export const CancelSpotOrderAuthz: MessageFns<CancelSpotOrderAuthz> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CancelSpotOrderAuthz>, I>>(base?: I): CancelSpotOrderAuthz {
+  create<I extends Exact<DeepPartial<CancelSpotOrderAuthz>, I>>(
+    base?: I,
+  ): CancelSpotOrderAuthz {
     return CancelSpotOrderAuthz.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CancelSpotOrderAuthz>, I>>(object: I): CancelSpotOrderAuthz {
+  fromPartial<I extends Exact<DeepPartial<CancelSpotOrderAuthz>, I>>(
+    object: I,
+  ): CancelSpotOrderAuthz {
     const message = createBaseCancelSpotOrderAuthz();
     message.subaccountId = object.subaccountId ?? "";
     message.marketIds = object.marketIds?.map((e) => e) || [];
@@ -444,526 +489,589 @@ function createBaseBatchCancelSpotOrdersAuthz(): BatchCancelSpotOrdersAuthz {
   return { subaccountId: "", marketIds: [] };
 }
 
-export const BatchCancelSpotOrdersAuthz: MessageFns<BatchCancelSpotOrdersAuthz> = {
-  encode(message: BatchCancelSpotOrdersAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchCancelSpotOrdersAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBatchCancelSpotOrdersAuthz();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
+export const BatchCancelSpotOrdersAuthz: MessageFns<BatchCancelSpotOrdersAuthz> =
+  {
+    encode(
+      message: BatchCancelSpotOrdersAuthz,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): BatchCancelSpotOrdersAuthz {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BatchCancelSpotOrdersAuthz {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBatchCancelSpotOrdersAuthz();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BatchCancelSpotOrdersAuthz): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<BatchCancelSpotOrdersAuthz>, I>>(base?: I): BatchCancelSpotOrdersAuthz {
-    return BatchCancelSpotOrdersAuthz.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BatchCancelSpotOrdersAuthz>, I>>(object: I): BatchCancelSpotOrdersAuthz {
-    const message = createBaseBatchCancelSpotOrdersAuthz();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BatchCancelSpotOrdersAuthz {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: BatchCancelSpotOrdersAuthz): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<BatchCancelSpotOrdersAuthz>, I>>(
+      base?: I,
+    ): BatchCancelSpotOrdersAuthz {
+      return BatchCancelSpotOrdersAuthz.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<BatchCancelSpotOrdersAuthz>, I>>(
+      object: I,
+    ): BatchCancelSpotOrdersAuthz {
+      const message = createBaseBatchCancelSpotOrdersAuthz();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseCreateDerivativeLimitOrderAuthz(): CreateDerivativeLimitOrderAuthz {
   return { subaccountId: "", marketIds: [] };
 }
 
-export const CreateDerivativeLimitOrderAuthz: MessageFns<CreateDerivativeLimitOrderAuthz> = {
-  encode(message: CreateDerivativeLimitOrderAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateDerivativeLimitOrderAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreateDerivativeLimitOrderAuthz();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
+export const CreateDerivativeLimitOrderAuthz: MessageFns<CreateDerivativeLimitOrderAuthz> =
+  {
+    encode(
+      message: CreateDerivativeLimitOrderAuthz,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CreateDerivativeLimitOrderAuthz {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CreateDerivativeLimitOrderAuthz {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCreateDerivativeLimitOrderAuthz();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CreateDerivativeLimitOrderAuthz): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<CreateDerivativeLimitOrderAuthz>, I>>(base?: I): CreateDerivativeLimitOrderAuthz {
-    return CreateDerivativeLimitOrderAuthz.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<CreateDerivativeLimitOrderAuthz>, I>>(
-    object: I,
-  ): CreateDerivativeLimitOrderAuthz {
-    const message = createBaseCreateDerivativeLimitOrderAuthz();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CreateDerivativeLimitOrderAuthz {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: CreateDerivativeLimitOrderAuthz): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<CreateDerivativeLimitOrderAuthz>, I>>(
+      base?: I,
+    ): CreateDerivativeLimitOrderAuthz {
+      return CreateDerivativeLimitOrderAuthz.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<CreateDerivativeLimitOrderAuthz>, I>,
+    >(object: I): CreateDerivativeLimitOrderAuthz {
+      const message = createBaseCreateDerivativeLimitOrderAuthz();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseCreateDerivativeMarketOrderAuthz(): CreateDerivativeMarketOrderAuthz {
   return { subaccountId: "", marketIds: [] };
 }
 
-export const CreateDerivativeMarketOrderAuthz: MessageFns<CreateDerivativeMarketOrderAuthz> = {
-  encode(message: CreateDerivativeMarketOrderAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateDerivativeMarketOrderAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCreateDerivativeMarketOrderAuthz();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
+export const CreateDerivativeMarketOrderAuthz: MessageFns<CreateDerivativeMarketOrderAuthz> =
+  {
+    encode(
+      message: CreateDerivativeMarketOrderAuthz,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CreateDerivativeMarketOrderAuthz {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CreateDerivativeMarketOrderAuthz {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCreateDerivativeMarketOrderAuthz();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CreateDerivativeMarketOrderAuthz): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<CreateDerivativeMarketOrderAuthz>, I>>(
-    base?: I,
-  ): CreateDerivativeMarketOrderAuthz {
-    return CreateDerivativeMarketOrderAuthz.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<CreateDerivativeMarketOrderAuthz>, I>>(
-    object: I,
-  ): CreateDerivativeMarketOrderAuthz {
-    const message = createBaseCreateDerivativeMarketOrderAuthz();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CreateDerivativeMarketOrderAuthz {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: CreateDerivativeMarketOrderAuthz): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<CreateDerivativeMarketOrderAuthz>, I>>(
+      base?: I,
+    ): CreateDerivativeMarketOrderAuthz {
+      return CreateDerivativeMarketOrderAuthz.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<CreateDerivativeMarketOrderAuthz>, I>,
+    >(object: I): CreateDerivativeMarketOrderAuthz {
+      const message = createBaseCreateDerivativeMarketOrderAuthz();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseBatchCreateDerivativeLimitOrdersAuthz(): BatchCreateDerivativeLimitOrdersAuthz {
   return { subaccountId: "", marketIds: [] };
 }
 
-export const BatchCreateDerivativeLimitOrdersAuthz: MessageFns<BatchCreateDerivativeLimitOrdersAuthz> = {
-  encode(message: BatchCreateDerivativeLimitOrdersAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchCreateDerivativeLimitOrdersAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBatchCreateDerivativeLimitOrdersAuthz();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
+export const BatchCreateDerivativeLimitOrdersAuthz: MessageFns<BatchCreateDerivativeLimitOrdersAuthz> =
+  {
+    encode(
+      message: BatchCreateDerivativeLimitOrdersAuthz,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): BatchCreateDerivativeLimitOrdersAuthz {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BatchCreateDerivativeLimitOrdersAuthz {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBatchCreateDerivativeLimitOrdersAuthz();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BatchCreateDerivativeLimitOrdersAuthz): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<BatchCreateDerivativeLimitOrdersAuthz>, I>>(
-    base?: I,
-  ): BatchCreateDerivativeLimitOrdersAuthz {
-    return BatchCreateDerivativeLimitOrdersAuthz.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BatchCreateDerivativeLimitOrdersAuthz>, I>>(
-    object: I,
-  ): BatchCreateDerivativeLimitOrdersAuthz {
-    const message = createBaseBatchCreateDerivativeLimitOrdersAuthz();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BatchCreateDerivativeLimitOrdersAuthz {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: BatchCreateDerivativeLimitOrdersAuthz): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<BatchCreateDerivativeLimitOrdersAuthz>, I>,
+    >(base?: I): BatchCreateDerivativeLimitOrdersAuthz {
+      return BatchCreateDerivativeLimitOrdersAuthz.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<BatchCreateDerivativeLimitOrdersAuthz>, I>,
+    >(object: I): BatchCreateDerivativeLimitOrdersAuthz {
+      const message = createBaseBatchCreateDerivativeLimitOrdersAuthz();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseCancelDerivativeOrderAuthz(): CancelDerivativeOrderAuthz {
   return { subaccountId: "", marketIds: [] };
 }
 
-export const CancelDerivativeOrderAuthz: MessageFns<CancelDerivativeOrderAuthz> = {
-  encode(message: CancelDerivativeOrderAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): CancelDerivativeOrderAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCancelDerivativeOrderAuthz();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
+export const CancelDerivativeOrderAuthz: MessageFns<CancelDerivativeOrderAuthz> =
+  {
+    encode(
+      message: CancelDerivativeOrderAuthz,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CancelDerivativeOrderAuthz {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CancelDerivativeOrderAuthz {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCancelDerivativeOrderAuthz();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CancelDerivativeOrderAuthz): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<CancelDerivativeOrderAuthz>, I>>(base?: I): CancelDerivativeOrderAuthz {
-    return CancelDerivativeOrderAuthz.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<CancelDerivativeOrderAuthz>, I>>(object: I): CancelDerivativeOrderAuthz {
-    const message = createBaseCancelDerivativeOrderAuthz();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CancelDerivativeOrderAuthz {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: CancelDerivativeOrderAuthz): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<CancelDerivativeOrderAuthz>, I>>(
+      base?: I,
+    ): CancelDerivativeOrderAuthz {
+      return CancelDerivativeOrderAuthz.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<CancelDerivativeOrderAuthz>, I>>(
+      object: I,
+    ): CancelDerivativeOrderAuthz {
+      const message = createBaseCancelDerivativeOrderAuthz();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseBatchCancelDerivativeOrdersAuthz(): BatchCancelDerivativeOrdersAuthz {
   return { subaccountId: "", marketIds: [] };
 }
 
-export const BatchCancelDerivativeOrdersAuthz: MessageFns<BatchCancelDerivativeOrdersAuthz> = {
-  encode(message: BatchCancelDerivativeOrdersAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchCancelDerivativeOrdersAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBatchCancelDerivativeOrdersAuthz();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
+export const BatchCancelDerivativeOrdersAuthz: MessageFns<BatchCancelDerivativeOrdersAuthz> =
+  {
+    encode(
+      message: BatchCancelDerivativeOrdersAuthz,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): BatchCancelDerivativeOrdersAuthz {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BatchCancelDerivativeOrdersAuthz {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBatchCancelDerivativeOrdersAuthz();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BatchCancelDerivativeOrdersAuthz): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<BatchCancelDerivativeOrdersAuthz>, I>>(
-    base?: I,
-  ): BatchCancelDerivativeOrdersAuthz {
-    return BatchCancelDerivativeOrdersAuthz.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BatchCancelDerivativeOrdersAuthz>, I>>(
-    object: I,
-  ): BatchCancelDerivativeOrdersAuthz {
-    const message = createBaseBatchCancelDerivativeOrdersAuthz();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BatchCancelDerivativeOrdersAuthz {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: BatchCancelDerivativeOrdersAuthz): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<BatchCancelDerivativeOrdersAuthz>, I>>(
+      base?: I,
+    ): BatchCancelDerivativeOrdersAuthz {
+      return BatchCancelDerivativeOrdersAuthz.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<BatchCancelDerivativeOrdersAuthz>, I>,
+    >(object: I): BatchCancelDerivativeOrdersAuthz {
+      const message = createBaseBatchCancelDerivativeOrdersAuthz();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseBatchUpdateOrdersAuthz(): BatchUpdateOrdersAuthz {
   return { subaccountId: "", spotMarkets: [], derivativeMarkets: [] };
 }
 
 export const BatchUpdateOrdersAuthz: MessageFns<BatchUpdateOrdersAuthz> = {
-  encode(message: BatchUpdateOrdersAuthz, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BatchUpdateOrdersAuthz,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -976,8 +1084,12 @@ export const BatchUpdateOrdersAuthz: MessageFns<BatchUpdateOrdersAuthz> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchUpdateOrdersAuthz {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): BatchUpdateOrdersAuthz {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchUpdateOrdersAuthz();
     while (reader.pos < end) {
@@ -1021,18 +1133,18 @@ export const BatchUpdateOrdersAuthz: MessageFns<BatchUpdateOrdersAuthz> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       spotMarkets: globalThis.Array.isArray(object?.spotMarkets)
         ? object.spotMarkets.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.spot_markets)
-        ? object.spot_markets.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.spot_markets.map((e: any) => globalThis.String(e))
+          : [],
       derivativeMarkets: globalThis.Array.isArray(object?.derivativeMarkets)
         ? object.derivativeMarkets.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.derivative_markets)
-        ? object.derivative_markets.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.derivative_markets.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -1050,10 +1162,14 @@ export const BatchUpdateOrdersAuthz: MessageFns<BatchUpdateOrdersAuthz> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BatchUpdateOrdersAuthz>, I>>(base?: I): BatchUpdateOrdersAuthz {
+  create<I extends Exact<DeepPartial<BatchUpdateOrdersAuthz>, I>>(
+    base?: I,
+  ): BatchUpdateOrdersAuthz {
     return BatchUpdateOrdersAuthz.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BatchUpdateOrdersAuthz>, I>>(object: I): BatchUpdateOrdersAuthz {
+  fromPartial<I extends Exact<DeepPartial<BatchUpdateOrdersAuthz>, I>>(
+    object: I,
+  ): BatchUpdateOrdersAuthz {
     const message = createBaseBatchUpdateOrdersAuthz();
     message.subaccountId = object.subaccountId ?? "";
     message.spotMarkets = object.spotMarkets?.map((e) => e) || [];
@@ -1066,93 +1182,114 @@ function createBaseGenericExchangeAuthorization(): GenericExchangeAuthorization 
   return { msg: "", spendLimit: [] };
 }
 
-export const GenericExchangeAuthorization: MessageFns<GenericExchangeAuthorization> = {
-  encode(message: GenericExchangeAuthorization, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.msg !== "") {
-      writer.uint32(10).string(message.msg);
-    }
-    for (const v of message.spendLimit) {
-      Coin.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): GenericExchangeAuthorization {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGenericExchangeAuthorization();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.msg = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.spendLimit.push(Coin.decode(reader, reader.uint32()));
-          continue;
-        }
+export const GenericExchangeAuthorization: MessageFns<GenericExchangeAuthorization> =
+  {
+    encode(
+      message: GenericExchangeAuthorization,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.msg !== "") {
+        writer.uint32(10).string(message.msg);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.spendLimit) {
+        Coin.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): GenericExchangeAuthorization {
-    return {
-      msg: isSet(object.msg) ? globalThis.String(object.msg) : "",
-      spendLimit: globalThis.Array.isArray(object?.spendLimit)
-        ? object.spendLimit.map((e: any) => Coin.fromJSON(e))
-        : globalThis.Array.isArray(object?.spend_limit)
-        ? object.spend_limit.map((e: any) => Coin.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): GenericExchangeAuthorization {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseGenericExchangeAuthorization();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: GenericExchangeAuthorization): unknown {
-    const obj: any = {};
-    if (message.msg !== "") {
-      obj.msg = message.msg;
-    }
-    if (message.spendLimit?.length) {
-      obj.spendLimit = message.spendLimit.map((e) => Coin.toJSON(e));
-    }
-    return obj;
-  },
+            message.msg = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<GenericExchangeAuthorization>, I>>(base?: I): GenericExchangeAuthorization {
-    return GenericExchangeAuthorization.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<GenericExchangeAuthorization>, I>>(object: I): GenericExchangeAuthorization {
-    const message = createBaseGenericExchangeAuthorization();
-    message.msg = object.msg ?? "";
-    message.spendLimit = object.spendLimit?.map((e) => Coin.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.spendLimit.push(Coin.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+    fromJSON(object: any): GenericExchangeAuthorization {
+      return {
+        msg: isSet(object.msg) ? globalThis.String(object.msg) : "",
+        spendLimit: globalThis.Array.isArray(object?.spendLimit)
+          ? object.spendLimit.map((e: any) => Coin.fromJSON(e))
+          : globalThis.Array.isArray(object?.spend_limit)
+            ? object.spend_limit.map((e: any) => Coin.fromJSON(e))
+            : [],
+      };
+    },
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+    toJSON(message: GenericExchangeAuthorization): unknown {
+      const obj: any = {};
+      if (message.msg !== "") {
+        obj.msg = message.msg;
+      }
+      if (message.spendLimit?.length) {
+        obj.spendLimit = message.spendLimit.map((e) => Coin.toJSON(e));
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<GenericExchangeAuthorization>, I>>(
+      base?: I,
+    ): GenericExchangeAuthorization {
+      return GenericExchangeAuthorization.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<GenericExchangeAuthorization>, I>>(
+      object: I,
+    ): GenericExchangeAuthorization {
+      const message = createBaseGenericExchangeAuthorization();
+      message.msg = object.msg ?? "";
+      message.spendLimit =
+        object.spendLimit?.map((e) => Coin.fromPartial(e)) || [];
+      return message;
+    },
+  };
+
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
+
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

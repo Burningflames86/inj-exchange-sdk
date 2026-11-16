@@ -53,7 +53,10 @@ function createBaseProof(): Proof {
 }
 
 export const Proof: MessageFns<Proof> = {
-  encode(message: Proof, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Proof,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.total !== 0) {
       writer.uint32(8).int64(message.total);
     }
@@ -70,7 +73,8 @@ export const Proof: MessageFns<Proof> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Proof {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProof();
     while (reader.pos < end) {
@@ -124,8 +128,8 @@ export const Proof: MessageFns<Proof> = {
       leafHash: isSet(object.leafHash)
         ? Buffer.from(bytesFromBase64(object.leafHash))
         : isSet(object.leaf_hash)
-        ? Buffer.from(bytesFromBase64(object.leaf_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.leaf_hash))
+          : Buffer.alloc(0),
       aunts: globalThis.Array.isArray(object?.aunts)
         ? object.aunts.map((e: any) => Buffer.from(bytesFromBase64(e)))
         : [],
@@ -167,7 +171,10 @@ function createBaseValueOp(): ValueOp {
 }
 
 export const ValueOp: MessageFns<ValueOp> = {
-  encode(message: ValueOp, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ValueOp,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -178,7 +185,8 @@ export const ValueOp: MessageFns<ValueOp> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ValueOp {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValueOp();
     while (reader.pos < end) {
@@ -211,7 +219,9 @@ export const ValueOp: MessageFns<ValueOp> = {
 
   fromJSON(object: any): ValueOp {
     return {
-      key: isSet(object.key) ? Buffer.from(bytesFromBase64(object.key)) : Buffer.alloc(0),
+      key: isSet(object.key)
+        ? Buffer.from(bytesFromBase64(object.key))
+        : Buffer.alloc(0),
       proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined,
     };
   },
@@ -233,7 +243,10 @@ export const ValueOp: MessageFns<ValueOp> = {
   fromPartial<I extends Exact<DeepPartial<ValueOp>, I>>(object: I): ValueOp {
     const message = createBaseValueOp();
     message.key = object.key ?? Buffer.alloc(0);
-    message.proof = (object.proof !== undefined && object.proof !== null) ? Proof.fromPartial(object.proof) : undefined;
+    message.proof =
+      object.proof !== undefined && object.proof !== null
+        ? Proof.fromPartial(object.proof)
+        : undefined;
     return message;
   },
 };
@@ -243,7 +256,10 @@ function createBaseDominoOp(): DominoOp {
 }
 
 export const DominoOp: MessageFns<DominoOp> = {
-  encode(message: DominoOp, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DominoOp,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -257,7 +273,8 @@ export const DominoOp: MessageFns<DominoOp> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DominoOp {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDominoOp();
     while (reader.pos < end) {
@@ -335,7 +352,10 @@ function createBaseProofOp(): ProofOp {
 }
 
 export const ProofOp: MessageFns<ProofOp> = {
-  encode(message: ProofOp, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ProofOp,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -349,7 +369,8 @@ export const ProofOp: MessageFns<ProofOp> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ProofOp {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProofOp();
     while (reader.pos < end) {
@@ -391,8 +412,12 @@ export const ProofOp: MessageFns<ProofOp> = {
   fromJSON(object: any): ProofOp {
     return {
       type: isSet(object.type) ? globalThis.String(object.type) : "",
-      key: isSet(object.key) ? Buffer.from(bytesFromBase64(object.key)) : Buffer.alloc(0),
-      data: isSet(object.data) ? Buffer.from(bytesFromBase64(object.data)) : Buffer.alloc(0),
+      key: isSet(object.key)
+        ? Buffer.from(bytesFromBase64(object.key))
+        : Buffer.alloc(0),
+      data: isSet(object.data)
+        ? Buffer.from(bytesFromBase64(object.data))
+        : Buffer.alloc(0),
     };
   },
 
@@ -427,7 +452,10 @@ function createBaseProofOps(): ProofOps {
 }
 
 export const ProofOps: MessageFns<ProofOps> = {
-  encode(message: ProofOps, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ProofOps,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.ops) {
       ProofOp.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -435,7 +463,8 @@ export const ProofOps: MessageFns<ProofOps> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ProofOps {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProofOps();
     while (reader.pos < end) {
@@ -459,7 +488,11 @@ export const ProofOps: MessageFns<ProofOps> = {
   },
 
   fromJSON(object: any): ProofOps {
-    return { ops: globalThis.Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromJSON(e)) : [] };
+    return {
+      ops: globalThis.Array.isArray(object?.ops)
+        ? object.ops.map((e: any) => ProofOp.fromJSON(e))
+        : [],
+    };
   },
 
   toJSON(message: ProofOps): unknown {
@@ -488,17 +521,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

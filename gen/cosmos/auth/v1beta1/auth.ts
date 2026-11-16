@@ -58,7 +58,10 @@ function createBaseBaseAccount(): BaseAccount {
 }
 
 export const BaseAccount: MessageFns<BaseAccount> = {
-  encode(message: BaseAccount, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BaseAccount,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -75,7 +78,8 @@ export const BaseAccount: MessageFns<BaseAccount> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): BaseAccount {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBaseAccount();
     while (reader.pos < end) {
@@ -128,13 +132,13 @@ export const BaseAccount: MessageFns<BaseAccount> = {
       pubKey: isSet(object.pubKey)
         ? Any.fromJSON(object.pubKey)
         : isSet(object.pub_key)
-        ? Any.fromJSON(object.pub_key)
-        : undefined,
+          ? Any.fromJSON(object.pub_key)
+          : undefined,
       accountNumber: isSet(object.accountNumber)
         ? globalThis.Number(object.accountNumber)
         : isSet(object.account_number)
-        ? globalThis.Number(object.account_number)
-        : 0,
+          ? globalThis.Number(object.account_number)
+          : 0,
       sequence: isSet(object.sequence) ? globalThis.Number(object.sequence) : 0,
     };
   },
@@ -159,12 +163,15 @@ export const BaseAccount: MessageFns<BaseAccount> = {
   create<I extends Exact<DeepPartial<BaseAccount>, I>>(base?: I): BaseAccount {
     return BaseAccount.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BaseAccount>, I>>(object: I): BaseAccount {
+  fromPartial<I extends Exact<DeepPartial<BaseAccount>, I>>(
+    object: I,
+  ): BaseAccount {
     const message = createBaseBaseAccount();
     message.address = object.address ?? "";
-    message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)
-      ? Any.fromPartial(object.pubKey)
-      : undefined;
+    message.pubKey =
+      object.pubKey !== undefined && object.pubKey !== null
+        ? Any.fromPartial(object.pubKey)
+        : undefined;
     message.accountNumber = object.accountNumber ?? 0;
     message.sequence = object.sequence ?? 0;
     return message;
@@ -176,7 +183,10 @@ function createBaseModuleAccount(): ModuleAccount {
 }
 
 export const ModuleAccount: MessageFns<ModuleAccount> = {
-  encode(message: ModuleAccount, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ModuleAccount,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.baseAccount !== undefined) {
       BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).join();
     }
@@ -190,7 +200,8 @@ export const ModuleAccount: MessageFns<ModuleAccount> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ModuleAccount {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleAccount();
     while (reader.pos < end) {
@@ -234,8 +245,8 @@ export const ModuleAccount: MessageFns<ModuleAccount> = {
       baseAccount: isSet(object.baseAccount)
         ? BaseAccount.fromJSON(object.baseAccount)
         : isSet(object.base_account)
-        ? BaseAccount.fromJSON(object.base_account)
-        : undefined,
+          ? BaseAccount.fromJSON(object.base_account)
+          : undefined,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       permissions: globalThis.Array.isArray(object?.permissions)
         ? object.permissions.map((e: any) => globalThis.String(e))
@@ -257,14 +268,19 @@ export const ModuleAccount: MessageFns<ModuleAccount> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ModuleAccount>, I>>(base?: I): ModuleAccount {
+  create<I extends Exact<DeepPartial<ModuleAccount>, I>>(
+    base?: I,
+  ): ModuleAccount {
     return ModuleAccount.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ModuleAccount>, I>>(object: I): ModuleAccount {
+  fromPartial<I extends Exact<DeepPartial<ModuleAccount>, I>>(
+    object: I,
+  ): ModuleAccount {
     const message = createBaseModuleAccount();
-    message.baseAccount = (object.baseAccount !== undefined && object.baseAccount !== null)
-      ? BaseAccount.fromPartial(object.baseAccount)
-      : undefined;
+    message.baseAccount =
+      object.baseAccount !== undefined && object.baseAccount !== null
+        ? BaseAccount.fromPartial(object.baseAccount)
+        : undefined;
     message.name = object.name ?? "";
     message.permissions = object.permissions?.map((e) => e) || [];
     return message;
@@ -276,7 +292,10 @@ function createBaseModuleCredential(): ModuleCredential {
 }
 
 export const ModuleCredential: MessageFns<ModuleCredential> = {
-  encode(message: ModuleCredential, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ModuleCredential,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.moduleName !== "") {
       writer.uint32(10).string(message.moduleName);
     }
@@ -287,7 +306,8 @@ export const ModuleCredential: MessageFns<ModuleCredential> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ModuleCredential {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleCredential();
     while (reader.pos < end) {
@@ -323,13 +343,15 @@ export const ModuleCredential: MessageFns<ModuleCredential> = {
       moduleName: isSet(object.moduleName)
         ? globalThis.String(object.moduleName)
         : isSet(object.module_name)
-        ? globalThis.String(object.module_name)
-        : "",
+          ? globalThis.String(object.module_name)
+          : "",
       derivationKeys: globalThis.Array.isArray(object?.derivationKeys)
         ? object.derivationKeys.map((e: any) => Buffer.from(bytesFromBase64(e)))
         : globalThis.Array.isArray(object?.derivation_keys)
-        ? object.derivation_keys.map((e: any) => Buffer.from(bytesFromBase64(e)))
-        : [],
+          ? object.derivation_keys.map((e: any) =>
+              Buffer.from(bytesFromBase64(e)),
+            )
+          : [],
     };
   },
 
@@ -339,15 +361,21 @@ export const ModuleCredential: MessageFns<ModuleCredential> = {
       obj.moduleName = message.moduleName;
     }
     if (message.derivationKeys?.length) {
-      obj.derivationKeys = message.derivationKeys.map((e) => base64FromBytes(e));
+      obj.derivationKeys = message.derivationKeys.map((e) =>
+        base64FromBytes(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ModuleCredential>, I>>(base?: I): ModuleCredential {
+  create<I extends Exact<DeepPartial<ModuleCredential>, I>>(
+    base?: I,
+  ): ModuleCredential {
     return ModuleCredential.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ModuleCredential>, I>>(object: I): ModuleCredential {
+  fromPartial<I extends Exact<DeepPartial<ModuleCredential>, I>>(
+    object: I,
+  ): ModuleCredential {
     const message = createBaseModuleCredential();
     message.moduleName = object.moduleName ?? "";
     message.derivationKeys = object.derivationKeys?.map((e) => e) || [];
@@ -366,7 +394,10 @@ function createBaseParams(): Params {
 }
 
 export const Params: MessageFns<Params> = {
-  encode(message: Params, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Params,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.maxMemoCharacters !== 0) {
       writer.uint32(8).uint64(message.maxMemoCharacters);
     }
@@ -386,7 +417,8 @@ export const Params: MessageFns<Params> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Params {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -446,28 +478,28 @@ export const Params: MessageFns<Params> = {
       maxMemoCharacters: isSet(object.maxMemoCharacters)
         ? globalThis.Number(object.maxMemoCharacters)
         : isSet(object.max_memo_characters)
-        ? globalThis.Number(object.max_memo_characters)
-        : 0,
+          ? globalThis.Number(object.max_memo_characters)
+          : 0,
       txSigLimit: isSet(object.txSigLimit)
         ? globalThis.Number(object.txSigLimit)
         : isSet(object.tx_sig_limit)
-        ? globalThis.Number(object.tx_sig_limit)
-        : 0,
+          ? globalThis.Number(object.tx_sig_limit)
+          : 0,
       txSizeCostPerByte: isSet(object.txSizeCostPerByte)
         ? globalThis.Number(object.txSizeCostPerByte)
         : isSet(object.tx_size_cost_per_byte)
-        ? globalThis.Number(object.tx_size_cost_per_byte)
-        : 0,
+          ? globalThis.Number(object.tx_size_cost_per_byte)
+          : 0,
       sigVerifyCostEd25519: isSet(object.sigVerifyCostEd25519)
         ? globalThis.Number(object.sigVerifyCostEd25519)
         : isSet(object.sig_verify_cost_ed25519)
-        ? globalThis.Number(object.sig_verify_cost_ed25519)
-        : 0,
+          ? globalThis.Number(object.sig_verify_cost_ed25519)
+          : 0,
       sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1)
         ? globalThis.Number(object.sigVerifyCostSecp256k1)
         : isSet(object.sig_verify_cost_secp256k1)
-        ? globalThis.Number(object.sig_verify_cost_secp256k1)
-        : 0,
+          ? globalThis.Number(object.sig_verify_cost_secp256k1)
+          : 0,
     };
   },
 
@@ -513,17 +545,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

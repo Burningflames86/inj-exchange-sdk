@@ -8,10 +8,11 @@
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^26.2.0",
+    "prettier": "^3.10.1",
     "ts-proto": "^2.12.0",
     "typescript": "^7.0.2"
   },
-  "name": "idk",
+  "name": "inj-trading-sdk",
   "module": "index.ts",
   "type": "module",
   "private": true

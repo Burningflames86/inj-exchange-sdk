@@ -104,7 +104,9 @@ export enum CancellationStrategy {
   UNRECOGNIZED = -1,
 }
 
-export function cancellationStrategyFromJSON(object: any): CancellationStrategy {
+export function cancellationStrategyFromJSON(
+  object: any,
+): CancellationStrategy {
   switch (object) {
     case 0:
     case "UnspecifiedOrder":
@@ -122,7 +124,9 @@ export function cancellationStrategyFromJSON(object: any): CancellationStrategy 
   }
 }
 
-export function cancellationStrategyToJSON(object: CancellationStrategy): string {
+export function cancellationStrategyToJSON(
+  object: CancellationStrategy,
+): string {
   switch (object) {
     case CancellationStrategy.UnspecifiedOrder:
       return "UnspecifiedOrder";
@@ -155,9 +159,7 @@ export interface QuerySubaccountOrdersResponse {
 
 export interface SubaccountOrderbookMetadataWithMarket {
   /** the subaccount orderbook metadata */
-  metadata:
-    | SubaccountOrderbookMetadata
-    | undefined;
+  metadata: SubaccountOrderbookMetadata | undefined;
   /** the market ID */
   marketId: string;
   /** true if the order is for buy orders */
@@ -168,8 +170,7 @@ export interface SubaccountOrderbookMetadataWithMarket {
  * QueryExchangeParamsRequest is the request type for the Query/ExchangeParams
  * RPC method.
  */
-export interface QueryExchangeParamsRequest {
-}
+export interface QueryExchangeParamsRequest {}
 
 /**
  * QueryExchangeParamsRequest is the response type for the Query/ExchangeParams
@@ -207,8 +208,7 @@ export interface QuerySubaccountDepositsResponse_DepositsEntry {
  * QueryExchangeBalancesRequest is the request type for the
  * Query/ExchangeBalances RPC method.
  */
-export interface QueryExchangeBalancesRequest {
-}
+export interface QueryExchangeBalancesRequest {}
 
 /**
  * QuerySubaccountDepositsResponse is the response type for the
@@ -413,9 +413,7 @@ export interface QuerySpotOrderbookResponse {
 }
 
 export interface FullSpotMarket {
-  market:
-    | SpotMarket
-    | undefined;
+  market: SpotMarket | undefined;
   /**
    * mid_price_and_tob defines the mid price for this market and the best ask
    * and bid orders
@@ -754,17 +752,11 @@ export interface PerpetualMarketState {
 
 export interface FullDerivativeMarket {
   /** derivative market details */
-  market:
-    | DerivativeMarket
-    | undefined;
+  market: DerivativeMarket | undefined;
   /** perpetual market info */
-  perpetualInfo?:
-    | PerpetualMarketState
-    | undefined;
+  perpetualInfo?: PerpetualMarketState | undefined;
   /** expiry futures market info */
-  futuresInfo?:
-    | ExpiryFuturesMarketInfo
-    | undefined;
+  futuresInfo?: ExpiryFuturesMarketInfo | undefined;
   /** mark price (in chain format) */
   markPrice: string;
   /**
@@ -971,8 +963,7 @@ export interface QuerySubaccountTradeNonceResponse {
  * QueryModuleStateRequest is the request type for the Query/ExchangeModuleState
  * RPC method.
  */
-export interface QueryModuleStateRequest {
-}
+export interface QueryModuleStateRequest {}
 
 /**
  * QueryModuleStateResponse is the response type for the
@@ -983,8 +974,7 @@ export interface QueryModuleStateResponse {
 }
 
 /** QueryPositionsRequest is the request type for the Query/Positions RPC method. */
-export interface QueryPositionsRequest {
-}
+export interface QueryPositionsRequest {}
 
 /**
  * QueryPositionsResponse is the response type for the Query/Positions RPC
@@ -1015,8 +1005,7 @@ export interface QueryTradeRewardPointsResponse {
  * QueryTradeRewardCampaignRequest is the request type for the
  * Query/TradeRewardCampaign RPC method.
  */
-export interface QueryTradeRewardCampaignRequest {
-}
+export interface QueryTradeRewardCampaignRequest {}
 
 /**
  * QueryTradeRewardCampaignResponse is the response type for the
@@ -1050,8 +1039,7 @@ export interface QueryIsOptedOutOfRewardsResponse {
  * QueryRegisteredDMMsRequest is the request type for the Query/RegisteredDMMs
  * RPC method.
  */
-export interface QueryOptedOutOfRewardsAccountsRequest {
-}
+export interface QueryOptedOutOfRewardsAccountsRequest {}
 
 /**
  * QueryRegisteredDMMsResponse is the response type for the Query/RegisteredDMMs
@@ -1083,8 +1071,7 @@ export interface QueryFeeDiscountAccountInfoResponse {
  * QueryFeeDiscountScheduleRequest is the request type for the
  * Query/FeeDiscountSchedule RPC method.
  */
-export interface QueryFeeDiscountScheduleRequest {
-}
+export interface QueryFeeDiscountScheduleRequest {}
 
 /**
  * QueryFeeDiscountScheduleResponse is the response type for the
@@ -1131,8 +1118,7 @@ export interface QueryBalanceMismatchesResponse {
  * QueryBalanceWithBalanceHoldsRequest is the request type for the
  * Query/QueryBalanceWithBalanceHolds RPC method.
  */
-export interface QueryBalanceWithBalanceHoldsRequest {
-}
+export interface QueryBalanceWithBalanceHoldsRequest {}
 
 export interface BalanceWithMarginHold {
   /** the subaccount ID */
@@ -1159,8 +1145,7 @@ export interface QueryBalanceWithBalanceHoldsResponse {
  * QueryFeeDiscountTierStatisticsRequest is the request type for the
  * Query/QueryFeeDiscountTierStatistics RPC method.
  */
-export interface QueryFeeDiscountTierStatisticsRequest {
-}
+export interface QueryFeeDiscountTierStatisticsRequest {}
 
 export interface TierStatistic {
   tier: number;
@@ -1179,8 +1164,7 @@ export interface QueryFeeDiscountTierStatisticsResponse {
  * MitoVaultInfosRequest is the request type for the Query/MitoVaultInfos RPC
  * method.
  */
-export interface MitoVaultInfosRequest {
-}
+export interface MitoVaultInfosRequest {}
 
 /**
  * MitoVaultInfosResponse is the response type for the Query/MitoVaultInfos RPC
@@ -1396,8 +1380,7 @@ export interface QueryMarketBalanceResponse {
   balance: MarketBalance | undefined;
 }
 
-export interface QueryMarketBalancesRequest {
-}
+export interface QueryMarketBalancesRequest {}
 
 export interface QueryMarketBalancesResponse {
   balances: MarketBalance[];
@@ -1417,8 +1400,7 @@ export interface QueryDenomMinNotionalResponse {
   amount: string;
 }
 
-export interface QueryDenomMinNotionalsRequest {
-}
+export interface QueryDenomMinNotionalsRequest {}
 
 export interface QueryDenomMinNotionalsResponse {
   denomMinNotionals: DenomMinNotional[];
@@ -1429,7 +1411,10 @@ function createBaseSubaccount(): Subaccount {
 }
 
 export const Subaccount: MessageFns<Subaccount> = {
-  encode(message: Subaccount, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Subaccount,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.trader !== "") {
       writer.uint32(10).string(message.trader);
     }
@@ -1440,7 +1425,8 @@ export const Subaccount: MessageFns<Subaccount> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Subaccount {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubaccount();
     while (reader.pos < end) {
@@ -1477,8 +1463,8 @@ export const Subaccount: MessageFns<Subaccount> = {
       subaccountNonce: isSet(object.subaccountNonce)
         ? globalThis.Number(object.subaccountNonce)
         : isSet(object.subaccount_nonce)
-        ? globalThis.Number(object.subaccount_nonce)
-        : 0,
+          ? globalThis.Number(object.subaccount_nonce)
+          : 0,
     };
   },
 
@@ -1496,7 +1482,9 @@ export const Subaccount: MessageFns<Subaccount> = {
   create<I extends Exact<DeepPartial<Subaccount>, I>>(base?: I): Subaccount {
     return Subaccount.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<Subaccount>, I>>(object: I): Subaccount {
+  fromPartial<I extends Exact<DeepPartial<Subaccount>, I>>(
+    object: I,
+  ): Subaccount {
     const message = createBaseSubaccount();
     message.trader = object.trader ?? "";
     message.subaccountNonce = object.subaccountNonce ?? 0;
@@ -1508,547 +1496,670 @@ function createBaseQuerySubaccountOrdersRequest(): QuerySubaccountOrdersRequest 
   return { subaccountId: "", marketId: "" };
 }
 
-export const QuerySubaccountOrdersRequest: MessageFns<QuerySubaccountOrdersRequest> = {
-  encode(message: QuerySubaccountOrdersRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountOrdersRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountOrdersRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
+export const QuerySubaccountOrdersRequest: MessageFns<QuerySubaccountOrdersRequest> =
+  {
+    encode(
+      message: QuerySubaccountOrdersRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QuerySubaccountOrdersRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountOrdersRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountOrdersRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QuerySubaccountOrdersRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QuerySubaccountOrdersRequest>, I>>(base?: I): QuerySubaccountOrdersRequest {
-    return QuerySubaccountOrdersRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountOrdersRequest>, I>>(object: I): QuerySubaccountOrdersRequest {
-    const message = createBaseQuerySubaccountOrdersRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountOrdersRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QuerySubaccountOrdersRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QuerySubaccountOrdersRequest>, I>>(
+      base?: I,
+    ): QuerySubaccountOrdersRequest {
+      return QuerySubaccountOrdersRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QuerySubaccountOrdersRequest>, I>>(
+      object: I,
+    ): QuerySubaccountOrdersRequest {
+      const message = createBaseQuerySubaccountOrdersRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountOrdersResponse(): QuerySubaccountOrdersResponse {
   return { buyOrders: [], sellOrders: [] };
 }
 
-export const QuerySubaccountOrdersResponse: MessageFns<QuerySubaccountOrdersResponse> = {
-  encode(message: QuerySubaccountOrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.buyOrders) {
-      SubaccountOrderData.encode(v!, writer.uint32(10).fork()).join();
-    }
-    for (const v of message.sellOrders) {
-      SubaccountOrderData.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.buyOrders.push(SubaccountOrderData.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.sellOrders.push(SubaccountOrderData.decode(reader, reader.uint32()));
-          continue;
-        }
+export const QuerySubaccountOrdersResponse: MessageFns<QuerySubaccountOrdersResponse> =
+  {
+    encode(
+      message: QuerySubaccountOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.buyOrders) {
+        SubaccountOrderData.encode(v!, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.sellOrders) {
+        SubaccountOrderData.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QuerySubaccountOrdersResponse {
-    return {
-      buyOrders: globalThis.Array.isArray(object?.buyOrders)
-        ? object.buyOrders.map((e: any) => SubaccountOrderData.fromJSON(e))
-        : globalThis.Array.isArray(object?.buy_orders)
-        ? object.buy_orders.map((e: any) => SubaccountOrderData.fromJSON(e))
-        : [],
-      sellOrders: globalThis.Array.isArray(object?.sellOrders)
-        ? object.sellOrders.map((e: any) => SubaccountOrderData.fromJSON(e))
-        : globalThis.Array.isArray(object?.sell_orders)
-        ? object.sell_orders.map((e: any) => SubaccountOrderData.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QuerySubaccountOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.buyOrders?.length) {
-      obj.buyOrders = message.buyOrders.map((e) => SubaccountOrderData.toJSON(e));
-    }
-    if (message.sellOrders?.length) {
-      obj.sellOrders = message.sellOrders.map((e) => SubaccountOrderData.toJSON(e));
-    }
-    return obj;
-  },
+            message.buyOrders.push(
+              SubaccountOrderData.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QuerySubaccountOrdersResponse>, I>>(base?: I): QuerySubaccountOrdersResponse {
-    return QuerySubaccountOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountOrdersResponse>, I>>(
-    object: I,
-  ): QuerySubaccountOrdersResponse {
-    const message = createBaseQuerySubaccountOrdersResponse();
-    message.buyOrders = object.buyOrders?.map((e) => SubaccountOrderData.fromPartial(e)) || [];
-    message.sellOrders = object.sellOrders?.map((e) => SubaccountOrderData.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.sellOrders.push(
+              SubaccountOrderData.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountOrdersResponse {
+      return {
+        buyOrders: globalThis.Array.isArray(object?.buyOrders)
+          ? object.buyOrders.map((e: any) => SubaccountOrderData.fromJSON(e))
+          : globalThis.Array.isArray(object?.buy_orders)
+            ? object.buy_orders.map((e: any) => SubaccountOrderData.fromJSON(e))
+            : [],
+        sellOrders: globalThis.Array.isArray(object?.sellOrders)
+          ? object.sellOrders.map((e: any) => SubaccountOrderData.fromJSON(e))
+          : globalThis.Array.isArray(object?.sell_orders)
+            ? object.sell_orders.map((e: any) =>
+                SubaccountOrderData.fromJSON(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: QuerySubaccountOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.buyOrders?.length) {
+        obj.buyOrders = message.buyOrders.map((e) =>
+          SubaccountOrderData.toJSON(e),
+        );
+      }
+      if (message.sellOrders?.length) {
+        obj.sellOrders = message.sellOrders.map((e) =>
+          SubaccountOrderData.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QuerySubaccountOrdersResponse>, I>>(
+      base?: I,
+    ): QuerySubaccountOrdersResponse {
+      return QuerySubaccountOrdersResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QuerySubaccountOrdersResponse>, I>>(
+      object: I,
+    ): QuerySubaccountOrdersResponse {
+      const message = createBaseQuerySubaccountOrdersResponse();
+      message.buyOrders =
+        object.buyOrders?.map((e) => SubaccountOrderData.fromPartial(e)) || [];
+      message.sellOrders =
+        object.sellOrders?.map((e) => SubaccountOrderData.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseSubaccountOrderbookMetadataWithMarket(): SubaccountOrderbookMetadataWithMarket {
   return { metadata: undefined, marketId: "", isBuy: false };
 }
 
-export const SubaccountOrderbookMetadataWithMarket: MessageFns<SubaccountOrderbookMetadataWithMarket> = {
-  encode(message: SubaccountOrderbookMetadataWithMarket, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.metadata !== undefined) {
-      SubaccountOrderbookMetadata.encode(message.metadata, writer.uint32(10).fork()).join();
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    if (message.isBuy !== false) {
-      writer.uint32(24).bool(message.isBuy);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountOrderbookMetadataWithMarket {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountOrderbookMetadataWithMarket();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.metadata = SubaccountOrderbookMetadata.decode(reader, reader.uint32());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.isBuy = reader.bool();
-          continue;
-        }
+export const SubaccountOrderbookMetadataWithMarket: MessageFns<SubaccountOrderbookMetadataWithMarket> =
+  {
+    encode(
+      message: SubaccountOrderbookMetadataWithMarket,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.metadata !== undefined) {
+        SubaccountOrderbookMetadata.encode(
+          message.metadata,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.isBuy !== false) {
+        writer.uint32(24).bool(message.isBuy);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): SubaccountOrderbookMetadataWithMarket {
-    return {
-      metadata: isSet(object.metadata) ? SubaccountOrderbookMetadata.fromJSON(object.metadata) : undefined,
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      isBuy: isSet(object.isBuy) ? globalThis.Boolean(object.isBuy) : false,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountOrderbookMetadataWithMarket {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountOrderbookMetadataWithMarket();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SubaccountOrderbookMetadataWithMarket): unknown {
-    const obj: any = {};
-    if (message.metadata !== undefined) {
-      obj.metadata = SubaccountOrderbookMetadata.toJSON(message.metadata);
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.isBuy !== false) {
-      obj.isBuy = message.isBuy;
-    }
-    return obj;
-  },
+            message.metadata = SubaccountOrderbookMetadata.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SubaccountOrderbookMetadataWithMarket>, I>>(
-    base?: I,
-  ): SubaccountOrderbookMetadataWithMarket {
-    return SubaccountOrderbookMetadataWithMarket.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountOrderbookMetadataWithMarket>, I>>(
-    object: I,
-  ): SubaccountOrderbookMetadataWithMarket {
-    const message = createBaseSubaccountOrderbookMetadataWithMarket();
-    message.metadata = (object.metadata !== undefined && object.metadata !== null)
-      ? SubaccountOrderbookMetadata.fromPartial(object.metadata)
-      : undefined;
-    message.marketId = object.marketId ?? "";
-    message.isBuy = object.isBuy ?? false;
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.isBuy = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountOrderbookMetadataWithMarket {
+      return {
+        metadata: isSet(object.metadata)
+          ? SubaccountOrderbookMetadata.fromJSON(object.metadata)
+          : undefined,
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        isBuy: isSet(object.isBuy) ? globalThis.Boolean(object.isBuy) : false,
+      };
+    },
+
+    toJSON(message: SubaccountOrderbookMetadataWithMarket): unknown {
+      const obj: any = {};
+      if (message.metadata !== undefined) {
+        obj.metadata = SubaccountOrderbookMetadata.toJSON(message.metadata);
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.isBuy !== false) {
+        obj.isBuy = message.isBuy;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<SubaccountOrderbookMetadataWithMarket>, I>,
+    >(base?: I): SubaccountOrderbookMetadataWithMarket {
+      return SubaccountOrderbookMetadataWithMarket.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<SubaccountOrderbookMetadataWithMarket>, I>,
+    >(object: I): SubaccountOrderbookMetadataWithMarket {
+      const message = createBaseSubaccountOrderbookMetadataWithMarket();
+      message.metadata =
+        object.metadata !== undefined && object.metadata !== null
+          ? SubaccountOrderbookMetadata.fromPartial(object.metadata)
+          : undefined;
+      message.marketId = object.marketId ?? "";
+      message.isBuy = object.isBuy ?? false;
+      return message;
+    },
+  };
 
 function createBaseQueryExchangeParamsRequest(): QueryExchangeParamsRequest {
   return {};
 }
 
-export const QueryExchangeParamsRequest: MessageFns<QueryExchangeParamsRequest> = {
-  encode(_: QueryExchangeParamsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const QueryExchangeParamsRequest: MessageFns<QueryExchangeParamsRequest> =
+  {
+    encode(
+      _: QueryExchangeParamsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryExchangeParamsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryExchangeParamsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryExchangeParamsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryExchangeParamsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): QueryExchangeParamsRequest {
-    return {};
-  },
+    fromJSON(_: any): QueryExchangeParamsRequest {
+      return {};
+    },
 
-  toJSON(_: QueryExchangeParamsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: QueryExchangeParamsRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<QueryExchangeParamsRequest>, I>>(base?: I): QueryExchangeParamsRequest {
-    return QueryExchangeParamsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryExchangeParamsRequest>, I>>(_: I): QueryExchangeParamsRequest {
-    const message = createBaseQueryExchangeParamsRequest();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryExchangeParamsRequest>, I>>(
+      base?: I,
+    ): QueryExchangeParamsRequest {
+      return QueryExchangeParamsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryExchangeParamsRequest>, I>>(
+      _: I,
+    ): QueryExchangeParamsRequest {
+      const message = createBaseQueryExchangeParamsRequest();
+      return message;
+    },
+  };
 
 function createBaseQueryExchangeParamsResponse(): QueryExchangeParamsResponse {
   return { params: undefined };
 }
 
-export const QueryExchangeParamsResponse: MessageFns<QueryExchangeParamsResponse> = {
-  encode(message: QueryExchangeParamsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.params !== undefined) {
-      Params.encode(message.params, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryExchangeParamsResponse: MessageFns<QueryExchangeParamsResponse> =
+  {
+    encode(
+      message: QueryExchangeParamsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.params !== undefined) {
+        Params.encode(message.params, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryExchangeParamsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryExchangeParamsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryExchangeParamsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryExchangeParamsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.params = Params.decode(reader, reader.uint32());
+            continue;
           }
-
-          message.params = Params.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryExchangeParamsResponse {
+      return {
+        params: isSet(object.params)
+          ? Params.fromJSON(object.params)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QueryExchangeParamsResponse): unknown {
+      const obj: any = {};
+      if (message.params !== undefined) {
+        obj.params = Params.toJSON(message.params);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryExchangeParamsResponse {
-    return { params: isSet(object.params) ? Params.fromJSON(object.params) : undefined };
-  },
-
-  toJSON(message: QueryExchangeParamsResponse): unknown {
-    const obj: any = {};
-    if (message.params !== undefined) {
-      obj.params = Params.toJSON(message.params);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryExchangeParamsResponse>, I>>(base?: I): QueryExchangeParamsResponse {
-    return QueryExchangeParamsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryExchangeParamsResponse>, I>>(object: I): QueryExchangeParamsResponse {
-    const message = createBaseQueryExchangeParamsResponse();
-    message.params = (object.params !== undefined && object.params !== null)
-      ? Params.fromPartial(object.params)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryExchangeParamsResponse>, I>>(
+      base?: I,
+    ): QueryExchangeParamsResponse {
+      return QueryExchangeParamsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryExchangeParamsResponse>, I>>(
+      object: I,
+    ): QueryExchangeParamsResponse {
+      const message = createBaseQueryExchangeParamsResponse();
+      message.params =
+        object.params !== undefined && object.params !== null
+          ? Params.fromPartial(object.params)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountDepositsRequest(): QuerySubaccountDepositsRequest {
   return { subaccountId: "", subaccount: undefined };
 }
 
-export const QuerySubaccountDepositsRequest: MessageFns<QuerySubaccountDepositsRequest> = {
-  encode(message: QuerySubaccountDepositsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    if (message.subaccount !== undefined) {
-      Subaccount.encode(message.subaccount, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountDepositsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountDepositsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccount = Subaccount.decode(reader, reader.uint32());
-          continue;
-        }
+export const QuerySubaccountDepositsRequest: MessageFns<QuerySubaccountDepositsRequest> =
+  {
+    encode(
+      message: QuerySubaccountDepositsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccount !== undefined) {
+        Subaccount.encode(message.subaccount, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QuerySubaccountDepositsRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      subaccount: isSet(object.subaccount) ? Subaccount.fromJSON(object.subaccount) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountDepositsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountDepositsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QuerySubaccountDepositsRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.subaccount !== undefined) {
-      obj.subaccount = Subaccount.toJSON(message.subaccount);
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QuerySubaccountDepositsRequest>, I>>(base?: I): QuerySubaccountDepositsRequest {
-    return QuerySubaccountDepositsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountDepositsRequest>, I>>(
-    object: I,
-  ): QuerySubaccountDepositsRequest {
-    const message = createBaseQuerySubaccountDepositsRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.subaccount = (object.subaccount !== undefined && object.subaccount !== null)
-      ? Subaccount.fromPartial(object.subaccount)
-      : undefined;
-    return message;
-  },
-};
+            message.subaccount = Subaccount.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountDepositsRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        subaccount: isSet(object.subaccount)
+          ? Subaccount.fromJSON(object.subaccount)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QuerySubaccountDepositsRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.subaccount !== undefined) {
+        obj.subaccount = Subaccount.toJSON(message.subaccount);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QuerySubaccountDepositsRequest>, I>>(
+      base?: I,
+    ): QuerySubaccountDepositsRequest {
+      return QuerySubaccountDepositsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountDepositsRequest>, I>,
+    >(object: I): QuerySubaccountDepositsRequest {
+      const message = createBaseQuerySubaccountDepositsRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.subaccount =
+        object.subaccount !== undefined && object.subaccount !== null
+          ? Subaccount.fromPartial(object.subaccount)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountDepositsResponse(): QuerySubaccountDepositsResponse {
   return { deposits: {} };
 }
 
-export const QuerySubaccountDepositsResponse: MessageFns<QuerySubaccountDepositsResponse> = {
-  encode(message: QuerySubaccountDepositsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    globalThis.Object.entries(message.deposits).forEach(([key, value]: [string, Deposit]) => {
-      QuerySubaccountDepositsResponse_DepositsEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).join();
-    });
-    return writer;
-  },
+export const QuerySubaccountDepositsResponse: MessageFns<QuerySubaccountDepositsResponse> =
+  {
+    encode(
+      message: QuerySubaccountDepositsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      globalThis.Object.entries(message.deposits).forEach(
+        ([key, value]: [string, Deposit]) => {
+          QuerySubaccountDepositsResponse_DepositsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(10).fork(),
+          ).join();
+        },
+      );
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountDepositsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountDepositsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountDepositsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountDepositsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-          const entry1 = QuerySubaccountDepositsResponse_DepositsEntry.decode(reader, reader.uint32());
-          if (entry1.value !== undefined) {
-            message.deposits[entry1.key] = entry1.value;
+            const entry1 = QuerySubaccountDepositsResponse_DepositsEntry.decode(
+              reader,
+              reader.uint32(),
+            );
+            if (entry1.value !== undefined) {
+              message.deposits[entry1.key] = entry1.value;
+            }
+            continue;
           }
-          continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountDepositsResponse {
+      return {
+        deposits: isObject(object.deposits)
+          ? (
+              globalThis.Object.entries(object.deposits) as [string, any][]
+            ).reduce(
+              (
+                acc: { [key: string]: Deposit },
+                [key, value]: [string, any],
+              ) => {
+                acc[key] = Deposit.fromJSON(value);
+                return acc;
+              },
+              {},
+            )
+          : {},
+      };
+    },
+
+    toJSON(message: QuerySubaccountDepositsResponse): unknown {
+      const obj: any = {};
+      if (message.deposits) {
+        const entries = globalThis.Object.entries(message.deposits) as [
+          string,
+          Deposit,
+        ][];
+        if (entries.length > 0) {
+          obj.deposits = {};
+          entries.forEach(([k, v]) => {
+            obj.deposits[k] = Deposit.toJSON(v);
+          });
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySubaccountDepositsResponse {
-    return {
-      deposits: isObject(object.deposits)
-        ? (globalThis.Object.entries(object.deposits) as [string, any][]).reduce(
-          (acc: { [key: string]: Deposit }, [key, value]: [string, any]) => {
-            acc[key] = Deposit.fromJSON(value);
-            return acc;
-          },
-          {},
-        )
-        : {},
-    };
-  },
-
-  toJSON(message: QuerySubaccountDepositsResponse): unknown {
-    const obj: any = {};
-    if (message.deposits) {
-      const entries = globalThis.Object.entries(message.deposits) as [string, Deposit][];
-      if (entries.length > 0) {
-        obj.deposits = {};
-        entries.forEach(([k, v]) => {
-          obj.deposits[k] = Deposit.toJSON(v);
-        });
-      }
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySubaccountDepositsResponse>, I>>(base?: I): QuerySubaccountDepositsResponse {
-    return QuerySubaccountDepositsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountDepositsResponse>, I>>(
-    object: I,
-  ): QuerySubaccountDepositsResponse {
-    const message = createBaseQuerySubaccountDepositsResponse();
-    message.deposits = (globalThis.Object.entries(object.deposits ?? {}) as [string, Deposit][]).reduce(
-      (acc: { [key: string]: Deposit }, [key, value]: [string, Deposit]) => {
-        if (value !== undefined) {
-          acc[key] = Deposit.fromPartial(value);
-        }
-        return acc;
-      },
-      {},
-    );
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QuerySubaccountDepositsResponse>, I>>(
+      base?: I,
+    ): QuerySubaccountDepositsResponse {
+      return QuerySubaccountDepositsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountDepositsResponse>, I>,
+    >(object: I): QuerySubaccountDepositsResponse {
+      const message = createBaseQuerySubaccountDepositsResponse();
+      message.deposits = (
+        globalThis.Object.entries(object.deposits ?? {}) as [string, Deposit][]
+      ).reduce(
+        (acc: { [key: string]: Deposit }, [key, value]: [string, Deposit]) => {
+          if (value !== undefined) {
+            acc[key] = Deposit.fromPartial(value);
+          }
+          return acc;
+        },
+        {},
+      );
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountDepositsResponse_DepositsEntry(): QuerySubaccountDepositsResponse_DepositsEntry {
   return { key: "", value: undefined };
@@ -2069,8 +2180,12 @@ export const QuerySubaccountDepositsResponse_DepositsEntry: MessageFns<QuerySuba
       return writer;
     },
 
-    decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountDepositsResponse_DepositsEntry {
-      const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountDepositsResponse_DepositsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
       const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseQuerySubaccountDepositsResponse_DepositsEntry();
       while (reader.pos < end) {
@@ -2119,19 +2234,28 @@ export const QuerySubaccountDepositsResponse_DepositsEntry: MessageFns<QuerySuba
       return obj;
     },
 
-    create<I extends Exact<DeepPartial<QuerySubaccountDepositsResponse_DepositsEntry>, I>>(
-      base?: I,
-    ): QuerySubaccountDepositsResponse_DepositsEntry {
-      return QuerySubaccountDepositsResponse_DepositsEntry.fromPartial(base ?? ({} as any));
+    create<
+      I extends Exact<
+        DeepPartial<QuerySubaccountDepositsResponse_DepositsEntry>,
+        I
+      >,
+    >(base?: I): QuerySubaccountDepositsResponse_DepositsEntry {
+      return QuerySubaccountDepositsResponse_DepositsEntry.fromPartial(
+        base ?? ({} as any),
+      );
     },
-    fromPartial<I extends Exact<DeepPartial<QuerySubaccountDepositsResponse_DepositsEntry>, I>>(
-      object: I,
-    ): QuerySubaccountDepositsResponse_DepositsEntry {
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QuerySubaccountDepositsResponse_DepositsEntry>,
+        I
+      >,
+    >(object: I): QuerySubaccountDepositsResponse_DepositsEntry {
       const message = createBaseQuerySubaccountDepositsResponse_DepositsEntry();
       message.key = object.key ?? "";
-      message.value = (object.value !== undefined && object.value !== null)
-        ? Deposit.fromPartial(object.value)
-        : undefined;
+      message.value =
+        object.value !== undefined && object.value !== null
+          ? Deposit.fromPartial(object.value)
+          : undefined;
       return message;
     },
   };
@@ -2140,542 +2264,680 @@ function createBaseQueryExchangeBalancesRequest(): QueryExchangeBalancesRequest 
   return {};
 }
 
-export const QueryExchangeBalancesRequest: MessageFns<QueryExchangeBalancesRequest> = {
-  encode(_: QueryExchangeBalancesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const QueryExchangeBalancesRequest: MessageFns<QueryExchangeBalancesRequest> =
+  {
+    encode(
+      _: QueryExchangeBalancesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryExchangeBalancesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryExchangeBalancesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryExchangeBalancesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryExchangeBalancesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): QueryExchangeBalancesRequest {
-    return {};
-  },
+    fromJSON(_: any): QueryExchangeBalancesRequest {
+      return {};
+    },
 
-  toJSON(_: QueryExchangeBalancesRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: QueryExchangeBalancesRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<QueryExchangeBalancesRequest>, I>>(base?: I): QueryExchangeBalancesRequest {
-    return QueryExchangeBalancesRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryExchangeBalancesRequest>, I>>(_: I): QueryExchangeBalancesRequest {
-    const message = createBaseQueryExchangeBalancesRequest();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryExchangeBalancesRequest>, I>>(
+      base?: I,
+    ): QueryExchangeBalancesRequest {
+      return QueryExchangeBalancesRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryExchangeBalancesRequest>, I>>(
+      _: I,
+    ): QueryExchangeBalancesRequest {
+      const message = createBaseQueryExchangeBalancesRequest();
+      return message;
+    },
+  };
 
 function createBaseQueryExchangeBalancesResponse(): QueryExchangeBalancesResponse {
   return { balances: [] };
 }
 
-export const QueryExchangeBalancesResponse: MessageFns<QueryExchangeBalancesResponse> = {
-  encode(message: QueryExchangeBalancesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.balances) {
-      Balance.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryExchangeBalancesResponse: MessageFns<QueryExchangeBalancesResponse> =
+  {
+    encode(
+      message: QueryExchangeBalancesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.balances) {
+        Balance.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryExchangeBalancesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryExchangeBalancesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryExchangeBalancesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryExchangeBalancesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.balances.push(Balance.decode(reader, reader.uint32()));
+            continue;
           }
-
-          message.balances.push(Balance.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryExchangeBalancesResponse {
+      return {
+        balances: globalThis.Array.isArray(object?.balances)
+          ? object.balances.map((e: any) => Balance.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryExchangeBalancesResponse): unknown {
+      const obj: any = {};
+      if (message.balances?.length) {
+        obj.balances = message.balances.map((e) => Balance.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryExchangeBalancesResponse {
-    return {
-      balances: globalThis.Array.isArray(object?.balances) ? object.balances.map((e: any) => Balance.fromJSON(e)) : [],
-    };
-  },
-
-  toJSON(message: QueryExchangeBalancesResponse): unknown {
-    const obj: any = {};
-    if (message.balances?.length) {
-      obj.balances = message.balances.map((e) => Balance.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryExchangeBalancesResponse>, I>>(base?: I): QueryExchangeBalancesResponse {
-    return QueryExchangeBalancesResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryExchangeBalancesResponse>, I>>(
-    object: I,
-  ): QueryExchangeBalancesResponse {
-    const message = createBaseQueryExchangeBalancesResponse();
-    message.balances = object.balances?.map((e) => Balance.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryExchangeBalancesResponse>, I>>(
+      base?: I,
+    ): QueryExchangeBalancesResponse {
+      return QueryExchangeBalancesResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryExchangeBalancesResponse>, I>>(
+      object: I,
+    ): QueryExchangeBalancesResponse {
+      const message = createBaseQueryExchangeBalancesResponse();
+      message.balances =
+        object.balances?.map((e) => Balance.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryAggregateVolumeRequest(): QueryAggregateVolumeRequest {
   return { account: "" };
 }
 
-export const QueryAggregateVolumeRequest: MessageFns<QueryAggregateVolumeRequest> = {
-  encode(message: QueryAggregateVolumeRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.account !== "") {
-      writer.uint32(10).string(message.account);
-    }
-    return writer;
-  },
+export const QueryAggregateVolumeRequest: MessageFns<QueryAggregateVolumeRequest> =
+  {
+    encode(
+      message: QueryAggregateVolumeRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.account !== "") {
+        writer.uint32(10).string(message.account);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAggregateVolumeRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAggregateVolumeRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAggregateVolumeRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAggregateVolumeRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.account = reader.string();
+            continue;
           }
-
-          message.account = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryAggregateVolumeRequest {
+      return {
+        account: isSet(object.account) ? globalThis.String(object.account) : "",
+      };
+    },
+
+    toJSON(message: QueryAggregateVolumeRequest): unknown {
+      const obj: any = {};
+      if (message.account !== "") {
+        obj.account = message.account;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryAggregateVolumeRequest {
-    return { account: isSet(object.account) ? globalThis.String(object.account) : "" };
-  },
-
-  toJSON(message: QueryAggregateVolumeRequest): unknown {
-    const obj: any = {};
-    if (message.account !== "") {
-      obj.account = message.account;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryAggregateVolumeRequest>, I>>(base?: I): QueryAggregateVolumeRequest {
-    return QueryAggregateVolumeRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAggregateVolumeRequest>, I>>(object: I): QueryAggregateVolumeRequest {
-    const message = createBaseQueryAggregateVolumeRequest();
-    message.account = object.account ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryAggregateVolumeRequest>, I>>(
+      base?: I,
+    ): QueryAggregateVolumeRequest {
+      return QueryAggregateVolumeRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryAggregateVolumeRequest>, I>>(
+      object: I,
+    ): QueryAggregateVolumeRequest {
+      const message = createBaseQueryAggregateVolumeRequest();
+      message.account = object.account ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryAggregateVolumeResponse(): QueryAggregateVolumeResponse {
   return { aggregateVolumes: [] };
 }
 
-export const QueryAggregateVolumeResponse: MessageFns<QueryAggregateVolumeResponse> = {
-  encode(message: QueryAggregateVolumeResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.aggregateVolumes) {
-      MarketVolume.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryAggregateVolumeResponse: MessageFns<QueryAggregateVolumeResponse> =
+  {
+    encode(
+      message: QueryAggregateVolumeResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.aggregateVolumes) {
+        MarketVolume.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAggregateVolumeResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAggregateVolumeResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAggregateVolumeResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAggregateVolumeResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.aggregateVolumes.push(
+              MarketVolume.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.aggregateVolumes.push(MarketVolume.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryAggregateVolumeResponse {
+      return {
+        aggregateVolumes: globalThis.Array.isArray(object?.aggregateVolumes)
+          ? object.aggregateVolumes.map((e: any) => MarketVolume.fromJSON(e))
+          : globalThis.Array.isArray(object?.aggregate_volumes)
+            ? object.aggregate_volumes.map((e: any) => MarketVolume.fromJSON(e))
+            : [],
+      };
+    },
+
+    toJSON(message: QueryAggregateVolumeResponse): unknown {
+      const obj: any = {};
+      if (message.aggregateVolumes?.length) {
+        obj.aggregateVolumes = message.aggregateVolumes.map((e) =>
+          MarketVolume.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryAggregateVolumeResponse {
-    return {
-      aggregateVolumes: globalThis.Array.isArray(object?.aggregateVolumes)
-        ? object.aggregateVolumes.map((e: any) => MarketVolume.fromJSON(e))
-        : globalThis.Array.isArray(object?.aggregate_volumes)
-        ? object.aggregate_volumes.map((e: any) => MarketVolume.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryAggregateVolumeResponse): unknown {
-    const obj: any = {};
-    if (message.aggregateVolumes?.length) {
-      obj.aggregateVolumes = message.aggregateVolumes.map((e) => MarketVolume.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryAggregateVolumeResponse>, I>>(base?: I): QueryAggregateVolumeResponse {
-    return QueryAggregateVolumeResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAggregateVolumeResponse>, I>>(object: I): QueryAggregateVolumeResponse {
-    const message = createBaseQueryAggregateVolumeResponse();
-    message.aggregateVolumes = object.aggregateVolumes?.map((e) => MarketVolume.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryAggregateVolumeResponse>, I>>(
+      base?: I,
+    ): QueryAggregateVolumeResponse {
+      return QueryAggregateVolumeResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryAggregateVolumeResponse>, I>>(
+      object: I,
+    ): QueryAggregateVolumeResponse {
+      const message = createBaseQueryAggregateVolumeResponse();
+      message.aggregateVolumes =
+        object.aggregateVolumes?.map((e) => MarketVolume.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryAggregateVolumesRequest(): QueryAggregateVolumesRequest {
   return { accounts: [], marketIds: [] };
 }
 
-export const QueryAggregateVolumesRequest: MessageFns<QueryAggregateVolumesRequest> = {
-  encode(message: QueryAggregateVolumesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.accounts) {
-      writer.uint32(10).string(v!);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAggregateVolumesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAggregateVolumesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.accounts.push(reader.string());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
+export const QueryAggregateVolumesRequest: MessageFns<QueryAggregateVolumesRequest> =
+  {
+    encode(
+      message: QueryAggregateVolumesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.accounts) {
+        writer.uint32(10).string(v!);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryAggregateVolumesRequest {
-    return {
-      accounts: globalThis.Array.isArray(object?.accounts) ? object.accounts.map((e: any) => globalThis.String(e)) : [],
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAggregateVolumesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAggregateVolumesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryAggregateVolumesRequest): unknown {
-    const obj: any = {};
-    if (message.accounts?.length) {
-      obj.accounts = message.accounts;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
+            message.accounts.push(reader.string());
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryAggregateVolumesRequest>, I>>(base?: I): QueryAggregateVolumesRequest {
-    return QueryAggregateVolumesRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAggregateVolumesRequest>, I>>(object: I): QueryAggregateVolumesRequest {
-    const message = createBaseQueryAggregateVolumesRequest();
-    message.accounts = object.accounts?.map((e) => e) || [];
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryAggregateVolumesRequest {
+      return {
+        accounts: globalThis.Array.isArray(object?.accounts)
+          ? object.accounts.map((e: any) => globalThis.String(e))
+          : [],
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: QueryAggregateVolumesRequest): unknown {
+      const obj: any = {};
+      if (message.accounts?.length) {
+        obj.accounts = message.accounts;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryAggregateVolumesRequest>, I>>(
+      base?: I,
+    ): QueryAggregateVolumesRequest {
+      return QueryAggregateVolumesRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryAggregateVolumesRequest>, I>>(
+      object: I,
+    ): QueryAggregateVolumesRequest {
+      const message = createBaseQueryAggregateVolumesRequest();
+      message.accounts = object.accounts?.map((e) => e) || [];
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryAggregateVolumesResponse(): QueryAggregateVolumesResponse {
   return { aggregateAccountVolumes: [], aggregateMarketVolumes: [] };
 }
 
-export const QueryAggregateVolumesResponse: MessageFns<QueryAggregateVolumesResponse> = {
-  encode(message: QueryAggregateVolumesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.aggregateAccountVolumes) {
-      AggregateAccountVolumeRecord.encode(v!, writer.uint32(10).fork()).join();
-    }
-    for (const v of message.aggregateMarketVolumes) {
-      MarketVolume.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAggregateVolumesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAggregateVolumesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.aggregateAccountVolumes.push(AggregateAccountVolumeRecord.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.aggregateMarketVolumes.push(MarketVolume.decode(reader, reader.uint32()));
-          continue;
-        }
+export const QueryAggregateVolumesResponse: MessageFns<QueryAggregateVolumesResponse> =
+  {
+    encode(
+      message: QueryAggregateVolumesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.aggregateAccountVolumes) {
+        AggregateAccountVolumeRecord.encode(
+          v!,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.aggregateMarketVolumes) {
+        MarketVolume.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryAggregateVolumesResponse {
-    return {
-      aggregateAccountVolumes: globalThis.Array.isArray(object?.aggregateAccountVolumes)
-        ? object.aggregateAccountVolumes.map((e: any) => AggregateAccountVolumeRecord.fromJSON(e))
-        : globalThis.Array.isArray(object?.aggregate_account_volumes)
-        ? object.aggregate_account_volumes.map((e: any) => AggregateAccountVolumeRecord.fromJSON(e))
-        : [],
-      aggregateMarketVolumes: globalThis.Array.isArray(object?.aggregateMarketVolumes)
-        ? object.aggregateMarketVolumes.map((e: any) => MarketVolume.fromJSON(e))
-        : globalThis.Array.isArray(object?.aggregate_market_volumes)
-        ? object.aggregate_market_volumes.map((e: any) => MarketVolume.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAggregateVolumesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAggregateVolumesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryAggregateVolumesResponse): unknown {
-    const obj: any = {};
-    if (message.aggregateAccountVolumes?.length) {
-      obj.aggregateAccountVolumes = message.aggregateAccountVolumes.map((e) => AggregateAccountVolumeRecord.toJSON(e));
-    }
-    if (message.aggregateMarketVolumes?.length) {
-      obj.aggregateMarketVolumes = message.aggregateMarketVolumes.map((e) => MarketVolume.toJSON(e));
-    }
-    return obj;
-  },
+            message.aggregateAccountVolumes.push(
+              AggregateAccountVolumeRecord.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryAggregateVolumesResponse>, I>>(base?: I): QueryAggregateVolumesResponse {
-    return QueryAggregateVolumesResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAggregateVolumesResponse>, I>>(
-    object: I,
-  ): QueryAggregateVolumesResponse {
-    const message = createBaseQueryAggregateVolumesResponse();
-    message.aggregateAccountVolumes =
-      object.aggregateAccountVolumes?.map((e) => AggregateAccountVolumeRecord.fromPartial(e)) || [];
-    message.aggregateMarketVolumes = object.aggregateMarketVolumes?.map((e) => MarketVolume.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.aggregateMarketVolumes.push(
+              MarketVolume.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryAggregateVolumesResponse {
+      return {
+        aggregateAccountVolumes: globalThis.Array.isArray(
+          object?.aggregateAccountVolumes,
+        )
+          ? object.aggregateAccountVolumes.map((e: any) =>
+              AggregateAccountVolumeRecord.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.aggregate_account_volumes)
+            ? object.aggregate_account_volumes.map((e: any) =>
+                AggregateAccountVolumeRecord.fromJSON(e),
+              )
+            : [],
+        aggregateMarketVolumes: globalThis.Array.isArray(
+          object?.aggregateMarketVolumes,
+        )
+          ? object.aggregateMarketVolumes.map((e: any) =>
+              MarketVolume.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.aggregate_market_volumes)
+            ? object.aggregate_market_volumes.map((e: any) =>
+                MarketVolume.fromJSON(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: QueryAggregateVolumesResponse): unknown {
+      const obj: any = {};
+      if (message.aggregateAccountVolumes?.length) {
+        obj.aggregateAccountVolumes = message.aggregateAccountVolumes.map((e) =>
+          AggregateAccountVolumeRecord.toJSON(e),
+        );
+      }
+      if (message.aggregateMarketVolumes?.length) {
+        obj.aggregateMarketVolumes = message.aggregateMarketVolumes.map((e) =>
+          MarketVolume.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryAggregateVolumesResponse>, I>>(
+      base?: I,
+    ): QueryAggregateVolumesResponse {
+      return QueryAggregateVolumesResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryAggregateVolumesResponse>, I>>(
+      object: I,
+    ): QueryAggregateVolumesResponse {
+      const message = createBaseQueryAggregateVolumesResponse();
+      message.aggregateAccountVolumes =
+        object.aggregateAccountVolumes?.map((e) =>
+          AggregateAccountVolumeRecord.fromPartial(e),
+        ) || [];
+      message.aggregateMarketVolumes =
+        object.aggregateMarketVolumes?.map((e) =>
+          MarketVolume.fromPartial(e),
+        ) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryAggregateMarketVolumeRequest(): QueryAggregateMarketVolumeRequest {
   return { marketId: "" };
 }
 
-export const QueryAggregateMarketVolumeRequest: MessageFns<QueryAggregateMarketVolumeRequest> = {
-  encode(message: QueryAggregateMarketVolumeRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryAggregateMarketVolumeRequest: MessageFns<QueryAggregateMarketVolumeRequest> =
+  {
+    encode(
+      message: QueryAggregateMarketVolumeRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAggregateMarketVolumeRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAggregateMarketVolumeRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAggregateMarketVolumeRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAggregateMarketVolumeRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryAggregateMarketVolumeRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryAggregateMarketVolumeRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryAggregateMarketVolumeRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryAggregateMarketVolumeRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryAggregateMarketVolumeRequest>, I>>(
-    base?: I,
-  ): QueryAggregateMarketVolumeRequest {
-    return QueryAggregateMarketVolumeRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAggregateMarketVolumeRequest>, I>>(
-    object: I,
-  ): QueryAggregateMarketVolumeRequest {
-    const message = createBaseQueryAggregateMarketVolumeRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryAggregateMarketVolumeRequest>, I>>(
+      base?: I,
+    ): QueryAggregateMarketVolumeRequest {
+      return QueryAggregateMarketVolumeRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryAggregateMarketVolumeRequest>, I>,
+    >(object: I): QueryAggregateMarketVolumeRequest {
+      const message = createBaseQueryAggregateMarketVolumeRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryAggregateMarketVolumeResponse(): QueryAggregateMarketVolumeResponse {
   return { volume: undefined };
 }
 
-export const QueryAggregateMarketVolumeResponse: MessageFns<QueryAggregateMarketVolumeResponse> = {
-  encode(message: QueryAggregateMarketVolumeResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.volume !== undefined) {
-      VolumeRecord.encode(message.volume, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryAggregateMarketVolumeResponse: MessageFns<QueryAggregateMarketVolumeResponse> =
+  {
+    encode(
+      message: QueryAggregateMarketVolumeResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.volume !== undefined) {
+        VolumeRecord.encode(message.volume, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAggregateMarketVolumeResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAggregateMarketVolumeResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAggregateMarketVolumeResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAggregateMarketVolumeResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.volume = VolumeRecord.decode(reader, reader.uint32());
+            continue;
           }
-
-          message.volume = VolumeRecord.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryAggregateMarketVolumeResponse {
+      return {
+        volume: isSet(object.volume)
+          ? VolumeRecord.fromJSON(object.volume)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QueryAggregateMarketVolumeResponse): unknown {
+      const obj: any = {};
+      if (message.volume !== undefined) {
+        obj.volume = VolumeRecord.toJSON(message.volume);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryAggregateMarketVolumeResponse {
-    return { volume: isSet(object.volume) ? VolumeRecord.fromJSON(object.volume) : undefined };
-  },
-
-  toJSON(message: QueryAggregateMarketVolumeResponse): unknown {
-    const obj: any = {};
-    if (message.volume !== undefined) {
-      obj.volume = VolumeRecord.toJSON(message.volume);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryAggregateMarketVolumeResponse>, I>>(
-    base?: I,
-  ): QueryAggregateMarketVolumeResponse {
-    return QueryAggregateMarketVolumeResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAggregateMarketVolumeResponse>, I>>(
-    object: I,
-  ): QueryAggregateMarketVolumeResponse {
-    const message = createBaseQueryAggregateMarketVolumeResponse();
-    message.volume = (object.volume !== undefined && object.volume !== null)
-      ? VolumeRecord.fromPartial(object.volume)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryAggregateMarketVolumeResponse>, I>>(
+      base?: I,
+    ): QueryAggregateMarketVolumeResponse {
+      return QueryAggregateMarketVolumeResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryAggregateMarketVolumeResponse>, I>,
+    >(object: I): QueryAggregateMarketVolumeResponse {
+      const message = createBaseQueryAggregateMarketVolumeResponse();
+      message.volume =
+        object.volume !== undefined && object.volume !== null
+          ? VolumeRecord.fromPartial(object.volume)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQueryDenomDecimalRequest(): QueryDenomDecimalRequest {
   return { denom: "" };
 }
 
 export const QueryDenomDecimalRequest: MessageFns<QueryDenomDecimalRequest> = {
-  encode(message: QueryDenomDecimalRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: QueryDenomDecimalRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomDecimalRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): QueryDenomDecimalRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomDecimalRequest();
     while (reader.pos < end) {
@@ -2699,7 +2961,9 @@ export const QueryDenomDecimalRequest: MessageFns<QueryDenomDecimalRequest> = {
   },
 
   fromJSON(object: any): QueryDenomDecimalRequest {
-    return { denom: isSet(object.denom) ? globalThis.String(object.denom) : "" };
+    return {
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+    };
   },
 
   toJSON(message: QueryDenomDecimalRequest): unknown {
@@ -2710,10 +2974,14 @@ export const QueryDenomDecimalRequest: MessageFns<QueryDenomDecimalRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QueryDenomDecimalRequest>, I>>(base?: I): QueryDenomDecimalRequest {
+  create<I extends Exact<DeepPartial<QueryDenomDecimalRequest>, I>>(
+    base?: I,
+  ): QueryDenomDecimalRequest {
     return QueryDenomDecimalRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QueryDenomDecimalRequest>, I>>(object: I): QueryDenomDecimalRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryDenomDecimalRequest>, I>>(
+    object: I,
+  ): QueryDenomDecimalRequest {
     const message = createBaseQueryDenomDecimalRequest();
     message.denom = object.denom ?? "";
     return message;
@@ -2724,468 +2992,562 @@ function createBaseQueryDenomDecimalResponse(): QueryDenomDecimalResponse {
   return { decimal: 0 };
 }
 
-export const QueryDenomDecimalResponse: MessageFns<QueryDenomDecimalResponse> = {
-  encode(message: QueryDenomDecimalResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.decimal !== 0) {
-      writer.uint32(8).uint64(message.decimal);
-    }
-    return writer;
-  },
+export const QueryDenomDecimalResponse: MessageFns<QueryDenomDecimalResponse> =
+  {
+    encode(
+      message: QueryDenomDecimalResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.decimal !== 0) {
+        writer.uint32(8).uint64(message.decimal);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomDecimalResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDenomDecimalResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDenomDecimalResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDenomDecimalResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.decimal = longToNumber(reader.uint64());
+            continue;
           }
-
-          message.decimal = longToNumber(reader.uint64());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDenomDecimalResponse {
+      return {
+        decimal: isSet(object.decimal) ? globalThis.Number(object.decimal) : 0,
+      };
+    },
+
+    toJSON(message: QueryDenomDecimalResponse): unknown {
+      const obj: any = {};
+      if (message.decimal !== 0) {
+        obj.decimal = Math.round(message.decimal);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDenomDecimalResponse {
-    return { decimal: isSet(object.decimal) ? globalThis.Number(object.decimal) : 0 };
-  },
-
-  toJSON(message: QueryDenomDecimalResponse): unknown {
-    const obj: any = {};
-    if (message.decimal !== 0) {
-      obj.decimal = Math.round(message.decimal);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDenomDecimalResponse>, I>>(base?: I): QueryDenomDecimalResponse {
-    return QueryDenomDecimalResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDenomDecimalResponse>, I>>(object: I): QueryDenomDecimalResponse {
-    const message = createBaseQueryDenomDecimalResponse();
-    message.decimal = object.decimal ?? 0;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryDenomDecimalResponse>, I>>(
+      base?: I,
+    ): QueryDenomDecimalResponse {
+      return QueryDenomDecimalResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryDenomDecimalResponse>, I>>(
+      object: I,
+    ): QueryDenomDecimalResponse {
+      const message = createBaseQueryDenomDecimalResponse();
+      message.decimal = object.decimal ?? 0;
+      return message;
+    },
+  };
 
 function createBaseQueryDenomDecimalsRequest(): QueryDenomDecimalsRequest {
   return { denoms: [] };
 }
 
-export const QueryDenomDecimalsRequest: MessageFns<QueryDenomDecimalsRequest> = {
-  encode(message: QueryDenomDecimalsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.denoms) {
-      writer.uint32(10).string(v!);
-    }
-    return writer;
-  },
+export const QueryDenomDecimalsRequest: MessageFns<QueryDenomDecimalsRequest> =
+  {
+    encode(
+      message: QueryDenomDecimalsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.denoms) {
+        writer.uint32(10).string(v!);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomDecimalsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDenomDecimalsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDenomDecimalsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDenomDecimalsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.denoms.push(reader.string());
+            continue;
           }
-
-          message.denoms.push(reader.string());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDenomDecimalsRequest {
+      return {
+        denoms: globalThis.Array.isArray(object?.denoms)
+          ? object.denoms.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryDenomDecimalsRequest): unknown {
+      const obj: any = {};
+      if (message.denoms?.length) {
+        obj.denoms = message.denoms;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDenomDecimalsRequest {
-    return {
-      denoms: globalThis.Array.isArray(object?.denoms) ? object.denoms.map((e: any) => globalThis.String(e)) : [],
-    };
-  },
-
-  toJSON(message: QueryDenomDecimalsRequest): unknown {
-    const obj: any = {};
-    if (message.denoms?.length) {
-      obj.denoms = message.denoms;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDenomDecimalsRequest>, I>>(base?: I): QueryDenomDecimalsRequest {
-    return QueryDenomDecimalsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDenomDecimalsRequest>, I>>(object: I): QueryDenomDecimalsRequest {
-    const message = createBaseQueryDenomDecimalsRequest();
-    message.denoms = object.denoms?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryDenomDecimalsRequest>, I>>(
+      base?: I,
+    ): QueryDenomDecimalsRequest {
+      return QueryDenomDecimalsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryDenomDecimalsRequest>, I>>(
+      object: I,
+    ): QueryDenomDecimalsRequest {
+      const message = createBaseQueryDenomDecimalsRequest();
+      message.denoms = object.denoms?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryDenomDecimalsResponse(): QueryDenomDecimalsResponse {
   return { denomDecimals: [] };
 }
 
-export const QueryDenomDecimalsResponse: MessageFns<QueryDenomDecimalsResponse> = {
-  encode(message: QueryDenomDecimalsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.denomDecimals) {
-      DenomDecimals.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryDenomDecimalsResponse: MessageFns<QueryDenomDecimalsResponse> =
+  {
+    encode(
+      message: QueryDenomDecimalsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.denomDecimals) {
+        DenomDecimals.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomDecimalsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDenomDecimalsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDenomDecimalsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDenomDecimalsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.denomDecimals.push(
+              DenomDecimals.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.denomDecimals.push(DenomDecimals.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDenomDecimalsResponse {
+      return {
+        denomDecimals: globalThis.Array.isArray(object?.denomDecimals)
+          ? object.denomDecimals.map((e: any) => DenomDecimals.fromJSON(e))
+          : globalThis.Array.isArray(object?.denom_decimals)
+            ? object.denom_decimals.map((e: any) => DenomDecimals.fromJSON(e))
+            : [],
+      };
+    },
+
+    toJSON(message: QueryDenomDecimalsResponse): unknown {
+      const obj: any = {};
+      if (message.denomDecimals?.length) {
+        obj.denomDecimals = message.denomDecimals.map((e) =>
+          DenomDecimals.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDenomDecimalsResponse {
-    return {
-      denomDecimals: globalThis.Array.isArray(object?.denomDecimals)
-        ? object.denomDecimals.map((e: any) => DenomDecimals.fromJSON(e))
-        : globalThis.Array.isArray(object?.denom_decimals)
-        ? object.denom_decimals.map((e: any) => DenomDecimals.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryDenomDecimalsResponse): unknown {
-    const obj: any = {};
-    if (message.denomDecimals?.length) {
-      obj.denomDecimals = message.denomDecimals.map((e) => DenomDecimals.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDenomDecimalsResponse>, I>>(base?: I): QueryDenomDecimalsResponse {
-    return QueryDenomDecimalsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDenomDecimalsResponse>, I>>(object: I): QueryDenomDecimalsResponse {
-    const message = createBaseQueryDenomDecimalsResponse();
-    message.denomDecimals = object.denomDecimals?.map((e) => DenomDecimals.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryDenomDecimalsResponse>, I>>(
+      base?: I,
+    ): QueryDenomDecimalsResponse {
+      return QueryDenomDecimalsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryDenomDecimalsResponse>, I>>(
+      object: I,
+    ): QueryDenomDecimalsResponse {
+      const message = createBaseQueryDenomDecimalsResponse();
+      message.denomDecimals =
+        object.denomDecimals?.map((e) => DenomDecimals.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryAggregateMarketVolumesRequest(): QueryAggregateMarketVolumesRequest {
   return { marketIds: [] };
 }
 
-export const QueryAggregateMarketVolumesRequest: MessageFns<QueryAggregateMarketVolumesRequest> = {
-  encode(message: QueryAggregateMarketVolumesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.marketIds) {
-      writer.uint32(10).string(v!);
-    }
-    return writer;
-  },
+export const QueryAggregateMarketVolumesRequest: MessageFns<QueryAggregateMarketVolumesRequest> =
+  {
+    encode(
+      message: QueryAggregateMarketVolumesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.marketIds) {
+        writer.uint32(10).string(v!);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAggregateMarketVolumesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAggregateMarketVolumesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAggregateMarketVolumesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAggregateMarketVolumesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketIds.push(reader.string());
+            continue;
           }
-
-          message.marketIds.push(reader.string());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryAggregateMarketVolumesRequest {
+      return {
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: QueryAggregateMarketVolumesRequest): unknown {
+      const obj: any = {};
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryAggregateMarketVolumesRequest {
-    return {
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryAggregateMarketVolumesRequest): unknown {
-    const obj: any = {};
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryAggregateMarketVolumesRequest>, I>>(
-    base?: I,
-  ): QueryAggregateMarketVolumesRequest {
-    return QueryAggregateMarketVolumesRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAggregateMarketVolumesRequest>, I>>(
-    object: I,
-  ): QueryAggregateMarketVolumesRequest {
-    const message = createBaseQueryAggregateMarketVolumesRequest();
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryAggregateMarketVolumesRequest>, I>>(
+      base?: I,
+    ): QueryAggregateMarketVolumesRequest {
+      return QueryAggregateMarketVolumesRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryAggregateMarketVolumesRequest>, I>,
+    >(object: I): QueryAggregateMarketVolumesRequest {
+      const message = createBaseQueryAggregateMarketVolumesRequest();
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryAggregateMarketVolumesResponse(): QueryAggregateMarketVolumesResponse {
   return { volumes: [] };
 }
 
-export const QueryAggregateMarketVolumesResponse: MessageFns<QueryAggregateMarketVolumesResponse> = {
-  encode(message: QueryAggregateMarketVolumesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.volumes) {
-      MarketVolume.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryAggregateMarketVolumesResponse: MessageFns<QueryAggregateMarketVolumesResponse> =
+  {
+    encode(
+      message: QueryAggregateMarketVolumesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.volumes) {
+        MarketVolume.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAggregateMarketVolumesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAggregateMarketVolumesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAggregateMarketVolumesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAggregateMarketVolumesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.volumes.push(MarketVolume.decode(reader, reader.uint32()));
+            continue;
           }
-
-          message.volumes.push(MarketVolume.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryAggregateMarketVolumesResponse {
+      return {
+        volumes: globalThis.Array.isArray(object?.volumes)
+          ? object.volumes.map((e: any) => MarketVolume.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryAggregateMarketVolumesResponse): unknown {
+      const obj: any = {};
+      if (message.volumes?.length) {
+        obj.volumes = message.volumes.map((e) => MarketVolume.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryAggregateMarketVolumesResponse {
-    return {
-      volumes: globalThis.Array.isArray(object?.volumes)
-        ? object.volumes.map((e: any) => MarketVolume.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryAggregateMarketVolumesResponse): unknown {
-    const obj: any = {};
-    if (message.volumes?.length) {
-      obj.volumes = message.volumes.map((e) => MarketVolume.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryAggregateMarketVolumesResponse>, I>>(
-    base?: I,
-  ): QueryAggregateMarketVolumesResponse {
-    return QueryAggregateMarketVolumesResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAggregateMarketVolumesResponse>, I>>(
-    object: I,
-  ): QueryAggregateMarketVolumesResponse {
-    const message = createBaseQueryAggregateMarketVolumesResponse();
-    message.volumes = object.volumes?.map((e) => MarketVolume.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryAggregateMarketVolumesResponse>, I>,
+    >(base?: I): QueryAggregateMarketVolumesResponse {
+      return QueryAggregateMarketVolumesResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryAggregateMarketVolumesResponse>, I>,
+    >(object: I): QueryAggregateMarketVolumesResponse {
+      const message = createBaseQueryAggregateMarketVolumesResponse();
+      message.volumes =
+        object.volumes?.map((e) => MarketVolume.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountDepositRequest(): QuerySubaccountDepositRequest {
   return { subaccountId: "", denom: "" };
 }
 
-export const QuerySubaccountDepositRequest: MessageFns<QuerySubaccountDepositRequest> = {
-  encode(message: QuerySubaccountDepositRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    if (message.denom !== "") {
-      writer.uint32(18).string(message.denom);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountDepositRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountDepositRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.denom = reader.string();
-          continue;
-        }
+export const QuerySubaccountDepositRequest: MessageFns<QuerySubaccountDepositRequest> =
+  {
+    encode(
+      message: QuerySubaccountDepositRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.denom !== "") {
+        writer.uint32(18).string(message.denom);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QuerySubaccountDepositRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountDepositRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountDepositRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QuerySubaccountDepositRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.denom !== "") {
-      obj.denom = message.denom;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QuerySubaccountDepositRequest>, I>>(base?: I): QuerySubaccountDepositRequest {
-    return QuerySubaccountDepositRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountDepositRequest>, I>>(
-    object: I,
-  ): QuerySubaccountDepositRequest {
-    const message = createBaseQuerySubaccountDepositRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.denom = object.denom ?? "";
-    return message;
-  },
-};
+            message.denom = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountDepositRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+      };
+    },
+
+    toJSON(message: QuerySubaccountDepositRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.denom !== "") {
+        obj.denom = message.denom;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QuerySubaccountDepositRequest>, I>>(
+      base?: I,
+    ): QuerySubaccountDepositRequest {
+      return QuerySubaccountDepositRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QuerySubaccountDepositRequest>, I>>(
+      object: I,
+    ): QuerySubaccountDepositRequest {
+      const message = createBaseQuerySubaccountDepositRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.denom = object.denom ?? "";
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountDepositResponse(): QuerySubaccountDepositResponse {
   return { deposits: undefined };
 }
 
-export const QuerySubaccountDepositResponse: MessageFns<QuerySubaccountDepositResponse> = {
-  encode(message: QuerySubaccountDepositResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.deposits !== undefined) {
-      Deposit.encode(message.deposits, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QuerySubaccountDepositResponse: MessageFns<QuerySubaccountDepositResponse> =
+  {
+    encode(
+      message: QuerySubaccountDepositResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.deposits !== undefined) {
+        Deposit.encode(message.deposits, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountDepositResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountDepositResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountDepositResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountDepositResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.deposits = Deposit.decode(reader, reader.uint32());
+            continue;
           }
-
-          message.deposits = Deposit.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountDepositResponse {
+      return {
+        deposits: isSet(object.deposits)
+          ? Deposit.fromJSON(object.deposits)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QuerySubaccountDepositResponse): unknown {
+      const obj: any = {};
+      if (message.deposits !== undefined) {
+        obj.deposits = Deposit.toJSON(message.deposits);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySubaccountDepositResponse {
-    return { deposits: isSet(object.deposits) ? Deposit.fromJSON(object.deposits) : undefined };
-  },
-
-  toJSON(message: QuerySubaccountDepositResponse): unknown {
-    const obj: any = {};
-    if (message.deposits !== undefined) {
-      obj.deposits = Deposit.toJSON(message.deposits);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySubaccountDepositResponse>, I>>(base?: I): QuerySubaccountDepositResponse {
-    return QuerySubaccountDepositResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountDepositResponse>, I>>(
-    object: I,
-  ): QuerySubaccountDepositResponse {
-    const message = createBaseQuerySubaccountDepositResponse();
-    message.deposits = (object.deposits !== undefined && object.deposits !== null)
-      ? Deposit.fromPartial(object.deposits)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QuerySubaccountDepositResponse>, I>>(
+      base?: I,
+    ): QuerySubaccountDepositResponse {
+      return QuerySubaccountDepositResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountDepositResponse>, I>,
+    >(object: I): QuerySubaccountDepositResponse {
+      const message = createBaseQuerySubaccountDepositResponse();
+      message.deposits =
+        object.deposits !== undefined && object.deposits !== null
+          ? Deposit.fromPartial(object.deposits)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQuerySpotMarketsRequest(): QuerySpotMarketsRequest {
   return { status: "", marketIds: [] };
 }
 
 export const QuerySpotMarketsRequest: MessageFns<QuerySpotMarketsRequest> = {
-  encode(message: QuerySpotMarketsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: QuerySpotMarketsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.status !== "") {
       writer.uint32(10).string(message.status);
     }
@@ -3195,8 +3557,12 @@ export const QuerySpotMarketsRequest: MessageFns<QuerySpotMarketsRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotMarketsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): QuerySpotMarketsRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotMarketsRequest();
     while (reader.pos < end) {
@@ -3233,8 +3599,8 @@ export const QuerySpotMarketsRequest: MessageFns<QuerySpotMarketsRequest> = {
       marketIds: globalThis.Array.isArray(object?.marketIds)
         ? object.marketIds.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.market_ids.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -3249,10 +3615,14 @@ export const QuerySpotMarketsRequest: MessageFns<QuerySpotMarketsRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QuerySpotMarketsRequest>, I>>(base?: I): QuerySpotMarketsRequest {
+  create<I extends Exact<DeepPartial<QuerySpotMarketsRequest>, I>>(
+    base?: I,
+  ): QuerySpotMarketsRequest {
     return QuerySpotMarketsRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QuerySpotMarketsRequest>, I>>(object: I): QuerySpotMarketsRequest {
+  fromPartial<I extends Exact<DeepPartial<QuerySpotMarketsRequest>, I>>(
+    object: I,
+  ): QuerySpotMarketsRequest {
     const message = createBaseQuerySpotMarketsRequest();
     message.status = object.status ?? "";
     message.marketIds = object.marketIds?.map((e) => e) || [];
@@ -3265,15 +3635,22 @@ function createBaseQuerySpotMarketsResponse(): QuerySpotMarketsResponse {
 }
 
 export const QuerySpotMarketsResponse: MessageFns<QuerySpotMarketsResponse> = {
-  encode(message: QuerySpotMarketsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: QuerySpotMarketsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.markets) {
       SpotMarket.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotMarketsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): QuerySpotMarketsResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotMarketsResponse();
     while (reader.pos < end) {
@@ -3298,7 +3675,9 @@ export const QuerySpotMarketsResponse: MessageFns<QuerySpotMarketsResponse> = {
 
   fromJSON(object: any): QuerySpotMarketsResponse {
     return {
-      markets: globalThis.Array.isArray(object?.markets) ? object.markets.map((e: any) => SpotMarket.fromJSON(e)) : [],
+      markets: globalThis.Array.isArray(object?.markets)
+        ? object.markets.map((e: any) => SpotMarket.fromJSON(e))
+        : [],
     };
   },
 
@@ -3310,12 +3689,17 @@ export const QuerySpotMarketsResponse: MessageFns<QuerySpotMarketsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QuerySpotMarketsResponse>, I>>(base?: I): QuerySpotMarketsResponse {
+  create<I extends Exact<DeepPartial<QuerySpotMarketsResponse>, I>>(
+    base?: I,
+  ): QuerySpotMarketsResponse {
     return QuerySpotMarketsResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QuerySpotMarketsResponse>, I>>(object: I): QuerySpotMarketsResponse {
+  fromPartial<I extends Exact<DeepPartial<QuerySpotMarketsResponse>, I>>(
+    object: I,
+  ): QuerySpotMarketsResponse {
     const message = createBaseQuerySpotMarketsResponse();
-    message.markets = object.markets?.map((e) => SpotMarket.fromPartial(e)) || [];
+    message.markets =
+      object.markets?.map((e) => SpotMarket.fromPartial(e)) || [];
     return message;
   },
 };
@@ -3325,15 +3709,22 @@ function createBaseQuerySpotMarketRequest(): QuerySpotMarketRequest {
 }
 
 export const QuerySpotMarketRequest: MessageFns<QuerySpotMarketRequest> = {
-  encode(message: QuerySpotMarketRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: QuerySpotMarketRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotMarketRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): QuerySpotMarketRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotMarketRequest();
     while (reader.pos < end) {
@@ -3361,8 +3752,8 @@ export const QuerySpotMarketRequest: MessageFns<QuerySpotMarketRequest> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
     };
   },
 
@@ -3374,10 +3765,14 @@ export const QuerySpotMarketRequest: MessageFns<QuerySpotMarketRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QuerySpotMarketRequest>, I>>(base?: I): QuerySpotMarketRequest {
+  create<I extends Exact<DeepPartial<QuerySpotMarketRequest>, I>>(
+    base?: I,
+  ): QuerySpotMarketRequest {
     return QuerySpotMarketRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QuerySpotMarketRequest>, I>>(object: I): QuerySpotMarketRequest {
+  fromPartial<I extends Exact<DeepPartial<QuerySpotMarketRequest>, I>>(
+    object: I,
+  ): QuerySpotMarketRequest {
     const message = createBaseQuerySpotMarketRequest();
     message.marketId = object.marketId ?? "";
     return message;
@@ -3389,15 +3784,22 @@ function createBaseQuerySpotMarketResponse(): QuerySpotMarketResponse {
 }
 
 export const QuerySpotMarketResponse: MessageFns<QuerySpotMarketResponse> = {
-  encode(message: QuerySpotMarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: QuerySpotMarketResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.market !== undefined) {
       SpotMarket.encode(message.market, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): QuerySpotMarketResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotMarketResponse();
     while (reader.pos < end) {
@@ -3421,7 +3823,11 @@ export const QuerySpotMarketResponse: MessageFns<QuerySpotMarketResponse> = {
   },
 
   fromJSON(object: any): QuerySpotMarketResponse {
-    return { market: isSet(object.market) ? SpotMarket.fromJSON(object.market) : undefined };
+    return {
+      market: isSet(object.market)
+        ? SpotMarket.fromJSON(object.market)
+        : undefined,
+    };
   },
 
   toJSON(message: QuerySpotMarketResponse): unknown {
@@ -3432,259 +3838,305 @@ export const QuerySpotMarketResponse: MessageFns<QuerySpotMarketResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QuerySpotMarketResponse>, I>>(base?: I): QuerySpotMarketResponse {
+  create<I extends Exact<DeepPartial<QuerySpotMarketResponse>, I>>(
+    base?: I,
+  ): QuerySpotMarketResponse {
     return QuerySpotMarketResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QuerySpotMarketResponse>, I>>(object: I): QuerySpotMarketResponse {
+  fromPartial<I extends Exact<DeepPartial<QuerySpotMarketResponse>, I>>(
+    object: I,
+  ): QuerySpotMarketResponse {
     const message = createBaseQuerySpotMarketResponse();
-    message.market = (object.market !== undefined && object.market !== null)
-      ? SpotMarket.fromPartial(object.market)
-      : undefined;
+    message.market =
+      object.market !== undefined && object.market !== null
+        ? SpotMarket.fromPartial(object.market)
+        : undefined;
     return message;
   },
 };
 
 function createBaseQuerySpotOrderbookRequest(): QuerySpotOrderbookRequest {
-  return { marketId: "", limit: 0, orderSide: 0, limitCumulativeNotional: "", limitCumulativeQuantity: "" };
+  return {
+    marketId: "",
+    limit: 0,
+    orderSide: 0,
+    limitCumulativeNotional: "",
+    limitCumulativeQuantity: "",
+  };
 }
 
-export const QuerySpotOrderbookRequest: MessageFns<QuerySpotOrderbookRequest> = {
-  encode(message: QuerySpotOrderbookRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.limit !== 0) {
-      writer.uint32(16).uint64(message.limit);
-    }
-    if (message.orderSide !== 0) {
-      writer.uint32(24).int32(message.orderSide);
-    }
-    if (message.limitCumulativeNotional !== "") {
-      writer.uint32(34).string(message.limitCumulativeNotional);
-    }
-    if (message.limitCumulativeQuantity !== "") {
-      writer.uint32(42).string(message.limitCumulativeQuantity);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotOrderbookRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySpotOrderbookRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.limit = longToNumber(reader.uint64());
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.orderSide = reader.int32() as any;
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.limitCumulativeNotional = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.limitCumulativeQuantity = reader.string();
-          continue;
-        }
+export const QuerySpotOrderbookRequest: MessageFns<QuerySpotOrderbookRequest> =
+  {
+    encode(
+      message: QuerySpotOrderbookRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.limit !== 0) {
+        writer.uint32(16).uint64(message.limit);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.orderSide !== 0) {
+        writer.uint32(24).int32(message.orderSide);
+      }
+      if (message.limitCumulativeNotional !== "") {
+        writer.uint32(34).string(message.limitCumulativeNotional);
+      }
+      if (message.limitCumulativeQuantity !== "") {
+        writer.uint32(42).string(message.limitCumulativeQuantity);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QuerySpotOrderbookRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
-      orderSide: isSet(object.orderSide)
-        ? orderSideFromJSON(object.orderSide)
-        : isSet(object.order_side)
-        ? orderSideFromJSON(object.order_side)
-        : 0,
-      limitCumulativeNotional: isSet(object.limitCumulativeNotional)
-        ? globalThis.String(object.limitCumulativeNotional)
-        : isSet(object.limit_cumulative_notional)
-        ? globalThis.String(object.limit_cumulative_notional)
-        : "",
-      limitCumulativeQuantity: isSet(object.limitCumulativeQuantity)
-        ? globalThis.String(object.limitCumulativeQuantity)
-        : isSet(object.limit_cumulative_quantity)
-        ? globalThis.String(object.limit_cumulative_quantity)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySpotOrderbookRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySpotOrderbookRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QuerySpotOrderbookRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.limit !== 0) {
-      obj.limit = Math.round(message.limit);
-    }
-    if (message.orderSide !== 0) {
-      obj.orderSide = orderSideToJSON(message.orderSide);
-    }
-    if (message.limitCumulativeNotional !== "") {
-      obj.limitCumulativeNotional = message.limitCumulativeNotional;
-    }
-    if (message.limitCumulativeQuantity !== "") {
-      obj.limitCumulativeQuantity = message.limitCumulativeQuantity;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QuerySpotOrderbookRequest>, I>>(base?: I): QuerySpotOrderbookRequest {
-    return QuerySpotOrderbookRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySpotOrderbookRequest>, I>>(object: I): QuerySpotOrderbookRequest {
-    const message = createBaseQuerySpotOrderbookRequest();
-    message.marketId = object.marketId ?? "";
-    message.limit = object.limit ?? 0;
-    message.orderSide = object.orderSide ?? 0;
-    message.limitCumulativeNotional = object.limitCumulativeNotional ?? "";
-    message.limitCumulativeQuantity = object.limitCumulativeQuantity ?? "";
-    return message;
-  },
-};
+            message.limit = longToNumber(reader.uint64());
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.orderSide = reader.int32() as any;
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.limitCumulativeNotional = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.limitCumulativeQuantity = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySpotOrderbookRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
+        orderSide: isSet(object.orderSide)
+          ? orderSideFromJSON(object.orderSide)
+          : isSet(object.order_side)
+            ? orderSideFromJSON(object.order_side)
+            : 0,
+        limitCumulativeNotional: isSet(object.limitCumulativeNotional)
+          ? globalThis.String(object.limitCumulativeNotional)
+          : isSet(object.limit_cumulative_notional)
+            ? globalThis.String(object.limit_cumulative_notional)
+            : "",
+        limitCumulativeQuantity: isSet(object.limitCumulativeQuantity)
+          ? globalThis.String(object.limitCumulativeQuantity)
+          : isSet(object.limit_cumulative_quantity)
+            ? globalThis.String(object.limit_cumulative_quantity)
+            : "",
+      };
+    },
+
+    toJSON(message: QuerySpotOrderbookRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.limit !== 0) {
+        obj.limit = Math.round(message.limit);
+      }
+      if (message.orderSide !== 0) {
+        obj.orderSide = orderSideToJSON(message.orderSide);
+      }
+      if (message.limitCumulativeNotional !== "") {
+        obj.limitCumulativeNotional = message.limitCumulativeNotional;
+      }
+      if (message.limitCumulativeQuantity !== "") {
+        obj.limitCumulativeQuantity = message.limitCumulativeQuantity;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QuerySpotOrderbookRequest>, I>>(
+      base?: I,
+    ): QuerySpotOrderbookRequest {
+      return QuerySpotOrderbookRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QuerySpotOrderbookRequest>, I>>(
+      object: I,
+    ): QuerySpotOrderbookRequest {
+      const message = createBaseQuerySpotOrderbookRequest();
+      message.marketId = object.marketId ?? "";
+      message.limit = object.limit ?? 0;
+      message.orderSide = object.orderSide ?? 0;
+      message.limitCumulativeNotional = object.limitCumulativeNotional ?? "";
+      message.limitCumulativeQuantity = object.limitCumulativeQuantity ?? "";
+      return message;
+    },
+  };
 
 function createBaseQuerySpotOrderbookResponse(): QuerySpotOrderbookResponse {
   return { buysPriceLevel: [], sellsPriceLevel: [] };
 }
 
-export const QuerySpotOrderbookResponse: MessageFns<QuerySpotOrderbookResponse> = {
-  encode(message: QuerySpotOrderbookResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.buysPriceLevel) {
-      Level.encode(v!, writer.uint32(10).fork()).join();
-    }
-    for (const v of message.sellsPriceLevel) {
-      Level.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotOrderbookResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySpotOrderbookResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.buysPriceLevel.push(Level.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.sellsPriceLevel.push(Level.decode(reader, reader.uint32()));
-          continue;
-        }
+export const QuerySpotOrderbookResponse: MessageFns<QuerySpotOrderbookResponse> =
+  {
+    encode(
+      message: QuerySpotOrderbookResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.buysPriceLevel) {
+        Level.encode(v!, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.sellsPriceLevel) {
+        Level.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QuerySpotOrderbookResponse {
-    return {
-      buysPriceLevel: globalThis.Array.isArray(object?.buysPriceLevel)
-        ? object.buysPriceLevel.map((e: any) => Level.fromJSON(e))
-        : globalThis.Array.isArray(object?.buys_price_level)
-        ? object.buys_price_level.map((e: any) => Level.fromJSON(e))
-        : [],
-      sellsPriceLevel: globalThis.Array.isArray(object?.sellsPriceLevel)
-        ? object.sellsPriceLevel.map((e: any) => Level.fromJSON(e))
-        : globalThis.Array.isArray(object?.sells_price_level)
-        ? object.sells_price_level.map((e: any) => Level.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySpotOrderbookResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySpotOrderbookResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QuerySpotOrderbookResponse): unknown {
-    const obj: any = {};
-    if (message.buysPriceLevel?.length) {
-      obj.buysPriceLevel = message.buysPriceLevel.map((e) => Level.toJSON(e));
-    }
-    if (message.sellsPriceLevel?.length) {
-      obj.sellsPriceLevel = message.sellsPriceLevel.map((e) => Level.toJSON(e));
-    }
-    return obj;
-  },
+            message.buysPriceLevel.push(Level.decode(reader, reader.uint32()));
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QuerySpotOrderbookResponse>, I>>(base?: I): QuerySpotOrderbookResponse {
-    return QuerySpotOrderbookResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySpotOrderbookResponse>, I>>(object: I): QuerySpotOrderbookResponse {
-    const message = createBaseQuerySpotOrderbookResponse();
-    message.buysPriceLevel = object.buysPriceLevel?.map((e) => Level.fromPartial(e)) || [];
-    message.sellsPriceLevel = object.sellsPriceLevel?.map((e) => Level.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.sellsPriceLevel.push(Level.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySpotOrderbookResponse {
+      return {
+        buysPriceLevel: globalThis.Array.isArray(object?.buysPriceLevel)
+          ? object.buysPriceLevel.map((e: any) => Level.fromJSON(e))
+          : globalThis.Array.isArray(object?.buys_price_level)
+            ? object.buys_price_level.map((e: any) => Level.fromJSON(e))
+            : [],
+        sellsPriceLevel: globalThis.Array.isArray(object?.sellsPriceLevel)
+          ? object.sellsPriceLevel.map((e: any) => Level.fromJSON(e))
+          : globalThis.Array.isArray(object?.sells_price_level)
+            ? object.sells_price_level.map((e: any) => Level.fromJSON(e))
+            : [],
+      };
+    },
+
+    toJSON(message: QuerySpotOrderbookResponse): unknown {
+      const obj: any = {};
+      if (message.buysPriceLevel?.length) {
+        obj.buysPriceLevel = message.buysPriceLevel.map((e) => Level.toJSON(e));
+      }
+      if (message.sellsPriceLevel?.length) {
+        obj.sellsPriceLevel = message.sellsPriceLevel.map((e) =>
+          Level.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QuerySpotOrderbookResponse>, I>>(
+      base?: I,
+    ): QuerySpotOrderbookResponse {
+      return QuerySpotOrderbookResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QuerySpotOrderbookResponse>, I>>(
+      object: I,
+    ): QuerySpotOrderbookResponse {
+      const message = createBaseQuerySpotOrderbookResponse();
+      message.buysPriceLevel =
+        object.buysPriceLevel?.map((e) => Level.fromPartial(e)) || [];
+      message.sellsPriceLevel =
+        object.sellsPriceLevel?.map((e) => Level.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseFullSpotMarket(): FullSpotMarket {
   return { market: undefined, midPriceAndTob: undefined };
 }
 
 export const FullSpotMarket: MessageFns<FullSpotMarket> = {
-  encode(message: FullSpotMarket, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FullSpotMarket,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.market !== undefined) {
       SpotMarket.encode(message.market, writer.uint32(10).fork()).join();
     }
     if (message.midPriceAndTob !== undefined) {
-      MidPriceAndTOB.encode(message.midPriceAndTob, writer.uint32(18).fork()).join();
+      MidPriceAndTOB.encode(
+        message.midPriceAndTob,
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): FullSpotMarket {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFullSpotMarket();
     while (reader.pos < end) {
@@ -3703,7 +4155,10 @@ export const FullSpotMarket: MessageFns<FullSpotMarket> = {
             break;
           }
 
-          message.midPriceAndTob = MidPriceAndTOB.decode(reader, reader.uint32());
+          message.midPriceAndTob = MidPriceAndTOB.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -3717,12 +4172,14 @@ export const FullSpotMarket: MessageFns<FullSpotMarket> = {
 
   fromJSON(object: any): FullSpotMarket {
     return {
-      market: isSet(object.market) ? SpotMarket.fromJSON(object.market) : undefined,
+      market: isSet(object.market)
+        ? SpotMarket.fromJSON(object.market)
+        : undefined,
       midPriceAndTob: isSet(object.midPriceAndTob)
         ? MidPriceAndTOB.fromJSON(object.midPriceAndTob)
         : isSet(object.mid_price_and_tob)
-        ? MidPriceAndTOB.fromJSON(object.mid_price_and_tob)
-        : undefined,
+          ? MidPriceAndTOB.fromJSON(object.mid_price_and_tob)
+          : undefined,
     };
   },
 
@@ -3737,17 +4194,23 @@ export const FullSpotMarket: MessageFns<FullSpotMarket> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FullSpotMarket>, I>>(base?: I): FullSpotMarket {
+  create<I extends Exact<DeepPartial<FullSpotMarket>, I>>(
+    base?: I,
+  ): FullSpotMarket {
     return FullSpotMarket.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FullSpotMarket>, I>>(object: I): FullSpotMarket {
+  fromPartial<I extends Exact<DeepPartial<FullSpotMarket>, I>>(
+    object: I,
+  ): FullSpotMarket {
     const message = createBaseFullSpotMarket();
-    message.market = (object.market !== undefined && object.market !== null)
-      ? SpotMarket.fromPartial(object.market)
-      : undefined;
-    message.midPriceAndTob = (object.midPriceAndTob !== undefined && object.midPriceAndTob !== null)
-      ? MidPriceAndTOB.fromPartial(object.midPriceAndTob)
-      : undefined;
+    message.market =
+      object.market !== undefined && object.market !== null
+        ? SpotMarket.fromPartial(object.market)
+        : undefined;
+    message.midPriceAndTob =
+      object.midPriceAndTob !== undefined && object.midPriceAndTob !== null
+        ? MidPriceAndTOB.fromPartial(object.midPriceAndTob)
+        : undefined;
     return message;
   },
 };
@@ -3756,656 +4219,767 @@ function createBaseQueryFullSpotMarketsRequest(): QueryFullSpotMarketsRequest {
   return { status: "", marketIds: [], withMidPriceAndTob: false };
 }
 
-export const QueryFullSpotMarketsRequest: MessageFns<QueryFullSpotMarketsRequest> = {
-  encode(message: QueryFullSpotMarketsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.status !== "") {
-      writer.uint32(10).string(message.status);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    if (message.withMidPriceAndTob !== false) {
-      writer.uint32(24).bool(message.withMidPriceAndTob);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFullSpotMarketsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFullSpotMarketsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.status = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.withMidPriceAndTob = reader.bool();
-          continue;
-        }
+export const QueryFullSpotMarketsRequest: MessageFns<QueryFullSpotMarketsRequest> =
+  {
+    encode(
+      message: QueryFullSpotMarketsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.status !== "") {
+        writer.uint32(10).string(message.status);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.withMidPriceAndTob !== false) {
+        writer.uint32(24).bool(message.withMidPriceAndTob);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QueryFullSpotMarketsRequest {
-    return {
-      status: isSet(object.status) ? globalThis.String(object.status) : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-      withMidPriceAndTob: isSet(object.withMidPriceAndTob)
-        ? globalThis.Boolean(object.withMidPriceAndTob)
-        : isSet(object.with_mid_price_and_tob)
-        ? globalThis.Boolean(object.with_mid_price_and_tob)
-        : false,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFullSpotMarketsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFullSpotMarketsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryFullSpotMarketsRequest): unknown {
-    const obj: any = {};
-    if (message.status !== "") {
-      obj.status = message.status;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    if (message.withMidPriceAndTob !== false) {
-      obj.withMidPriceAndTob = message.withMidPriceAndTob;
-    }
-    return obj;
-  },
+            message.status = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryFullSpotMarketsRequest>, I>>(base?: I): QueryFullSpotMarketsRequest {
-    return QueryFullSpotMarketsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFullSpotMarketsRequest>, I>>(object: I): QueryFullSpotMarketsRequest {
-    const message = createBaseQueryFullSpotMarketsRequest();
-    message.status = object.status ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    message.withMidPriceAndTob = object.withMidPriceAndTob ?? false;
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.withMidPriceAndTob = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryFullSpotMarketsRequest {
+      return {
+        status: isSet(object.status) ? globalThis.String(object.status) : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+        withMidPriceAndTob: isSet(object.withMidPriceAndTob)
+          ? globalThis.Boolean(object.withMidPriceAndTob)
+          : isSet(object.with_mid_price_and_tob)
+            ? globalThis.Boolean(object.with_mid_price_and_tob)
+            : false,
+      };
+    },
+
+    toJSON(message: QueryFullSpotMarketsRequest): unknown {
+      const obj: any = {};
+      if (message.status !== "") {
+        obj.status = message.status;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      if (message.withMidPriceAndTob !== false) {
+        obj.withMidPriceAndTob = message.withMidPriceAndTob;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryFullSpotMarketsRequest>, I>>(
+      base?: I,
+    ): QueryFullSpotMarketsRequest {
+      return QueryFullSpotMarketsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryFullSpotMarketsRequest>, I>>(
+      object: I,
+    ): QueryFullSpotMarketsRequest {
+      const message = createBaseQueryFullSpotMarketsRequest();
+      message.status = object.status ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      message.withMidPriceAndTob = object.withMidPriceAndTob ?? false;
+      return message;
+    },
+  };
 
 function createBaseQueryFullSpotMarketsResponse(): QueryFullSpotMarketsResponse {
   return { markets: [] };
 }
 
-export const QueryFullSpotMarketsResponse: MessageFns<QueryFullSpotMarketsResponse> = {
-  encode(message: QueryFullSpotMarketsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.markets) {
-      FullSpotMarket.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryFullSpotMarketsResponse: MessageFns<QueryFullSpotMarketsResponse> =
+  {
+    encode(
+      message: QueryFullSpotMarketsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.markets) {
+        FullSpotMarket.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFullSpotMarketsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFullSpotMarketsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFullSpotMarketsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFullSpotMarketsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.markets.push(
+              FullSpotMarket.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.markets.push(FullSpotMarket.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryFullSpotMarketsResponse {
+      return {
+        markets: globalThis.Array.isArray(object?.markets)
+          ? object.markets.map((e: any) => FullSpotMarket.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryFullSpotMarketsResponse): unknown {
+      const obj: any = {};
+      if (message.markets?.length) {
+        obj.markets = message.markets.map((e) => FullSpotMarket.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryFullSpotMarketsResponse {
-    return {
-      markets: globalThis.Array.isArray(object?.markets)
-        ? object.markets.map((e: any) => FullSpotMarket.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryFullSpotMarketsResponse): unknown {
-    const obj: any = {};
-    if (message.markets?.length) {
-      obj.markets = message.markets.map((e) => FullSpotMarket.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryFullSpotMarketsResponse>, I>>(base?: I): QueryFullSpotMarketsResponse {
-    return QueryFullSpotMarketsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFullSpotMarketsResponse>, I>>(object: I): QueryFullSpotMarketsResponse {
-    const message = createBaseQueryFullSpotMarketsResponse();
-    message.markets = object.markets?.map((e) => FullSpotMarket.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryFullSpotMarketsResponse>, I>>(
+      base?: I,
+    ): QueryFullSpotMarketsResponse {
+      return QueryFullSpotMarketsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryFullSpotMarketsResponse>, I>>(
+      object: I,
+    ): QueryFullSpotMarketsResponse {
+      const message = createBaseQueryFullSpotMarketsResponse();
+      message.markets =
+        object.markets?.map((e) => FullSpotMarket.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryFullSpotMarketRequest(): QueryFullSpotMarketRequest {
   return { marketId: "", withMidPriceAndTob: false };
 }
 
-export const QueryFullSpotMarketRequest: MessageFns<QueryFullSpotMarketRequest> = {
-  encode(message: QueryFullSpotMarketRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.withMidPriceAndTob !== false) {
-      writer.uint32(16).bool(message.withMidPriceAndTob);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFullSpotMarketRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFullSpotMarketRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.withMidPriceAndTob = reader.bool();
-          continue;
-        }
+export const QueryFullSpotMarketRequest: MessageFns<QueryFullSpotMarketRequest> =
+  {
+    encode(
+      message: QueryFullSpotMarketRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.withMidPriceAndTob !== false) {
+        writer.uint32(16).bool(message.withMidPriceAndTob);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryFullSpotMarketRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      withMidPriceAndTob: isSet(object.withMidPriceAndTob)
-        ? globalThis.Boolean(object.withMidPriceAndTob)
-        : isSet(object.with_mid_price_and_tob)
-        ? globalThis.Boolean(object.with_mid_price_and_tob)
-        : false,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFullSpotMarketRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFullSpotMarketRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryFullSpotMarketRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.withMidPriceAndTob !== false) {
-      obj.withMidPriceAndTob = message.withMidPriceAndTob;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryFullSpotMarketRequest>, I>>(base?: I): QueryFullSpotMarketRequest {
-    return QueryFullSpotMarketRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFullSpotMarketRequest>, I>>(object: I): QueryFullSpotMarketRequest {
-    const message = createBaseQueryFullSpotMarketRequest();
-    message.marketId = object.marketId ?? "";
-    message.withMidPriceAndTob = object.withMidPriceAndTob ?? false;
-    return message;
-  },
-};
+            message.withMidPriceAndTob = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryFullSpotMarketRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        withMidPriceAndTob: isSet(object.withMidPriceAndTob)
+          ? globalThis.Boolean(object.withMidPriceAndTob)
+          : isSet(object.with_mid_price_and_tob)
+            ? globalThis.Boolean(object.with_mid_price_and_tob)
+            : false,
+      };
+    },
+
+    toJSON(message: QueryFullSpotMarketRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.withMidPriceAndTob !== false) {
+        obj.withMidPriceAndTob = message.withMidPriceAndTob;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryFullSpotMarketRequest>, I>>(
+      base?: I,
+    ): QueryFullSpotMarketRequest {
+      return QueryFullSpotMarketRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryFullSpotMarketRequest>, I>>(
+      object: I,
+    ): QueryFullSpotMarketRequest {
+      const message = createBaseQueryFullSpotMarketRequest();
+      message.marketId = object.marketId ?? "";
+      message.withMidPriceAndTob = object.withMidPriceAndTob ?? false;
+      return message;
+    },
+  };
 
 function createBaseQueryFullSpotMarketResponse(): QueryFullSpotMarketResponse {
   return { market: undefined };
 }
 
-export const QueryFullSpotMarketResponse: MessageFns<QueryFullSpotMarketResponse> = {
-  encode(message: QueryFullSpotMarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.market !== undefined) {
-      FullSpotMarket.encode(message.market, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryFullSpotMarketResponse: MessageFns<QueryFullSpotMarketResponse> =
+  {
+    encode(
+      message: QueryFullSpotMarketResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.market !== undefined) {
+        FullSpotMarket.encode(message.market, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFullSpotMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFullSpotMarketResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFullSpotMarketResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFullSpotMarketResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.market = FullSpotMarket.decode(reader, reader.uint32());
+            continue;
           }
-
-          message.market = FullSpotMarket.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryFullSpotMarketResponse {
+      return {
+        market: isSet(object.market)
+          ? FullSpotMarket.fromJSON(object.market)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QueryFullSpotMarketResponse): unknown {
+      const obj: any = {};
+      if (message.market !== undefined) {
+        obj.market = FullSpotMarket.toJSON(message.market);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryFullSpotMarketResponse {
-    return { market: isSet(object.market) ? FullSpotMarket.fromJSON(object.market) : undefined };
-  },
-
-  toJSON(message: QueryFullSpotMarketResponse): unknown {
-    const obj: any = {};
-    if (message.market !== undefined) {
-      obj.market = FullSpotMarket.toJSON(message.market);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryFullSpotMarketResponse>, I>>(base?: I): QueryFullSpotMarketResponse {
-    return QueryFullSpotMarketResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFullSpotMarketResponse>, I>>(object: I): QueryFullSpotMarketResponse {
-    const message = createBaseQueryFullSpotMarketResponse();
-    message.market = (object.market !== undefined && object.market !== null)
-      ? FullSpotMarket.fromPartial(object.market)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryFullSpotMarketResponse>, I>>(
+      base?: I,
+    ): QueryFullSpotMarketResponse {
+      return QueryFullSpotMarketResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryFullSpotMarketResponse>, I>>(
+      object: I,
+    ): QueryFullSpotMarketResponse {
+      const message = createBaseQueryFullSpotMarketResponse();
+      message.market =
+        object.market !== undefined && object.market !== null
+          ? FullSpotMarket.fromPartial(object.market)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQuerySpotOrdersByHashesRequest(): QuerySpotOrdersByHashesRequest {
   return { marketId: "", subaccountId: "", orderHashes: [] };
 }
 
-export const QuerySpotOrdersByHashesRequest: MessageFns<QuerySpotOrdersByHashesRequest> = {
-  encode(message: QuerySpotOrdersByHashesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(18).string(message.subaccountId);
-    }
-    for (const v of message.orderHashes) {
-      writer.uint32(26).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotOrdersByHashesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySpotOrdersByHashesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.orderHashes.push(reader.string());
-          continue;
-        }
+export const QuerySpotOrdersByHashesRequest: MessageFns<QuerySpotOrdersByHashesRequest> =
+  {
+    encode(
+      message: QuerySpotOrdersByHashesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccountId !== "") {
+        writer.uint32(18).string(message.subaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.orderHashes) {
+        writer.uint32(26).string(v!);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QuerySpotOrdersByHashesRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      orderHashes: globalThis.Array.isArray(object?.orderHashes)
-        ? object.orderHashes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.order_hashes)
-        ? object.order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySpotOrdersByHashesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySpotOrdersByHashesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QuerySpotOrdersByHashesRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.orderHashes?.length) {
-      obj.orderHashes = message.orderHashes;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QuerySpotOrdersByHashesRequest>, I>>(base?: I): QuerySpotOrdersByHashesRequest {
-    return QuerySpotOrdersByHashesRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySpotOrdersByHashesRequest>, I>>(
-    object: I,
-  ): QuerySpotOrdersByHashesRequest {
-    const message = createBaseQuerySpotOrdersByHashesRequest();
-    message.marketId = object.marketId ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    message.orderHashes = object.orderHashes?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.orderHashes.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySpotOrdersByHashesRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        orderHashes: globalThis.Array.isArray(object?.orderHashes)
+          ? object.orderHashes.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.order_hashes)
+            ? object.order_hashes.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: QuerySpotOrdersByHashesRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.orderHashes?.length) {
+        obj.orderHashes = message.orderHashes;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QuerySpotOrdersByHashesRequest>, I>>(
+      base?: I,
+    ): QuerySpotOrdersByHashesRequest {
+      return QuerySpotOrdersByHashesRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySpotOrdersByHashesRequest>, I>,
+    >(object: I): QuerySpotOrdersByHashesRequest {
+      const message = createBaseQuerySpotOrdersByHashesRequest();
+      message.marketId = object.marketId ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      message.orderHashes = object.orderHashes?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseQuerySpotOrdersByHashesResponse(): QuerySpotOrdersByHashesResponse {
   return { orders: [] };
 }
 
-export const QuerySpotOrdersByHashesResponse: MessageFns<QuerySpotOrdersByHashesResponse> = {
-  encode(message: QuerySpotOrdersByHashesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.orders) {
-      TrimmedSpotLimitOrder.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QuerySpotOrdersByHashesResponse: MessageFns<QuerySpotOrdersByHashesResponse> =
+  {
+    encode(
+      message: QuerySpotOrdersByHashesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.orders) {
+        TrimmedSpotLimitOrder.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotOrdersByHashesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySpotOrdersByHashesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySpotOrdersByHashesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySpotOrdersByHashesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.orders.push(
+              TrimmedSpotLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.orders.push(TrimmedSpotLimitOrder.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySpotOrdersByHashesResponse {
+      return {
+        orders: globalThis.Array.isArray(object?.orders)
+          ? object.orders.map((e: any) => TrimmedSpotLimitOrder.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QuerySpotOrdersByHashesResponse): unknown {
+      const obj: any = {};
+      if (message.orders?.length) {
+        obj.orders = message.orders.map((e) => TrimmedSpotLimitOrder.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySpotOrdersByHashesResponse {
-    return {
-      orders: globalThis.Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => TrimmedSpotLimitOrder.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QuerySpotOrdersByHashesResponse): unknown {
-    const obj: any = {};
-    if (message.orders?.length) {
-      obj.orders = message.orders.map((e) => TrimmedSpotLimitOrder.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySpotOrdersByHashesResponse>, I>>(base?: I): QuerySpotOrdersByHashesResponse {
-    return QuerySpotOrdersByHashesResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySpotOrdersByHashesResponse>, I>>(
-    object: I,
-  ): QuerySpotOrdersByHashesResponse {
-    const message = createBaseQuerySpotOrdersByHashesResponse();
-    message.orders = object.orders?.map((e) => TrimmedSpotLimitOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QuerySpotOrdersByHashesResponse>, I>>(
+      base?: I,
+    ): QuerySpotOrdersByHashesResponse {
+      return QuerySpotOrdersByHashesResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySpotOrdersByHashesResponse>, I>,
+    >(object: I): QuerySpotOrdersByHashesResponse {
+      const message = createBaseQuerySpotOrdersByHashesResponse();
+      message.orders =
+        object.orders?.map((e) => TrimmedSpotLimitOrder.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryTraderSpotOrdersRequest(): QueryTraderSpotOrdersRequest {
   return { marketId: "", subaccountId: "" };
 }
 
-export const QueryTraderSpotOrdersRequest: MessageFns<QueryTraderSpotOrdersRequest> = {
-  encode(message: QueryTraderSpotOrdersRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(18).string(message.subaccountId);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTraderSpotOrdersRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTraderSpotOrdersRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
+export const QueryTraderSpotOrdersRequest: MessageFns<QueryTraderSpotOrdersRequest> =
+  {
+    encode(
+      message: QueryTraderSpotOrdersRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccountId !== "") {
+        writer.uint32(18).string(message.subaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryTraderSpotOrdersRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTraderSpotOrdersRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryTraderSpotOrdersRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryTraderSpotOrdersRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryTraderSpotOrdersRequest>, I>>(base?: I): QueryTraderSpotOrdersRequest {
-    return QueryTraderSpotOrdersRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTraderSpotOrdersRequest>, I>>(object: I): QueryTraderSpotOrdersRequest {
-    const message = createBaseQueryTraderSpotOrdersRequest();
-    message.marketId = object.marketId ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    return message;
-  },
-};
+            message.subaccountId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryTraderSpotOrdersRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryTraderSpotOrdersRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryTraderSpotOrdersRequest>, I>>(
+      base?: I,
+    ): QueryTraderSpotOrdersRequest {
+      return QueryTraderSpotOrdersRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryTraderSpotOrdersRequest>, I>>(
+      object: I,
+    ): QueryTraderSpotOrdersRequest {
+      const message = createBaseQueryTraderSpotOrdersRequest();
+      message.marketId = object.marketId ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryAccountAddressSpotOrdersRequest(): QueryAccountAddressSpotOrdersRequest {
   return { marketId: "", accountAddress: "" };
 }
 
-export const QueryAccountAddressSpotOrdersRequest: MessageFns<QueryAccountAddressSpotOrdersRequest> = {
-  encode(message: QueryAccountAddressSpotOrdersRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.accountAddress !== "") {
-      writer.uint32(18).string(message.accountAddress);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountAddressSpotOrdersRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAccountAddressSpotOrdersRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.accountAddress = reader.string();
-          continue;
-        }
+export const QueryAccountAddressSpotOrdersRequest: MessageFns<QueryAccountAddressSpotOrdersRequest> =
+  {
+    encode(
+      message: QueryAccountAddressSpotOrdersRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.accountAddress !== "") {
+        writer.uint32(18).string(message.accountAddress);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryAccountAddressSpotOrdersRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      accountAddress: isSet(object.accountAddress)
-        ? globalThis.String(object.accountAddress)
-        : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAccountAddressSpotOrdersRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAccountAddressSpotOrdersRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryAccountAddressSpotOrdersRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.accountAddress !== "") {
-      obj.accountAddress = message.accountAddress;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryAccountAddressSpotOrdersRequest>, I>>(
-    base?: I,
-  ): QueryAccountAddressSpotOrdersRequest {
-    return QueryAccountAddressSpotOrdersRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAccountAddressSpotOrdersRequest>, I>>(
-    object: I,
-  ): QueryAccountAddressSpotOrdersRequest {
-    const message = createBaseQueryAccountAddressSpotOrdersRequest();
-    message.marketId = object.marketId ?? "";
-    message.accountAddress = object.accountAddress ?? "";
-    return message;
-  },
-};
+            message.accountAddress = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryAccountAddressSpotOrdersRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        accountAddress: isSet(object.accountAddress)
+          ? globalThis.String(object.accountAddress)
+          : isSet(object.account_address)
+            ? globalThis.String(object.account_address)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryAccountAddressSpotOrdersRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.accountAddress !== "") {
+        obj.accountAddress = message.accountAddress;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<QueryAccountAddressSpotOrdersRequest>, I>,
+    >(base?: I): QueryAccountAddressSpotOrdersRequest {
+      return QueryAccountAddressSpotOrdersRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryAccountAddressSpotOrdersRequest>, I>,
+    >(object: I): QueryAccountAddressSpotOrdersRequest {
+      const message = createBaseQueryAccountAddressSpotOrdersRequest();
+      message.marketId = object.marketId ?? "";
+      message.accountAddress = object.accountAddress ?? "";
+      return message;
+    },
+  };
 
 function createBaseTrimmedSpotLimitOrder(): TrimmedSpotLimitOrder {
-  return { price: "", quantity: "", fillable: "", isBuy: false, orderHash: "", cid: "" };
+  return {
+    price: "",
+    quantity: "",
+    fillable: "",
+    isBuy: false,
+    orderHash: "",
+    cid: "",
+  };
 }
 
 export const TrimmedSpotLimitOrder: MessageFns<TrimmedSpotLimitOrder> = {
-  encode(message: TrimmedSpotLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TrimmedSpotLimitOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -4427,8 +5001,12 @@ export const TrimmedSpotLimitOrder: MessageFns<TrimmedSpotLimitOrder> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TrimmedSpotLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TrimmedSpotLimitOrder {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTrimmedSpotLimitOrder();
     while (reader.pos < end) {
@@ -4494,14 +5072,18 @@ export const TrimmedSpotLimitOrder: MessageFns<TrimmedSpotLimitOrder> = {
   fromJSON(object: any): TrimmedSpotLimitOrder {
     return {
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
-      fillable: isSet(object.fillable) ? globalThis.String(object.fillable) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
+      fillable: isSet(object.fillable)
+        ? globalThis.String(object.fillable)
+        : "",
       isBuy: isSet(object.isBuy) ? globalThis.Boolean(object.isBuy) : false,
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -4529,10 +5111,14 @@ export const TrimmedSpotLimitOrder: MessageFns<TrimmedSpotLimitOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TrimmedSpotLimitOrder>, I>>(base?: I): TrimmedSpotLimitOrder {
+  create<I extends Exact<DeepPartial<TrimmedSpotLimitOrder>, I>>(
+    base?: I,
+  ): TrimmedSpotLimitOrder {
     return TrimmedSpotLimitOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TrimmedSpotLimitOrder>, I>>(object: I): TrimmedSpotLimitOrder {
+  fromPartial<I extends Exact<DeepPartial<TrimmedSpotLimitOrder>, I>>(
+    object: I,
+  ): TrimmedSpotLimitOrder {
     const message = createBaseTrimmedSpotLimitOrder();
     message.price = object.price ?? "";
     message.quantity = object.quantity ?? "";
@@ -4548,1741 +5134,2006 @@ function createBaseQueryTraderSpotOrdersResponse(): QueryTraderSpotOrdersRespons
   return { orders: [] };
 }
 
-export const QueryTraderSpotOrdersResponse: MessageFns<QueryTraderSpotOrdersResponse> = {
-  encode(message: QueryTraderSpotOrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.orders) {
-      TrimmedSpotLimitOrder.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryTraderSpotOrdersResponse: MessageFns<QueryTraderSpotOrdersResponse> =
+  {
+    encode(
+      message: QueryTraderSpotOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.orders) {
+        TrimmedSpotLimitOrder.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTraderSpotOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTraderSpotOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTraderSpotOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryTraderSpotOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.orders.push(
+              TrimmedSpotLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.orders.push(TrimmedSpotLimitOrder.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryTraderSpotOrdersResponse {
+      return {
+        orders: globalThis.Array.isArray(object?.orders)
+          ? object.orders.map((e: any) => TrimmedSpotLimitOrder.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryTraderSpotOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.orders?.length) {
+        obj.orders = message.orders.map((e) => TrimmedSpotLimitOrder.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryTraderSpotOrdersResponse {
-    return {
-      orders: globalThis.Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => TrimmedSpotLimitOrder.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryTraderSpotOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.orders?.length) {
-      obj.orders = message.orders.map((e) => TrimmedSpotLimitOrder.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryTraderSpotOrdersResponse>, I>>(base?: I): QueryTraderSpotOrdersResponse {
-    return QueryTraderSpotOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTraderSpotOrdersResponse>, I>>(
-    object: I,
-  ): QueryTraderSpotOrdersResponse {
-    const message = createBaseQueryTraderSpotOrdersResponse();
-    message.orders = object.orders?.map((e) => TrimmedSpotLimitOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryTraderSpotOrdersResponse>, I>>(
+      base?: I,
+    ): QueryTraderSpotOrdersResponse {
+      return QueryTraderSpotOrdersResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryTraderSpotOrdersResponse>, I>>(
+      object: I,
+    ): QueryTraderSpotOrdersResponse {
+      const message = createBaseQueryTraderSpotOrdersResponse();
+      message.orders =
+        object.orders?.map((e) => TrimmedSpotLimitOrder.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryAccountAddressSpotOrdersResponse(): QueryAccountAddressSpotOrdersResponse {
   return { orders: [] };
 }
 
-export const QueryAccountAddressSpotOrdersResponse: MessageFns<QueryAccountAddressSpotOrdersResponse> = {
-  encode(message: QueryAccountAddressSpotOrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.orders) {
-      TrimmedSpotLimitOrder.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryAccountAddressSpotOrdersResponse: MessageFns<QueryAccountAddressSpotOrdersResponse> =
+  {
+    encode(
+      message: QueryAccountAddressSpotOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.orders) {
+        TrimmedSpotLimitOrder.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountAddressSpotOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAccountAddressSpotOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAccountAddressSpotOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAccountAddressSpotOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.orders.push(
+              TrimmedSpotLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.orders.push(TrimmedSpotLimitOrder.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryAccountAddressSpotOrdersResponse {
+      return {
+        orders: globalThis.Array.isArray(object?.orders)
+          ? object.orders.map((e: any) => TrimmedSpotLimitOrder.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryAccountAddressSpotOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.orders?.length) {
+        obj.orders = message.orders.map((e) => TrimmedSpotLimitOrder.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryAccountAddressSpotOrdersResponse {
-    return {
-      orders: globalThis.Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => TrimmedSpotLimitOrder.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryAccountAddressSpotOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.orders?.length) {
-      obj.orders = message.orders.map((e) => TrimmedSpotLimitOrder.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryAccountAddressSpotOrdersResponse>, I>>(
-    base?: I,
-  ): QueryAccountAddressSpotOrdersResponse {
-    return QueryAccountAddressSpotOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAccountAddressSpotOrdersResponse>, I>>(
-    object: I,
-  ): QueryAccountAddressSpotOrdersResponse {
-    const message = createBaseQueryAccountAddressSpotOrdersResponse();
-    message.orders = object.orders?.map((e) => TrimmedSpotLimitOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryAccountAddressSpotOrdersResponse>, I>,
+    >(base?: I): QueryAccountAddressSpotOrdersResponse {
+      return QueryAccountAddressSpotOrdersResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryAccountAddressSpotOrdersResponse>, I>,
+    >(object: I): QueryAccountAddressSpotOrdersResponse {
+      const message = createBaseQueryAccountAddressSpotOrdersResponse();
+      message.orders =
+        object.orders?.map((e) => TrimmedSpotLimitOrder.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQuerySpotMidPriceAndTOBRequest(): QuerySpotMidPriceAndTOBRequest {
   return { marketId: "" };
 }
 
-export const QuerySpotMidPriceAndTOBRequest: MessageFns<QuerySpotMidPriceAndTOBRequest> = {
-  encode(message: QuerySpotMidPriceAndTOBRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QuerySpotMidPriceAndTOBRequest: MessageFns<QuerySpotMidPriceAndTOBRequest> =
+  {
+    encode(
+      message: QuerySpotMidPriceAndTOBRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotMidPriceAndTOBRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySpotMidPriceAndTOBRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySpotMidPriceAndTOBRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySpotMidPriceAndTOBRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySpotMidPriceAndTOBRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QuerySpotMidPriceAndTOBRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySpotMidPriceAndTOBRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QuerySpotMidPriceAndTOBRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySpotMidPriceAndTOBRequest>, I>>(base?: I): QuerySpotMidPriceAndTOBRequest {
-    return QuerySpotMidPriceAndTOBRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySpotMidPriceAndTOBRequest>, I>>(
-    object: I,
-  ): QuerySpotMidPriceAndTOBRequest {
-    const message = createBaseQuerySpotMidPriceAndTOBRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QuerySpotMidPriceAndTOBRequest>, I>>(
+      base?: I,
+    ): QuerySpotMidPriceAndTOBRequest {
+      return QuerySpotMidPriceAndTOBRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySpotMidPriceAndTOBRequest>, I>,
+    >(object: I): QuerySpotMidPriceAndTOBRequest {
+      const message = createBaseQuerySpotMidPriceAndTOBRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQuerySpotMidPriceAndTOBResponse(): QuerySpotMidPriceAndTOBResponse {
   return { midPrice: "", bestBuyPrice: "", bestSellPrice: "" };
 }
 
-export const QuerySpotMidPriceAndTOBResponse: MessageFns<QuerySpotMidPriceAndTOBResponse> = {
-  encode(message: QuerySpotMidPriceAndTOBResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.midPrice !== "") {
-      writer.uint32(10).string(message.midPrice);
-    }
-    if (message.bestBuyPrice !== "") {
-      writer.uint32(18).string(message.bestBuyPrice);
-    }
-    if (message.bestSellPrice !== "") {
-      writer.uint32(26).string(message.bestSellPrice);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotMidPriceAndTOBResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySpotMidPriceAndTOBResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.midPrice = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.bestBuyPrice = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.bestSellPrice = reader.string();
-          continue;
-        }
+export const QuerySpotMidPriceAndTOBResponse: MessageFns<QuerySpotMidPriceAndTOBResponse> =
+  {
+    encode(
+      message: QuerySpotMidPriceAndTOBResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.midPrice !== "") {
+        writer.uint32(10).string(message.midPrice);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.bestBuyPrice !== "") {
+        writer.uint32(18).string(message.bestBuyPrice);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.bestSellPrice !== "") {
+        writer.uint32(26).string(message.bestSellPrice);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QuerySpotMidPriceAndTOBResponse {
-    return {
-      midPrice: isSet(object.midPrice)
-        ? globalThis.String(object.midPrice)
-        : isSet(object.mid_price)
-        ? globalThis.String(object.mid_price)
-        : "",
-      bestBuyPrice: isSet(object.bestBuyPrice)
-        ? globalThis.String(object.bestBuyPrice)
-        : isSet(object.best_buy_price)
-        ? globalThis.String(object.best_buy_price)
-        : "",
-      bestSellPrice: isSet(object.bestSellPrice)
-        ? globalThis.String(object.bestSellPrice)
-        : isSet(object.best_sell_price)
-        ? globalThis.String(object.best_sell_price)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySpotMidPriceAndTOBResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySpotMidPriceAndTOBResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QuerySpotMidPriceAndTOBResponse): unknown {
-    const obj: any = {};
-    if (message.midPrice !== "") {
-      obj.midPrice = message.midPrice;
-    }
-    if (message.bestBuyPrice !== "") {
-      obj.bestBuyPrice = message.bestBuyPrice;
-    }
-    if (message.bestSellPrice !== "") {
-      obj.bestSellPrice = message.bestSellPrice;
-    }
-    return obj;
-  },
+            message.midPrice = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QuerySpotMidPriceAndTOBResponse>, I>>(base?: I): QuerySpotMidPriceAndTOBResponse {
-    return QuerySpotMidPriceAndTOBResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySpotMidPriceAndTOBResponse>, I>>(
-    object: I,
-  ): QuerySpotMidPriceAndTOBResponse {
-    const message = createBaseQuerySpotMidPriceAndTOBResponse();
-    message.midPrice = object.midPrice ?? "";
-    message.bestBuyPrice = object.bestBuyPrice ?? "";
-    message.bestSellPrice = object.bestSellPrice ?? "";
-    return message;
-  },
-};
+            message.bestBuyPrice = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.bestSellPrice = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySpotMidPriceAndTOBResponse {
+      return {
+        midPrice: isSet(object.midPrice)
+          ? globalThis.String(object.midPrice)
+          : isSet(object.mid_price)
+            ? globalThis.String(object.mid_price)
+            : "",
+        bestBuyPrice: isSet(object.bestBuyPrice)
+          ? globalThis.String(object.bestBuyPrice)
+          : isSet(object.best_buy_price)
+            ? globalThis.String(object.best_buy_price)
+            : "",
+        bestSellPrice: isSet(object.bestSellPrice)
+          ? globalThis.String(object.bestSellPrice)
+          : isSet(object.best_sell_price)
+            ? globalThis.String(object.best_sell_price)
+            : "",
+      };
+    },
+
+    toJSON(message: QuerySpotMidPriceAndTOBResponse): unknown {
+      const obj: any = {};
+      if (message.midPrice !== "") {
+        obj.midPrice = message.midPrice;
+      }
+      if (message.bestBuyPrice !== "") {
+        obj.bestBuyPrice = message.bestBuyPrice;
+      }
+      if (message.bestSellPrice !== "") {
+        obj.bestSellPrice = message.bestSellPrice;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QuerySpotMidPriceAndTOBResponse>, I>>(
+      base?: I,
+    ): QuerySpotMidPriceAndTOBResponse {
+      return QuerySpotMidPriceAndTOBResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySpotMidPriceAndTOBResponse>, I>,
+    >(object: I): QuerySpotMidPriceAndTOBResponse {
+      const message = createBaseQuerySpotMidPriceAndTOBResponse();
+      message.midPrice = object.midPrice ?? "";
+      message.bestBuyPrice = object.bestBuyPrice ?? "";
+      message.bestSellPrice = object.bestSellPrice ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeMidPriceAndTOBRequest(): QueryDerivativeMidPriceAndTOBRequest {
   return { marketId: "" };
 }
 
-export const QueryDerivativeMidPriceAndTOBRequest: MessageFns<QueryDerivativeMidPriceAndTOBRequest> = {
-  encode(message: QueryDerivativeMidPriceAndTOBRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryDerivativeMidPriceAndTOBRequest: MessageFns<QueryDerivativeMidPriceAndTOBRequest> =
+  {
+    encode(
+      message: QueryDerivativeMidPriceAndTOBRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeMidPriceAndTOBRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeMidPriceAndTOBRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeMidPriceAndTOBRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeMidPriceAndTOBRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeMidPriceAndTOBRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryDerivativeMidPriceAndTOBRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDerivativeMidPriceAndTOBRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryDerivativeMidPriceAndTOBRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDerivativeMidPriceAndTOBRequest>, I>>(
-    base?: I,
-  ): QueryDerivativeMidPriceAndTOBRequest {
-    return QueryDerivativeMidPriceAndTOBRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeMidPriceAndTOBRequest>, I>>(
-    object: I,
-  ): QueryDerivativeMidPriceAndTOBRequest {
-    const message = createBaseQueryDerivativeMidPriceAndTOBRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryDerivativeMidPriceAndTOBRequest>, I>,
+    >(base?: I): QueryDerivativeMidPriceAndTOBRequest {
+      return QueryDerivativeMidPriceAndTOBRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryDerivativeMidPriceAndTOBRequest>, I>,
+    >(object: I): QueryDerivativeMidPriceAndTOBRequest {
+      const message = createBaseQueryDerivativeMidPriceAndTOBRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeMidPriceAndTOBResponse(): QueryDerivativeMidPriceAndTOBResponse {
   return { midPrice: "", bestBuyPrice: "", bestSellPrice: "" };
 }
 
-export const QueryDerivativeMidPriceAndTOBResponse: MessageFns<QueryDerivativeMidPriceAndTOBResponse> = {
-  encode(message: QueryDerivativeMidPriceAndTOBResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.midPrice !== "") {
-      writer.uint32(10).string(message.midPrice);
-    }
-    if (message.bestBuyPrice !== "") {
-      writer.uint32(18).string(message.bestBuyPrice);
-    }
-    if (message.bestSellPrice !== "") {
-      writer.uint32(26).string(message.bestSellPrice);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeMidPriceAndTOBResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeMidPriceAndTOBResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.midPrice = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.bestBuyPrice = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.bestSellPrice = reader.string();
-          continue;
-        }
+export const QueryDerivativeMidPriceAndTOBResponse: MessageFns<QueryDerivativeMidPriceAndTOBResponse> =
+  {
+    encode(
+      message: QueryDerivativeMidPriceAndTOBResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.midPrice !== "") {
+        writer.uint32(10).string(message.midPrice);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.bestBuyPrice !== "") {
+        writer.uint32(18).string(message.bestBuyPrice);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.bestSellPrice !== "") {
+        writer.uint32(26).string(message.bestSellPrice);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QueryDerivativeMidPriceAndTOBResponse {
-    return {
-      midPrice: isSet(object.midPrice)
-        ? globalThis.String(object.midPrice)
-        : isSet(object.mid_price)
-        ? globalThis.String(object.mid_price)
-        : "",
-      bestBuyPrice: isSet(object.bestBuyPrice)
-        ? globalThis.String(object.bestBuyPrice)
-        : isSet(object.best_buy_price)
-        ? globalThis.String(object.best_buy_price)
-        : "",
-      bestSellPrice: isSet(object.bestSellPrice)
-        ? globalThis.String(object.bestSellPrice)
-        : isSet(object.best_sell_price)
-        ? globalThis.String(object.best_sell_price)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeMidPriceAndTOBResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeMidPriceAndTOBResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryDerivativeMidPriceAndTOBResponse): unknown {
-    const obj: any = {};
-    if (message.midPrice !== "") {
-      obj.midPrice = message.midPrice;
-    }
-    if (message.bestBuyPrice !== "") {
-      obj.bestBuyPrice = message.bestBuyPrice;
-    }
-    if (message.bestSellPrice !== "") {
-      obj.bestSellPrice = message.bestSellPrice;
-    }
-    return obj;
-  },
+            message.midPrice = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryDerivativeMidPriceAndTOBResponse>, I>>(
-    base?: I,
-  ): QueryDerivativeMidPriceAndTOBResponse {
-    return QueryDerivativeMidPriceAndTOBResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeMidPriceAndTOBResponse>, I>>(
-    object: I,
-  ): QueryDerivativeMidPriceAndTOBResponse {
-    const message = createBaseQueryDerivativeMidPriceAndTOBResponse();
-    message.midPrice = object.midPrice ?? "";
-    message.bestBuyPrice = object.bestBuyPrice ?? "";
-    message.bestSellPrice = object.bestSellPrice ?? "";
-    return message;
-  },
-};
+            message.bestBuyPrice = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.bestSellPrice = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeMidPriceAndTOBResponse {
+      return {
+        midPrice: isSet(object.midPrice)
+          ? globalThis.String(object.midPrice)
+          : isSet(object.mid_price)
+            ? globalThis.String(object.mid_price)
+            : "",
+        bestBuyPrice: isSet(object.bestBuyPrice)
+          ? globalThis.String(object.bestBuyPrice)
+          : isSet(object.best_buy_price)
+            ? globalThis.String(object.best_buy_price)
+            : "",
+        bestSellPrice: isSet(object.bestSellPrice)
+          ? globalThis.String(object.bestSellPrice)
+          : isSet(object.best_sell_price)
+            ? globalThis.String(object.best_sell_price)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryDerivativeMidPriceAndTOBResponse): unknown {
+      const obj: any = {};
+      if (message.midPrice !== "") {
+        obj.midPrice = message.midPrice;
+      }
+      if (message.bestBuyPrice !== "") {
+        obj.bestBuyPrice = message.bestBuyPrice;
+      }
+      if (message.bestSellPrice !== "") {
+        obj.bestSellPrice = message.bestSellPrice;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<QueryDerivativeMidPriceAndTOBResponse>, I>,
+    >(base?: I): QueryDerivativeMidPriceAndTOBResponse {
+      return QueryDerivativeMidPriceAndTOBResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryDerivativeMidPriceAndTOBResponse>, I>,
+    >(object: I): QueryDerivativeMidPriceAndTOBResponse {
+      const message = createBaseQueryDerivativeMidPriceAndTOBResponse();
+      message.midPrice = object.midPrice ?? "";
+      message.bestBuyPrice = object.bestBuyPrice ?? "";
+      message.bestSellPrice = object.bestSellPrice ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeOrderbookRequest(): QueryDerivativeOrderbookRequest {
   return { marketId: "", limit: 0, limitCumulativeNotional: "" };
 }
 
-export const QueryDerivativeOrderbookRequest: MessageFns<QueryDerivativeOrderbookRequest> = {
-  encode(message: QueryDerivativeOrderbookRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.limit !== 0) {
-      writer.uint32(16).uint64(message.limit);
-    }
-    if (message.limitCumulativeNotional !== "") {
-      writer.uint32(26).string(message.limitCumulativeNotional);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeOrderbookRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeOrderbookRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.limit = longToNumber(reader.uint64());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.limitCumulativeNotional = reader.string();
-          continue;
-        }
+export const QueryDerivativeOrderbookRequest: MessageFns<QueryDerivativeOrderbookRequest> =
+  {
+    encode(
+      message: QueryDerivativeOrderbookRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.limit !== 0) {
+        writer.uint32(16).uint64(message.limit);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.limitCumulativeNotional !== "") {
+        writer.uint32(26).string(message.limitCumulativeNotional);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QueryDerivativeOrderbookRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
-      limitCumulativeNotional: isSet(object.limitCumulativeNotional)
-        ? globalThis.String(object.limitCumulativeNotional)
-        : isSet(object.limit_cumulative_notional)
-        ? globalThis.String(object.limit_cumulative_notional)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeOrderbookRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeOrderbookRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryDerivativeOrderbookRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.limit !== 0) {
-      obj.limit = Math.round(message.limit);
-    }
-    if (message.limitCumulativeNotional !== "") {
-      obj.limitCumulativeNotional = message.limitCumulativeNotional;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryDerivativeOrderbookRequest>, I>>(base?: I): QueryDerivativeOrderbookRequest {
-    return QueryDerivativeOrderbookRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeOrderbookRequest>, I>>(
-    object: I,
-  ): QueryDerivativeOrderbookRequest {
-    const message = createBaseQueryDerivativeOrderbookRequest();
-    message.marketId = object.marketId ?? "";
-    message.limit = object.limit ?? 0;
-    message.limitCumulativeNotional = object.limitCumulativeNotional ?? "";
-    return message;
-  },
-};
+            message.limit = longToNumber(reader.uint64());
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.limitCumulativeNotional = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeOrderbookRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
+        limitCumulativeNotional: isSet(object.limitCumulativeNotional)
+          ? globalThis.String(object.limitCumulativeNotional)
+          : isSet(object.limit_cumulative_notional)
+            ? globalThis.String(object.limit_cumulative_notional)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryDerivativeOrderbookRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.limit !== 0) {
+        obj.limit = Math.round(message.limit);
+      }
+      if (message.limitCumulativeNotional !== "") {
+        obj.limitCumulativeNotional = message.limitCumulativeNotional;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryDerivativeOrderbookRequest>, I>>(
+      base?: I,
+    ): QueryDerivativeOrderbookRequest {
+      return QueryDerivativeOrderbookRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryDerivativeOrderbookRequest>, I>,
+    >(object: I): QueryDerivativeOrderbookRequest {
+      const message = createBaseQueryDerivativeOrderbookRequest();
+      message.marketId = object.marketId ?? "";
+      message.limit = object.limit ?? 0;
+      message.limitCumulativeNotional = object.limitCumulativeNotional ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeOrderbookResponse(): QueryDerivativeOrderbookResponse {
   return { buysPriceLevel: [], sellsPriceLevel: [] };
 }
 
-export const QueryDerivativeOrderbookResponse: MessageFns<QueryDerivativeOrderbookResponse> = {
-  encode(message: QueryDerivativeOrderbookResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.buysPriceLevel) {
-      Level.encode(v!, writer.uint32(10).fork()).join();
-    }
-    for (const v of message.sellsPriceLevel) {
-      Level.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeOrderbookResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeOrderbookResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.buysPriceLevel.push(Level.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.sellsPriceLevel.push(Level.decode(reader, reader.uint32()));
-          continue;
-        }
+export const QueryDerivativeOrderbookResponse: MessageFns<QueryDerivativeOrderbookResponse> =
+  {
+    encode(
+      message: QueryDerivativeOrderbookResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.buysPriceLevel) {
+        Level.encode(v!, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.sellsPriceLevel) {
+        Level.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryDerivativeOrderbookResponse {
-    return {
-      buysPriceLevel: globalThis.Array.isArray(object?.buysPriceLevel)
-        ? object.buysPriceLevel.map((e: any) => Level.fromJSON(e))
-        : globalThis.Array.isArray(object?.buys_price_level)
-        ? object.buys_price_level.map((e: any) => Level.fromJSON(e))
-        : [],
-      sellsPriceLevel: globalThis.Array.isArray(object?.sellsPriceLevel)
-        ? object.sellsPriceLevel.map((e: any) => Level.fromJSON(e))
-        : globalThis.Array.isArray(object?.sells_price_level)
-        ? object.sells_price_level.map((e: any) => Level.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeOrderbookResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeOrderbookResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryDerivativeOrderbookResponse): unknown {
-    const obj: any = {};
-    if (message.buysPriceLevel?.length) {
-      obj.buysPriceLevel = message.buysPriceLevel.map((e) => Level.toJSON(e));
-    }
-    if (message.sellsPriceLevel?.length) {
-      obj.sellsPriceLevel = message.sellsPriceLevel.map((e) => Level.toJSON(e));
-    }
-    return obj;
-  },
+            message.buysPriceLevel.push(Level.decode(reader, reader.uint32()));
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryDerivativeOrderbookResponse>, I>>(
-    base?: I,
-  ): QueryDerivativeOrderbookResponse {
-    return QueryDerivativeOrderbookResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeOrderbookResponse>, I>>(
-    object: I,
-  ): QueryDerivativeOrderbookResponse {
-    const message = createBaseQueryDerivativeOrderbookResponse();
-    message.buysPriceLevel = object.buysPriceLevel?.map((e) => Level.fromPartial(e)) || [];
-    message.sellsPriceLevel = object.sellsPriceLevel?.map((e) => Level.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.sellsPriceLevel.push(Level.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeOrderbookResponse {
+      return {
+        buysPriceLevel: globalThis.Array.isArray(object?.buysPriceLevel)
+          ? object.buysPriceLevel.map((e: any) => Level.fromJSON(e))
+          : globalThis.Array.isArray(object?.buys_price_level)
+            ? object.buys_price_level.map((e: any) => Level.fromJSON(e))
+            : [],
+        sellsPriceLevel: globalThis.Array.isArray(object?.sellsPriceLevel)
+          ? object.sellsPriceLevel.map((e: any) => Level.fromJSON(e))
+          : globalThis.Array.isArray(object?.sells_price_level)
+            ? object.sells_price_level.map((e: any) => Level.fromJSON(e))
+            : [],
+      };
+    },
+
+    toJSON(message: QueryDerivativeOrderbookResponse): unknown {
+      const obj: any = {};
+      if (message.buysPriceLevel?.length) {
+        obj.buysPriceLevel = message.buysPriceLevel.map((e) => Level.toJSON(e));
+      }
+      if (message.sellsPriceLevel?.length) {
+        obj.sellsPriceLevel = message.sellsPriceLevel.map((e) =>
+          Level.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryDerivativeOrderbookResponse>, I>>(
+      base?: I,
+    ): QueryDerivativeOrderbookResponse {
+      return QueryDerivativeOrderbookResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryDerivativeOrderbookResponse>, I>,
+    >(object: I): QueryDerivativeOrderbookResponse {
+      const message = createBaseQueryDerivativeOrderbookResponse();
+      message.buysPriceLevel =
+        object.buysPriceLevel?.map((e) => Level.fromPartial(e)) || [];
+      message.sellsPriceLevel =
+        object.sellsPriceLevel?.map((e) => Level.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryTraderSpotOrdersToCancelUpToAmountRequest(): QueryTraderSpotOrdersToCancelUpToAmountRequest {
-  return { marketId: "", subaccountId: "", baseAmount: "", quoteAmount: "", strategy: 0, referencePrice: "" };
+  return {
+    marketId: "",
+    subaccountId: "",
+    baseAmount: "",
+    quoteAmount: "",
+    strategy: 0,
+    referencePrice: "",
+  };
 }
 
-export const QueryTraderSpotOrdersToCancelUpToAmountRequest: MessageFns<
-  QueryTraderSpotOrdersToCancelUpToAmountRequest
-> = {
-  encode(
-    message: QueryTraderSpotOrdersToCancelUpToAmountRequest,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(18).string(message.subaccountId);
-    }
-    if (message.baseAmount !== "") {
-      writer.uint32(26).string(message.baseAmount);
-    }
-    if (message.quoteAmount !== "") {
-      writer.uint32(34).string(message.quoteAmount);
-    }
-    if (message.strategy !== 0) {
-      writer.uint32(40).int32(message.strategy);
-    }
-    if (message.referencePrice !== "") {
-      writer.uint32(50).string(message.referencePrice);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTraderSpotOrdersToCancelUpToAmountRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTraderSpotOrdersToCancelUpToAmountRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.baseAmount = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.quoteAmount = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.strategy = reader.int32() as any;
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.referencePrice = reader.string();
-          continue;
-        }
+export const QueryTraderSpotOrdersToCancelUpToAmountRequest: MessageFns<QueryTraderSpotOrdersToCancelUpToAmountRequest> =
+  {
+    encode(
+      message: QueryTraderSpotOrdersToCancelUpToAmountRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccountId !== "") {
+        writer.uint32(18).string(message.subaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.baseAmount !== "") {
+        writer.uint32(26).string(message.baseAmount);
+      }
+      if (message.quoteAmount !== "") {
+        writer.uint32(34).string(message.quoteAmount);
+      }
+      if (message.strategy !== 0) {
+        writer.uint32(40).int32(message.strategy);
+      }
+      if (message.referencePrice !== "") {
+        writer.uint32(50).string(message.referencePrice);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QueryTraderSpotOrdersToCancelUpToAmountRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      baseAmount: isSet(object.baseAmount)
-        ? globalThis.String(object.baseAmount)
-        : isSet(object.base_amount)
-        ? globalThis.String(object.base_amount)
-        : "",
-      quoteAmount: isSet(object.quoteAmount)
-        ? globalThis.String(object.quoteAmount)
-        : isSet(object.quote_amount)
-        ? globalThis.String(object.quote_amount)
-        : "",
-      strategy: isSet(object.strategy) ? cancellationStrategyFromJSON(object.strategy) : 0,
-      referencePrice: isSet(object.referencePrice)
-        ? globalThis.String(object.referencePrice)
-        : isSet(object.reference_price)
-        ? globalThis.String(object.reference_price)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTraderSpotOrdersToCancelUpToAmountRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseQueryTraderSpotOrdersToCancelUpToAmountRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryTraderSpotOrdersToCancelUpToAmountRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.baseAmount !== "") {
-      obj.baseAmount = message.baseAmount;
-    }
-    if (message.quoteAmount !== "") {
-      obj.quoteAmount = message.quoteAmount;
-    }
-    if (message.strategy !== 0) {
-      obj.strategy = cancellationStrategyToJSON(message.strategy);
-    }
-    if (message.referencePrice !== "") {
-      obj.referencePrice = message.referencePrice;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryTraderSpotOrdersToCancelUpToAmountRequest>, I>>(
-    base?: I,
-  ): QueryTraderSpotOrdersToCancelUpToAmountRequest {
-    return QueryTraderSpotOrdersToCancelUpToAmountRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTraderSpotOrdersToCancelUpToAmountRequest>, I>>(
-    object: I,
-  ): QueryTraderSpotOrdersToCancelUpToAmountRequest {
-    const message = createBaseQueryTraderSpotOrdersToCancelUpToAmountRequest();
-    message.marketId = object.marketId ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    message.baseAmount = object.baseAmount ?? "";
-    message.quoteAmount = object.quoteAmount ?? "";
-    message.strategy = object.strategy ?? 0;
-    message.referencePrice = object.referencePrice ?? "";
-    return message;
-  },
-};
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.baseAmount = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.quoteAmount = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.strategy = reader.int32() as any;
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.referencePrice = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryTraderSpotOrdersToCancelUpToAmountRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        baseAmount: isSet(object.baseAmount)
+          ? globalThis.String(object.baseAmount)
+          : isSet(object.base_amount)
+            ? globalThis.String(object.base_amount)
+            : "",
+        quoteAmount: isSet(object.quoteAmount)
+          ? globalThis.String(object.quoteAmount)
+          : isSet(object.quote_amount)
+            ? globalThis.String(object.quote_amount)
+            : "",
+        strategy: isSet(object.strategy)
+          ? cancellationStrategyFromJSON(object.strategy)
+          : 0,
+        referencePrice: isSet(object.referencePrice)
+          ? globalThis.String(object.referencePrice)
+          : isSet(object.reference_price)
+            ? globalThis.String(object.reference_price)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryTraderSpotOrdersToCancelUpToAmountRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.baseAmount !== "") {
+        obj.baseAmount = message.baseAmount;
+      }
+      if (message.quoteAmount !== "") {
+        obj.quoteAmount = message.quoteAmount;
+      }
+      if (message.strategy !== 0) {
+        obj.strategy = cancellationStrategyToJSON(message.strategy);
+      }
+      if (message.referencePrice !== "") {
+        obj.referencePrice = message.referencePrice;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<
+        DeepPartial<QueryTraderSpotOrdersToCancelUpToAmountRequest>,
+        I
+      >,
+    >(base?: I): QueryTraderSpotOrdersToCancelUpToAmountRequest {
+      return QueryTraderSpotOrdersToCancelUpToAmountRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QueryTraderSpotOrdersToCancelUpToAmountRequest>,
+        I
+      >,
+    >(object: I): QueryTraderSpotOrdersToCancelUpToAmountRequest {
+      const message =
+        createBaseQueryTraderSpotOrdersToCancelUpToAmountRequest();
+      message.marketId = object.marketId ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      message.baseAmount = object.baseAmount ?? "";
+      message.quoteAmount = object.quoteAmount ?? "";
+      message.strategy = object.strategy ?? 0;
+      message.referencePrice = object.referencePrice ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryTraderDerivativeOrdersToCancelUpToAmountRequest(): QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
-  return { marketId: "", subaccountId: "", quoteAmount: "", strategy: 0, referencePrice: "" };
+  return {
+    marketId: "",
+    subaccountId: "",
+    quoteAmount: "",
+    strategy: 0,
+    referencePrice: "",
+  };
 }
 
-export const QueryTraderDerivativeOrdersToCancelUpToAmountRequest: MessageFns<
-  QueryTraderDerivativeOrdersToCancelUpToAmountRequest
-> = {
-  encode(
-    message: QueryTraderDerivativeOrdersToCancelUpToAmountRequest,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(18).string(message.subaccountId);
-    }
-    if (message.quoteAmount !== "") {
-      writer.uint32(26).string(message.quoteAmount);
-    }
-    if (message.strategy !== 0) {
-      writer.uint32(32).int32(message.strategy);
-    }
-    if (message.referencePrice !== "") {
-      writer.uint32(42).string(message.referencePrice);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTraderDerivativeOrdersToCancelUpToAmountRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.quoteAmount = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 32) {
-            break;
-          }
-
-          message.strategy = reader.int32() as any;
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.referencePrice = reader.string();
-          continue;
-        }
+export const QueryTraderDerivativeOrdersToCancelUpToAmountRequest: MessageFns<QueryTraderDerivativeOrdersToCancelUpToAmountRequest> =
+  {
+    encode(
+      message: QueryTraderDerivativeOrdersToCancelUpToAmountRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccountId !== "") {
+        writer.uint32(18).string(message.subaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.quoteAmount !== "") {
+        writer.uint32(26).string(message.quoteAmount);
+      }
+      if (message.strategy !== 0) {
+        writer.uint32(32).int32(message.strategy);
+      }
+      if (message.referencePrice !== "") {
+        writer.uint32(42).string(message.referencePrice);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      quoteAmount: isSet(object.quoteAmount)
-        ? globalThis.String(object.quoteAmount)
-        : isSet(object.quote_amount)
-        ? globalThis.String(object.quote_amount)
-        : "",
-      strategy: isSet(object.strategy) ? cancellationStrategyFromJSON(object.strategy) : 0,
-      referencePrice: isSet(object.referencePrice)
-        ? globalThis.String(object.referencePrice)
-        : isSet(object.reference_price)
-        ? globalThis.String(object.reference_price)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseQueryTraderDerivativeOrdersToCancelUpToAmountRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryTraderDerivativeOrdersToCancelUpToAmountRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.quoteAmount !== "") {
-      obj.quoteAmount = message.quoteAmount;
-    }
-    if (message.strategy !== 0) {
-      obj.strategy = cancellationStrategyToJSON(message.strategy);
-    }
-    if (message.referencePrice !== "") {
-      obj.referencePrice = message.referencePrice;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryTraderDerivativeOrdersToCancelUpToAmountRequest>, I>>(
-    base?: I,
-  ): QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
-    return QueryTraderDerivativeOrdersToCancelUpToAmountRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTraderDerivativeOrdersToCancelUpToAmountRequest>, I>>(
-    object: I,
-  ): QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
-    const message = createBaseQueryTraderDerivativeOrdersToCancelUpToAmountRequest();
-    message.marketId = object.marketId ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    message.quoteAmount = object.quoteAmount ?? "";
-    message.strategy = object.strategy ?? 0;
-    message.referencePrice = object.referencePrice ?? "";
-    return message;
-  },
-};
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.quoteAmount = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 32) {
+              break;
+            }
+
+            message.strategy = reader.int32() as any;
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.referencePrice = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(
+      object: any,
+    ): QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        quoteAmount: isSet(object.quoteAmount)
+          ? globalThis.String(object.quoteAmount)
+          : isSet(object.quote_amount)
+            ? globalThis.String(object.quote_amount)
+            : "",
+        strategy: isSet(object.strategy)
+          ? cancellationStrategyFromJSON(object.strategy)
+          : 0,
+        referencePrice: isSet(object.referencePrice)
+          ? globalThis.String(object.referencePrice)
+          : isSet(object.reference_price)
+            ? globalThis.String(object.reference_price)
+            : "",
+      };
+    },
+
+    toJSON(
+      message: QueryTraderDerivativeOrdersToCancelUpToAmountRequest,
+    ): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.quoteAmount !== "") {
+        obj.quoteAmount = message.quoteAmount;
+      }
+      if (message.strategy !== 0) {
+        obj.strategy = cancellationStrategyToJSON(message.strategy);
+      }
+      if (message.referencePrice !== "") {
+        obj.referencePrice = message.referencePrice;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<
+        DeepPartial<QueryTraderDerivativeOrdersToCancelUpToAmountRequest>,
+        I
+      >,
+    >(base?: I): QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
+      return QueryTraderDerivativeOrdersToCancelUpToAmountRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QueryTraderDerivativeOrdersToCancelUpToAmountRequest>,
+        I
+      >,
+    >(object: I): QueryTraderDerivativeOrdersToCancelUpToAmountRequest {
+      const message =
+        createBaseQueryTraderDerivativeOrdersToCancelUpToAmountRequest();
+      message.marketId = object.marketId ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      message.quoteAmount = object.quoteAmount ?? "";
+      message.strategy = object.strategy ?? 0;
+      message.referencePrice = object.referencePrice ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryTraderDerivativeOrdersRequest(): QueryTraderDerivativeOrdersRequest {
   return { marketId: "", subaccountId: "" };
 }
 
-export const QueryTraderDerivativeOrdersRequest: MessageFns<QueryTraderDerivativeOrdersRequest> = {
-  encode(message: QueryTraderDerivativeOrdersRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(18).string(message.subaccountId);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTraderDerivativeOrdersRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTraderDerivativeOrdersRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
+export const QueryTraderDerivativeOrdersRequest: MessageFns<QueryTraderDerivativeOrdersRequest> =
+  {
+    encode(
+      message: QueryTraderDerivativeOrdersRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccountId !== "") {
+        writer.uint32(18).string(message.subaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryTraderDerivativeOrdersRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTraderDerivativeOrdersRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryTraderDerivativeOrdersRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryTraderDerivativeOrdersRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryTraderDerivativeOrdersRequest>, I>>(
-    base?: I,
-  ): QueryTraderDerivativeOrdersRequest {
-    return QueryTraderDerivativeOrdersRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTraderDerivativeOrdersRequest>, I>>(
-    object: I,
-  ): QueryTraderDerivativeOrdersRequest {
-    const message = createBaseQueryTraderDerivativeOrdersRequest();
-    message.marketId = object.marketId ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    return message;
-  },
-};
+            message.subaccountId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryTraderDerivativeOrdersRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryTraderDerivativeOrdersRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryTraderDerivativeOrdersRequest>, I>>(
+      base?: I,
+    ): QueryTraderDerivativeOrdersRequest {
+      return QueryTraderDerivativeOrdersRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryTraderDerivativeOrdersRequest>, I>,
+    >(object: I): QueryTraderDerivativeOrdersRequest {
+      const message = createBaseQueryTraderDerivativeOrdersRequest();
+      message.marketId = object.marketId ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryAccountAddressDerivativeOrdersRequest(): QueryAccountAddressDerivativeOrdersRequest {
   return { marketId: "", accountAddress: "" };
 }
 
-export const QueryAccountAddressDerivativeOrdersRequest: MessageFns<QueryAccountAddressDerivativeOrdersRequest> = {
-  encode(message: QueryAccountAddressDerivativeOrdersRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.accountAddress !== "") {
-      writer.uint32(18).string(message.accountAddress);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountAddressDerivativeOrdersRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAccountAddressDerivativeOrdersRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.accountAddress = reader.string();
-          continue;
-        }
+export const QueryAccountAddressDerivativeOrdersRequest: MessageFns<QueryAccountAddressDerivativeOrdersRequest> =
+  {
+    encode(
+      message: QueryAccountAddressDerivativeOrdersRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.accountAddress !== "") {
+        writer.uint32(18).string(message.accountAddress);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryAccountAddressDerivativeOrdersRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      accountAddress: isSet(object.accountAddress)
-        ? globalThis.String(object.accountAddress)
-        : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAccountAddressDerivativeOrdersRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAccountAddressDerivativeOrdersRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryAccountAddressDerivativeOrdersRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.accountAddress !== "") {
-      obj.accountAddress = message.accountAddress;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryAccountAddressDerivativeOrdersRequest>, I>>(
-    base?: I,
-  ): QueryAccountAddressDerivativeOrdersRequest {
-    return QueryAccountAddressDerivativeOrdersRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAccountAddressDerivativeOrdersRequest>, I>>(
-    object: I,
-  ): QueryAccountAddressDerivativeOrdersRequest {
-    const message = createBaseQueryAccountAddressDerivativeOrdersRequest();
-    message.marketId = object.marketId ?? "";
-    message.accountAddress = object.accountAddress ?? "";
-    return message;
-  },
-};
+            message.accountAddress = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryAccountAddressDerivativeOrdersRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        accountAddress: isSet(object.accountAddress)
+          ? globalThis.String(object.accountAddress)
+          : isSet(object.account_address)
+            ? globalThis.String(object.account_address)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryAccountAddressDerivativeOrdersRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.accountAddress !== "") {
+        obj.accountAddress = message.accountAddress;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<
+        DeepPartial<QueryAccountAddressDerivativeOrdersRequest>,
+        I
+      >,
+    >(base?: I): QueryAccountAddressDerivativeOrdersRequest {
+      return QueryAccountAddressDerivativeOrdersRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QueryAccountAddressDerivativeOrdersRequest>,
+        I
+      >,
+    >(object: I): QueryAccountAddressDerivativeOrdersRequest {
+      const message = createBaseQueryAccountAddressDerivativeOrdersRequest();
+      message.marketId = object.marketId ?? "";
+      message.accountAddress = object.accountAddress ?? "";
+      return message;
+    },
+  };
 
 function createBaseTrimmedDerivativeLimitOrder(): TrimmedDerivativeLimitOrder {
-  return { price: "", quantity: "", margin: "", fillable: "", isBuy: false, orderHash: "", cid: "" };
+  return {
+    price: "",
+    quantity: "",
+    margin: "",
+    fillable: "",
+    isBuy: false,
+    orderHash: "",
+    cid: "",
+  };
 }
 
-export const TrimmedDerivativeLimitOrder: MessageFns<TrimmedDerivativeLimitOrder> = {
-  encode(message: TrimmedDerivativeLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.price !== "") {
-      writer.uint32(10).string(message.price);
-    }
-    if (message.quantity !== "") {
-      writer.uint32(18).string(message.quantity);
-    }
-    if (message.margin !== "") {
-      writer.uint32(26).string(message.margin);
-    }
-    if (message.fillable !== "") {
-      writer.uint32(34).string(message.fillable);
-    }
-    if (message.isBuy !== false) {
-      writer.uint32(40).bool(message.isBuy);
-    }
-    if (message.orderHash !== "") {
-      writer.uint32(50).string(message.orderHash);
-    }
-    if (message.cid !== "") {
-      writer.uint32(58).string(message.cid);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): TrimmedDerivativeLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTrimmedDerivativeLimitOrder();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.price = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.quantity = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.margin = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.fillable = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.isBuy = reader.bool();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.orderHash = reader.string();
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.cid = reader.string();
-          continue;
-        }
+export const TrimmedDerivativeLimitOrder: MessageFns<TrimmedDerivativeLimitOrder> =
+  {
+    encode(
+      message: TrimmedDerivativeLimitOrder,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.price !== "") {
+        writer.uint32(10).string(message.price);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.quantity !== "") {
+        writer.uint32(18).string(message.quantity);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.margin !== "") {
+        writer.uint32(26).string(message.margin);
+      }
+      if (message.fillable !== "") {
+        writer.uint32(34).string(message.fillable);
+      }
+      if (message.isBuy !== false) {
+        writer.uint32(40).bool(message.isBuy);
+      }
+      if (message.orderHash !== "") {
+        writer.uint32(50).string(message.orderHash);
+      }
+      if (message.cid !== "") {
+        writer.uint32(58).string(message.cid);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): TrimmedDerivativeLimitOrder {
-    return {
-      price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
-      margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
-      fillable: isSet(object.fillable) ? globalThis.String(object.fillable) : "",
-      isBuy: isSet(object.isBuy) ? globalThis.Boolean(object.isBuy) : false,
-      orderHash: isSet(object.orderHash)
-        ? globalThis.String(object.orderHash)
-        : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
-      cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): TrimmedDerivativeLimitOrder {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTrimmedDerivativeLimitOrder();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: TrimmedDerivativeLimitOrder): unknown {
-    const obj: any = {};
-    if (message.price !== "") {
-      obj.price = message.price;
-    }
-    if (message.quantity !== "") {
-      obj.quantity = message.quantity;
-    }
-    if (message.margin !== "") {
-      obj.margin = message.margin;
-    }
-    if (message.fillable !== "") {
-      obj.fillable = message.fillable;
-    }
-    if (message.isBuy !== false) {
-      obj.isBuy = message.isBuy;
-    }
-    if (message.orderHash !== "") {
-      obj.orderHash = message.orderHash;
-    }
-    if (message.cid !== "") {
-      obj.cid = message.cid;
-    }
-    return obj;
-  },
+            message.price = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<TrimmedDerivativeLimitOrder>, I>>(base?: I): TrimmedDerivativeLimitOrder {
-    return TrimmedDerivativeLimitOrder.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TrimmedDerivativeLimitOrder>, I>>(object: I): TrimmedDerivativeLimitOrder {
-    const message = createBaseTrimmedDerivativeLimitOrder();
-    message.price = object.price ?? "";
-    message.quantity = object.quantity ?? "";
-    message.margin = object.margin ?? "";
-    message.fillable = object.fillable ?? "";
-    message.isBuy = object.isBuy ?? false;
-    message.orderHash = object.orderHash ?? "";
-    message.cid = object.cid ?? "";
-    return message;
-  },
-};
+            message.quantity = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.margin = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.fillable = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.isBuy = reader.bool();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.orderHash = reader.string();
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.cid = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): TrimmedDerivativeLimitOrder {
+      return {
+        price: isSet(object.price) ? globalThis.String(object.price) : "",
+        quantity: isSet(object.quantity)
+          ? globalThis.String(object.quantity)
+          : "",
+        margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
+        fillable: isSet(object.fillable)
+          ? globalThis.String(object.fillable)
+          : "",
+        isBuy: isSet(object.isBuy) ? globalThis.Boolean(object.isBuy) : false,
+        orderHash: isSet(object.orderHash)
+          ? globalThis.String(object.orderHash)
+          : isSet(object.order_hash)
+            ? globalThis.String(object.order_hash)
+            : "",
+        cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
+      };
+    },
+
+    toJSON(message: TrimmedDerivativeLimitOrder): unknown {
+      const obj: any = {};
+      if (message.price !== "") {
+        obj.price = message.price;
+      }
+      if (message.quantity !== "") {
+        obj.quantity = message.quantity;
+      }
+      if (message.margin !== "") {
+        obj.margin = message.margin;
+      }
+      if (message.fillable !== "") {
+        obj.fillable = message.fillable;
+      }
+      if (message.isBuy !== false) {
+        obj.isBuy = message.isBuy;
+      }
+      if (message.orderHash !== "") {
+        obj.orderHash = message.orderHash;
+      }
+      if (message.cid !== "") {
+        obj.cid = message.cid;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<TrimmedDerivativeLimitOrder>, I>>(
+      base?: I,
+    ): TrimmedDerivativeLimitOrder {
+      return TrimmedDerivativeLimitOrder.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<TrimmedDerivativeLimitOrder>, I>>(
+      object: I,
+    ): TrimmedDerivativeLimitOrder {
+      const message = createBaseTrimmedDerivativeLimitOrder();
+      message.price = object.price ?? "";
+      message.quantity = object.quantity ?? "";
+      message.margin = object.margin ?? "";
+      message.fillable = object.fillable ?? "";
+      message.isBuy = object.isBuy ?? false;
+      message.orderHash = object.orderHash ?? "";
+      message.cid = object.cid ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryTraderDerivativeOrdersResponse(): QueryTraderDerivativeOrdersResponse {
   return { orders: [] };
 }
 
-export const QueryTraderDerivativeOrdersResponse: MessageFns<QueryTraderDerivativeOrdersResponse> = {
-  encode(message: QueryTraderDerivativeOrdersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.orders) {
-      TrimmedDerivativeLimitOrder.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryTraderDerivativeOrdersResponse: MessageFns<QueryTraderDerivativeOrdersResponse> =
+  {
+    encode(
+      message: QueryTraderDerivativeOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.orders) {
+        TrimmedDerivativeLimitOrder.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTraderDerivativeOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTraderDerivativeOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTraderDerivativeOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryTraderDerivativeOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.orders.push(
+              TrimmedDerivativeLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.orders.push(TrimmedDerivativeLimitOrder.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryTraderDerivativeOrdersResponse {
+      return {
+        orders: globalThis.Array.isArray(object?.orders)
+          ? object.orders.map((e: any) =>
+              TrimmedDerivativeLimitOrder.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: QueryTraderDerivativeOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.orders?.length) {
+        obj.orders = message.orders.map((e) =>
+          TrimmedDerivativeLimitOrder.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryTraderDerivativeOrdersResponse {
-    return {
-      orders: globalThis.Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => TrimmedDerivativeLimitOrder.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryTraderDerivativeOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.orders?.length) {
-      obj.orders = message.orders.map((e) => TrimmedDerivativeLimitOrder.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryTraderDerivativeOrdersResponse>, I>>(
-    base?: I,
-  ): QueryTraderDerivativeOrdersResponse {
-    return QueryTraderDerivativeOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTraderDerivativeOrdersResponse>, I>>(
-    object: I,
-  ): QueryTraderDerivativeOrdersResponse {
-    const message = createBaseQueryTraderDerivativeOrdersResponse();
-    message.orders = object.orders?.map((e) => TrimmedDerivativeLimitOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryTraderDerivativeOrdersResponse>, I>,
+    >(base?: I): QueryTraderDerivativeOrdersResponse {
+      return QueryTraderDerivativeOrdersResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryTraderDerivativeOrdersResponse>, I>,
+    >(object: I): QueryTraderDerivativeOrdersResponse {
+      const message = createBaseQueryTraderDerivativeOrdersResponse();
+      message.orders =
+        object.orders?.map((e) => TrimmedDerivativeLimitOrder.fromPartial(e)) ||
+        [];
+      return message;
+    },
+  };
 
 function createBaseQueryAccountAddressDerivativeOrdersResponse(): QueryAccountAddressDerivativeOrdersResponse {
   return { orders: [] };
 }
 
-export const QueryAccountAddressDerivativeOrdersResponse: MessageFns<QueryAccountAddressDerivativeOrdersResponse> = {
-  encode(
-    message: QueryAccountAddressDerivativeOrdersResponse,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    for (const v of message.orders) {
-      TrimmedDerivativeLimitOrder.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryAccountAddressDerivativeOrdersResponse: MessageFns<QueryAccountAddressDerivativeOrdersResponse> =
+  {
+    encode(
+      message: QueryAccountAddressDerivativeOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.orders) {
+        TrimmedDerivativeLimitOrder.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountAddressDerivativeOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAccountAddressDerivativeOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryAccountAddressDerivativeOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryAccountAddressDerivativeOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.orders.push(
+              TrimmedDerivativeLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.orders.push(TrimmedDerivativeLimitOrder.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryAccountAddressDerivativeOrdersResponse {
+      return {
+        orders: globalThis.Array.isArray(object?.orders)
+          ? object.orders.map((e: any) =>
+              TrimmedDerivativeLimitOrder.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: QueryAccountAddressDerivativeOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.orders?.length) {
+        obj.orders = message.orders.map((e) =>
+          TrimmedDerivativeLimitOrder.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryAccountAddressDerivativeOrdersResponse {
-    return {
-      orders: globalThis.Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => TrimmedDerivativeLimitOrder.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryAccountAddressDerivativeOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.orders?.length) {
-      obj.orders = message.orders.map((e) => TrimmedDerivativeLimitOrder.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryAccountAddressDerivativeOrdersResponse>, I>>(
-    base?: I,
-  ): QueryAccountAddressDerivativeOrdersResponse {
-    return QueryAccountAddressDerivativeOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryAccountAddressDerivativeOrdersResponse>, I>>(
-    object: I,
-  ): QueryAccountAddressDerivativeOrdersResponse {
-    const message = createBaseQueryAccountAddressDerivativeOrdersResponse();
-    message.orders = object.orders?.map((e) => TrimmedDerivativeLimitOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<QueryAccountAddressDerivativeOrdersResponse>,
+        I
+      >,
+    >(base?: I): QueryAccountAddressDerivativeOrdersResponse {
+      return QueryAccountAddressDerivativeOrdersResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QueryAccountAddressDerivativeOrdersResponse>,
+        I
+      >,
+    >(object: I): QueryAccountAddressDerivativeOrdersResponse {
+      const message = createBaseQueryAccountAddressDerivativeOrdersResponse();
+      message.orders =
+        object.orders?.map((e) => TrimmedDerivativeLimitOrder.fromPartial(e)) ||
+        [];
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeOrdersByHashesRequest(): QueryDerivativeOrdersByHashesRequest {
   return { marketId: "", subaccountId: "", orderHashes: [] };
 }
 
-export const QueryDerivativeOrdersByHashesRequest: MessageFns<QueryDerivativeOrdersByHashesRequest> = {
-  encode(message: QueryDerivativeOrdersByHashesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(18).string(message.subaccountId);
-    }
-    for (const v of message.orderHashes) {
-      writer.uint32(26).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeOrdersByHashesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeOrdersByHashesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.orderHashes.push(reader.string());
-          continue;
-        }
+export const QueryDerivativeOrdersByHashesRequest: MessageFns<QueryDerivativeOrdersByHashesRequest> =
+  {
+    encode(
+      message: QueryDerivativeOrdersByHashesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccountId !== "") {
+        writer.uint32(18).string(message.subaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.orderHashes) {
+        writer.uint32(26).string(v!);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QueryDerivativeOrdersByHashesRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      orderHashes: globalThis.Array.isArray(object?.orderHashes)
-        ? object.orderHashes.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.order_hashes)
-        ? object.order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeOrdersByHashesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeOrdersByHashesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryDerivativeOrdersByHashesRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.orderHashes?.length) {
-      obj.orderHashes = message.orderHashes;
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryDerivativeOrdersByHashesRequest>, I>>(
-    base?: I,
-  ): QueryDerivativeOrdersByHashesRequest {
-    return QueryDerivativeOrdersByHashesRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeOrdersByHashesRequest>, I>>(
-    object: I,
-  ): QueryDerivativeOrdersByHashesRequest {
-    const message = createBaseQueryDerivativeOrdersByHashesRequest();
-    message.marketId = object.marketId ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    message.orderHashes = object.orderHashes?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.orderHashes.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeOrdersByHashesRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        orderHashes: globalThis.Array.isArray(object?.orderHashes)
+          ? object.orderHashes.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.order_hashes)
+            ? object.order_hashes.map((e: any) => globalThis.String(e))
+            : [],
+      };
+    },
+
+    toJSON(message: QueryDerivativeOrdersByHashesRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.orderHashes?.length) {
+        obj.orderHashes = message.orderHashes;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<QueryDerivativeOrdersByHashesRequest>, I>,
+    >(base?: I): QueryDerivativeOrdersByHashesRequest {
+      return QueryDerivativeOrdersByHashesRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryDerivativeOrdersByHashesRequest>, I>,
+    >(object: I): QueryDerivativeOrdersByHashesRequest {
+      const message = createBaseQueryDerivativeOrdersByHashesRequest();
+      message.marketId = object.marketId ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      message.orderHashes = object.orderHashes?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeOrdersByHashesResponse(): QueryDerivativeOrdersByHashesResponse {
   return { orders: [] };
 }
 
-export const QueryDerivativeOrdersByHashesResponse: MessageFns<QueryDerivativeOrdersByHashesResponse> = {
-  encode(message: QueryDerivativeOrdersByHashesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.orders) {
-      TrimmedDerivativeLimitOrder.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryDerivativeOrdersByHashesResponse: MessageFns<QueryDerivativeOrdersByHashesResponse> =
+  {
+    encode(
+      message: QueryDerivativeOrdersByHashesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.orders) {
+        TrimmedDerivativeLimitOrder.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeOrdersByHashesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeOrdersByHashesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeOrdersByHashesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeOrdersByHashesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.orders.push(
+              TrimmedDerivativeLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.orders.push(TrimmedDerivativeLimitOrder.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeOrdersByHashesResponse {
+      return {
+        orders: globalThis.Array.isArray(object?.orders)
+          ? object.orders.map((e: any) =>
+              TrimmedDerivativeLimitOrder.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: QueryDerivativeOrdersByHashesResponse): unknown {
+      const obj: any = {};
+      if (message.orders?.length) {
+        obj.orders = message.orders.map((e) =>
+          TrimmedDerivativeLimitOrder.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDerivativeOrdersByHashesResponse {
-    return {
-      orders: globalThis.Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => TrimmedDerivativeLimitOrder.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryDerivativeOrdersByHashesResponse): unknown {
-    const obj: any = {};
-    if (message.orders?.length) {
-      obj.orders = message.orders.map((e) => TrimmedDerivativeLimitOrder.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDerivativeOrdersByHashesResponse>, I>>(
-    base?: I,
-  ): QueryDerivativeOrdersByHashesResponse {
-    return QueryDerivativeOrdersByHashesResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeOrdersByHashesResponse>, I>>(
-    object: I,
-  ): QueryDerivativeOrdersByHashesResponse {
-    const message = createBaseQueryDerivativeOrdersByHashesResponse();
-    message.orders = object.orders?.map((e) => TrimmedDerivativeLimitOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryDerivativeOrdersByHashesResponse>, I>,
+    >(base?: I): QueryDerivativeOrdersByHashesResponse {
+      return QueryDerivativeOrdersByHashesResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryDerivativeOrdersByHashesResponse>, I>,
+    >(object: I): QueryDerivativeOrdersByHashesResponse {
+      const message = createBaseQueryDerivativeOrdersByHashesResponse();
+      message.orders =
+        object.orders?.map((e) => TrimmedDerivativeLimitOrder.fromPartial(e)) ||
+        [];
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeMarketsRequest(): QueryDerivativeMarketsRequest {
   return { status: "", marketIds: [], withMidPriceAndTob: false };
 }
 
-export const QueryDerivativeMarketsRequest: MessageFns<QueryDerivativeMarketsRequest> = {
-  encode(message: QueryDerivativeMarketsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.status !== "") {
-      writer.uint32(10).string(message.status);
-    }
-    for (const v of message.marketIds) {
-      writer.uint32(18).string(v!);
-    }
-    if (message.withMidPriceAndTob !== false) {
-      writer.uint32(24).bool(message.withMidPriceAndTob);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeMarketsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeMarketsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.status = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketIds.push(reader.string());
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.withMidPriceAndTob = reader.bool();
-          continue;
-        }
+export const QueryDerivativeMarketsRequest: MessageFns<QueryDerivativeMarketsRequest> =
+  {
+    encode(
+      message: QueryDerivativeMarketsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.status !== "") {
+        writer.uint32(10).string(message.status);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.marketIds) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.withMidPriceAndTob !== false) {
+        writer.uint32(24).bool(message.withMidPriceAndTob);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QueryDerivativeMarketsRequest {
-    return {
-      status: isSet(object.status) ? globalThis.String(object.status) : "",
-      marketIds: globalThis.Array.isArray(object?.marketIds)
-        ? object.marketIds.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.market_ids)
-        ? object.market_ids.map((e: any) => globalThis.String(e))
-        : [],
-      withMidPriceAndTob: isSet(object.withMidPriceAndTob)
-        ? globalThis.Boolean(object.withMidPriceAndTob)
-        : isSet(object.with_mid_price_and_tob)
-        ? globalThis.Boolean(object.with_mid_price_and_tob)
-        : false,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeMarketsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeMarketsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryDerivativeMarketsRequest): unknown {
-    const obj: any = {};
-    if (message.status !== "") {
-      obj.status = message.status;
-    }
-    if (message.marketIds?.length) {
-      obj.marketIds = message.marketIds;
-    }
-    if (message.withMidPriceAndTob !== false) {
-      obj.withMidPriceAndTob = message.withMidPriceAndTob;
-    }
-    return obj;
-  },
+            message.status = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryDerivativeMarketsRequest>, I>>(base?: I): QueryDerivativeMarketsRequest {
-    return QueryDerivativeMarketsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeMarketsRequest>, I>>(
-    object: I,
-  ): QueryDerivativeMarketsRequest {
-    const message = createBaseQueryDerivativeMarketsRequest();
-    message.status = object.status ?? "";
-    message.marketIds = object.marketIds?.map((e) => e) || [];
-    message.withMidPriceAndTob = object.withMidPriceAndTob ?? false;
-    return message;
-  },
-};
+            message.marketIds.push(reader.string());
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.withMidPriceAndTob = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeMarketsRequest {
+      return {
+        status: isSet(object.status) ? globalThis.String(object.status) : "",
+        marketIds: globalThis.Array.isArray(object?.marketIds)
+          ? object.marketIds.map((e: any) => globalThis.String(e))
+          : globalThis.Array.isArray(object?.market_ids)
+            ? object.market_ids.map((e: any) => globalThis.String(e))
+            : [],
+        withMidPriceAndTob: isSet(object.withMidPriceAndTob)
+          ? globalThis.Boolean(object.withMidPriceAndTob)
+          : isSet(object.with_mid_price_and_tob)
+            ? globalThis.Boolean(object.with_mid_price_and_tob)
+            : false,
+      };
+    },
+
+    toJSON(message: QueryDerivativeMarketsRequest): unknown {
+      const obj: any = {};
+      if (message.status !== "") {
+        obj.status = message.status;
+      }
+      if (message.marketIds?.length) {
+        obj.marketIds = message.marketIds;
+      }
+      if (message.withMidPriceAndTob !== false) {
+        obj.withMidPriceAndTob = message.withMidPriceAndTob;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryDerivativeMarketsRequest>, I>>(
+      base?: I,
+    ): QueryDerivativeMarketsRequest {
+      return QueryDerivativeMarketsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryDerivativeMarketsRequest>, I>>(
+      object: I,
+    ): QueryDerivativeMarketsRequest {
+      const message = createBaseQueryDerivativeMarketsRequest();
+      message.status = object.status ?? "";
+      message.marketIds = object.marketIds?.map((e) => e) || [];
+      message.withMidPriceAndTob = object.withMidPriceAndTob ?? false;
+      return message;
+    },
+  };
 
 function createBasePriceLevel(): PriceLevel {
   return { price: "", quantity: "" };
 }
 
 export const PriceLevel: MessageFns<PriceLevel> = {
-  encode(message: PriceLevel, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceLevel,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -6293,7 +7144,8 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceLevel {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceLevel();
     while (reader.pos < end) {
@@ -6327,7 +7179,9 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   fromJSON(object: any): PriceLevel {
     return {
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
     };
   },
 
@@ -6345,7 +7199,9 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   create<I extends Exact<DeepPartial<PriceLevel>, I>>(base?: I): PriceLevel {
     return PriceLevel.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceLevel>, I>>(object: I): PriceLevel {
+  fromPartial<I extends Exact<DeepPartial<PriceLevel>, I>>(
+    object: I,
+  ): PriceLevel {
     const message = createBasePriceLevel();
     message.price = object.price ?? "";
     message.quantity = object.quantity ?? "";
@@ -6358,18 +7214,31 @@ function createBasePerpetualMarketState(): PerpetualMarketState {
 }
 
 export const PerpetualMarketState: MessageFns<PerpetualMarketState> = {
-  encode(message: PerpetualMarketState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PerpetualMarketState,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketInfo !== undefined) {
-      PerpetualMarketInfo.encode(message.marketInfo, writer.uint32(10).fork()).join();
+      PerpetualMarketInfo.encode(
+        message.marketInfo,
+        writer.uint32(10).fork(),
+      ).join();
     }
     if (message.fundingInfo !== undefined) {
-      PerpetualMarketFunding.encode(message.fundingInfo, writer.uint32(18).fork()).join();
+      PerpetualMarketFunding.encode(
+        message.fundingInfo,
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PerpetualMarketState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PerpetualMarketState {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePerpetualMarketState();
     while (reader.pos < end) {
@@ -6380,7 +7249,10 @@ export const PerpetualMarketState: MessageFns<PerpetualMarketState> = {
             break;
           }
 
-          message.marketInfo = PerpetualMarketInfo.decode(reader, reader.uint32());
+          message.marketInfo = PerpetualMarketInfo.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 2: {
@@ -6388,7 +7260,10 @@ export const PerpetualMarketState: MessageFns<PerpetualMarketState> = {
             break;
           }
 
-          message.fundingInfo = PerpetualMarketFunding.decode(reader, reader.uint32());
+          message.fundingInfo = PerpetualMarketFunding.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -6405,13 +7280,13 @@ export const PerpetualMarketState: MessageFns<PerpetualMarketState> = {
       marketInfo: isSet(object.marketInfo)
         ? PerpetualMarketInfo.fromJSON(object.marketInfo)
         : isSet(object.market_info)
-        ? PerpetualMarketInfo.fromJSON(object.market_info)
-        : undefined,
+          ? PerpetualMarketInfo.fromJSON(object.market_info)
+          : undefined,
       fundingInfo: isSet(object.fundingInfo)
         ? PerpetualMarketFunding.fromJSON(object.fundingInfo)
         : isSet(object.funding_info)
-        ? PerpetualMarketFunding.fromJSON(object.funding_info)
-        : undefined,
+          ? PerpetualMarketFunding.fromJSON(object.funding_info)
+          : undefined,
     };
   },
 
@@ -6426,17 +7301,23 @@ export const PerpetualMarketState: MessageFns<PerpetualMarketState> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PerpetualMarketState>, I>>(base?: I): PerpetualMarketState {
+  create<I extends Exact<DeepPartial<PerpetualMarketState>, I>>(
+    base?: I,
+  ): PerpetualMarketState {
     return PerpetualMarketState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PerpetualMarketState>, I>>(object: I): PerpetualMarketState {
+  fromPartial<I extends Exact<DeepPartial<PerpetualMarketState>, I>>(
+    object: I,
+  ): PerpetualMarketState {
     const message = createBasePerpetualMarketState();
-    message.marketInfo = (object.marketInfo !== undefined && object.marketInfo !== null)
-      ? PerpetualMarketInfo.fromPartial(object.marketInfo)
-      : undefined;
-    message.fundingInfo = (object.fundingInfo !== undefined && object.fundingInfo !== null)
-      ? PerpetualMarketFunding.fromPartial(object.fundingInfo)
-      : undefined;
+    message.marketInfo =
+      object.marketInfo !== undefined && object.marketInfo !== null
+        ? PerpetualMarketInfo.fromPartial(object.marketInfo)
+        : undefined;
+    message.fundingInfo =
+      object.fundingInfo !== undefined && object.fundingInfo !== null
+        ? PerpetualMarketFunding.fromPartial(object.fundingInfo)
+        : undefined;
     return message;
   },
 };
@@ -6452,27 +7333,43 @@ function createBaseFullDerivativeMarket(): FullDerivativeMarket {
 }
 
 export const FullDerivativeMarket: MessageFns<FullDerivativeMarket> = {
-  encode(message: FullDerivativeMarket, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FullDerivativeMarket,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.market !== undefined) {
       DerivativeMarket.encode(message.market, writer.uint32(10).fork()).join();
     }
     if (message.perpetualInfo !== undefined) {
-      PerpetualMarketState.encode(message.perpetualInfo, writer.uint32(18).fork()).join();
+      PerpetualMarketState.encode(
+        message.perpetualInfo,
+        writer.uint32(18).fork(),
+      ).join();
     }
     if (message.futuresInfo !== undefined) {
-      ExpiryFuturesMarketInfo.encode(message.futuresInfo, writer.uint32(26).fork()).join();
+      ExpiryFuturesMarketInfo.encode(
+        message.futuresInfo,
+        writer.uint32(26).fork(),
+      ).join();
     }
     if (message.markPrice !== "") {
       writer.uint32(34).string(message.markPrice);
     }
     if (message.midPriceAndTob !== undefined) {
-      MidPriceAndTOB.encode(message.midPriceAndTob, writer.uint32(42).fork()).join();
+      MidPriceAndTOB.encode(
+        message.midPriceAndTob,
+        writer.uint32(42).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): FullDerivativeMarket {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): FullDerivativeMarket {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFullDerivativeMarket();
     while (reader.pos < end) {
@@ -6491,7 +7388,10 @@ export const FullDerivativeMarket: MessageFns<FullDerivativeMarket> = {
             break;
           }
 
-          message.perpetualInfo = PerpetualMarketState.decode(reader, reader.uint32());
+          message.perpetualInfo = PerpetualMarketState.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 3: {
@@ -6499,7 +7399,10 @@ export const FullDerivativeMarket: MessageFns<FullDerivativeMarket> = {
             break;
           }
 
-          message.futuresInfo = ExpiryFuturesMarketInfo.decode(reader, reader.uint32());
+          message.futuresInfo = ExpiryFuturesMarketInfo.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 4: {
@@ -6515,7 +7418,10 @@ export const FullDerivativeMarket: MessageFns<FullDerivativeMarket> = {
             break;
           }
 
-          message.midPriceAndTob = MidPriceAndTOB.decode(reader, reader.uint32());
+          message.midPriceAndTob = MidPriceAndTOB.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -6529,27 +7435,29 @@ export const FullDerivativeMarket: MessageFns<FullDerivativeMarket> = {
 
   fromJSON(object: any): FullDerivativeMarket {
     return {
-      market: isSet(object.market) ? DerivativeMarket.fromJSON(object.market) : undefined,
+      market: isSet(object.market)
+        ? DerivativeMarket.fromJSON(object.market)
+        : undefined,
       perpetualInfo: isSet(object.perpetualInfo)
         ? PerpetualMarketState.fromJSON(object.perpetualInfo)
         : isSet(object.perpetual_info)
-        ? PerpetualMarketState.fromJSON(object.perpetual_info)
-        : undefined,
+          ? PerpetualMarketState.fromJSON(object.perpetual_info)
+          : undefined,
       futuresInfo: isSet(object.futuresInfo)
         ? ExpiryFuturesMarketInfo.fromJSON(object.futuresInfo)
         : isSet(object.futures_info)
-        ? ExpiryFuturesMarketInfo.fromJSON(object.futures_info)
-        : undefined,
+          ? ExpiryFuturesMarketInfo.fromJSON(object.futures_info)
+          : undefined,
       markPrice: isSet(object.markPrice)
         ? globalThis.String(object.markPrice)
         : isSet(object.mark_price)
-        ? globalThis.String(object.mark_price)
-        : "",
+          ? globalThis.String(object.mark_price)
+          : "",
       midPriceAndTob: isSet(object.midPriceAndTob)
         ? MidPriceAndTOB.fromJSON(object.midPriceAndTob)
         : isSet(object.mid_price_and_tob)
-        ? MidPriceAndTOB.fromJSON(object.mid_price_and_tob)
-        : undefined,
+          ? MidPriceAndTOB.fromJSON(object.mid_price_and_tob)
+          : undefined,
     };
   },
 
@@ -6573,24 +7481,32 @@ export const FullDerivativeMarket: MessageFns<FullDerivativeMarket> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FullDerivativeMarket>, I>>(base?: I): FullDerivativeMarket {
+  create<I extends Exact<DeepPartial<FullDerivativeMarket>, I>>(
+    base?: I,
+  ): FullDerivativeMarket {
     return FullDerivativeMarket.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FullDerivativeMarket>, I>>(object: I): FullDerivativeMarket {
+  fromPartial<I extends Exact<DeepPartial<FullDerivativeMarket>, I>>(
+    object: I,
+  ): FullDerivativeMarket {
     const message = createBaseFullDerivativeMarket();
-    message.market = (object.market !== undefined && object.market !== null)
-      ? DerivativeMarket.fromPartial(object.market)
-      : undefined;
-    message.perpetualInfo = (object.perpetualInfo !== undefined && object.perpetualInfo !== null)
-      ? PerpetualMarketState.fromPartial(object.perpetualInfo)
-      : undefined;
-    message.futuresInfo = (object.futuresInfo !== undefined && object.futuresInfo !== null)
-      ? ExpiryFuturesMarketInfo.fromPartial(object.futuresInfo)
-      : undefined;
+    message.market =
+      object.market !== undefined && object.market !== null
+        ? DerivativeMarket.fromPartial(object.market)
+        : undefined;
+    message.perpetualInfo =
+      object.perpetualInfo !== undefined && object.perpetualInfo !== null
+        ? PerpetualMarketState.fromPartial(object.perpetualInfo)
+        : undefined;
+    message.futuresInfo =
+      object.futuresInfo !== undefined && object.futuresInfo !== null
+        ? ExpiryFuturesMarketInfo.fromPartial(object.futuresInfo)
+        : undefined;
     message.markPrice = object.markPrice ?? "";
-    message.midPriceAndTob = (object.midPriceAndTob !== undefined && object.midPriceAndTob !== null)
-      ? MidPriceAndTOB.fromPartial(object.midPriceAndTob)
-      : undefined;
+    message.midPriceAndTob =
+      object.midPriceAndTob !== undefined && object.midPriceAndTob !== null
+        ? MidPriceAndTOB.fromPartial(object.midPriceAndTob)
+        : undefined;
     return message;
   },
 };
@@ -6599,863 +7515,1011 @@ function createBaseQueryDerivativeMarketsResponse(): QueryDerivativeMarketsRespo
   return { markets: [] };
 }
 
-export const QueryDerivativeMarketsResponse: MessageFns<QueryDerivativeMarketsResponse> = {
-  encode(message: QueryDerivativeMarketsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.markets) {
-      FullDerivativeMarket.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryDerivativeMarketsResponse: MessageFns<QueryDerivativeMarketsResponse> =
+  {
+    encode(
+      message: QueryDerivativeMarketsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.markets) {
+        FullDerivativeMarket.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeMarketsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeMarketsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeMarketsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeMarketsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.markets.push(
+              FullDerivativeMarket.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.markets.push(FullDerivativeMarket.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeMarketsResponse {
+      return {
+        markets: globalThis.Array.isArray(object?.markets)
+          ? object.markets.map((e: any) => FullDerivativeMarket.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryDerivativeMarketsResponse): unknown {
+      const obj: any = {};
+      if (message.markets?.length) {
+        obj.markets = message.markets.map((e) =>
+          FullDerivativeMarket.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDerivativeMarketsResponse {
-    return {
-      markets: globalThis.Array.isArray(object?.markets)
-        ? object.markets.map((e: any) => FullDerivativeMarket.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryDerivativeMarketsResponse): unknown {
-    const obj: any = {};
-    if (message.markets?.length) {
-      obj.markets = message.markets.map((e) => FullDerivativeMarket.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDerivativeMarketsResponse>, I>>(base?: I): QueryDerivativeMarketsResponse {
-    return QueryDerivativeMarketsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeMarketsResponse>, I>>(
-    object: I,
-  ): QueryDerivativeMarketsResponse {
-    const message = createBaseQueryDerivativeMarketsResponse();
-    message.markets = object.markets?.map((e) => FullDerivativeMarket.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryDerivativeMarketsResponse>, I>>(
+      base?: I,
+    ): QueryDerivativeMarketsResponse {
+      return QueryDerivativeMarketsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryDerivativeMarketsResponse>, I>,
+    >(object: I): QueryDerivativeMarketsResponse {
+      const message = createBaseQueryDerivativeMarketsResponse();
+      message.markets =
+        object.markets?.map((e) => FullDerivativeMarket.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeMarketRequest(): QueryDerivativeMarketRequest {
   return { marketId: "" };
 }
 
-export const QueryDerivativeMarketRequest: MessageFns<QueryDerivativeMarketRequest> = {
-  encode(message: QueryDerivativeMarketRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryDerivativeMarketRequest: MessageFns<QueryDerivativeMarketRequest> =
+  {
+    encode(
+      message: QueryDerivativeMarketRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeMarketRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeMarketRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeMarketRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeMarketRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeMarketRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryDerivativeMarketRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDerivativeMarketRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryDerivativeMarketRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDerivativeMarketRequest>, I>>(base?: I): QueryDerivativeMarketRequest {
-    return QueryDerivativeMarketRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeMarketRequest>, I>>(object: I): QueryDerivativeMarketRequest {
-    const message = createBaseQueryDerivativeMarketRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryDerivativeMarketRequest>, I>>(
+      base?: I,
+    ): QueryDerivativeMarketRequest {
+      return QueryDerivativeMarketRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryDerivativeMarketRequest>, I>>(
+      object: I,
+    ): QueryDerivativeMarketRequest {
+      const message = createBaseQueryDerivativeMarketRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeMarketResponse(): QueryDerivativeMarketResponse {
   return { market: undefined };
 }
 
-export const QueryDerivativeMarketResponse: MessageFns<QueryDerivativeMarketResponse> = {
-  encode(message: QueryDerivativeMarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.market !== undefined) {
-      FullDerivativeMarket.encode(message.market, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryDerivativeMarketResponse: MessageFns<QueryDerivativeMarketResponse> =
+  {
+    encode(
+      message: QueryDerivativeMarketResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.market !== undefined) {
+        FullDerivativeMarket.encode(
+          message.market,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeMarketResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeMarketResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeMarketResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.market = FullDerivativeMarket.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
           }
-
-          message.market = FullDerivativeMarket.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeMarketResponse {
+      return {
+        market: isSet(object.market)
+          ? FullDerivativeMarket.fromJSON(object.market)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QueryDerivativeMarketResponse): unknown {
+      const obj: any = {};
+      if (message.market !== undefined) {
+        obj.market = FullDerivativeMarket.toJSON(message.market);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDerivativeMarketResponse {
-    return { market: isSet(object.market) ? FullDerivativeMarket.fromJSON(object.market) : undefined };
-  },
-
-  toJSON(message: QueryDerivativeMarketResponse): unknown {
-    const obj: any = {};
-    if (message.market !== undefined) {
-      obj.market = FullDerivativeMarket.toJSON(message.market);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDerivativeMarketResponse>, I>>(base?: I): QueryDerivativeMarketResponse {
-    return QueryDerivativeMarketResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeMarketResponse>, I>>(
-    object: I,
-  ): QueryDerivativeMarketResponse {
-    const message = createBaseQueryDerivativeMarketResponse();
-    message.market = (object.market !== undefined && object.market !== null)
-      ? FullDerivativeMarket.fromPartial(object.market)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryDerivativeMarketResponse>, I>>(
+      base?: I,
+    ): QueryDerivativeMarketResponse {
+      return QueryDerivativeMarketResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryDerivativeMarketResponse>, I>>(
+      object: I,
+    ): QueryDerivativeMarketResponse {
+      const message = createBaseQueryDerivativeMarketResponse();
+      message.market =
+        object.market !== undefined && object.market !== null
+          ? FullDerivativeMarket.fromPartial(object.market)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeMarketAddressRequest(): QueryDerivativeMarketAddressRequest {
   return { marketId: "" };
 }
 
-export const QueryDerivativeMarketAddressRequest: MessageFns<QueryDerivativeMarketAddressRequest> = {
-  encode(message: QueryDerivativeMarketAddressRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryDerivativeMarketAddressRequest: MessageFns<QueryDerivativeMarketAddressRequest> =
+  {
+    encode(
+      message: QueryDerivativeMarketAddressRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeMarketAddressRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeMarketAddressRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeMarketAddressRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeMarketAddressRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeMarketAddressRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryDerivativeMarketAddressRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDerivativeMarketAddressRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryDerivativeMarketAddressRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDerivativeMarketAddressRequest>, I>>(
-    base?: I,
-  ): QueryDerivativeMarketAddressRequest {
-    return QueryDerivativeMarketAddressRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeMarketAddressRequest>, I>>(
-    object: I,
-  ): QueryDerivativeMarketAddressRequest {
-    const message = createBaseQueryDerivativeMarketAddressRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryDerivativeMarketAddressRequest>, I>,
+    >(base?: I): QueryDerivativeMarketAddressRequest {
+      return QueryDerivativeMarketAddressRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryDerivativeMarketAddressRequest>, I>,
+    >(object: I): QueryDerivativeMarketAddressRequest {
+      const message = createBaseQueryDerivativeMarketAddressRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryDerivativeMarketAddressResponse(): QueryDerivativeMarketAddressResponse {
   return { address: "", subaccountId: "" };
 }
 
-export const QueryDerivativeMarketAddressResponse: MessageFns<QueryDerivativeMarketAddressResponse> = {
-  encode(message: QueryDerivativeMarketAddressResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.address !== "") {
-      writer.uint32(10).string(message.address);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(18).string(message.subaccountId);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDerivativeMarketAddressResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDerivativeMarketAddressResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.address = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
+export const QueryDerivativeMarketAddressResponse: MessageFns<QueryDerivativeMarketAddressResponse> =
+  {
+    encode(
+      message: QueryDerivativeMarketAddressResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.address !== "") {
+        writer.uint32(10).string(message.address);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccountId !== "") {
+        writer.uint32(18).string(message.subaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryDerivativeMarketAddressResponse {
-    return {
-      address: isSet(object.address) ? globalThis.String(object.address) : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDerivativeMarketAddressResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDerivativeMarketAddressResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryDerivativeMarketAddressResponse): unknown {
-    const obj: any = {};
-    if (message.address !== "") {
-      obj.address = message.address;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    return obj;
-  },
+            message.address = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryDerivativeMarketAddressResponse>, I>>(
-    base?: I,
-  ): QueryDerivativeMarketAddressResponse {
-    return QueryDerivativeMarketAddressResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDerivativeMarketAddressResponse>, I>>(
-    object: I,
-  ): QueryDerivativeMarketAddressResponse {
-    const message = createBaseQueryDerivativeMarketAddressResponse();
-    message.address = object.address ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    return message;
-  },
-};
+            message.subaccountId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryDerivativeMarketAddressResponse {
+      return {
+        address: isSet(object.address) ? globalThis.String(object.address) : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryDerivativeMarketAddressResponse): unknown {
+      const obj: any = {};
+      if (message.address !== "") {
+        obj.address = message.address;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<QueryDerivativeMarketAddressResponse>, I>,
+    >(base?: I): QueryDerivativeMarketAddressResponse {
+      return QueryDerivativeMarketAddressResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryDerivativeMarketAddressResponse>, I>,
+    >(object: I): QueryDerivativeMarketAddressResponse {
+      const message = createBaseQueryDerivativeMarketAddressResponse();
+      message.address = object.address ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountTradeNonceRequest(): QuerySubaccountTradeNonceRequest {
   return { subaccountId: "" };
 }
 
-export const QuerySubaccountTradeNonceRequest: MessageFns<QuerySubaccountTradeNonceRequest> = {
-  encode(message: QuerySubaccountTradeNonceRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    return writer;
-  },
+export const QuerySubaccountTradeNonceRequest: MessageFns<QuerySubaccountTradeNonceRequest> =
+  {
+    encode(
+      message: QuerySubaccountTradeNonceRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountTradeNonceRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountTradeNonceRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountTradeNonceRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountTradeNonceRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.subaccountId = reader.string();
+            continue;
           }
-
-          message.subaccountId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountTradeNonceRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QuerySubaccountTradeNonceRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySubaccountTradeNonceRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QuerySubaccountTradeNonceRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySubaccountTradeNonceRequest>, I>>(
-    base?: I,
-  ): QuerySubaccountTradeNonceRequest {
-    return QuerySubaccountTradeNonceRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountTradeNonceRequest>, I>>(
-    object: I,
-  ): QuerySubaccountTradeNonceRequest {
-    const message = createBaseQuerySubaccountTradeNonceRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QuerySubaccountTradeNonceRequest>, I>>(
+      base?: I,
+    ): QuerySubaccountTradeNonceRequest {
+      return QuerySubaccountTradeNonceRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountTradeNonceRequest>, I>,
+    >(object: I): QuerySubaccountTradeNonceRequest {
+      const message = createBaseQuerySubaccountTradeNonceRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountPositionsRequest(): QuerySubaccountPositionsRequest {
   return { subaccountId: "" };
 }
 
-export const QuerySubaccountPositionsRequest: MessageFns<QuerySubaccountPositionsRequest> = {
-  encode(message: QuerySubaccountPositionsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    return writer;
-  },
+export const QuerySubaccountPositionsRequest: MessageFns<QuerySubaccountPositionsRequest> =
+  {
+    encode(
+      message: QuerySubaccountPositionsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountPositionsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountPositionsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountPositionsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountPositionsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.subaccountId = reader.string();
+            continue;
           }
-
-          message.subaccountId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountPositionsRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QuerySubaccountPositionsRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySubaccountPositionsRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QuerySubaccountPositionsRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySubaccountPositionsRequest>, I>>(base?: I): QuerySubaccountPositionsRequest {
-    return QuerySubaccountPositionsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountPositionsRequest>, I>>(
-    object: I,
-  ): QuerySubaccountPositionsRequest {
-    const message = createBaseQuerySubaccountPositionsRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QuerySubaccountPositionsRequest>, I>>(
+      base?: I,
+    ): QuerySubaccountPositionsRequest {
+      return QuerySubaccountPositionsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountPositionsRequest>, I>,
+    >(object: I): QuerySubaccountPositionsRequest {
+      const message = createBaseQuerySubaccountPositionsRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountPositionInMarketRequest(): QuerySubaccountPositionInMarketRequest {
   return { subaccountId: "", marketId: "" };
 }
 
-export const QuerySubaccountPositionInMarketRequest: MessageFns<QuerySubaccountPositionInMarketRequest> = {
-  encode(message: QuerySubaccountPositionInMarketRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountPositionInMarketRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountPositionInMarketRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
+export const QuerySubaccountPositionInMarketRequest: MessageFns<QuerySubaccountPositionInMarketRequest> =
+  {
+    encode(
+      message: QuerySubaccountPositionInMarketRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QuerySubaccountPositionInMarketRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountPositionInMarketRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountPositionInMarketRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QuerySubaccountPositionInMarketRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QuerySubaccountPositionInMarketRequest>, I>>(
-    base?: I,
-  ): QuerySubaccountPositionInMarketRequest {
-    return QuerySubaccountPositionInMarketRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountPositionInMarketRequest>, I>>(
-    object: I,
-  ): QuerySubaccountPositionInMarketRequest {
-    const message = createBaseQuerySubaccountPositionInMarketRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountPositionInMarketRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QuerySubaccountPositionInMarketRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<QuerySubaccountPositionInMarketRequest>, I>,
+    >(base?: I): QuerySubaccountPositionInMarketRequest {
+      return QuerySubaccountPositionInMarketRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountPositionInMarketRequest>, I>,
+    >(object: I): QuerySubaccountPositionInMarketRequest {
+      const message = createBaseQuerySubaccountPositionInMarketRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountEffectivePositionInMarketRequest(): QuerySubaccountEffectivePositionInMarketRequest {
   return { subaccountId: "", marketId: "" };
 }
 
-export const QuerySubaccountEffectivePositionInMarketRequest: MessageFns<
-  QuerySubaccountEffectivePositionInMarketRequest
-> = {
-  encode(
-    message: QuerySubaccountEffectivePositionInMarketRequest,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountEffectivePositionInMarketRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountEffectivePositionInMarketRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
+export const QuerySubaccountEffectivePositionInMarketRequest: MessageFns<QuerySubaccountEffectivePositionInMarketRequest> =
+  {
+    encode(
+      message: QuerySubaccountEffectivePositionInMarketRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QuerySubaccountEffectivePositionInMarketRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountEffectivePositionInMarketRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseQuerySubaccountEffectivePositionInMarketRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QuerySubaccountEffectivePositionInMarketRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QuerySubaccountEffectivePositionInMarketRequest>, I>>(
-    base?: I,
-  ): QuerySubaccountEffectivePositionInMarketRequest {
-    return QuerySubaccountEffectivePositionInMarketRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountEffectivePositionInMarketRequest>, I>>(
-    object: I,
-  ): QuerySubaccountEffectivePositionInMarketRequest {
-    const message = createBaseQuerySubaccountEffectivePositionInMarketRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountEffectivePositionInMarketRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QuerySubaccountEffectivePositionInMarketRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<
+        DeepPartial<QuerySubaccountEffectivePositionInMarketRequest>,
+        I
+      >,
+    >(base?: I): QuerySubaccountEffectivePositionInMarketRequest {
+      return QuerySubaccountEffectivePositionInMarketRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QuerySubaccountEffectivePositionInMarketRequest>,
+        I
+      >,
+    >(object: I): QuerySubaccountEffectivePositionInMarketRequest {
+      const message =
+        createBaseQuerySubaccountEffectivePositionInMarketRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountOrderMetadataRequest(): QuerySubaccountOrderMetadataRequest {
   return { subaccountId: "" };
 }
 
-export const QuerySubaccountOrderMetadataRequest: MessageFns<QuerySubaccountOrderMetadataRequest> = {
-  encode(message: QuerySubaccountOrderMetadataRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    return writer;
-  },
+export const QuerySubaccountOrderMetadataRequest: MessageFns<QuerySubaccountOrderMetadataRequest> =
+  {
+    encode(
+      message: QuerySubaccountOrderMetadataRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountOrderMetadataRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountOrderMetadataRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountOrderMetadataRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountOrderMetadataRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.subaccountId = reader.string();
+            continue;
           }
-
-          message.subaccountId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountOrderMetadataRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QuerySubaccountOrderMetadataRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySubaccountOrderMetadataRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QuerySubaccountOrderMetadataRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySubaccountOrderMetadataRequest>, I>>(
-    base?: I,
-  ): QuerySubaccountOrderMetadataRequest {
-    return QuerySubaccountOrderMetadataRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountOrderMetadataRequest>, I>>(
-    object: I,
-  ): QuerySubaccountOrderMetadataRequest {
-    const message = createBaseQuerySubaccountOrderMetadataRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QuerySubaccountOrderMetadataRequest>, I>,
+    >(base?: I): QuerySubaccountOrderMetadataRequest {
+      return QuerySubaccountOrderMetadataRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountOrderMetadataRequest>, I>,
+    >(object: I): QuerySubaccountOrderMetadataRequest {
+      const message = createBaseQuerySubaccountOrderMetadataRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountPositionsResponse(): QuerySubaccountPositionsResponse {
   return { state: [] };
 }
 
-export const QuerySubaccountPositionsResponse: MessageFns<QuerySubaccountPositionsResponse> = {
-  encode(message: QuerySubaccountPositionsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.state) {
-      DerivativePosition.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QuerySubaccountPositionsResponse: MessageFns<QuerySubaccountPositionsResponse> =
+  {
+    encode(
+      message: QuerySubaccountPositionsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.state) {
+        DerivativePosition.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountPositionsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountPositionsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountPositionsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountPositionsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.state.push(
+              DerivativePosition.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.state.push(DerivativePosition.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountPositionsResponse {
+      return {
+        state: globalThis.Array.isArray(object?.state)
+          ? object.state.map((e: any) => DerivativePosition.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QuerySubaccountPositionsResponse): unknown {
+      const obj: any = {};
+      if (message.state?.length) {
+        obj.state = message.state.map((e) => DerivativePosition.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySubaccountPositionsResponse {
-    return {
-      state: globalThis.Array.isArray(object?.state)
-        ? object.state.map((e: any) => DerivativePosition.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QuerySubaccountPositionsResponse): unknown {
-    const obj: any = {};
-    if (message.state?.length) {
-      obj.state = message.state.map((e) => DerivativePosition.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySubaccountPositionsResponse>, I>>(
-    base?: I,
-  ): QuerySubaccountPositionsResponse {
-    return QuerySubaccountPositionsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountPositionsResponse>, I>>(
-    object: I,
-  ): QuerySubaccountPositionsResponse {
-    const message = createBaseQuerySubaccountPositionsResponse();
-    message.state = object.state?.map((e) => DerivativePosition.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QuerySubaccountPositionsResponse>, I>>(
+      base?: I,
+    ): QuerySubaccountPositionsResponse {
+      return QuerySubaccountPositionsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountPositionsResponse>, I>,
+    >(object: I): QuerySubaccountPositionsResponse {
+      const message = createBaseQuerySubaccountPositionsResponse();
+      message.state =
+        object.state?.map((e) => DerivativePosition.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountPositionInMarketResponse(): QuerySubaccountPositionInMarketResponse {
   return { state: undefined };
 }
 
-export const QuerySubaccountPositionInMarketResponse: MessageFns<QuerySubaccountPositionInMarketResponse> = {
-  encode(message: QuerySubaccountPositionInMarketResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.state !== undefined) {
-      Position.encode(message.state, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QuerySubaccountPositionInMarketResponse: MessageFns<QuerySubaccountPositionInMarketResponse> =
+  {
+    encode(
+      message: QuerySubaccountPositionInMarketResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.state !== undefined) {
+        Position.encode(message.state, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountPositionInMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountPositionInMarketResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountPositionInMarketResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountPositionInMarketResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.state = Position.decode(reader, reader.uint32());
+            continue;
           }
-
-          message.state = Position.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountPositionInMarketResponse {
+      return {
+        state: isSet(object.state)
+          ? Position.fromJSON(object.state)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QuerySubaccountPositionInMarketResponse): unknown {
+      const obj: any = {};
+      if (message.state !== undefined) {
+        obj.state = Position.toJSON(message.state);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySubaccountPositionInMarketResponse {
-    return { state: isSet(object.state) ? Position.fromJSON(object.state) : undefined };
-  },
-
-  toJSON(message: QuerySubaccountPositionInMarketResponse): unknown {
-    const obj: any = {};
-    if (message.state !== undefined) {
-      obj.state = Position.toJSON(message.state);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySubaccountPositionInMarketResponse>, I>>(
-    base?: I,
-  ): QuerySubaccountPositionInMarketResponse {
-    return QuerySubaccountPositionInMarketResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountPositionInMarketResponse>, I>>(
-    object: I,
-  ): QuerySubaccountPositionInMarketResponse {
-    const message = createBaseQuerySubaccountPositionInMarketResponse();
-    message.state = (object.state !== undefined && object.state !== null)
-      ? Position.fromPartial(object.state)
-      : undefined;
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QuerySubaccountPositionInMarketResponse>, I>,
+    >(base?: I): QuerySubaccountPositionInMarketResponse {
+      return QuerySubaccountPositionInMarketResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountPositionInMarketResponse>, I>,
+    >(object: I): QuerySubaccountPositionInMarketResponse {
+      const message = createBaseQuerySubaccountPositionInMarketResponse();
+      message.state =
+        object.state !== undefined && object.state !== null
+          ? Position.fromPartial(object.state)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseEffectivePosition(): EffectivePosition {
   return { isLong: false, quantity: "", entryPrice: "", effectiveMargin: "" };
 }
 
 export const EffectivePosition: MessageFns<EffectivePosition> = {
-  encode(message: EffectivePosition, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: EffectivePosition,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.isLong !== false) {
       writer.uint32(8).bool(message.isLong);
     }
@@ -7472,7 +8536,8 @@ export const EffectivePosition: MessageFns<EffectivePosition> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): EffectivePosition {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEffectivePosition();
     while (reader.pos < end) {
@@ -7524,19 +8589,21 @@ export const EffectivePosition: MessageFns<EffectivePosition> = {
       isLong: isSet(object.isLong)
         ? globalThis.Boolean(object.isLong)
         : isSet(object.is_long)
-        ? globalThis.Boolean(object.is_long)
-        : false,
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+          ? globalThis.Boolean(object.is_long)
+          : false,
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       entryPrice: isSet(object.entryPrice)
         ? globalThis.String(object.entryPrice)
         : isSet(object.entry_price)
-        ? globalThis.String(object.entry_price)
-        : "",
+          ? globalThis.String(object.entry_price)
+          : "",
       effectiveMargin: isSet(object.effectiveMargin)
         ? globalThis.String(object.effectiveMargin)
         : isSet(object.effective_margin)
-        ? globalThis.String(object.effective_margin)
-        : "",
+          ? globalThis.String(object.effective_margin)
+          : "",
     };
   },
 
@@ -7557,10 +8624,14 @@ export const EffectivePosition: MessageFns<EffectivePosition> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<EffectivePosition>, I>>(base?: I): EffectivePosition {
+  create<I extends Exact<DeepPartial<EffectivePosition>, I>>(
+    base?: I,
+  ): EffectivePosition {
     return EffectivePosition.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<EffectivePosition>, I>>(object: I): EffectivePosition {
+  fromPartial<I extends Exact<DeepPartial<EffectivePosition>, I>>(
+    object: I,
+  ): EffectivePosition {
     const message = createBaseEffectivePosition();
     message.isLong = object.isLong ?? false;
     message.quantity = object.quantity ?? "";
@@ -7574,604 +8645,755 @@ function createBaseQuerySubaccountEffectivePositionInMarketResponse(): QuerySuba
   return { state: undefined };
 }
 
-export const QuerySubaccountEffectivePositionInMarketResponse: MessageFns<
-  QuerySubaccountEffectivePositionInMarketResponse
-> = {
-  encode(
-    message: QuerySubaccountEffectivePositionInMarketResponse,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.state !== undefined) {
-      EffectivePosition.encode(message.state, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QuerySubaccountEffectivePositionInMarketResponse: MessageFns<QuerySubaccountEffectivePositionInMarketResponse> =
+  {
+    encode(
+      message: QuerySubaccountEffectivePositionInMarketResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.state !== undefined) {
+        EffectivePosition.encode(
+          message.state,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountEffectivePositionInMarketResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountEffectivePositionInMarketResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountEffectivePositionInMarketResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseQuerySubaccountEffectivePositionInMarketResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.state = EffectivePosition.decode(reader, reader.uint32());
+            continue;
           }
-
-          message.state = EffectivePosition.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountEffectivePositionInMarketResponse {
+      return {
+        state: isSet(object.state)
+          ? EffectivePosition.fromJSON(object.state)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QuerySubaccountEffectivePositionInMarketResponse): unknown {
+      const obj: any = {};
+      if (message.state !== undefined) {
+        obj.state = EffectivePosition.toJSON(message.state);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySubaccountEffectivePositionInMarketResponse {
-    return { state: isSet(object.state) ? EffectivePosition.fromJSON(object.state) : undefined };
-  },
-
-  toJSON(message: QuerySubaccountEffectivePositionInMarketResponse): unknown {
-    const obj: any = {};
-    if (message.state !== undefined) {
-      obj.state = EffectivePosition.toJSON(message.state);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySubaccountEffectivePositionInMarketResponse>, I>>(
-    base?: I,
-  ): QuerySubaccountEffectivePositionInMarketResponse {
-    return QuerySubaccountEffectivePositionInMarketResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountEffectivePositionInMarketResponse>, I>>(
-    object: I,
-  ): QuerySubaccountEffectivePositionInMarketResponse {
-    const message = createBaseQuerySubaccountEffectivePositionInMarketResponse();
-    message.state = (object.state !== undefined && object.state !== null)
-      ? EffectivePosition.fromPartial(object.state)
-      : undefined;
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<QuerySubaccountEffectivePositionInMarketResponse>,
+        I
+      >,
+    >(base?: I): QuerySubaccountEffectivePositionInMarketResponse {
+      return QuerySubaccountEffectivePositionInMarketResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QuerySubaccountEffectivePositionInMarketResponse>,
+        I
+      >,
+    >(object: I): QuerySubaccountEffectivePositionInMarketResponse {
+      const message =
+        createBaseQuerySubaccountEffectivePositionInMarketResponse();
+      message.state =
+        object.state !== undefined && object.state !== null
+          ? EffectivePosition.fromPartial(object.state)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQueryPerpetualMarketInfoRequest(): QueryPerpetualMarketInfoRequest {
   return { marketId: "" };
 }
 
-export const QueryPerpetualMarketInfoRequest: MessageFns<QueryPerpetualMarketInfoRequest> = {
-  encode(message: QueryPerpetualMarketInfoRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryPerpetualMarketInfoRequest: MessageFns<QueryPerpetualMarketInfoRequest> =
+  {
+    encode(
+      message: QueryPerpetualMarketInfoRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPerpetualMarketInfoRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryPerpetualMarketInfoRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryPerpetualMarketInfoRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryPerpetualMarketInfoRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryPerpetualMarketInfoRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryPerpetualMarketInfoRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryPerpetualMarketInfoRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryPerpetualMarketInfoRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryPerpetualMarketInfoRequest>, I>>(base?: I): QueryPerpetualMarketInfoRequest {
-    return QueryPerpetualMarketInfoRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryPerpetualMarketInfoRequest>, I>>(
-    object: I,
-  ): QueryPerpetualMarketInfoRequest {
-    const message = createBaseQueryPerpetualMarketInfoRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryPerpetualMarketInfoRequest>, I>>(
+      base?: I,
+    ): QueryPerpetualMarketInfoRequest {
+      return QueryPerpetualMarketInfoRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryPerpetualMarketInfoRequest>, I>,
+    >(object: I): QueryPerpetualMarketInfoRequest {
+      const message = createBaseQueryPerpetualMarketInfoRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryPerpetualMarketInfoResponse(): QueryPerpetualMarketInfoResponse {
   return { info: undefined };
 }
 
-export const QueryPerpetualMarketInfoResponse: MessageFns<QueryPerpetualMarketInfoResponse> = {
-  encode(message: QueryPerpetualMarketInfoResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.info !== undefined) {
-      PerpetualMarketInfo.encode(message.info, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryPerpetualMarketInfoResponse: MessageFns<QueryPerpetualMarketInfoResponse> =
+  {
+    encode(
+      message: QueryPerpetualMarketInfoResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.info !== undefined) {
+        PerpetualMarketInfo.encode(
+          message.info,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPerpetualMarketInfoResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryPerpetualMarketInfoResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryPerpetualMarketInfoResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryPerpetualMarketInfoResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.info = PerpetualMarketInfo.decode(reader, reader.uint32());
+            continue;
           }
-
-          message.info = PerpetualMarketInfo.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryPerpetualMarketInfoResponse {
+      return {
+        info: isSet(object.info)
+          ? PerpetualMarketInfo.fromJSON(object.info)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QueryPerpetualMarketInfoResponse): unknown {
+      const obj: any = {};
+      if (message.info !== undefined) {
+        obj.info = PerpetualMarketInfo.toJSON(message.info);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryPerpetualMarketInfoResponse {
-    return { info: isSet(object.info) ? PerpetualMarketInfo.fromJSON(object.info) : undefined };
-  },
-
-  toJSON(message: QueryPerpetualMarketInfoResponse): unknown {
-    const obj: any = {};
-    if (message.info !== undefined) {
-      obj.info = PerpetualMarketInfo.toJSON(message.info);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryPerpetualMarketInfoResponse>, I>>(
-    base?: I,
-  ): QueryPerpetualMarketInfoResponse {
-    return QueryPerpetualMarketInfoResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryPerpetualMarketInfoResponse>, I>>(
-    object: I,
-  ): QueryPerpetualMarketInfoResponse {
-    const message = createBaseQueryPerpetualMarketInfoResponse();
-    message.info = (object.info !== undefined && object.info !== null)
-      ? PerpetualMarketInfo.fromPartial(object.info)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryPerpetualMarketInfoResponse>, I>>(
+      base?: I,
+    ): QueryPerpetualMarketInfoResponse {
+      return QueryPerpetualMarketInfoResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryPerpetualMarketInfoResponse>, I>,
+    >(object: I): QueryPerpetualMarketInfoResponse {
+      const message = createBaseQueryPerpetualMarketInfoResponse();
+      message.info =
+        object.info !== undefined && object.info !== null
+          ? PerpetualMarketInfo.fromPartial(object.info)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQueryExpiryFuturesMarketInfoRequest(): QueryExpiryFuturesMarketInfoRequest {
   return { marketId: "" };
 }
 
-export const QueryExpiryFuturesMarketInfoRequest: MessageFns<QueryExpiryFuturesMarketInfoRequest> = {
-  encode(message: QueryExpiryFuturesMarketInfoRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryExpiryFuturesMarketInfoRequest: MessageFns<QueryExpiryFuturesMarketInfoRequest> =
+  {
+    encode(
+      message: QueryExpiryFuturesMarketInfoRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryExpiryFuturesMarketInfoRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryExpiryFuturesMarketInfoRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryExpiryFuturesMarketInfoRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryExpiryFuturesMarketInfoRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryExpiryFuturesMarketInfoRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryExpiryFuturesMarketInfoRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryExpiryFuturesMarketInfoRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryExpiryFuturesMarketInfoRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryExpiryFuturesMarketInfoRequest>, I>>(
-    base?: I,
-  ): QueryExpiryFuturesMarketInfoRequest {
-    return QueryExpiryFuturesMarketInfoRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryExpiryFuturesMarketInfoRequest>, I>>(
-    object: I,
-  ): QueryExpiryFuturesMarketInfoRequest {
-    const message = createBaseQueryExpiryFuturesMarketInfoRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryExpiryFuturesMarketInfoRequest>, I>,
+    >(base?: I): QueryExpiryFuturesMarketInfoRequest {
+      return QueryExpiryFuturesMarketInfoRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryExpiryFuturesMarketInfoRequest>, I>,
+    >(object: I): QueryExpiryFuturesMarketInfoRequest {
+      const message = createBaseQueryExpiryFuturesMarketInfoRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryExpiryFuturesMarketInfoResponse(): QueryExpiryFuturesMarketInfoResponse {
   return { info: undefined };
 }
 
-export const QueryExpiryFuturesMarketInfoResponse: MessageFns<QueryExpiryFuturesMarketInfoResponse> = {
-  encode(message: QueryExpiryFuturesMarketInfoResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.info !== undefined) {
-      ExpiryFuturesMarketInfo.encode(message.info, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryExpiryFuturesMarketInfoResponse: MessageFns<QueryExpiryFuturesMarketInfoResponse> =
+  {
+    encode(
+      message: QueryExpiryFuturesMarketInfoResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.info !== undefined) {
+        ExpiryFuturesMarketInfo.encode(
+          message.info,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryExpiryFuturesMarketInfoResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryExpiryFuturesMarketInfoResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryExpiryFuturesMarketInfoResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryExpiryFuturesMarketInfoResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.info = ExpiryFuturesMarketInfo.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
           }
-
-          message.info = ExpiryFuturesMarketInfo.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryExpiryFuturesMarketInfoResponse {
+      return {
+        info: isSet(object.info)
+          ? ExpiryFuturesMarketInfo.fromJSON(object.info)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QueryExpiryFuturesMarketInfoResponse): unknown {
+      const obj: any = {};
+      if (message.info !== undefined) {
+        obj.info = ExpiryFuturesMarketInfo.toJSON(message.info);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryExpiryFuturesMarketInfoResponse {
-    return { info: isSet(object.info) ? ExpiryFuturesMarketInfo.fromJSON(object.info) : undefined };
-  },
-
-  toJSON(message: QueryExpiryFuturesMarketInfoResponse): unknown {
-    const obj: any = {};
-    if (message.info !== undefined) {
-      obj.info = ExpiryFuturesMarketInfo.toJSON(message.info);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryExpiryFuturesMarketInfoResponse>, I>>(
-    base?: I,
-  ): QueryExpiryFuturesMarketInfoResponse {
-    return QueryExpiryFuturesMarketInfoResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryExpiryFuturesMarketInfoResponse>, I>>(
-    object: I,
-  ): QueryExpiryFuturesMarketInfoResponse {
-    const message = createBaseQueryExpiryFuturesMarketInfoResponse();
-    message.info = (object.info !== undefined && object.info !== null)
-      ? ExpiryFuturesMarketInfo.fromPartial(object.info)
-      : undefined;
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryExpiryFuturesMarketInfoResponse>, I>,
+    >(base?: I): QueryExpiryFuturesMarketInfoResponse {
+      return QueryExpiryFuturesMarketInfoResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryExpiryFuturesMarketInfoResponse>, I>,
+    >(object: I): QueryExpiryFuturesMarketInfoResponse {
+      const message = createBaseQueryExpiryFuturesMarketInfoResponse();
+      message.info =
+        object.info !== undefined && object.info !== null
+          ? ExpiryFuturesMarketInfo.fromPartial(object.info)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQueryPerpetualMarketFundingRequest(): QueryPerpetualMarketFundingRequest {
   return { marketId: "" };
 }
 
-export const QueryPerpetualMarketFundingRequest: MessageFns<QueryPerpetualMarketFundingRequest> = {
-  encode(message: QueryPerpetualMarketFundingRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryPerpetualMarketFundingRequest: MessageFns<QueryPerpetualMarketFundingRequest> =
+  {
+    encode(
+      message: QueryPerpetualMarketFundingRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPerpetualMarketFundingRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryPerpetualMarketFundingRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryPerpetualMarketFundingRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryPerpetualMarketFundingRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryPerpetualMarketFundingRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryPerpetualMarketFundingRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryPerpetualMarketFundingRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryPerpetualMarketFundingRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryPerpetualMarketFundingRequest>, I>>(
-    base?: I,
-  ): QueryPerpetualMarketFundingRequest {
-    return QueryPerpetualMarketFundingRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryPerpetualMarketFundingRequest>, I>>(
-    object: I,
-  ): QueryPerpetualMarketFundingRequest {
-    const message = createBaseQueryPerpetualMarketFundingRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryPerpetualMarketFundingRequest>, I>>(
+      base?: I,
+    ): QueryPerpetualMarketFundingRequest {
+      return QueryPerpetualMarketFundingRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryPerpetualMarketFundingRequest>, I>,
+    >(object: I): QueryPerpetualMarketFundingRequest {
+      const message = createBaseQueryPerpetualMarketFundingRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryPerpetualMarketFundingResponse(): QueryPerpetualMarketFundingResponse {
   return { state: undefined };
 }
 
-export const QueryPerpetualMarketFundingResponse: MessageFns<QueryPerpetualMarketFundingResponse> = {
-  encode(message: QueryPerpetualMarketFundingResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.state !== undefined) {
-      PerpetualMarketFunding.encode(message.state, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryPerpetualMarketFundingResponse: MessageFns<QueryPerpetualMarketFundingResponse> =
+  {
+    encode(
+      message: QueryPerpetualMarketFundingResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.state !== undefined) {
+        PerpetualMarketFunding.encode(
+          message.state,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPerpetualMarketFundingResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryPerpetualMarketFundingResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryPerpetualMarketFundingResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryPerpetualMarketFundingResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.state = PerpetualMarketFunding.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
           }
-
-          message.state = PerpetualMarketFunding.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryPerpetualMarketFundingResponse {
+      return {
+        state: isSet(object.state)
+          ? PerpetualMarketFunding.fromJSON(object.state)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QueryPerpetualMarketFundingResponse): unknown {
+      const obj: any = {};
+      if (message.state !== undefined) {
+        obj.state = PerpetualMarketFunding.toJSON(message.state);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryPerpetualMarketFundingResponse {
-    return { state: isSet(object.state) ? PerpetualMarketFunding.fromJSON(object.state) : undefined };
-  },
-
-  toJSON(message: QueryPerpetualMarketFundingResponse): unknown {
-    const obj: any = {};
-    if (message.state !== undefined) {
-      obj.state = PerpetualMarketFunding.toJSON(message.state);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryPerpetualMarketFundingResponse>, I>>(
-    base?: I,
-  ): QueryPerpetualMarketFundingResponse {
-    return QueryPerpetualMarketFundingResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryPerpetualMarketFundingResponse>, I>>(
-    object: I,
-  ): QueryPerpetualMarketFundingResponse {
-    const message = createBaseQueryPerpetualMarketFundingResponse();
-    message.state = (object.state !== undefined && object.state !== null)
-      ? PerpetualMarketFunding.fromPartial(object.state)
-      : undefined;
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryPerpetualMarketFundingResponse>, I>,
+    >(base?: I): QueryPerpetualMarketFundingResponse {
+      return QueryPerpetualMarketFundingResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryPerpetualMarketFundingResponse>, I>,
+    >(object: I): QueryPerpetualMarketFundingResponse {
+      const message = createBaseQueryPerpetualMarketFundingResponse();
+      message.state =
+        object.state !== undefined && object.state !== null
+          ? PerpetualMarketFunding.fromPartial(object.state)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountOrderMetadataResponse(): QuerySubaccountOrderMetadataResponse {
   return { metadata: [] };
 }
 
-export const QuerySubaccountOrderMetadataResponse: MessageFns<QuerySubaccountOrderMetadataResponse> = {
-  encode(message: QuerySubaccountOrderMetadataResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.metadata) {
-      SubaccountOrderbookMetadataWithMarket.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QuerySubaccountOrderMetadataResponse: MessageFns<QuerySubaccountOrderMetadataResponse> =
+  {
+    encode(
+      message: QuerySubaccountOrderMetadataResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.metadata) {
+        SubaccountOrderbookMetadataWithMarket.encode(
+          v!,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountOrderMetadataResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountOrderMetadataResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountOrderMetadataResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountOrderMetadataResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.metadata.push(
+              SubaccountOrderbookMetadataWithMarket.decode(
+                reader,
+                reader.uint32(),
+              ),
+            );
+            continue;
           }
-
-          message.metadata.push(SubaccountOrderbookMetadataWithMarket.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountOrderMetadataResponse {
+      return {
+        metadata: globalThis.Array.isArray(object?.metadata)
+          ? object.metadata.map((e: any) =>
+              SubaccountOrderbookMetadataWithMarket.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: QuerySubaccountOrderMetadataResponse): unknown {
+      const obj: any = {};
+      if (message.metadata?.length) {
+        obj.metadata = message.metadata.map((e) =>
+          SubaccountOrderbookMetadataWithMarket.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySubaccountOrderMetadataResponse {
-    return {
-      metadata: globalThis.Array.isArray(object?.metadata)
-        ? object.metadata.map((e: any) => SubaccountOrderbookMetadataWithMarket.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QuerySubaccountOrderMetadataResponse): unknown {
-    const obj: any = {};
-    if (message.metadata?.length) {
-      obj.metadata = message.metadata.map((e) => SubaccountOrderbookMetadataWithMarket.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySubaccountOrderMetadataResponse>, I>>(
-    base?: I,
-  ): QuerySubaccountOrderMetadataResponse {
-    return QuerySubaccountOrderMetadataResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountOrderMetadataResponse>, I>>(
-    object: I,
-  ): QuerySubaccountOrderMetadataResponse {
-    const message = createBaseQuerySubaccountOrderMetadataResponse();
-    message.metadata = object.metadata?.map((e) => SubaccountOrderbookMetadataWithMarket.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QuerySubaccountOrderMetadataResponse>, I>,
+    >(base?: I): QuerySubaccountOrderMetadataResponse {
+      return QuerySubaccountOrderMetadataResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountOrderMetadataResponse>, I>,
+    >(object: I): QuerySubaccountOrderMetadataResponse {
+      const message = createBaseQuerySubaccountOrderMetadataResponse();
+      message.metadata =
+        object.metadata?.map((e) =>
+          SubaccountOrderbookMetadataWithMarket.fromPartial(e),
+        ) || [];
+      return message;
+    },
+  };
 
 function createBaseQuerySubaccountTradeNonceResponse(): QuerySubaccountTradeNonceResponse {
   return { nonce: 0 };
 }
 
-export const QuerySubaccountTradeNonceResponse: MessageFns<QuerySubaccountTradeNonceResponse> = {
-  encode(message: QuerySubaccountTradeNonceResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.nonce !== 0) {
-      writer.uint32(8).uint32(message.nonce);
-    }
-    return writer;
-  },
+export const QuerySubaccountTradeNonceResponse: MessageFns<QuerySubaccountTradeNonceResponse> =
+  {
+    encode(
+      message: QuerySubaccountTradeNonceResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.nonce !== 0) {
+        writer.uint32(8).uint32(message.nonce);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySubaccountTradeNonceResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySubaccountTradeNonceResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QuerySubaccountTradeNonceResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQuerySubaccountTradeNonceResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.nonce = reader.uint32();
+            continue;
           }
-
-          message.nonce = reader.uint32();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QuerySubaccountTradeNonceResponse {
+      return {
+        nonce: isSet(object.nonce) ? globalThis.Number(object.nonce) : 0,
+      };
+    },
+
+    toJSON(message: QuerySubaccountTradeNonceResponse): unknown {
+      const obj: any = {};
+      if (message.nonce !== 0) {
+        obj.nonce = Math.round(message.nonce);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QuerySubaccountTradeNonceResponse {
-    return { nonce: isSet(object.nonce) ? globalThis.Number(object.nonce) : 0 };
-  },
-
-  toJSON(message: QuerySubaccountTradeNonceResponse): unknown {
-    const obj: any = {};
-    if (message.nonce !== 0) {
-      obj.nonce = Math.round(message.nonce);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QuerySubaccountTradeNonceResponse>, I>>(
-    base?: I,
-  ): QuerySubaccountTradeNonceResponse {
-    return QuerySubaccountTradeNonceResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QuerySubaccountTradeNonceResponse>, I>>(
-    object: I,
-  ): QuerySubaccountTradeNonceResponse {
-    const message = createBaseQuerySubaccountTradeNonceResponse();
-    message.nonce = object.nonce ?? 0;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QuerySubaccountTradeNonceResponse>, I>>(
+      base?: I,
+    ): QuerySubaccountTradeNonceResponse {
+      return QuerySubaccountTradeNonceResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QuerySubaccountTradeNonceResponse>, I>,
+    >(object: I): QuerySubaccountTradeNonceResponse {
+      const message = createBaseQuerySubaccountTradeNonceResponse();
+      message.nonce = object.nonce ?? 0;
+      return message;
+    },
+  };
 
 function createBaseQueryModuleStateRequest(): QueryModuleStateRequest {
   return {};
 }
 
 export const QueryModuleStateRequest: MessageFns<QueryModuleStateRequest> = {
-  encode(_: QueryModuleStateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: QueryModuleStateRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleStateRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): QueryModuleStateRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleStateRequest();
     while (reader.pos < end) {
@@ -8195,10 +9417,14 @@ export const QueryModuleStateRequest: MessageFns<QueryModuleStateRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QueryModuleStateRequest>, I>>(base?: I): QueryModuleStateRequest {
+  create<I extends Exact<DeepPartial<QueryModuleStateRequest>, I>>(
+    base?: I,
+  ): QueryModuleStateRequest {
     return QueryModuleStateRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QueryModuleStateRequest>, I>>(_: I): QueryModuleStateRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryModuleStateRequest>, I>>(
+    _: I,
+  ): QueryModuleStateRequest {
     const message = createBaseQueryModuleStateRequest();
     return message;
   },
@@ -8209,15 +9435,22 @@ function createBaseQueryModuleStateResponse(): QueryModuleStateResponse {
 }
 
 export const QueryModuleStateResponse: MessageFns<QueryModuleStateResponse> = {
-  encode(message: QueryModuleStateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: QueryModuleStateResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.state !== undefined) {
       GenesisState.encode(message.state, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleStateResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): QueryModuleStateResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleStateResponse();
     while (reader.pos < end) {
@@ -8241,7 +9474,11 @@ export const QueryModuleStateResponse: MessageFns<QueryModuleStateResponse> = {
   },
 
   fromJSON(object: any): QueryModuleStateResponse {
-    return { state: isSet(object.state) ? GenesisState.fromJSON(object.state) : undefined };
+    return {
+      state: isSet(object.state)
+        ? GenesisState.fromJSON(object.state)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryModuleStateResponse): unknown {
@@ -8252,14 +9489,19 @@ export const QueryModuleStateResponse: MessageFns<QueryModuleStateResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QueryModuleStateResponse>, I>>(base?: I): QueryModuleStateResponse {
+  create<I extends Exact<DeepPartial<QueryModuleStateResponse>, I>>(
+    base?: I,
+  ): QueryModuleStateResponse {
     return QueryModuleStateResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QueryModuleStateResponse>, I>>(object: I): QueryModuleStateResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryModuleStateResponse>, I>>(
+    object: I,
+  ): QueryModuleStateResponse {
     const message = createBaseQueryModuleStateResponse();
-    message.state = (object.state !== undefined && object.state !== null)
-      ? GenesisState.fromPartial(object.state)
-      : undefined;
+    message.state =
+      object.state !== undefined && object.state !== null
+        ? GenesisState.fromPartial(object.state)
+        : undefined;
     return message;
   },
 };
@@ -8269,12 +9511,19 @@ function createBaseQueryPositionsRequest(): QueryPositionsRequest {
 }
 
 export const QueryPositionsRequest: MessageFns<QueryPositionsRequest> = {
-  encode(_: QueryPositionsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: QueryPositionsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPositionsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): QueryPositionsRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPositionsRequest();
     while (reader.pos < end) {
@@ -8298,10 +9547,14 @@ export const QueryPositionsRequest: MessageFns<QueryPositionsRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QueryPositionsRequest>, I>>(base?: I): QueryPositionsRequest {
+  create<I extends Exact<DeepPartial<QueryPositionsRequest>, I>>(
+    base?: I,
+  ): QueryPositionsRequest {
     return QueryPositionsRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QueryPositionsRequest>, I>>(_: I): QueryPositionsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryPositionsRequest>, I>>(
+    _: I,
+  ): QueryPositionsRequest {
     const message = createBaseQueryPositionsRequest();
     return message;
   },
@@ -8312,15 +9565,22 @@ function createBaseQueryPositionsResponse(): QueryPositionsResponse {
 }
 
 export const QueryPositionsResponse: MessageFns<QueryPositionsResponse> = {
-  encode(message: QueryPositionsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: QueryPositionsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.state) {
       DerivativePosition.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPositionsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): QueryPositionsResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPositionsResponse();
     while (reader.pos < end) {
@@ -8331,7 +9591,9 @@ export const QueryPositionsResponse: MessageFns<QueryPositionsResponse> = {
             break;
           }
 
-          message.state.push(DerivativePosition.decode(reader, reader.uint32()));
+          message.state.push(
+            DerivativePosition.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -8359,12 +9621,17 @@ export const QueryPositionsResponse: MessageFns<QueryPositionsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<QueryPositionsResponse>, I>>(base?: I): QueryPositionsResponse {
+  create<I extends Exact<DeepPartial<QueryPositionsResponse>, I>>(
+    base?: I,
+  ): QueryPositionsResponse {
     return QueryPositionsResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QueryPositionsResponse>, I>>(object: I): QueryPositionsResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryPositionsResponse>, I>>(
+    object: I,
+  ): QueryPositionsResponse {
     const message = createBaseQueryPositionsResponse();
-    message.state = object.state?.map((e) => DerivativePosition.fromPartial(e)) || [];
+    message.state =
+      object.state?.map((e) => DerivativePosition.fromPartial(e)) || [];
     return message;
   },
 };
@@ -8373,192 +9640,233 @@ function createBaseQueryTradeRewardPointsRequest(): QueryTradeRewardPointsReques
   return { accounts: [], pendingPoolTimestamp: 0 };
 }
 
-export const QueryTradeRewardPointsRequest: MessageFns<QueryTradeRewardPointsRequest> = {
-  encode(message: QueryTradeRewardPointsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.accounts) {
-      writer.uint32(10).string(v!);
-    }
-    if (message.pendingPoolTimestamp !== 0) {
-      writer.uint32(16).int64(message.pendingPoolTimestamp);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTradeRewardPointsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTradeRewardPointsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.accounts.push(reader.string());
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.pendingPoolTimestamp = longToNumber(reader.int64());
-          continue;
-        }
+export const QueryTradeRewardPointsRequest: MessageFns<QueryTradeRewardPointsRequest> =
+  {
+    encode(
+      message: QueryTradeRewardPointsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.accounts) {
+        writer.uint32(10).string(v!);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.pendingPoolTimestamp !== 0) {
+        writer.uint32(16).int64(message.pendingPoolTimestamp);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryTradeRewardPointsRequest {
-    return {
-      accounts: globalThis.Array.isArray(object?.accounts) ? object.accounts.map((e: any) => globalThis.String(e)) : [],
-      pendingPoolTimestamp: isSet(object.pendingPoolTimestamp)
-        ? globalThis.Number(object.pendingPoolTimestamp)
-        : isSet(object.pending_pool_timestamp)
-        ? globalThis.Number(object.pending_pool_timestamp)
-        : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTradeRewardPointsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryTradeRewardPointsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryTradeRewardPointsRequest): unknown {
-    const obj: any = {};
-    if (message.accounts?.length) {
-      obj.accounts = message.accounts;
-    }
-    if (message.pendingPoolTimestamp !== 0) {
-      obj.pendingPoolTimestamp = Math.round(message.pendingPoolTimestamp);
-    }
-    return obj;
-  },
+            message.accounts.push(reader.string());
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryTradeRewardPointsRequest>, I>>(base?: I): QueryTradeRewardPointsRequest {
-    return QueryTradeRewardPointsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTradeRewardPointsRequest>, I>>(
-    object: I,
-  ): QueryTradeRewardPointsRequest {
-    const message = createBaseQueryTradeRewardPointsRequest();
-    message.accounts = object.accounts?.map((e) => e) || [];
-    message.pendingPoolTimestamp = object.pendingPoolTimestamp ?? 0;
-    return message;
-  },
-};
+            message.pendingPoolTimestamp = longToNumber(reader.int64());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryTradeRewardPointsRequest {
+      return {
+        accounts: globalThis.Array.isArray(object?.accounts)
+          ? object.accounts.map((e: any) => globalThis.String(e))
+          : [],
+        pendingPoolTimestamp: isSet(object.pendingPoolTimestamp)
+          ? globalThis.Number(object.pendingPoolTimestamp)
+          : isSet(object.pending_pool_timestamp)
+            ? globalThis.Number(object.pending_pool_timestamp)
+            : 0,
+      };
+    },
+
+    toJSON(message: QueryTradeRewardPointsRequest): unknown {
+      const obj: any = {};
+      if (message.accounts?.length) {
+        obj.accounts = message.accounts;
+      }
+      if (message.pendingPoolTimestamp !== 0) {
+        obj.pendingPoolTimestamp = Math.round(message.pendingPoolTimestamp);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryTradeRewardPointsRequest>, I>>(
+      base?: I,
+    ): QueryTradeRewardPointsRequest {
+      return QueryTradeRewardPointsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryTradeRewardPointsRequest>, I>>(
+      object: I,
+    ): QueryTradeRewardPointsRequest {
+      const message = createBaseQueryTradeRewardPointsRequest();
+      message.accounts = object.accounts?.map((e) => e) || [];
+      message.pendingPoolTimestamp = object.pendingPoolTimestamp ?? 0;
+      return message;
+    },
+  };
 
 function createBaseQueryTradeRewardPointsResponse(): QueryTradeRewardPointsResponse {
   return { accountTradeRewardPoints: [] };
 }
 
-export const QueryTradeRewardPointsResponse: MessageFns<QueryTradeRewardPointsResponse> = {
-  encode(message: QueryTradeRewardPointsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.accountTradeRewardPoints) {
-      writer.uint32(10).string(v!);
-    }
-    return writer;
-  },
+export const QueryTradeRewardPointsResponse: MessageFns<QueryTradeRewardPointsResponse> =
+  {
+    encode(
+      message: QueryTradeRewardPointsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.accountTradeRewardPoints) {
+        writer.uint32(10).string(v!);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTradeRewardPointsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTradeRewardPointsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTradeRewardPointsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryTradeRewardPointsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.accountTradeRewardPoints.push(reader.string());
+            continue;
           }
-
-          message.accountTradeRewardPoints.push(reader.string());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryTradeRewardPointsResponse {
+      return {
+        accountTradeRewardPoints: globalThis.Array.isArray(
+          object?.accountTradeRewardPoints,
+        )
+          ? object.accountTradeRewardPoints.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.account_trade_reward_points)
+            ? object.account_trade_reward_points.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: QueryTradeRewardPointsResponse): unknown {
+      const obj: any = {};
+      if (message.accountTradeRewardPoints?.length) {
+        obj.accountTradeRewardPoints = message.accountTradeRewardPoints;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryTradeRewardPointsResponse {
-    return {
-      accountTradeRewardPoints: globalThis.Array.isArray(object?.accountTradeRewardPoints)
-        ? object.accountTradeRewardPoints.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.account_trade_reward_points)
-        ? object.account_trade_reward_points.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryTradeRewardPointsResponse): unknown {
-    const obj: any = {};
-    if (message.accountTradeRewardPoints?.length) {
-      obj.accountTradeRewardPoints = message.accountTradeRewardPoints;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryTradeRewardPointsResponse>, I>>(base?: I): QueryTradeRewardPointsResponse {
-    return QueryTradeRewardPointsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTradeRewardPointsResponse>, I>>(
-    object: I,
-  ): QueryTradeRewardPointsResponse {
-    const message = createBaseQueryTradeRewardPointsResponse();
-    message.accountTradeRewardPoints = object.accountTradeRewardPoints?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryTradeRewardPointsResponse>, I>>(
+      base?: I,
+    ): QueryTradeRewardPointsResponse {
+      return QueryTradeRewardPointsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryTradeRewardPointsResponse>, I>,
+    >(object: I): QueryTradeRewardPointsResponse {
+      const message = createBaseQueryTradeRewardPointsResponse();
+      message.accountTradeRewardPoints =
+        object.accountTradeRewardPoints?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryTradeRewardCampaignRequest(): QueryTradeRewardCampaignRequest {
   return {};
 }
 
-export const QueryTradeRewardCampaignRequest: MessageFns<QueryTradeRewardCampaignRequest> = {
-  encode(_: QueryTradeRewardCampaignRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const QueryTradeRewardCampaignRequest: MessageFns<QueryTradeRewardCampaignRequest> =
+  {
+    encode(
+      _: QueryTradeRewardCampaignRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTradeRewardCampaignRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTradeRewardCampaignRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTradeRewardCampaignRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryTradeRewardCampaignRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): QueryTradeRewardCampaignRequest {
-    return {};
-  },
+    fromJSON(_: any): QueryTradeRewardCampaignRequest {
+      return {};
+    },
 
-  toJSON(_: QueryTradeRewardCampaignRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: QueryTradeRewardCampaignRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<QueryTradeRewardCampaignRequest>, I>>(base?: I): QueryTradeRewardCampaignRequest {
-    return QueryTradeRewardCampaignRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTradeRewardCampaignRequest>, I>>(_: I): QueryTradeRewardCampaignRequest {
-    const message = createBaseQueryTradeRewardCampaignRequest();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryTradeRewardCampaignRequest>, I>>(
+      base?: I,
+    ): QueryTradeRewardCampaignRequest {
+      return QueryTradeRewardCampaignRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryTradeRewardCampaignRequest>, I>,
+    >(_: I): QueryTradeRewardCampaignRequest {
+      const message = createBaseQueryTradeRewardCampaignRequest();
+      return message;
+    },
+  };
 
 function createBaseQueryTradeRewardCampaignResponse(): QueryTradeRewardCampaignResponse {
   return {
@@ -8570,758 +9878,939 @@ function createBaseQueryTradeRewardCampaignResponse(): QueryTradeRewardCampaignR
   };
 }
 
-export const QueryTradeRewardCampaignResponse: MessageFns<QueryTradeRewardCampaignResponse> = {
-  encode(message: QueryTradeRewardCampaignResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.tradingRewardCampaignInfo !== undefined) {
-      TradingRewardCampaignInfo.encode(message.tradingRewardCampaignInfo, writer.uint32(10).fork()).join();
-    }
-    for (const v of message.tradingRewardPoolCampaignSchedule) {
-      CampaignRewardPool.encode(v!, writer.uint32(18).fork()).join();
-    }
-    if (message.totalTradeRewardPoints !== "") {
-      writer.uint32(26).string(message.totalTradeRewardPoints);
-    }
-    for (const v of message.pendingTradingRewardPoolCampaignSchedule) {
-      CampaignRewardPool.encode(v!, writer.uint32(34).fork()).join();
-    }
-    for (const v of message.pendingTotalTradeRewardPoints) {
-      writer.uint32(42).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTradeRewardCampaignResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTradeRewardCampaignResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.tradingRewardCampaignInfo = TradingRewardCampaignInfo.decode(reader, reader.uint32());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.tradingRewardPoolCampaignSchedule.push(CampaignRewardPool.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.totalTradeRewardPoints = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.pendingTradingRewardPoolCampaignSchedule.push(CampaignRewardPool.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.pendingTotalTradeRewardPoints.push(reader.string());
-          continue;
-        }
+export const QueryTradeRewardCampaignResponse: MessageFns<QueryTradeRewardCampaignResponse> =
+  {
+    encode(
+      message: QueryTradeRewardCampaignResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.tradingRewardCampaignInfo !== undefined) {
+        TradingRewardCampaignInfo.encode(
+          message.tradingRewardCampaignInfo,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.tradingRewardPoolCampaignSchedule) {
+        CampaignRewardPool.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.totalTradeRewardPoints !== "") {
+        writer.uint32(26).string(message.totalTradeRewardPoints);
+      }
+      for (const v of message.pendingTradingRewardPoolCampaignSchedule) {
+        CampaignRewardPool.encode(v!, writer.uint32(34).fork()).join();
+      }
+      for (const v of message.pendingTotalTradeRewardPoints) {
+        writer.uint32(42).string(v!);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QueryTradeRewardCampaignResponse {
-    return {
-      tradingRewardCampaignInfo: isSet(object.tradingRewardCampaignInfo)
-        ? TradingRewardCampaignInfo.fromJSON(object.tradingRewardCampaignInfo)
-        : isSet(object.trading_reward_campaign_info)
-        ? TradingRewardCampaignInfo.fromJSON(object.trading_reward_campaign_info)
-        : undefined,
-      tradingRewardPoolCampaignSchedule: globalThis.Array.isArray(object?.tradingRewardPoolCampaignSchedule)
-        ? object.tradingRewardPoolCampaignSchedule.map((e: any) => CampaignRewardPool.fromJSON(e))
-        : globalThis.Array.isArray(object?.trading_reward_pool_campaign_schedule)
-        ? object.trading_reward_pool_campaign_schedule.map((e: any) => CampaignRewardPool.fromJSON(e))
-        : [],
-      totalTradeRewardPoints: isSet(object.totalTradeRewardPoints)
-        ? globalThis.String(object.totalTradeRewardPoints)
-        : isSet(object.total_trade_reward_points)
-        ? globalThis.String(object.total_trade_reward_points)
-        : "",
-      pendingTradingRewardPoolCampaignSchedule:
-        globalThis.Array.isArray(object?.pendingTradingRewardPoolCampaignSchedule)
-          ? object.pendingTradingRewardPoolCampaignSchedule.map((e: any) => CampaignRewardPool.fromJSON(e))
-          : globalThis.Array.isArray(object?.pending_trading_reward_pool_campaign_schedule)
-          ? object.pending_trading_reward_pool_campaign_schedule.map((e: any) => CampaignRewardPool.fromJSON(e))
-          : [],
-      pendingTotalTradeRewardPoints: globalThis.Array.isArray(object?.pendingTotalTradeRewardPoints)
-        ? object.pendingTotalTradeRewardPoints.map((e: any) => globalThis.String(e))
-        : globalThis.Array.isArray(object?.pending_total_trade_reward_points)
-        ? object.pending_total_trade_reward_points.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTradeRewardCampaignResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryTradeRewardCampaignResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryTradeRewardCampaignResponse): unknown {
-    const obj: any = {};
-    if (message.tradingRewardCampaignInfo !== undefined) {
-      obj.tradingRewardCampaignInfo = TradingRewardCampaignInfo.toJSON(message.tradingRewardCampaignInfo);
-    }
-    if (message.tradingRewardPoolCampaignSchedule?.length) {
-      obj.tradingRewardPoolCampaignSchedule = message.tradingRewardPoolCampaignSchedule.map((e) =>
-        CampaignRewardPool.toJSON(e)
-      );
-    }
-    if (message.totalTradeRewardPoints !== "") {
-      obj.totalTradeRewardPoints = message.totalTradeRewardPoints;
-    }
-    if (message.pendingTradingRewardPoolCampaignSchedule?.length) {
-      obj.pendingTradingRewardPoolCampaignSchedule = message.pendingTradingRewardPoolCampaignSchedule.map((e) =>
-        CampaignRewardPool.toJSON(e)
-      );
-    }
-    if (message.pendingTotalTradeRewardPoints?.length) {
-      obj.pendingTotalTradeRewardPoints = message.pendingTotalTradeRewardPoints;
-    }
-    return obj;
-  },
+            message.tradingRewardCampaignInfo =
+              TradingRewardCampaignInfo.decode(reader, reader.uint32());
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryTradeRewardCampaignResponse>, I>>(
-    base?: I,
-  ): QueryTradeRewardCampaignResponse {
-    return QueryTradeRewardCampaignResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTradeRewardCampaignResponse>, I>>(
-    object: I,
-  ): QueryTradeRewardCampaignResponse {
-    const message = createBaseQueryTradeRewardCampaignResponse();
-    message.tradingRewardCampaignInfo =
-      (object.tradingRewardCampaignInfo !== undefined && object.tradingRewardCampaignInfo !== null)
-        ? TradingRewardCampaignInfo.fromPartial(object.tradingRewardCampaignInfo)
-        : undefined;
-    message.tradingRewardPoolCampaignSchedule =
-      object.tradingRewardPoolCampaignSchedule?.map((e) => CampaignRewardPool.fromPartial(e)) || [];
-    message.totalTradeRewardPoints = object.totalTradeRewardPoints ?? "";
-    message.pendingTradingRewardPoolCampaignSchedule =
-      object.pendingTradingRewardPoolCampaignSchedule?.map((e) => CampaignRewardPool.fromPartial(e)) || [];
-    message.pendingTotalTradeRewardPoints = object.pendingTotalTradeRewardPoints?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.tradingRewardPoolCampaignSchedule.push(
+              CampaignRewardPool.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.totalTradeRewardPoints = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.pendingTradingRewardPoolCampaignSchedule.push(
+              CampaignRewardPool.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.pendingTotalTradeRewardPoints.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryTradeRewardCampaignResponse {
+      return {
+        tradingRewardCampaignInfo: isSet(object.tradingRewardCampaignInfo)
+          ? TradingRewardCampaignInfo.fromJSON(object.tradingRewardCampaignInfo)
+          : isSet(object.trading_reward_campaign_info)
+            ? TradingRewardCampaignInfo.fromJSON(
+                object.trading_reward_campaign_info,
+              )
+            : undefined,
+        tradingRewardPoolCampaignSchedule: globalThis.Array.isArray(
+          object?.tradingRewardPoolCampaignSchedule,
+        )
+          ? object.tradingRewardPoolCampaignSchedule.map((e: any) =>
+              CampaignRewardPool.fromJSON(e),
+            )
+          : globalThis.Array.isArray(
+                object?.trading_reward_pool_campaign_schedule,
+              )
+            ? object.trading_reward_pool_campaign_schedule.map((e: any) =>
+                CampaignRewardPool.fromJSON(e),
+              )
+            : [],
+        totalTradeRewardPoints: isSet(object.totalTradeRewardPoints)
+          ? globalThis.String(object.totalTradeRewardPoints)
+          : isSet(object.total_trade_reward_points)
+            ? globalThis.String(object.total_trade_reward_points)
+            : "",
+        pendingTradingRewardPoolCampaignSchedule: globalThis.Array.isArray(
+          object?.pendingTradingRewardPoolCampaignSchedule,
+        )
+          ? object.pendingTradingRewardPoolCampaignSchedule.map((e: any) =>
+              CampaignRewardPool.fromJSON(e),
+            )
+          : globalThis.Array.isArray(
+                object?.pending_trading_reward_pool_campaign_schedule,
+              )
+            ? object.pending_trading_reward_pool_campaign_schedule.map(
+                (e: any) => CampaignRewardPool.fromJSON(e),
+              )
+            : [],
+        pendingTotalTradeRewardPoints: globalThis.Array.isArray(
+          object?.pendingTotalTradeRewardPoints,
+        )
+          ? object.pendingTotalTradeRewardPoints.map((e: any) =>
+              globalThis.String(e),
+            )
+          : globalThis.Array.isArray(object?.pending_total_trade_reward_points)
+            ? object.pending_total_trade_reward_points.map((e: any) =>
+                globalThis.String(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: QueryTradeRewardCampaignResponse): unknown {
+      const obj: any = {};
+      if (message.tradingRewardCampaignInfo !== undefined) {
+        obj.tradingRewardCampaignInfo = TradingRewardCampaignInfo.toJSON(
+          message.tradingRewardCampaignInfo,
+        );
+      }
+      if (message.tradingRewardPoolCampaignSchedule?.length) {
+        obj.tradingRewardPoolCampaignSchedule =
+          message.tradingRewardPoolCampaignSchedule.map((e) =>
+            CampaignRewardPool.toJSON(e),
+          );
+      }
+      if (message.totalTradeRewardPoints !== "") {
+        obj.totalTradeRewardPoints = message.totalTradeRewardPoints;
+      }
+      if (message.pendingTradingRewardPoolCampaignSchedule?.length) {
+        obj.pendingTradingRewardPoolCampaignSchedule =
+          message.pendingTradingRewardPoolCampaignSchedule.map((e) =>
+            CampaignRewardPool.toJSON(e),
+          );
+      }
+      if (message.pendingTotalTradeRewardPoints?.length) {
+        obj.pendingTotalTradeRewardPoints =
+          message.pendingTotalTradeRewardPoints;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryTradeRewardCampaignResponse>, I>>(
+      base?: I,
+    ): QueryTradeRewardCampaignResponse {
+      return QueryTradeRewardCampaignResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryTradeRewardCampaignResponse>, I>,
+    >(object: I): QueryTradeRewardCampaignResponse {
+      const message = createBaseQueryTradeRewardCampaignResponse();
+      message.tradingRewardCampaignInfo =
+        object.tradingRewardCampaignInfo !== undefined &&
+        object.tradingRewardCampaignInfo !== null
+          ? TradingRewardCampaignInfo.fromPartial(
+              object.tradingRewardCampaignInfo,
+            )
+          : undefined;
+      message.tradingRewardPoolCampaignSchedule =
+        object.tradingRewardPoolCampaignSchedule?.map((e) =>
+          CampaignRewardPool.fromPartial(e),
+        ) || [];
+      message.totalTradeRewardPoints = object.totalTradeRewardPoints ?? "";
+      message.pendingTradingRewardPoolCampaignSchedule =
+        object.pendingTradingRewardPoolCampaignSchedule?.map((e) =>
+          CampaignRewardPool.fromPartial(e),
+        ) || [];
+      message.pendingTotalTradeRewardPoints =
+        object.pendingTotalTradeRewardPoints?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryIsOptedOutOfRewardsRequest(): QueryIsOptedOutOfRewardsRequest {
   return { account: "" };
 }
 
-export const QueryIsOptedOutOfRewardsRequest: MessageFns<QueryIsOptedOutOfRewardsRequest> = {
-  encode(message: QueryIsOptedOutOfRewardsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.account !== "") {
-      writer.uint32(10).string(message.account);
-    }
-    return writer;
-  },
+export const QueryIsOptedOutOfRewardsRequest: MessageFns<QueryIsOptedOutOfRewardsRequest> =
+  {
+    encode(
+      message: QueryIsOptedOutOfRewardsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.account !== "") {
+        writer.uint32(10).string(message.account);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryIsOptedOutOfRewardsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryIsOptedOutOfRewardsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryIsOptedOutOfRewardsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryIsOptedOutOfRewardsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.account = reader.string();
+            continue;
           }
-
-          message.account = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryIsOptedOutOfRewardsRequest {
+      return {
+        account: isSet(object.account) ? globalThis.String(object.account) : "",
+      };
+    },
+
+    toJSON(message: QueryIsOptedOutOfRewardsRequest): unknown {
+      const obj: any = {};
+      if (message.account !== "") {
+        obj.account = message.account;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryIsOptedOutOfRewardsRequest {
-    return { account: isSet(object.account) ? globalThis.String(object.account) : "" };
-  },
-
-  toJSON(message: QueryIsOptedOutOfRewardsRequest): unknown {
-    const obj: any = {};
-    if (message.account !== "") {
-      obj.account = message.account;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryIsOptedOutOfRewardsRequest>, I>>(base?: I): QueryIsOptedOutOfRewardsRequest {
-    return QueryIsOptedOutOfRewardsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryIsOptedOutOfRewardsRequest>, I>>(
-    object: I,
-  ): QueryIsOptedOutOfRewardsRequest {
-    const message = createBaseQueryIsOptedOutOfRewardsRequest();
-    message.account = object.account ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryIsOptedOutOfRewardsRequest>, I>>(
+      base?: I,
+    ): QueryIsOptedOutOfRewardsRequest {
+      return QueryIsOptedOutOfRewardsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryIsOptedOutOfRewardsRequest>, I>,
+    >(object: I): QueryIsOptedOutOfRewardsRequest {
+      const message = createBaseQueryIsOptedOutOfRewardsRequest();
+      message.account = object.account ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryIsOptedOutOfRewardsResponse(): QueryIsOptedOutOfRewardsResponse {
   return { isOptedOut: false };
 }
 
-export const QueryIsOptedOutOfRewardsResponse: MessageFns<QueryIsOptedOutOfRewardsResponse> = {
-  encode(message: QueryIsOptedOutOfRewardsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.isOptedOut !== false) {
-      writer.uint32(8).bool(message.isOptedOut);
-    }
-    return writer;
-  },
+export const QueryIsOptedOutOfRewardsResponse: MessageFns<QueryIsOptedOutOfRewardsResponse> =
+  {
+    encode(
+      message: QueryIsOptedOutOfRewardsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.isOptedOut !== false) {
+        writer.uint32(8).bool(message.isOptedOut);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryIsOptedOutOfRewardsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryIsOptedOutOfRewardsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryIsOptedOutOfRewardsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryIsOptedOutOfRewardsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.isOptedOut = reader.bool();
+            continue;
           }
-
-          message.isOptedOut = reader.bool();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryIsOptedOutOfRewardsResponse {
+      return {
+        isOptedOut: isSet(object.isOptedOut)
+          ? globalThis.Boolean(object.isOptedOut)
+          : isSet(object.is_opted_out)
+            ? globalThis.Boolean(object.is_opted_out)
+            : false,
+      };
+    },
+
+    toJSON(message: QueryIsOptedOutOfRewardsResponse): unknown {
+      const obj: any = {};
+      if (message.isOptedOut !== false) {
+        obj.isOptedOut = message.isOptedOut;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryIsOptedOutOfRewardsResponse {
-    return {
-      isOptedOut: isSet(object.isOptedOut)
-        ? globalThis.Boolean(object.isOptedOut)
-        : isSet(object.is_opted_out)
-        ? globalThis.Boolean(object.is_opted_out)
-        : false,
-    };
-  },
-
-  toJSON(message: QueryIsOptedOutOfRewardsResponse): unknown {
-    const obj: any = {};
-    if (message.isOptedOut !== false) {
-      obj.isOptedOut = message.isOptedOut;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryIsOptedOutOfRewardsResponse>, I>>(
-    base?: I,
-  ): QueryIsOptedOutOfRewardsResponse {
-    return QueryIsOptedOutOfRewardsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryIsOptedOutOfRewardsResponse>, I>>(
-    object: I,
-  ): QueryIsOptedOutOfRewardsResponse {
-    const message = createBaseQueryIsOptedOutOfRewardsResponse();
-    message.isOptedOut = object.isOptedOut ?? false;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryIsOptedOutOfRewardsResponse>, I>>(
+      base?: I,
+    ): QueryIsOptedOutOfRewardsResponse {
+      return QueryIsOptedOutOfRewardsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryIsOptedOutOfRewardsResponse>, I>,
+    >(object: I): QueryIsOptedOutOfRewardsResponse {
+      const message = createBaseQueryIsOptedOutOfRewardsResponse();
+      message.isOptedOut = object.isOptedOut ?? false;
+      return message;
+    },
+  };
 
 function createBaseQueryOptedOutOfRewardsAccountsRequest(): QueryOptedOutOfRewardsAccountsRequest {
   return {};
 }
 
-export const QueryOptedOutOfRewardsAccountsRequest: MessageFns<QueryOptedOutOfRewardsAccountsRequest> = {
-  encode(_: QueryOptedOutOfRewardsAccountsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const QueryOptedOutOfRewardsAccountsRequest: MessageFns<QueryOptedOutOfRewardsAccountsRequest> =
+  {
+    encode(
+      _: QueryOptedOutOfRewardsAccountsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryOptedOutOfRewardsAccountsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryOptedOutOfRewardsAccountsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryOptedOutOfRewardsAccountsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryOptedOutOfRewardsAccountsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): QueryOptedOutOfRewardsAccountsRequest {
-    return {};
-  },
+    fromJSON(_: any): QueryOptedOutOfRewardsAccountsRequest {
+      return {};
+    },
 
-  toJSON(_: QueryOptedOutOfRewardsAccountsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: QueryOptedOutOfRewardsAccountsRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<QueryOptedOutOfRewardsAccountsRequest>, I>>(
-    base?: I,
-  ): QueryOptedOutOfRewardsAccountsRequest {
-    return QueryOptedOutOfRewardsAccountsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryOptedOutOfRewardsAccountsRequest>, I>>(
-    _: I,
-  ): QueryOptedOutOfRewardsAccountsRequest {
-    const message = createBaseQueryOptedOutOfRewardsAccountsRequest();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryOptedOutOfRewardsAccountsRequest>, I>,
+    >(base?: I): QueryOptedOutOfRewardsAccountsRequest {
+      return QueryOptedOutOfRewardsAccountsRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryOptedOutOfRewardsAccountsRequest>, I>,
+    >(_: I): QueryOptedOutOfRewardsAccountsRequest {
+      const message = createBaseQueryOptedOutOfRewardsAccountsRequest();
+      return message;
+    },
+  };
 
 function createBaseQueryOptedOutOfRewardsAccountsResponse(): QueryOptedOutOfRewardsAccountsResponse {
   return { accounts: [] };
 }
 
-export const QueryOptedOutOfRewardsAccountsResponse: MessageFns<QueryOptedOutOfRewardsAccountsResponse> = {
-  encode(message: QueryOptedOutOfRewardsAccountsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.accounts) {
-      writer.uint32(10).string(v!);
-    }
-    return writer;
-  },
+export const QueryOptedOutOfRewardsAccountsResponse: MessageFns<QueryOptedOutOfRewardsAccountsResponse> =
+  {
+    encode(
+      message: QueryOptedOutOfRewardsAccountsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.accounts) {
+        writer.uint32(10).string(v!);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryOptedOutOfRewardsAccountsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryOptedOutOfRewardsAccountsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryOptedOutOfRewardsAccountsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryOptedOutOfRewardsAccountsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.accounts.push(reader.string());
+            continue;
           }
-
-          message.accounts.push(reader.string());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryOptedOutOfRewardsAccountsResponse {
+      return {
+        accounts: globalThis.Array.isArray(object?.accounts)
+          ? object.accounts.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryOptedOutOfRewardsAccountsResponse): unknown {
+      const obj: any = {};
+      if (message.accounts?.length) {
+        obj.accounts = message.accounts;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryOptedOutOfRewardsAccountsResponse {
-    return {
-      accounts: globalThis.Array.isArray(object?.accounts) ? object.accounts.map((e: any) => globalThis.String(e)) : [],
-    };
-  },
-
-  toJSON(message: QueryOptedOutOfRewardsAccountsResponse): unknown {
-    const obj: any = {};
-    if (message.accounts?.length) {
-      obj.accounts = message.accounts;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryOptedOutOfRewardsAccountsResponse>, I>>(
-    base?: I,
-  ): QueryOptedOutOfRewardsAccountsResponse {
-    return QueryOptedOutOfRewardsAccountsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryOptedOutOfRewardsAccountsResponse>, I>>(
-    object: I,
-  ): QueryOptedOutOfRewardsAccountsResponse {
-    const message = createBaseQueryOptedOutOfRewardsAccountsResponse();
-    message.accounts = object.accounts?.map((e) => e) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryOptedOutOfRewardsAccountsResponse>, I>,
+    >(base?: I): QueryOptedOutOfRewardsAccountsResponse {
+      return QueryOptedOutOfRewardsAccountsResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryOptedOutOfRewardsAccountsResponse>, I>,
+    >(object: I): QueryOptedOutOfRewardsAccountsResponse {
+      const message = createBaseQueryOptedOutOfRewardsAccountsResponse();
+      message.accounts = object.accounts?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryFeeDiscountAccountInfoRequest(): QueryFeeDiscountAccountInfoRequest {
   return { account: "" };
 }
 
-export const QueryFeeDiscountAccountInfoRequest: MessageFns<QueryFeeDiscountAccountInfoRequest> = {
-  encode(message: QueryFeeDiscountAccountInfoRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.account !== "") {
-      writer.uint32(10).string(message.account);
-    }
-    return writer;
-  },
+export const QueryFeeDiscountAccountInfoRequest: MessageFns<QueryFeeDiscountAccountInfoRequest> =
+  {
+    encode(
+      message: QueryFeeDiscountAccountInfoRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.account !== "") {
+        writer.uint32(10).string(message.account);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFeeDiscountAccountInfoRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFeeDiscountAccountInfoRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFeeDiscountAccountInfoRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFeeDiscountAccountInfoRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.account = reader.string();
+            continue;
           }
-
-          message.account = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryFeeDiscountAccountInfoRequest {
+      return {
+        account: isSet(object.account) ? globalThis.String(object.account) : "",
+      };
+    },
+
+    toJSON(message: QueryFeeDiscountAccountInfoRequest): unknown {
+      const obj: any = {};
+      if (message.account !== "") {
+        obj.account = message.account;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryFeeDiscountAccountInfoRequest {
-    return { account: isSet(object.account) ? globalThis.String(object.account) : "" };
-  },
-
-  toJSON(message: QueryFeeDiscountAccountInfoRequest): unknown {
-    const obj: any = {};
-    if (message.account !== "") {
-      obj.account = message.account;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryFeeDiscountAccountInfoRequest>, I>>(
-    base?: I,
-  ): QueryFeeDiscountAccountInfoRequest {
-    return QueryFeeDiscountAccountInfoRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFeeDiscountAccountInfoRequest>, I>>(
-    object: I,
-  ): QueryFeeDiscountAccountInfoRequest {
-    const message = createBaseQueryFeeDiscountAccountInfoRequest();
-    message.account = object.account ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryFeeDiscountAccountInfoRequest>, I>>(
+      base?: I,
+    ): QueryFeeDiscountAccountInfoRequest {
+      return QueryFeeDiscountAccountInfoRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryFeeDiscountAccountInfoRequest>, I>,
+    >(object: I): QueryFeeDiscountAccountInfoRequest {
+      const message = createBaseQueryFeeDiscountAccountInfoRequest();
+      message.account = object.account ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryFeeDiscountAccountInfoResponse(): QueryFeeDiscountAccountInfoResponse {
   return { tierLevel: 0, accountInfo: undefined, accountTtl: undefined };
 }
 
-export const QueryFeeDiscountAccountInfoResponse: MessageFns<QueryFeeDiscountAccountInfoResponse> = {
-  encode(message: QueryFeeDiscountAccountInfoResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.tierLevel !== 0) {
-      writer.uint32(8).uint64(message.tierLevel);
-    }
-    if (message.accountInfo !== undefined) {
-      FeeDiscountTierInfo.encode(message.accountInfo, writer.uint32(18).fork()).join();
-    }
-    if (message.accountTtl !== undefined) {
-      FeeDiscountTierTTL.encode(message.accountTtl, writer.uint32(26).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFeeDiscountAccountInfoResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFeeDiscountAccountInfoResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.tierLevel = longToNumber(reader.uint64());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.accountInfo = FeeDiscountTierInfo.decode(reader, reader.uint32());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.accountTtl = FeeDiscountTierTTL.decode(reader, reader.uint32());
-          continue;
-        }
+export const QueryFeeDiscountAccountInfoResponse: MessageFns<QueryFeeDiscountAccountInfoResponse> =
+  {
+    encode(
+      message: QueryFeeDiscountAccountInfoResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.tierLevel !== 0) {
+        writer.uint32(8).uint64(message.tierLevel);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.accountInfo !== undefined) {
+        FeeDiscountTierInfo.encode(
+          message.accountInfo,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.accountTtl !== undefined) {
+        FeeDiscountTierTTL.encode(
+          message.accountTtl,
+          writer.uint32(26).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QueryFeeDiscountAccountInfoResponse {
-    return {
-      tierLevel: isSet(object.tierLevel)
-        ? globalThis.Number(object.tierLevel)
-        : isSet(object.tier_level)
-        ? globalThis.Number(object.tier_level)
-        : 0,
-      accountInfo: isSet(object.accountInfo)
-        ? FeeDiscountTierInfo.fromJSON(object.accountInfo)
-        : isSet(object.account_info)
-        ? FeeDiscountTierInfo.fromJSON(object.account_info)
-        : undefined,
-      accountTtl: isSet(object.accountTtl)
-        ? FeeDiscountTierTTL.fromJSON(object.accountTtl)
-        : isSet(object.account_ttl)
-        ? FeeDiscountTierTTL.fromJSON(object.account_ttl)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFeeDiscountAccountInfoResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFeeDiscountAccountInfoResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
 
-  toJSON(message: QueryFeeDiscountAccountInfoResponse): unknown {
-    const obj: any = {};
-    if (message.tierLevel !== 0) {
-      obj.tierLevel = Math.round(message.tierLevel);
-    }
-    if (message.accountInfo !== undefined) {
-      obj.accountInfo = FeeDiscountTierInfo.toJSON(message.accountInfo);
-    }
-    if (message.accountTtl !== undefined) {
-      obj.accountTtl = FeeDiscountTierTTL.toJSON(message.accountTtl);
-    }
-    return obj;
-  },
+            message.tierLevel = longToNumber(reader.uint64());
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryFeeDiscountAccountInfoResponse>, I>>(
-    base?: I,
-  ): QueryFeeDiscountAccountInfoResponse {
-    return QueryFeeDiscountAccountInfoResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFeeDiscountAccountInfoResponse>, I>>(
-    object: I,
-  ): QueryFeeDiscountAccountInfoResponse {
-    const message = createBaseQueryFeeDiscountAccountInfoResponse();
-    message.tierLevel = object.tierLevel ?? 0;
-    message.accountInfo = (object.accountInfo !== undefined && object.accountInfo !== null)
-      ? FeeDiscountTierInfo.fromPartial(object.accountInfo)
-      : undefined;
-    message.accountTtl = (object.accountTtl !== undefined && object.accountTtl !== null)
-      ? FeeDiscountTierTTL.fromPartial(object.accountTtl)
-      : undefined;
-    return message;
-  },
-};
+            message.accountInfo = FeeDiscountTierInfo.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.accountTtl = FeeDiscountTierTTL.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryFeeDiscountAccountInfoResponse {
+      return {
+        tierLevel: isSet(object.tierLevel)
+          ? globalThis.Number(object.tierLevel)
+          : isSet(object.tier_level)
+            ? globalThis.Number(object.tier_level)
+            : 0,
+        accountInfo: isSet(object.accountInfo)
+          ? FeeDiscountTierInfo.fromJSON(object.accountInfo)
+          : isSet(object.account_info)
+            ? FeeDiscountTierInfo.fromJSON(object.account_info)
+            : undefined,
+        accountTtl: isSet(object.accountTtl)
+          ? FeeDiscountTierTTL.fromJSON(object.accountTtl)
+          : isSet(object.account_ttl)
+            ? FeeDiscountTierTTL.fromJSON(object.account_ttl)
+            : undefined,
+      };
+    },
+
+    toJSON(message: QueryFeeDiscountAccountInfoResponse): unknown {
+      const obj: any = {};
+      if (message.tierLevel !== 0) {
+        obj.tierLevel = Math.round(message.tierLevel);
+      }
+      if (message.accountInfo !== undefined) {
+        obj.accountInfo = FeeDiscountTierInfo.toJSON(message.accountInfo);
+      }
+      if (message.accountTtl !== undefined) {
+        obj.accountTtl = FeeDiscountTierTTL.toJSON(message.accountTtl);
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<QueryFeeDiscountAccountInfoResponse>, I>,
+    >(base?: I): QueryFeeDiscountAccountInfoResponse {
+      return QueryFeeDiscountAccountInfoResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryFeeDiscountAccountInfoResponse>, I>,
+    >(object: I): QueryFeeDiscountAccountInfoResponse {
+      const message = createBaseQueryFeeDiscountAccountInfoResponse();
+      message.tierLevel = object.tierLevel ?? 0;
+      message.accountInfo =
+        object.accountInfo !== undefined && object.accountInfo !== null
+          ? FeeDiscountTierInfo.fromPartial(object.accountInfo)
+          : undefined;
+      message.accountTtl =
+        object.accountTtl !== undefined && object.accountTtl !== null
+          ? FeeDiscountTierTTL.fromPartial(object.accountTtl)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQueryFeeDiscountScheduleRequest(): QueryFeeDiscountScheduleRequest {
   return {};
 }
 
-export const QueryFeeDiscountScheduleRequest: MessageFns<QueryFeeDiscountScheduleRequest> = {
-  encode(_: QueryFeeDiscountScheduleRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const QueryFeeDiscountScheduleRequest: MessageFns<QueryFeeDiscountScheduleRequest> =
+  {
+    encode(
+      _: QueryFeeDiscountScheduleRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFeeDiscountScheduleRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFeeDiscountScheduleRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFeeDiscountScheduleRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFeeDiscountScheduleRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): QueryFeeDiscountScheduleRequest {
-    return {};
-  },
+    fromJSON(_: any): QueryFeeDiscountScheduleRequest {
+      return {};
+    },
 
-  toJSON(_: QueryFeeDiscountScheduleRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: QueryFeeDiscountScheduleRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<QueryFeeDiscountScheduleRequest>, I>>(base?: I): QueryFeeDiscountScheduleRequest {
-    return QueryFeeDiscountScheduleRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFeeDiscountScheduleRequest>, I>>(_: I): QueryFeeDiscountScheduleRequest {
-    const message = createBaseQueryFeeDiscountScheduleRequest();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryFeeDiscountScheduleRequest>, I>>(
+      base?: I,
+    ): QueryFeeDiscountScheduleRequest {
+      return QueryFeeDiscountScheduleRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryFeeDiscountScheduleRequest>, I>,
+    >(_: I): QueryFeeDiscountScheduleRequest {
+      const message = createBaseQueryFeeDiscountScheduleRequest();
+      return message;
+    },
+  };
 
 function createBaseQueryFeeDiscountScheduleResponse(): QueryFeeDiscountScheduleResponse {
   return { feeDiscountSchedule: undefined };
 }
 
-export const QueryFeeDiscountScheduleResponse: MessageFns<QueryFeeDiscountScheduleResponse> = {
-  encode(message: QueryFeeDiscountScheduleResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.feeDiscountSchedule !== undefined) {
-      FeeDiscountSchedule.encode(message.feeDiscountSchedule, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryFeeDiscountScheduleResponse: MessageFns<QueryFeeDiscountScheduleResponse> =
+  {
+    encode(
+      message: QueryFeeDiscountScheduleResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.feeDiscountSchedule !== undefined) {
+        FeeDiscountSchedule.encode(
+          message.feeDiscountSchedule,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFeeDiscountScheduleResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFeeDiscountScheduleResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFeeDiscountScheduleResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFeeDiscountScheduleResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.feeDiscountSchedule = FeeDiscountSchedule.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
           }
-
-          message.feeDiscountSchedule = FeeDiscountSchedule.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryFeeDiscountScheduleResponse {
+      return {
+        feeDiscountSchedule: isSet(object.feeDiscountSchedule)
+          ? FeeDiscountSchedule.fromJSON(object.feeDiscountSchedule)
+          : isSet(object.fee_discount_schedule)
+            ? FeeDiscountSchedule.fromJSON(object.fee_discount_schedule)
+            : undefined,
+      };
+    },
+
+    toJSON(message: QueryFeeDiscountScheduleResponse): unknown {
+      const obj: any = {};
+      if (message.feeDiscountSchedule !== undefined) {
+        obj.feeDiscountSchedule = FeeDiscountSchedule.toJSON(
+          message.feeDiscountSchedule,
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryFeeDiscountScheduleResponse {
-    return {
-      feeDiscountSchedule: isSet(object.feeDiscountSchedule)
-        ? FeeDiscountSchedule.fromJSON(object.feeDiscountSchedule)
-        : isSet(object.fee_discount_schedule)
-        ? FeeDiscountSchedule.fromJSON(object.fee_discount_schedule)
-        : undefined,
-    };
-  },
-
-  toJSON(message: QueryFeeDiscountScheduleResponse): unknown {
-    const obj: any = {};
-    if (message.feeDiscountSchedule !== undefined) {
-      obj.feeDiscountSchedule = FeeDiscountSchedule.toJSON(message.feeDiscountSchedule);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryFeeDiscountScheduleResponse>, I>>(
-    base?: I,
-  ): QueryFeeDiscountScheduleResponse {
-    return QueryFeeDiscountScheduleResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFeeDiscountScheduleResponse>, I>>(
-    object: I,
-  ): QueryFeeDiscountScheduleResponse {
-    const message = createBaseQueryFeeDiscountScheduleResponse();
-    message.feeDiscountSchedule = (object.feeDiscountSchedule !== undefined && object.feeDiscountSchedule !== null)
-      ? FeeDiscountSchedule.fromPartial(object.feeDiscountSchedule)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryFeeDiscountScheduleResponse>, I>>(
+      base?: I,
+    ): QueryFeeDiscountScheduleResponse {
+      return QueryFeeDiscountScheduleResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryFeeDiscountScheduleResponse>, I>,
+    >(object: I): QueryFeeDiscountScheduleResponse {
+      const message = createBaseQueryFeeDiscountScheduleResponse();
+      message.feeDiscountSchedule =
+        object.feeDiscountSchedule !== undefined &&
+        object.feeDiscountSchedule !== null
+          ? FeeDiscountSchedule.fromPartial(object.feeDiscountSchedule)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQueryBalanceMismatchesRequest(): QueryBalanceMismatchesRequest {
   return { dustFactor: 0 };
 }
 
-export const QueryBalanceMismatchesRequest: MessageFns<QueryBalanceMismatchesRequest> = {
-  encode(message: QueryBalanceMismatchesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.dustFactor !== 0) {
-      writer.uint32(8).int64(message.dustFactor);
-    }
-    return writer;
-  },
+export const QueryBalanceMismatchesRequest: MessageFns<QueryBalanceMismatchesRequest> =
+  {
+    encode(
+      message: QueryBalanceMismatchesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.dustFactor !== 0) {
+        writer.uint32(8).int64(message.dustFactor);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceMismatchesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryBalanceMismatchesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryBalanceMismatchesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryBalanceMismatchesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.dustFactor = longToNumber(reader.int64());
+            continue;
           }
-
-          message.dustFactor = longToNumber(reader.int64());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryBalanceMismatchesRequest {
+      return {
+        dustFactor: isSet(object.dustFactor)
+          ? globalThis.Number(object.dustFactor)
+          : isSet(object.dust_factor)
+            ? globalThis.Number(object.dust_factor)
+            : 0,
+      };
+    },
+
+    toJSON(message: QueryBalanceMismatchesRequest): unknown {
+      const obj: any = {};
+      if (message.dustFactor !== 0) {
+        obj.dustFactor = Math.round(message.dustFactor);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryBalanceMismatchesRequest {
-    return {
-      dustFactor: isSet(object.dustFactor)
-        ? globalThis.Number(object.dustFactor)
-        : isSet(object.dust_factor)
-        ? globalThis.Number(object.dust_factor)
-        : 0,
-    };
-  },
-
-  toJSON(message: QueryBalanceMismatchesRequest): unknown {
-    const obj: any = {};
-    if (message.dustFactor !== 0) {
-      obj.dustFactor = Math.round(message.dustFactor);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryBalanceMismatchesRequest>, I>>(base?: I): QueryBalanceMismatchesRequest {
-    return QueryBalanceMismatchesRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryBalanceMismatchesRequest>, I>>(
-    object: I,
-  ): QueryBalanceMismatchesRequest {
-    const message = createBaseQueryBalanceMismatchesRequest();
-    message.dustFactor = object.dustFactor ?? 0;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryBalanceMismatchesRequest>, I>>(
+      base?: I,
+    ): QueryBalanceMismatchesRequest {
+      return QueryBalanceMismatchesRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryBalanceMismatchesRequest>, I>>(
+      object: I,
+    ): QueryBalanceMismatchesRequest {
+      const message = createBaseQueryBalanceMismatchesRequest();
+      message.dustFactor = object.dustFactor ?? 0;
+      return message;
+    },
+  };
 
 function createBaseBalanceMismatch(): BalanceMismatch {
-  return { subaccountId: "", denom: "", available: "", total: "", balanceHold: "", expectedTotal: "", difference: "" };
+  return {
+    subaccountId: "",
+    denom: "",
+    available: "",
+    total: "",
+    balanceHold: "",
+    expectedTotal: "",
+    difference: "",
+  };
 }
 
 export const BalanceMismatch: MessageFns<BalanceMismatch> = {
-  encode(message: BalanceMismatch, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BalanceMismatch,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -9347,7 +10836,8 @@ export const BalanceMismatch: MessageFns<BalanceMismatch> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): BalanceMismatch {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBalanceMismatch();
     while (reader.pos < end) {
@@ -9420,21 +10910,27 @@ export const BalanceMismatch: MessageFns<BalanceMismatch> = {
 
   fromJSON(object: any): BalanceMismatch {
     return {
-      subaccountId: isSet(object.subaccountId) ? globalThis.String(object.subaccountId) : "",
+      subaccountId: isSet(object.subaccountId)
+        ? globalThis.String(object.subaccountId)
+        : "",
       denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
-      available: isSet(object.available) ? globalThis.String(object.available) : "",
+      available: isSet(object.available)
+        ? globalThis.String(object.available)
+        : "",
       total: isSet(object.total) ? globalThis.String(object.total) : "",
       balanceHold: isSet(object.balanceHold)
         ? globalThis.String(object.balanceHold)
         : isSet(object.balance_hold)
-        ? globalThis.String(object.balance_hold)
-        : "",
+          ? globalThis.String(object.balance_hold)
+          : "",
       expectedTotal: isSet(object.expectedTotal)
         ? globalThis.String(object.expectedTotal)
         : isSet(object.expected_total)
-        ? globalThis.String(object.expected_total)
+          ? globalThis.String(object.expected_total)
+          : "",
+      difference: isSet(object.difference)
+        ? globalThis.String(object.difference)
         : "",
-      difference: isSet(object.difference) ? globalThis.String(object.difference) : "",
     };
   },
 
@@ -9464,10 +10960,14 @@ export const BalanceMismatch: MessageFns<BalanceMismatch> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BalanceMismatch>, I>>(base?: I): BalanceMismatch {
+  create<I extends Exact<DeepPartial<BalanceMismatch>, I>>(
+    base?: I,
+  ): BalanceMismatch {
     return BalanceMismatch.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BalanceMismatch>, I>>(object: I): BalanceMismatch {
+  fromPartial<I extends Exact<DeepPartial<BalanceMismatch>, I>>(
+    object: I,
+  ): BalanceMismatch {
     const message = createBaseBalanceMismatch();
     message.subaccountId = object.subaccountId ?? "";
     message.denom = object.denom ?? "";
@@ -9484,121 +10984,160 @@ function createBaseQueryBalanceMismatchesResponse(): QueryBalanceMismatchesRespo
   return { balanceMismatches: [] };
 }
 
-export const QueryBalanceMismatchesResponse: MessageFns<QueryBalanceMismatchesResponse> = {
-  encode(message: QueryBalanceMismatchesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.balanceMismatches) {
-      BalanceMismatch.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryBalanceMismatchesResponse: MessageFns<QueryBalanceMismatchesResponse> =
+  {
+    encode(
+      message: QueryBalanceMismatchesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.balanceMismatches) {
+        BalanceMismatch.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceMismatchesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryBalanceMismatchesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryBalanceMismatchesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryBalanceMismatchesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.balanceMismatches.push(
+              BalanceMismatch.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.balanceMismatches.push(BalanceMismatch.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryBalanceMismatchesResponse {
+      return {
+        balanceMismatches: globalThis.Array.isArray(object?.balanceMismatches)
+          ? object.balanceMismatches.map((e: any) =>
+              BalanceMismatch.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.balance_mismatches)
+            ? object.balance_mismatches.map((e: any) =>
+                BalanceMismatch.fromJSON(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: QueryBalanceMismatchesResponse): unknown {
+      const obj: any = {};
+      if (message.balanceMismatches?.length) {
+        obj.balanceMismatches = message.balanceMismatches.map((e) =>
+          BalanceMismatch.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryBalanceMismatchesResponse {
-    return {
-      balanceMismatches: globalThis.Array.isArray(object?.balanceMismatches)
-        ? object.balanceMismatches.map((e: any) => BalanceMismatch.fromJSON(e))
-        : globalThis.Array.isArray(object?.balance_mismatches)
-        ? object.balance_mismatches.map((e: any) => BalanceMismatch.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryBalanceMismatchesResponse): unknown {
-    const obj: any = {};
-    if (message.balanceMismatches?.length) {
-      obj.balanceMismatches = message.balanceMismatches.map((e) => BalanceMismatch.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryBalanceMismatchesResponse>, I>>(base?: I): QueryBalanceMismatchesResponse {
-    return QueryBalanceMismatchesResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryBalanceMismatchesResponse>, I>>(
-    object: I,
-  ): QueryBalanceMismatchesResponse {
-    const message = createBaseQueryBalanceMismatchesResponse();
-    message.balanceMismatches = object.balanceMismatches?.map((e) => BalanceMismatch.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryBalanceMismatchesResponse>, I>>(
+      base?: I,
+    ): QueryBalanceMismatchesResponse {
+      return QueryBalanceMismatchesResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryBalanceMismatchesResponse>, I>,
+    >(object: I): QueryBalanceMismatchesResponse {
+      const message = createBaseQueryBalanceMismatchesResponse();
+      message.balanceMismatches =
+        object.balanceMismatches?.map((e) => BalanceMismatch.fromPartial(e)) ||
+        [];
+      return message;
+    },
+  };
 
 function createBaseQueryBalanceWithBalanceHoldsRequest(): QueryBalanceWithBalanceHoldsRequest {
   return {};
 }
 
-export const QueryBalanceWithBalanceHoldsRequest: MessageFns<QueryBalanceWithBalanceHoldsRequest> = {
-  encode(_: QueryBalanceWithBalanceHoldsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const QueryBalanceWithBalanceHoldsRequest: MessageFns<QueryBalanceWithBalanceHoldsRequest> =
+  {
+    encode(
+      _: QueryBalanceWithBalanceHoldsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceWithBalanceHoldsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryBalanceWithBalanceHoldsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryBalanceWithBalanceHoldsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryBalanceWithBalanceHoldsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): QueryBalanceWithBalanceHoldsRequest {
-    return {};
-  },
+    fromJSON(_: any): QueryBalanceWithBalanceHoldsRequest {
+      return {};
+    },
 
-  toJSON(_: QueryBalanceWithBalanceHoldsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: QueryBalanceWithBalanceHoldsRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<QueryBalanceWithBalanceHoldsRequest>, I>>(
-    base?: I,
-  ): QueryBalanceWithBalanceHoldsRequest {
-    return QueryBalanceWithBalanceHoldsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryBalanceWithBalanceHoldsRequest>, I>>(
-    _: I,
-  ): QueryBalanceWithBalanceHoldsRequest {
-    const message = createBaseQueryBalanceWithBalanceHoldsRequest();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryBalanceWithBalanceHoldsRequest>, I>,
+    >(base?: I): QueryBalanceWithBalanceHoldsRequest {
+      return QueryBalanceWithBalanceHoldsRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryBalanceWithBalanceHoldsRequest>, I>,
+    >(_: I): QueryBalanceWithBalanceHoldsRequest {
+      const message = createBaseQueryBalanceWithBalanceHoldsRequest();
+      return message;
+    },
+  };
 
 function createBaseBalanceWithMarginHold(): BalanceWithMarginHold {
-  return { subaccountId: "", denom: "", available: "", total: "", balanceHold: "" };
+  return {
+    subaccountId: "",
+    denom: "",
+    available: "",
+    total: "",
+    balanceHold: "",
+  };
 }
 
 export const BalanceWithMarginHold: MessageFns<BalanceWithMarginHold> = {
-  encode(message: BalanceWithMarginHold, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BalanceWithMarginHold,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -9617,8 +11156,12 @@ export const BalanceWithMarginHold: MessageFns<BalanceWithMarginHold> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BalanceWithMarginHold {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): BalanceWithMarginHold {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBalanceWithMarginHold();
     while (reader.pos < end) {
@@ -9675,15 +11218,19 @@ export const BalanceWithMarginHold: MessageFns<BalanceWithMarginHold> = {
 
   fromJSON(object: any): BalanceWithMarginHold {
     return {
-      subaccountId: isSet(object.subaccountId) ? globalThis.String(object.subaccountId) : "",
+      subaccountId: isSet(object.subaccountId)
+        ? globalThis.String(object.subaccountId)
+        : "",
       denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
-      available: isSet(object.available) ? globalThis.String(object.available) : "",
+      available: isSet(object.available)
+        ? globalThis.String(object.available)
+        : "",
       total: isSet(object.total) ? globalThis.String(object.total) : "",
       balanceHold: isSet(object.balanceHold)
         ? globalThis.String(object.balanceHold)
         : isSet(object.balance_hold)
-        ? globalThis.String(object.balance_hold)
-        : "",
+          ? globalThis.String(object.balance_hold)
+          : "",
     };
   },
 
@@ -9707,10 +11254,14 @@ export const BalanceWithMarginHold: MessageFns<BalanceWithMarginHold> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BalanceWithMarginHold>, I>>(base?: I): BalanceWithMarginHold {
+  create<I extends Exact<DeepPartial<BalanceWithMarginHold>, I>>(
+    base?: I,
+  ): BalanceWithMarginHold {
     return BalanceWithMarginHold.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BalanceWithMarginHold>, I>>(object: I): BalanceWithMarginHold {
+  fromPartial<I extends Exact<DeepPartial<BalanceWithMarginHold>, I>>(
+    object: I,
+  ): BalanceWithMarginHold {
     const message = createBaseBalanceWithMarginHold();
     message.subaccountId = object.subaccountId ?? "";
     message.denom = object.denom ?? "";
@@ -9725,124 +11276,159 @@ function createBaseQueryBalanceWithBalanceHoldsResponse(): QueryBalanceWithBalan
   return { balanceWithBalanceHolds: [] };
 }
 
-export const QueryBalanceWithBalanceHoldsResponse: MessageFns<QueryBalanceWithBalanceHoldsResponse> = {
-  encode(message: QueryBalanceWithBalanceHoldsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.balanceWithBalanceHolds) {
-      BalanceWithMarginHold.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryBalanceWithBalanceHoldsResponse: MessageFns<QueryBalanceWithBalanceHoldsResponse> =
+  {
+    encode(
+      message: QueryBalanceWithBalanceHoldsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.balanceWithBalanceHolds) {
+        BalanceWithMarginHold.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceWithBalanceHoldsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryBalanceWithBalanceHoldsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryBalanceWithBalanceHoldsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryBalanceWithBalanceHoldsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.balanceWithBalanceHolds.push(
+              BalanceWithMarginHold.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.balanceWithBalanceHolds.push(BalanceWithMarginHold.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryBalanceWithBalanceHoldsResponse {
+      return {
+        balanceWithBalanceHolds: globalThis.Array.isArray(
+          object?.balanceWithBalanceHolds,
+        )
+          ? object.balanceWithBalanceHolds.map((e: any) =>
+              BalanceWithMarginHold.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.balance_with_balance_holds)
+            ? object.balance_with_balance_holds.map((e: any) =>
+                BalanceWithMarginHold.fromJSON(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: QueryBalanceWithBalanceHoldsResponse): unknown {
+      const obj: any = {};
+      if (message.balanceWithBalanceHolds?.length) {
+        obj.balanceWithBalanceHolds = message.balanceWithBalanceHolds.map((e) =>
+          BalanceWithMarginHold.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryBalanceWithBalanceHoldsResponse {
-    return {
-      balanceWithBalanceHolds: globalThis.Array.isArray(object?.balanceWithBalanceHolds)
-        ? object.balanceWithBalanceHolds.map((e: any) => BalanceWithMarginHold.fromJSON(e))
-        : globalThis.Array.isArray(object?.balance_with_balance_holds)
-        ? object.balance_with_balance_holds.map((e: any) => BalanceWithMarginHold.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryBalanceWithBalanceHoldsResponse): unknown {
-    const obj: any = {};
-    if (message.balanceWithBalanceHolds?.length) {
-      obj.balanceWithBalanceHolds = message.balanceWithBalanceHolds.map((e) => BalanceWithMarginHold.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryBalanceWithBalanceHoldsResponse>, I>>(
-    base?: I,
-  ): QueryBalanceWithBalanceHoldsResponse {
-    return QueryBalanceWithBalanceHoldsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryBalanceWithBalanceHoldsResponse>, I>>(
-    object: I,
-  ): QueryBalanceWithBalanceHoldsResponse {
-    const message = createBaseQueryBalanceWithBalanceHoldsResponse();
-    message.balanceWithBalanceHolds =
-      object.balanceWithBalanceHolds?.map((e) => BalanceWithMarginHold.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryBalanceWithBalanceHoldsResponse>, I>,
+    >(base?: I): QueryBalanceWithBalanceHoldsResponse {
+      return QueryBalanceWithBalanceHoldsResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryBalanceWithBalanceHoldsResponse>, I>,
+    >(object: I): QueryBalanceWithBalanceHoldsResponse {
+      const message = createBaseQueryBalanceWithBalanceHoldsResponse();
+      message.balanceWithBalanceHolds =
+        object.balanceWithBalanceHolds?.map((e) =>
+          BalanceWithMarginHold.fromPartial(e),
+        ) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryFeeDiscountTierStatisticsRequest(): QueryFeeDiscountTierStatisticsRequest {
   return {};
 }
 
-export const QueryFeeDiscountTierStatisticsRequest: MessageFns<QueryFeeDiscountTierStatisticsRequest> = {
-  encode(_: QueryFeeDiscountTierStatisticsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const QueryFeeDiscountTierStatisticsRequest: MessageFns<QueryFeeDiscountTierStatisticsRequest> =
+  {
+    encode(
+      _: QueryFeeDiscountTierStatisticsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFeeDiscountTierStatisticsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFeeDiscountTierStatisticsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFeeDiscountTierStatisticsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFeeDiscountTierStatisticsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): QueryFeeDiscountTierStatisticsRequest {
-    return {};
-  },
+    fromJSON(_: any): QueryFeeDiscountTierStatisticsRequest {
+      return {};
+    },
 
-  toJSON(_: QueryFeeDiscountTierStatisticsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: QueryFeeDiscountTierStatisticsRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<QueryFeeDiscountTierStatisticsRequest>, I>>(
-    base?: I,
-  ): QueryFeeDiscountTierStatisticsRequest {
-    return QueryFeeDiscountTierStatisticsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFeeDiscountTierStatisticsRequest>, I>>(
-    _: I,
-  ): QueryFeeDiscountTierStatisticsRequest {
-    const message = createBaseQueryFeeDiscountTierStatisticsRequest();
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryFeeDiscountTierStatisticsRequest>, I>,
+    >(base?: I): QueryFeeDiscountTierStatisticsRequest {
+      return QueryFeeDiscountTierStatisticsRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryFeeDiscountTierStatisticsRequest>, I>,
+    >(_: I): QueryFeeDiscountTierStatisticsRequest {
+      const message = createBaseQueryFeeDiscountTierStatisticsRequest();
+      return message;
+    },
+  };
 
 function createBaseTierStatistic(): TierStatistic {
   return { tier: 0, count: 0 };
 }
 
 export const TierStatistic: MessageFns<TierStatistic> = {
-  encode(message: TierStatistic, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TierStatistic,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.tier !== 0) {
       writer.uint32(8).uint64(message.tier);
     }
@@ -9853,7 +11439,8 @@ export const TierStatistic: MessageFns<TierStatistic> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TierStatistic {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTierStatistic();
     while (reader.pos < end) {
@@ -9902,10 +11489,14 @@ export const TierStatistic: MessageFns<TierStatistic> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TierStatistic>, I>>(base?: I): TierStatistic {
+  create<I extends Exact<DeepPartial<TierStatistic>, I>>(
+    base?: I,
+  ): TierStatistic {
     return TierStatistic.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TierStatistic>, I>>(object: I): TierStatistic {
+  fromPartial<I extends Exact<DeepPartial<TierStatistic>, I>>(
+    object: I,
+  ): TierStatistic {
     const message = createBaseTierStatistic();
     message.tier = object.tier ?? 0;
     message.count = object.count ?? 0;
@@ -9917,79 +11508,99 @@ function createBaseQueryFeeDiscountTierStatisticsResponse(): QueryFeeDiscountTie
   return { statistics: [] };
 }
 
-export const QueryFeeDiscountTierStatisticsResponse: MessageFns<QueryFeeDiscountTierStatisticsResponse> = {
-  encode(message: QueryFeeDiscountTierStatisticsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.statistics) {
-      TierStatistic.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryFeeDiscountTierStatisticsResponse: MessageFns<QueryFeeDiscountTierStatisticsResponse> =
+  {
+    encode(
+      message: QueryFeeDiscountTierStatisticsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.statistics) {
+        TierStatistic.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFeeDiscountTierStatisticsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFeeDiscountTierStatisticsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFeeDiscountTierStatisticsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFeeDiscountTierStatisticsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.statistics.push(
+              TierStatistic.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.statistics.push(TierStatistic.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryFeeDiscountTierStatisticsResponse {
+      return {
+        statistics: globalThis.Array.isArray(object?.statistics)
+          ? object.statistics.map((e: any) => TierStatistic.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryFeeDiscountTierStatisticsResponse): unknown {
+      const obj: any = {};
+      if (message.statistics?.length) {
+        obj.statistics = message.statistics.map((e) => TierStatistic.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryFeeDiscountTierStatisticsResponse {
-    return {
-      statistics: globalThis.Array.isArray(object?.statistics)
-        ? object.statistics.map((e: any) => TierStatistic.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryFeeDiscountTierStatisticsResponse): unknown {
-    const obj: any = {};
-    if (message.statistics?.length) {
-      obj.statistics = message.statistics.map((e) => TierStatistic.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryFeeDiscountTierStatisticsResponse>, I>>(
-    base?: I,
-  ): QueryFeeDiscountTierStatisticsResponse {
-    return QueryFeeDiscountTierStatisticsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFeeDiscountTierStatisticsResponse>, I>>(
-    object: I,
-  ): QueryFeeDiscountTierStatisticsResponse {
-    const message = createBaseQueryFeeDiscountTierStatisticsResponse();
-    message.statistics = object.statistics?.map((e) => TierStatistic.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryFeeDiscountTierStatisticsResponse>, I>,
+    >(base?: I): QueryFeeDiscountTierStatisticsResponse {
+      return QueryFeeDiscountTierStatisticsResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryFeeDiscountTierStatisticsResponse>, I>,
+    >(object: I): QueryFeeDiscountTierStatisticsResponse {
+      const message = createBaseQueryFeeDiscountTierStatisticsResponse();
+      message.statistics =
+        object.statistics?.map((e) => TierStatistic.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseMitoVaultInfosRequest(): MitoVaultInfosRequest {
   return {};
 }
 
 export const MitoVaultInfosRequest: MessageFns<MitoVaultInfosRequest> = {
-  encode(_: MitoVaultInfosRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: MitoVaultInfosRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MitoVaultInfosRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MitoVaultInfosRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMitoVaultInfosRequest();
     while (reader.pos < end) {
@@ -10013,21 +11624,33 @@ export const MitoVaultInfosRequest: MessageFns<MitoVaultInfosRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MitoVaultInfosRequest>, I>>(base?: I): MitoVaultInfosRequest {
+  create<I extends Exact<DeepPartial<MitoVaultInfosRequest>, I>>(
+    base?: I,
+  ): MitoVaultInfosRequest {
     return MitoVaultInfosRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MitoVaultInfosRequest>, I>>(_: I): MitoVaultInfosRequest {
+  fromPartial<I extends Exact<DeepPartial<MitoVaultInfosRequest>, I>>(
+    _: I,
+  ): MitoVaultInfosRequest {
     const message = createBaseMitoVaultInfosRequest();
     return message;
   },
 };
 
 function createBaseMitoVaultInfosResponse(): MitoVaultInfosResponse {
-  return { masterAddresses: [], derivativeAddresses: [], spotAddresses: [], cw20Addresses: [] };
+  return {
+    masterAddresses: [],
+    derivativeAddresses: [],
+    spotAddresses: [],
+    cw20Addresses: [],
+  };
 }
 
 export const MitoVaultInfosResponse: MessageFns<MitoVaultInfosResponse> = {
-  encode(message: MitoVaultInfosResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MitoVaultInfosResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.masterAddresses) {
       writer.uint32(10).string(v!);
     }
@@ -10043,8 +11666,12 @@ export const MitoVaultInfosResponse: MessageFns<MitoVaultInfosResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MitoVaultInfosResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MitoVaultInfosResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMitoVaultInfosResponse();
     while (reader.pos < end) {
@@ -10096,23 +11723,23 @@ export const MitoVaultInfosResponse: MessageFns<MitoVaultInfosResponse> = {
       masterAddresses: globalThis.Array.isArray(object?.masterAddresses)
         ? object.masterAddresses.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.master_addresses)
-        ? object.master_addresses.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.master_addresses.map((e: any) => globalThis.String(e))
+          : [],
       derivativeAddresses: globalThis.Array.isArray(object?.derivativeAddresses)
         ? object.derivativeAddresses.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.derivative_addresses)
-        ? object.derivative_addresses.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.derivative_addresses.map((e: any) => globalThis.String(e))
+          : [],
       spotAddresses: globalThis.Array.isArray(object?.spotAddresses)
         ? object.spotAddresses.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.spot_addresses)
-        ? object.spot_addresses.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.spot_addresses.map((e: any) => globalThis.String(e))
+          : [],
       cw20Addresses: globalThis.Array.isArray(object?.cw20Addresses)
         ? object.cw20Addresses.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.cw20_addresses)
-        ? object.cw20_addresses.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.cw20_addresses.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -10133,13 +11760,18 @@ export const MitoVaultInfosResponse: MessageFns<MitoVaultInfosResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MitoVaultInfosResponse>, I>>(base?: I): MitoVaultInfosResponse {
+  create<I extends Exact<DeepPartial<MitoVaultInfosResponse>, I>>(
+    base?: I,
+  ): MitoVaultInfosResponse {
     return MitoVaultInfosResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MitoVaultInfosResponse>, I>>(object: I): MitoVaultInfosResponse {
+  fromPartial<I extends Exact<DeepPartial<MitoVaultInfosResponse>, I>>(
+    object: I,
+  ): MitoVaultInfosResponse {
     const message = createBaseMitoVaultInfosResponse();
     message.masterAddresses = object.masterAddresses?.map((e) => e) || [];
-    message.derivativeAddresses = object.derivativeAddresses?.map((e) => e) || [];
+    message.derivativeAddresses =
+      object.derivativeAddresses?.map((e) => e) || [];
     message.spotAddresses = object.spotAddresses?.map((e) => e) || [];
     message.cw20Addresses = object.cw20Addresses?.map((e) => e) || [];
     return message;
@@ -10150,276 +11782,329 @@ function createBaseQueryMarketIDFromVaultRequest(): QueryMarketIDFromVaultReques
   return { vaultAddress: "" };
 }
 
-export const QueryMarketIDFromVaultRequest: MessageFns<QueryMarketIDFromVaultRequest> = {
-  encode(message: QueryMarketIDFromVaultRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.vaultAddress !== "") {
-      writer.uint32(10).string(message.vaultAddress);
-    }
-    return writer;
-  },
+export const QueryMarketIDFromVaultRequest: MessageFns<QueryMarketIDFromVaultRequest> =
+  {
+    encode(
+      message: QueryMarketIDFromVaultRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.vaultAddress !== "") {
+        writer.uint32(10).string(message.vaultAddress);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMarketIDFromVaultRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryMarketIDFromVaultRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryMarketIDFromVaultRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryMarketIDFromVaultRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.vaultAddress = reader.string();
+            continue;
           }
-
-          message.vaultAddress = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryMarketIDFromVaultRequest {
+      return {
+        vaultAddress: isSet(object.vaultAddress)
+          ? globalThis.String(object.vaultAddress)
+          : isSet(object.vault_address)
+            ? globalThis.String(object.vault_address)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryMarketIDFromVaultRequest): unknown {
+      const obj: any = {};
+      if (message.vaultAddress !== "") {
+        obj.vaultAddress = message.vaultAddress;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryMarketIDFromVaultRequest {
-    return {
-      vaultAddress: isSet(object.vaultAddress)
-        ? globalThis.String(object.vaultAddress)
-        : isSet(object.vault_address)
-        ? globalThis.String(object.vault_address)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryMarketIDFromVaultRequest): unknown {
-    const obj: any = {};
-    if (message.vaultAddress !== "") {
-      obj.vaultAddress = message.vaultAddress;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryMarketIDFromVaultRequest>, I>>(base?: I): QueryMarketIDFromVaultRequest {
-    return QueryMarketIDFromVaultRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryMarketIDFromVaultRequest>, I>>(
-    object: I,
-  ): QueryMarketIDFromVaultRequest {
-    const message = createBaseQueryMarketIDFromVaultRequest();
-    message.vaultAddress = object.vaultAddress ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryMarketIDFromVaultRequest>, I>>(
+      base?: I,
+    ): QueryMarketIDFromVaultRequest {
+      return QueryMarketIDFromVaultRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryMarketIDFromVaultRequest>, I>>(
+      object: I,
+    ): QueryMarketIDFromVaultRequest {
+      const message = createBaseQueryMarketIDFromVaultRequest();
+      message.vaultAddress = object.vaultAddress ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryMarketIDFromVaultResponse(): QueryMarketIDFromVaultResponse {
   return { marketId: "" };
 }
 
-export const QueryMarketIDFromVaultResponse: MessageFns<QueryMarketIDFromVaultResponse> = {
-  encode(message: QueryMarketIDFromVaultResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryMarketIDFromVaultResponse: MessageFns<QueryMarketIDFromVaultResponse> =
+  {
+    encode(
+      message: QueryMarketIDFromVaultResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMarketIDFromVaultResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryMarketIDFromVaultResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryMarketIDFromVaultResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryMarketIDFromVaultResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryMarketIDFromVaultResponse {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryMarketIDFromVaultResponse): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryMarketIDFromVaultResponse {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryMarketIDFromVaultResponse): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryMarketIDFromVaultResponse>, I>>(base?: I): QueryMarketIDFromVaultResponse {
-    return QueryMarketIDFromVaultResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryMarketIDFromVaultResponse>, I>>(
-    object: I,
-  ): QueryMarketIDFromVaultResponse {
-    const message = createBaseQueryMarketIDFromVaultResponse();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryMarketIDFromVaultResponse>, I>>(
+      base?: I,
+    ): QueryMarketIDFromVaultResponse {
+      return QueryMarketIDFromVaultResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryMarketIDFromVaultResponse>, I>,
+    >(object: I): QueryMarketIDFromVaultResponse {
+      const message = createBaseQueryMarketIDFromVaultResponse();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryHistoricalTradeRecordsRequest(): QueryHistoricalTradeRecordsRequest {
   return { marketId: "" };
 }
 
-export const QueryHistoricalTradeRecordsRequest: MessageFns<QueryHistoricalTradeRecordsRequest> = {
-  encode(message: QueryHistoricalTradeRecordsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryHistoricalTradeRecordsRequest: MessageFns<QueryHistoricalTradeRecordsRequest> =
+  {
+    encode(
+      message: QueryHistoricalTradeRecordsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryHistoricalTradeRecordsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryHistoricalTradeRecordsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryHistoricalTradeRecordsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryHistoricalTradeRecordsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryHistoricalTradeRecordsRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryHistoricalTradeRecordsRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryHistoricalTradeRecordsRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryHistoricalTradeRecordsRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryHistoricalTradeRecordsRequest>, I>>(
-    base?: I,
-  ): QueryHistoricalTradeRecordsRequest {
-    return QueryHistoricalTradeRecordsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryHistoricalTradeRecordsRequest>, I>>(
-    object: I,
-  ): QueryHistoricalTradeRecordsRequest {
-    const message = createBaseQueryHistoricalTradeRecordsRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryHistoricalTradeRecordsRequest>, I>>(
+      base?: I,
+    ): QueryHistoricalTradeRecordsRequest {
+      return QueryHistoricalTradeRecordsRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryHistoricalTradeRecordsRequest>, I>,
+    >(object: I): QueryHistoricalTradeRecordsRequest {
+      const message = createBaseQueryHistoricalTradeRecordsRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryHistoricalTradeRecordsResponse(): QueryHistoricalTradeRecordsResponse {
   return { tradeRecords: [] };
 }
 
-export const QueryHistoricalTradeRecordsResponse: MessageFns<QueryHistoricalTradeRecordsResponse> = {
-  encode(message: QueryHistoricalTradeRecordsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.tradeRecords) {
-      TradeRecords.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryHistoricalTradeRecordsResponse: MessageFns<QueryHistoricalTradeRecordsResponse> =
+  {
+    encode(
+      message: QueryHistoricalTradeRecordsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.tradeRecords) {
+        TradeRecords.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryHistoricalTradeRecordsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryHistoricalTradeRecordsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryHistoricalTradeRecordsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryHistoricalTradeRecordsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.tradeRecords.push(
+              TradeRecords.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.tradeRecords.push(TradeRecords.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryHistoricalTradeRecordsResponse {
+      return {
+        tradeRecords: globalThis.Array.isArray(object?.tradeRecords)
+          ? object.tradeRecords.map((e: any) => TradeRecords.fromJSON(e))
+          : globalThis.Array.isArray(object?.trade_records)
+            ? object.trade_records.map((e: any) => TradeRecords.fromJSON(e))
+            : [],
+      };
+    },
+
+    toJSON(message: QueryHistoricalTradeRecordsResponse): unknown {
+      const obj: any = {};
+      if (message.tradeRecords?.length) {
+        obj.tradeRecords = message.tradeRecords.map((e) =>
+          TradeRecords.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryHistoricalTradeRecordsResponse {
-    return {
-      tradeRecords: globalThis.Array.isArray(object?.tradeRecords)
-        ? object.tradeRecords.map((e: any) => TradeRecords.fromJSON(e))
-        : globalThis.Array.isArray(object?.trade_records)
-        ? object.trade_records.map((e: any) => TradeRecords.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryHistoricalTradeRecordsResponse): unknown {
-    const obj: any = {};
-    if (message.tradeRecords?.length) {
-      obj.tradeRecords = message.tradeRecords.map((e) => TradeRecords.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryHistoricalTradeRecordsResponse>, I>>(
-    base?: I,
-  ): QueryHistoricalTradeRecordsResponse {
-    return QueryHistoricalTradeRecordsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryHistoricalTradeRecordsResponse>, I>>(
-    object: I,
-  ): QueryHistoricalTradeRecordsResponse {
-    const message = createBaseQueryHistoricalTradeRecordsResponse();
-    message.tradeRecords = object.tradeRecords?.map((e) => TradeRecords.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryHistoricalTradeRecordsResponse>, I>,
+    >(base?: I): QueryHistoricalTradeRecordsResponse {
+      return QueryHistoricalTradeRecordsResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryHistoricalTradeRecordsResponse>, I>,
+    >(object: I): QueryHistoricalTradeRecordsResponse {
+      const message = createBaseQueryHistoricalTradeRecordsResponse();
+      message.tradeRecords =
+        object.tradeRecords?.map((e) => TradeRecords.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseTradeHistoryOptions(): TradeHistoryOptions {
-  return { tradeGroupingSec: 0, maxAge: 0, includeRawHistory: false, includeMetadata: false };
+  return {
+    tradeGroupingSec: 0,
+    maxAge: 0,
+    includeRawHistory: false,
+    includeMetadata: false,
+  };
 }
 
 export const TradeHistoryOptions: MessageFns<TradeHistoryOptions> = {
-  encode(message: TradeHistoryOptions, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TradeHistoryOptions,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.tradeGroupingSec !== 0) {
       writer.uint32(8).uint64(message.tradeGroupingSec);
     }
@@ -10435,8 +12120,12 @@ export const TradeHistoryOptions: MessageFns<TradeHistoryOptions> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TradeHistoryOptions {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TradeHistoryOptions {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTradeHistoryOptions();
     while (reader.pos < end) {
@@ -10488,23 +12177,23 @@ export const TradeHistoryOptions: MessageFns<TradeHistoryOptions> = {
       tradeGroupingSec: isSet(object.tradeGroupingSec)
         ? globalThis.Number(object.tradeGroupingSec)
         : isSet(object.trade_grouping_sec)
-        ? globalThis.Number(object.trade_grouping_sec)
-        : 0,
+          ? globalThis.Number(object.trade_grouping_sec)
+          : 0,
       maxAge: isSet(object.maxAge)
         ? globalThis.Number(object.maxAge)
         : isSet(object.max_age)
-        ? globalThis.Number(object.max_age)
-        : 0,
+          ? globalThis.Number(object.max_age)
+          : 0,
       includeRawHistory: isSet(object.includeRawHistory)
         ? globalThis.Boolean(object.includeRawHistory)
         : isSet(object.include_raw_history)
-        ? globalThis.Boolean(object.include_raw_history)
-        : false,
+          ? globalThis.Boolean(object.include_raw_history)
+          : false,
       includeMetadata: isSet(object.includeMetadata)
         ? globalThis.Boolean(object.includeMetadata)
         : isSet(object.include_metadata)
-        ? globalThis.Boolean(object.include_metadata)
-        : false,
+          ? globalThis.Boolean(object.include_metadata)
+          : false,
     };
   },
 
@@ -10525,10 +12214,14 @@ export const TradeHistoryOptions: MessageFns<TradeHistoryOptions> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TradeHistoryOptions>, I>>(base?: I): TradeHistoryOptions {
+  create<I extends Exact<DeepPartial<TradeHistoryOptions>, I>>(
+    base?: I,
+  ): TradeHistoryOptions {
     return TradeHistoryOptions.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TradeHistoryOptions>, I>>(object: I): TradeHistoryOptions {
+  fromPartial<I extends Exact<DeepPartial<TradeHistoryOptions>, I>>(
+    object: I,
+  ): TradeHistoryOptions {
     const message = createBaseTradeHistoryOptions();
     message.tradeGroupingSec = object.tradeGroupingSec ?? 0;
     message.maxAge = object.maxAge ?? 0;
@@ -10542,311 +12235,386 @@ function createBaseQueryMarketVolatilityRequest(): QueryMarketVolatilityRequest 
   return { marketId: "", tradeHistoryOptions: undefined };
 }
 
-export const QueryMarketVolatilityRequest: MessageFns<QueryMarketVolatilityRequest> = {
-  encode(message: QueryMarketVolatilityRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    if (message.tradeHistoryOptions !== undefined) {
-      TradeHistoryOptions.encode(message.tradeHistoryOptions, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMarketVolatilityRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryMarketVolatilityRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.tradeHistoryOptions = TradeHistoryOptions.decode(reader, reader.uint32());
-          continue;
-        }
+export const QueryMarketVolatilityRequest: MessageFns<QueryMarketVolatilityRequest> =
+  {
+    encode(
+      message: QueryMarketVolatilityRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.tradeHistoryOptions !== undefined) {
+        TradeHistoryOptions.encode(
+          message.tradeHistoryOptions,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryMarketVolatilityRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      tradeHistoryOptions: isSet(object.tradeHistoryOptions)
-        ? TradeHistoryOptions.fromJSON(object.tradeHistoryOptions)
-        : isSet(object.trade_history_options)
-        ? TradeHistoryOptions.fromJSON(object.trade_history_options)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryMarketVolatilityRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryMarketVolatilityRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryMarketVolatilityRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.tradeHistoryOptions !== undefined) {
-      obj.tradeHistoryOptions = TradeHistoryOptions.toJSON(message.tradeHistoryOptions);
-    }
-    return obj;
-  },
+            message.marketId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryMarketVolatilityRequest>, I>>(base?: I): QueryMarketVolatilityRequest {
-    return QueryMarketVolatilityRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryMarketVolatilityRequest>, I>>(object: I): QueryMarketVolatilityRequest {
-    const message = createBaseQueryMarketVolatilityRequest();
-    message.marketId = object.marketId ?? "";
-    message.tradeHistoryOptions = (object.tradeHistoryOptions !== undefined && object.tradeHistoryOptions !== null)
-      ? TradeHistoryOptions.fromPartial(object.tradeHistoryOptions)
-      : undefined;
-    return message;
-  },
-};
+            message.tradeHistoryOptions = TradeHistoryOptions.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryMarketVolatilityRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        tradeHistoryOptions: isSet(object.tradeHistoryOptions)
+          ? TradeHistoryOptions.fromJSON(object.tradeHistoryOptions)
+          : isSet(object.trade_history_options)
+            ? TradeHistoryOptions.fromJSON(object.trade_history_options)
+            : undefined,
+      };
+    },
+
+    toJSON(message: QueryMarketVolatilityRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.tradeHistoryOptions !== undefined) {
+        obj.tradeHistoryOptions = TradeHistoryOptions.toJSON(
+          message.tradeHistoryOptions,
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryMarketVolatilityRequest>, I>>(
+      base?: I,
+    ): QueryMarketVolatilityRequest {
+      return QueryMarketVolatilityRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryMarketVolatilityRequest>, I>>(
+      object: I,
+    ): QueryMarketVolatilityRequest {
+      const message = createBaseQueryMarketVolatilityRequest();
+      message.marketId = object.marketId ?? "";
+      message.tradeHistoryOptions =
+        object.tradeHistoryOptions !== undefined &&
+        object.tradeHistoryOptions !== null
+          ? TradeHistoryOptions.fromPartial(object.tradeHistoryOptions)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQueryMarketVolatilityResponse(): QueryMarketVolatilityResponse {
   return { volatility: "", historyMetadata: undefined, rawHistory: [] };
 }
 
-export const QueryMarketVolatilityResponse: MessageFns<QueryMarketVolatilityResponse> = {
-  encode(message: QueryMarketVolatilityResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.volatility !== "") {
-      writer.uint32(10).string(message.volatility);
-    }
-    if (message.historyMetadata !== undefined) {
-      MetadataStatistics.encode(message.historyMetadata, writer.uint32(18).fork()).join();
-    }
-    for (const v of message.rawHistory) {
-      TradeRecord.encode(v!, writer.uint32(26).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMarketVolatilityResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryMarketVolatilityResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.volatility = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.historyMetadata = MetadataStatistics.decode(reader, reader.uint32());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.rawHistory.push(TradeRecord.decode(reader, reader.uint32()));
-          continue;
-        }
+export const QueryMarketVolatilityResponse: MessageFns<QueryMarketVolatilityResponse> =
+  {
+    encode(
+      message: QueryMarketVolatilityResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.volatility !== "") {
+        writer.uint32(10).string(message.volatility);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.historyMetadata !== undefined) {
+        MetadataStatistics.encode(
+          message.historyMetadata,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.rawHistory) {
+        TradeRecord.encode(v!, writer.uint32(26).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): QueryMarketVolatilityResponse {
-    return {
-      volatility: isSet(object.volatility) ? globalThis.String(object.volatility) : "",
-      historyMetadata: isSet(object.historyMetadata)
-        ? MetadataStatistics.fromJSON(object.historyMetadata)
-        : isSet(object.history_metadata)
-        ? MetadataStatistics.fromJSON(object.history_metadata)
-        : undefined,
-      rawHistory: globalThis.Array.isArray(object?.rawHistory)
-        ? object.rawHistory.map((e: any) => TradeRecord.fromJSON(e))
-        : globalThis.Array.isArray(object?.raw_history)
-        ? object.raw_history.map((e: any) => TradeRecord.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryMarketVolatilityResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryMarketVolatilityResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryMarketVolatilityResponse): unknown {
-    const obj: any = {};
-    if (message.volatility !== "") {
-      obj.volatility = message.volatility;
-    }
-    if (message.historyMetadata !== undefined) {
-      obj.historyMetadata = MetadataStatistics.toJSON(message.historyMetadata);
-    }
-    if (message.rawHistory?.length) {
-      obj.rawHistory = message.rawHistory.map((e) => TradeRecord.toJSON(e));
-    }
-    return obj;
-  },
+            message.volatility = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryMarketVolatilityResponse>, I>>(base?: I): QueryMarketVolatilityResponse {
-    return QueryMarketVolatilityResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryMarketVolatilityResponse>, I>>(
-    object: I,
-  ): QueryMarketVolatilityResponse {
-    const message = createBaseQueryMarketVolatilityResponse();
-    message.volatility = object.volatility ?? "";
-    message.historyMetadata = (object.historyMetadata !== undefined && object.historyMetadata !== null)
-      ? MetadataStatistics.fromPartial(object.historyMetadata)
-      : undefined;
-    message.rawHistory = object.rawHistory?.map((e) => TradeRecord.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.historyMetadata = MetadataStatistics.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.rawHistory.push(
+              TradeRecord.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryMarketVolatilityResponse {
+      return {
+        volatility: isSet(object.volatility)
+          ? globalThis.String(object.volatility)
+          : "",
+        historyMetadata: isSet(object.historyMetadata)
+          ? MetadataStatistics.fromJSON(object.historyMetadata)
+          : isSet(object.history_metadata)
+            ? MetadataStatistics.fromJSON(object.history_metadata)
+            : undefined,
+        rawHistory: globalThis.Array.isArray(object?.rawHistory)
+          ? object.rawHistory.map((e: any) => TradeRecord.fromJSON(e))
+          : globalThis.Array.isArray(object?.raw_history)
+            ? object.raw_history.map((e: any) => TradeRecord.fromJSON(e))
+            : [],
+      };
+    },
+
+    toJSON(message: QueryMarketVolatilityResponse): unknown {
+      const obj: any = {};
+      if (message.volatility !== "") {
+        obj.volatility = message.volatility;
+      }
+      if (message.historyMetadata !== undefined) {
+        obj.historyMetadata = MetadataStatistics.toJSON(
+          message.historyMetadata,
+        );
+      }
+      if (message.rawHistory?.length) {
+        obj.rawHistory = message.rawHistory.map((e) => TradeRecord.toJSON(e));
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryMarketVolatilityResponse>, I>>(
+      base?: I,
+    ): QueryMarketVolatilityResponse {
+      return QueryMarketVolatilityResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryMarketVolatilityResponse>, I>>(
+      object: I,
+    ): QueryMarketVolatilityResponse {
+      const message = createBaseQueryMarketVolatilityResponse();
+      message.volatility = object.volatility ?? "";
+      message.historyMetadata =
+        object.historyMetadata !== undefined && object.historyMetadata !== null
+          ? MetadataStatistics.fromPartial(object.historyMetadata)
+          : undefined;
+      message.rawHistory =
+        object.rawHistory?.map((e) => TradeRecord.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryBinaryMarketsRequest(): QueryBinaryMarketsRequest {
   return { status: "" };
 }
 
-export const QueryBinaryMarketsRequest: MessageFns<QueryBinaryMarketsRequest> = {
-  encode(message: QueryBinaryMarketsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.status !== "") {
-      writer.uint32(10).string(message.status);
-    }
-    return writer;
-  },
+export const QueryBinaryMarketsRequest: MessageFns<QueryBinaryMarketsRequest> =
+  {
+    encode(
+      message: QueryBinaryMarketsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.status !== "") {
+        writer.uint32(10).string(message.status);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryBinaryMarketsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryBinaryMarketsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryBinaryMarketsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryBinaryMarketsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.status = reader.string();
+            continue;
           }
-
-          message.status = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryBinaryMarketsRequest {
+      return {
+        status: isSet(object.status) ? globalThis.String(object.status) : "",
+      };
+    },
+
+    toJSON(message: QueryBinaryMarketsRequest): unknown {
+      const obj: any = {};
+      if (message.status !== "") {
+        obj.status = message.status;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryBinaryMarketsRequest {
-    return { status: isSet(object.status) ? globalThis.String(object.status) : "" };
-  },
-
-  toJSON(message: QueryBinaryMarketsRequest): unknown {
-    const obj: any = {};
-    if (message.status !== "") {
-      obj.status = message.status;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryBinaryMarketsRequest>, I>>(base?: I): QueryBinaryMarketsRequest {
-    return QueryBinaryMarketsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryBinaryMarketsRequest>, I>>(object: I): QueryBinaryMarketsRequest {
-    const message = createBaseQueryBinaryMarketsRequest();
-    message.status = object.status ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryBinaryMarketsRequest>, I>>(
+      base?: I,
+    ): QueryBinaryMarketsRequest {
+      return QueryBinaryMarketsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryBinaryMarketsRequest>, I>>(
+      object: I,
+    ): QueryBinaryMarketsRequest {
+      const message = createBaseQueryBinaryMarketsRequest();
+      message.status = object.status ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryBinaryMarketsResponse(): QueryBinaryMarketsResponse {
   return { markets: [] };
 }
 
-export const QueryBinaryMarketsResponse: MessageFns<QueryBinaryMarketsResponse> = {
-  encode(message: QueryBinaryMarketsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.markets) {
-      BinaryOptionsMarket.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryBinaryMarketsResponse: MessageFns<QueryBinaryMarketsResponse> =
+  {
+    encode(
+      message: QueryBinaryMarketsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.markets) {
+        BinaryOptionsMarket.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryBinaryMarketsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryBinaryMarketsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryBinaryMarketsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryBinaryMarketsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.markets.push(
+              BinaryOptionsMarket.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.markets.push(BinaryOptionsMarket.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryBinaryMarketsResponse {
+      return {
+        markets: globalThis.Array.isArray(object?.markets)
+          ? object.markets.map((e: any) => BinaryOptionsMarket.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryBinaryMarketsResponse): unknown {
+      const obj: any = {};
+      if (message.markets?.length) {
+        obj.markets = message.markets.map((e) => BinaryOptionsMarket.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryBinaryMarketsResponse {
-    return {
-      markets: globalThis.Array.isArray(object?.markets)
-        ? object.markets.map((e: any) => BinaryOptionsMarket.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryBinaryMarketsResponse): unknown {
-    const obj: any = {};
-    if (message.markets?.length) {
-      obj.markets = message.markets.map((e) => BinaryOptionsMarket.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryBinaryMarketsResponse>, I>>(base?: I): QueryBinaryMarketsResponse {
-    return QueryBinaryMarketsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryBinaryMarketsResponse>, I>>(object: I): QueryBinaryMarketsResponse {
-    const message = createBaseQueryBinaryMarketsResponse();
-    message.markets = object.markets?.map((e) => BinaryOptionsMarket.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryBinaryMarketsResponse>, I>>(
+      base?: I,
+    ): QueryBinaryMarketsResponse {
+      return QueryBinaryMarketsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryBinaryMarketsResponse>, I>>(
+      object: I,
+    ): QueryBinaryMarketsResponse {
+      const message = createBaseQueryBinaryMarketsResponse();
+      message.markets =
+        object.markets?.map((e) => BinaryOptionsMarket.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryTraderDerivativeConditionalOrdersRequest(): QueryTraderDerivativeConditionalOrdersRequest {
   return { subaccountId: "", marketId: "" };
@@ -10867,8 +12635,12 @@ export const QueryTraderDerivativeConditionalOrdersRequest: MessageFns<QueryTrad
       return writer;
     },
 
-    decode(input: BinaryReader | Uint8Array, length?: number): QueryTraderDerivativeConditionalOrdersRequest {
-      const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTraderDerivativeConditionalOrdersRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
       const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseQueryTraderDerivativeConditionalOrdersRequest();
       while (reader.pos < end) {
@@ -10904,13 +12676,13 @@ export const QueryTraderDerivativeConditionalOrdersRequest: MessageFns<QueryTrad
         subaccountId: isSet(object.subaccountId)
           ? globalThis.String(object.subaccountId)
           : isSet(object.subaccount_id)
-          ? globalThis.String(object.subaccount_id)
-          : "",
+            ? globalThis.String(object.subaccount_id)
+            : "",
         marketId: isSet(object.marketId)
           ? globalThis.String(object.marketId)
           : isSet(object.market_id)
-          ? globalThis.String(object.market_id)
-          : "",
+            ? globalThis.String(object.market_id)
+            : "",
       };
     },
 
@@ -10925,14 +12697,22 @@ export const QueryTraderDerivativeConditionalOrdersRequest: MessageFns<QueryTrad
       return obj;
     },
 
-    create<I extends Exact<DeepPartial<QueryTraderDerivativeConditionalOrdersRequest>, I>>(
-      base?: I,
-    ): QueryTraderDerivativeConditionalOrdersRequest {
-      return QueryTraderDerivativeConditionalOrdersRequest.fromPartial(base ?? ({} as any));
+    create<
+      I extends Exact<
+        DeepPartial<QueryTraderDerivativeConditionalOrdersRequest>,
+        I
+      >,
+    >(base?: I): QueryTraderDerivativeConditionalOrdersRequest {
+      return QueryTraderDerivativeConditionalOrdersRequest.fromPartial(
+        base ?? ({} as any),
+      );
     },
-    fromPartial<I extends Exact<DeepPartial<QueryTraderDerivativeConditionalOrdersRequest>, I>>(
-      object: I,
-    ): QueryTraderDerivativeConditionalOrdersRequest {
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QueryTraderDerivativeConditionalOrdersRequest>,
+        I
+      >,
+    >(object: I): QueryTraderDerivativeConditionalOrdersRequest {
       const message = createBaseQueryTraderDerivativeConditionalOrdersRequest();
       message.subaccountId = object.subaccountId ?? "";
       message.marketId = object.marketId ?? "";
@@ -10953,551 +12733,653 @@ function createBaseTrimmedDerivativeConditionalOrder(): TrimmedDerivativeConditi
   };
 }
 
-export const TrimmedDerivativeConditionalOrder: MessageFns<TrimmedDerivativeConditionalOrder> = {
-  encode(message: TrimmedDerivativeConditionalOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.price !== "") {
-      writer.uint32(10).string(message.price);
-    }
-    if (message.quantity !== "") {
-      writer.uint32(18).string(message.quantity);
-    }
-    if (message.margin !== "") {
-      writer.uint32(26).string(message.margin);
-    }
-    if (message.triggerPrice !== "") {
-      writer.uint32(34).string(message.triggerPrice);
-    }
-    if (message.isBuy !== false) {
-      writer.uint32(40).bool(message.isBuy);
-    }
-    if (message.isLimit !== false) {
-      writer.uint32(48).bool(message.isLimit);
-    }
-    if (message.orderHash !== "") {
-      writer.uint32(58).string(message.orderHash);
-    }
-    if (message.cid !== "") {
-      writer.uint32(66).string(message.cid);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): TrimmedDerivativeConditionalOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTrimmedDerivativeConditionalOrder();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.price = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.quantity = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.margin = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.triggerPrice = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.isBuy = reader.bool();
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.isLimit = reader.bool();
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.orderHash = reader.string();
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.cid = reader.string();
-          continue;
-        }
+export const TrimmedDerivativeConditionalOrder: MessageFns<TrimmedDerivativeConditionalOrder> =
+  {
+    encode(
+      message: TrimmedDerivativeConditionalOrder,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.price !== "") {
+        writer.uint32(10).string(message.price);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.quantity !== "") {
+        writer.uint32(18).string(message.quantity);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.margin !== "") {
+        writer.uint32(26).string(message.margin);
+      }
+      if (message.triggerPrice !== "") {
+        writer.uint32(34).string(message.triggerPrice);
+      }
+      if (message.isBuy !== false) {
+        writer.uint32(40).bool(message.isBuy);
+      }
+      if (message.isLimit !== false) {
+        writer.uint32(48).bool(message.isLimit);
+      }
+      if (message.orderHash !== "") {
+        writer.uint32(58).string(message.orderHash);
+      }
+      if (message.cid !== "") {
+        writer.uint32(66).string(message.cid);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): TrimmedDerivativeConditionalOrder {
-    return {
-      price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
-      margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
-      triggerPrice: isSet(object.triggerPrice) ? globalThis.String(object.triggerPrice) : "",
-      isBuy: isSet(object.isBuy) ? globalThis.Boolean(object.isBuy) : false,
-      isLimit: isSet(object.isLimit) ? globalThis.Boolean(object.isLimit) : false,
-      orderHash: isSet(object.orderHash)
-        ? globalThis.String(object.orderHash)
-        : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
-      cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): TrimmedDerivativeConditionalOrder {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTrimmedDerivativeConditionalOrder();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: TrimmedDerivativeConditionalOrder): unknown {
-    const obj: any = {};
-    if (message.price !== "") {
-      obj.price = message.price;
-    }
-    if (message.quantity !== "") {
-      obj.quantity = message.quantity;
-    }
-    if (message.margin !== "") {
-      obj.margin = message.margin;
-    }
-    if (message.triggerPrice !== "") {
-      obj.triggerPrice = message.triggerPrice;
-    }
-    if (message.isBuy !== false) {
-      obj.isBuy = message.isBuy;
-    }
-    if (message.isLimit !== false) {
-      obj.isLimit = message.isLimit;
-    }
-    if (message.orderHash !== "") {
-      obj.orderHash = message.orderHash;
-    }
-    if (message.cid !== "") {
-      obj.cid = message.cid;
-    }
-    return obj;
-  },
+            message.price = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<TrimmedDerivativeConditionalOrder>, I>>(
-    base?: I,
-  ): TrimmedDerivativeConditionalOrder {
-    return TrimmedDerivativeConditionalOrder.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TrimmedDerivativeConditionalOrder>, I>>(
-    object: I,
-  ): TrimmedDerivativeConditionalOrder {
-    const message = createBaseTrimmedDerivativeConditionalOrder();
-    message.price = object.price ?? "";
-    message.quantity = object.quantity ?? "";
-    message.margin = object.margin ?? "";
-    message.triggerPrice = object.triggerPrice ?? "";
-    message.isBuy = object.isBuy ?? false;
-    message.isLimit = object.isLimit ?? false;
-    message.orderHash = object.orderHash ?? "";
-    message.cid = object.cid ?? "";
-    return message;
-  },
-};
+            message.quantity = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.margin = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.triggerPrice = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.isBuy = reader.bool();
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.isLimit = reader.bool();
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.orderHash = reader.string();
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.cid = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): TrimmedDerivativeConditionalOrder {
+      return {
+        price: isSet(object.price) ? globalThis.String(object.price) : "",
+        quantity: isSet(object.quantity)
+          ? globalThis.String(object.quantity)
+          : "",
+        margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
+        triggerPrice: isSet(object.triggerPrice)
+          ? globalThis.String(object.triggerPrice)
+          : "",
+        isBuy: isSet(object.isBuy) ? globalThis.Boolean(object.isBuy) : false,
+        isLimit: isSet(object.isLimit)
+          ? globalThis.Boolean(object.isLimit)
+          : false,
+        orderHash: isSet(object.orderHash)
+          ? globalThis.String(object.orderHash)
+          : isSet(object.order_hash)
+            ? globalThis.String(object.order_hash)
+            : "",
+        cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
+      };
+    },
+
+    toJSON(message: TrimmedDerivativeConditionalOrder): unknown {
+      const obj: any = {};
+      if (message.price !== "") {
+        obj.price = message.price;
+      }
+      if (message.quantity !== "") {
+        obj.quantity = message.quantity;
+      }
+      if (message.margin !== "") {
+        obj.margin = message.margin;
+      }
+      if (message.triggerPrice !== "") {
+        obj.triggerPrice = message.triggerPrice;
+      }
+      if (message.isBuy !== false) {
+        obj.isBuy = message.isBuy;
+      }
+      if (message.isLimit !== false) {
+        obj.isLimit = message.isLimit;
+      }
+      if (message.orderHash !== "") {
+        obj.orderHash = message.orderHash;
+      }
+      if (message.cid !== "") {
+        obj.cid = message.cid;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<TrimmedDerivativeConditionalOrder>, I>>(
+      base?: I,
+    ): TrimmedDerivativeConditionalOrder {
+      return TrimmedDerivativeConditionalOrder.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<TrimmedDerivativeConditionalOrder>, I>,
+    >(object: I): TrimmedDerivativeConditionalOrder {
+      const message = createBaseTrimmedDerivativeConditionalOrder();
+      message.price = object.price ?? "";
+      message.quantity = object.quantity ?? "";
+      message.margin = object.margin ?? "";
+      message.triggerPrice = object.triggerPrice ?? "";
+      message.isBuy = object.isBuy ?? false;
+      message.isLimit = object.isLimit ?? false;
+      message.orderHash = object.orderHash ?? "";
+      message.cid = object.cid ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryTraderDerivativeConditionalOrdersResponse(): QueryTraderDerivativeConditionalOrdersResponse {
   return { orders: [] };
 }
 
-export const QueryTraderDerivativeConditionalOrdersResponse: MessageFns<
-  QueryTraderDerivativeConditionalOrdersResponse
-> = {
-  encode(
-    message: QueryTraderDerivativeConditionalOrdersResponse,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    for (const v of message.orders) {
-      TrimmedDerivativeConditionalOrder.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryTraderDerivativeConditionalOrdersResponse: MessageFns<QueryTraderDerivativeConditionalOrdersResponse> =
+  {
+    encode(
+      message: QueryTraderDerivativeConditionalOrdersResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.orders) {
+        TrimmedDerivativeConditionalOrder.encode(
+          v!,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTraderDerivativeConditionalOrdersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryTraderDerivativeConditionalOrdersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryTraderDerivativeConditionalOrdersResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseQueryTraderDerivativeConditionalOrdersResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.orders.push(
+              TrimmedDerivativeConditionalOrder.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.orders.push(TrimmedDerivativeConditionalOrder.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryTraderDerivativeConditionalOrdersResponse {
+      return {
+        orders: globalThis.Array.isArray(object?.orders)
+          ? object.orders.map((e: any) =>
+              TrimmedDerivativeConditionalOrder.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: QueryTraderDerivativeConditionalOrdersResponse): unknown {
+      const obj: any = {};
+      if (message.orders?.length) {
+        obj.orders = message.orders.map((e) =>
+          TrimmedDerivativeConditionalOrder.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryTraderDerivativeConditionalOrdersResponse {
-    return {
-      orders: globalThis.Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => TrimmedDerivativeConditionalOrder.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryTraderDerivativeConditionalOrdersResponse): unknown {
-    const obj: any = {};
-    if (message.orders?.length) {
-      obj.orders = message.orders.map((e) => TrimmedDerivativeConditionalOrder.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryTraderDerivativeConditionalOrdersResponse>, I>>(
-    base?: I,
-  ): QueryTraderDerivativeConditionalOrdersResponse {
-    return QueryTraderDerivativeConditionalOrdersResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryTraderDerivativeConditionalOrdersResponse>, I>>(
-    object: I,
-  ): QueryTraderDerivativeConditionalOrdersResponse {
-    const message = createBaseQueryTraderDerivativeConditionalOrdersResponse();
-    message.orders = object.orders?.map((e) => TrimmedDerivativeConditionalOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<QueryTraderDerivativeConditionalOrdersResponse>,
+        I
+      >,
+    >(base?: I): QueryTraderDerivativeConditionalOrdersResponse {
+      return QueryTraderDerivativeConditionalOrdersResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QueryTraderDerivativeConditionalOrdersResponse>,
+        I
+      >,
+    >(object: I): QueryTraderDerivativeConditionalOrdersResponse {
+      const message =
+        createBaseQueryTraderDerivativeConditionalOrdersResponse();
+      message.orders =
+        object.orders?.map((e) =>
+          TrimmedDerivativeConditionalOrder.fromPartial(e),
+        ) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryFullSpotOrderbookRequest(): QueryFullSpotOrderbookRequest {
   return { marketId: "" };
 }
 
-export const QueryFullSpotOrderbookRequest: MessageFns<QueryFullSpotOrderbookRequest> = {
-  encode(message: QueryFullSpotOrderbookRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryFullSpotOrderbookRequest: MessageFns<QueryFullSpotOrderbookRequest> =
+  {
+    encode(
+      message: QueryFullSpotOrderbookRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFullSpotOrderbookRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFullSpotOrderbookRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFullSpotOrderbookRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFullSpotOrderbookRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryFullSpotOrderbookRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryFullSpotOrderbookRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryFullSpotOrderbookRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryFullSpotOrderbookRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryFullSpotOrderbookRequest>, I>>(base?: I): QueryFullSpotOrderbookRequest {
-    return QueryFullSpotOrderbookRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFullSpotOrderbookRequest>, I>>(
-    object: I,
-  ): QueryFullSpotOrderbookRequest {
-    const message = createBaseQueryFullSpotOrderbookRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryFullSpotOrderbookRequest>, I>>(
+      base?: I,
+    ): QueryFullSpotOrderbookRequest {
+      return QueryFullSpotOrderbookRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryFullSpotOrderbookRequest>, I>>(
+      object: I,
+    ): QueryFullSpotOrderbookRequest {
+      const message = createBaseQueryFullSpotOrderbookRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryFullSpotOrderbookResponse(): QueryFullSpotOrderbookResponse {
   return { Bids: [], Asks: [] };
 }
 
-export const QueryFullSpotOrderbookResponse: MessageFns<QueryFullSpotOrderbookResponse> = {
-  encode(message: QueryFullSpotOrderbookResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.Bids) {
-      TrimmedLimitOrder.encode(v!, writer.uint32(10).fork()).join();
-    }
-    for (const v of message.Asks) {
-      TrimmedLimitOrder.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFullSpotOrderbookResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFullSpotOrderbookResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.Bids.push(TrimmedLimitOrder.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.Asks.push(TrimmedLimitOrder.decode(reader, reader.uint32()));
-          continue;
-        }
+export const QueryFullSpotOrderbookResponse: MessageFns<QueryFullSpotOrderbookResponse> =
+  {
+    encode(
+      message: QueryFullSpotOrderbookResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.Bids) {
+        TrimmedLimitOrder.encode(v!, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.Asks) {
+        TrimmedLimitOrder.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryFullSpotOrderbookResponse {
-    return {
-      Bids: globalThis.Array.isArray(object?.Bids) ? object.Bids.map((e: any) => TrimmedLimitOrder.fromJSON(e)) : [],
-      Asks: globalThis.Array.isArray(object?.Asks) ? object.Asks.map((e: any) => TrimmedLimitOrder.fromJSON(e)) : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFullSpotOrderbookResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFullSpotOrderbookResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryFullSpotOrderbookResponse): unknown {
-    const obj: any = {};
-    if (message.Bids?.length) {
-      obj.Bids = message.Bids.map((e) => TrimmedLimitOrder.toJSON(e));
-    }
-    if (message.Asks?.length) {
-      obj.Asks = message.Asks.map((e) => TrimmedLimitOrder.toJSON(e));
-    }
-    return obj;
-  },
+            message.Bids.push(
+              TrimmedLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryFullSpotOrderbookResponse>, I>>(base?: I): QueryFullSpotOrderbookResponse {
-    return QueryFullSpotOrderbookResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFullSpotOrderbookResponse>, I>>(
-    object: I,
-  ): QueryFullSpotOrderbookResponse {
-    const message = createBaseQueryFullSpotOrderbookResponse();
-    message.Bids = object.Bids?.map((e) => TrimmedLimitOrder.fromPartial(e)) || [];
-    message.Asks = object.Asks?.map((e) => TrimmedLimitOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.Asks.push(
+              TrimmedLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryFullSpotOrderbookResponse {
+      return {
+        Bids: globalThis.Array.isArray(object?.Bids)
+          ? object.Bids.map((e: any) => TrimmedLimitOrder.fromJSON(e))
+          : [],
+        Asks: globalThis.Array.isArray(object?.Asks)
+          ? object.Asks.map((e: any) => TrimmedLimitOrder.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryFullSpotOrderbookResponse): unknown {
+      const obj: any = {};
+      if (message.Bids?.length) {
+        obj.Bids = message.Bids.map((e) => TrimmedLimitOrder.toJSON(e));
+      }
+      if (message.Asks?.length) {
+        obj.Asks = message.Asks.map((e) => TrimmedLimitOrder.toJSON(e));
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryFullSpotOrderbookResponse>, I>>(
+      base?: I,
+    ): QueryFullSpotOrderbookResponse {
+      return QueryFullSpotOrderbookResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryFullSpotOrderbookResponse>, I>,
+    >(object: I): QueryFullSpotOrderbookResponse {
+      const message = createBaseQueryFullSpotOrderbookResponse();
+      message.Bids =
+        object.Bids?.map((e) => TrimmedLimitOrder.fromPartial(e)) || [];
+      message.Asks =
+        object.Asks?.map((e) => TrimmedLimitOrder.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryFullDerivativeOrderbookRequest(): QueryFullDerivativeOrderbookRequest {
   return { marketId: "" };
 }
 
-export const QueryFullDerivativeOrderbookRequest: MessageFns<QueryFullDerivativeOrderbookRequest> = {
-  encode(message: QueryFullDerivativeOrderbookRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryFullDerivativeOrderbookRequest: MessageFns<QueryFullDerivativeOrderbookRequest> =
+  {
+    encode(
+      message: QueryFullDerivativeOrderbookRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFullDerivativeOrderbookRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFullDerivativeOrderbookRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFullDerivativeOrderbookRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFullDerivativeOrderbookRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryFullDerivativeOrderbookRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryFullDerivativeOrderbookRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryFullDerivativeOrderbookRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryFullDerivativeOrderbookRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryFullDerivativeOrderbookRequest>, I>>(
-    base?: I,
-  ): QueryFullDerivativeOrderbookRequest {
-    return QueryFullDerivativeOrderbookRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFullDerivativeOrderbookRequest>, I>>(
-    object: I,
-  ): QueryFullDerivativeOrderbookRequest {
-    const message = createBaseQueryFullDerivativeOrderbookRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<
+      I extends Exact<DeepPartial<QueryFullDerivativeOrderbookRequest>, I>,
+    >(base?: I): QueryFullDerivativeOrderbookRequest {
+      return QueryFullDerivativeOrderbookRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryFullDerivativeOrderbookRequest>, I>,
+    >(object: I): QueryFullDerivativeOrderbookRequest {
+      const message = createBaseQueryFullDerivativeOrderbookRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryFullDerivativeOrderbookResponse(): QueryFullDerivativeOrderbookResponse {
   return { Bids: [], Asks: [] };
 }
 
-export const QueryFullDerivativeOrderbookResponse: MessageFns<QueryFullDerivativeOrderbookResponse> = {
-  encode(message: QueryFullDerivativeOrderbookResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.Bids) {
-      TrimmedLimitOrder.encode(v!, writer.uint32(10).fork()).join();
-    }
-    for (const v of message.Asks) {
-      TrimmedLimitOrder.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryFullDerivativeOrderbookResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFullDerivativeOrderbookResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.Bids.push(TrimmedLimitOrder.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.Asks.push(TrimmedLimitOrder.decode(reader, reader.uint32()));
-          continue;
-        }
+export const QueryFullDerivativeOrderbookResponse: MessageFns<QueryFullDerivativeOrderbookResponse> =
+  {
+    encode(
+      message: QueryFullDerivativeOrderbookResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.Bids) {
+        TrimmedLimitOrder.encode(v!, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.Asks) {
+        TrimmedLimitOrder.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryFullDerivativeOrderbookResponse {
-    return {
-      Bids: globalThis.Array.isArray(object?.Bids) ? object.Bids.map((e: any) => TrimmedLimitOrder.fromJSON(e)) : [],
-      Asks: globalThis.Array.isArray(object?.Asks) ? object.Asks.map((e: any) => TrimmedLimitOrder.fromJSON(e)) : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryFullDerivativeOrderbookResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryFullDerivativeOrderbookResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryFullDerivativeOrderbookResponse): unknown {
-    const obj: any = {};
-    if (message.Bids?.length) {
-      obj.Bids = message.Bids.map((e) => TrimmedLimitOrder.toJSON(e));
-    }
-    if (message.Asks?.length) {
-      obj.Asks = message.Asks.map((e) => TrimmedLimitOrder.toJSON(e));
-    }
-    return obj;
-  },
+            message.Bids.push(
+              TrimmedLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryFullDerivativeOrderbookResponse>, I>>(
-    base?: I,
-  ): QueryFullDerivativeOrderbookResponse {
-    return QueryFullDerivativeOrderbookResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryFullDerivativeOrderbookResponse>, I>>(
-    object: I,
-  ): QueryFullDerivativeOrderbookResponse {
-    const message = createBaseQueryFullDerivativeOrderbookResponse();
-    message.Bids = object.Bids?.map((e) => TrimmedLimitOrder.fromPartial(e)) || [];
-    message.Asks = object.Asks?.map((e) => TrimmedLimitOrder.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.Asks.push(
+              TrimmedLimitOrder.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryFullDerivativeOrderbookResponse {
+      return {
+        Bids: globalThis.Array.isArray(object?.Bids)
+          ? object.Bids.map((e: any) => TrimmedLimitOrder.fromJSON(e))
+          : [],
+        Asks: globalThis.Array.isArray(object?.Asks)
+          ? object.Asks.map((e: any) => TrimmedLimitOrder.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryFullDerivativeOrderbookResponse): unknown {
+      const obj: any = {};
+      if (message.Bids?.length) {
+        obj.Bids = message.Bids.map((e) => TrimmedLimitOrder.toJSON(e));
+      }
+      if (message.Asks?.length) {
+        obj.Asks = message.Asks.map((e) => TrimmedLimitOrder.toJSON(e));
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<QueryFullDerivativeOrderbookResponse>, I>,
+    >(base?: I): QueryFullDerivativeOrderbookResponse {
+      return QueryFullDerivativeOrderbookResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryFullDerivativeOrderbookResponse>, I>,
+    >(object: I): QueryFullDerivativeOrderbookResponse {
+      const message = createBaseQueryFullDerivativeOrderbookResponse();
+      message.Bids =
+        object.Bids?.map((e) => TrimmedLimitOrder.fromPartial(e)) || [];
+      message.Asks =
+        object.Asks?.map((e) => TrimmedLimitOrder.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseTrimmedLimitOrder(): TrimmedLimitOrder {
   return { price: "", quantity: "", orderHash: "", subaccountId: "" };
 }
 
 export const TrimmedLimitOrder: MessageFns<TrimmedLimitOrder> = {
-  encode(message: TrimmedLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TrimmedLimitOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -11514,7 +13396,8 @@ export const TrimmedLimitOrder: MessageFns<TrimmedLimitOrder> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TrimmedLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTrimmedLimitOrder();
     while (reader.pos < end) {
@@ -11564,17 +13447,19 @@ export const TrimmedLimitOrder: MessageFns<TrimmedLimitOrder> = {
   fromJSON(object: any): TrimmedLimitOrder {
     return {
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
     };
   },
 
@@ -11595,10 +13480,14 @@ export const TrimmedLimitOrder: MessageFns<TrimmedLimitOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TrimmedLimitOrder>, I>>(base?: I): TrimmedLimitOrder {
+  create<I extends Exact<DeepPartial<TrimmedLimitOrder>, I>>(
+    base?: I,
+  ): TrimmedLimitOrder {
     return TrimmedLimitOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TrimmedLimitOrder>, I>>(object: I): TrimmedLimitOrder {
+  fromPartial<I extends Exact<DeepPartial<TrimmedLimitOrder>, I>>(
+    object: I,
+  ): TrimmedLimitOrder {
     const message = createBaseTrimmedLimitOrder();
     message.price = object.price ?? "";
     message.quantity = object.quantity ?? "";
@@ -11612,805 +13501,973 @@ function createBaseQueryMarketAtomicExecutionFeeMultiplierRequest(): QueryMarket
   return { marketId: "" };
 }
 
-export const QueryMarketAtomicExecutionFeeMultiplierRequest: MessageFns<
-  QueryMarketAtomicExecutionFeeMultiplierRequest
-> = {
-  encode(
-    message: QueryMarketAtomicExecutionFeeMultiplierRequest,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryMarketAtomicExecutionFeeMultiplierRequest: MessageFns<QueryMarketAtomicExecutionFeeMultiplierRequest> =
+  {
+    encode(
+      message: QueryMarketAtomicExecutionFeeMultiplierRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMarketAtomicExecutionFeeMultiplierRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryMarketAtomicExecutionFeeMultiplierRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryMarketAtomicExecutionFeeMultiplierRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseQueryMarketAtomicExecutionFeeMultiplierRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryMarketAtomicExecutionFeeMultiplierRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryMarketAtomicExecutionFeeMultiplierRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryMarketAtomicExecutionFeeMultiplierRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryMarketAtomicExecutionFeeMultiplierRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryMarketAtomicExecutionFeeMultiplierRequest>, I>>(
-    base?: I,
-  ): QueryMarketAtomicExecutionFeeMultiplierRequest {
-    return QueryMarketAtomicExecutionFeeMultiplierRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryMarketAtomicExecutionFeeMultiplierRequest>, I>>(
-    object: I,
-  ): QueryMarketAtomicExecutionFeeMultiplierRequest {
-    const message = createBaseQueryMarketAtomicExecutionFeeMultiplierRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<QueryMarketAtomicExecutionFeeMultiplierRequest>,
+        I
+      >,
+    >(base?: I): QueryMarketAtomicExecutionFeeMultiplierRequest {
+      return QueryMarketAtomicExecutionFeeMultiplierRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QueryMarketAtomicExecutionFeeMultiplierRequest>,
+        I
+      >,
+    >(object: I): QueryMarketAtomicExecutionFeeMultiplierRequest {
+      const message =
+        createBaseQueryMarketAtomicExecutionFeeMultiplierRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryMarketAtomicExecutionFeeMultiplierResponse(): QueryMarketAtomicExecutionFeeMultiplierResponse {
   return { multiplier: "" };
 }
 
-export const QueryMarketAtomicExecutionFeeMultiplierResponse: MessageFns<
-  QueryMarketAtomicExecutionFeeMultiplierResponse
-> = {
-  encode(
-    message: QueryMarketAtomicExecutionFeeMultiplierResponse,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.multiplier !== "") {
-      writer.uint32(10).string(message.multiplier);
-    }
-    return writer;
-  },
+export const QueryMarketAtomicExecutionFeeMultiplierResponse: MessageFns<QueryMarketAtomicExecutionFeeMultiplierResponse> =
+  {
+    encode(
+      message: QueryMarketAtomicExecutionFeeMultiplierResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.multiplier !== "") {
+        writer.uint32(10).string(message.multiplier);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMarketAtomicExecutionFeeMultiplierResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryMarketAtomicExecutionFeeMultiplierResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryMarketAtomicExecutionFeeMultiplierResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseQueryMarketAtomicExecutionFeeMultiplierResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.multiplier = reader.string();
+            continue;
           }
-
-          message.multiplier = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryMarketAtomicExecutionFeeMultiplierResponse {
+      return {
+        multiplier: isSet(object.multiplier)
+          ? globalThis.String(object.multiplier)
+          : "",
+      };
+    },
+
+    toJSON(message: QueryMarketAtomicExecutionFeeMultiplierResponse): unknown {
+      const obj: any = {};
+      if (message.multiplier !== "") {
+        obj.multiplier = message.multiplier;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryMarketAtomicExecutionFeeMultiplierResponse {
-    return { multiplier: isSet(object.multiplier) ? globalThis.String(object.multiplier) : "" };
-  },
-
-  toJSON(message: QueryMarketAtomicExecutionFeeMultiplierResponse): unknown {
-    const obj: any = {};
-    if (message.multiplier !== "") {
-      obj.multiplier = message.multiplier;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryMarketAtomicExecutionFeeMultiplierResponse>, I>>(
-    base?: I,
-  ): QueryMarketAtomicExecutionFeeMultiplierResponse {
-    return QueryMarketAtomicExecutionFeeMultiplierResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryMarketAtomicExecutionFeeMultiplierResponse>, I>>(
-    object: I,
-  ): QueryMarketAtomicExecutionFeeMultiplierResponse {
-    const message = createBaseQueryMarketAtomicExecutionFeeMultiplierResponse();
-    message.multiplier = object.multiplier ?? "";
-    return message;
-  },
-};
+    create<
+      I extends Exact<
+        DeepPartial<QueryMarketAtomicExecutionFeeMultiplierResponse>,
+        I
+      >,
+    >(base?: I): QueryMarketAtomicExecutionFeeMultiplierResponse {
+      return QueryMarketAtomicExecutionFeeMultiplierResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<QueryMarketAtomicExecutionFeeMultiplierResponse>,
+        I
+      >,
+    >(object: I): QueryMarketAtomicExecutionFeeMultiplierResponse {
+      const message =
+        createBaseQueryMarketAtomicExecutionFeeMultiplierResponse();
+      message.multiplier = object.multiplier ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryActiveStakeGrantRequest(): QueryActiveStakeGrantRequest {
   return { grantee: "" };
 }
 
-export const QueryActiveStakeGrantRequest: MessageFns<QueryActiveStakeGrantRequest> = {
-  encode(message: QueryActiveStakeGrantRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.grantee !== "") {
-      writer.uint32(10).string(message.grantee);
-    }
-    return writer;
-  },
+export const QueryActiveStakeGrantRequest: MessageFns<QueryActiveStakeGrantRequest> =
+  {
+    encode(
+      message: QueryActiveStakeGrantRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.grantee !== "") {
+        writer.uint32(10).string(message.grantee);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryActiveStakeGrantRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryActiveStakeGrantRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryActiveStakeGrantRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryActiveStakeGrantRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.grantee = reader.string();
+            continue;
           }
-
-          message.grantee = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryActiveStakeGrantRequest {
+      return {
+        grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
+      };
+    },
+
+    toJSON(message: QueryActiveStakeGrantRequest): unknown {
+      const obj: any = {};
+      if (message.grantee !== "") {
+        obj.grantee = message.grantee;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryActiveStakeGrantRequest {
-    return { grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "" };
-  },
-
-  toJSON(message: QueryActiveStakeGrantRequest): unknown {
-    const obj: any = {};
-    if (message.grantee !== "") {
-      obj.grantee = message.grantee;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryActiveStakeGrantRequest>, I>>(base?: I): QueryActiveStakeGrantRequest {
-    return QueryActiveStakeGrantRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryActiveStakeGrantRequest>, I>>(object: I): QueryActiveStakeGrantRequest {
-    const message = createBaseQueryActiveStakeGrantRequest();
-    message.grantee = object.grantee ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryActiveStakeGrantRequest>, I>>(
+      base?: I,
+    ): QueryActiveStakeGrantRequest {
+      return QueryActiveStakeGrantRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryActiveStakeGrantRequest>, I>>(
+      object: I,
+    ): QueryActiveStakeGrantRequest {
+      const message = createBaseQueryActiveStakeGrantRequest();
+      message.grantee = object.grantee ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryActiveStakeGrantResponse(): QueryActiveStakeGrantResponse {
   return { grant: undefined, effectiveGrant: undefined };
 }
 
-export const QueryActiveStakeGrantResponse: MessageFns<QueryActiveStakeGrantResponse> = {
-  encode(message: QueryActiveStakeGrantResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.grant !== undefined) {
-      ActiveGrant.encode(message.grant, writer.uint32(10).fork()).join();
-    }
-    if (message.effectiveGrant !== undefined) {
-      EffectiveGrant.encode(message.effectiveGrant, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryActiveStakeGrantResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryActiveStakeGrantResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.grant = ActiveGrant.decode(reader, reader.uint32());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.effectiveGrant = EffectiveGrant.decode(reader, reader.uint32());
-          continue;
-        }
+export const QueryActiveStakeGrantResponse: MessageFns<QueryActiveStakeGrantResponse> =
+  {
+    encode(
+      message: QueryActiveStakeGrantResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.grant !== undefined) {
+        ActiveGrant.encode(message.grant, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.effectiveGrant !== undefined) {
+        EffectiveGrant.encode(
+          message.effectiveGrant,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryActiveStakeGrantResponse {
-    return {
-      grant: isSet(object.grant) ? ActiveGrant.fromJSON(object.grant) : undefined,
-      effectiveGrant: isSet(object.effectiveGrant)
-        ? EffectiveGrant.fromJSON(object.effectiveGrant)
-        : isSet(object.effective_grant)
-        ? EffectiveGrant.fromJSON(object.effective_grant)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryActiveStakeGrantResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryActiveStakeGrantResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryActiveStakeGrantResponse): unknown {
-    const obj: any = {};
-    if (message.grant !== undefined) {
-      obj.grant = ActiveGrant.toJSON(message.grant);
-    }
-    if (message.effectiveGrant !== undefined) {
-      obj.effectiveGrant = EffectiveGrant.toJSON(message.effectiveGrant);
-    }
-    return obj;
-  },
+            message.grant = ActiveGrant.decode(reader, reader.uint32());
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryActiveStakeGrantResponse>, I>>(base?: I): QueryActiveStakeGrantResponse {
-    return QueryActiveStakeGrantResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryActiveStakeGrantResponse>, I>>(
-    object: I,
-  ): QueryActiveStakeGrantResponse {
-    const message = createBaseQueryActiveStakeGrantResponse();
-    message.grant = (object.grant !== undefined && object.grant !== null)
-      ? ActiveGrant.fromPartial(object.grant)
-      : undefined;
-    message.effectiveGrant = (object.effectiveGrant !== undefined && object.effectiveGrant !== null)
-      ? EffectiveGrant.fromPartial(object.effectiveGrant)
-      : undefined;
-    return message;
-  },
-};
+            message.effectiveGrant = EffectiveGrant.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryActiveStakeGrantResponse {
+      return {
+        grant: isSet(object.grant)
+          ? ActiveGrant.fromJSON(object.grant)
+          : undefined,
+        effectiveGrant: isSet(object.effectiveGrant)
+          ? EffectiveGrant.fromJSON(object.effectiveGrant)
+          : isSet(object.effective_grant)
+            ? EffectiveGrant.fromJSON(object.effective_grant)
+            : undefined,
+      };
+    },
+
+    toJSON(message: QueryActiveStakeGrantResponse): unknown {
+      const obj: any = {};
+      if (message.grant !== undefined) {
+        obj.grant = ActiveGrant.toJSON(message.grant);
+      }
+      if (message.effectiveGrant !== undefined) {
+        obj.effectiveGrant = EffectiveGrant.toJSON(message.effectiveGrant);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryActiveStakeGrantResponse>, I>>(
+      base?: I,
+    ): QueryActiveStakeGrantResponse {
+      return QueryActiveStakeGrantResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryActiveStakeGrantResponse>, I>>(
+      object: I,
+    ): QueryActiveStakeGrantResponse {
+      const message = createBaseQueryActiveStakeGrantResponse();
+      message.grant =
+        object.grant !== undefined && object.grant !== null
+          ? ActiveGrant.fromPartial(object.grant)
+          : undefined;
+      message.effectiveGrant =
+        object.effectiveGrant !== undefined && object.effectiveGrant !== null
+          ? EffectiveGrant.fromPartial(object.effectiveGrant)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQueryGrantAuthorizationRequest(): QueryGrantAuthorizationRequest {
   return { granter: "", grantee: "" };
 }
 
-export const QueryGrantAuthorizationRequest: MessageFns<QueryGrantAuthorizationRequest> = {
-  encode(message: QueryGrantAuthorizationRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.granter !== "") {
-      writer.uint32(10).string(message.granter);
-    }
-    if (message.grantee !== "") {
-      writer.uint32(18).string(message.grantee);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGrantAuthorizationRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGrantAuthorizationRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.granter = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.grantee = reader.string();
-          continue;
-        }
+export const QueryGrantAuthorizationRequest: MessageFns<QueryGrantAuthorizationRequest> =
+  {
+    encode(
+      message: QueryGrantAuthorizationRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.granter !== "") {
+        writer.uint32(10).string(message.granter);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.grantee !== "") {
+        writer.uint32(18).string(message.grantee);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryGrantAuthorizationRequest {
-    return {
-      granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
-      grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryGrantAuthorizationRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryGrantAuthorizationRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryGrantAuthorizationRequest): unknown {
-    const obj: any = {};
-    if (message.granter !== "") {
-      obj.granter = message.granter;
-    }
-    if (message.grantee !== "") {
-      obj.grantee = message.grantee;
-    }
-    return obj;
-  },
+            message.granter = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryGrantAuthorizationRequest>, I>>(base?: I): QueryGrantAuthorizationRequest {
-    return QueryGrantAuthorizationRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryGrantAuthorizationRequest>, I>>(
-    object: I,
-  ): QueryGrantAuthorizationRequest {
-    const message = createBaseQueryGrantAuthorizationRequest();
-    message.granter = object.granter ?? "";
-    message.grantee = object.grantee ?? "";
-    return message;
-  },
-};
+            message.grantee = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryGrantAuthorizationRequest {
+      return {
+        granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
+        grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
+      };
+    },
+
+    toJSON(message: QueryGrantAuthorizationRequest): unknown {
+      const obj: any = {};
+      if (message.granter !== "") {
+        obj.granter = message.granter;
+      }
+      if (message.grantee !== "") {
+        obj.grantee = message.grantee;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryGrantAuthorizationRequest>, I>>(
+      base?: I,
+    ): QueryGrantAuthorizationRequest {
+      return QueryGrantAuthorizationRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryGrantAuthorizationRequest>, I>,
+    >(object: I): QueryGrantAuthorizationRequest {
+      const message = createBaseQueryGrantAuthorizationRequest();
+      message.granter = object.granter ?? "";
+      message.grantee = object.grantee ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryGrantAuthorizationResponse(): QueryGrantAuthorizationResponse {
   return { amount: "" };
 }
 
-export const QueryGrantAuthorizationResponse: MessageFns<QueryGrantAuthorizationResponse> = {
-  encode(message: QueryGrantAuthorizationResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.amount !== "") {
-      writer.uint32(10).string(message.amount);
-    }
-    return writer;
-  },
+export const QueryGrantAuthorizationResponse: MessageFns<QueryGrantAuthorizationResponse> =
+  {
+    encode(
+      message: QueryGrantAuthorizationResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.amount !== "") {
+        writer.uint32(10).string(message.amount);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGrantAuthorizationResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGrantAuthorizationResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryGrantAuthorizationResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryGrantAuthorizationResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.amount = reader.string();
+            continue;
           }
-
-          message.amount = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryGrantAuthorizationResponse {
+      return {
+        amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
+      };
+    },
+
+    toJSON(message: QueryGrantAuthorizationResponse): unknown {
+      const obj: any = {};
+      if (message.amount !== "") {
+        obj.amount = message.amount;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryGrantAuthorizationResponse {
-    return { amount: isSet(object.amount) ? globalThis.String(object.amount) : "" };
-  },
-
-  toJSON(message: QueryGrantAuthorizationResponse): unknown {
-    const obj: any = {};
-    if (message.amount !== "") {
-      obj.amount = message.amount;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryGrantAuthorizationResponse>, I>>(base?: I): QueryGrantAuthorizationResponse {
-    return QueryGrantAuthorizationResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryGrantAuthorizationResponse>, I>>(
-    object: I,
-  ): QueryGrantAuthorizationResponse {
-    const message = createBaseQueryGrantAuthorizationResponse();
-    message.amount = object.amount ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryGrantAuthorizationResponse>, I>>(
+      base?: I,
+    ): QueryGrantAuthorizationResponse {
+      return QueryGrantAuthorizationResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryGrantAuthorizationResponse>, I>,
+    >(object: I): QueryGrantAuthorizationResponse {
+      const message = createBaseQueryGrantAuthorizationResponse();
+      message.amount = object.amount ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryGrantAuthorizationsRequest(): QueryGrantAuthorizationsRequest {
   return { granter: "" };
 }
 
-export const QueryGrantAuthorizationsRequest: MessageFns<QueryGrantAuthorizationsRequest> = {
-  encode(message: QueryGrantAuthorizationsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.granter !== "") {
-      writer.uint32(10).string(message.granter);
-    }
-    return writer;
-  },
+export const QueryGrantAuthorizationsRequest: MessageFns<QueryGrantAuthorizationsRequest> =
+  {
+    encode(
+      message: QueryGrantAuthorizationsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.granter !== "") {
+        writer.uint32(10).string(message.granter);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGrantAuthorizationsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGrantAuthorizationsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryGrantAuthorizationsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryGrantAuthorizationsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.granter = reader.string();
+            continue;
           }
-
-          message.granter = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryGrantAuthorizationsRequest {
+      return {
+        granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
+      };
+    },
+
+    toJSON(message: QueryGrantAuthorizationsRequest): unknown {
+      const obj: any = {};
+      if (message.granter !== "") {
+        obj.granter = message.granter;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryGrantAuthorizationsRequest {
-    return { granter: isSet(object.granter) ? globalThis.String(object.granter) : "" };
-  },
-
-  toJSON(message: QueryGrantAuthorizationsRequest): unknown {
-    const obj: any = {};
-    if (message.granter !== "") {
-      obj.granter = message.granter;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryGrantAuthorizationsRequest>, I>>(base?: I): QueryGrantAuthorizationsRequest {
-    return QueryGrantAuthorizationsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryGrantAuthorizationsRequest>, I>>(
-    object: I,
-  ): QueryGrantAuthorizationsRequest {
-    const message = createBaseQueryGrantAuthorizationsRequest();
-    message.granter = object.granter ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryGrantAuthorizationsRequest>, I>>(
+      base?: I,
+    ): QueryGrantAuthorizationsRequest {
+      return QueryGrantAuthorizationsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryGrantAuthorizationsRequest>, I>,
+    >(object: I): QueryGrantAuthorizationsRequest {
+      const message = createBaseQueryGrantAuthorizationsRequest();
+      message.granter = object.granter ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryGrantAuthorizationsResponse(): QueryGrantAuthorizationsResponse {
   return { totalGrantAmount: "", grants: [] };
 }
 
-export const QueryGrantAuthorizationsResponse: MessageFns<QueryGrantAuthorizationsResponse> = {
-  encode(message: QueryGrantAuthorizationsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.totalGrantAmount !== "") {
-      writer.uint32(10).string(message.totalGrantAmount);
-    }
-    for (const v of message.grants) {
-      GrantAuthorization.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGrantAuthorizationsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGrantAuthorizationsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.totalGrantAmount = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.grants.push(GrantAuthorization.decode(reader, reader.uint32()));
-          continue;
-        }
+export const QueryGrantAuthorizationsResponse: MessageFns<QueryGrantAuthorizationsResponse> =
+  {
+    encode(
+      message: QueryGrantAuthorizationsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.totalGrantAmount !== "") {
+        writer.uint32(10).string(message.totalGrantAmount);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.grants) {
+        GrantAuthorization.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): QueryGrantAuthorizationsResponse {
-    return {
-      totalGrantAmount: isSet(object.totalGrantAmount)
-        ? globalThis.String(object.totalGrantAmount)
-        : isSet(object.total_grant_amount)
-        ? globalThis.String(object.total_grant_amount)
-        : "",
-      grants: globalThis.Array.isArray(object?.grants)
-        ? object.grants.map((e: any) => GrantAuthorization.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryGrantAuthorizationsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryGrantAuthorizationsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: QueryGrantAuthorizationsResponse): unknown {
-    const obj: any = {};
-    if (message.totalGrantAmount !== "") {
-      obj.totalGrantAmount = message.totalGrantAmount;
-    }
-    if (message.grants?.length) {
-      obj.grants = message.grants.map((e) => GrantAuthorization.toJSON(e));
-    }
-    return obj;
-  },
+            message.totalGrantAmount = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<QueryGrantAuthorizationsResponse>, I>>(
-    base?: I,
-  ): QueryGrantAuthorizationsResponse {
-    return QueryGrantAuthorizationsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryGrantAuthorizationsResponse>, I>>(
-    object: I,
-  ): QueryGrantAuthorizationsResponse {
-    const message = createBaseQueryGrantAuthorizationsResponse();
-    message.totalGrantAmount = object.totalGrantAmount ?? "";
-    message.grants = object.grants?.map((e) => GrantAuthorization.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.grants.push(
+              GrantAuthorization.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): QueryGrantAuthorizationsResponse {
+      return {
+        totalGrantAmount: isSet(object.totalGrantAmount)
+          ? globalThis.String(object.totalGrantAmount)
+          : isSet(object.total_grant_amount)
+            ? globalThis.String(object.total_grant_amount)
+            : "",
+        grants: globalThis.Array.isArray(object?.grants)
+          ? object.grants.map((e: any) => GrantAuthorization.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryGrantAuthorizationsResponse): unknown {
+      const obj: any = {};
+      if (message.totalGrantAmount !== "") {
+        obj.totalGrantAmount = message.totalGrantAmount;
+      }
+      if (message.grants?.length) {
+        obj.grants = message.grants.map((e) => GrantAuthorization.toJSON(e));
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<QueryGrantAuthorizationsResponse>, I>>(
+      base?: I,
+    ): QueryGrantAuthorizationsResponse {
+      return QueryGrantAuthorizationsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryGrantAuthorizationsResponse>, I>,
+    >(object: I): QueryGrantAuthorizationsResponse {
+      const message = createBaseQueryGrantAuthorizationsResponse();
+      message.totalGrantAmount = object.totalGrantAmount ?? "";
+      message.grants =
+        object.grants?.map((e) => GrantAuthorization.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseQueryMarketBalanceRequest(): QueryMarketBalanceRequest {
   return { marketId: "" };
 }
 
-export const QueryMarketBalanceRequest: MessageFns<QueryMarketBalanceRequest> = {
-  encode(message: QueryMarketBalanceRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.marketId !== "") {
-      writer.uint32(10).string(message.marketId);
-    }
-    return writer;
-  },
+export const QueryMarketBalanceRequest: MessageFns<QueryMarketBalanceRequest> =
+  {
+    encode(
+      message: QueryMarketBalanceRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.marketId !== "") {
+        writer.uint32(10).string(message.marketId);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMarketBalanceRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryMarketBalanceRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryMarketBalanceRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryMarketBalanceRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
           }
-
-          message.marketId = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryMarketBalanceRequest {
+      return {
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+      };
+    },
+
+    toJSON(message: QueryMarketBalanceRequest): unknown {
+      const obj: any = {};
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryMarketBalanceRequest {
-    return {
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-    };
-  },
-
-  toJSON(message: QueryMarketBalanceRequest): unknown {
-    const obj: any = {};
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryMarketBalanceRequest>, I>>(base?: I): QueryMarketBalanceRequest {
-    return QueryMarketBalanceRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryMarketBalanceRequest>, I>>(object: I): QueryMarketBalanceRequest {
-    const message = createBaseQueryMarketBalanceRequest();
-    message.marketId = object.marketId ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryMarketBalanceRequest>, I>>(
+      base?: I,
+    ): QueryMarketBalanceRequest {
+      return QueryMarketBalanceRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryMarketBalanceRequest>, I>>(
+      object: I,
+    ): QueryMarketBalanceRequest {
+      const message = createBaseQueryMarketBalanceRequest();
+      message.marketId = object.marketId ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryMarketBalanceResponse(): QueryMarketBalanceResponse {
   return { balance: undefined };
 }
 
-export const QueryMarketBalanceResponse: MessageFns<QueryMarketBalanceResponse> = {
-  encode(message: QueryMarketBalanceResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.balance !== undefined) {
-      MarketBalance.encode(message.balance, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryMarketBalanceResponse: MessageFns<QueryMarketBalanceResponse> =
+  {
+    encode(
+      message: QueryMarketBalanceResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.balance !== undefined) {
+        MarketBalance.encode(message.balance, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMarketBalanceResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryMarketBalanceResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryMarketBalanceResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryMarketBalanceResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.balance = MarketBalance.decode(reader, reader.uint32());
+            continue;
           }
-
-          message.balance = MarketBalance.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryMarketBalanceResponse {
+      return {
+        balance: isSet(object.balance)
+          ? MarketBalance.fromJSON(object.balance)
+          : undefined,
+      };
+    },
+
+    toJSON(message: QueryMarketBalanceResponse): unknown {
+      const obj: any = {};
+      if (message.balance !== undefined) {
+        obj.balance = MarketBalance.toJSON(message.balance);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryMarketBalanceResponse {
-    return { balance: isSet(object.balance) ? MarketBalance.fromJSON(object.balance) : undefined };
-  },
-
-  toJSON(message: QueryMarketBalanceResponse): unknown {
-    const obj: any = {};
-    if (message.balance !== undefined) {
-      obj.balance = MarketBalance.toJSON(message.balance);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryMarketBalanceResponse>, I>>(base?: I): QueryMarketBalanceResponse {
-    return QueryMarketBalanceResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryMarketBalanceResponse>, I>>(object: I): QueryMarketBalanceResponse {
-    const message = createBaseQueryMarketBalanceResponse();
-    message.balance = (object.balance !== undefined && object.balance !== null)
-      ? MarketBalance.fromPartial(object.balance)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryMarketBalanceResponse>, I>>(
+      base?: I,
+    ): QueryMarketBalanceResponse {
+      return QueryMarketBalanceResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryMarketBalanceResponse>, I>>(
+      object: I,
+    ): QueryMarketBalanceResponse {
+      const message = createBaseQueryMarketBalanceResponse();
+      message.balance =
+        object.balance !== undefined && object.balance !== null
+          ? MarketBalance.fromPartial(object.balance)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseQueryMarketBalancesRequest(): QueryMarketBalancesRequest {
   return {};
 }
 
-export const QueryMarketBalancesRequest: MessageFns<QueryMarketBalancesRequest> = {
-  encode(_: QueryMarketBalancesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const QueryMarketBalancesRequest: MessageFns<QueryMarketBalancesRequest> =
+  {
+    encode(
+      _: QueryMarketBalancesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMarketBalancesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryMarketBalancesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryMarketBalancesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryMarketBalancesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): QueryMarketBalancesRequest {
-    return {};
-  },
+    fromJSON(_: any): QueryMarketBalancesRequest {
+      return {};
+    },
 
-  toJSON(_: QueryMarketBalancesRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: QueryMarketBalancesRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<QueryMarketBalancesRequest>, I>>(base?: I): QueryMarketBalancesRequest {
-    return QueryMarketBalancesRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryMarketBalancesRequest>, I>>(_: I): QueryMarketBalancesRequest {
-    const message = createBaseQueryMarketBalancesRequest();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryMarketBalancesRequest>, I>>(
+      base?: I,
+    ): QueryMarketBalancesRequest {
+      return QueryMarketBalancesRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryMarketBalancesRequest>, I>>(
+      _: I,
+    ): QueryMarketBalancesRequest {
+      const message = createBaseQueryMarketBalancesRequest();
+      return message;
+    },
+  };
 
 function createBaseQueryMarketBalancesResponse(): QueryMarketBalancesResponse {
   return { balances: [] };
 }
 
-export const QueryMarketBalancesResponse: MessageFns<QueryMarketBalancesResponse> = {
-  encode(message: QueryMarketBalancesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.balances) {
-      MarketBalance.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryMarketBalancesResponse: MessageFns<QueryMarketBalancesResponse> =
+  {
+    encode(
+      message: QueryMarketBalancesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.balances) {
+        MarketBalance.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMarketBalancesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryMarketBalancesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryMarketBalancesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryMarketBalancesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.balances.push(
+              MarketBalance.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.balances.push(MarketBalance.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryMarketBalancesResponse {
+      return {
+        balances: globalThis.Array.isArray(object?.balances)
+          ? object.balances.map((e: any) => MarketBalance.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: QueryMarketBalancesResponse): unknown {
+      const obj: any = {};
+      if (message.balances?.length) {
+        obj.balances = message.balances.map((e) => MarketBalance.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryMarketBalancesResponse {
-    return {
-      balances: globalThis.Array.isArray(object?.balances)
-        ? object.balances.map((e: any) => MarketBalance.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryMarketBalancesResponse): unknown {
-    const obj: any = {};
-    if (message.balances?.length) {
-      obj.balances = message.balances.map((e) => MarketBalance.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryMarketBalancesResponse>, I>>(base?: I): QueryMarketBalancesResponse {
-    return QueryMarketBalancesResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryMarketBalancesResponse>, I>>(object: I): QueryMarketBalancesResponse {
-    const message = createBaseQueryMarketBalancesResponse();
-    message.balances = object.balances?.map((e) => MarketBalance.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryMarketBalancesResponse>, I>>(
+      base?: I,
+    ): QueryMarketBalancesResponse {
+      return QueryMarketBalancesResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryMarketBalancesResponse>, I>>(
+      object: I,
+    ): QueryMarketBalancesResponse {
+      const message = createBaseQueryMarketBalancesResponse();
+      message.balances =
+        object.balances?.map((e) => MarketBalance.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseMarketBalance(): MarketBalance {
   return { marketId: "", balance: "" };
 }
 
 export const MarketBalance: MessageFns<MarketBalance> = {
-  encode(message: MarketBalance, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MarketBalance,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -12421,7 +14478,8 @@ export const MarketBalance: MessageFns<MarketBalance> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): MarketBalance {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMarketBalance();
     while (reader.pos < end) {
@@ -12457,8 +14515,8 @@ export const MarketBalance: MessageFns<MarketBalance> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       balance: isSet(object.balance) ? globalThis.String(object.balance) : "",
     };
   },
@@ -12474,10 +14532,14 @@ export const MarketBalance: MessageFns<MarketBalance> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MarketBalance>, I>>(base?: I): MarketBalance {
+  create<I extends Exact<DeepPartial<MarketBalance>, I>>(
+    base?: I,
+  ): MarketBalance {
     return MarketBalance.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MarketBalance>, I>>(object: I): MarketBalance {
+  fromPartial<I extends Exact<DeepPartial<MarketBalance>, I>>(
+    object: I,
+  ): MarketBalance {
     const message = createBaseMarketBalance();
     message.marketId = object.marketId ?? "";
     message.balance = object.balance ?? "";
@@ -12489,228 +14551,286 @@ function createBaseQueryDenomMinNotionalRequest(): QueryDenomMinNotionalRequest 
   return { denom: "" };
 }
 
-export const QueryDenomMinNotionalRequest: MessageFns<QueryDenomMinNotionalRequest> = {
-  encode(message: QueryDenomMinNotionalRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.denom !== "") {
-      writer.uint32(10).string(message.denom);
-    }
-    return writer;
-  },
+export const QueryDenomMinNotionalRequest: MessageFns<QueryDenomMinNotionalRequest> =
+  {
+    encode(
+      message: QueryDenomMinNotionalRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.denom !== "") {
+        writer.uint32(10).string(message.denom);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomMinNotionalRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDenomMinNotionalRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDenomMinNotionalRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDenomMinNotionalRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.denom = reader.string();
+            continue;
           }
-
-          message.denom = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDenomMinNotionalRequest {
+      return {
+        denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+      };
+    },
+
+    toJSON(message: QueryDenomMinNotionalRequest): unknown {
+      const obj: any = {};
+      if (message.denom !== "") {
+        obj.denom = message.denom;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDenomMinNotionalRequest {
-    return { denom: isSet(object.denom) ? globalThis.String(object.denom) : "" };
-  },
-
-  toJSON(message: QueryDenomMinNotionalRequest): unknown {
-    const obj: any = {};
-    if (message.denom !== "") {
-      obj.denom = message.denom;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDenomMinNotionalRequest>, I>>(base?: I): QueryDenomMinNotionalRequest {
-    return QueryDenomMinNotionalRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDenomMinNotionalRequest>, I>>(object: I): QueryDenomMinNotionalRequest {
-    const message = createBaseQueryDenomMinNotionalRequest();
-    message.denom = object.denom ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryDenomMinNotionalRequest>, I>>(
+      base?: I,
+    ): QueryDenomMinNotionalRequest {
+      return QueryDenomMinNotionalRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryDenomMinNotionalRequest>, I>>(
+      object: I,
+    ): QueryDenomMinNotionalRequest {
+      const message = createBaseQueryDenomMinNotionalRequest();
+      message.denom = object.denom ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryDenomMinNotionalResponse(): QueryDenomMinNotionalResponse {
   return { amount: "" };
 }
 
-export const QueryDenomMinNotionalResponse: MessageFns<QueryDenomMinNotionalResponse> = {
-  encode(message: QueryDenomMinNotionalResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.amount !== "") {
-      writer.uint32(10).string(message.amount);
-    }
-    return writer;
-  },
+export const QueryDenomMinNotionalResponse: MessageFns<QueryDenomMinNotionalResponse> =
+  {
+    encode(
+      message: QueryDenomMinNotionalResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.amount !== "") {
+        writer.uint32(10).string(message.amount);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomMinNotionalResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDenomMinNotionalResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDenomMinNotionalResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDenomMinNotionalResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.amount = reader.string();
+            continue;
           }
-
-          message.amount = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDenomMinNotionalResponse {
+      return {
+        amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
+      };
+    },
+
+    toJSON(message: QueryDenomMinNotionalResponse): unknown {
+      const obj: any = {};
+      if (message.amount !== "") {
+        obj.amount = message.amount;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDenomMinNotionalResponse {
-    return { amount: isSet(object.amount) ? globalThis.String(object.amount) : "" };
-  },
-
-  toJSON(message: QueryDenomMinNotionalResponse): unknown {
-    const obj: any = {};
-    if (message.amount !== "") {
-      obj.amount = message.amount;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDenomMinNotionalResponse>, I>>(base?: I): QueryDenomMinNotionalResponse {
-    return QueryDenomMinNotionalResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDenomMinNotionalResponse>, I>>(
-    object: I,
-  ): QueryDenomMinNotionalResponse {
-    const message = createBaseQueryDenomMinNotionalResponse();
-    message.amount = object.amount ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryDenomMinNotionalResponse>, I>>(
+      base?: I,
+    ): QueryDenomMinNotionalResponse {
+      return QueryDenomMinNotionalResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryDenomMinNotionalResponse>, I>>(
+      object: I,
+    ): QueryDenomMinNotionalResponse {
+      const message = createBaseQueryDenomMinNotionalResponse();
+      message.amount = object.amount ?? "";
+      return message;
+    },
+  };
 
 function createBaseQueryDenomMinNotionalsRequest(): QueryDenomMinNotionalsRequest {
   return {};
 }
 
-export const QueryDenomMinNotionalsRequest: MessageFns<QueryDenomMinNotionalsRequest> = {
-  encode(_: QueryDenomMinNotionalsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    return writer;
-  },
+export const QueryDenomMinNotionalsRequest: MessageFns<QueryDenomMinNotionalsRequest> =
+  {
+    encode(
+      _: QueryDenomMinNotionalsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomMinNotionalsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDenomMinNotionalsRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDenomMinNotionalsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDenomMinNotionalsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): QueryDenomMinNotionalsRequest {
-    return {};
-  },
+    fromJSON(_: any): QueryDenomMinNotionalsRequest {
+      return {};
+    },
 
-  toJSON(_: QueryDenomMinNotionalsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
+    toJSON(_: QueryDenomMinNotionalsRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<QueryDenomMinNotionalsRequest>, I>>(base?: I): QueryDenomMinNotionalsRequest {
-    return QueryDenomMinNotionalsRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDenomMinNotionalsRequest>, I>>(_: I): QueryDenomMinNotionalsRequest {
-    const message = createBaseQueryDenomMinNotionalsRequest();
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryDenomMinNotionalsRequest>, I>>(
+      base?: I,
+    ): QueryDenomMinNotionalsRequest {
+      return QueryDenomMinNotionalsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<QueryDenomMinNotionalsRequest>, I>>(
+      _: I,
+    ): QueryDenomMinNotionalsRequest {
+      const message = createBaseQueryDenomMinNotionalsRequest();
+      return message;
+    },
+  };
 
 function createBaseQueryDenomMinNotionalsResponse(): QueryDenomMinNotionalsResponse {
   return { denomMinNotionals: [] };
 }
 
-export const QueryDenomMinNotionalsResponse: MessageFns<QueryDenomMinNotionalsResponse> = {
-  encode(message: QueryDenomMinNotionalsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.denomMinNotionals) {
-      DenomMinNotional.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const QueryDenomMinNotionalsResponse: MessageFns<QueryDenomMinNotionalsResponse> =
+  {
+    encode(
+      message: QueryDenomMinNotionalsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.denomMinNotionals) {
+        DenomMinNotional.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomMinNotionalsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryDenomMinNotionalsResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): QueryDenomMinNotionalsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseQueryDenomMinNotionalsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.denomMinNotionals.push(
+              DenomMinNotional.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.denomMinNotionals.push(DenomMinNotional.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): QueryDenomMinNotionalsResponse {
+      return {
+        denomMinNotionals: globalThis.Array.isArray(object?.denomMinNotionals)
+          ? object.denomMinNotionals.map((e: any) =>
+              DenomMinNotional.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.denom_min_notionals)
+            ? object.denom_min_notionals.map((e: any) =>
+                DenomMinNotional.fromJSON(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: QueryDenomMinNotionalsResponse): unknown {
+      const obj: any = {};
+      if (message.denomMinNotionals?.length) {
+        obj.denomMinNotionals = message.denomMinNotionals.map((e) =>
+          DenomMinNotional.toJSON(e),
+        );
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): QueryDenomMinNotionalsResponse {
-    return {
-      denomMinNotionals: globalThis.Array.isArray(object?.denomMinNotionals)
-        ? object.denomMinNotionals.map((e: any) => DenomMinNotional.fromJSON(e))
-        : globalThis.Array.isArray(object?.denom_min_notionals)
-        ? object.denom_min_notionals.map((e: any) => DenomMinNotional.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: QueryDenomMinNotionalsResponse): unknown {
-    const obj: any = {};
-    if (message.denomMinNotionals?.length) {
-      obj.denomMinNotionals = message.denomMinNotionals.map((e) => DenomMinNotional.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<QueryDenomMinNotionalsResponse>, I>>(base?: I): QueryDenomMinNotionalsResponse {
-    return QueryDenomMinNotionalsResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<QueryDenomMinNotionalsResponse>, I>>(
-    object: I,
-  ): QueryDenomMinNotionalsResponse {
-    const message = createBaseQueryDenomMinNotionalsResponse();
-    message.denomMinNotionals = object.denomMinNotionals?.map((e) => DenomMinNotional.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<QueryDenomMinNotionalsResponse>, I>>(
+      base?: I,
+    ): QueryDenomMinNotionalsResponse {
+      return QueryDenomMinNotionalsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<QueryDenomMinNotionalsResponse>, I>,
+    >(object: I): QueryDenomMinNotionalsResponse {
+      const message = createBaseQueryDenomMinNotionalsResponse();
+      message.denomMinNotionals =
+        object.denomMinNotionals?.map((e) => DenomMinNotional.fromPartial(e)) ||
+        [];
+      return message;
+    },
+  };
 
 /** Query defines the gRPC querier service. */
 export type QueryService = typeof QueryService;
@@ -12725,7 +14845,9 @@ export const QueryService = {
       QueryFullDerivativeOrderbookRequest.decode(value),
     responseSerialize: (value: QueryFullDerivativeOrderbookResponse): Buffer =>
       Buffer.from(QueryFullDerivativeOrderbookResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryFullDerivativeOrderbookResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryFullDerivativeOrderbookResponse =>
       QueryFullDerivativeOrderbookResponse.decode(value),
   },
   l3SpotOrderBook: {
@@ -12734,7 +14856,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryFullSpotOrderbookRequest): Buffer =>
       Buffer.from(QueryFullSpotOrderbookRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryFullSpotOrderbookRequest => QueryFullSpotOrderbookRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryFullSpotOrderbookRequest =>
+      QueryFullSpotOrderbookRequest.decode(value),
     responseSerialize: (value: QueryFullSpotOrderbookResponse): Buffer =>
       Buffer.from(QueryFullSpotOrderbookResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QueryFullSpotOrderbookResponse =>
@@ -12747,10 +14870,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryExchangeParamsRequest): Buffer =>
       Buffer.from(QueryExchangeParamsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryExchangeParamsRequest => QueryExchangeParamsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryExchangeParamsRequest =>
+      QueryExchangeParamsRequest.decode(value),
     responseSerialize: (value: QueryExchangeParamsResponse): Buffer =>
       Buffer.from(QueryExchangeParamsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryExchangeParamsResponse => QueryExchangeParamsResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryExchangeParamsResponse =>
+      QueryExchangeParamsResponse.decode(value),
   },
   /** Retrieves a Subaccount's Deposits */
   subaccountDeposits: {
@@ -12759,7 +14884,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QuerySubaccountDepositsRequest): Buffer =>
       Buffer.from(QuerySubaccountDepositsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QuerySubaccountDepositsRequest => QuerySubaccountDepositsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QuerySubaccountDepositsRequest =>
+      QuerySubaccountDepositsRequest.decode(value),
     responseSerialize: (value: QuerySubaccountDepositsResponse): Buffer =>
       Buffer.from(QuerySubaccountDepositsResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QuerySubaccountDepositsResponse =>
@@ -12772,7 +14898,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QuerySubaccountDepositRequest): Buffer =>
       Buffer.from(QuerySubaccountDepositRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QuerySubaccountDepositRequest => QuerySubaccountDepositRequest.decode(value),
+    requestDeserialize: (value: Buffer): QuerySubaccountDepositRequest =>
+      QuerySubaccountDepositRequest.decode(value),
     responseSerialize: (value: QuerySubaccountDepositResponse): Buffer =>
       Buffer.from(QuerySubaccountDepositResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QuerySubaccountDepositResponse =>
@@ -12785,10 +14912,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryExchangeBalancesRequest): Buffer =>
       Buffer.from(QueryExchangeBalancesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryExchangeBalancesRequest => QueryExchangeBalancesRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryExchangeBalancesRequest =>
+      QueryExchangeBalancesRequest.decode(value),
     responseSerialize: (value: QueryExchangeBalancesResponse): Buffer =>
       Buffer.from(QueryExchangeBalancesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryExchangeBalancesResponse => QueryExchangeBalancesResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryExchangeBalancesResponse =>
+      QueryExchangeBalancesResponse.decode(value),
   },
   /** Retrieves the aggregate volumes for the specified account or subaccount */
   aggregateVolume: {
@@ -12797,10 +14926,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryAggregateVolumeRequest): Buffer =>
       Buffer.from(QueryAggregateVolumeRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryAggregateVolumeRequest => QueryAggregateVolumeRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryAggregateVolumeRequest =>
+      QueryAggregateVolumeRequest.decode(value),
     responseSerialize: (value: QueryAggregateVolumeResponse): Buffer =>
       Buffer.from(QueryAggregateVolumeResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryAggregateVolumeResponse => QueryAggregateVolumeResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryAggregateVolumeResponse =>
+      QueryAggregateVolumeResponse.decode(value),
   },
   /** Retrieves the aggregate volumes for specified accounts */
   aggregateVolumes: {
@@ -12809,10 +14940,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryAggregateVolumesRequest): Buffer =>
       Buffer.from(QueryAggregateVolumesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryAggregateVolumesRequest => QueryAggregateVolumesRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryAggregateVolumesRequest =>
+      QueryAggregateVolumesRequest.decode(value),
     responseSerialize: (value: QueryAggregateVolumesResponse): Buffer =>
       Buffer.from(QueryAggregateVolumesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryAggregateVolumesResponse => QueryAggregateVolumesResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryAggregateVolumesResponse =>
+      QueryAggregateVolumesResponse.decode(value),
   },
   /** Retrieves the aggregate volume for the specified market */
   aggregateMarketVolume: {
@@ -12849,10 +14982,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryDenomDecimalRequest): Buffer =>
       Buffer.from(QueryDenomDecimalRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryDenomDecimalRequest => QueryDenomDecimalRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryDenomDecimalRequest =>
+      QueryDenomDecimalRequest.decode(value),
     responseSerialize: (value: QueryDenomDecimalResponse): Buffer =>
       Buffer.from(QueryDenomDecimalResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryDenomDecimalResponse => QueryDenomDecimalResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryDenomDecimalResponse =>
+      QueryDenomDecimalResponse.decode(value),
   },
   /**
    * Retrieves the denom decimals for multiple denoms. Returns all denom
@@ -12864,10 +14999,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryDenomDecimalsRequest): Buffer =>
       Buffer.from(QueryDenomDecimalsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryDenomDecimalsRequest => QueryDenomDecimalsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryDenomDecimalsRequest =>
+      QueryDenomDecimalsRequest.decode(value),
     responseSerialize: (value: QueryDenomDecimalsResponse): Buffer =>
       Buffer.from(QueryDenomDecimalsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryDenomDecimalsResponse => QueryDenomDecimalsResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryDenomDecimalsResponse =>
+      QueryDenomDecimalsResponse.decode(value),
   },
   /** Retrieves a list of spot markets. */
   spotMarkets: {
@@ -12876,10 +15013,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QuerySpotMarketsRequest): Buffer =>
       Buffer.from(QuerySpotMarketsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QuerySpotMarketsRequest => QuerySpotMarketsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QuerySpotMarketsRequest =>
+      QuerySpotMarketsRequest.decode(value),
     responseSerialize: (value: QuerySpotMarketsResponse): Buffer =>
       Buffer.from(QuerySpotMarketsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QuerySpotMarketsResponse => QuerySpotMarketsResponse.decode(value),
+    responseDeserialize: (value: Buffer): QuerySpotMarketsResponse =>
+      QuerySpotMarketsResponse.decode(value),
   },
   /** Retrieves a spot market by ticker */
   spotMarket: {
@@ -12888,10 +15027,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QuerySpotMarketRequest): Buffer =>
       Buffer.from(QuerySpotMarketRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QuerySpotMarketRequest => QuerySpotMarketRequest.decode(value),
+    requestDeserialize: (value: Buffer): QuerySpotMarketRequest =>
+      QuerySpotMarketRequest.decode(value),
     responseSerialize: (value: QuerySpotMarketResponse): Buffer =>
       Buffer.from(QuerySpotMarketResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QuerySpotMarketResponse => QuerySpotMarketResponse.decode(value),
+    responseDeserialize: (value: Buffer): QuerySpotMarketResponse =>
+      QuerySpotMarketResponse.decode(value),
   },
   /** Retrieves a list of spot markets with extra information. */
   fullSpotMarkets: {
@@ -12900,10 +15041,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryFullSpotMarketsRequest): Buffer =>
       Buffer.from(QueryFullSpotMarketsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryFullSpotMarketsRequest => QueryFullSpotMarketsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryFullSpotMarketsRequest =>
+      QueryFullSpotMarketsRequest.decode(value),
     responseSerialize: (value: QueryFullSpotMarketsResponse): Buffer =>
       Buffer.from(QueryFullSpotMarketsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryFullSpotMarketsResponse => QueryFullSpotMarketsResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryFullSpotMarketsResponse =>
+      QueryFullSpotMarketsResponse.decode(value),
   },
   /** Retrieves a spot market with extra information. */
   fullSpotMarket: {
@@ -12912,10 +15055,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryFullSpotMarketRequest): Buffer =>
       Buffer.from(QueryFullSpotMarketRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryFullSpotMarketRequest => QueryFullSpotMarketRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryFullSpotMarketRequest =>
+      QueryFullSpotMarketRequest.decode(value),
     responseSerialize: (value: QueryFullSpotMarketResponse): Buffer =>
       Buffer.from(QueryFullSpotMarketResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryFullSpotMarketResponse => QueryFullSpotMarketResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryFullSpotMarketResponse =>
+      QueryFullSpotMarketResponse.decode(value),
   },
   /** Retrieves a spot market's orderbook by marketID */
   spotOrderbook: {
@@ -12924,10 +15069,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QuerySpotOrderbookRequest): Buffer =>
       Buffer.from(QuerySpotOrderbookRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QuerySpotOrderbookRequest => QuerySpotOrderbookRequest.decode(value),
+    requestDeserialize: (value: Buffer): QuerySpotOrderbookRequest =>
+      QuerySpotOrderbookRequest.decode(value),
     responseSerialize: (value: QuerySpotOrderbookResponse): Buffer =>
       Buffer.from(QuerySpotOrderbookResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QuerySpotOrderbookResponse => QuerySpotOrderbookResponse.decode(value),
+    responseDeserialize: (value: Buffer): QuerySpotOrderbookResponse =>
+      QuerySpotOrderbookResponse.decode(value),
   },
   /** Retrieves a trader's spot orders */
   traderSpotOrders: {
@@ -12936,10 +15083,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryTraderSpotOrdersRequest): Buffer =>
       Buffer.from(QueryTraderSpotOrdersRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryTraderSpotOrdersRequest => QueryTraderSpotOrdersRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryTraderSpotOrdersRequest =>
+      QueryTraderSpotOrdersRequest.decode(value),
     responseSerialize: (value: QueryTraderSpotOrdersResponse): Buffer =>
       Buffer.from(QueryTraderSpotOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryTraderSpotOrdersResponse => QueryTraderSpotOrdersResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryTraderSpotOrdersResponse =>
+      QueryTraderSpotOrdersResponse.decode(value),
   },
   /** Retrieves all account address spot orders */
   accountAddressSpotOrders: {
@@ -12952,7 +15101,9 @@ export const QueryService = {
       QueryAccountAddressSpotOrdersRequest.decode(value),
     responseSerialize: (value: QueryAccountAddressSpotOrdersResponse): Buffer =>
       Buffer.from(QueryAccountAddressSpotOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryAccountAddressSpotOrdersResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryAccountAddressSpotOrdersResponse =>
       QueryAccountAddressSpotOrdersResponse.decode(value),
   },
   /**
@@ -12965,7 +15116,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QuerySpotOrdersByHashesRequest): Buffer =>
       Buffer.from(QuerySpotOrdersByHashesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QuerySpotOrdersByHashesRequest => QuerySpotOrdersByHashesRequest.decode(value),
+    requestDeserialize: (value: Buffer): QuerySpotOrdersByHashesRequest =>
+      QuerySpotOrdersByHashesRequest.decode(value),
     responseSerialize: (value: QuerySpotOrdersByHashesResponse): Buffer =>
       Buffer.from(QuerySpotOrdersByHashesResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QuerySpotOrdersByHashesResponse =>
@@ -12978,10 +15130,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QuerySubaccountOrdersRequest): Buffer =>
       Buffer.from(QuerySubaccountOrdersRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QuerySubaccountOrdersRequest => QuerySubaccountOrdersRequest.decode(value),
+    requestDeserialize: (value: Buffer): QuerySubaccountOrdersRequest =>
+      QuerySubaccountOrdersRequest.decode(value),
     responseSerialize: (value: QuerySubaccountOrdersResponse): Buffer =>
       Buffer.from(QuerySubaccountOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QuerySubaccountOrdersResponse => QuerySubaccountOrdersResponse.decode(value),
+    responseDeserialize: (value: Buffer): QuerySubaccountOrdersResponse =>
+      QuerySubaccountOrdersResponse.decode(value),
   },
   /** Retrieves a trader's transient spot orders */
   traderSpotTransientOrders: {
@@ -12990,10 +15144,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryTraderSpotOrdersRequest): Buffer =>
       Buffer.from(QueryTraderSpotOrdersRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryTraderSpotOrdersRequest => QueryTraderSpotOrdersRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryTraderSpotOrdersRequest =>
+      QueryTraderSpotOrdersRequest.decode(value),
     responseSerialize: (value: QueryTraderSpotOrdersResponse): Buffer =>
       Buffer.from(QueryTraderSpotOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryTraderSpotOrdersResponse => QueryTraderSpotOrdersResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryTraderSpotOrdersResponse =>
+      QueryTraderSpotOrdersResponse.decode(value),
   },
   /** Retrieves a spot market's mid-price */
   spotMidPriceAndTob: {
@@ -13002,7 +15158,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QuerySpotMidPriceAndTOBRequest): Buffer =>
       Buffer.from(QuerySpotMidPriceAndTOBRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QuerySpotMidPriceAndTOBRequest => QuerySpotMidPriceAndTOBRequest.decode(value),
+    requestDeserialize: (value: Buffer): QuerySpotMidPriceAndTOBRequest =>
+      QuerySpotMidPriceAndTOBRequest.decode(value),
     responseSerialize: (value: QuerySpotMidPriceAndTOBResponse): Buffer =>
       Buffer.from(QuerySpotMidPriceAndTOBResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QuerySpotMidPriceAndTOBResponse =>
@@ -13019,7 +15176,9 @@ export const QueryService = {
       QueryDerivativeMidPriceAndTOBRequest.decode(value),
     responseSerialize: (value: QueryDerivativeMidPriceAndTOBResponse): Buffer =>
       Buffer.from(QueryDerivativeMidPriceAndTOBResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryDerivativeMidPriceAndTOBResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryDerivativeMidPriceAndTOBResponse =>
       QueryDerivativeMidPriceAndTOBResponse.decode(value),
   },
   /** Retrieves a derivative market's orderbook by marketID */
@@ -13055,13 +15214,25 @@ export const QueryService = {
     path: "/injective.exchange.v1beta1.Query/AccountAddressDerivativeOrders" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: QueryAccountAddressDerivativeOrdersRequest): Buffer =>
-      Buffer.from(QueryAccountAddressDerivativeOrdersRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryAccountAddressDerivativeOrdersRequest =>
+    requestSerialize: (
+      value: QueryAccountAddressDerivativeOrdersRequest,
+    ): Buffer =>
+      Buffer.from(
+        QueryAccountAddressDerivativeOrdersRequest.encode(value).finish(),
+      ),
+    requestDeserialize: (
+      value: Buffer,
+    ): QueryAccountAddressDerivativeOrdersRequest =>
       QueryAccountAddressDerivativeOrdersRequest.decode(value),
-    responseSerialize: (value: QueryAccountAddressDerivativeOrdersResponse): Buffer =>
-      Buffer.from(QueryAccountAddressDerivativeOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryAccountAddressDerivativeOrdersResponse =>
+    responseSerialize: (
+      value: QueryAccountAddressDerivativeOrdersResponse,
+    ): Buffer =>
+      Buffer.from(
+        QueryAccountAddressDerivativeOrdersResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryAccountAddressDerivativeOrdersResponse =>
       QueryAccountAddressDerivativeOrdersResponse.decode(value),
   },
   /** Retrieves a trader's derivative orders */
@@ -13075,7 +15246,9 @@ export const QueryService = {
       QueryDerivativeOrdersByHashesRequest.decode(value),
     responseSerialize: (value: QueryDerivativeOrdersByHashesResponse): Buffer =>
       Buffer.from(QueryDerivativeOrdersByHashesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryDerivativeOrdersByHashesResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryDerivativeOrdersByHashesResponse =>
       QueryDerivativeOrdersByHashesResponse.decode(value),
   },
   /** Retrieves a trader's transient derivative orders */
@@ -13099,7 +15272,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryDerivativeMarketsRequest): Buffer =>
       Buffer.from(QueryDerivativeMarketsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryDerivativeMarketsRequest => QueryDerivativeMarketsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryDerivativeMarketsRequest =>
+      QueryDerivativeMarketsRequest.decode(value),
     responseSerialize: (value: QueryDerivativeMarketsResponse): Buffer =>
       Buffer.from(QueryDerivativeMarketsResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QueryDerivativeMarketsResponse =>
@@ -13112,10 +15286,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryDerivativeMarketRequest): Buffer =>
       Buffer.from(QueryDerivativeMarketRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryDerivativeMarketRequest => QueryDerivativeMarketRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryDerivativeMarketRequest =>
+      QueryDerivativeMarketRequest.decode(value),
     responseSerialize: (value: QueryDerivativeMarketResponse): Buffer =>
       Buffer.from(QueryDerivativeMarketResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryDerivativeMarketResponse => QueryDerivativeMarketResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryDerivativeMarketResponse =>
+      QueryDerivativeMarketResponse.decode(value),
   },
   /**
    * Retrieves a derivative market's corresponding address for fees that
@@ -13131,7 +15307,9 @@ export const QueryService = {
       QueryDerivativeMarketAddressRequest.decode(value),
     responseSerialize: (value: QueryDerivativeMarketAddressResponse): Buffer =>
       Buffer.from(QueryDerivativeMarketAddressResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryDerivativeMarketAddressResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryDerivativeMarketAddressResponse =>
       QueryDerivativeMarketAddressResponse.decode(value),
   },
   /** Retrieves a subaccount's trade nonce */
@@ -13155,10 +15333,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryModuleStateRequest): Buffer =>
       Buffer.from(QueryModuleStateRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryModuleStateRequest => QueryModuleStateRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryModuleStateRequest =>
+      QueryModuleStateRequest.decode(value),
     responseSerialize: (value: QueryModuleStateResponse): Buffer =>
       Buffer.from(QueryModuleStateResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryModuleStateResponse => QueryModuleStateResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryModuleStateResponse =>
+      QueryModuleStateResponse.decode(value),
   },
   /** Retrieves the entire exchange module's positions */
   positions: {
@@ -13167,10 +15347,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryPositionsRequest): Buffer =>
       Buffer.from(QueryPositionsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryPositionsRequest => QueryPositionsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryPositionsRequest =>
+      QueryPositionsRequest.decode(value),
     responseSerialize: (value: QueryPositionsResponse): Buffer =>
       Buffer.from(QueryPositionsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryPositionsResponse => QueryPositionsResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryPositionsResponse =>
+      QueryPositionsResponse.decode(value),
   },
   /** Retrieves subaccount's positions */
   subaccountPositions: {
@@ -13192,12 +15374,22 @@ export const QueryService = {
     requestStream: false as const,
     responseStream: false as const,
     requestSerialize: (value: QuerySubaccountPositionInMarketRequest): Buffer =>
-      Buffer.from(QuerySubaccountPositionInMarketRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QuerySubaccountPositionInMarketRequest =>
+      Buffer.from(
+        QuerySubaccountPositionInMarketRequest.encode(value).finish(),
+      ),
+    requestDeserialize: (
+      value: Buffer,
+    ): QuerySubaccountPositionInMarketRequest =>
       QuerySubaccountPositionInMarketRequest.decode(value),
-    responseSerialize: (value: QuerySubaccountPositionInMarketResponse): Buffer =>
-      Buffer.from(QuerySubaccountPositionInMarketResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QuerySubaccountPositionInMarketResponse =>
+    responseSerialize: (
+      value: QuerySubaccountPositionInMarketResponse,
+    ): Buffer =>
+      Buffer.from(
+        QuerySubaccountPositionInMarketResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): QuerySubaccountPositionInMarketResponse =>
       QuerySubaccountPositionInMarketResponse.decode(value),
   },
   /** Retrieves subaccount's position in market */
@@ -13205,13 +15397,25 @@ export const QueryService = {
     path: "/injective.exchange.v1beta1.Query/SubaccountEffectivePositionInMarket" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: QuerySubaccountEffectivePositionInMarketRequest): Buffer =>
-      Buffer.from(QuerySubaccountEffectivePositionInMarketRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QuerySubaccountEffectivePositionInMarketRequest =>
+    requestSerialize: (
+      value: QuerySubaccountEffectivePositionInMarketRequest,
+    ): Buffer =>
+      Buffer.from(
+        QuerySubaccountEffectivePositionInMarketRequest.encode(value).finish(),
+      ),
+    requestDeserialize: (
+      value: Buffer,
+    ): QuerySubaccountEffectivePositionInMarketRequest =>
       QuerySubaccountEffectivePositionInMarketRequest.decode(value),
-    responseSerialize: (value: QuerySubaccountEffectivePositionInMarketResponse): Buffer =>
-      Buffer.from(QuerySubaccountEffectivePositionInMarketResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QuerySubaccountEffectivePositionInMarketResponse =>
+    responseSerialize: (
+      value: QuerySubaccountEffectivePositionInMarketResponse,
+    ): Buffer =>
+      Buffer.from(
+        QuerySubaccountEffectivePositionInMarketResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): QuerySubaccountEffectivePositionInMarketResponse =>
       QuerySubaccountEffectivePositionInMarketResponse.decode(value),
   },
   /** Retrieves perpetual market info */
@@ -13239,7 +15443,9 @@ export const QueryService = {
       QueryExpiryFuturesMarketInfoRequest.decode(value),
     responseSerialize: (value: QueryExpiryFuturesMarketInfoResponse): Buffer =>
       Buffer.from(QueryExpiryFuturesMarketInfoResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryExpiryFuturesMarketInfoResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryExpiryFuturesMarketInfoResponse =>
       QueryExpiryFuturesMarketInfoResponse.decode(value),
   },
   /** Retrieves perpetual market funding */
@@ -13267,7 +15473,9 @@ export const QueryService = {
       QuerySubaccountOrderMetadataRequest.decode(value),
     responseSerialize: (value: QuerySubaccountOrderMetadataResponse): Buffer =>
       Buffer.from(QuerySubaccountOrderMetadataResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QuerySubaccountOrderMetadataResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): QuerySubaccountOrderMetadataResponse =>
       QuerySubaccountOrderMetadataResponse.decode(value),
   },
   /** Retrieves the account and total trade rewards points */
@@ -13277,7 +15485,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryTradeRewardPointsRequest): Buffer =>
       Buffer.from(QueryTradeRewardPointsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryTradeRewardPointsRequest => QueryTradeRewardPointsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryTradeRewardPointsRequest =>
+      QueryTradeRewardPointsRequest.decode(value),
     responseSerialize: (value: QueryTradeRewardPointsResponse): Buffer =>
       Buffer.from(QueryTradeRewardPointsResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QueryTradeRewardPointsResponse =>
@@ -13290,7 +15499,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryTradeRewardPointsRequest): Buffer =>
       Buffer.from(QueryTradeRewardPointsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryTradeRewardPointsRequest => QueryTradeRewardPointsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryTradeRewardPointsRequest =>
+      QueryTradeRewardPointsRequest.decode(value),
     responseSerialize: (value: QueryTradeRewardPointsResponse): Buffer =>
       Buffer.from(QueryTradeRewardPointsResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QueryTradeRewardPointsResponse =>
@@ -13345,7 +15555,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryBalanceMismatchesRequest): Buffer =>
       Buffer.from(QueryBalanceMismatchesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryBalanceMismatchesRequest => QueryBalanceMismatchesRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryBalanceMismatchesRequest =>
+      QueryBalanceMismatchesRequest.decode(value),
     responseSerialize: (value: QueryBalanceMismatchesResponse): Buffer =>
       Buffer.from(QueryBalanceMismatchesResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QueryBalanceMismatchesResponse =>
@@ -13362,7 +15573,9 @@ export const QueryService = {
       QueryBalanceWithBalanceHoldsRequest.decode(value),
     responseSerialize: (value: QueryBalanceWithBalanceHoldsResponse): Buffer =>
       Buffer.from(QueryBalanceWithBalanceHoldsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryBalanceWithBalanceHoldsResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryBalanceWithBalanceHoldsResponse =>
       QueryBalanceWithBalanceHoldsResponse.decode(value),
   },
   /** Retrieves fee discount tier stats */
@@ -13372,11 +15585,19 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryFeeDiscountTierStatisticsRequest): Buffer =>
       Buffer.from(QueryFeeDiscountTierStatisticsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryFeeDiscountTierStatisticsRequest =>
+    requestDeserialize: (
+      value: Buffer,
+    ): QueryFeeDiscountTierStatisticsRequest =>
       QueryFeeDiscountTierStatisticsRequest.decode(value),
-    responseSerialize: (value: QueryFeeDiscountTierStatisticsResponse): Buffer =>
-      Buffer.from(QueryFeeDiscountTierStatisticsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryFeeDiscountTierStatisticsResponse =>
+    responseSerialize: (
+      value: QueryFeeDiscountTierStatisticsResponse,
+    ): Buffer =>
+      Buffer.from(
+        QueryFeeDiscountTierStatisticsResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryFeeDiscountTierStatisticsResponse =>
       QueryFeeDiscountTierStatisticsResponse.decode(value),
   },
   /** Retrieves market making pool info */
@@ -13386,10 +15607,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: MitoVaultInfosRequest): Buffer =>
       Buffer.from(MitoVaultInfosRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): MitoVaultInfosRequest => MitoVaultInfosRequest.decode(value),
+    requestDeserialize: (value: Buffer): MitoVaultInfosRequest =>
+      MitoVaultInfosRequest.decode(value),
     responseSerialize: (value: MitoVaultInfosResponse): Buffer =>
       Buffer.from(MitoVaultInfosResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): MitoVaultInfosResponse => MitoVaultInfosResponse.decode(value),
+    responseDeserialize: (value: Buffer): MitoVaultInfosResponse =>
+      MitoVaultInfosResponse.decode(value),
   },
   /**
    * QueryMarketIDFromVault returns the market ID for a given vault subaccount
@@ -13401,7 +15624,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryMarketIDFromVaultRequest): Buffer =>
       Buffer.from(QueryMarketIDFromVaultRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryMarketIDFromVaultRequest => QueryMarketIDFromVaultRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryMarketIDFromVaultRequest =>
+      QueryMarketIDFromVaultRequest.decode(value),
     responseSerialize: (value: QueryMarketIDFromVaultResponse): Buffer =>
       Buffer.from(QueryMarketIDFromVaultResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QueryMarketIDFromVaultResponse =>
@@ -13442,11 +15666,19 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryOptedOutOfRewardsAccountsRequest): Buffer =>
       Buffer.from(QueryOptedOutOfRewardsAccountsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryOptedOutOfRewardsAccountsRequest =>
+    requestDeserialize: (
+      value: Buffer,
+    ): QueryOptedOutOfRewardsAccountsRequest =>
       QueryOptedOutOfRewardsAccountsRequest.decode(value),
-    responseSerialize: (value: QueryOptedOutOfRewardsAccountsResponse): Buffer =>
-      Buffer.from(QueryOptedOutOfRewardsAccountsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryOptedOutOfRewardsAccountsResponse =>
+    responseSerialize: (
+      value: QueryOptedOutOfRewardsAccountsResponse,
+    ): Buffer =>
+      Buffer.from(
+        QueryOptedOutOfRewardsAccountsResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryOptedOutOfRewardsAccountsResponse =>
       QueryOptedOutOfRewardsAccountsResponse.decode(value),
   },
   /**
@@ -13459,10 +15691,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryMarketVolatilityRequest): Buffer =>
       Buffer.from(QueryMarketVolatilityRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryMarketVolatilityRequest => QueryMarketVolatilityRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryMarketVolatilityRequest =>
+      QueryMarketVolatilityRequest.decode(value),
     responseSerialize: (value: QueryMarketVolatilityResponse): Buffer =>
       Buffer.from(QueryMarketVolatilityResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryMarketVolatilityResponse => QueryMarketVolatilityResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryMarketVolatilityResponse =>
+      QueryMarketVolatilityResponse.decode(value),
   },
   /** Retrieves all binary options markets */
   binaryOptionsMarkets: {
@@ -13471,36 +15705,62 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryBinaryMarketsRequest): Buffer =>
       Buffer.from(QueryBinaryMarketsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryBinaryMarketsRequest => QueryBinaryMarketsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryBinaryMarketsRequest =>
+      QueryBinaryMarketsRequest.decode(value),
     responseSerialize: (value: QueryBinaryMarketsResponse): Buffer =>
       Buffer.from(QueryBinaryMarketsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryBinaryMarketsResponse => QueryBinaryMarketsResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryBinaryMarketsResponse =>
+      QueryBinaryMarketsResponse.decode(value),
   },
   /** Retrieves a trader's derivative conditional orders */
   traderDerivativeConditionalOrders: {
     path: "/injective.exchange.v1beta1.Query/TraderDerivativeConditionalOrders" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: QueryTraderDerivativeConditionalOrdersRequest): Buffer =>
-      Buffer.from(QueryTraderDerivativeConditionalOrdersRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryTraderDerivativeConditionalOrdersRequest =>
+    requestSerialize: (
+      value: QueryTraderDerivativeConditionalOrdersRequest,
+    ): Buffer =>
+      Buffer.from(
+        QueryTraderDerivativeConditionalOrdersRequest.encode(value).finish(),
+      ),
+    requestDeserialize: (
+      value: Buffer,
+    ): QueryTraderDerivativeConditionalOrdersRequest =>
       QueryTraderDerivativeConditionalOrdersRequest.decode(value),
-    responseSerialize: (value: QueryTraderDerivativeConditionalOrdersResponse): Buffer =>
-      Buffer.from(QueryTraderDerivativeConditionalOrdersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryTraderDerivativeConditionalOrdersResponse =>
+    responseSerialize: (
+      value: QueryTraderDerivativeConditionalOrdersResponse,
+    ): Buffer =>
+      Buffer.from(
+        QueryTraderDerivativeConditionalOrdersResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryTraderDerivativeConditionalOrdersResponse =>
       QueryTraderDerivativeConditionalOrdersResponse.decode(value),
   },
   marketAtomicExecutionFeeMultiplier: {
     path: "/injective.exchange.v1beta1.Query/MarketAtomicExecutionFeeMultiplier" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: QueryMarketAtomicExecutionFeeMultiplierRequest): Buffer =>
-      Buffer.from(QueryMarketAtomicExecutionFeeMultiplierRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryMarketAtomicExecutionFeeMultiplierRequest =>
+    requestSerialize: (
+      value: QueryMarketAtomicExecutionFeeMultiplierRequest,
+    ): Buffer =>
+      Buffer.from(
+        QueryMarketAtomicExecutionFeeMultiplierRequest.encode(value).finish(),
+      ),
+    requestDeserialize: (
+      value: Buffer,
+    ): QueryMarketAtomicExecutionFeeMultiplierRequest =>
       QueryMarketAtomicExecutionFeeMultiplierRequest.decode(value),
-    responseSerialize: (value: QueryMarketAtomicExecutionFeeMultiplierResponse): Buffer =>
-      Buffer.from(QueryMarketAtomicExecutionFeeMultiplierResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryMarketAtomicExecutionFeeMultiplierResponse =>
+    responseSerialize: (
+      value: QueryMarketAtomicExecutionFeeMultiplierResponse,
+    ): Buffer =>
+      Buffer.from(
+        QueryMarketAtomicExecutionFeeMultiplierResponse.encode(value).finish(),
+      ),
+    responseDeserialize: (
+      value: Buffer,
+    ): QueryMarketAtomicExecutionFeeMultiplierResponse =>
       QueryMarketAtomicExecutionFeeMultiplierResponse.decode(value),
   },
   /** Retrieves the active stake grant for a grantee */
@@ -13510,10 +15770,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryActiveStakeGrantRequest): Buffer =>
       Buffer.from(QueryActiveStakeGrantRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryActiveStakeGrantRequest => QueryActiveStakeGrantRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryActiveStakeGrantRequest =>
+      QueryActiveStakeGrantRequest.decode(value),
     responseSerialize: (value: QueryActiveStakeGrantResponse): Buffer =>
       Buffer.from(QueryActiveStakeGrantResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryActiveStakeGrantResponse => QueryActiveStakeGrantResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryActiveStakeGrantResponse =>
+      QueryActiveStakeGrantResponse.decode(value),
   },
   /** Retrieves the grant authorization amount for a granter and grantee */
   grantAuthorization: {
@@ -13522,7 +15784,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryGrantAuthorizationRequest): Buffer =>
       Buffer.from(QueryGrantAuthorizationRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryGrantAuthorizationRequest => QueryGrantAuthorizationRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryGrantAuthorizationRequest =>
+      QueryGrantAuthorizationRequest.decode(value),
     responseSerialize: (value: QueryGrantAuthorizationResponse): Buffer =>
       Buffer.from(QueryGrantAuthorizationResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QueryGrantAuthorizationResponse =>
@@ -13549,10 +15812,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryMarketBalanceRequest): Buffer =>
       Buffer.from(QueryMarketBalanceRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryMarketBalanceRequest => QueryMarketBalanceRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryMarketBalanceRequest =>
+      QueryMarketBalanceRequest.decode(value),
     responseSerialize: (value: QueryMarketBalanceResponse): Buffer =>
       Buffer.from(QueryMarketBalanceResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryMarketBalanceResponse => QueryMarketBalanceResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryMarketBalanceResponse =>
+      QueryMarketBalanceResponse.decode(value),
   },
   /** Retrieves all derivative or binary options market balances */
   marketBalances: {
@@ -13561,10 +15826,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryMarketBalancesRequest): Buffer =>
       Buffer.from(QueryMarketBalancesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryMarketBalancesRequest => QueryMarketBalancesRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryMarketBalancesRequest =>
+      QueryMarketBalancesRequest.decode(value),
     responseSerialize: (value: QueryMarketBalancesResponse): Buffer =>
       Buffer.from(QueryMarketBalancesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryMarketBalancesResponse => QueryMarketBalancesResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryMarketBalancesResponse =>
+      QueryMarketBalancesResponse.decode(value),
   },
   /** Retrieves the min notional for a denom */
   denomMinNotional: {
@@ -13573,10 +15840,12 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryDenomMinNotionalRequest): Buffer =>
       Buffer.from(QueryDenomMinNotionalRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryDenomMinNotionalRequest => QueryDenomMinNotionalRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryDenomMinNotionalRequest =>
+      QueryDenomMinNotionalRequest.decode(value),
     responseSerialize: (value: QueryDenomMinNotionalResponse): Buffer =>
       Buffer.from(QueryDenomMinNotionalResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): QueryDenomMinNotionalResponse => QueryDenomMinNotionalResponse.decode(value),
+    responseDeserialize: (value: Buffer): QueryDenomMinNotionalResponse =>
+      QueryDenomMinNotionalResponse.decode(value),
   },
   /** Retrieves the min notionals for all denoms */
   denomMinNotionals: {
@@ -13585,7 +15854,8 @@ export const QueryService = {
     responseStream: false as const,
     requestSerialize: (value: QueryDenomMinNotionalsRequest): Buffer =>
       Buffer.from(QueryDenomMinNotionalsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): QueryDenomMinNotionalsRequest => QueryDenomMinNotionalsRequest.decode(value),
+    requestDeserialize: (value: Buffer): QueryDenomMinNotionalsRequest =>
+      QueryDenomMinNotionalsRequest.decode(value),
     responseSerialize: (value: QueryDenomMinNotionalsResponse): Buffer =>
       Buffer.from(QueryDenomMinNotionalsResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): QueryDenomMinNotionalsResponse =>
@@ -13594,43 +15864,94 @@ export const QueryService = {
 } as const;
 
 export interface QueryServer extends UntypedServiceImplementation {
-  l3DerivativeOrderBook: handleUnaryCall<QueryFullDerivativeOrderbookRequest, QueryFullDerivativeOrderbookResponse>;
-  l3SpotOrderBook: handleUnaryCall<QueryFullSpotOrderbookRequest, QueryFullSpotOrderbookResponse>;
+  l3DerivativeOrderBook: handleUnaryCall<
+    QueryFullDerivativeOrderbookRequest,
+    QueryFullDerivativeOrderbookResponse
+  >;
+  l3SpotOrderBook: handleUnaryCall<
+    QueryFullSpotOrderbookRequest,
+    QueryFullSpotOrderbookResponse
+  >;
   /** Retrieves exchange params */
-  queryExchangeParams: handleUnaryCall<QueryExchangeParamsRequest, QueryExchangeParamsResponse>;
+  queryExchangeParams: handleUnaryCall<
+    QueryExchangeParamsRequest,
+    QueryExchangeParamsResponse
+  >;
   /** Retrieves a Subaccount's Deposits */
-  subaccountDeposits: handleUnaryCall<QuerySubaccountDepositsRequest, QuerySubaccountDepositsResponse>;
+  subaccountDeposits: handleUnaryCall<
+    QuerySubaccountDepositsRequest,
+    QuerySubaccountDepositsResponse
+  >;
   /** Retrieves a Subaccount's Deposits */
-  subaccountDeposit: handleUnaryCall<QuerySubaccountDepositRequest, QuerySubaccountDepositResponse>;
+  subaccountDeposit: handleUnaryCall<
+    QuerySubaccountDepositRequest,
+    QuerySubaccountDepositResponse
+  >;
   /** Retrieves all of the balances of all users on the exchange. */
-  exchangeBalances: handleUnaryCall<QueryExchangeBalancesRequest, QueryExchangeBalancesResponse>;
+  exchangeBalances: handleUnaryCall<
+    QueryExchangeBalancesRequest,
+    QueryExchangeBalancesResponse
+  >;
   /** Retrieves the aggregate volumes for the specified account or subaccount */
-  aggregateVolume: handleUnaryCall<QueryAggregateVolumeRequest, QueryAggregateVolumeResponse>;
+  aggregateVolume: handleUnaryCall<
+    QueryAggregateVolumeRequest,
+    QueryAggregateVolumeResponse
+  >;
   /** Retrieves the aggregate volumes for specified accounts */
-  aggregateVolumes: handleUnaryCall<QueryAggregateVolumesRequest, QueryAggregateVolumesResponse>;
+  aggregateVolumes: handleUnaryCall<
+    QueryAggregateVolumesRequest,
+    QueryAggregateVolumesResponse
+  >;
   /** Retrieves the aggregate volume for the specified market */
-  aggregateMarketVolume: handleUnaryCall<QueryAggregateMarketVolumeRequest, QueryAggregateMarketVolumeResponse>;
+  aggregateMarketVolume: handleUnaryCall<
+    QueryAggregateMarketVolumeRequest,
+    QueryAggregateMarketVolumeResponse
+  >;
   /** Retrieves the aggregate market volumes for specified markets */
-  aggregateMarketVolumes: handleUnaryCall<QueryAggregateMarketVolumesRequest, QueryAggregateMarketVolumesResponse>;
+  aggregateMarketVolumes: handleUnaryCall<
+    QueryAggregateMarketVolumesRequest,
+    QueryAggregateMarketVolumesResponse
+  >;
   /** Retrieves the denom decimals for a denom. */
-  denomDecimal: handleUnaryCall<QueryDenomDecimalRequest, QueryDenomDecimalResponse>;
+  denomDecimal: handleUnaryCall<
+    QueryDenomDecimalRequest,
+    QueryDenomDecimalResponse
+  >;
   /**
    * Retrieves the denom decimals for multiple denoms. Returns all denom
    * decimals if unspecified.
    */
-  denomDecimals: handleUnaryCall<QueryDenomDecimalsRequest, QueryDenomDecimalsResponse>;
+  denomDecimals: handleUnaryCall<
+    QueryDenomDecimalsRequest,
+    QueryDenomDecimalsResponse
+  >;
   /** Retrieves a list of spot markets. */
-  spotMarkets: handleUnaryCall<QuerySpotMarketsRequest, QuerySpotMarketsResponse>;
+  spotMarkets: handleUnaryCall<
+    QuerySpotMarketsRequest,
+    QuerySpotMarketsResponse
+  >;
   /** Retrieves a spot market by ticker */
   spotMarket: handleUnaryCall<QuerySpotMarketRequest, QuerySpotMarketResponse>;
   /** Retrieves a list of spot markets with extra information. */
-  fullSpotMarkets: handleUnaryCall<QueryFullSpotMarketsRequest, QueryFullSpotMarketsResponse>;
+  fullSpotMarkets: handleUnaryCall<
+    QueryFullSpotMarketsRequest,
+    QueryFullSpotMarketsResponse
+  >;
   /** Retrieves a spot market with extra information. */
-  fullSpotMarket: handleUnaryCall<QueryFullSpotMarketRequest, QueryFullSpotMarketResponse>;
+  fullSpotMarket: handleUnaryCall<
+    QueryFullSpotMarketRequest,
+    QueryFullSpotMarketResponse
+  >;
   /** Retrieves a spot market's orderbook by marketID */
-  spotOrderbook: handleUnaryCall<QuerySpotOrderbookRequest, QuerySpotOrderbookResponse>;
+  spotOrderbook: handleUnaryCall<
+    QuerySpotOrderbookRequest,
+    QuerySpotOrderbookResponse
+  >;
   /** Retrieves a trader's spot orders */
-  traderSpotOrders: handleUnaryCall<QueryTraderSpotOrdersRequest, QueryTraderSpotOrdersResponse>;
+  traderSpotOrders: handleUnaryCall<
+    QueryTraderSpotOrdersRequest,
+    QueryTraderSpotOrdersResponse
+  >;
   /** Retrieves all account address spot orders */
   accountAddressSpotOrders: handleUnaryCall<
     QueryAccountAddressSpotOrdersRequest,
@@ -13640,22 +15961,40 @@ export interface QueryServer extends UntypedServiceImplementation {
    * Retrieves spot orders corresponding to specified order hashes for a given
    * subaccountID and marketID
    */
-  spotOrdersByHashes: handleUnaryCall<QuerySpotOrdersByHashesRequest, QuerySpotOrdersByHashesResponse>;
+  spotOrdersByHashes: handleUnaryCall<
+    QuerySpotOrdersByHashesRequest,
+    QuerySpotOrdersByHashesResponse
+  >;
   /** Retrieves subaccount's orders */
-  subaccountOrders: handleUnaryCall<QuerySubaccountOrdersRequest, QuerySubaccountOrdersResponse>;
+  subaccountOrders: handleUnaryCall<
+    QuerySubaccountOrdersRequest,
+    QuerySubaccountOrdersResponse
+  >;
   /** Retrieves a trader's transient spot orders */
-  traderSpotTransientOrders: handleUnaryCall<QueryTraderSpotOrdersRequest, QueryTraderSpotOrdersResponse>;
+  traderSpotTransientOrders: handleUnaryCall<
+    QueryTraderSpotOrdersRequest,
+    QueryTraderSpotOrdersResponse
+  >;
   /** Retrieves a spot market's mid-price */
-  spotMidPriceAndTob: handleUnaryCall<QuerySpotMidPriceAndTOBRequest, QuerySpotMidPriceAndTOBResponse>;
+  spotMidPriceAndTob: handleUnaryCall<
+    QuerySpotMidPriceAndTOBRequest,
+    QuerySpotMidPriceAndTOBResponse
+  >;
   /** Retrieves a derivative market's mid-price */
   derivativeMidPriceAndTob: handleUnaryCall<
     QueryDerivativeMidPriceAndTOBRequest,
     QueryDerivativeMidPriceAndTOBResponse
   >;
   /** Retrieves a derivative market's orderbook by marketID */
-  derivativeOrderbook: handleUnaryCall<QueryDerivativeOrderbookRequest, QueryDerivativeOrderbookResponse>;
+  derivativeOrderbook: handleUnaryCall<
+    QueryDerivativeOrderbookRequest,
+    QueryDerivativeOrderbookResponse
+  >;
   /** Retrieves a trader's derivative orders */
-  traderDerivativeOrders: handleUnaryCall<QueryTraderDerivativeOrdersRequest, QueryTraderDerivativeOrdersResponse>;
+  traderDerivativeOrders: handleUnaryCall<
+    QueryTraderDerivativeOrdersRequest,
+    QueryTraderDerivativeOrdersResponse
+  >;
   /** Retrieves all account address derivative orders */
   accountAddressDerivativeOrders: handleUnaryCall<
     QueryAccountAddressDerivativeOrdersRequest,
@@ -13672,22 +16011,40 @@ export interface QueryServer extends UntypedServiceImplementation {
     QueryTraderDerivativeOrdersResponse
   >;
   /** Retrieves a list of derivative markets. */
-  derivativeMarkets: handleUnaryCall<QueryDerivativeMarketsRequest, QueryDerivativeMarketsResponse>;
+  derivativeMarkets: handleUnaryCall<
+    QueryDerivativeMarketsRequest,
+    QueryDerivativeMarketsResponse
+  >;
   /** Retrieves a derivative market by ticker */
-  derivativeMarket: handleUnaryCall<QueryDerivativeMarketRequest, QueryDerivativeMarketResponse>;
+  derivativeMarket: handleUnaryCall<
+    QueryDerivativeMarketRequest,
+    QueryDerivativeMarketResponse
+  >;
   /**
    * Retrieves a derivative market's corresponding address for fees that
    * contribute to the market's insurance fund
    */
-  derivativeMarketAddress: handleUnaryCall<QueryDerivativeMarketAddressRequest, QueryDerivativeMarketAddressResponse>;
+  derivativeMarketAddress: handleUnaryCall<
+    QueryDerivativeMarketAddressRequest,
+    QueryDerivativeMarketAddressResponse
+  >;
   /** Retrieves a subaccount's trade nonce */
-  subaccountTradeNonce: handleUnaryCall<QuerySubaccountTradeNonceRequest, QuerySubaccountTradeNonceResponse>;
+  subaccountTradeNonce: handleUnaryCall<
+    QuerySubaccountTradeNonceRequest,
+    QuerySubaccountTradeNonceResponse
+  >;
   /** Retrieves the entire exchange module's state */
-  exchangeModuleState: handleUnaryCall<QueryModuleStateRequest, QueryModuleStateResponse>;
+  exchangeModuleState: handleUnaryCall<
+    QueryModuleStateRequest,
+    QueryModuleStateResponse
+  >;
   /** Retrieves the entire exchange module's positions */
   positions: handleUnaryCall<QueryPositionsRequest, QueryPositionsResponse>;
   /** Retrieves subaccount's positions */
-  subaccountPositions: handleUnaryCall<QuerySubaccountPositionsRequest, QuerySubaccountPositionsResponse>;
+  subaccountPositions: handleUnaryCall<
+    QuerySubaccountPositionsRequest,
+    QuerySubaccountPositionsResponse
+  >;
   /** Retrieves subaccount's position in market */
   subaccountPositionInMarket: handleUnaryCall<
     QuerySubaccountPositionInMarketRequest,
@@ -13699,43 +16056,88 @@ export interface QueryServer extends UntypedServiceImplementation {
     QuerySubaccountEffectivePositionInMarketResponse
   >;
   /** Retrieves perpetual market info */
-  perpetualMarketInfo: handleUnaryCall<QueryPerpetualMarketInfoRequest, QueryPerpetualMarketInfoResponse>;
+  perpetualMarketInfo: handleUnaryCall<
+    QueryPerpetualMarketInfoRequest,
+    QueryPerpetualMarketInfoResponse
+  >;
   /** Retrieves expiry market info */
-  expiryFuturesMarketInfo: handleUnaryCall<QueryExpiryFuturesMarketInfoRequest, QueryExpiryFuturesMarketInfoResponse>;
+  expiryFuturesMarketInfo: handleUnaryCall<
+    QueryExpiryFuturesMarketInfoRequest,
+    QueryExpiryFuturesMarketInfoResponse
+  >;
   /** Retrieves perpetual market funding */
-  perpetualMarketFunding: handleUnaryCall<QueryPerpetualMarketFundingRequest, QueryPerpetualMarketFundingResponse>;
+  perpetualMarketFunding: handleUnaryCall<
+    QueryPerpetualMarketFundingRequest,
+    QueryPerpetualMarketFundingResponse
+  >;
   /** Retrieves subaccount's order metadata */
-  subaccountOrderMetadata: handleUnaryCall<QuerySubaccountOrderMetadataRequest, QuerySubaccountOrderMetadataResponse>;
+  subaccountOrderMetadata: handleUnaryCall<
+    QuerySubaccountOrderMetadataRequest,
+    QuerySubaccountOrderMetadataResponse
+  >;
   /** Retrieves the account and total trade rewards points */
-  tradeRewardPoints: handleUnaryCall<QueryTradeRewardPointsRequest, QueryTradeRewardPointsResponse>;
+  tradeRewardPoints: handleUnaryCall<
+    QueryTradeRewardPointsRequest,
+    QueryTradeRewardPointsResponse
+  >;
   /** Retrieves the pending account and total trade rewards points */
-  pendingTradeRewardPoints: handleUnaryCall<QueryTradeRewardPointsRequest, QueryTradeRewardPointsResponse>;
+  pendingTradeRewardPoints: handleUnaryCall<
+    QueryTradeRewardPointsRequest,
+    QueryTradeRewardPointsResponse
+  >;
   /** Retrieves the trade reward campaign */
-  tradeRewardCampaign: handleUnaryCall<QueryTradeRewardCampaignRequest, QueryTradeRewardCampaignResponse>;
+  tradeRewardCampaign: handleUnaryCall<
+    QueryTradeRewardCampaignRequest,
+    QueryTradeRewardCampaignResponse
+  >;
   /** Retrieves the account's fee discount info */
-  feeDiscountAccountInfo: handleUnaryCall<QueryFeeDiscountAccountInfoRequest, QueryFeeDiscountAccountInfoResponse>;
+  feeDiscountAccountInfo: handleUnaryCall<
+    QueryFeeDiscountAccountInfoRequest,
+    QueryFeeDiscountAccountInfoResponse
+  >;
   /** Retrieves the fee discount schedule */
-  feeDiscountSchedule: handleUnaryCall<QueryFeeDiscountScheduleRequest, QueryFeeDiscountScheduleResponse>;
+  feeDiscountSchedule: handleUnaryCall<
+    QueryFeeDiscountScheduleRequest,
+    QueryFeeDiscountScheduleResponse
+  >;
   /** Retrieves mismatches between available vs. total balance */
-  balanceMismatches: handleUnaryCall<QueryBalanceMismatchesRequest, QueryBalanceMismatchesResponse>;
+  balanceMismatches: handleUnaryCall<
+    QueryBalanceMismatchesRequest,
+    QueryBalanceMismatchesResponse
+  >;
   /** Retrieves available and total balances with balance holds */
-  balanceWithBalanceHolds: handleUnaryCall<QueryBalanceWithBalanceHoldsRequest, QueryBalanceWithBalanceHoldsResponse>;
+  balanceWithBalanceHolds: handleUnaryCall<
+    QueryBalanceWithBalanceHoldsRequest,
+    QueryBalanceWithBalanceHoldsResponse
+  >;
   /** Retrieves fee discount tier stats */
   feeDiscountTierStatistics: handleUnaryCall<
     QueryFeeDiscountTierStatisticsRequest,
     QueryFeeDiscountTierStatisticsResponse
   >;
   /** Retrieves market making pool info */
-  mitoVaultInfos: handleUnaryCall<MitoVaultInfosRequest, MitoVaultInfosResponse>;
+  mitoVaultInfos: handleUnaryCall<
+    MitoVaultInfosRequest,
+    MitoVaultInfosResponse
+  >;
   /**
    * QueryMarketIDFromVault returns the market ID for a given vault subaccount
    * ID
    */
-  queryMarketIdFromVault: handleUnaryCall<QueryMarketIDFromVaultRequest, QueryMarketIDFromVaultResponse>;
+  queryMarketIdFromVault: handleUnaryCall<
+    QueryMarketIDFromVaultRequest,
+    QueryMarketIDFromVaultResponse
+  >;
   /** Retrieves historical trade records for a given market ID */
-  historicalTradeRecords: handleUnaryCall<QueryHistoricalTradeRecordsRequest, QueryHistoricalTradeRecordsResponse>;
+  historicalTradeRecords: handleUnaryCall<
+    QueryHistoricalTradeRecordsRequest,
+    QueryHistoricalTradeRecordsResponse
+  >;
   /** Retrieves if the account is opted out of rewards */
-  isOptedOutOfRewards: handleUnaryCall<QueryIsOptedOutOfRewardsRequest, QueryIsOptedOutOfRewardsResponse>;
+  isOptedOutOfRewards: handleUnaryCall<
+    QueryIsOptedOutOfRewardsRequest,
+    QueryIsOptedOutOfRewardsResponse
+  >;
   /** Retrieves all accounts opted out of rewards */
   optedOutOfRewardsAccounts: handleUnaryCall<
     QueryOptedOutOfRewardsAccountsRequest,
@@ -13745,9 +16147,15 @@ export interface QueryServer extends UntypedServiceImplementation {
    * MarketVolatility computes the volatility for spot and derivative markets
    * trading history.
    */
-  marketVolatility: handleUnaryCall<QueryMarketVolatilityRequest, QueryMarketVolatilityResponse>;
+  marketVolatility: handleUnaryCall<
+    QueryMarketVolatilityRequest,
+    QueryMarketVolatilityResponse
+  >;
   /** Retrieves all binary options markets */
-  binaryOptionsMarkets: handleUnaryCall<QueryBinaryMarketsRequest, QueryBinaryMarketsResponse>;
+  binaryOptionsMarkets: handleUnaryCall<
+    QueryBinaryMarketsRequest,
+    QueryBinaryMarketsResponse
+  >;
   /** Retrieves a trader's derivative conditional orders */
   traderDerivativeConditionalOrders: handleUnaryCall<
     QueryTraderDerivativeConditionalOrdersRequest,
@@ -13758,195 +16166,315 @@ export interface QueryServer extends UntypedServiceImplementation {
     QueryMarketAtomicExecutionFeeMultiplierResponse
   >;
   /** Retrieves the active stake grant for a grantee */
-  activeStakeGrant: handleUnaryCall<QueryActiveStakeGrantRequest, QueryActiveStakeGrantResponse>;
+  activeStakeGrant: handleUnaryCall<
+    QueryActiveStakeGrantRequest,
+    QueryActiveStakeGrantResponse
+  >;
   /** Retrieves the grant authorization amount for a granter and grantee */
-  grantAuthorization: handleUnaryCall<QueryGrantAuthorizationRequest, QueryGrantAuthorizationResponse>;
+  grantAuthorization: handleUnaryCall<
+    QueryGrantAuthorizationRequest,
+    QueryGrantAuthorizationResponse
+  >;
   /** Retrieves the grant authorization amount for a granter and grantee */
-  grantAuthorizations: handleUnaryCall<QueryGrantAuthorizationsRequest, QueryGrantAuthorizationsResponse>;
+  grantAuthorizations: handleUnaryCall<
+    QueryGrantAuthorizationsRequest,
+    QueryGrantAuthorizationsResponse
+  >;
   /** Retrieves a derivative or binary options market's balance */
-  marketBalance: handleUnaryCall<QueryMarketBalanceRequest, QueryMarketBalanceResponse>;
+  marketBalance: handleUnaryCall<
+    QueryMarketBalanceRequest,
+    QueryMarketBalanceResponse
+  >;
   /** Retrieves all derivative or binary options market balances */
-  marketBalances: handleUnaryCall<QueryMarketBalancesRequest, QueryMarketBalancesResponse>;
+  marketBalances: handleUnaryCall<
+    QueryMarketBalancesRequest,
+    QueryMarketBalancesResponse
+  >;
   /** Retrieves the min notional for a denom */
-  denomMinNotional: handleUnaryCall<QueryDenomMinNotionalRequest, QueryDenomMinNotionalResponse>;
+  denomMinNotional: handleUnaryCall<
+    QueryDenomMinNotionalRequest,
+    QueryDenomMinNotionalResponse
+  >;
   /** Retrieves the min notionals for all denoms */
-  denomMinNotionals: handleUnaryCall<QueryDenomMinNotionalsRequest, QueryDenomMinNotionalsResponse>;
+  denomMinNotionals: handleUnaryCall<
+    QueryDenomMinNotionalsRequest,
+    QueryDenomMinNotionalsResponse
+  >;
 }
 
 export interface QueryClient extends Client {
   l3DerivativeOrderBook(
     request: QueryFullDerivativeOrderbookRequest,
-    callback: (error: ServiceError | null, response: QueryFullDerivativeOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullDerivativeOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   l3DerivativeOrderBook(
     request: QueryFullDerivativeOrderbookRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryFullDerivativeOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullDerivativeOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   l3DerivativeOrderBook(
     request: QueryFullDerivativeOrderbookRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryFullDerivativeOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullDerivativeOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   l3SpotOrderBook(
     request: QueryFullSpotOrderbookRequest,
-    callback: (error: ServiceError | null, response: QueryFullSpotOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullSpotOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   l3SpotOrderBook(
     request: QueryFullSpotOrderbookRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryFullSpotOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullSpotOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   l3SpotOrderBook(
     request: QueryFullSpotOrderbookRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryFullSpotOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullSpotOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves exchange params */
   queryExchangeParams(
     request: QueryExchangeParamsRequest,
-    callback: (error: ServiceError | null, response: QueryExchangeParamsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryExchangeParamsResponse,
+    ) => void,
   ): ClientUnaryCall;
   queryExchangeParams(
     request: QueryExchangeParamsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryExchangeParamsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryExchangeParamsResponse,
+    ) => void,
   ): ClientUnaryCall;
   queryExchangeParams(
     request: QueryExchangeParamsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryExchangeParamsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryExchangeParamsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a Subaccount's Deposits */
   subaccountDeposits(
     request: QuerySubaccountDepositsRequest,
-    callback: (error: ServiceError | null, response: QuerySubaccountDepositsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountDepositsResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountDeposits(
     request: QuerySubaccountDepositsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySubaccountDepositsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountDepositsResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountDeposits(
     request: QuerySubaccountDepositsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySubaccountDepositsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountDepositsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a Subaccount's Deposits */
   subaccountDeposit(
     request: QuerySubaccountDepositRequest,
-    callback: (error: ServiceError | null, response: QuerySubaccountDepositResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountDepositResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountDeposit(
     request: QuerySubaccountDepositRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySubaccountDepositResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountDepositResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountDeposit(
     request: QuerySubaccountDepositRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySubaccountDepositResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountDepositResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves all of the balances of all users on the exchange. */
   exchangeBalances(
     request: QueryExchangeBalancesRequest,
-    callback: (error: ServiceError | null, response: QueryExchangeBalancesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryExchangeBalancesResponse,
+    ) => void,
   ): ClientUnaryCall;
   exchangeBalances(
     request: QueryExchangeBalancesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryExchangeBalancesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryExchangeBalancesResponse,
+    ) => void,
   ): ClientUnaryCall;
   exchangeBalances(
     request: QueryExchangeBalancesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryExchangeBalancesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryExchangeBalancesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the aggregate volumes for the specified account or subaccount */
   aggregateVolume(
     request: QueryAggregateVolumeRequest,
-    callback: (error: ServiceError | null, response: QueryAggregateVolumeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateVolumeResponse,
+    ) => void,
   ): ClientUnaryCall;
   aggregateVolume(
     request: QueryAggregateVolumeRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryAggregateVolumeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateVolumeResponse,
+    ) => void,
   ): ClientUnaryCall;
   aggregateVolume(
     request: QueryAggregateVolumeRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryAggregateVolumeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateVolumeResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the aggregate volumes for specified accounts */
   aggregateVolumes(
     request: QueryAggregateVolumesRequest,
-    callback: (error: ServiceError | null, response: QueryAggregateVolumesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateVolumesResponse,
+    ) => void,
   ): ClientUnaryCall;
   aggregateVolumes(
     request: QueryAggregateVolumesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryAggregateVolumesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateVolumesResponse,
+    ) => void,
   ): ClientUnaryCall;
   aggregateVolumes(
     request: QueryAggregateVolumesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryAggregateVolumesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateVolumesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the aggregate volume for the specified market */
   aggregateMarketVolume(
     request: QueryAggregateMarketVolumeRequest,
-    callback: (error: ServiceError | null, response: QueryAggregateMarketVolumeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateMarketVolumeResponse,
+    ) => void,
   ): ClientUnaryCall;
   aggregateMarketVolume(
     request: QueryAggregateMarketVolumeRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryAggregateMarketVolumeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateMarketVolumeResponse,
+    ) => void,
   ): ClientUnaryCall;
   aggregateMarketVolume(
     request: QueryAggregateMarketVolumeRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryAggregateMarketVolumeResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateMarketVolumeResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the aggregate market volumes for specified markets */
   aggregateMarketVolumes(
     request: QueryAggregateMarketVolumesRequest,
-    callback: (error: ServiceError | null, response: QueryAggregateMarketVolumesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateMarketVolumesResponse,
+    ) => void,
   ): ClientUnaryCall;
   aggregateMarketVolumes(
     request: QueryAggregateMarketVolumesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryAggregateMarketVolumesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateMarketVolumesResponse,
+    ) => void,
   ): ClientUnaryCall;
   aggregateMarketVolumes(
     request: QueryAggregateMarketVolumesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryAggregateMarketVolumesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAggregateMarketVolumesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the denom decimals for a denom. */
   denomDecimal(
     request: QueryDenomDecimalRequest,
-    callback: (error: ServiceError | null, response: QueryDenomDecimalResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomDecimalResponse,
+    ) => void,
   ): ClientUnaryCall;
   denomDecimal(
     request: QueryDenomDecimalRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryDenomDecimalResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomDecimalResponse,
+    ) => void,
   ): ClientUnaryCall;
   denomDecimal(
     request: QueryDenomDecimalRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryDenomDecimalResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomDecimalResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * Retrieves the denom decimals for multiple denoms. Returns all denom
@@ -13954,130 +16482,202 @@ export interface QueryClient extends Client {
    */
   denomDecimals(
     request: QueryDenomDecimalsRequest,
-    callback: (error: ServiceError | null, response: QueryDenomDecimalsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomDecimalsResponse,
+    ) => void,
   ): ClientUnaryCall;
   denomDecimals(
     request: QueryDenomDecimalsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryDenomDecimalsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomDecimalsResponse,
+    ) => void,
   ): ClientUnaryCall;
   denomDecimals(
     request: QueryDenomDecimalsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryDenomDecimalsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomDecimalsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a list of spot markets. */
   spotMarkets(
     request: QuerySpotMarketsRequest,
-    callback: (error: ServiceError | null, response: QuerySpotMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarkets(
     request: QuerySpotMarketsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySpotMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarkets(
     request: QuerySpotMarketsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySpotMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a spot market by ticker */
   spotMarket(
     request: QuerySpotMarketRequest,
-    callback: (error: ServiceError | null, response: QuerySpotMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarket(
     request: QuerySpotMarketRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySpotMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMarket(
     request: QuerySpotMarketRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySpotMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a list of spot markets with extra information. */
   fullSpotMarkets(
     request: QueryFullSpotMarketsRequest,
-    callback: (error: ServiceError | null, response: QueryFullSpotMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullSpotMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   fullSpotMarkets(
     request: QueryFullSpotMarketsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryFullSpotMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullSpotMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   fullSpotMarkets(
     request: QueryFullSpotMarketsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryFullSpotMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullSpotMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a spot market with extra information. */
   fullSpotMarket(
     request: QueryFullSpotMarketRequest,
-    callback: (error: ServiceError | null, response: QueryFullSpotMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullSpotMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   fullSpotMarket(
     request: QueryFullSpotMarketRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryFullSpotMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullSpotMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   fullSpotMarket(
     request: QueryFullSpotMarketRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryFullSpotMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFullSpotMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a spot market's orderbook by marketID */
   spotOrderbook(
     request: QuerySpotOrderbookRequest,
-    callback: (error: ServiceError | null, response: QuerySpotOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotOrderbook(
     request: QuerySpotOrderbookRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySpotOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotOrderbook(
     request: QuerySpotOrderbookRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySpotOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a trader's spot orders */
   traderSpotOrders(
     request: QueryTraderSpotOrdersRequest,
-    callback: (error: ServiceError | null, response: QueryTraderSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   traderSpotOrders(
     request: QueryTraderSpotOrdersRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryTraderSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   traderSpotOrders(
     request: QueryTraderSpotOrdersRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryTraderSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves all account address spot orders */
   accountAddressSpotOrders(
     request: QueryAccountAddressSpotOrdersRequest,
-    callback: (error: ServiceError | null, response: QueryAccountAddressSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAccountAddressSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   accountAddressSpotOrders(
     request: QueryAccountAddressSpotOrdersRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryAccountAddressSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAccountAddressSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   accountAddressSpotOrders(
     request: QueryAccountAddressSpotOrdersRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryAccountAddressSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAccountAddressSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * Retrieves spot orders corresponding to specified order hashes for a given
@@ -14085,194 +16685,302 @@ export interface QueryClient extends Client {
    */
   spotOrdersByHashes(
     request: QuerySpotOrdersByHashesRequest,
-    callback: (error: ServiceError | null, response: QuerySpotOrdersByHashesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotOrdersByHashesResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotOrdersByHashes(
     request: QuerySpotOrdersByHashesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySpotOrdersByHashesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotOrdersByHashesResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotOrdersByHashes(
     request: QuerySpotOrdersByHashesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySpotOrdersByHashesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotOrdersByHashesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves subaccount's orders */
   subaccountOrders(
     request: QuerySubaccountOrdersRequest,
-    callback: (error: ServiceError | null, response: QuerySubaccountOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountOrders(
     request: QuerySubaccountOrdersRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySubaccountOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountOrders(
     request: QuerySubaccountOrdersRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySubaccountOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a trader's transient spot orders */
   traderSpotTransientOrders(
     request: QueryTraderSpotOrdersRequest,
-    callback: (error: ServiceError | null, response: QueryTraderSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   traderSpotTransientOrders(
     request: QueryTraderSpotOrdersRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryTraderSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   traderSpotTransientOrders(
     request: QueryTraderSpotOrdersRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryTraderSpotOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderSpotOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a spot market's mid-price */
   spotMidPriceAndTob(
     request: QuerySpotMidPriceAndTOBRequest,
-    callback: (error: ServiceError | null, response: QuerySpotMidPriceAndTOBResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotMidPriceAndTOBResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMidPriceAndTob(
     request: QuerySpotMidPriceAndTOBRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySpotMidPriceAndTOBResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotMidPriceAndTOBResponse,
+    ) => void,
   ): ClientUnaryCall;
   spotMidPriceAndTob(
     request: QuerySpotMidPriceAndTOBRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySpotMidPriceAndTOBResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySpotMidPriceAndTOBResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a derivative market's mid-price */
   derivativeMidPriceAndTob(
     request: QueryDerivativeMidPriceAndTOBRequest,
-    callback: (error: ServiceError | null, response: QueryDerivativeMidPriceAndTOBResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMidPriceAndTOBResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMidPriceAndTob(
     request: QueryDerivativeMidPriceAndTOBRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryDerivativeMidPriceAndTOBResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMidPriceAndTOBResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMidPriceAndTob(
     request: QueryDerivativeMidPriceAndTOBRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryDerivativeMidPriceAndTOBResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMidPriceAndTOBResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a derivative market's orderbook by marketID */
   derivativeOrderbook(
     request: QueryDerivativeOrderbookRequest,
-    callback: (error: ServiceError | null, response: QueryDerivativeOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeOrderbook(
     request: QueryDerivativeOrderbookRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryDerivativeOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeOrderbook(
     request: QueryDerivativeOrderbookRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryDerivativeOrderbookResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeOrderbookResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a trader's derivative orders */
   traderDerivativeOrders(
     request: QueryTraderDerivativeOrdersRequest,
-    callback: (error: ServiceError | null, response: QueryTraderDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   traderDerivativeOrders(
     request: QueryTraderDerivativeOrdersRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryTraderDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   traderDerivativeOrders(
     request: QueryTraderDerivativeOrdersRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryTraderDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves all account address derivative orders */
   accountAddressDerivativeOrders(
     request: QueryAccountAddressDerivativeOrdersRequest,
-    callback: (error: ServiceError | null, response: QueryAccountAddressDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAccountAddressDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   accountAddressDerivativeOrders(
     request: QueryAccountAddressDerivativeOrdersRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryAccountAddressDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAccountAddressDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   accountAddressDerivativeOrders(
     request: QueryAccountAddressDerivativeOrdersRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryAccountAddressDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryAccountAddressDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a trader's derivative orders */
   derivativeOrdersByHashes(
     request: QueryDerivativeOrdersByHashesRequest,
-    callback: (error: ServiceError | null, response: QueryDerivativeOrdersByHashesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeOrdersByHashesResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeOrdersByHashes(
     request: QueryDerivativeOrdersByHashesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryDerivativeOrdersByHashesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeOrdersByHashesResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeOrdersByHashes(
     request: QueryDerivativeOrdersByHashesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryDerivativeOrdersByHashesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeOrdersByHashesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a trader's transient derivative orders */
   traderDerivativeTransientOrders(
     request: QueryTraderDerivativeOrdersRequest,
-    callback: (error: ServiceError | null, response: QueryTraderDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   traderDerivativeTransientOrders(
     request: QueryTraderDerivativeOrdersRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryTraderDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   traderDerivativeTransientOrders(
     request: QueryTraderDerivativeOrdersRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryTraderDerivativeOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderDerivativeOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a list of derivative markets. */
   derivativeMarkets(
     request: QueryDerivativeMarketsRequest,
-    callback: (error: ServiceError | null, response: QueryDerivativeMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarkets(
     request: QueryDerivativeMarketsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryDerivativeMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarkets(
     request: QueryDerivativeMarketsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryDerivativeMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a derivative market by ticker */
   derivativeMarket(
     request: QueryDerivativeMarketRequest,
-    callback: (error: ServiceError | null, response: QueryDerivativeMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarket(
     request: QueryDerivativeMarketRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryDerivativeMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarket(
     request: QueryDerivativeMarketRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryDerivativeMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * Retrieves a derivative market's corresponding address for fees that
@@ -14280,322 +16988,502 @@ export interface QueryClient extends Client {
    */
   derivativeMarketAddress(
     request: QueryDerivativeMarketAddressRequest,
-    callback: (error: ServiceError | null, response: QueryDerivativeMarketAddressResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMarketAddressResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarketAddress(
     request: QueryDerivativeMarketAddressRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryDerivativeMarketAddressResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMarketAddressResponse,
+    ) => void,
   ): ClientUnaryCall;
   derivativeMarketAddress(
     request: QueryDerivativeMarketAddressRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryDerivativeMarketAddressResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDerivativeMarketAddressResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a subaccount's trade nonce */
   subaccountTradeNonce(
     request: QuerySubaccountTradeNonceRequest,
-    callback: (error: ServiceError | null, response: QuerySubaccountTradeNonceResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountTradeNonceResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountTradeNonce(
     request: QuerySubaccountTradeNonceRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySubaccountTradeNonceResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountTradeNonceResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountTradeNonce(
     request: QuerySubaccountTradeNonceRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySubaccountTradeNonceResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountTradeNonceResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the entire exchange module's state */
   exchangeModuleState(
     request: QueryModuleStateRequest,
-    callback: (error: ServiceError | null, response: QueryModuleStateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryModuleStateResponse,
+    ) => void,
   ): ClientUnaryCall;
   exchangeModuleState(
     request: QueryModuleStateRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryModuleStateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryModuleStateResponse,
+    ) => void,
   ): ClientUnaryCall;
   exchangeModuleState(
     request: QueryModuleStateRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryModuleStateResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryModuleStateResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the entire exchange module's positions */
   positions(
     request: QueryPositionsRequest,
-    callback: (error: ServiceError | null, response: QueryPositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryPositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   positions(
     request: QueryPositionsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryPositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryPositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   positions(
     request: QueryPositionsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryPositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryPositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves subaccount's positions */
   subaccountPositions(
     request: QuerySubaccountPositionsRequest,
-    callback: (error: ServiceError | null, response: QuerySubaccountPositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountPositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountPositions(
     request: QuerySubaccountPositionsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySubaccountPositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountPositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountPositions(
     request: QuerySubaccountPositionsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySubaccountPositionsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountPositionsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves subaccount's position in market */
   subaccountPositionInMarket(
     request: QuerySubaccountPositionInMarketRequest,
-    callback: (error: ServiceError | null, response: QuerySubaccountPositionInMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountPositionInMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountPositionInMarket(
     request: QuerySubaccountPositionInMarketRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySubaccountPositionInMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountPositionInMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountPositionInMarket(
     request: QuerySubaccountPositionInMarketRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySubaccountPositionInMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountPositionInMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves subaccount's position in market */
   subaccountEffectivePositionInMarket(
     request: QuerySubaccountEffectivePositionInMarketRequest,
-    callback: (error: ServiceError | null, response: QuerySubaccountEffectivePositionInMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountEffectivePositionInMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountEffectivePositionInMarket(
     request: QuerySubaccountEffectivePositionInMarketRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySubaccountEffectivePositionInMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountEffectivePositionInMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountEffectivePositionInMarket(
     request: QuerySubaccountEffectivePositionInMarketRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySubaccountEffectivePositionInMarketResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountEffectivePositionInMarketResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves perpetual market info */
   perpetualMarketInfo(
     request: QueryPerpetualMarketInfoRequest,
-    callback: (error: ServiceError | null, response: QueryPerpetualMarketInfoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryPerpetualMarketInfoResponse,
+    ) => void,
   ): ClientUnaryCall;
   perpetualMarketInfo(
     request: QueryPerpetualMarketInfoRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryPerpetualMarketInfoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryPerpetualMarketInfoResponse,
+    ) => void,
   ): ClientUnaryCall;
   perpetualMarketInfo(
     request: QueryPerpetualMarketInfoRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryPerpetualMarketInfoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryPerpetualMarketInfoResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves expiry market info */
   expiryFuturesMarketInfo(
     request: QueryExpiryFuturesMarketInfoRequest,
-    callback: (error: ServiceError | null, response: QueryExpiryFuturesMarketInfoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryExpiryFuturesMarketInfoResponse,
+    ) => void,
   ): ClientUnaryCall;
   expiryFuturesMarketInfo(
     request: QueryExpiryFuturesMarketInfoRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryExpiryFuturesMarketInfoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryExpiryFuturesMarketInfoResponse,
+    ) => void,
   ): ClientUnaryCall;
   expiryFuturesMarketInfo(
     request: QueryExpiryFuturesMarketInfoRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryExpiryFuturesMarketInfoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryExpiryFuturesMarketInfoResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves perpetual market funding */
   perpetualMarketFunding(
     request: QueryPerpetualMarketFundingRequest,
-    callback: (error: ServiceError | null, response: QueryPerpetualMarketFundingResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryPerpetualMarketFundingResponse,
+    ) => void,
   ): ClientUnaryCall;
   perpetualMarketFunding(
     request: QueryPerpetualMarketFundingRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryPerpetualMarketFundingResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryPerpetualMarketFundingResponse,
+    ) => void,
   ): ClientUnaryCall;
   perpetualMarketFunding(
     request: QueryPerpetualMarketFundingRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryPerpetualMarketFundingResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryPerpetualMarketFundingResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves subaccount's order metadata */
   subaccountOrderMetadata(
     request: QuerySubaccountOrderMetadataRequest,
-    callback: (error: ServiceError | null, response: QuerySubaccountOrderMetadataResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountOrderMetadataResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountOrderMetadata(
     request: QuerySubaccountOrderMetadataRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QuerySubaccountOrderMetadataResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountOrderMetadataResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountOrderMetadata(
     request: QuerySubaccountOrderMetadataRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QuerySubaccountOrderMetadataResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QuerySubaccountOrderMetadataResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the account and total trade rewards points */
   tradeRewardPoints(
     request: QueryTradeRewardPointsRequest,
-    callback: (error: ServiceError | null, response: QueryTradeRewardPointsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTradeRewardPointsResponse,
+    ) => void,
   ): ClientUnaryCall;
   tradeRewardPoints(
     request: QueryTradeRewardPointsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryTradeRewardPointsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTradeRewardPointsResponse,
+    ) => void,
   ): ClientUnaryCall;
   tradeRewardPoints(
     request: QueryTradeRewardPointsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryTradeRewardPointsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTradeRewardPointsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the pending account and total trade rewards points */
   pendingTradeRewardPoints(
     request: QueryTradeRewardPointsRequest,
-    callback: (error: ServiceError | null, response: QueryTradeRewardPointsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTradeRewardPointsResponse,
+    ) => void,
   ): ClientUnaryCall;
   pendingTradeRewardPoints(
     request: QueryTradeRewardPointsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryTradeRewardPointsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTradeRewardPointsResponse,
+    ) => void,
   ): ClientUnaryCall;
   pendingTradeRewardPoints(
     request: QueryTradeRewardPointsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryTradeRewardPointsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTradeRewardPointsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the trade reward campaign */
   tradeRewardCampaign(
     request: QueryTradeRewardCampaignRequest,
-    callback: (error: ServiceError | null, response: QueryTradeRewardCampaignResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTradeRewardCampaignResponse,
+    ) => void,
   ): ClientUnaryCall;
   tradeRewardCampaign(
     request: QueryTradeRewardCampaignRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryTradeRewardCampaignResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTradeRewardCampaignResponse,
+    ) => void,
   ): ClientUnaryCall;
   tradeRewardCampaign(
     request: QueryTradeRewardCampaignRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryTradeRewardCampaignResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTradeRewardCampaignResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the account's fee discount info */
   feeDiscountAccountInfo(
     request: QueryFeeDiscountAccountInfoRequest,
-    callback: (error: ServiceError | null, response: QueryFeeDiscountAccountInfoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFeeDiscountAccountInfoResponse,
+    ) => void,
   ): ClientUnaryCall;
   feeDiscountAccountInfo(
     request: QueryFeeDiscountAccountInfoRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryFeeDiscountAccountInfoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFeeDiscountAccountInfoResponse,
+    ) => void,
   ): ClientUnaryCall;
   feeDiscountAccountInfo(
     request: QueryFeeDiscountAccountInfoRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryFeeDiscountAccountInfoResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFeeDiscountAccountInfoResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the fee discount schedule */
   feeDiscountSchedule(
     request: QueryFeeDiscountScheduleRequest,
-    callback: (error: ServiceError | null, response: QueryFeeDiscountScheduleResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFeeDiscountScheduleResponse,
+    ) => void,
   ): ClientUnaryCall;
   feeDiscountSchedule(
     request: QueryFeeDiscountScheduleRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryFeeDiscountScheduleResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFeeDiscountScheduleResponse,
+    ) => void,
   ): ClientUnaryCall;
   feeDiscountSchedule(
     request: QueryFeeDiscountScheduleRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryFeeDiscountScheduleResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFeeDiscountScheduleResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves mismatches between available vs. total balance */
   balanceMismatches(
     request: QueryBalanceMismatchesRequest,
-    callback: (error: ServiceError | null, response: QueryBalanceMismatchesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryBalanceMismatchesResponse,
+    ) => void,
   ): ClientUnaryCall;
   balanceMismatches(
     request: QueryBalanceMismatchesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryBalanceMismatchesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryBalanceMismatchesResponse,
+    ) => void,
   ): ClientUnaryCall;
   balanceMismatches(
     request: QueryBalanceMismatchesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryBalanceMismatchesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryBalanceMismatchesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves available and total balances with balance holds */
   balanceWithBalanceHolds(
     request: QueryBalanceWithBalanceHoldsRequest,
-    callback: (error: ServiceError | null, response: QueryBalanceWithBalanceHoldsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryBalanceWithBalanceHoldsResponse,
+    ) => void,
   ): ClientUnaryCall;
   balanceWithBalanceHolds(
     request: QueryBalanceWithBalanceHoldsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryBalanceWithBalanceHoldsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryBalanceWithBalanceHoldsResponse,
+    ) => void,
   ): ClientUnaryCall;
   balanceWithBalanceHolds(
     request: QueryBalanceWithBalanceHoldsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryBalanceWithBalanceHoldsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryBalanceWithBalanceHoldsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves fee discount tier stats */
   feeDiscountTierStatistics(
     request: QueryFeeDiscountTierStatisticsRequest,
-    callback: (error: ServiceError | null, response: QueryFeeDiscountTierStatisticsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFeeDiscountTierStatisticsResponse,
+    ) => void,
   ): ClientUnaryCall;
   feeDiscountTierStatistics(
     request: QueryFeeDiscountTierStatisticsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryFeeDiscountTierStatisticsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFeeDiscountTierStatisticsResponse,
+    ) => void,
   ): ClientUnaryCall;
   feeDiscountTierStatistics(
     request: QueryFeeDiscountTierStatisticsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryFeeDiscountTierStatisticsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryFeeDiscountTierStatisticsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves market making pool info */
   mitoVaultInfos(
     request: MitoVaultInfosRequest,
-    callback: (error: ServiceError | null, response: MitoVaultInfosResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MitoVaultInfosResponse,
+    ) => void,
   ): ClientUnaryCall;
   mitoVaultInfos(
     request: MitoVaultInfosRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: MitoVaultInfosResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MitoVaultInfosResponse,
+    ) => void,
   ): ClientUnaryCall;
   mitoVaultInfos(
     request: MitoVaultInfosRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: MitoVaultInfosResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: MitoVaultInfosResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * QueryMarketIDFromVault returns the market ID for a given vault subaccount
@@ -14603,66 +17491,102 @@ export interface QueryClient extends Client {
    */
   queryMarketIdFromVault(
     request: QueryMarketIDFromVaultRequest,
-    callback: (error: ServiceError | null, response: QueryMarketIDFromVaultResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketIDFromVaultResponse,
+    ) => void,
   ): ClientUnaryCall;
   queryMarketIdFromVault(
     request: QueryMarketIDFromVaultRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryMarketIDFromVaultResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketIDFromVaultResponse,
+    ) => void,
   ): ClientUnaryCall;
   queryMarketIdFromVault(
     request: QueryMarketIDFromVaultRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryMarketIDFromVaultResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketIDFromVaultResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves historical trade records for a given market ID */
   historicalTradeRecords(
     request: QueryHistoricalTradeRecordsRequest,
-    callback: (error: ServiceError | null, response: QueryHistoricalTradeRecordsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryHistoricalTradeRecordsResponse,
+    ) => void,
   ): ClientUnaryCall;
   historicalTradeRecords(
     request: QueryHistoricalTradeRecordsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryHistoricalTradeRecordsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryHistoricalTradeRecordsResponse,
+    ) => void,
   ): ClientUnaryCall;
   historicalTradeRecords(
     request: QueryHistoricalTradeRecordsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryHistoricalTradeRecordsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryHistoricalTradeRecordsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves if the account is opted out of rewards */
   isOptedOutOfRewards(
     request: QueryIsOptedOutOfRewardsRequest,
-    callback: (error: ServiceError | null, response: QueryIsOptedOutOfRewardsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryIsOptedOutOfRewardsResponse,
+    ) => void,
   ): ClientUnaryCall;
   isOptedOutOfRewards(
     request: QueryIsOptedOutOfRewardsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryIsOptedOutOfRewardsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryIsOptedOutOfRewardsResponse,
+    ) => void,
   ): ClientUnaryCall;
   isOptedOutOfRewards(
     request: QueryIsOptedOutOfRewardsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryIsOptedOutOfRewardsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryIsOptedOutOfRewardsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves all accounts opted out of rewards */
   optedOutOfRewardsAccounts(
     request: QueryOptedOutOfRewardsAccountsRequest,
-    callback: (error: ServiceError | null, response: QueryOptedOutOfRewardsAccountsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryOptedOutOfRewardsAccountsResponse,
+    ) => void,
   ): ClientUnaryCall;
   optedOutOfRewardsAccounts(
     request: QueryOptedOutOfRewardsAccountsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryOptedOutOfRewardsAccountsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryOptedOutOfRewardsAccountsResponse,
+    ) => void,
   ): ClientUnaryCall;
   optedOutOfRewardsAccounts(
     request: QueryOptedOutOfRewardsAccountsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryOptedOutOfRewardsAccountsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryOptedOutOfRewardsAccountsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * MarketVolatility computes the volatility for spot and derivative markets
@@ -14670,177 +17594,276 @@ export interface QueryClient extends Client {
    */
   marketVolatility(
     request: QueryMarketVolatilityRequest,
-    callback: (error: ServiceError | null, response: QueryMarketVolatilityResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketVolatilityResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketVolatility(
     request: QueryMarketVolatilityRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryMarketVolatilityResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketVolatilityResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketVolatility(
     request: QueryMarketVolatilityRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryMarketVolatilityResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketVolatilityResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves all binary options markets */
   binaryOptionsMarkets(
     request: QueryBinaryMarketsRequest,
-    callback: (error: ServiceError | null, response: QueryBinaryMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryBinaryMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   binaryOptionsMarkets(
     request: QueryBinaryMarketsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryBinaryMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryBinaryMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   binaryOptionsMarkets(
     request: QueryBinaryMarketsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryBinaryMarketsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryBinaryMarketsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a trader's derivative conditional orders */
   traderDerivativeConditionalOrders(
     request: QueryTraderDerivativeConditionalOrdersRequest,
-    callback: (error: ServiceError | null, response: QueryTraderDerivativeConditionalOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderDerivativeConditionalOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   traderDerivativeConditionalOrders(
     request: QueryTraderDerivativeConditionalOrdersRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryTraderDerivativeConditionalOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderDerivativeConditionalOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   traderDerivativeConditionalOrders(
     request: QueryTraderDerivativeConditionalOrdersRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryTraderDerivativeConditionalOrdersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryTraderDerivativeConditionalOrdersResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketAtomicExecutionFeeMultiplier(
     request: QueryMarketAtomicExecutionFeeMultiplierRequest,
-    callback: (error: ServiceError | null, response: QueryMarketAtomicExecutionFeeMultiplierResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketAtomicExecutionFeeMultiplierResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketAtomicExecutionFeeMultiplier(
     request: QueryMarketAtomicExecutionFeeMultiplierRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryMarketAtomicExecutionFeeMultiplierResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketAtomicExecutionFeeMultiplierResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketAtomicExecutionFeeMultiplier(
     request: QueryMarketAtomicExecutionFeeMultiplierRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryMarketAtomicExecutionFeeMultiplierResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketAtomicExecutionFeeMultiplierResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the active stake grant for a grantee */
   activeStakeGrant(
     request: QueryActiveStakeGrantRequest,
-    callback: (error: ServiceError | null, response: QueryActiveStakeGrantResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryActiveStakeGrantResponse,
+    ) => void,
   ): ClientUnaryCall;
   activeStakeGrant(
     request: QueryActiveStakeGrantRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryActiveStakeGrantResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryActiveStakeGrantResponse,
+    ) => void,
   ): ClientUnaryCall;
   activeStakeGrant(
     request: QueryActiveStakeGrantRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryActiveStakeGrantResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryActiveStakeGrantResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the grant authorization amount for a granter and grantee */
   grantAuthorization(
     request: QueryGrantAuthorizationRequest,
-    callback: (error: ServiceError | null, response: QueryGrantAuthorizationResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryGrantAuthorizationResponse,
+    ) => void,
   ): ClientUnaryCall;
   grantAuthorization(
     request: QueryGrantAuthorizationRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryGrantAuthorizationResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryGrantAuthorizationResponse,
+    ) => void,
   ): ClientUnaryCall;
   grantAuthorization(
     request: QueryGrantAuthorizationRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryGrantAuthorizationResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryGrantAuthorizationResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the grant authorization amount for a granter and grantee */
   grantAuthorizations(
     request: QueryGrantAuthorizationsRequest,
-    callback: (error: ServiceError | null, response: QueryGrantAuthorizationsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryGrantAuthorizationsResponse,
+    ) => void,
   ): ClientUnaryCall;
   grantAuthorizations(
     request: QueryGrantAuthorizationsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryGrantAuthorizationsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryGrantAuthorizationsResponse,
+    ) => void,
   ): ClientUnaryCall;
   grantAuthorizations(
     request: QueryGrantAuthorizationsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryGrantAuthorizationsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryGrantAuthorizationsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves a derivative or binary options market's balance */
   marketBalance(
     request: QueryMarketBalanceRequest,
-    callback: (error: ServiceError | null, response: QueryMarketBalanceResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketBalanceResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketBalance(
     request: QueryMarketBalanceRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryMarketBalanceResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketBalanceResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketBalance(
     request: QueryMarketBalanceRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryMarketBalanceResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketBalanceResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves all derivative or binary options market balances */
   marketBalances(
     request: QueryMarketBalancesRequest,
-    callback: (error: ServiceError | null, response: QueryMarketBalancesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketBalancesResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketBalances(
     request: QueryMarketBalancesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryMarketBalancesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketBalancesResponse,
+    ) => void,
   ): ClientUnaryCall;
   marketBalances(
     request: QueryMarketBalancesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryMarketBalancesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryMarketBalancesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the min notional for a denom */
   denomMinNotional(
     request: QueryDenomMinNotionalRequest,
-    callback: (error: ServiceError | null, response: QueryDenomMinNotionalResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomMinNotionalResponse,
+    ) => void,
   ): ClientUnaryCall;
   denomMinNotional(
     request: QueryDenomMinNotionalRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryDenomMinNotionalResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomMinNotionalResponse,
+    ) => void,
   ): ClientUnaryCall;
   denomMinNotional(
     request: QueryDenomMinNotionalRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryDenomMinNotionalResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomMinNotionalResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Retrieves the min notionals for all denoms */
   denomMinNotionals(
     request: QueryDenomMinNotionalsRequest,
-    callback: (error: ServiceError | null, response: QueryDenomMinNotionalsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomMinNotionalsResponse,
+    ) => void,
   ): ClientUnaryCall;
   denomMinNotionals(
     request: QueryDenomMinNotionalsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: QueryDenomMinNotionalsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomMinNotionalsResponse,
+    ) => void,
   ): ClientUnaryCall;
   denomMinNotionals(
     request: QueryDenomMinNotionalsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: QueryDenomMinNotionalsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: QueryDenomMinNotionalsResponse,
+    ) => void,
   ): ClientUnaryCall;
 }
 
@@ -14848,22 +17871,34 @@ export const QueryClient = makeGenericClientConstructor(
   QueryService,
   "injective.exchange.v1beta1.Query",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): QueryClient;
+  new (
+    address: string,
+    credentials: ChannelCredentials,
+    options?: Partial<ClientOptions>,
+  ): QueryClient;
   service: typeof QueryService;
   serviceName: string;
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

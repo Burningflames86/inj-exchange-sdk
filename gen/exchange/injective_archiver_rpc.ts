@@ -278,9 +278,7 @@ export interface HistoricalTrade {
   /** The direction the trade */
   tradeDirection: string;
   /** Price level at which trade has been executed */
-  price:
-    | PriceLevel
-    | undefined;
+  price: PriceLevel | undefined;
   /** The fee associated with the trade (quote asset denom) */
   fee: string;
   /** Timestamp of trade execution in UNIX millis */
@@ -326,9 +324,7 @@ export interface StreamSpotAverageEntriesRequest {
 
 export interface StreamSpotAverageEntriesResponse {
   /** List of spot average entries */
-  averageEntry:
-    | SpotAverageEntry
-    | undefined;
+  averageEntry: SpotAverageEntry | undefined;
   /** Operation timestamp in UNIX. */
   timestamp: number;
 }
@@ -349,7 +345,10 @@ function createBaseBalanceRequest(): BalanceRequest {
 }
 
 export const BalanceRequest: MessageFns<BalanceRequest> = {
-  encode(message: BalanceRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BalanceRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.account !== "") {
       writer.uint32(10).string(message.account);
     }
@@ -360,7 +359,8 @@ export const BalanceRequest: MessageFns<BalanceRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): BalanceRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBalanceRequest();
     while (reader.pos < end) {
@@ -394,7 +394,9 @@ export const BalanceRequest: MessageFns<BalanceRequest> = {
   fromJSON(object: any): BalanceRequest {
     return {
       account: isSet(object.account) ? globalThis.String(object.account) : "",
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
+      resolution: isSet(object.resolution)
+        ? globalThis.String(object.resolution)
+        : "",
     };
   },
 
@@ -409,10 +411,14 @@ export const BalanceRequest: MessageFns<BalanceRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BalanceRequest>, I>>(base?: I): BalanceRequest {
+  create<I extends Exact<DeepPartial<BalanceRequest>, I>>(
+    base?: I,
+  ): BalanceRequest {
     return BalanceRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BalanceRequest>, I>>(object: I): BalanceRequest {
+  fromPartial<I extends Exact<DeepPartial<BalanceRequest>, I>>(
+    object: I,
+  ): BalanceRequest {
     const message = createBaseBalanceRequest();
     message.account = object.account ?? "";
     message.resolution = object.resolution ?? "";
@@ -425,15 +431,22 @@ function createBaseBalanceResponse(): BalanceResponse {
 }
 
 export const BalanceResponse: MessageFns<BalanceResponse> = {
-  encode(message: BalanceResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BalanceResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.historicalBalance !== undefined) {
-      HistoricalBalance.encode(message.historicalBalance, writer.uint32(10).fork()).join();
+      HistoricalBalance.encode(
+        message.historicalBalance,
+        writer.uint32(10).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): BalanceResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBalanceResponse();
     while (reader.pos < end) {
@@ -444,7 +457,10 @@ export const BalanceResponse: MessageFns<BalanceResponse> = {
             break;
           }
 
-          message.historicalBalance = HistoricalBalance.decode(reader, reader.uint32());
+          message.historicalBalance = HistoricalBalance.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -461,27 +477,35 @@ export const BalanceResponse: MessageFns<BalanceResponse> = {
       historicalBalance: isSet(object.historicalBalance)
         ? HistoricalBalance.fromJSON(object.historicalBalance)
         : isSet(object.historical_balance)
-        ? HistoricalBalance.fromJSON(object.historical_balance)
-        : undefined,
+          ? HistoricalBalance.fromJSON(object.historical_balance)
+          : undefined,
     };
   },
 
   toJSON(message: BalanceResponse): unknown {
     const obj: any = {};
     if (message.historicalBalance !== undefined) {
-      obj.historicalBalance = HistoricalBalance.toJSON(message.historicalBalance);
+      obj.historicalBalance = HistoricalBalance.toJSON(
+        message.historicalBalance,
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<BalanceResponse>, I>>(base?: I): BalanceResponse {
+  create<I extends Exact<DeepPartial<BalanceResponse>, I>>(
+    base?: I,
+  ): BalanceResponse {
     return BalanceResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BalanceResponse>, I>>(object: I): BalanceResponse {
+  fromPartial<I extends Exact<DeepPartial<BalanceResponse>, I>>(
+    object: I,
+  ): BalanceResponse {
     const message = createBaseBalanceResponse();
-    message.historicalBalance = (object.historicalBalance !== undefined && object.historicalBalance !== null)
-      ? HistoricalBalance.fromPartial(object.historicalBalance)
-      : undefined;
+    message.historicalBalance =
+      object.historicalBalance !== undefined &&
+      object.historicalBalance !== null
+        ? HistoricalBalance.fromPartial(object.historicalBalance)
+        : undefined;
     return message;
   },
 };
@@ -491,7 +515,10 @@ function createBaseHistoricalBalance(): HistoricalBalance {
 }
 
 export const HistoricalBalance: MessageFns<HistoricalBalance> = {
-  encode(message: HistoricalBalance, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: HistoricalBalance,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.t) {
       writer.sint32(v);
@@ -509,7 +536,8 @@ export const HistoricalBalance: MessageFns<HistoricalBalance> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): HistoricalBalance {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHistoricalBalance();
     while (reader.pos < end) {
@@ -556,7 +584,9 @@ export const HistoricalBalance: MessageFns<HistoricalBalance> = {
             break;
           }
 
-          message.dv.push(HistoricalDetailedBalance.decode(reader, reader.uint32()));
+          message.dv.push(
+            HistoricalDetailedBalance.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -570,9 +600,15 @@ export const HistoricalBalance: MessageFns<HistoricalBalance> = {
 
   fromJSON(object: any): HistoricalBalance {
     return {
-      t: globalThis.Array.isArray(object?.t) ? object.t.map((e: any) => globalThis.Number(e)) : [],
-      v: globalThis.Array.isArray(object?.v) ? object.v.map((e: any) => globalThis.Number(e)) : [],
-      dv: globalThis.Array.isArray(object?.dv) ? object.dv.map((e: any) => HistoricalDetailedBalance.fromJSON(e)) : [],
+      t: globalThis.Array.isArray(object?.t)
+        ? object.t.map((e: any) => globalThis.Number(e))
+        : [],
+      v: globalThis.Array.isArray(object?.v)
+        ? object.v.map((e: any) => globalThis.Number(e))
+        : [],
+      dv: globalThis.Array.isArray(object?.dv)
+        ? object.dv.map((e: any) => HistoricalDetailedBalance.fromJSON(e))
+        : [],
     };
   },
 
@@ -590,14 +626,19 @@ export const HistoricalBalance: MessageFns<HistoricalBalance> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<HistoricalBalance>, I>>(base?: I): HistoricalBalance {
+  create<I extends Exact<DeepPartial<HistoricalBalance>, I>>(
+    base?: I,
+  ): HistoricalBalance {
     return HistoricalBalance.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<HistoricalBalance>, I>>(object: I): HistoricalBalance {
+  fromPartial<I extends Exact<DeepPartial<HistoricalBalance>, I>>(
+    object: I,
+  ): HistoricalBalance {
     const message = createBaseHistoricalBalance();
     message.t = object.t?.map((e) => e) || [];
     message.v = object.v?.map((e) => e) || [];
-    message.dv = object.dv?.map((e) => HistoricalDetailedBalance.fromPartial(e)) || [];
+    message.dv =
+      object.dv?.map((e) => HistoricalDetailedBalance.fromPartial(e)) || [];
     return message;
   },
 };
@@ -606,100 +647,115 @@ function createBaseHistoricalDetailedBalance(): HistoricalDetailedBalance {
   return { spot: 0, perp: 0, staking: 0 };
 }
 
-export const HistoricalDetailedBalance: MessageFns<HistoricalDetailedBalance> = {
-  encode(message: HistoricalDetailedBalance, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.spot !== 0) {
-      writer.uint32(9).double(message.spot);
-    }
-    if (message.perp !== 0) {
-      writer.uint32(17).double(message.perp);
-    }
-    if (message.staking !== 0) {
-      writer.uint32(25).double(message.staking);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): HistoricalDetailedBalance {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseHistoricalDetailedBalance();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 9) {
-            break;
-          }
-
-          message.spot = reader.double();
-          continue;
-        }
-        case 2: {
-          if (tag !== 17) {
-            break;
-          }
-
-          message.perp = reader.double();
-          continue;
-        }
-        case 3: {
-          if (tag !== 25) {
-            break;
-          }
-
-          message.staking = reader.double();
-          continue;
-        }
+export const HistoricalDetailedBalance: MessageFns<HistoricalDetailedBalance> =
+  {
+    encode(
+      message: HistoricalDetailedBalance,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.spot !== 0) {
+        writer.uint32(9).double(message.spot);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.perp !== 0) {
+        writer.uint32(17).double(message.perp);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.staking !== 0) {
+        writer.uint32(25).double(message.staking);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): HistoricalDetailedBalance {
-    return {
-      spot: isSet(object.spot) ? globalThis.Number(object.spot) : 0,
-      perp: isSet(object.perp) ? globalThis.Number(object.perp) : 0,
-      staking: isSet(object.staking) ? globalThis.Number(object.staking) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): HistoricalDetailedBalance {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseHistoricalDetailedBalance();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 9) {
+              break;
+            }
 
-  toJSON(message: HistoricalDetailedBalance): unknown {
-    const obj: any = {};
-    if (message.spot !== 0) {
-      obj.spot = message.spot;
-    }
-    if (message.perp !== 0) {
-      obj.perp = message.perp;
-    }
-    if (message.staking !== 0) {
-      obj.staking = message.staking;
-    }
-    return obj;
-  },
+            message.spot = reader.double();
+            continue;
+          }
+          case 2: {
+            if (tag !== 17) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<HistoricalDetailedBalance>, I>>(base?: I): HistoricalDetailedBalance {
-    return HistoricalDetailedBalance.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<HistoricalDetailedBalance>, I>>(object: I): HistoricalDetailedBalance {
-    const message = createBaseHistoricalDetailedBalance();
-    message.spot = object.spot ?? 0;
-    message.perp = object.perp ?? 0;
-    message.staking = object.staking ?? 0;
-    return message;
-  },
-};
+            message.perp = reader.double();
+            continue;
+          }
+          case 3: {
+            if (tag !== 25) {
+              break;
+            }
+
+            message.staking = reader.double();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): HistoricalDetailedBalance {
+      return {
+        spot: isSet(object.spot) ? globalThis.Number(object.spot) : 0,
+        perp: isSet(object.perp) ? globalThis.Number(object.perp) : 0,
+        staking: isSet(object.staking) ? globalThis.Number(object.staking) : 0,
+      };
+    },
+
+    toJSON(message: HistoricalDetailedBalance): unknown {
+      const obj: any = {};
+      if (message.spot !== 0) {
+        obj.spot = message.spot;
+      }
+      if (message.perp !== 0) {
+        obj.perp = message.perp;
+      }
+      if (message.staking !== 0) {
+        obj.staking = message.staking;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<HistoricalDetailedBalance>, I>>(
+      base?: I,
+    ): HistoricalDetailedBalance {
+      return HistoricalDetailedBalance.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<HistoricalDetailedBalance>, I>>(
+      object: I,
+    ): HistoricalDetailedBalance {
+      const message = createBaseHistoricalDetailedBalance();
+      message.spot = object.spot ?? 0;
+      message.perp = object.perp ?? 0;
+      message.staking = object.staking ?? 0;
+      return message;
+    },
+  };
 
 function createBaseAccountStatsRequest(): AccountStatsRequest {
   return { account: "", period: "" };
 }
 
 export const AccountStatsRequest: MessageFns<AccountStatsRequest> = {
-  encode(message: AccountStatsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AccountStatsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.account !== "") {
       writer.uint32(10).string(message.account);
     }
@@ -709,8 +765,12 @@ export const AccountStatsRequest: MessageFns<AccountStatsRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AccountStatsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): AccountStatsRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountStatsRequest();
     while (reader.pos < end) {
@@ -759,10 +819,14 @@ export const AccountStatsRequest: MessageFns<AccountStatsRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AccountStatsRequest>, I>>(base?: I): AccountStatsRequest {
+  create<I extends Exact<DeepPartial<AccountStatsRequest>, I>>(
+    base?: I,
+  ): AccountStatsRequest {
     return AccountStatsRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AccountStatsRequest>, I>>(object: I): AccountStatsRequest {
+  fromPartial<I extends Exact<DeepPartial<AccountStatsRequest>, I>>(
+    object: I,
+  ): AccountStatsRequest {
     const message = createBaseAccountStatsRequest();
     message.account = object.account ?? "";
     message.period = object.period ?? "";
@@ -775,7 +839,10 @@ function createBaseAccountStatsResponse(): AccountStatsResponse {
 }
 
 export const AccountStatsResponse: MessageFns<AccountStatsResponse> = {
-  encode(message: AccountStatsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AccountStatsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.account !== "") {
       writer.uint32(10).string(message.account);
     }
@@ -791,8 +858,12 @@ export const AccountStatsResponse: MessageFns<AccountStatsResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AccountStatsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): AccountStatsResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountStatsResponse();
     while (reader.pos < end) {
@@ -865,10 +936,14 @@ export const AccountStatsResponse: MessageFns<AccountStatsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AccountStatsResponse>, I>>(base?: I): AccountStatsResponse {
+  create<I extends Exact<DeepPartial<AccountStatsResponse>, I>>(
+    base?: I,
+  ): AccountStatsResponse {
     return AccountStatsResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AccountStatsResponse>, I>>(object: I): AccountStatsResponse {
+  fromPartial<I extends Exact<DeepPartial<AccountStatsResponse>, I>>(
+    object: I,
+  ): AccountStatsResponse {
     const message = createBaseAccountStatsResponse();
     message.account = object.account ?? "";
     message.pnl = object.pnl ?? 0;
@@ -883,7 +958,10 @@ function createBaseRpnlRequest(): RpnlRequest {
 }
 
 export const RpnlRequest: MessageFns<RpnlRequest> = {
-  encode(message: RpnlRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: RpnlRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.account !== "") {
       writer.uint32(10).string(message.account);
     }
@@ -894,7 +972,8 @@ export const RpnlRequest: MessageFns<RpnlRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): RpnlRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRpnlRequest();
     while (reader.pos < end) {
@@ -928,7 +1007,9 @@ export const RpnlRequest: MessageFns<RpnlRequest> = {
   fromJSON(object: any): RpnlRequest {
     return {
       account: isSet(object.account) ? globalThis.String(object.account) : "",
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
+      resolution: isSet(object.resolution)
+        ? globalThis.String(object.resolution)
+        : "",
     };
   },
 
@@ -946,7 +1027,9 @@ export const RpnlRequest: MessageFns<RpnlRequest> = {
   create<I extends Exact<DeepPartial<RpnlRequest>, I>>(base?: I): RpnlRequest {
     return RpnlRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<RpnlRequest>, I>>(object: I): RpnlRequest {
+  fromPartial<I extends Exact<DeepPartial<RpnlRequest>, I>>(
+    object: I,
+  ): RpnlRequest {
     const message = createBaseRpnlRequest();
     message.account = object.account ?? "";
     message.resolution = object.resolution ?? "";
@@ -959,15 +1042,22 @@ function createBaseRpnlResponse(): RpnlResponse {
 }
 
 export const RpnlResponse: MessageFns<RpnlResponse> = {
-  encode(message: RpnlResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: RpnlResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.historicalRpnl !== undefined) {
-      HistoricalRPNL.encode(message.historicalRpnl, writer.uint32(10).fork()).join();
+      HistoricalRPNL.encode(
+        message.historicalRpnl,
+        writer.uint32(10).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): RpnlResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRpnlResponse();
     while (reader.pos < end) {
@@ -978,7 +1068,10 @@ export const RpnlResponse: MessageFns<RpnlResponse> = {
             break;
           }
 
-          message.historicalRpnl = HistoricalRPNL.decode(reader, reader.uint32());
+          message.historicalRpnl = HistoricalRPNL.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -995,8 +1088,8 @@ export const RpnlResponse: MessageFns<RpnlResponse> = {
       historicalRpnl: isSet(object.historicalRpnl)
         ? HistoricalRPNL.fromJSON(object.historicalRpnl)
         : isSet(object.historical_rpnl)
-        ? HistoricalRPNL.fromJSON(object.historical_rpnl)
-        : undefined,
+          ? HistoricalRPNL.fromJSON(object.historical_rpnl)
+          : undefined,
     };
   },
 
@@ -1008,14 +1101,19 @@ export const RpnlResponse: MessageFns<RpnlResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<RpnlResponse>, I>>(base?: I): RpnlResponse {
+  create<I extends Exact<DeepPartial<RpnlResponse>, I>>(
+    base?: I,
+  ): RpnlResponse {
     return RpnlResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<RpnlResponse>, I>>(object: I): RpnlResponse {
+  fromPartial<I extends Exact<DeepPartial<RpnlResponse>, I>>(
+    object: I,
+  ): RpnlResponse {
     const message = createBaseRpnlResponse();
-    message.historicalRpnl = (object.historicalRpnl !== undefined && object.historicalRpnl !== null)
-      ? HistoricalRPNL.fromPartial(object.historicalRpnl)
-      : undefined;
+    message.historicalRpnl =
+      object.historicalRpnl !== undefined && object.historicalRpnl !== null
+        ? HistoricalRPNL.fromPartial(object.historicalRpnl)
+        : undefined;
     return message;
   },
 };
@@ -1025,7 +1123,10 @@ function createBaseHistoricalRPNL(): HistoricalRPNL {
 }
 
 export const HistoricalRPNL: MessageFns<HistoricalRPNL> = {
-  encode(message: HistoricalRPNL, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: HistoricalRPNL,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.t) {
       writer.sint32(v);
@@ -1043,7 +1144,8 @@ export const HistoricalRPNL: MessageFns<HistoricalRPNL> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): HistoricalRPNL {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHistoricalRPNL();
     while (reader.pos < end) {
@@ -1090,7 +1192,9 @@ export const HistoricalRPNL: MessageFns<HistoricalRPNL> = {
             break;
           }
 
-          message.dv.push(HistoricalDetailedPNL.decode(reader, reader.uint32()));
+          message.dv.push(
+            HistoricalDetailedPNL.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -1104,9 +1208,15 @@ export const HistoricalRPNL: MessageFns<HistoricalRPNL> = {
 
   fromJSON(object: any): HistoricalRPNL {
     return {
-      t: globalThis.Array.isArray(object?.t) ? object.t.map((e: any) => globalThis.Number(e)) : [],
-      v: globalThis.Array.isArray(object?.v) ? object.v.map((e: any) => globalThis.Number(e)) : [],
-      dv: globalThis.Array.isArray(object?.dv) ? object.dv.map((e: any) => HistoricalDetailedPNL.fromJSON(e)) : [],
+      t: globalThis.Array.isArray(object?.t)
+        ? object.t.map((e: any) => globalThis.Number(e))
+        : [],
+      v: globalThis.Array.isArray(object?.v)
+        ? object.v.map((e: any) => globalThis.Number(e))
+        : [],
+      dv: globalThis.Array.isArray(object?.dv)
+        ? object.dv.map((e: any) => HistoricalDetailedPNL.fromJSON(e))
+        : [],
     };
   },
 
@@ -1124,14 +1234,19 @@ export const HistoricalRPNL: MessageFns<HistoricalRPNL> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<HistoricalRPNL>, I>>(base?: I): HistoricalRPNL {
+  create<I extends Exact<DeepPartial<HistoricalRPNL>, I>>(
+    base?: I,
+  ): HistoricalRPNL {
     return HistoricalRPNL.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<HistoricalRPNL>, I>>(object: I): HistoricalRPNL {
+  fromPartial<I extends Exact<DeepPartial<HistoricalRPNL>, I>>(
+    object: I,
+  ): HistoricalRPNL {
     const message = createBaseHistoricalRPNL();
     message.t = object.t?.map((e) => e) || [];
     message.v = object.v?.map((e) => e) || [];
-    message.dv = object.dv?.map((e) => HistoricalDetailedPNL.fromPartial(e)) || [];
+    message.dv =
+      object.dv?.map((e) => HistoricalDetailedPNL.fromPartial(e)) || [];
     return message;
   },
 };
@@ -1141,7 +1256,10 @@ function createBaseHistoricalDetailedPNL(): HistoricalDetailedPNL {
 }
 
 export const HistoricalDetailedPNL: MessageFns<HistoricalDetailedPNL> = {
-  encode(message: HistoricalDetailedPNL, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: HistoricalDetailedPNL,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.rpnl !== 0) {
       writer.uint32(9).double(message.rpnl);
     }
@@ -1151,8 +1269,12 @@ export const HistoricalDetailedPNL: MessageFns<HistoricalDetailedPNL> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): HistoricalDetailedPNL {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): HistoricalDetailedPNL {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHistoricalDetailedPNL();
     while (reader.pos < end) {
@@ -1201,10 +1323,14 @@ export const HistoricalDetailedPNL: MessageFns<HistoricalDetailedPNL> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<HistoricalDetailedPNL>, I>>(base?: I): HistoricalDetailedPNL {
+  create<I extends Exact<DeepPartial<HistoricalDetailedPNL>, I>>(
+    base?: I,
+  ): HistoricalDetailedPNL {
     return HistoricalDetailedPNL.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<HistoricalDetailedPNL>, I>>(object: I): HistoricalDetailedPNL {
+  fromPartial<I extends Exact<DeepPartial<HistoricalDetailedPNL>, I>>(
+    object: I,
+  ): HistoricalDetailedPNL {
     const message = createBaseHistoricalDetailedPNL();
     message.rpnl = object.rpnl ?? 0;
     message.upnl = object.upnl ?? 0;
@@ -1217,7 +1343,10 @@ function createBaseVolumesRequest(): VolumesRequest {
 }
 
 export const VolumesRequest: MessageFns<VolumesRequest> = {
-  encode(message: VolumesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: VolumesRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.account !== "") {
       writer.uint32(10).string(message.account);
     }
@@ -1228,7 +1357,8 @@ export const VolumesRequest: MessageFns<VolumesRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): VolumesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVolumesRequest();
     while (reader.pos < end) {
@@ -1262,7 +1392,9 @@ export const VolumesRequest: MessageFns<VolumesRequest> = {
   fromJSON(object: any): VolumesRequest {
     return {
       account: isSet(object.account) ? globalThis.String(object.account) : "",
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
+      resolution: isSet(object.resolution)
+        ? globalThis.String(object.resolution)
+        : "",
     };
   },
 
@@ -1277,10 +1409,14 @@ export const VolumesRequest: MessageFns<VolumesRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<VolumesRequest>, I>>(base?: I): VolumesRequest {
+  create<I extends Exact<DeepPartial<VolumesRequest>, I>>(
+    base?: I,
+  ): VolumesRequest {
     return VolumesRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<VolumesRequest>, I>>(object: I): VolumesRequest {
+  fromPartial<I extends Exact<DeepPartial<VolumesRequest>, I>>(
+    object: I,
+  ): VolumesRequest {
     const message = createBaseVolumesRequest();
     message.account = object.account ?? "";
     message.resolution = object.resolution ?? "";
@@ -1293,15 +1429,22 @@ function createBaseVolumesResponse(): VolumesResponse {
 }
 
 export const VolumesResponse: MessageFns<VolumesResponse> = {
-  encode(message: VolumesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: VolumesResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.historicalVolumes !== undefined) {
-      HistoricalVolumes.encode(message.historicalVolumes, writer.uint32(10).fork()).join();
+      HistoricalVolumes.encode(
+        message.historicalVolumes,
+        writer.uint32(10).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): VolumesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVolumesResponse();
     while (reader.pos < end) {
@@ -1312,7 +1455,10 @@ export const VolumesResponse: MessageFns<VolumesResponse> = {
             break;
           }
 
-          message.historicalVolumes = HistoricalVolumes.decode(reader, reader.uint32());
+          message.historicalVolumes = HistoricalVolumes.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -1329,27 +1475,35 @@ export const VolumesResponse: MessageFns<VolumesResponse> = {
       historicalVolumes: isSet(object.historicalVolumes)
         ? HistoricalVolumes.fromJSON(object.historicalVolumes)
         : isSet(object.historical_volumes)
-        ? HistoricalVolumes.fromJSON(object.historical_volumes)
-        : undefined,
+          ? HistoricalVolumes.fromJSON(object.historical_volumes)
+          : undefined,
     };
   },
 
   toJSON(message: VolumesResponse): unknown {
     const obj: any = {};
     if (message.historicalVolumes !== undefined) {
-      obj.historicalVolumes = HistoricalVolumes.toJSON(message.historicalVolumes);
+      obj.historicalVolumes = HistoricalVolumes.toJSON(
+        message.historicalVolumes,
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<VolumesResponse>, I>>(base?: I): VolumesResponse {
+  create<I extends Exact<DeepPartial<VolumesResponse>, I>>(
+    base?: I,
+  ): VolumesResponse {
     return VolumesResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<VolumesResponse>, I>>(object: I): VolumesResponse {
+  fromPartial<I extends Exact<DeepPartial<VolumesResponse>, I>>(
+    object: I,
+  ): VolumesResponse {
     const message = createBaseVolumesResponse();
-    message.historicalVolumes = (object.historicalVolumes !== undefined && object.historicalVolumes !== null)
-      ? HistoricalVolumes.fromPartial(object.historicalVolumes)
-      : undefined;
+    message.historicalVolumes =
+      object.historicalVolumes !== undefined &&
+      object.historicalVolumes !== null
+        ? HistoricalVolumes.fromPartial(object.historicalVolumes)
+        : undefined;
     return message;
   },
 };
@@ -1359,7 +1513,10 @@ function createBaseHistoricalVolumes(): HistoricalVolumes {
 }
 
 export const HistoricalVolumes: MessageFns<HistoricalVolumes> = {
-  encode(message: HistoricalVolumes, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: HistoricalVolumes,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.t) {
       writer.sint32(v);
@@ -1374,7 +1531,8 @@ export const HistoricalVolumes: MessageFns<HistoricalVolumes> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): HistoricalVolumes {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHistoricalVolumes();
     while (reader.pos < end) {
@@ -1427,8 +1585,12 @@ export const HistoricalVolumes: MessageFns<HistoricalVolumes> = {
 
   fromJSON(object: any): HistoricalVolumes {
     return {
-      t: globalThis.Array.isArray(object?.t) ? object.t.map((e: any) => globalThis.Number(e)) : [],
-      v: globalThis.Array.isArray(object?.v) ? object.v.map((e: any) => globalThis.Number(e)) : [],
+      t: globalThis.Array.isArray(object?.t)
+        ? object.t.map((e: any) => globalThis.Number(e))
+        : [],
+      v: globalThis.Array.isArray(object?.v)
+        ? object.v.map((e: any) => globalThis.Number(e))
+        : [],
     };
   },
 
@@ -1443,10 +1605,14 @@ export const HistoricalVolumes: MessageFns<HistoricalVolumes> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<HistoricalVolumes>, I>>(base?: I): HistoricalVolumes {
+  create<I extends Exact<DeepPartial<HistoricalVolumes>, I>>(
+    base?: I,
+  ): HistoricalVolumes {
     return HistoricalVolumes.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<HistoricalVolumes>, I>>(object: I): HistoricalVolumes {
+  fromPartial<I extends Exact<DeepPartial<HistoricalVolumes>, I>>(
+    object: I,
+  ): HistoricalVolumes {
     const message = createBaseHistoricalVolumes();
     message.t = object.t?.map((e) => e) || [];
     message.v = object.v?.map((e) => e) || [];
@@ -1459,7 +1625,10 @@ function createBasePnlLeaderboardRequest(): PnlLeaderboardRequest {
 }
 
 export const PnlLeaderboardRequest: MessageFns<PnlLeaderboardRequest> = {
-  encode(message: PnlLeaderboardRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PnlLeaderboardRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.startDate !== 0) {
       writer.uint32(8).sint64(message.startDate);
     }
@@ -1475,8 +1644,12 @@ export const PnlLeaderboardRequest: MessageFns<PnlLeaderboardRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PnlLeaderboardRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PnlLeaderboardRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePnlLeaderboardRequest();
     while (reader.pos < end) {
@@ -1528,13 +1701,13 @@ export const PnlLeaderboardRequest: MessageFns<PnlLeaderboardRequest> = {
       startDate: isSet(object.startDate)
         ? globalThis.Number(object.startDate)
         : isSet(object.start_date)
-        ? globalThis.Number(object.start_date)
-        : 0,
+          ? globalThis.Number(object.start_date)
+          : 0,
       endDate: isSet(object.endDate)
         ? globalThis.Number(object.endDate)
         : isSet(object.end_date)
-        ? globalThis.Number(object.end_date)
-        : 0,
+          ? globalThis.Number(object.end_date)
+          : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       account: isSet(object.account) ? globalThis.String(object.account) : "",
     };
@@ -1557,10 +1730,14 @@ export const PnlLeaderboardRequest: MessageFns<PnlLeaderboardRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PnlLeaderboardRequest>, I>>(base?: I): PnlLeaderboardRequest {
+  create<I extends Exact<DeepPartial<PnlLeaderboardRequest>, I>>(
+    base?: I,
+  ): PnlLeaderboardRequest {
     return PnlLeaderboardRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PnlLeaderboardRequest>, I>>(object: I): PnlLeaderboardRequest {
+  fromPartial<I extends Exact<DeepPartial<PnlLeaderboardRequest>, I>>(
+    object: I,
+  ): PnlLeaderboardRequest {
     const message = createBasePnlLeaderboardRequest();
     message.startDate = object.startDate ?? 0;
     message.endDate = object.endDate ?? 0;
@@ -1575,7 +1752,10 @@ function createBasePnlLeaderboardResponse(): PnlLeaderboardResponse {
 }
 
 export const PnlLeaderboardResponse: MessageFns<PnlLeaderboardResponse> = {
-  encode(message: PnlLeaderboardResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PnlLeaderboardResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.firstDate !== "") {
       writer.uint32(10).string(message.firstDate);
     }
@@ -1586,13 +1766,20 @@ export const PnlLeaderboardResponse: MessageFns<PnlLeaderboardResponse> = {
       LeaderboardRow.encode(v!, writer.uint32(26).fork()).join();
     }
     if (message.accountRow !== undefined) {
-      LeaderboardRow.encode(message.accountRow, writer.uint32(34).fork()).join();
+      LeaderboardRow.encode(
+        message.accountRow,
+        writer.uint32(34).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PnlLeaderboardResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PnlLeaderboardResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePnlLeaderboardResponse();
     while (reader.pos < end) {
@@ -1644,21 +1831,21 @@ export const PnlLeaderboardResponse: MessageFns<PnlLeaderboardResponse> = {
       firstDate: isSet(object.firstDate)
         ? globalThis.String(object.firstDate)
         : isSet(object.first_date)
-        ? globalThis.String(object.first_date)
-        : "",
+          ? globalThis.String(object.first_date)
+          : "",
       lastDate: isSet(object.lastDate)
         ? globalThis.String(object.lastDate)
         : isSet(object.last_date)
-        ? globalThis.String(object.last_date)
-        : "",
+          ? globalThis.String(object.last_date)
+          : "",
       leaders: globalThis.Array.isArray(object?.leaders)
         ? object.leaders.map((e: any) => LeaderboardRow.fromJSON(e))
         : [],
       accountRow: isSet(object.accountRow)
         ? LeaderboardRow.fromJSON(object.accountRow)
         : isSet(object.account_row)
-        ? LeaderboardRow.fromJSON(object.account_row)
-        : undefined,
+          ? LeaderboardRow.fromJSON(object.account_row)
+          : undefined,
     };
   },
 
@@ -1679,17 +1866,23 @@ export const PnlLeaderboardResponse: MessageFns<PnlLeaderboardResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PnlLeaderboardResponse>, I>>(base?: I): PnlLeaderboardResponse {
+  create<I extends Exact<DeepPartial<PnlLeaderboardResponse>, I>>(
+    base?: I,
+  ): PnlLeaderboardResponse {
     return PnlLeaderboardResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PnlLeaderboardResponse>, I>>(object: I): PnlLeaderboardResponse {
+  fromPartial<I extends Exact<DeepPartial<PnlLeaderboardResponse>, I>>(
+    object: I,
+  ): PnlLeaderboardResponse {
     const message = createBasePnlLeaderboardResponse();
     message.firstDate = object.firstDate ?? "";
     message.lastDate = object.lastDate ?? "";
-    message.leaders = object.leaders?.map((e) => LeaderboardRow.fromPartial(e)) || [];
-    message.accountRow = (object.accountRow !== undefined && object.accountRow !== null)
-      ? LeaderboardRow.fromPartial(object.accountRow)
-      : undefined;
+    message.leaders =
+      object.leaders?.map((e) => LeaderboardRow.fromPartial(e)) || [];
+    message.accountRow =
+      object.accountRow !== undefined && object.accountRow !== null
+        ? LeaderboardRow.fromPartial(object.accountRow)
+        : undefined;
     return message;
   },
 };
@@ -1699,7 +1892,10 @@ function createBaseLeaderboardRow(): LeaderboardRow {
 }
 
 export const LeaderboardRow: MessageFns<LeaderboardRow> = {
-  encode(message: LeaderboardRow, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: LeaderboardRow,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.account !== "") {
       writer.uint32(10).string(message.account);
     }
@@ -1716,7 +1912,8 @@ export const LeaderboardRow: MessageFns<LeaderboardRow> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): LeaderboardRow {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLeaderboardRow();
     while (reader.pos < end) {
@@ -1789,10 +1986,14 @@ export const LeaderboardRow: MessageFns<LeaderboardRow> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<LeaderboardRow>, I>>(base?: I): LeaderboardRow {
+  create<I extends Exact<DeepPartial<LeaderboardRow>, I>>(
+    base?: I,
+  ): LeaderboardRow {
     return LeaderboardRow.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<LeaderboardRow>, I>>(object: I): LeaderboardRow {
+  fromPartial<I extends Exact<DeepPartial<LeaderboardRow>, I>>(
+    object: I,
+  ): LeaderboardRow {
     const message = createBaseLeaderboardRow();
     message.account = object.account ?? "";
     message.pnl = object.pnl ?? 0;
@@ -1807,7 +2008,10 @@ function createBaseVolLeaderboardRequest(): VolLeaderboardRequest {
 }
 
 export const VolLeaderboardRequest: MessageFns<VolLeaderboardRequest> = {
-  encode(message: VolLeaderboardRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: VolLeaderboardRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.startDate !== 0) {
       writer.uint32(8).sint64(message.startDate);
     }
@@ -1823,8 +2027,12 @@ export const VolLeaderboardRequest: MessageFns<VolLeaderboardRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): VolLeaderboardRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): VolLeaderboardRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVolLeaderboardRequest();
     while (reader.pos < end) {
@@ -1876,13 +2084,13 @@ export const VolLeaderboardRequest: MessageFns<VolLeaderboardRequest> = {
       startDate: isSet(object.startDate)
         ? globalThis.Number(object.startDate)
         : isSet(object.start_date)
-        ? globalThis.Number(object.start_date)
-        : 0,
+          ? globalThis.Number(object.start_date)
+          : 0,
       endDate: isSet(object.endDate)
         ? globalThis.Number(object.endDate)
         : isSet(object.end_date)
-        ? globalThis.Number(object.end_date)
-        : 0,
+          ? globalThis.Number(object.end_date)
+          : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       account: isSet(object.account) ? globalThis.String(object.account) : "",
     };
@@ -1905,10 +2113,14 @@ export const VolLeaderboardRequest: MessageFns<VolLeaderboardRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<VolLeaderboardRequest>, I>>(base?: I): VolLeaderboardRequest {
+  create<I extends Exact<DeepPartial<VolLeaderboardRequest>, I>>(
+    base?: I,
+  ): VolLeaderboardRequest {
     return VolLeaderboardRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<VolLeaderboardRequest>, I>>(object: I): VolLeaderboardRequest {
+  fromPartial<I extends Exact<DeepPartial<VolLeaderboardRequest>, I>>(
+    object: I,
+  ): VolLeaderboardRequest {
     const message = createBaseVolLeaderboardRequest();
     message.startDate = object.startDate ?? 0;
     message.endDate = object.endDate ?? 0;
@@ -1923,7 +2135,10 @@ function createBaseVolLeaderboardResponse(): VolLeaderboardResponse {
 }
 
 export const VolLeaderboardResponse: MessageFns<VolLeaderboardResponse> = {
-  encode(message: VolLeaderboardResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: VolLeaderboardResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.firstDate !== "") {
       writer.uint32(10).string(message.firstDate);
     }
@@ -1934,13 +2149,20 @@ export const VolLeaderboardResponse: MessageFns<VolLeaderboardResponse> = {
       LeaderboardRow.encode(v!, writer.uint32(26).fork()).join();
     }
     if (message.accountRow !== undefined) {
-      LeaderboardRow.encode(message.accountRow, writer.uint32(34).fork()).join();
+      LeaderboardRow.encode(
+        message.accountRow,
+        writer.uint32(34).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): VolLeaderboardResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): VolLeaderboardResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVolLeaderboardResponse();
     while (reader.pos < end) {
@@ -1992,21 +2214,21 @@ export const VolLeaderboardResponse: MessageFns<VolLeaderboardResponse> = {
       firstDate: isSet(object.firstDate)
         ? globalThis.String(object.firstDate)
         : isSet(object.first_date)
-        ? globalThis.String(object.first_date)
-        : "",
+          ? globalThis.String(object.first_date)
+          : "",
       lastDate: isSet(object.lastDate)
         ? globalThis.String(object.lastDate)
         : isSet(object.last_date)
-        ? globalThis.String(object.last_date)
-        : "",
+          ? globalThis.String(object.last_date)
+          : "",
       leaders: globalThis.Array.isArray(object?.leaders)
         ? object.leaders.map((e: any) => LeaderboardRow.fromJSON(e))
         : [],
       accountRow: isSet(object.accountRow)
         ? LeaderboardRow.fromJSON(object.accountRow)
         : isSet(object.account_row)
-        ? LeaderboardRow.fromJSON(object.account_row)
-        : undefined,
+          ? LeaderboardRow.fromJSON(object.account_row)
+          : undefined,
     };
   },
 
@@ -2027,17 +2249,23 @@ export const VolLeaderboardResponse: MessageFns<VolLeaderboardResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<VolLeaderboardResponse>, I>>(base?: I): VolLeaderboardResponse {
+  create<I extends Exact<DeepPartial<VolLeaderboardResponse>, I>>(
+    base?: I,
+  ): VolLeaderboardResponse {
     return VolLeaderboardResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<VolLeaderboardResponse>, I>>(object: I): VolLeaderboardResponse {
+  fromPartial<I extends Exact<DeepPartial<VolLeaderboardResponse>, I>>(
+    object: I,
+  ): VolLeaderboardResponse {
     const message = createBaseVolLeaderboardResponse();
     message.firstDate = object.firstDate ?? "";
     message.lastDate = object.lastDate ?? "";
-    message.leaders = object.leaders?.map((e) => LeaderboardRow.fromPartial(e)) || [];
-    message.accountRow = (object.accountRow !== undefined && object.accountRow !== null)
-      ? LeaderboardRow.fromPartial(object.accountRow)
-      : undefined;
+    message.leaders =
+      object.leaders?.map((e) => LeaderboardRow.fromPartial(e)) || [];
+    message.accountRow =
+      object.accountRow !== undefined && object.accountRow !== null
+        ? LeaderboardRow.fromPartial(object.accountRow)
+        : undefined;
     return message;
   },
 };
@@ -2046,456 +2274,517 @@ function createBasePnlLeaderboardFixedResolutionRequest(): PnlLeaderboardFixedRe
   return { resolution: "", limit: 0, account: "" };
 }
 
-export const PnlLeaderboardFixedResolutionRequest: MessageFns<PnlLeaderboardFixedResolutionRequest> = {
-  encode(message: PnlLeaderboardFixedResolutionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.resolution !== "") {
-      writer.uint32(10).string(message.resolution);
-    }
-    if (message.limit !== 0) {
-      writer.uint32(16).sint32(message.limit);
-    }
-    if (message.account !== "") {
-      writer.uint32(26).string(message.account);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): PnlLeaderboardFixedResolutionRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePnlLeaderboardFixedResolutionRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.resolution = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.limit = reader.sint32();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.account = reader.string();
-          continue;
-        }
+export const PnlLeaderboardFixedResolutionRequest: MessageFns<PnlLeaderboardFixedResolutionRequest> =
+  {
+    encode(
+      message: PnlLeaderboardFixedResolutionRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.resolution !== "") {
+        writer.uint32(10).string(message.resolution);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.limit !== 0) {
+        writer.uint32(16).sint32(message.limit);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.account !== "") {
+        writer.uint32(26).string(message.account);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): PnlLeaderboardFixedResolutionRequest {
-    return {
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
-      limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
-      account: isSet(object.account) ? globalThis.String(object.account) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PnlLeaderboardFixedResolutionRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePnlLeaderboardFixedResolutionRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: PnlLeaderboardFixedResolutionRequest): unknown {
-    const obj: any = {};
-    if (message.resolution !== "") {
-      obj.resolution = message.resolution;
-    }
-    if (message.limit !== 0) {
-      obj.limit = Math.round(message.limit);
-    }
-    if (message.account !== "") {
-      obj.account = message.account;
-    }
-    return obj;
-  },
+            message.resolution = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<PnlLeaderboardFixedResolutionRequest>, I>>(
-    base?: I,
-  ): PnlLeaderboardFixedResolutionRequest {
-    return PnlLeaderboardFixedResolutionRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<PnlLeaderboardFixedResolutionRequest>, I>>(
-    object: I,
-  ): PnlLeaderboardFixedResolutionRequest {
-    const message = createBasePnlLeaderboardFixedResolutionRequest();
-    message.resolution = object.resolution ?? "";
-    message.limit = object.limit ?? 0;
-    message.account = object.account ?? "";
-    return message;
-  },
-};
+            message.limit = reader.sint32();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.account = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): PnlLeaderboardFixedResolutionRequest {
+      return {
+        resolution: isSet(object.resolution)
+          ? globalThis.String(object.resolution)
+          : "",
+        limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
+        account: isSet(object.account) ? globalThis.String(object.account) : "",
+      };
+    },
+
+    toJSON(message: PnlLeaderboardFixedResolutionRequest): unknown {
+      const obj: any = {};
+      if (message.resolution !== "") {
+        obj.resolution = message.resolution;
+      }
+      if (message.limit !== 0) {
+        obj.limit = Math.round(message.limit);
+      }
+      if (message.account !== "") {
+        obj.account = message.account;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<PnlLeaderboardFixedResolutionRequest>, I>,
+    >(base?: I): PnlLeaderboardFixedResolutionRequest {
+      return PnlLeaderboardFixedResolutionRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<PnlLeaderboardFixedResolutionRequest>, I>,
+    >(object: I): PnlLeaderboardFixedResolutionRequest {
+      const message = createBasePnlLeaderboardFixedResolutionRequest();
+      message.resolution = object.resolution ?? "";
+      message.limit = object.limit ?? 0;
+      message.account = object.account ?? "";
+      return message;
+    },
+  };
 
 function createBasePnlLeaderboardFixedResolutionResponse(): PnlLeaderboardFixedResolutionResponse {
   return { firstDate: "", lastDate: "", leaders: [], accountRow: undefined };
 }
 
-export const PnlLeaderboardFixedResolutionResponse: MessageFns<PnlLeaderboardFixedResolutionResponse> = {
-  encode(message: PnlLeaderboardFixedResolutionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.firstDate !== "") {
-      writer.uint32(10).string(message.firstDate);
-    }
-    if (message.lastDate !== "") {
-      writer.uint32(18).string(message.lastDate);
-    }
-    for (const v of message.leaders) {
-      LeaderboardRow.encode(v!, writer.uint32(26).fork()).join();
-    }
-    if (message.accountRow !== undefined) {
-      LeaderboardRow.encode(message.accountRow, writer.uint32(34).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): PnlLeaderboardFixedResolutionResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePnlLeaderboardFixedResolutionResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.firstDate = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.lastDate = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.leaders.push(LeaderboardRow.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.accountRow = LeaderboardRow.decode(reader, reader.uint32());
-          continue;
-        }
+export const PnlLeaderboardFixedResolutionResponse: MessageFns<PnlLeaderboardFixedResolutionResponse> =
+  {
+    encode(
+      message: PnlLeaderboardFixedResolutionResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.firstDate !== "") {
+        writer.uint32(10).string(message.firstDate);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.lastDate !== "") {
+        writer.uint32(18).string(message.lastDate);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.leaders) {
+        LeaderboardRow.encode(v!, writer.uint32(26).fork()).join();
+      }
+      if (message.accountRow !== undefined) {
+        LeaderboardRow.encode(
+          message.accountRow,
+          writer.uint32(34).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): PnlLeaderboardFixedResolutionResponse {
-    return {
-      firstDate: isSet(object.firstDate)
-        ? globalThis.String(object.firstDate)
-        : isSet(object.first_date)
-        ? globalThis.String(object.first_date)
-        : "",
-      lastDate: isSet(object.lastDate)
-        ? globalThis.String(object.lastDate)
-        : isSet(object.last_date)
-        ? globalThis.String(object.last_date)
-        : "",
-      leaders: globalThis.Array.isArray(object?.leaders)
-        ? object.leaders.map((e: any) => LeaderboardRow.fromJSON(e))
-        : [],
-      accountRow: isSet(object.accountRow)
-        ? LeaderboardRow.fromJSON(object.accountRow)
-        : isSet(object.account_row)
-        ? LeaderboardRow.fromJSON(object.account_row)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PnlLeaderboardFixedResolutionResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePnlLeaderboardFixedResolutionResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: PnlLeaderboardFixedResolutionResponse): unknown {
-    const obj: any = {};
-    if (message.firstDate !== "") {
-      obj.firstDate = message.firstDate;
-    }
-    if (message.lastDate !== "") {
-      obj.lastDate = message.lastDate;
-    }
-    if (message.leaders?.length) {
-      obj.leaders = message.leaders.map((e) => LeaderboardRow.toJSON(e));
-    }
-    if (message.accountRow !== undefined) {
-      obj.accountRow = LeaderboardRow.toJSON(message.accountRow);
-    }
-    return obj;
-  },
+            message.firstDate = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<PnlLeaderboardFixedResolutionResponse>, I>>(
-    base?: I,
-  ): PnlLeaderboardFixedResolutionResponse {
-    return PnlLeaderboardFixedResolutionResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<PnlLeaderboardFixedResolutionResponse>, I>>(
-    object: I,
-  ): PnlLeaderboardFixedResolutionResponse {
-    const message = createBasePnlLeaderboardFixedResolutionResponse();
-    message.firstDate = object.firstDate ?? "";
-    message.lastDate = object.lastDate ?? "";
-    message.leaders = object.leaders?.map((e) => LeaderboardRow.fromPartial(e)) || [];
-    message.accountRow = (object.accountRow !== undefined && object.accountRow !== null)
-      ? LeaderboardRow.fromPartial(object.accountRow)
-      : undefined;
-    return message;
-  },
-};
+            message.lastDate = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.leaders.push(
+              LeaderboardRow.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.accountRow = LeaderboardRow.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): PnlLeaderboardFixedResolutionResponse {
+      return {
+        firstDate: isSet(object.firstDate)
+          ? globalThis.String(object.firstDate)
+          : isSet(object.first_date)
+            ? globalThis.String(object.first_date)
+            : "",
+        lastDate: isSet(object.lastDate)
+          ? globalThis.String(object.lastDate)
+          : isSet(object.last_date)
+            ? globalThis.String(object.last_date)
+            : "",
+        leaders: globalThis.Array.isArray(object?.leaders)
+          ? object.leaders.map((e: any) => LeaderboardRow.fromJSON(e))
+          : [],
+        accountRow: isSet(object.accountRow)
+          ? LeaderboardRow.fromJSON(object.accountRow)
+          : isSet(object.account_row)
+            ? LeaderboardRow.fromJSON(object.account_row)
+            : undefined,
+      };
+    },
+
+    toJSON(message: PnlLeaderboardFixedResolutionResponse): unknown {
+      const obj: any = {};
+      if (message.firstDate !== "") {
+        obj.firstDate = message.firstDate;
+      }
+      if (message.lastDate !== "") {
+        obj.lastDate = message.lastDate;
+      }
+      if (message.leaders?.length) {
+        obj.leaders = message.leaders.map((e) => LeaderboardRow.toJSON(e));
+      }
+      if (message.accountRow !== undefined) {
+        obj.accountRow = LeaderboardRow.toJSON(message.accountRow);
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<PnlLeaderboardFixedResolutionResponse>, I>,
+    >(base?: I): PnlLeaderboardFixedResolutionResponse {
+      return PnlLeaderboardFixedResolutionResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<PnlLeaderboardFixedResolutionResponse>, I>,
+    >(object: I): PnlLeaderboardFixedResolutionResponse {
+      const message = createBasePnlLeaderboardFixedResolutionResponse();
+      message.firstDate = object.firstDate ?? "";
+      message.lastDate = object.lastDate ?? "";
+      message.leaders =
+        object.leaders?.map((e) => LeaderboardRow.fromPartial(e)) || [];
+      message.accountRow =
+        object.accountRow !== undefined && object.accountRow !== null
+          ? LeaderboardRow.fromPartial(object.accountRow)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseVolLeaderboardFixedResolutionRequest(): VolLeaderboardFixedResolutionRequest {
   return { resolution: "", limit: 0, account: "" };
 }
 
-export const VolLeaderboardFixedResolutionRequest: MessageFns<VolLeaderboardFixedResolutionRequest> = {
-  encode(message: VolLeaderboardFixedResolutionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.resolution !== "") {
-      writer.uint32(10).string(message.resolution);
-    }
-    if (message.limit !== 0) {
-      writer.uint32(16).sint32(message.limit);
-    }
-    if (message.account !== "") {
-      writer.uint32(26).string(message.account);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): VolLeaderboardFixedResolutionRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseVolLeaderboardFixedResolutionRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.resolution = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.limit = reader.sint32();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.account = reader.string();
-          continue;
-        }
+export const VolLeaderboardFixedResolutionRequest: MessageFns<VolLeaderboardFixedResolutionRequest> =
+  {
+    encode(
+      message: VolLeaderboardFixedResolutionRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.resolution !== "") {
+        writer.uint32(10).string(message.resolution);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.limit !== 0) {
+        writer.uint32(16).sint32(message.limit);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.account !== "") {
+        writer.uint32(26).string(message.account);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): VolLeaderboardFixedResolutionRequest {
-    return {
-      resolution: isSet(object.resolution) ? globalThis.String(object.resolution) : "",
-      limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
-      account: isSet(object.account) ? globalThis.String(object.account) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): VolLeaderboardFixedResolutionRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseVolLeaderboardFixedResolutionRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: VolLeaderboardFixedResolutionRequest): unknown {
-    const obj: any = {};
-    if (message.resolution !== "") {
-      obj.resolution = message.resolution;
-    }
-    if (message.limit !== 0) {
-      obj.limit = Math.round(message.limit);
-    }
-    if (message.account !== "") {
-      obj.account = message.account;
-    }
-    return obj;
-  },
+            message.resolution = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<VolLeaderboardFixedResolutionRequest>, I>>(
-    base?: I,
-  ): VolLeaderboardFixedResolutionRequest {
-    return VolLeaderboardFixedResolutionRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<VolLeaderboardFixedResolutionRequest>, I>>(
-    object: I,
-  ): VolLeaderboardFixedResolutionRequest {
-    const message = createBaseVolLeaderboardFixedResolutionRequest();
-    message.resolution = object.resolution ?? "";
-    message.limit = object.limit ?? 0;
-    message.account = object.account ?? "";
-    return message;
-  },
-};
+            message.limit = reader.sint32();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.account = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): VolLeaderboardFixedResolutionRequest {
+      return {
+        resolution: isSet(object.resolution)
+          ? globalThis.String(object.resolution)
+          : "",
+        limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
+        account: isSet(object.account) ? globalThis.String(object.account) : "",
+      };
+    },
+
+    toJSON(message: VolLeaderboardFixedResolutionRequest): unknown {
+      const obj: any = {};
+      if (message.resolution !== "") {
+        obj.resolution = message.resolution;
+      }
+      if (message.limit !== 0) {
+        obj.limit = Math.round(message.limit);
+      }
+      if (message.account !== "") {
+        obj.account = message.account;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<VolLeaderboardFixedResolutionRequest>, I>,
+    >(base?: I): VolLeaderboardFixedResolutionRequest {
+      return VolLeaderboardFixedResolutionRequest.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<VolLeaderboardFixedResolutionRequest>, I>,
+    >(object: I): VolLeaderboardFixedResolutionRequest {
+      const message = createBaseVolLeaderboardFixedResolutionRequest();
+      message.resolution = object.resolution ?? "";
+      message.limit = object.limit ?? 0;
+      message.account = object.account ?? "";
+      return message;
+    },
+  };
 
 function createBaseVolLeaderboardFixedResolutionResponse(): VolLeaderboardFixedResolutionResponse {
   return { firstDate: "", lastDate: "", leaders: [], accountRow: undefined };
 }
 
-export const VolLeaderboardFixedResolutionResponse: MessageFns<VolLeaderboardFixedResolutionResponse> = {
-  encode(message: VolLeaderboardFixedResolutionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.firstDate !== "") {
-      writer.uint32(10).string(message.firstDate);
-    }
-    if (message.lastDate !== "") {
-      writer.uint32(18).string(message.lastDate);
-    }
-    for (const v of message.leaders) {
-      LeaderboardRow.encode(v!, writer.uint32(26).fork()).join();
-    }
-    if (message.accountRow !== undefined) {
-      LeaderboardRow.encode(message.accountRow, writer.uint32(34).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): VolLeaderboardFixedResolutionResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseVolLeaderboardFixedResolutionResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.firstDate = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.lastDate = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.leaders.push(LeaderboardRow.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.accountRow = LeaderboardRow.decode(reader, reader.uint32());
-          continue;
-        }
+export const VolLeaderboardFixedResolutionResponse: MessageFns<VolLeaderboardFixedResolutionResponse> =
+  {
+    encode(
+      message: VolLeaderboardFixedResolutionResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.firstDate !== "") {
+        writer.uint32(10).string(message.firstDate);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.lastDate !== "") {
+        writer.uint32(18).string(message.lastDate);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.leaders) {
+        LeaderboardRow.encode(v!, writer.uint32(26).fork()).join();
+      }
+      if (message.accountRow !== undefined) {
+        LeaderboardRow.encode(
+          message.accountRow,
+          writer.uint32(34).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): VolLeaderboardFixedResolutionResponse {
-    return {
-      firstDate: isSet(object.firstDate)
-        ? globalThis.String(object.firstDate)
-        : isSet(object.first_date)
-        ? globalThis.String(object.first_date)
-        : "",
-      lastDate: isSet(object.lastDate)
-        ? globalThis.String(object.lastDate)
-        : isSet(object.last_date)
-        ? globalThis.String(object.last_date)
-        : "",
-      leaders: globalThis.Array.isArray(object?.leaders)
-        ? object.leaders.map((e: any) => LeaderboardRow.fromJSON(e))
-        : [],
-      accountRow: isSet(object.accountRow)
-        ? LeaderboardRow.fromJSON(object.accountRow)
-        : isSet(object.account_row)
-        ? LeaderboardRow.fromJSON(object.account_row)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): VolLeaderboardFixedResolutionResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseVolLeaderboardFixedResolutionResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: VolLeaderboardFixedResolutionResponse): unknown {
-    const obj: any = {};
-    if (message.firstDate !== "") {
-      obj.firstDate = message.firstDate;
-    }
-    if (message.lastDate !== "") {
-      obj.lastDate = message.lastDate;
-    }
-    if (message.leaders?.length) {
-      obj.leaders = message.leaders.map((e) => LeaderboardRow.toJSON(e));
-    }
-    if (message.accountRow !== undefined) {
-      obj.accountRow = LeaderboardRow.toJSON(message.accountRow);
-    }
-    return obj;
-  },
+            message.firstDate = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<VolLeaderboardFixedResolutionResponse>, I>>(
-    base?: I,
-  ): VolLeaderboardFixedResolutionResponse {
-    return VolLeaderboardFixedResolutionResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<VolLeaderboardFixedResolutionResponse>, I>>(
-    object: I,
-  ): VolLeaderboardFixedResolutionResponse {
-    const message = createBaseVolLeaderboardFixedResolutionResponse();
-    message.firstDate = object.firstDate ?? "";
-    message.lastDate = object.lastDate ?? "";
-    message.leaders = object.leaders?.map((e) => LeaderboardRow.fromPartial(e)) || [];
-    message.accountRow = (object.accountRow !== undefined && object.accountRow !== null)
-      ? LeaderboardRow.fromPartial(object.accountRow)
-      : undefined;
-    return message;
-  },
-};
+            message.lastDate = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.leaders.push(
+              LeaderboardRow.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.accountRow = LeaderboardRow.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): VolLeaderboardFixedResolutionResponse {
+      return {
+        firstDate: isSet(object.firstDate)
+          ? globalThis.String(object.firstDate)
+          : isSet(object.first_date)
+            ? globalThis.String(object.first_date)
+            : "",
+        lastDate: isSet(object.lastDate)
+          ? globalThis.String(object.lastDate)
+          : isSet(object.last_date)
+            ? globalThis.String(object.last_date)
+            : "",
+        leaders: globalThis.Array.isArray(object?.leaders)
+          ? object.leaders.map((e: any) => LeaderboardRow.fromJSON(e))
+          : [],
+        accountRow: isSet(object.accountRow)
+          ? LeaderboardRow.fromJSON(object.accountRow)
+          : isSet(object.account_row)
+            ? LeaderboardRow.fromJSON(object.account_row)
+            : undefined,
+      };
+    },
+
+    toJSON(message: VolLeaderboardFixedResolutionResponse): unknown {
+      const obj: any = {};
+      if (message.firstDate !== "") {
+        obj.firstDate = message.firstDate;
+      }
+      if (message.lastDate !== "") {
+        obj.lastDate = message.lastDate;
+      }
+      if (message.leaders?.length) {
+        obj.leaders = message.leaders.map((e) => LeaderboardRow.toJSON(e));
+      }
+      if (message.accountRow !== undefined) {
+        obj.accountRow = LeaderboardRow.toJSON(message.accountRow);
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<VolLeaderboardFixedResolutionResponse>, I>,
+    >(base?: I): VolLeaderboardFixedResolutionResponse {
+      return VolLeaderboardFixedResolutionResponse.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<VolLeaderboardFixedResolutionResponse>, I>,
+    >(object: I): VolLeaderboardFixedResolutionResponse {
+      const message = createBaseVolLeaderboardFixedResolutionResponse();
+      message.firstDate = object.firstDate ?? "";
+      message.lastDate = object.lastDate ?? "";
+      message.leaders =
+        object.leaders?.map((e) => LeaderboardRow.fromPartial(e)) || [];
+      message.accountRow =
+        object.accountRow !== undefined && object.accountRow !== null
+          ? LeaderboardRow.fromPartial(object.accountRow)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseDenomHoldersRequest(): DenomHoldersRequest {
   return { denom: "", token: "", limit: 0 };
 }
 
 export const DenomHoldersRequest: MessageFns<DenomHoldersRequest> = {
-  encode(message: DenomHoldersRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DenomHoldersRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -2508,8 +2797,12 @@ export const DenomHoldersRequest: MessageFns<DenomHoldersRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DenomHoldersRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DenomHoldersRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomHoldersRequest();
     while (reader.pos < end) {
@@ -2570,10 +2863,14 @@ export const DenomHoldersRequest: MessageFns<DenomHoldersRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DenomHoldersRequest>, I>>(base?: I): DenomHoldersRequest {
+  create<I extends Exact<DeepPartial<DenomHoldersRequest>, I>>(
+    base?: I,
+  ): DenomHoldersRequest {
     return DenomHoldersRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DenomHoldersRequest>, I>>(object: I): DenomHoldersRequest {
+  fromPartial<I extends Exact<DeepPartial<DenomHoldersRequest>, I>>(
+    object: I,
+  ): DenomHoldersRequest {
     const message = createBaseDenomHoldersRequest();
     message.denom = object.denom ?? "";
     message.token = object.token ?? "";
@@ -2587,7 +2884,10 @@ function createBaseDenomHoldersResponse(): DenomHoldersResponse {
 }
 
 export const DenomHoldersResponse: MessageFns<DenomHoldersResponse> = {
-  encode(message: DenomHoldersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DenomHoldersResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.holders) {
       Holder.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -2600,8 +2900,12 @@ export const DenomHoldersResponse: MessageFns<DenomHoldersResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DenomHoldersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DenomHoldersResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomHoldersResponse();
     while (reader.pos < end) {
@@ -2642,8 +2946,12 @@ export const DenomHoldersResponse: MessageFns<DenomHoldersResponse> = {
 
   fromJSON(object: any): DenomHoldersResponse {
     return {
-      holders: globalThis.Array.isArray(object?.holders) ? object.holders.map((e: any) => Holder.fromJSON(e)) : [],
-      next: globalThis.Array.isArray(object?.next) ? object.next.map((e: any) => globalThis.String(e)) : [],
+      holders: globalThis.Array.isArray(object?.holders)
+        ? object.holders.map((e: any) => Holder.fromJSON(e))
+        : [],
+      next: globalThis.Array.isArray(object?.next)
+        ? object.next.map((e: any) => globalThis.String(e))
+        : [],
       total: isSet(object.total) ? globalThis.Number(object.total) : 0,
     };
   },
@@ -2662,10 +2970,14 @@ export const DenomHoldersResponse: MessageFns<DenomHoldersResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DenomHoldersResponse>, I>>(base?: I): DenomHoldersResponse {
+  create<I extends Exact<DeepPartial<DenomHoldersResponse>, I>>(
+    base?: I,
+  ): DenomHoldersResponse {
     return DenomHoldersResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DenomHoldersResponse>, I>>(object: I): DenomHoldersResponse {
+  fromPartial<I extends Exact<DeepPartial<DenomHoldersResponse>, I>>(
+    object: I,
+  ): DenomHoldersResponse {
     const message = createBaseDenomHoldersResponse();
     message.holders = object.holders?.map((e) => Holder.fromPartial(e)) || [];
     message.next = object.next?.map((e) => e) || [];
@@ -2679,7 +2991,10 @@ function createBaseHolder(): Holder {
 }
 
 export const Holder: MessageFns<Holder> = {
-  encode(message: Holder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Holder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
@@ -2690,7 +3005,8 @@ export const Holder: MessageFns<Holder> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Holder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHolder();
     while (reader.pos < end) {
@@ -2726,8 +3042,8 @@ export const Holder: MessageFns<Holder> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
       balance: isSet(object.balance) ? globalThis.String(object.balance) : "",
     };
   },
@@ -2755,11 +3071,23 @@ export const Holder: MessageFns<Holder> = {
 };
 
 function createBaseHistoricalTradesRequest(): HistoricalTradesRequest {
-  return { fromBlock: 0, endBlock: 0, fromTime: 0, endTime: 0, perPage: 0, token: "", account: "", executionTypes: [] };
+  return {
+    fromBlock: 0,
+    endBlock: 0,
+    fromTime: 0,
+    endTime: 0,
+    perPage: 0,
+    token: "",
+    account: "",
+    executionTypes: [],
+  };
 }
 
 export const HistoricalTradesRequest: MessageFns<HistoricalTradesRequest> = {
-  encode(message: HistoricalTradesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: HistoricalTradesRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.fromBlock !== 0) {
       writer.uint32(8).uint64(message.fromBlock);
     }
@@ -2787,8 +3115,12 @@ export const HistoricalTradesRequest: MessageFns<HistoricalTradesRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): HistoricalTradesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): HistoricalTradesRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHistoricalTradesRequest();
     while (reader.pos < end) {
@@ -2872,35 +3204,35 @@ export const HistoricalTradesRequest: MessageFns<HistoricalTradesRequest> = {
       fromBlock: isSet(object.fromBlock)
         ? globalThis.Number(object.fromBlock)
         : isSet(object.from_block)
-        ? globalThis.Number(object.from_block)
-        : 0,
+          ? globalThis.Number(object.from_block)
+          : 0,
       endBlock: isSet(object.endBlock)
         ? globalThis.Number(object.endBlock)
         : isSet(object.end_block)
-        ? globalThis.Number(object.end_block)
-        : 0,
+          ? globalThis.Number(object.end_block)
+          : 0,
       fromTime: isSet(object.fromTime)
         ? globalThis.Number(object.fromTime)
         : isSet(object.from_time)
-        ? globalThis.Number(object.from_time)
-        : 0,
+          ? globalThis.Number(object.from_time)
+          : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
       perPage: isSet(object.perPage)
         ? globalThis.Number(object.perPage)
         : isSet(object.per_page)
-        ? globalThis.Number(object.per_page)
-        : 0,
+          ? globalThis.Number(object.per_page)
+          : 0,
       token: isSet(object.token) ? globalThis.String(object.token) : "",
       account: isSet(object.account) ? globalThis.String(object.account) : "",
       executionTypes: globalThis.Array.isArray(object?.executionTypes)
         ? object.executionTypes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.execution_types)
-        ? object.execution_types.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.execution_types.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -2933,10 +3265,14 @@ export const HistoricalTradesRequest: MessageFns<HistoricalTradesRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<HistoricalTradesRequest>, I>>(base?: I): HistoricalTradesRequest {
+  create<I extends Exact<DeepPartial<HistoricalTradesRequest>, I>>(
+    base?: I,
+  ): HistoricalTradesRequest {
     return HistoricalTradesRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<HistoricalTradesRequest>, I>>(object: I): HistoricalTradesRequest {
+  fromPartial<I extends Exact<DeepPartial<HistoricalTradesRequest>, I>>(
+    object: I,
+  ): HistoricalTradesRequest {
     const message = createBaseHistoricalTradesRequest();
     message.fromBlock = object.fromBlock ?? 0;
     message.endBlock = object.endBlock ?? 0;
@@ -2955,7 +3291,10 @@ function createBaseHistoricalTradesResponse(): HistoricalTradesResponse {
 }
 
 export const HistoricalTradesResponse: MessageFns<HistoricalTradesResponse> = {
-  encode(message: HistoricalTradesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: HistoricalTradesResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.trades) {
       HistoricalTrade.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -2971,8 +3310,12 @@ export const HistoricalTradesResponse: MessageFns<HistoricalTradesResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): HistoricalTradesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): HistoricalTradesResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHistoricalTradesResponse();
     while (reader.pos < end) {
@@ -3027,14 +3370,16 @@ export const HistoricalTradesResponse: MessageFns<HistoricalTradesResponse> = {
       lastHeight: isSet(object.lastHeight)
         ? globalThis.Number(object.lastHeight)
         : isSet(object.last_height)
-        ? globalThis.Number(object.last_height)
-        : 0,
+          ? globalThis.Number(object.last_height)
+          : 0,
       lastTime: isSet(object.lastTime)
         ? globalThis.Number(object.lastTime)
         : isSet(object.last_time)
-        ? globalThis.Number(object.last_time)
-        : 0,
-      next: globalThis.Array.isArray(object?.next) ? object.next.map((e: any) => globalThis.String(e)) : [],
+          ? globalThis.Number(object.last_time)
+          : 0,
+      next: globalThis.Array.isArray(object?.next)
+        ? object.next.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -3055,12 +3400,17 @@ export const HistoricalTradesResponse: MessageFns<HistoricalTradesResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<HistoricalTradesResponse>, I>>(base?: I): HistoricalTradesResponse {
+  create<I extends Exact<DeepPartial<HistoricalTradesResponse>, I>>(
+    base?: I,
+  ): HistoricalTradesResponse {
     return HistoricalTradesResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<HistoricalTradesResponse>, I>>(object: I): HistoricalTradesResponse {
+  fromPartial<I extends Exact<DeepPartial<HistoricalTradesResponse>, I>>(
+    object: I,
+  ): HistoricalTradesResponse {
     const message = createBaseHistoricalTradesResponse();
-    message.trades = object.trades?.map((e) => HistoricalTrade.fromPartial(e)) || [];
+    message.trades =
+      object.trades?.map((e) => HistoricalTrade.fromPartial(e)) || [];
     message.lastHeight = object.lastHeight ?? 0;
     message.lastTime = object.lastTime ?? 0;
     message.next = object.next?.map((e) => e) || [];
@@ -3091,7 +3441,10 @@ function createBaseHistoricalTrade(): HistoricalTrade {
 }
 
 export const HistoricalTrade: MessageFns<HistoricalTrade> = {
-  encode(message: HistoricalTrade, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: HistoricalTrade,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.account !== "") {
       writer.uint32(10).string(message.account);
     }
@@ -3147,7 +3500,8 @@ export const HistoricalTrade: MessageFns<HistoricalTrade> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): HistoricalTrade {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHistoricalTrade();
     while (reader.pos < end) {
@@ -3304,69 +3658,71 @@ export const HistoricalTrade: MessageFns<HistoricalTrade> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       tradeDirection: isSet(object.tradeDirection)
         ? globalThis.String(object.tradeDirection)
         : isSet(object.trade_direction)
-        ? globalThis.String(object.trade_direction)
-        : "",
-      price: isSet(object.price) ? PriceLevel.fromJSON(object.price) : undefined,
+          ? globalThis.String(object.trade_direction)
+          : "",
+      price: isSet(object.price)
+        ? PriceLevel.fromJSON(object.price)
+        : undefined,
       fee: isSet(object.fee) ? globalThis.String(object.fee) : "",
       executedAt: isSet(object.executedAt)
         ? globalThis.Number(object.executedAt)
         : isSet(object.executed_at)
-        ? globalThis.Number(object.executed_at)
-        : 0,
+          ? globalThis.Number(object.executed_at)
+          : 0,
       executedHeight: isSet(object.executedHeight)
         ? globalThis.Number(object.executedHeight)
         : isSet(object.executed_height)
-        ? globalThis.Number(object.executed_height)
-        : 0,
+          ? globalThis.Number(object.executed_height)
+          : 0,
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
       executionSide: isSet(object.executionSide)
         ? globalThis.String(object.executionSide)
         : isSet(object.execution_side)
-        ? globalThis.String(object.execution_side)
-        : "",
+          ? globalThis.String(object.execution_side)
+          : "",
       usdValue: isSet(object.usdValue)
         ? globalThis.String(object.usdValue)
         : isSet(object.usd_value)
-        ? globalThis.String(object.usd_value)
-        : "",
+          ? globalThis.String(object.usd_value)
+          : "",
       flags: globalThis.Array.isArray(object?.flags)
         ? object.flags.map((e: any) => globalThis.String(e))
         : [],
       marketType: isSet(object.marketType)
         ? globalThis.String(object.marketType)
         : isSet(object.market_type)
-        ? globalThis.String(object.market_type)
-        : "",
+          ? globalThis.String(object.market_type)
+          : "",
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       executionType: isSet(object.executionType)
         ? globalThis.String(object.executionType)
         : isSet(object.execution_type)
-        ? globalThis.String(object.execution_type)
-        : "",
+          ? globalThis.String(object.execution_type)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
       fundingRate: isSet(object.fundingRate)
         ? globalThis.String(object.fundingRate)
         : isSet(object.funding_rate)
-        ? globalThis.String(object.funding_rate)
-        : "",
+          ? globalThis.String(object.funding_rate)
+          : "",
     };
   },
 
@@ -3426,18 +3782,23 @@ export const HistoricalTrade: MessageFns<HistoricalTrade> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<HistoricalTrade>, I>>(base?: I): HistoricalTrade {
+  create<I extends Exact<DeepPartial<HistoricalTrade>, I>>(
+    base?: I,
+  ): HistoricalTrade {
     return HistoricalTrade.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<HistoricalTrade>, I>>(object: I): HistoricalTrade {
+  fromPartial<I extends Exact<DeepPartial<HistoricalTrade>, I>>(
+    object: I,
+  ): HistoricalTrade {
     const message = createBaseHistoricalTrade();
     message.account = object.account ?? "";
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
     message.tradeDirection = object.tradeDirection ?? "";
-    message.price = (object.price !== undefined && object.price !== null)
-      ? PriceLevel.fromPartial(object.price)
-      : undefined;
+    message.price =
+      object.price !== undefined && object.price !== null
+        ? PriceLevel.fromPartial(object.price)
+        : undefined;
     message.fee = object.fee ?? "";
     message.executedAt = object.executedAt ?? 0;
     message.executedHeight = object.executedHeight ?? 0;
@@ -3459,7 +3820,10 @@ function createBasePriceLevel(): PriceLevel {
 }
 
 export const PriceLevel: MessageFns<PriceLevel> = {
-  encode(message: PriceLevel, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceLevel,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -3473,7 +3837,8 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceLevel {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceLevel();
     while (reader.pos < end) {
@@ -3515,8 +3880,12 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   fromJSON(object: any): PriceLevel {
     return {
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -3537,7 +3906,9 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   create<I extends Exact<DeepPartial<PriceLevel>, I>>(base?: I): PriceLevel {
     return PriceLevel.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceLevel>, I>>(object: I): PriceLevel {
+  fromPartial<I extends Exact<DeepPartial<PriceLevel>, I>>(
+    object: I,
+  ): PriceLevel {
     const message = createBasePriceLevel();
     message.price = object.price ?? "";
     message.quantity = object.quantity ?? "";
@@ -3550,154 +3921,186 @@ function createBaseStreamSpotAverageEntriesRequest(): StreamSpotAverageEntriesRe
   return { account: "" };
 }
 
-export const StreamSpotAverageEntriesRequest: MessageFns<StreamSpotAverageEntriesRequest> = {
-  encode(message: StreamSpotAverageEntriesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.account !== "") {
-      writer.uint32(10).string(message.account);
-    }
-    return writer;
-  },
+export const StreamSpotAverageEntriesRequest: MessageFns<StreamSpotAverageEntriesRequest> =
+  {
+    encode(
+      message: StreamSpotAverageEntriesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.account !== "") {
+        writer.uint32(10).string(message.account);
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamSpotAverageEntriesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamSpotAverageEntriesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamSpotAverageEntriesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamSpotAverageEntriesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.account = reader.string();
+            continue;
           }
-
-          message.account = reader.string();
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): StreamSpotAverageEntriesRequest {
+      return {
+        account: isSet(object.account) ? globalThis.String(object.account) : "",
+      };
+    },
+
+    toJSON(message: StreamSpotAverageEntriesRequest): unknown {
+      const obj: any = {};
+      if (message.account !== "") {
+        obj.account = message.account;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): StreamSpotAverageEntriesRequest {
-    return { account: isSet(object.account) ? globalThis.String(object.account) : "" };
-  },
-
-  toJSON(message: StreamSpotAverageEntriesRequest): unknown {
-    const obj: any = {};
-    if (message.account !== "") {
-      obj.account = message.account;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<StreamSpotAverageEntriesRequest>, I>>(base?: I): StreamSpotAverageEntriesRequest {
-    return StreamSpotAverageEntriesRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamSpotAverageEntriesRequest>, I>>(
-    object: I,
-  ): StreamSpotAverageEntriesRequest {
-    const message = createBaseStreamSpotAverageEntriesRequest();
-    message.account = object.account ?? "";
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<StreamSpotAverageEntriesRequest>, I>>(
+      base?: I,
+    ): StreamSpotAverageEntriesRequest {
+      return StreamSpotAverageEntriesRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<StreamSpotAverageEntriesRequest>, I>,
+    >(object: I): StreamSpotAverageEntriesRequest {
+      const message = createBaseStreamSpotAverageEntriesRequest();
+      message.account = object.account ?? "";
+      return message;
+    },
+  };
 
 function createBaseStreamSpotAverageEntriesResponse(): StreamSpotAverageEntriesResponse {
   return { averageEntry: undefined, timestamp: 0 };
 }
 
-export const StreamSpotAverageEntriesResponse: MessageFns<StreamSpotAverageEntriesResponse> = {
-  encode(message: StreamSpotAverageEntriesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.averageEntry !== undefined) {
-      SpotAverageEntry.encode(message.averageEntry, writer.uint32(10).fork()).join();
-    }
-    if (message.timestamp !== 0) {
-      writer.uint32(16).sint64(message.timestamp);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamSpotAverageEntriesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamSpotAverageEntriesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.averageEntry = SpotAverageEntry.decode(reader, reader.uint32());
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.timestamp = longToNumber(reader.sint64());
-          continue;
-        }
+export const StreamSpotAverageEntriesResponse: MessageFns<StreamSpotAverageEntriesResponse> =
+  {
+    encode(
+      message: StreamSpotAverageEntriesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.averageEntry !== undefined) {
+        SpotAverageEntry.encode(
+          message.averageEntry,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.timestamp !== 0) {
+        writer.uint32(16).sint64(message.timestamp);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): StreamSpotAverageEntriesResponse {
-    return {
-      averageEntry: isSet(object.averageEntry)
-        ? SpotAverageEntry.fromJSON(object.averageEntry)
-        : isSet(object.average_entry)
-        ? SpotAverageEntry.fromJSON(object.average_entry)
-        : undefined,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamSpotAverageEntriesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamSpotAverageEntriesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamSpotAverageEntriesResponse): unknown {
-    const obj: any = {};
-    if (message.averageEntry !== undefined) {
-      obj.averageEntry = SpotAverageEntry.toJSON(message.averageEntry);
-    }
-    if (message.timestamp !== 0) {
-      obj.timestamp = Math.round(message.timestamp);
-    }
-    return obj;
-  },
+            message.averageEntry = SpotAverageEntry.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamSpotAverageEntriesResponse>, I>>(
-    base?: I,
-  ): StreamSpotAverageEntriesResponse {
-    return StreamSpotAverageEntriesResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamSpotAverageEntriesResponse>, I>>(
-    object: I,
-  ): StreamSpotAverageEntriesResponse {
-    const message = createBaseStreamSpotAverageEntriesResponse();
-    message.averageEntry = (object.averageEntry !== undefined && object.averageEntry !== null)
-      ? SpotAverageEntry.fromPartial(object.averageEntry)
-      : undefined;
-    message.timestamp = object.timestamp ?? 0;
-    return message;
-  },
-};
+            message.timestamp = longToNumber(reader.sint64());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamSpotAverageEntriesResponse {
+      return {
+        averageEntry: isSet(object.averageEntry)
+          ? SpotAverageEntry.fromJSON(object.averageEntry)
+          : isSet(object.average_entry)
+            ? SpotAverageEntry.fromJSON(object.average_entry)
+            : undefined,
+        timestamp: isSet(object.timestamp)
+          ? globalThis.Number(object.timestamp)
+          : 0,
+      };
+    },
+
+    toJSON(message: StreamSpotAverageEntriesResponse): unknown {
+      const obj: any = {};
+      if (message.averageEntry !== undefined) {
+        obj.averageEntry = SpotAverageEntry.toJSON(message.averageEntry);
+      }
+      if (message.timestamp !== 0) {
+        obj.timestamp = Math.round(message.timestamp);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamSpotAverageEntriesResponse>, I>>(
+      base?: I,
+    ): StreamSpotAverageEntriesResponse {
+      return StreamSpotAverageEntriesResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<StreamSpotAverageEntriesResponse>, I>,
+    >(object: I): StreamSpotAverageEntriesResponse {
+      const message = createBaseStreamSpotAverageEntriesResponse();
+      message.averageEntry =
+        object.averageEntry !== undefined && object.averageEntry !== null
+          ? SpotAverageEntry.fromPartial(object.averageEntry)
+          : undefined;
+      message.timestamp = object.timestamp ?? 0;
+      return message;
+    },
+  };
 
 function createBaseSpotAverageEntry(): SpotAverageEntry {
   return { marketId: "", averageEntryPrice: "", quantity: "", usdValue: "" };
 }
 
 export const SpotAverageEntry: MessageFns<SpotAverageEntry> = {
-  encode(message: SpotAverageEntry, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotAverageEntry,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -3714,7 +4117,8 @@ export const SpotAverageEntry: MessageFns<SpotAverageEntry> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SpotAverageEntry {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotAverageEntry();
     while (reader.pos < end) {
@@ -3766,19 +4170,21 @@ export const SpotAverageEntry: MessageFns<SpotAverageEntry> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       averageEntryPrice: isSet(object.averageEntryPrice)
         ? globalThis.String(object.averageEntryPrice)
         : isSet(object.average_entry_price)
-        ? globalThis.String(object.average_entry_price)
+          ? globalThis.String(object.average_entry_price)
+          : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
         : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
       usdValue: isSet(object.usdValue)
         ? globalThis.String(object.usdValue)
         : isSet(object.usd_value)
-        ? globalThis.String(object.usd_value)
-        : "",
+          ? globalThis.String(object.usd_value)
+          : "",
     };
   },
 
@@ -3799,10 +4205,14 @@ export const SpotAverageEntry: MessageFns<SpotAverageEntry> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SpotAverageEntry>, I>>(base?: I): SpotAverageEntry {
+  create<I extends Exact<DeepPartial<SpotAverageEntry>, I>>(
+    base?: I,
+  ): SpotAverageEntry {
     return SpotAverageEntry.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotAverageEntry>, I>>(object: I): SpotAverageEntry {
+  fromPartial<I extends Exact<DeepPartial<SpotAverageEntry>, I>>(
+    object: I,
+  ): SpotAverageEntry {
     const message = createBaseSpotAverageEntry();
     message.marketId = object.marketId ?? "";
     message.averageEntryPrice = object.averageEntryPrice ?? "";
@@ -3820,41 +4230,56 @@ export const InjectiveArchiverRPCService = {
     path: "/injective_archiver_rpc.InjectiveArchiverRPC/Balance" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: BalanceRequest): Buffer => Buffer.from(BalanceRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): BalanceRequest => BalanceRequest.decode(value),
-    responseSerialize: (value: BalanceResponse): Buffer => Buffer.from(BalanceResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): BalanceResponse => BalanceResponse.decode(value),
+    requestSerialize: (value: BalanceRequest): Buffer =>
+      Buffer.from(BalanceRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): BalanceRequest =>
+      BalanceRequest.decode(value),
+    responseSerialize: (value: BalanceResponse): Buffer =>
+      Buffer.from(BalanceResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): BalanceResponse =>
+      BalanceResponse.decode(value),
   },
   /** Provide all-time stats for a given account address. */
   accountStats: {
     path: "/injective_archiver_rpc.InjectiveArchiverRPC/AccountStats" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: AccountStatsRequest): Buffer => Buffer.from(AccountStatsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): AccountStatsRequest => AccountStatsRequest.decode(value),
+    requestSerialize: (value: AccountStatsRequest): Buffer =>
+      Buffer.from(AccountStatsRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): AccountStatsRequest =>
+      AccountStatsRequest.decode(value),
     responseSerialize: (value: AccountStatsResponse): Buffer =>
       Buffer.from(AccountStatsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): AccountStatsResponse => AccountStatsResponse.decode(value),
+    responseDeserialize: (value: Buffer): AccountStatsResponse =>
+      AccountStatsResponse.decode(value),
   },
   /** Provide historical realized profit and loss data for a given account address. */
   rpnl: {
     path: "/injective_archiver_rpc.InjectiveArchiverRPC/Rpnl" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: RpnlRequest): Buffer => Buffer.from(RpnlRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): RpnlRequest => RpnlRequest.decode(value),
-    responseSerialize: (value: RpnlResponse): Buffer => Buffer.from(RpnlResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): RpnlResponse => RpnlResponse.decode(value),
+    requestSerialize: (value: RpnlRequest): Buffer =>
+      Buffer.from(RpnlRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): RpnlRequest =>
+      RpnlRequest.decode(value),
+    responseSerialize: (value: RpnlResponse): Buffer =>
+      Buffer.from(RpnlResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): RpnlResponse =>
+      RpnlResponse.decode(value),
   },
   /** Provide historical volumes for a given account address. */
   volumes: {
     path: "/injective_archiver_rpc.InjectiveArchiverRPC/Volumes" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: VolumesRequest): Buffer => Buffer.from(VolumesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): VolumesRequest => VolumesRequest.decode(value),
-    responseSerialize: (value: VolumesResponse): Buffer => Buffer.from(VolumesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): VolumesResponse => VolumesResponse.decode(value),
+    requestSerialize: (value: VolumesRequest): Buffer =>
+      Buffer.from(VolumesRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): VolumesRequest =>
+      VolumesRequest.decode(value),
+    responseSerialize: (value: VolumesResponse): Buffer =>
+      Buffer.from(VolumesResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): VolumesResponse =>
+      VolumesResponse.decode(value),
   },
   /** Provide pnl leaderboard data. */
   pnlLeaderboard: {
@@ -3863,10 +4288,12 @@ export const InjectiveArchiverRPCService = {
     responseStream: false as const,
     requestSerialize: (value: PnlLeaderboardRequest): Buffer =>
       Buffer.from(PnlLeaderboardRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): PnlLeaderboardRequest => PnlLeaderboardRequest.decode(value),
+    requestDeserialize: (value: Buffer): PnlLeaderboardRequest =>
+      PnlLeaderboardRequest.decode(value),
     responseSerialize: (value: PnlLeaderboardResponse): Buffer =>
       Buffer.from(PnlLeaderboardResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PnlLeaderboardResponse => PnlLeaderboardResponse.decode(value),
+    responseDeserialize: (value: Buffer): PnlLeaderboardResponse =>
+      PnlLeaderboardResponse.decode(value),
   },
   /** Provide volume leaderboard data. */
   volLeaderboard: {
@@ -3875,10 +4302,12 @@ export const InjectiveArchiverRPCService = {
     responseStream: false as const,
     requestSerialize: (value: VolLeaderboardRequest): Buffer =>
       Buffer.from(VolLeaderboardRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): VolLeaderboardRequest => VolLeaderboardRequest.decode(value),
+    requestDeserialize: (value: Buffer): VolLeaderboardRequest =>
+      VolLeaderboardRequest.decode(value),
     responseSerialize: (value: VolLeaderboardResponse): Buffer =>
       Buffer.from(VolLeaderboardResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): VolLeaderboardResponse => VolLeaderboardResponse.decode(value),
+    responseDeserialize: (value: Buffer): VolLeaderboardResponse =>
+      VolLeaderboardResponse.decode(value),
   },
   /** Provide pnl leaderboard data. */
   pnlLeaderboardFixedResolution: {
@@ -3891,7 +4320,9 @@ export const InjectiveArchiverRPCService = {
       PnlLeaderboardFixedResolutionRequest.decode(value),
     responseSerialize: (value: PnlLeaderboardFixedResolutionResponse): Buffer =>
       Buffer.from(PnlLeaderboardFixedResolutionResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PnlLeaderboardFixedResolutionResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): PnlLeaderboardFixedResolutionResponse =>
       PnlLeaderboardFixedResolutionResponse.decode(value),
   },
   /** Provide volume leaderboard data. */
@@ -3905,7 +4336,9 @@ export const InjectiveArchiverRPCService = {
       VolLeaderboardFixedResolutionRequest.decode(value),
     responseSerialize: (value: VolLeaderboardFixedResolutionResponse): Buffer =>
       Buffer.from(VolLeaderboardFixedResolutionResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): VolLeaderboardFixedResolutionResponse =>
+    responseDeserialize: (
+      value: Buffer,
+    ): VolLeaderboardFixedResolutionResponse =>
       VolLeaderboardFixedResolutionResponse.decode(value),
   },
   /** Provide a list of addresses holding a specific denom */
@@ -3913,11 +4346,14 @@ export const InjectiveArchiverRPCService = {
     path: "/injective_archiver_rpc.InjectiveArchiverRPC/DenomHolders" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: DenomHoldersRequest): Buffer => Buffer.from(DenomHoldersRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): DenomHoldersRequest => DenomHoldersRequest.decode(value),
+    requestSerialize: (value: DenomHoldersRequest): Buffer =>
+      Buffer.from(DenomHoldersRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): DenomHoldersRequest =>
+      DenomHoldersRequest.decode(value),
     responseSerialize: (value: DenomHoldersResponse): Buffer =>
       Buffer.from(DenomHoldersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): DenomHoldersResponse => DenomHoldersResponse.decode(value),
+    responseDeserialize: (value: Buffer): DenomHoldersResponse =>
+      DenomHoldersResponse.decode(value),
   },
   /** Provide historical trades data. */
   historicalTrades: {
@@ -3926,10 +4362,12 @@ export const InjectiveArchiverRPCService = {
     responseStream: false as const,
     requestSerialize: (value: HistoricalTradesRequest): Buffer =>
       Buffer.from(HistoricalTradesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): HistoricalTradesRequest => HistoricalTradesRequest.decode(value),
+    requestDeserialize: (value: Buffer): HistoricalTradesRequest =>
+      HistoricalTradesRequest.decode(value),
     responseSerialize: (value: HistoricalTradesResponse): Buffer =>
       Buffer.from(HistoricalTradesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): HistoricalTradesResponse => HistoricalTradesResponse.decode(value),
+    responseDeserialize: (value: Buffer): HistoricalTradesResponse =>
+      HistoricalTradesResponse.decode(value),
   },
   /** Stream spot markets average entries for a given account address. */
   streamSpotAverageEntries: {
@@ -3957,9 +4395,15 @@ export interface InjectiveArchiverRPCServer extends UntypedServiceImplementation
   /** Provide historical volumes for a given account address. */
   volumes: handleUnaryCall<VolumesRequest, VolumesResponse>;
   /** Provide pnl leaderboard data. */
-  pnlLeaderboard: handleUnaryCall<PnlLeaderboardRequest, PnlLeaderboardResponse>;
+  pnlLeaderboard: handleUnaryCall<
+    PnlLeaderboardRequest,
+    PnlLeaderboardResponse
+  >;
   /** Provide volume leaderboard data. */
-  volLeaderboard: handleUnaryCall<VolLeaderboardRequest, VolLeaderboardResponse>;
+  volLeaderboard: handleUnaryCall<
+    VolLeaderboardRequest,
+    VolLeaderboardResponse
+  >;
   /** Provide pnl leaderboard data. */
   pnlLeaderboardFixedResolution: handleUnaryCall<
     PnlLeaderboardFixedResolutionRequest,
@@ -3973,7 +4417,10 @@ export interface InjectiveArchiverRPCServer extends UntypedServiceImplementation
   /** Provide a list of addresses holding a specific denom */
   denomHolders: handleUnaryCall<DenomHoldersRequest, DenomHoldersResponse>;
   /** Provide historical trades data. */
-  historicalTrades: handleUnaryCall<HistoricalTradesRequest, HistoricalTradesResponse>;
+  historicalTrades: handleUnaryCall<
+    HistoricalTradesRequest,
+    HistoricalTradesResponse
+  >;
   /** Stream spot markets average entries for a given account address. */
   streamSpotAverageEntries: handleServerStreamingCall<
     StreamSpotAverageEntriesRequest,
@@ -4001,21 +4448,33 @@ export interface InjectiveArchiverRPCClient extends Client {
   /** Provide all-time stats for a given account address. */
   accountStats(
     request: AccountStatsRequest,
-    callback: (error: ServiceError | null, response: AccountStatsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AccountStatsResponse,
+    ) => void,
   ): ClientUnaryCall;
   accountStats(
     request: AccountStatsRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: AccountStatsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AccountStatsResponse,
+    ) => void,
   ): ClientUnaryCall;
   accountStats(
     request: AccountStatsRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: AccountStatsResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AccountStatsResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Provide historical realized profit and loss data for a given account address. */
-  rpnl(request: RpnlRequest, callback: (error: ServiceError | null, response: RpnlResponse) => void): ClientUnaryCall;
+  rpnl(
+    request: RpnlRequest,
+    callback: (error: ServiceError | null, response: RpnlResponse) => void,
+  ): ClientUnaryCall;
   rpnl(
     request: RpnlRequest,
     metadata: Metadata,
@@ -4046,98 +4505,152 @@ export interface InjectiveArchiverRPCClient extends Client {
   /** Provide pnl leaderboard data. */
   pnlLeaderboard(
     request: PnlLeaderboardRequest,
-    callback: (error: ServiceError | null, response: PnlLeaderboardResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PnlLeaderboardResponse,
+    ) => void,
   ): ClientUnaryCall;
   pnlLeaderboard(
     request: PnlLeaderboardRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: PnlLeaderboardResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PnlLeaderboardResponse,
+    ) => void,
   ): ClientUnaryCall;
   pnlLeaderboard(
     request: PnlLeaderboardRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: PnlLeaderboardResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PnlLeaderboardResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Provide volume leaderboard data. */
   volLeaderboard(
     request: VolLeaderboardRequest,
-    callback: (error: ServiceError | null, response: VolLeaderboardResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: VolLeaderboardResponse,
+    ) => void,
   ): ClientUnaryCall;
   volLeaderboard(
     request: VolLeaderboardRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: VolLeaderboardResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: VolLeaderboardResponse,
+    ) => void,
   ): ClientUnaryCall;
   volLeaderboard(
     request: VolLeaderboardRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: VolLeaderboardResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: VolLeaderboardResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Provide pnl leaderboard data. */
   pnlLeaderboardFixedResolution(
     request: PnlLeaderboardFixedResolutionRequest,
-    callback: (error: ServiceError | null, response: PnlLeaderboardFixedResolutionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PnlLeaderboardFixedResolutionResponse,
+    ) => void,
   ): ClientUnaryCall;
   pnlLeaderboardFixedResolution(
     request: PnlLeaderboardFixedResolutionRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: PnlLeaderboardFixedResolutionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PnlLeaderboardFixedResolutionResponse,
+    ) => void,
   ): ClientUnaryCall;
   pnlLeaderboardFixedResolution(
     request: PnlLeaderboardFixedResolutionRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: PnlLeaderboardFixedResolutionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: PnlLeaderboardFixedResolutionResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Provide volume leaderboard data. */
   volLeaderboardFixedResolution(
     request: VolLeaderboardFixedResolutionRequest,
-    callback: (error: ServiceError | null, response: VolLeaderboardFixedResolutionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: VolLeaderboardFixedResolutionResponse,
+    ) => void,
   ): ClientUnaryCall;
   volLeaderboardFixedResolution(
     request: VolLeaderboardFixedResolutionRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: VolLeaderboardFixedResolutionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: VolLeaderboardFixedResolutionResponse,
+    ) => void,
   ): ClientUnaryCall;
   volLeaderboardFixedResolution(
     request: VolLeaderboardFixedResolutionRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: VolLeaderboardFixedResolutionResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: VolLeaderboardFixedResolutionResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Provide a list of addresses holding a specific denom */
   denomHolders(
     request: DenomHoldersRequest,
-    callback: (error: ServiceError | null, response: DenomHoldersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: DenomHoldersResponse,
+    ) => void,
   ): ClientUnaryCall;
   denomHolders(
     request: DenomHoldersRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: DenomHoldersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: DenomHoldersResponse,
+    ) => void,
   ): ClientUnaryCall;
   denomHolders(
     request: DenomHoldersRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: DenomHoldersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: DenomHoldersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Provide historical trades data. */
   historicalTrades(
     request: HistoricalTradesRequest,
-    callback: (error: ServiceError | null, response: HistoricalTradesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: HistoricalTradesResponse,
+    ) => void,
   ): ClientUnaryCall;
   historicalTrades(
     request: HistoricalTradesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: HistoricalTradesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: HistoricalTradesResponse,
+    ) => void,
   ): ClientUnaryCall;
   historicalTrades(
     request: HistoricalTradesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: HistoricalTradesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: HistoricalTradesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Stream spot markets average entries for a given account address. */
   streamSpotAverageEntries(
@@ -4155,22 +4668,34 @@ export const InjectiveArchiverRPCClient = makeGenericClientConstructor(
   InjectiveArchiverRPCService,
   "injective_archiver_rpc.InjectiveArchiverRPC",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): InjectiveArchiverRPCClient;
+  new (
+    address: string,
+    credentials: ChannelCredentials,
+    options?: Partial<ClientOptions>,
+  ): InjectiveArchiverRPCClient;
   service: typeof InjectiveArchiverRPCService;
   serviceName: string;
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

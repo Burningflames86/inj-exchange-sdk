@@ -20,11 +20,19 @@ export interface Block {
 }
 
 function createBaseBlock(): Block {
-  return { header: undefined, data: undefined, evidence: undefined, lastCommit: undefined };
+  return {
+    header: undefined,
+    data: undefined,
+    evidence: undefined,
+    lastCommit: undefined,
+  };
 }
 
 export const Block: MessageFns<Block> = {
-  encode(message: Block, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Block,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(10).fork()).join();
     }
@@ -41,7 +49,8 @@ export const Block: MessageFns<Block> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Block {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlock();
     while (reader.pos < end) {
@@ -92,12 +101,14 @@ export const Block: MessageFns<Block> = {
     return {
       header: isSet(object.header) ? Header.fromJSON(object.header) : undefined,
       data: isSet(object.data) ? Data.fromJSON(object.data) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceList.fromJSON(object.evidence) : undefined,
+      evidence: isSet(object.evidence)
+        ? EvidenceList.fromJSON(object.evidence)
+        : undefined,
       lastCommit: isSet(object.lastCommit)
         ? Commit.fromJSON(object.lastCommit)
         : isSet(object.last_commit)
-        ? Commit.fromJSON(object.last_commit)
-        : undefined,
+          ? Commit.fromJSON(object.last_commit)
+          : undefined,
     };
   },
 
@@ -123,31 +134,45 @@ export const Block: MessageFns<Block> = {
   },
   fromPartial<I extends Exact<DeepPartial<Block>, I>>(object: I): Block {
     const message = createBaseBlock();
-    message.header = (object.header !== undefined && object.header !== null)
-      ? Header.fromPartial(object.header)
-      : undefined;
-    message.data = (object.data !== undefined && object.data !== null) ? Data.fromPartial(object.data) : undefined;
-    message.evidence = (object.evidence !== undefined && object.evidence !== null)
-      ? EvidenceList.fromPartial(object.evidence)
-      : undefined;
-    message.lastCommit = (object.lastCommit !== undefined && object.lastCommit !== null)
-      ? Commit.fromPartial(object.lastCommit)
-      : undefined;
+    message.header =
+      object.header !== undefined && object.header !== null
+        ? Header.fromPartial(object.header)
+        : undefined;
+    message.data =
+      object.data !== undefined && object.data !== null
+        ? Data.fromPartial(object.data)
+        : undefined;
+    message.evidence =
+      object.evidence !== undefined && object.evidence !== null
+        ? EvidenceList.fromPartial(object.evidence)
+        : undefined;
+    message.lastCommit =
+      object.lastCommit !== undefined && object.lastCommit !== null
+        ? Commit.fromPartial(object.lastCommit)
+        : undefined;
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

@@ -7,7 +7,11 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { CommunityPoolSpendProposal } from "../../../cosmos/distribution/v1beta1/distribution";
-import { OracleType, oracleTypeFromJSON, oracleTypeToJSON } from "../../oracle/v1beta1/oracle";
+import {
+  OracleType,
+  oracleTypeFromJSON,
+  oracleTypeToJSON,
+} from "../../oracle/v1beta1/oracle";
 import {
   CampaignRewardPool,
   DenomDecimals,
@@ -91,9 +95,7 @@ export interface SpotMarketParamUpdateProposal {
    * orders in the market
    */
   minNotional: string;
-  adminInfo:
-    | AdminInfo
-    | undefined;
+  adminInfo: AdminInfo | undefined;
   /** base token decimals */
   baseDecimals: number;
   /** quote token decimals */
@@ -114,7 +116,8 @@ export interface BatchExchangeModificationProposal {
   spotMarketLaunchProposals: SpotMarketLaunchProposal[];
   perpetualMarketLaunchProposals: PerpetualMarketLaunchProposal[];
   expiryFuturesMarketLaunchProposals: ExpiryFuturesMarketLaunchProposal[];
-  tradingRewardCampaignUpdateProposal: TradingRewardCampaignUpdateProposal | undefined;
+  tradingRewardCampaignUpdateProposal:
+    TradingRewardCampaignUpdateProposal | undefined;
   binaryOptionsMarketLaunchProposals: BinaryOptionsMarketLaunchProposal[];
   binaryOptionsParamUpdateProposals: BinaryOptionsMarketParamUpdateProposal[];
   denomDecimalsUpdateProposal: UpdateDenomDecimalsProposal | undefined;
@@ -149,9 +152,7 @@ export interface SpotMarketLaunchProposal {
   takerFeeRate: string;
   /** min_notional defines the minimum notional for orders in the market */
   minNotional: string;
-  adminInfo:
-    | AdminInfo
-    | undefined;
+  adminInfo: AdminInfo | undefined;
   /** base token decimals */
   baseDecimals: number;
   /** quote token decimals */
@@ -536,320 +537,336 @@ function createBaseSpotMarketParamUpdateProposal(): SpotMarketParamUpdateProposa
   };
 }
 
-export const SpotMarketParamUpdateProposal: MessageFns<SpotMarketParamUpdateProposal> = {
-  encode(message: SpotMarketParamUpdateProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(26).string(message.marketId);
-    }
-    if (message.makerFeeRate !== "") {
-      writer.uint32(34).string(message.makerFeeRate);
-    }
-    if (message.takerFeeRate !== "") {
-      writer.uint32(42).string(message.takerFeeRate);
-    }
-    if (message.relayerFeeShareRate !== "") {
-      writer.uint32(50).string(message.relayerFeeShareRate);
-    }
-    if (message.minPriceTickSize !== "") {
-      writer.uint32(58).string(message.minPriceTickSize);
-    }
-    if (message.minQuantityTickSize !== "") {
-      writer.uint32(66).string(message.minQuantityTickSize);
-    }
-    if (message.status !== 0) {
-      writer.uint32(72).int32(message.status);
-    }
-    if (message.ticker !== "") {
-      writer.uint32(82).string(message.ticker);
-    }
-    if (message.minNotional !== "") {
-      writer.uint32(90).string(message.minNotional);
-    }
-    if (message.adminInfo !== undefined) {
-      AdminInfo.encode(message.adminInfo, writer.uint32(98).fork()).join();
-    }
-    if (message.baseDecimals !== 0) {
-      writer.uint32(104).uint32(message.baseDecimals);
-    }
-    if (message.quoteDecimals !== 0) {
-      writer.uint32(112).uint32(message.quoteDecimals);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SpotMarketParamUpdateProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSpotMarketParamUpdateProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.makerFeeRate = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.takerFeeRate = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.relayerFeeShareRate = reader.string();
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.minPriceTickSize = reader.string();
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.minQuantityTickSize = reader.string();
-          continue;
-        }
-        case 9: {
-          if (tag !== 72) {
-            break;
-          }
-
-          message.status = reader.int32() as any;
-          continue;
-        }
-        case 10: {
-          if (tag !== 82) {
-            break;
-          }
-
-          message.ticker = reader.string();
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.minNotional = reader.string();
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.adminInfo = AdminInfo.decode(reader, reader.uint32());
-          continue;
-        }
-        case 13: {
-          if (tag !== 104) {
-            break;
-          }
-
-          message.baseDecimals = reader.uint32();
-          continue;
-        }
-        case 14: {
-          if (tag !== 112) {
-            break;
-          }
-
-          message.quoteDecimals = reader.uint32();
-          continue;
-        }
+export const SpotMarketParamUpdateProposal: MessageFns<SpotMarketParamUpdateProposal> =
+  {
+    encode(
+      message: SpotMarketParamUpdateProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.marketId !== "") {
+        writer.uint32(26).string(message.marketId);
+      }
+      if (message.makerFeeRate !== "") {
+        writer.uint32(34).string(message.makerFeeRate);
+      }
+      if (message.takerFeeRate !== "") {
+        writer.uint32(42).string(message.takerFeeRate);
+      }
+      if (message.relayerFeeShareRate !== "") {
+        writer.uint32(50).string(message.relayerFeeShareRate);
+      }
+      if (message.minPriceTickSize !== "") {
+        writer.uint32(58).string(message.minPriceTickSize);
+      }
+      if (message.minQuantityTickSize !== "") {
+        writer.uint32(66).string(message.minQuantityTickSize);
+      }
+      if (message.status !== 0) {
+        writer.uint32(72).int32(message.status);
+      }
+      if (message.ticker !== "") {
+        writer.uint32(82).string(message.ticker);
+      }
+      if (message.minNotional !== "") {
+        writer.uint32(90).string(message.minNotional);
+      }
+      if (message.adminInfo !== undefined) {
+        AdminInfo.encode(message.adminInfo, writer.uint32(98).fork()).join();
+      }
+      if (message.baseDecimals !== 0) {
+        writer.uint32(104).uint32(message.baseDecimals);
+      }
+      if (message.quoteDecimals !== 0) {
+        writer.uint32(112).uint32(message.quoteDecimals);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): SpotMarketParamUpdateProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      makerFeeRate: isSet(object.makerFeeRate)
-        ? globalThis.String(object.makerFeeRate)
-        : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
-      takerFeeRate: isSet(object.takerFeeRate)
-        ? globalThis.String(object.takerFeeRate)
-        : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
-      relayerFeeShareRate: isSet(object.relayerFeeShareRate)
-        ? globalThis.String(object.relayerFeeShareRate)
-        : isSet(object.relayer_fee_share_rate)
-        ? globalThis.String(object.relayer_fee_share_rate)
-        : "",
-      minPriceTickSize: isSet(object.minPriceTickSize)
-        ? globalThis.String(object.minPriceTickSize)
-        : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
-      minQuantityTickSize: isSet(object.minQuantityTickSize)
-        ? globalThis.String(object.minQuantityTickSize)
-        : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
-      status: isSet(object.status) ? marketStatusFromJSON(object.status) : 0,
-      ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
-      minNotional: isSet(object.minNotional)
-        ? globalThis.String(object.minNotional)
-        : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
-      adminInfo: isSet(object.adminInfo)
-        ? AdminInfo.fromJSON(object.adminInfo)
-        : isSet(object.admin_info)
-        ? AdminInfo.fromJSON(object.admin_info)
-        : undefined,
-      baseDecimals: isSet(object.baseDecimals)
-        ? globalThis.Number(object.baseDecimals)
-        : isSet(object.base_decimals)
-        ? globalThis.Number(object.base_decimals)
-        : 0,
-      quoteDecimals: isSet(object.quoteDecimals)
-        ? globalThis.Number(object.quoteDecimals)
-        : isSet(object.quote_decimals)
-        ? globalThis.Number(object.quote_decimals)
-        : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SpotMarketParamUpdateProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSpotMarketParamUpdateProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SpotMarketParamUpdateProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.makerFeeRate !== "") {
-      obj.makerFeeRate = message.makerFeeRate;
-    }
-    if (message.takerFeeRate !== "") {
-      obj.takerFeeRate = message.takerFeeRate;
-    }
-    if (message.relayerFeeShareRate !== "") {
-      obj.relayerFeeShareRate = message.relayerFeeShareRate;
-    }
-    if (message.minPriceTickSize !== "") {
-      obj.minPriceTickSize = message.minPriceTickSize;
-    }
-    if (message.minQuantityTickSize !== "") {
-      obj.minQuantityTickSize = message.minQuantityTickSize;
-    }
-    if (message.status !== 0) {
-      obj.status = marketStatusToJSON(message.status);
-    }
-    if (message.ticker !== "") {
-      obj.ticker = message.ticker;
-    }
-    if (message.minNotional !== "") {
-      obj.minNotional = message.minNotional;
-    }
-    if (message.adminInfo !== undefined) {
-      obj.adminInfo = AdminInfo.toJSON(message.adminInfo);
-    }
-    if (message.baseDecimals !== 0) {
-      obj.baseDecimals = Math.round(message.baseDecimals);
-    }
-    if (message.quoteDecimals !== 0) {
-      obj.quoteDecimals = Math.round(message.quoteDecimals);
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SpotMarketParamUpdateProposal>, I>>(base?: I): SpotMarketParamUpdateProposal {
-    return SpotMarketParamUpdateProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SpotMarketParamUpdateProposal>, I>>(
-    object: I,
-  ): SpotMarketParamUpdateProposal {
-    const message = createBaseSpotMarketParamUpdateProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.marketId = object.marketId ?? "";
-    message.makerFeeRate = object.makerFeeRate ?? "";
-    message.takerFeeRate = object.takerFeeRate ?? "";
-    message.relayerFeeShareRate = object.relayerFeeShareRate ?? "";
-    message.minPriceTickSize = object.minPriceTickSize ?? "";
-    message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.status = object.status ?? 0;
-    message.ticker = object.ticker ?? "";
-    message.minNotional = object.minNotional ?? "";
-    message.adminInfo = (object.adminInfo !== undefined && object.adminInfo !== null)
-      ? AdminInfo.fromPartial(object.adminInfo)
-      : undefined;
-    message.baseDecimals = object.baseDecimals ?? 0;
-    message.quoteDecimals = object.quoteDecimals ?? 0;
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.makerFeeRate = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.takerFeeRate = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.relayerFeeShareRate = reader.string();
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.minPriceTickSize = reader.string();
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.minQuantityTickSize = reader.string();
+            continue;
+          }
+          case 9: {
+            if (tag !== 72) {
+              break;
+            }
+
+            message.status = reader.int32() as any;
+            continue;
+          }
+          case 10: {
+            if (tag !== 82) {
+              break;
+            }
+
+            message.ticker = reader.string();
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.minNotional = reader.string();
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.adminInfo = AdminInfo.decode(reader, reader.uint32());
+            continue;
+          }
+          case 13: {
+            if (tag !== 104) {
+              break;
+            }
+
+            message.baseDecimals = reader.uint32();
+            continue;
+          }
+          case 14: {
+            if (tag !== 112) {
+              break;
+            }
+
+            message.quoteDecimals = reader.uint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SpotMarketParamUpdateProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        makerFeeRate: isSet(object.makerFeeRate)
+          ? globalThis.String(object.makerFeeRate)
+          : isSet(object.maker_fee_rate)
+            ? globalThis.String(object.maker_fee_rate)
+            : "",
+        takerFeeRate: isSet(object.takerFeeRate)
+          ? globalThis.String(object.takerFeeRate)
+          : isSet(object.taker_fee_rate)
+            ? globalThis.String(object.taker_fee_rate)
+            : "",
+        relayerFeeShareRate: isSet(object.relayerFeeShareRate)
+          ? globalThis.String(object.relayerFeeShareRate)
+          : isSet(object.relayer_fee_share_rate)
+            ? globalThis.String(object.relayer_fee_share_rate)
+            : "",
+        minPriceTickSize: isSet(object.minPriceTickSize)
+          ? globalThis.String(object.minPriceTickSize)
+          : isSet(object.min_price_tick_size)
+            ? globalThis.String(object.min_price_tick_size)
+            : "",
+        minQuantityTickSize: isSet(object.minQuantityTickSize)
+          ? globalThis.String(object.minQuantityTickSize)
+          : isSet(object.min_quantity_tick_size)
+            ? globalThis.String(object.min_quantity_tick_size)
+            : "",
+        status: isSet(object.status) ? marketStatusFromJSON(object.status) : 0,
+        ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
+        minNotional: isSet(object.minNotional)
+          ? globalThis.String(object.minNotional)
+          : isSet(object.min_notional)
+            ? globalThis.String(object.min_notional)
+            : "",
+        adminInfo: isSet(object.adminInfo)
+          ? AdminInfo.fromJSON(object.adminInfo)
+          : isSet(object.admin_info)
+            ? AdminInfo.fromJSON(object.admin_info)
+            : undefined,
+        baseDecimals: isSet(object.baseDecimals)
+          ? globalThis.Number(object.baseDecimals)
+          : isSet(object.base_decimals)
+            ? globalThis.Number(object.base_decimals)
+            : 0,
+        quoteDecimals: isSet(object.quoteDecimals)
+          ? globalThis.Number(object.quoteDecimals)
+          : isSet(object.quote_decimals)
+            ? globalThis.Number(object.quote_decimals)
+            : 0,
+      };
+    },
+
+    toJSON(message: SpotMarketParamUpdateProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.makerFeeRate !== "") {
+        obj.makerFeeRate = message.makerFeeRate;
+      }
+      if (message.takerFeeRate !== "") {
+        obj.takerFeeRate = message.takerFeeRate;
+      }
+      if (message.relayerFeeShareRate !== "") {
+        obj.relayerFeeShareRate = message.relayerFeeShareRate;
+      }
+      if (message.minPriceTickSize !== "") {
+        obj.minPriceTickSize = message.minPriceTickSize;
+      }
+      if (message.minQuantityTickSize !== "") {
+        obj.minQuantityTickSize = message.minQuantityTickSize;
+      }
+      if (message.status !== 0) {
+        obj.status = marketStatusToJSON(message.status);
+      }
+      if (message.ticker !== "") {
+        obj.ticker = message.ticker;
+      }
+      if (message.minNotional !== "") {
+        obj.minNotional = message.minNotional;
+      }
+      if (message.adminInfo !== undefined) {
+        obj.adminInfo = AdminInfo.toJSON(message.adminInfo);
+      }
+      if (message.baseDecimals !== 0) {
+        obj.baseDecimals = Math.round(message.baseDecimals);
+      }
+      if (message.quoteDecimals !== 0) {
+        obj.quoteDecimals = Math.round(message.quoteDecimals);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SpotMarketParamUpdateProposal>, I>>(
+      base?: I,
+    ): SpotMarketParamUpdateProposal {
+      return SpotMarketParamUpdateProposal.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SpotMarketParamUpdateProposal>, I>>(
+      object: I,
+    ): SpotMarketParamUpdateProposal {
+      const message = createBaseSpotMarketParamUpdateProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.marketId = object.marketId ?? "";
+      message.makerFeeRate = object.makerFeeRate ?? "";
+      message.takerFeeRate = object.takerFeeRate ?? "";
+      message.relayerFeeShareRate = object.relayerFeeShareRate ?? "";
+      message.minPriceTickSize = object.minPriceTickSize ?? "";
+      message.minQuantityTickSize = object.minQuantityTickSize ?? "";
+      message.status = object.status ?? 0;
+      message.ticker = object.ticker ?? "";
+      message.minNotional = object.minNotional ?? "";
+      message.adminInfo =
+        object.adminInfo !== undefined && object.adminInfo !== null
+          ? AdminInfo.fromPartial(object.adminInfo)
+          : undefined;
+      message.baseDecimals = object.baseDecimals ?? 0;
+      message.quoteDecimals = object.quoteDecimals ?? 0;
+      return message;
+    },
+  };
 
 function createBaseExchangeEnableProposal(): ExchangeEnableProposal {
   return { title: "", description: "", exchangeType: 0 };
 }
 
 export const ExchangeEnableProposal: MessageFns<ExchangeEnableProposal> = {
-  encode(message: ExchangeEnableProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ExchangeEnableProposal,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -862,8 +879,12 @@ export const ExchangeEnableProposal: MessageFns<ExchangeEnableProposal> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ExchangeEnableProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ExchangeEnableProposal {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExchangeEnableProposal();
     while (reader.pos < end) {
@@ -905,8 +926,12 @@ export const ExchangeEnableProposal: MessageFns<ExchangeEnableProposal> = {
   fromJSON(object: any): ExchangeEnableProposal {
     return {
       title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      exchangeType: isSet(object.exchangeType) ? exchangeTypeFromJSON(object.exchangeType) : 0,
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
+      exchangeType: isSet(object.exchangeType)
+        ? exchangeTypeFromJSON(object.exchangeType)
+        : 0,
     };
   },
 
@@ -924,10 +949,14 @@ export const ExchangeEnableProposal: MessageFns<ExchangeEnableProposal> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ExchangeEnableProposal>, I>>(base?: I): ExchangeEnableProposal {
+  create<I extends Exact<DeepPartial<ExchangeEnableProposal>, I>>(
+    base?: I,
+  ): ExchangeEnableProposal {
     return ExchangeEnableProposal.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ExchangeEnableProposal>, I>>(object: I): ExchangeEnableProposal {
+  fromPartial<I extends Exact<DeepPartial<ExchangeEnableProposal>, I>>(
+    object: I,
+  ): ExchangeEnableProposal {
     const message = createBaseExchangeEnableProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -955,372 +984,543 @@ function createBaseBatchExchangeModificationProposal(): BatchExchangeModificatio
   };
 }
 
-export const BatchExchangeModificationProposal: MessageFns<BatchExchangeModificationProposal> = {
-  encode(message: BatchExchangeModificationProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    for (const v of message.spotMarketParamUpdateProposals) {
-      SpotMarketParamUpdateProposal.encode(v!, writer.uint32(26).fork()).join();
-    }
-    for (const v of message.derivativeMarketParamUpdateProposals) {
-      DerivativeMarketParamUpdateProposal.encode(v!, writer.uint32(34).fork()).join();
-    }
-    for (const v of message.spotMarketLaunchProposals) {
-      SpotMarketLaunchProposal.encode(v!, writer.uint32(42).fork()).join();
-    }
-    for (const v of message.perpetualMarketLaunchProposals) {
-      PerpetualMarketLaunchProposal.encode(v!, writer.uint32(50).fork()).join();
-    }
-    for (const v of message.expiryFuturesMarketLaunchProposals) {
-      ExpiryFuturesMarketLaunchProposal.encode(v!, writer.uint32(58).fork()).join();
-    }
-    if (message.tradingRewardCampaignUpdateProposal !== undefined) {
-      TradingRewardCampaignUpdateProposal.encode(message.tradingRewardCampaignUpdateProposal, writer.uint32(66).fork())
-        .join();
-    }
-    for (const v of message.binaryOptionsMarketLaunchProposals) {
-      BinaryOptionsMarketLaunchProposal.encode(v!, writer.uint32(74).fork()).join();
-    }
-    for (const v of message.binaryOptionsParamUpdateProposals) {
-      BinaryOptionsMarketParamUpdateProposal.encode(v!, writer.uint32(82).fork()).join();
-    }
-    if (message.denomDecimalsUpdateProposal !== undefined) {
-      UpdateDenomDecimalsProposal.encode(message.denomDecimalsUpdateProposal, writer.uint32(90).fork()).join();
-    }
-    if (message.feeDiscountProposal !== undefined) {
-      FeeDiscountProposal.encode(message.feeDiscountProposal, writer.uint32(98).fork()).join();
-    }
-    for (const v of message.marketForcedSettlementProposals) {
-      MarketForcedSettlementProposal.encode(v!, writer.uint32(106).fork()).join();
-    }
-    if (message.denomMinNotionalProposal !== undefined) {
-      DenomMinNotionalProposal.encode(message.denomMinNotionalProposal, writer.uint32(114).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchExchangeModificationProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBatchExchangeModificationProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.spotMarketParamUpdateProposals.push(SpotMarketParamUpdateProposal.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.derivativeMarketParamUpdateProposals.push(
-            DerivativeMarketParamUpdateProposal.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.spotMarketLaunchProposals.push(SpotMarketLaunchProposal.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.perpetualMarketLaunchProposals.push(PerpetualMarketLaunchProposal.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.expiryFuturesMarketLaunchProposals.push(
-            ExpiryFuturesMarketLaunchProposal.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.tradingRewardCampaignUpdateProposal = TradingRewardCampaignUpdateProposal.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        }
-        case 9: {
-          if (tag !== 74) {
-            break;
-          }
-
-          message.binaryOptionsMarketLaunchProposals.push(
-            BinaryOptionsMarketLaunchProposal.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-        case 10: {
-          if (tag !== 82) {
-            break;
-          }
-
-          message.binaryOptionsParamUpdateProposals.push(
-            BinaryOptionsMarketParamUpdateProposal.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.denomDecimalsUpdateProposal = UpdateDenomDecimalsProposal.decode(reader, reader.uint32());
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.feeDiscountProposal = FeeDiscountProposal.decode(reader, reader.uint32());
-          continue;
-        }
-        case 13: {
-          if (tag !== 106) {
-            break;
-          }
-
-          message.marketForcedSettlementProposals.push(MarketForcedSettlementProposal.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 14: {
-          if (tag !== 114) {
-            break;
-          }
-
-          message.denomMinNotionalProposal = DenomMinNotionalProposal.decode(reader, reader.uint32());
-          continue;
-        }
+export const BatchExchangeModificationProposal: MessageFns<BatchExchangeModificationProposal> =
+  {
+    encode(
+      message: BatchExchangeModificationProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.spotMarketParamUpdateProposals) {
+        SpotMarketParamUpdateProposal.encode(
+          v!,
+          writer.uint32(26).fork(),
+        ).join();
+      }
+      for (const v of message.derivativeMarketParamUpdateProposals) {
+        DerivativeMarketParamUpdateProposal.encode(
+          v!,
+          writer.uint32(34).fork(),
+        ).join();
+      }
+      for (const v of message.spotMarketLaunchProposals) {
+        SpotMarketLaunchProposal.encode(v!, writer.uint32(42).fork()).join();
+      }
+      for (const v of message.perpetualMarketLaunchProposals) {
+        PerpetualMarketLaunchProposal.encode(
+          v!,
+          writer.uint32(50).fork(),
+        ).join();
+      }
+      for (const v of message.expiryFuturesMarketLaunchProposals) {
+        ExpiryFuturesMarketLaunchProposal.encode(
+          v!,
+          writer.uint32(58).fork(),
+        ).join();
+      }
+      if (message.tradingRewardCampaignUpdateProposal !== undefined) {
+        TradingRewardCampaignUpdateProposal.encode(
+          message.tradingRewardCampaignUpdateProposal,
+          writer.uint32(66).fork(),
+        ).join();
+      }
+      for (const v of message.binaryOptionsMarketLaunchProposals) {
+        BinaryOptionsMarketLaunchProposal.encode(
+          v!,
+          writer.uint32(74).fork(),
+        ).join();
+      }
+      for (const v of message.binaryOptionsParamUpdateProposals) {
+        BinaryOptionsMarketParamUpdateProposal.encode(
+          v!,
+          writer.uint32(82).fork(),
+        ).join();
+      }
+      if (message.denomDecimalsUpdateProposal !== undefined) {
+        UpdateDenomDecimalsProposal.encode(
+          message.denomDecimalsUpdateProposal,
+          writer.uint32(90).fork(),
+        ).join();
+      }
+      if (message.feeDiscountProposal !== undefined) {
+        FeeDiscountProposal.encode(
+          message.feeDiscountProposal,
+          writer.uint32(98).fork(),
+        ).join();
+      }
+      for (const v of message.marketForcedSettlementProposals) {
+        MarketForcedSettlementProposal.encode(
+          v!,
+          writer.uint32(106).fork(),
+        ).join();
+      }
+      if (message.denomMinNotionalProposal !== undefined) {
+        DenomMinNotionalProposal.encode(
+          message.denomMinNotionalProposal,
+          writer.uint32(114).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): BatchExchangeModificationProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      spotMarketParamUpdateProposals: globalThis.Array.isArray(object?.spotMarketParamUpdateProposals)
-        ? object.spotMarketParamUpdateProposals.map((e: any) => SpotMarketParamUpdateProposal.fromJSON(e))
-        : globalThis.Array.isArray(object?.spot_market_param_update_proposals)
-        ? object.spot_market_param_update_proposals.map((e: any) => SpotMarketParamUpdateProposal.fromJSON(e))
-        : [],
-      derivativeMarketParamUpdateProposals: globalThis.Array.isArray(object?.derivativeMarketParamUpdateProposals)
-        ? object.derivativeMarketParamUpdateProposals.map((e: any) => DerivativeMarketParamUpdateProposal.fromJSON(e))
-        : globalThis.Array.isArray(object?.derivative_market_param_update_proposals)
-        ? object.derivative_market_param_update_proposals.map((e: any) =>
-          DerivativeMarketParamUpdateProposal.fromJSON(e)
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BatchExchangeModificationProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBatchExchangeModificationProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.spotMarketParamUpdateProposals.push(
+              SpotMarketParamUpdateProposal.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.derivativeMarketParamUpdateProposals.push(
+              DerivativeMarketParamUpdateProposal.decode(
+                reader,
+                reader.uint32(),
+              ),
+            );
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.spotMarketLaunchProposals.push(
+              SpotMarketLaunchProposal.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.perpetualMarketLaunchProposals.push(
+              PerpetualMarketLaunchProposal.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.expiryFuturesMarketLaunchProposals.push(
+              ExpiryFuturesMarketLaunchProposal.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.tradingRewardCampaignUpdateProposal =
+              TradingRewardCampaignUpdateProposal.decode(
+                reader,
+                reader.uint32(),
+              );
+            continue;
+          }
+          case 9: {
+            if (tag !== 74) {
+              break;
+            }
+
+            message.binaryOptionsMarketLaunchProposals.push(
+              BinaryOptionsMarketLaunchProposal.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 10: {
+            if (tag !== 82) {
+              break;
+            }
+
+            message.binaryOptionsParamUpdateProposals.push(
+              BinaryOptionsMarketParamUpdateProposal.decode(
+                reader,
+                reader.uint32(),
+              ),
+            );
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.denomDecimalsUpdateProposal =
+              UpdateDenomDecimalsProposal.decode(reader, reader.uint32());
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.feeDiscountProposal = FeeDiscountProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 13: {
+            if (tag !== 106) {
+              break;
+            }
+
+            message.marketForcedSettlementProposals.push(
+              MarketForcedSettlementProposal.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 14: {
+            if (tag !== 114) {
+              break;
+            }
+
+            message.denomMinNotionalProposal = DenomMinNotionalProposal.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BatchExchangeModificationProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        spotMarketParamUpdateProposals: globalThis.Array.isArray(
+          object?.spotMarketParamUpdateProposals,
         )
-        : [],
-      spotMarketLaunchProposals: globalThis.Array.isArray(object?.spotMarketLaunchProposals)
-        ? object.spotMarketLaunchProposals.map((e: any) => SpotMarketLaunchProposal.fromJSON(e))
-        : globalThis.Array.isArray(object?.spot_market_launch_proposals)
-        ? object.spot_market_launch_proposals.map((e: any) => SpotMarketLaunchProposal.fromJSON(e))
-        : [],
-      perpetualMarketLaunchProposals: globalThis.Array.isArray(object?.perpetualMarketLaunchProposals)
-        ? object.perpetualMarketLaunchProposals.map((e: any) => PerpetualMarketLaunchProposal.fromJSON(e))
-        : globalThis.Array.isArray(object?.perpetual_market_launch_proposals)
-        ? object.perpetual_market_launch_proposals.map((e: any) => PerpetualMarketLaunchProposal.fromJSON(e))
-        : [],
-      expiryFuturesMarketLaunchProposals: globalThis.Array.isArray(object?.expiryFuturesMarketLaunchProposals)
-        ? object.expiryFuturesMarketLaunchProposals.map((e: any) => ExpiryFuturesMarketLaunchProposal.fromJSON(e))
-        : globalThis.Array.isArray(object?.expiry_futures_market_launch_proposals)
-        ? object.expiry_futures_market_launch_proposals.map((e: any) => ExpiryFuturesMarketLaunchProposal.fromJSON(e))
-        : [],
-      tradingRewardCampaignUpdateProposal: isSet(object.tradingRewardCampaignUpdateProposal)
-        ? TradingRewardCampaignUpdateProposal.fromJSON(object.tradingRewardCampaignUpdateProposal)
-        : isSet(object.trading_reward_campaign_update_proposal)
-        ? TradingRewardCampaignUpdateProposal.fromJSON(object.trading_reward_campaign_update_proposal)
-        : undefined,
-      binaryOptionsMarketLaunchProposals: globalThis.Array.isArray(object?.binaryOptionsMarketLaunchProposals)
-        ? object.binaryOptionsMarketLaunchProposals.map((e: any) => BinaryOptionsMarketLaunchProposal.fromJSON(e))
-        : globalThis.Array.isArray(object?.binary_options_market_launch_proposals)
-        ? object.binary_options_market_launch_proposals.map((e: any) => BinaryOptionsMarketLaunchProposal.fromJSON(e))
-        : [],
-      binaryOptionsParamUpdateProposals: globalThis.Array.isArray(object?.binaryOptionsParamUpdateProposals)
-        ? object.binaryOptionsParamUpdateProposals.map((e: any) => BinaryOptionsMarketParamUpdateProposal.fromJSON(e))
-        : globalThis.Array.isArray(object?.binary_options_param_update_proposals)
-        ? object.binary_options_param_update_proposals.map((e: any) =>
-          BinaryOptionsMarketParamUpdateProposal.fromJSON(e)
+          ? object.spotMarketParamUpdateProposals.map((e: any) =>
+              SpotMarketParamUpdateProposal.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.spot_market_param_update_proposals)
+            ? object.spot_market_param_update_proposals.map((e: any) =>
+                SpotMarketParamUpdateProposal.fromJSON(e),
+              )
+            : [],
+        derivativeMarketParamUpdateProposals: globalThis.Array.isArray(
+          object?.derivativeMarketParamUpdateProposals,
         )
-        : [],
-      denomDecimalsUpdateProposal: isSet(object.denomDecimalsUpdateProposal)
-        ? UpdateDenomDecimalsProposal.fromJSON(object.denomDecimalsUpdateProposal)
-        : isSet(object.denom_decimals_update_proposal)
-        ? UpdateDenomDecimalsProposal.fromJSON(object.denom_decimals_update_proposal)
-        : undefined,
-      feeDiscountProposal: isSet(object.feeDiscountProposal)
-        ? FeeDiscountProposal.fromJSON(object.feeDiscountProposal)
-        : isSet(object.fee_discount_proposal)
-        ? FeeDiscountProposal.fromJSON(object.fee_discount_proposal)
-        : undefined,
-      marketForcedSettlementProposals: globalThis.Array.isArray(object?.marketForcedSettlementProposals)
-        ? object.marketForcedSettlementProposals.map((e: any) => MarketForcedSettlementProposal.fromJSON(e))
-        : globalThis.Array.isArray(object?.market_forced_settlement_proposals)
-        ? object.market_forced_settlement_proposals.map((e: any) => MarketForcedSettlementProposal.fromJSON(e))
-        : [],
-      denomMinNotionalProposal: isSet(object.denomMinNotionalProposal)
-        ? DenomMinNotionalProposal.fromJSON(object.denomMinNotionalProposal)
-        : isSet(object.denom_min_notional_proposal)
-        ? DenomMinNotionalProposal.fromJSON(object.denom_min_notional_proposal)
-        : undefined,
-    };
-  },
+          ? object.derivativeMarketParamUpdateProposals.map((e: any) =>
+              DerivativeMarketParamUpdateProposal.fromJSON(e),
+            )
+          : globalThis.Array.isArray(
+                object?.derivative_market_param_update_proposals,
+              )
+            ? object.derivative_market_param_update_proposals.map((e: any) =>
+                DerivativeMarketParamUpdateProposal.fromJSON(e),
+              )
+            : [],
+        spotMarketLaunchProposals: globalThis.Array.isArray(
+          object?.spotMarketLaunchProposals,
+        )
+          ? object.spotMarketLaunchProposals.map((e: any) =>
+              SpotMarketLaunchProposal.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.spot_market_launch_proposals)
+            ? object.spot_market_launch_proposals.map((e: any) =>
+                SpotMarketLaunchProposal.fromJSON(e),
+              )
+            : [],
+        perpetualMarketLaunchProposals: globalThis.Array.isArray(
+          object?.perpetualMarketLaunchProposals,
+        )
+          ? object.perpetualMarketLaunchProposals.map((e: any) =>
+              PerpetualMarketLaunchProposal.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.perpetual_market_launch_proposals)
+            ? object.perpetual_market_launch_proposals.map((e: any) =>
+                PerpetualMarketLaunchProposal.fromJSON(e),
+              )
+            : [],
+        expiryFuturesMarketLaunchProposals: globalThis.Array.isArray(
+          object?.expiryFuturesMarketLaunchProposals,
+        )
+          ? object.expiryFuturesMarketLaunchProposals.map((e: any) =>
+              ExpiryFuturesMarketLaunchProposal.fromJSON(e),
+            )
+          : globalThis.Array.isArray(
+                object?.expiry_futures_market_launch_proposals,
+              )
+            ? object.expiry_futures_market_launch_proposals.map((e: any) =>
+                ExpiryFuturesMarketLaunchProposal.fromJSON(e),
+              )
+            : [],
+        tradingRewardCampaignUpdateProposal: isSet(
+          object.tradingRewardCampaignUpdateProposal,
+        )
+          ? TradingRewardCampaignUpdateProposal.fromJSON(
+              object.tradingRewardCampaignUpdateProposal,
+            )
+          : isSet(object.trading_reward_campaign_update_proposal)
+            ? TradingRewardCampaignUpdateProposal.fromJSON(
+                object.trading_reward_campaign_update_proposal,
+              )
+            : undefined,
+        binaryOptionsMarketLaunchProposals: globalThis.Array.isArray(
+          object?.binaryOptionsMarketLaunchProposals,
+        )
+          ? object.binaryOptionsMarketLaunchProposals.map((e: any) =>
+              BinaryOptionsMarketLaunchProposal.fromJSON(e),
+            )
+          : globalThis.Array.isArray(
+                object?.binary_options_market_launch_proposals,
+              )
+            ? object.binary_options_market_launch_proposals.map((e: any) =>
+                BinaryOptionsMarketLaunchProposal.fromJSON(e),
+              )
+            : [],
+        binaryOptionsParamUpdateProposals: globalThis.Array.isArray(
+          object?.binaryOptionsParamUpdateProposals,
+        )
+          ? object.binaryOptionsParamUpdateProposals.map((e: any) =>
+              BinaryOptionsMarketParamUpdateProposal.fromJSON(e),
+            )
+          : globalThis.Array.isArray(
+                object?.binary_options_param_update_proposals,
+              )
+            ? object.binary_options_param_update_proposals.map((e: any) =>
+                BinaryOptionsMarketParamUpdateProposal.fromJSON(e),
+              )
+            : [],
+        denomDecimalsUpdateProposal: isSet(object.denomDecimalsUpdateProposal)
+          ? UpdateDenomDecimalsProposal.fromJSON(
+              object.denomDecimalsUpdateProposal,
+            )
+          : isSet(object.denom_decimals_update_proposal)
+            ? UpdateDenomDecimalsProposal.fromJSON(
+                object.denom_decimals_update_proposal,
+              )
+            : undefined,
+        feeDiscountProposal: isSet(object.feeDiscountProposal)
+          ? FeeDiscountProposal.fromJSON(object.feeDiscountProposal)
+          : isSet(object.fee_discount_proposal)
+            ? FeeDiscountProposal.fromJSON(object.fee_discount_proposal)
+            : undefined,
+        marketForcedSettlementProposals: globalThis.Array.isArray(
+          object?.marketForcedSettlementProposals,
+        )
+          ? object.marketForcedSettlementProposals.map((e: any) =>
+              MarketForcedSettlementProposal.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.market_forced_settlement_proposals)
+            ? object.market_forced_settlement_proposals.map((e: any) =>
+                MarketForcedSettlementProposal.fromJSON(e),
+              )
+            : [],
+        denomMinNotionalProposal: isSet(object.denomMinNotionalProposal)
+          ? DenomMinNotionalProposal.fromJSON(object.denomMinNotionalProposal)
+          : isSet(object.denom_min_notional_proposal)
+            ? DenomMinNotionalProposal.fromJSON(
+                object.denom_min_notional_proposal,
+              )
+            : undefined,
+      };
+    },
 
-  toJSON(message: BatchExchangeModificationProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.spotMarketParamUpdateProposals?.length) {
-      obj.spotMarketParamUpdateProposals = message.spotMarketParamUpdateProposals.map((e) =>
-        SpotMarketParamUpdateProposal.toJSON(e)
-      );
-    }
-    if (message.derivativeMarketParamUpdateProposals?.length) {
-      obj.derivativeMarketParamUpdateProposals = message.derivativeMarketParamUpdateProposals.map((e) =>
-        DerivativeMarketParamUpdateProposal.toJSON(e)
-      );
-    }
-    if (message.spotMarketLaunchProposals?.length) {
-      obj.spotMarketLaunchProposals = message.spotMarketLaunchProposals.map((e) => SpotMarketLaunchProposal.toJSON(e));
-    }
-    if (message.perpetualMarketLaunchProposals?.length) {
-      obj.perpetualMarketLaunchProposals = message.perpetualMarketLaunchProposals.map((e) =>
-        PerpetualMarketLaunchProposal.toJSON(e)
-      );
-    }
-    if (message.expiryFuturesMarketLaunchProposals?.length) {
-      obj.expiryFuturesMarketLaunchProposals = message.expiryFuturesMarketLaunchProposals.map((e) =>
-        ExpiryFuturesMarketLaunchProposal.toJSON(e)
-      );
-    }
-    if (message.tradingRewardCampaignUpdateProposal !== undefined) {
-      obj.tradingRewardCampaignUpdateProposal = TradingRewardCampaignUpdateProposal.toJSON(
-        message.tradingRewardCampaignUpdateProposal,
-      );
-    }
-    if (message.binaryOptionsMarketLaunchProposals?.length) {
-      obj.binaryOptionsMarketLaunchProposals = message.binaryOptionsMarketLaunchProposals.map((e) =>
-        BinaryOptionsMarketLaunchProposal.toJSON(e)
-      );
-    }
-    if (message.binaryOptionsParamUpdateProposals?.length) {
-      obj.binaryOptionsParamUpdateProposals = message.binaryOptionsParamUpdateProposals.map((e) =>
-        BinaryOptionsMarketParamUpdateProposal.toJSON(e)
-      );
-    }
-    if (message.denomDecimalsUpdateProposal !== undefined) {
-      obj.denomDecimalsUpdateProposal = UpdateDenomDecimalsProposal.toJSON(message.denomDecimalsUpdateProposal);
-    }
-    if (message.feeDiscountProposal !== undefined) {
-      obj.feeDiscountProposal = FeeDiscountProposal.toJSON(message.feeDiscountProposal);
-    }
-    if (message.marketForcedSettlementProposals?.length) {
-      obj.marketForcedSettlementProposals = message.marketForcedSettlementProposals.map((e) =>
-        MarketForcedSettlementProposal.toJSON(e)
-      );
-    }
-    if (message.denomMinNotionalProposal !== undefined) {
-      obj.denomMinNotionalProposal = DenomMinNotionalProposal.toJSON(message.denomMinNotionalProposal);
-    }
-    return obj;
-  },
+    toJSON(message: BatchExchangeModificationProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.spotMarketParamUpdateProposals?.length) {
+        obj.spotMarketParamUpdateProposals =
+          message.spotMarketParamUpdateProposals.map((e) =>
+            SpotMarketParamUpdateProposal.toJSON(e),
+          );
+      }
+      if (message.derivativeMarketParamUpdateProposals?.length) {
+        obj.derivativeMarketParamUpdateProposals =
+          message.derivativeMarketParamUpdateProposals.map((e) =>
+            DerivativeMarketParamUpdateProposal.toJSON(e),
+          );
+      }
+      if (message.spotMarketLaunchProposals?.length) {
+        obj.spotMarketLaunchProposals = message.spotMarketLaunchProposals.map(
+          (e) => SpotMarketLaunchProposal.toJSON(e),
+        );
+      }
+      if (message.perpetualMarketLaunchProposals?.length) {
+        obj.perpetualMarketLaunchProposals =
+          message.perpetualMarketLaunchProposals.map((e) =>
+            PerpetualMarketLaunchProposal.toJSON(e),
+          );
+      }
+      if (message.expiryFuturesMarketLaunchProposals?.length) {
+        obj.expiryFuturesMarketLaunchProposals =
+          message.expiryFuturesMarketLaunchProposals.map((e) =>
+            ExpiryFuturesMarketLaunchProposal.toJSON(e),
+          );
+      }
+      if (message.tradingRewardCampaignUpdateProposal !== undefined) {
+        obj.tradingRewardCampaignUpdateProposal =
+          TradingRewardCampaignUpdateProposal.toJSON(
+            message.tradingRewardCampaignUpdateProposal,
+          );
+      }
+      if (message.binaryOptionsMarketLaunchProposals?.length) {
+        obj.binaryOptionsMarketLaunchProposals =
+          message.binaryOptionsMarketLaunchProposals.map((e) =>
+            BinaryOptionsMarketLaunchProposal.toJSON(e),
+          );
+      }
+      if (message.binaryOptionsParamUpdateProposals?.length) {
+        obj.binaryOptionsParamUpdateProposals =
+          message.binaryOptionsParamUpdateProposals.map((e) =>
+            BinaryOptionsMarketParamUpdateProposal.toJSON(e),
+          );
+      }
+      if (message.denomDecimalsUpdateProposal !== undefined) {
+        obj.denomDecimalsUpdateProposal = UpdateDenomDecimalsProposal.toJSON(
+          message.denomDecimalsUpdateProposal,
+        );
+      }
+      if (message.feeDiscountProposal !== undefined) {
+        obj.feeDiscountProposal = FeeDiscountProposal.toJSON(
+          message.feeDiscountProposal,
+        );
+      }
+      if (message.marketForcedSettlementProposals?.length) {
+        obj.marketForcedSettlementProposals =
+          message.marketForcedSettlementProposals.map((e) =>
+            MarketForcedSettlementProposal.toJSON(e),
+          );
+      }
+      if (message.denomMinNotionalProposal !== undefined) {
+        obj.denomMinNotionalProposal = DenomMinNotionalProposal.toJSON(
+          message.denomMinNotionalProposal,
+        );
+      }
+      return obj;
+    },
 
-  create<I extends Exact<DeepPartial<BatchExchangeModificationProposal>, I>>(
-    base?: I,
-  ): BatchExchangeModificationProposal {
-    return BatchExchangeModificationProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BatchExchangeModificationProposal>, I>>(
-    object: I,
-  ): BatchExchangeModificationProposal {
-    const message = createBaseBatchExchangeModificationProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.spotMarketParamUpdateProposals =
-      object.spotMarketParamUpdateProposals?.map((e) => SpotMarketParamUpdateProposal.fromPartial(e)) || [];
-    message.derivativeMarketParamUpdateProposals =
-      object.derivativeMarketParamUpdateProposals?.map((e) => DerivativeMarketParamUpdateProposal.fromPartial(e)) || [];
-    message.spotMarketLaunchProposals =
-      object.spotMarketLaunchProposals?.map((e) => SpotMarketLaunchProposal.fromPartial(e)) || [];
-    message.perpetualMarketLaunchProposals =
-      object.perpetualMarketLaunchProposals?.map((e) => PerpetualMarketLaunchProposal.fromPartial(e)) || [];
-    message.expiryFuturesMarketLaunchProposals =
-      object.expiryFuturesMarketLaunchProposals?.map((e) => ExpiryFuturesMarketLaunchProposal.fromPartial(e)) || [];
-    message.tradingRewardCampaignUpdateProposal =
-      (object.tradingRewardCampaignUpdateProposal !== undefined && object.tradingRewardCampaignUpdateProposal !== null)
-        ? TradingRewardCampaignUpdateProposal.fromPartial(object.tradingRewardCampaignUpdateProposal)
-        : undefined;
-    message.binaryOptionsMarketLaunchProposals =
-      object.binaryOptionsMarketLaunchProposals?.map((e) => BinaryOptionsMarketLaunchProposal.fromPartial(e)) || [];
-    message.binaryOptionsParamUpdateProposals =
-      object.binaryOptionsParamUpdateProposals?.map((e) => BinaryOptionsMarketParamUpdateProposal.fromPartial(e)) || [];
-    message.denomDecimalsUpdateProposal =
-      (object.denomDecimalsUpdateProposal !== undefined && object.denomDecimalsUpdateProposal !== null)
-        ? UpdateDenomDecimalsProposal.fromPartial(object.denomDecimalsUpdateProposal)
-        : undefined;
-    message.feeDiscountProposal = (object.feeDiscountProposal !== undefined && object.feeDiscountProposal !== null)
-      ? FeeDiscountProposal.fromPartial(object.feeDiscountProposal)
-      : undefined;
-    message.marketForcedSettlementProposals =
-      object.marketForcedSettlementProposals?.map((e) => MarketForcedSettlementProposal.fromPartial(e)) || [];
-    message.denomMinNotionalProposal =
-      (object.denomMinNotionalProposal !== undefined && object.denomMinNotionalProposal !== null)
-        ? DenomMinNotionalProposal.fromPartial(object.denomMinNotionalProposal)
-        : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<BatchExchangeModificationProposal>, I>>(
+      base?: I,
+    ): BatchExchangeModificationProposal {
+      return BatchExchangeModificationProposal.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<BatchExchangeModificationProposal>, I>,
+    >(object: I): BatchExchangeModificationProposal {
+      const message = createBaseBatchExchangeModificationProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.spotMarketParamUpdateProposals =
+        object.spotMarketParamUpdateProposals?.map((e) =>
+          SpotMarketParamUpdateProposal.fromPartial(e),
+        ) || [];
+      message.derivativeMarketParamUpdateProposals =
+        object.derivativeMarketParamUpdateProposals?.map((e) =>
+          DerivativeMarketParamUpdateProposal.fromPartial(e),
+        ) || [];
+      message.spotMarketLaunchProposals =
+        object.spotMarketLaunchProposals?.map((e) =>
+          SpotMarketLaunchProposal.fromPartial(e),
+        ) || [];
+      message.perpetualMarketLaunchProposals =
+        object.perpetualMarketLaunchProposals?.map((e) =>
+          PerpetualMarketLaunchProposal.fromPartial(e),
+        ) || [];
+      message.expiryFuturesMarketLaunchProposals =
+        object.expiryFuturesMarketLaunchProposals?.map((e) =>
+          ExpiryFuturesMarketLaunchProposal.fromPartial(e),
+        ) || [];
+      message.tradingRewardCampaignUpdateProposal =
+        object.tradingRewardCampaignUpdateProposal !== undefined &&
+        object.tradingRewardCampaignUpdateProposal !== null
+          ? TradingRewardCampaignUpdateProposal.fromPartial(
+              object.tradingRewardCampaignUpdateProposal,
+            )
+          : undefined;
+      message.binaryOptionsMarketLaunchProposals =
+        object.binaryOptionsMarketLaunchProposals?.map((e) =>
+          BinaryOptionsMarketLaunchProposal.fromPartial(e),
+        ) || [];
+      message.binaryOptionsParamUpdateProposals =
+        object.binaryOptionsParamUpdateProposals?.map((e) =>
+          BinaryOptionsMarketParamUpdateProposal.fromPartial(e),
+        ) || [];
+      message.denomDecimalsUpdateProposal =
+        object.denomDecimalsUpdateProposal !== undefined &&
+        object.denomDecimalsUpdateProposal !== null
+          ? UpdateDenomDecimalsProposal.fromPartial(
+              object.denomDecimalsUpdateProposal,
+            )
+          : undefined;
+      message.feeDiscountProposal =
+        object.feeDiscountProposal !== undefined &&
+        object.feeDiscountProposal !== null
+          ? FeeDiscountProposal.fromPartial(object.feeDiscountProposal)
+          : undefined;
+      message.marketForcedSettlementProposals =
+        object.marketForcedSettlementProposals?.map((e) =>
+          MarketForcedSettlementProposal.fromPartial(e),
+        ) || [];
+      message.denomMinNotionalProposal =
+        object.denomMinNotionalProposal !== undefined &&
+        object.denomMinNotionalProposal !== null
+          ? DenomMinNotionalProposal.fromPartial(
+              object.denomMinNotionalProposal,
+            )
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseSpotMarketLaunchProposal(): SpotMarketLaunchProposal {
   return {
@@ -1341,7 +1541,10 @@ function createBaseSpotMarketLaunchProposal(): SpotMarketLaunchProposal {
 }
 
 export const SpotMarketLaunchProposal: MessageFns<SpotMarketLaunchProposal> = {
-  encode(message: SpotMarketLaunchProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotMarketLaunchProposal,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -1384,8 +1587,12 @@ export const SpotMarketLaunchProposal: MessageFns<SpotMarketLaunchProposal> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SpotMarketLaunchProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SpotMarketLaunchProposal {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotMarketLaunchProposal();
     while (reader.pos < end) {
@@ -1507,58 +1714,60 @@ export const SpotMarketLaunchProposal: MessageFns<SpotMarketLaunchProposal> = {
   fromJSON(object: any): SpotMarketLaunchProposal {
     return {
       title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
       ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
       baseDenom: isSet(object.baseDenom)
         ? globalThis.String(object.baseDenom)
         : isSet(object.base_denom)
-        ? globalThis.String(object.base_denom)
-        : "",
+          ? globalThis.String(object.base_denom)
+          : "",
       quoteDenom: isSet(object.quoteDenom)
         ? globalThis.String(object.quoteDenom)
         : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
+          ? globalThis.String(object.quote_denom)
+          : "",
       minPriceTickSize: isSet(object.minPriceTickSize)
         ? globalThis.String(object.minPriceTickSize)
         : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
+          ? globalThis.String(object.min_price_tick_size)
+          : "",
       minQuantityTickSize: isSet(object.minQuantityTickSize)
         ? globalThis.String(object.minQuantityTickSize)
         : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
+          ? globalThis.String(object.min_quantity_tick_size)
+          : "",
       makerFeeRate: isSet(object.makerFeeRate)
         ? globalThis.String(object.makerFeeRate)
         : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
+          ? globalThis.String(object.maker_fee_rate)
+          : "",
       takerFeeRate: isSet(object.takerFeeRate)
         ? globalThis.String(object.takerFeeRate)
         : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
+          ? globalThis.String(object.taker_fee_rate)
+          : "",
       minNotional: isSet(object.minNotional)
         ? globalThis.String(object.minNotional)
         : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
+          ? globalThis.String(object.min_notional)
+          : "",
       adminInfo: isSet(object.adminInfo)
         ? AdminInfo.fromJSON(object.adminInfo)
         : isSet(object.admin_info)
-        ? AdminInfo.fromJSON(object.admin_info)
-        : undefined,
+          ? AdminInfo.fromJSON(object.admin_info)
+          : undefined,
       baseDecimals: isSet(object.baseDecimals)
         ? globalThis.Number(object.baseDecimals)
         : isSet(object.base_decimals)
-        ? globalThis.Number(object.base_decimals)
-        : 0,
+          ? globalThis.Number(object.base_decimals)
+          : 0,
       quoteDecimals: isSet(object.quoteDecimals)
         ? globalThis.Number(object.quoteDecimals)
         : isSet(object.quote_decimals)
-        ? globalThis.Number(object.quote_decimals)
-        : 0,
+          ? globalThis.Number(object.quote_decimals)
+          : 0,
     };
   },
 
@@ -1606,10 +1815,14 @@ export const SpotMarketLaunchProposal: MessageFns<SpotMarketLaunchProposal> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SpotMarketLaunchProposal>, I>>(base?: I): SpotMarketLaunchProposal {
+  create<I extends Exact<DeepPartial<SpotMarketLaunchProposal>, I>>(
+    base?: I,
+  ): SpotMarketLaunchProposal {
     return SpotMarketLaunchProposal.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotMarketLaunchProposal>, I>>(object: I): SpotMarketLaunchProposal {
+  fromPartial<I extends Exact<DeepPartial<SpotMarketLaunchProposal>, I>>(
+    object: I,
+  ): SpotMarketLaunchProposal {
     const message = createBaseSpotMarketLaunchProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -1621,9 +1834,10 @@ export const SpotMarketLaunchProposal: MessageFns<SpotMarketLaunchProposal> = {
     message.makerFeeRate = object.makerFeeRate ?? "";
     message.takerFeeRate = object.takerFeeRate ?? "";
     message.minNotional = object.minNotional ?? "";
-    message.adminInfo = (object.adminInfo !== undefined && object.adminInfo !== null)
-      ? AdminInfo.fromPartial(object.adminInfo)
-      : undefined;
+    message.adminInfo =
+      object.adminInfo !== undefined && object.adminInfo !== null
+        ? AdminInfo.fromPartial(object.adminInfo)
+        : undefined;
     message.baseDecimals = object.baseDecimals ?? 0;
     message.quoteDecimals = object.quoteDecimals ?? 0;
     return message;
@@ -1651,357 +1865,370 @@ function createBasePerpetualMarketLaunchProposal(): PerpetualMarketLaunchProposa
   };
 }
 
-export const PerpetualMarketLaunchProposal: MessageFns<PerpetualMarketLaunchProposal> = {
-  encode(message: PerpetualMarketLaunchProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.ticker !== "") {
-      writer.uint32(26).string(message.ticker);
-    }
-    if (message.quoteDenom !== "") {
-      writer.uint32(34).string(message.quoteDenom);
-    }
-    if (message.oracleBase !== "") {
-      writer.uint32(42).string(message.oracleBase);
-    }
-    if (message.oracleQuote !== "") {
-      writer.uint32(50).string(message.oracleQuote);
-    }
-    if (message.oracleScaleFactor !== 0) {
-      writer.uint32(56).uint32(message.oracleScaleFactor);
-    }
-    if (message.oracleType !== 0) {
-      writer.uint32(64).int32(message.oracleType);
-    }
-    if (message.initialMarginRatio !== "") {
-      writer.uint32(74).string(message.initialMarginRatio);
-    }
-    if (message.maintenanceMarginRatio !== "") {
-      writer.uint32(82).string(message.maintenanceMarginRatio);
-    }
-    if (message.makerFeeRate !== "") {
-      writer.uint32(90).string(message.makerFeeRate);
-    }
-    if (message.takerFeeRate !== "") {
-      writer.uint32(98).string(message.takerFeeRate);
-    }
-    if (message.minPriceTickSize !== "") {
-      writer.uint32(106).string(message.minPriceTickSize);
-    }
-    if (message.minQuantityTickSize !== "") {
-      writer.uint32(114).string(message.minQuantityTickSize);
-    }
-    if (message.minNotional !== "") {
-      writer.uint32(122).string(message.minNotional);
-    }
-    if (message.adminInfo !== undefined) {
-      AdminInfo.encode(message.adminInfo, writer.uint32(130).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): PerpetualMarketLaunchProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePerpetualMarketLaunchProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.ticker = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.quoteDenom = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.oracleBase = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.oracleQuote = reader.string();
-          continue;
-        }
-        case 7: {
-          if (tag !== 56) {
-            break;
-          }
-
-          message.oracleScaleFactor = reader.uint32();
-          continue;
-        }
-        case 8: {
-          if (tag !== 64) {
-            break;
-          }
-
-          message.oracleType = reader.int32() as any;
-          continue;
-        }
-        case 9: {
-          if (tag !== 74) {
-            break;
-          }
-
-          message.initialMarginRatio = reader.string();
-          continue;
-        }
-        case 10: {
-          if (tag !== 82) {
-            break;
-          }
-
-          message.maintenanceMarginRatio = reader.string();
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.makerFeeRate = reader.string();
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.takerFeeRate = reader.string();
-          continue;
-        }
-        case 13: {
-          if (tag !== 106) {
-            break;
-          }
-
-          message.minPriceTickSize = reader.string();
-          continue;
-        }
-        case 14: {
-          if (tag !== 114) {
-            break;
-          }
-
-          message.minQuantityTickSize = reader.string();
-          continue;
-        }
-        case 15: {
-          if (tag !== 122) {
-            break;
-          }
-
-          message.minNotional = reader.string();
-          continue;
-        }
-        case 16: {
-          if (tag !== 130) {
-            break;
-          }
-
-          message.adminInfo = AdminInfo.decode(reader, reader.uint32());
-          continue;
-        }
+export const PerpetualMarketLaunchProposal: MessageFns<PerpetualMarketLaunchProposal> =
+  {
+    encode(
+      message: PerpetualMarketLaunchProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.ticker !== "") {
+        writer.uint32(26).string(message.ticker);
+      }
+      if (message.quoteDenom !== "") {
+        writer.uint32(34).string(message.quoteDenom);
+      }
+      if (message.oracleBase !== "") {
+        writer.uint32(42).string(message.oracleBase);
+      }
+      if (message.oracleQuote !== "") {
+        writer.uint32(50).string(message.oracleQuote);
+      }
+      if (message.oracleScaleFactor !== 0) {
+        writer.uint32(56).uint32(message.oracleScaleFactor);
+      }
+      if (message.oracleType !== 0) {
+        writer.uint32(64).int32(message.oracleType);
+      }
+      if (message.initialMarginRatio !== "") {
+        writer.uint32(74).string(message.initialMarginRatio);
+      }
+      if (message.maintenanceMarginRatio !== "") {
+        writer.uint32(82).string(message.maintenanceMarginRatio);
+      }
+      if (message.makerFeeRate !== "") {
+        writer.uint32(90).string(message.makerFeeRate);
+      }
+      if (message.takerFeeRate !== "") {
+        writer.uint32(98).string(message.takerFeeRate);
+      }
+      if (message.minPriceTickSize !== "") {
+        writer.uint32(106).string(message.minPriceTickSize);
+      }
+      if (message.minQuantityTickSize !== "") {
+        writer.uint32(114).string(message.minQuantityTickSize);
+      }
+      if (message.minNotional !== "") {
+        writer.uint32(122).string(message.minNotional);
+      }
+      if (message.adminInfo !== undefined) {
+        AdminInfo.encode(message.adminInfo, writer.uint32(130).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): PerpetualMarketLaunchProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
-      quoteDenom: isSet(object.quoteDenom)
-        ? globalThis.String(object.quoteDenom)
-        : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
-      oracleBase: isSet(object.oracleBase)
-        ? globalThis.String(object.oracleBase)
-        : isSet(object.oracle_base)
-        ? globalThis.String(object.oracle_base)
-        : "",
-      oracleQuote: isSet(object.oracleQuote)
-        ? globalThis.String(object.oracleQuote)
-        : isSet(object.oracle_quote)
-        ? globalThis.String(object.oracle_quote)
-        : "",
-      oracleScaleFactor: isSet(object.oracleScaleFactor)
-        ? globalThis.Number(object.oracleScaleFactor)
-        : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
-      oracleType: isSet(object.oracleType)
-        ? oracleTypeFromJSON(object.oracleType)
-        : isSet(object.oracle_type)
-        ? oracleTypeFromJSON(object.oracle_type)
-        : 0,
-      initialMarginRatio: isSet(object.initialMarginRatio)
-        ? globalThis.String(object.initialMarginRatio)
-        : isSet(object.initial_margin_ratio)
-        ? globalThis.String(object.initial_margin_ratio)
-        : "",
-      maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
-        ? globalThis.String(object.maintenanceMarginRatio)
-        : isSet(object.maintenance_margin_ratio)
-        ? globalThis.String(object.maintenance_margin_ratio)
-        : "",
-      makerFeeRate: isSet(object.makerFeeRate)
-        ? globalThis.String(object.makerFeeRate)
-        : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
-      takerFeeRate: isSet(object.takerFeeRate)
-        ? globalThis.String(object.takerFeeRate)
-        : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
-      minPriceTickSize: isSet(object.minPriceTickSize)
-        ? globalThis.String(object.minPriceTickSize)
-        : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
-      minQuantityTickSize: isSet(object.minQuantityTickSize)
-        ? globalThis.String(object.minQuantityTickSize)
-        : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
-      minNotional: isSet(object.minNotional)
-        ? globalThis.String(object.minNotional)
-        : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
-      adminInfo: isSet(object.adminInfo)
-        ? AdminInfo.fromJSON(object.adminInfo)
-        : isSet(object.admin_info)
-        ? AdminInfo.fromJSON(object.admin_info)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PerpetualMarketLaunchProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePerpetualMarketLaunchProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: PerpetualMarketLaunchProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.ticker !== "") {
-      obj.ticker = message.ticker;
-    }
-    if (message.quoteDenom !== "") {
-      obj.quoteDenom = message.quoteDenom;
-    }
-    if (message.oracleBase !== "") {
-      obj.oracleBase = message.oracleBase;
-    }
-    if (message.oracleQuote !== "") {
-      obj.oracleQuote = message.oracleQuote;
-    }
-    if (message.oracleScaleFactor !== 0) {
-      obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
-    }
-    if (message.oracleType !== 0) {
-      obj.oracleType = oracleTypeToJSON(message.oracleType);
-    }
-    if (message.initialMarginRatio !== "") {
-      obj.initialMarginRatio = message.initialMarginRatio;
-    }
-    if (message.maintenanceMarginRatio !== "") {
-      obj.maintenanceMarginRatio = message.maintenanceMarginRatio;
-    }
-    if (message.makerFeeRate !== "") {
-      obj.makerFeeRate = message.makerFeeRate;
-    }
-    if (message.takerFeeRate !== "") {
-      obj.takerFeeRate = message.takerFeeRate;
-    }
-    if (message.minPriceTickSize !== "") {
-      obj.minPriceTickSize = message.minPriceTickSize;
-    }
-    if (message.minQuantityTickSize !== "") {
-      obj.minQuantityTickSize = message.minQuantityTickSize;
-    }
-    if (message.minNotional !== "") {
-      obj.minNotional = message.minNotional;
-    }
-    if (message.adminInfo !== undefined) {
-      obj.adminInfo = AdminInfo.toJSON(message.adminInfo);
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<PerpetualMarketLaunchProposal>, I>>(base?: I): PerpetualMarketLaunchProposal {
-    return PerpetualMarketLaunchProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<PerpetualMarketLaunchProposal>, I>>(
-    object: I,
-  ): PerpetualMarketLaunchProposal {
-    const message = createBasePerpetualMarketLaunchProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.ticker = object.ticker ?? "";
-    message.quoteDenom = object.quoteDenom ?? "";
-    message.oracleBase = object.oracleBase ?? "";
-    message.oracleQuote = object.oracleQuote ?? "";
-    message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
-    message.oracleType = object.oracleType ?? 0;
-    message.initialMarginRatio = object.initialMarginRatio ?? "";
-    message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
-    message.makerFeeRate = object.makerFeeRate ?? "";
-    message.takerFeeRate = object.takerFeeRate ?? "";
-    message.minPriceTickSize = object.minPriceTickSize ?? "";
-    message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.minNotional = object.minNotional ?? "";
-    message.adminInfo = (object.adminInfo !== undefined && object.adminInfo !== null)
-      ? AdminInfo.fromPartial(object.adminInfo)
-      : undefined;
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.ticker = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.quoteDenom = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.oracleBase = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.oracleQuote = reader.string();
+            continue;
+          }
+          case 7: {
+            if (tag !== 56) {
+              break;
+            }
+
+            message.oracleScaleFactor = reader.uint32();
+            continue;
+          }
+          case 8: {
+            if (tag !== 64) {
+              break;
+            }
+
+            message.oracleType = reader.int32() as any;
+            continue;
+          }
+          case 9: {
+            if (tag !== 74) {
+              break;
+            }
+
+            message.initialMarginRatio = reader.string();
+            continue;
+          }
+          case 10: {
+            if (tag !== 82) {
+              break;
+            }
+
+            message.maintenanceMarginRatio = reader.string();
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.makerFeeRate = reader.string();
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.takerFeeRate = reader.string();
+            continue;
+          }
+          case 13: {
+            if (tag !== 106) {
+              break;
+            }
+
+            message.minPriceTickSize = reader.string();
+            continue;
+          }
+          case 14: {
+            if (tag !== 114) {
+              break;
+            }
+
+            message.minQuantityTickSize = reader.string();
+            continue;
+          }
+          case 15: {
+            if (tag !== 122) {
+              break;
+            }
+
+            message.minNotional = reader.string();
+            continue;
+          }
+          case 16: {
+            if (tag !== 130) {
+              break;
+            }
+
+            message.adminInfo = AdminInfo.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): PerpetualMarketLaunchProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
+        quoteDenom: isSet(object.quoteDenom)
+          ? globalThis.String(object.quoteDenom)
+          : isSet(object.quote_denom)
+            ? globalThis.String(object.quote_denom)
+            : "",
+        oracleBase: isSet(object.oracleBase)
+          ? globalThis.String(object.oracleBase)
+          : isSet(object.oracle_base)
+            ? globalThis.String(object.oracle_base)
+            : "",
+        oracleQuote: isSet(object.oracleQuote)
+          ? globalThis.String(object.oracleQuote)
+          : isSet(object.oracle_quote)
+            ? globalThis.String(object.oracle_quote)
+            : "",
+        oracleScaleFactor: isSet(object.oracleScaleFactor)
+          ? globalThis.Number(object.oracleScaleFactor)
+          : isSet(object.oracle_scale_factor)
+            ? globalThis.Number(object.oracle_scale_factor)
+            : 0,
+        oracleType: isSet(object.oracleType)
+          ? oracleTypeFromJSON(object.oracleType)
+          : isSet(object.oracle_type)
+            ? oracleTypeFromJSON(object.oracle_type)
+            : 0,
+        initialMarginRatio: isSet(object.initialMarginRatio)
+          ? globalThis.String(object.initialMarginRatio)
+          : isSet(object.initial_margin_ratio)
+            ? globalThis.String(object.initial_margin_ratio)
+            : "",
+        maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
+          ? globalThis.String(object.maintenanceMarginRatio)
+          : isSet(object.maintenance_margin_ratio)
+            ? globalThis.String(object.maintenance_margin_ratio)
+            : "",
+        makerFeeRate: isSet(object.makerFeeRate)
+          ? globalThis.String(object.makerFeeRate)
+          : isSet(object.maker_fee_rate)
+            ? globalThis.String(object.maker_fee_rate)
+            : "",
+        takerFeeRate: isSet(object.takerFeeRate)
+          ? globalThis.String(object.takerFeeRate)
+          : isSet(object.taker_fee_rate)
+            ? globalThis.String(object.taker_fee_rate)
+            : "",
+        minPriceTickSize: isSet(object.minPriceTickSize)
+          ? globalThis.String(object.minPriceTickSize)
+          : isSet(object.min_price_tick_size)
+            ? globalThis.String(object.min_price_tick_size)
+            : "",
+        minQuantityTickSize: isSet(object.minQuantityTickSize)
+          ? globalThis.String(object.minQuantityTickSize)
+          : isSet(object.min_quantity_tick_size)
+            ? globalThis.String(object.min_quantity_tick_size)
+            : "",
+        minNotional: isSet(object.minNotional)
+          ? globalThis.String(object.minNotional)
+          : isSet(object.min_notional)
+            ? globalThis.String(object.min_notional)
+            : "",
+        adminInfo: isSet(object.adminInfo)
+          ? AdminInfo.fromJSON(object.adminInfo)
+          : isSet(object.admin_info)
+            ? AdminInfo.fromJSON(object.admin_info)
+            : undefined,
+      };
+    },
+
+    toJSON(message: PerpetualMarketLaunchProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.ticker !== "") {
+        obj.ticker = message.ticker;
+      }
+      if (message.quoteDenom !== "") {
+        obj.quoteDenom = message.quoteDenom;
+      }
+      if (message.oracleBase !== "") {
+        obj.oracleBase = message.oracleBase;
+      }
+      if (message.oracleQuote !== "") {
+        obj.oracleQuote = message.oracleQuote;
+      }
+      if (message.oracleScaleFactor !== 0) {
+        obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
+      }
+      if (message.oracleType !== 0) {
+        obj.oracleType = oracleTypeToJSON(message.oracleType);
+      }
+      if (message.initialMarginRatio !== "") {
+        obj.initialMarginRatio = message.initialMarginRatio;
+      }
+      if (message.maintenanceMarginRatio !== "") {
+        obj.maintenanceMarginRatio = message.maintenanceMarginRatio;
+      }
+      if (message.makerFeeRate !== "") {
+        obj.makerFeeRate = message.makerFeeRate;
+      }
+      if (message.takerFeeRate !== "") {
+        obj.takerFeeRate = message.takerFeeRate;
+      }
+      if (message.minPriceTickSize !== "") {
+        obj.minPriceTickSize = message.minPriceTickSize;
+      }
+      if (message.minQuantityTickSize !== "") {
+        obj.minQuantityTickSize = message.minQuantityTickSize;
+      }
+      if (message.minNotional !== "") {
+        obj.minNotional = message.minNotional;
+      }
+      if (message.adminInfo !== undefined) {
+        obj.adminInfo = AdminInfo.toJSON(message.adminInfo);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<PerpetualMarketLaunchProposal>, I>>(
+      base?: I,
+    ): PerpetualMarketLaunchProposal {
+      return PerpetualMarketLaunchProposal.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<PerpetualMarketLaunchProposal>, I>>(
+      object: I,
+    ): PerpetualMarketLaunchProposal {
+      const message = createBasePerpetualMarketLaunchProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.ticker = object.ticker ?? "";
+      message.quoteDenom = object.quoteDenom ?? "";
+      message.oracleBase = object.oracleBase ?? "";
+      message.oracleQuote = object.oracleQuote ?? "";
+      message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
+      message.oracleType = object.oracleType ?? 0;
+      message.initialMarginRatio = object.initialMarginRatio ?? "";
+      message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
+      message.makerFeeRate = object.makerFeeRate ?? "";
+      message.takerFeeRate = object.takerFeeRate ?? "";
+      message.minPriceTickSize = object.minPriceTickSize ?? "";
+      message.minQuantityTickSize = object.minQuantityTickSize ?? "";
+      message.minNotional = object.minNotional ?? "";
+      message.adminInfo =
+        object.adminInfo !== undefined && object.adminInfo !== null
+          ? AdminInfo.fromPartial(object.adminInfo)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseBinaryOptionsMarketLaunchProposal(): BinaryOptionsMarketLaunchProposal {
   return {
@@ -2025,373 +2252,383 @@ function createBaseBinaryOptionsMarketLaunchProposal(): BinaryOptionsMarketLaunc
   };
 }
 
-export const BinaryOptionsMarketLaunchProposal: MessageFns<BinaryOptionsMarketLaunchProposal> = {
-  encode(message: BinaryOptionsMarketLaunchProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.ticker !== "") {
-      writer.uint32(26).string(message.ticker);
-    }
-    if (message.oracleSymbol !== "") {
-      writer.uint32(34).string(message.oracleSymbol);
-    }
-    if (message.oracleProvider !== "") {
-      writer.uint32(42).string(message.oracleProvider);
-    }
-    if (message.oracleType !== 0) {
-      writer.uint32(48).int32(message.oracleType);
-    }
-    if (message.oracleScaleFactor !== 0) {
-      writer.uint32(56).uint32(message.oracleScaleFactor);
-    }
-    if (message.expirationTimestamp !== 0) {
-      writer.uint32(64).int64(message.expirationTimestamp);
-    }
-    if (message.settlementTimestamp !== 0) {
-      writer.uint32(72).int64(message.settlementTimestamp);
-    }
-    if (message.admin !== "") {
-      writer.uint32(82).string(message.admin);
-    }
-    if (message.quoteDenom !== "") {
-      writer.uint32(90).string(message.quoteDenom);
-    }
-    if (message.makerFeeRate !== "") {
-      writer.uint32(98).string(message.makerFeeRate);
-    }
-    if (message.takerFeeRate !== "") {
-      writer.uint32(106).string(message.takerFeeRate);
-    }
-    if (message.minPriceTickSize !== "") {
-      writer.uint32(114).string(message.minPriceTickSize);
-    }
-    if (message.minQuantityTickSize !== "") {
-      writer.uint32(122).string(message.minQuantityTickSize);
-    }
-    if (message.minNotional !== "") {
-      writer.uint32(130).string(message.minNotional);
-    }
-    if (message.adminPermissions !== 0) {
-      writer.uint32(136).uint32(message.adminPermissions);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BinaryOptionsMarketLaunchProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBinaryOptionsMarketLaunchProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.ticker = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.oracleSymbol = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.oracleProvider = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.oracleType = reader.int32() as any;
-          continue;
-        }
-        case 7: {
-          if (tag !== 56) {
-            break;
-          }
-
-          message.oracleScaleFactor = reader.uint32();
-          continue;
-        }
-        case 8: {
-          if (tag !== 64) {
-            break;
-          }
-
-          message.expirationTimestamp = longToNumber(reader.int64());
-          continue;
-        }
-        case 9: {
-          if (tag !== 72) {
-            break;
-          }
-
-          message.settlementTimestamp = longToNumber(reader.int64());
-          continue;
-        }
-        case 10: {
-          if (tag !== 82) {
-            break;
-          }
-
-          message.admin = reader.string();
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.quoteDenom = reader.string();
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.makerFeeRate = reader.string();
-          continue;
-        }
-        case 13: {
-          if (tag !== 106) {
-            break;
-          }
-
-          message.takerFeeRate = reader.string();
-          continue;
-        }
-        case 14: {
-          if (tag !== 114) {
-            break;
-          }
-
-          message.minPriceTickSize = reader.string();
-          continue;
-        }
-        case 15: {
-          if (tag !== 122) {
-            break;
-          }
-
-          message.minQuantityTickSize = reader.string();
-          continue;
-        }
-        case 16: {
-          if (tag !== 130) {
-            break;
-          }
-
-          message.minNotional = reader.string();
-          continue;
-        }
-        case 17: {
-          if (tag !== 136) {
-            break;
-          }
-
-          message.adminPermissions = reader.uint32();
-          continue;
-        }
+export const BinaryOptionsMarketLaunchProposal: MessageFns<BinaryOptionsMarketLaunchProposal> =
+  {
+    encode(
+      message: BinaryOptionsMarketLaunchProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.ticker !== "") {
+        writer.uint32(26).string(message.ticker);
+      }
+      if (message.oracleSymbol !== "") {
+        writer.uint32(34).string(message.oracleSymbol);
+      }
+      if (message.oracleProvider !== "") {
+        writer.uint32(42).string(message.oracleProvider);
+      }
+      if (message.oracleType !== 0) {
+        writer.uint32(48).int32(message.oracleType);
+      }
+      if (message.oracleScaleFactor !== 0) {
+        writer.uint32(56).uint32(message.oracleScaleFactor);
+      }
+      if (message.expirationTimestamp !== 0) {
+        writer.uint32(64).int64(message.expirationTimestamp);
+      }
+      if (message.settlementTimestamp !== 0) {
+        writer.uint32(72).int64(message.settlementTimestamp);
+      }
+      if (message.admin !== "") {
+        writer.uint32(82).string(message.admin);
+      }
+      if (message.quoteDenom !== "") {
+        writer.uint32(90).string(message.quoteDenom);
+      }
+      if (message.makerFeeRate !== "") {
+        writer.uint32(98).string(message.makerFeeRate);
+      }
+      if (message.takerFeeRate !== "") {
+        writer.uint32(106).string(message.takerFeeRate);
+      }
+      if (message.minPriceTickSize !== "") {
+        writer.uint32(114).string(message.minPriceTickSize);
+      }
+      if (message.minQuantityTickSize !== "") {
+        writer.uint32(122).string(message.minQuantityTickSize);
+      }
+      if (message.minNotional !== "") {
+        writer.uint32(130).string(message.minNotional);
+      }
+      if (message.adminPermissions !== 0) {
+        writer.uint32(136).uint32(message.adminPermissions);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): BinaryOptionsMarketLaunchProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
-      oracleSymbol: isSet(object.oracleSymbol)
-        ? globalThis.String(object.oracleSymbol)
-        : isSet(object.oracle_symbol)
-        ? globalThis.String(object.oracle_symbol)
-        : "",
-      oracleProvider: isSet(object.oracleProvider)
-        ? globalThis.String(object.oracleProvider)
-        : isSet(object.oracle_provider)
-        ? globalThis.String(object.oracle_provider)
-        : "",
-      oracleType: isSet(object.oracleType)
-        ? oracleTypeFromJSON(object.oracleType)
-        : isSet(object.oracle_type)
-        ? oracleTypeFromJSON(object.oracle_type)
-        : 0,
-      oracleScaleFactor: isSet(object.oracleScaleFactor)
-        ? globalThis.Number(object.oracleScaleFactor)
-        : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
-      expirationTimestamp: isSet(object.expirationTimestamp)
-        ? globalThis.Number(object.expirationTimestamp)
-        : isSet(object.expiration_timestamp)
-        ? globalThis.Number(object.expiration_timestamp)
-        : 0,
-      settlementTimestamp: isSet(object.settlementTimestamp)
-        ? globalThis.Number(object.settlementTimestamp)
-        : isSet(object.settlement_timestamp)
-        ? globalThis.Number(object.settlement_timestamp)
-        : 0,
-      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
-      quoteDenom: isSet(object.quoteDenom)
-        ? globalThis.String(object.quoteDenom)
-        : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
-      makerFeeRate: isSet(object.makerFeeRate)
-        ? globalThis.String(object.makerFeeRate)
-        : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
-      takerFeeRate: isSet(object.takerFeeRate)
-        ? globalThis.String(object.takerFeeRate)
-        : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
-      minPriceTickSize: isSet(object.minPriceTickSize)
-        ? globalThis.String(object.minPriceTickSize)
-        : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
-      minQuantityTickSize: isSet(object.minQuantityTickSize)
-        ? globalThis.String(object.minQuantityTickSize)
-        : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
-      minNotional: isSet(object.minNotional)
-        ? globalThis.String(object.minNotional)
-        : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
-      adminPermissions: isSet(object.adminPermissions)
-        ? globalThis.Number(object.adminPermissions)
-        : isSet(object.admin_permissions)
-        ? globalThis.Number(object.admin_permissions)
-        : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BinaryOptionsMarketLaunchProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBinaryOptionsMarketLaunchProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BinaryOptionsMarketLaunchProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.ticker !== "") {
-      obj.ticker = message.ticker;
-    }
-    if (message.oracleSymbol !== "") {
-      obj.oracleSymbol = message.oracleSymbol;
-    }
-    if (message.oracleProvider !== "") {
-      obj.oracleProvider = message.oracleProvider;
-    }
-    if (message.oracleType !== 0) {
-      obj.oracleType = oracleTypeToJSON(message.oracleType);
-    }
-    if (message.oracleScaleFactor !== 0) {
-      obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
-    }
-    if (message.expirationTimestamp !== 0) {
-      obj.expirationTimestamp = Math.round(message.expirationTimestamp);
-    }
-    if (message.settlementTimestamp !== 0) {
-      obj.settlementTimestamp = Math.round(message.settlementTimestamp);
-    }
-    if (message.admin !== "") {
-      obj.admin = message.admin;
-    }
-    if (message.quoteDenom !== "") {
-      obj.quoteDenom = message.quoteDenom;
-    }
-    if (message.makerFeeRate !== "") {
-      obj.makerFeeRate = message.makerFeeRate;
-    }
-    if (message.takerFeeRate !== "") {
-      obj.takerFeeRate = message.takerFeeRate;
-    }
-    if (message.minPriceTickSize !== "") {
-      obj.minPriceTickSize = message.minPriceTickSize;
-    }
-    if (message.minQuantityTickSize !== "") {
-      obj.minQuantityTickSize = message.minQuantityTickSize;
-    }
-    if (message.minNotional !== "") {
-      obj.minNotional = message.minNotional;
-    }
-    if (message.adminPermissions !== 0) {
-      obj.adminPermissions = Math.round(message.adminPermissions);
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<BinaryOptionsMarketLaunchProposal>, I>>(
-    base?: I,
-  ): BinaryOptionsMarketLaunchProposal {
-    return BinaryOptionsMarketLaunchProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketLaunchProposal>, I>>(
-    object: I,
-  ): BinaryOptionsMarketLaunchProposal {
-    const message = createBaseBinaryOptionsMarketLaunchProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.ticker = object.ticker ?? "";
-    message.oracleSymbol = object.oracleSymbol ?? "";
-    message.oracleProvider = object.oracleProvider ?? "";
-    message.oracleType = object.oracleType ?? 0;
-    message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
-    message.expirationTimestamp = object.expirationTimestamp ?? 0;
-    message.settlementTimestamp = object.settlementTimestamp ?? 0;
-    message.admin = object.admin ?? "";
-    message.quoteDenom = object.quoteDenom ?? "";
-    message.makerFeeRate = object.makerFeeRate ?? "";
-    message.takerFeeRate = object.takerFeeRate ?? "";
-    message.minPriceTickSize = object.minPriceTickSize ?? "";
-    message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.minNotional = object.minNotional ?? "";
-    message.adminPermissions = object.adminPermissions ?? 0;
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.ticker = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.oracleSymbol = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.oracleProvider = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.oracleType = reader.int32() as any;
+            continue;
+          }
+          case 7: {
+            if (tag !== 56) {
+              break;
+            }
+
+            message.oracleScaleFactor = reader.uint32();
+            continue;
+          }
+          case 8: {
+            if (tag !== 64) {
+              break;
+            }
+
+            message.expirationTimestamp = longToNumber(reader.int64());
+            continue;
+          }
+          case 9: {
+            if (tag !== 72) {
+              break;
+            }
+
+            message.settlementTimestamp = longToNumber(reader.int64());
+            continue;
+          }
+          case 10: {
+            if (tag !== 82) {
+              break;
+            }
+
+            message.admin = reader.string();
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.quoteDenom = reader.string();
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.makerFeeRate = reader.string();
+            continue;
+          }
+          case 13: {
+            if (tag !== 106) {
+              break;
+            }
+
+            message.takerFeeRate = reader.string();
+            continue;
+          }
+          case 14: {
+            if (tag !== 114) {
+              break;
+            }
+
+            message.minPriceTickSize = reader.string();
+            continue;
+          }
+          case 15: {
+            if (tag !== 122) {
+              break;
+            }
+
+            message.minQuantityTickSize = reader.string();
+            continue;
+          }
+          case 16: {
+            if (tag !== 130) {
+              break;
+            }
+
+            message.minNotional = reader.string();
+            continue;
+          }
+          case 17: {
+            if (tag !== 136) {
+              break;
+            }
+
+            message.adminPermissions = reader.uint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BinaryOptionsMarketLaunchProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
+        oracleSymbol: isSet(object.oracleSymbol)
+          ? globalThis.String(object.oracleSymbol)
+          : isSet(object.oracle_symbol)
+            ? globalThis.String(object.oracle_symbol)
+            : "",
+        oracleProvider: isSet(object.oracleProvider)
+          ? globalThis.String(object.oracleProvider)
+          : isSet(object.oracle_provider)
+            ? globalThis.String(object.oracle_provider)
+            : "",
+        oracleType: isSet(object.oracleType)
+          ? oracleTypeFromJSON(object.oracleType)
+          : isSet(object.oracle_type)
+            ? oracleTypeFromJSON(object.oracle_type)
+            : 0,
+        oracleScaleFactor: isSet(object.oracleScaleFactor)
+          ? globalThis.Number(object.oracleScaleFactor)
+          : isSet(object.oracle_scale_factor)
+            ? globalThis.Number(object.oracle_scale_factor)
+            : 0,
+        expirationTimestamp: isSet(object.expirationTimestamp)
+          ? globalThis.Number(object.expirationTimestamp)
+          : isSet(object.expiration_timestamp)
+            ? globalThis.Number(object.expiration_timestamp)
+            : 0,
+        settlementTimestamp: isSet(object.settlementTimestamp)
+          ? globalThis.Number(object.settlementTimestamp)
+          : isSet(object.settlement_timestamp)
+            ? globalThis.Number(object.settlement_timestamp)
+            : 0,
+        admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+        quoteDenom: isSet(object.quoteDenom)
+          ? globalThis.String(object.quoteDenom)
+          : isSet(object.quote_denom)
+            ? globalThis.String(object.quote_denom)
+            : "",
+        makerFeeRate: isSet(object.makerFeeRate)
+          ? globalThis.String(object.makerFeeRate)
+          : isSet(object.maker_fee_rate)
+            ? globalThis.String(object.maker_fee_rate)
+            : "",
+        takerFeeRate: isSet(object.takerFeeRate)
+          ? globalThis.String(object.takerFeeRate)
+          : isSet(object.taker_fee_rate)
+            ? globalThis.String(object.taker_fee_rate)
+            : "",
+        minPriceTickSize: isSet(object.minPriceTickSize)
+          ? globalThis.String(object.minPriceTickSize)
+          : isSet(object.min_price_tick_size)
+            ? globalThis.String(object.min_price_tick_size)
+            : "",
+        minQuantityTickSize: isSet(object.minQuantityTickSize)
+          ? globalThis.String(object.minQuantityTickSize)
+          : isSet(object.min_quantity_tick_size)
+            ? globalThis.String(object.min_quantity_tick_size)
+            : "",
+        minNotional: isSet(object.minNotional)
+          ? globalThis.String(object.minNotional)
+          : isSet(object.min_notional)
+            ? globalThis.String(object.min_notional)
+            : "",
+        adminPermissions: isSet(object.adminPermissions)
+          ? globalThis.Number(object.adminPermissions)
+          : isSet(object.admin_permissions)
+            ? globalThis.Number(object.admin_permissions)
+            : 0,
+      };
+    },
+
+    toJSON(message: BinaryOptionsMarketLaunchProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.ticker !== "") {
+        obj.ticker = message.ticker;
+      }
+      if (message.oracleSymbol !== "") {
+        obj.oracleSymbol = message.oracleSymbol;
+      }
+      if (message.oracleProvider !== "") {
+        obj.oracleProvider = message.oracleProvider;
+      }
+      if (message.oracleType !== 0) {
+        obj.oracleType = oracleTypeToJSON(message.oracleType);
+      }
+      if (message.oracleScaleFactor !== 0) {
+        obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
+      }
+      if (message.expirationTimestamp !== 0) {
+        obj.expirationTimestamp = Math.round(message.expirationTimestamp);
+      }
+      if (message.settlementTimestamp !== 0) {
+        obj.settlementTimestamp = Math.round(message.settlementTimestamp);
+      }
+      if (message.admin !== "") {
+        obj.admin = message.admin;
+      }
+      if (message.quoteDenom !== "") {
+        obj.quoteDenom = message.quoteDenom;
+      }
+      if (message.makerFeeRate !== "") {
+        obj.makerFeeRate = message.makerFeeRate;
+      }
+      if (message.takerFeeRate !== "") {
+        obj.takerFeeRate = message.takerFeeRate;
+      }
+      if (message.minPriceTickSize !== "") {
+        obj.minPriceTickSize = message.minPriceTickSize;
+      }
+      if (message.minQuantityTickSize !== "") {
+        obj.minQuantityTickSize = message.minQuantityTickSize;
+      }
+      if (message.minNotional !== "") {
+        obj.minNotional = message.minNotional;
+      }
+      if (message.adminPermissions !== 0) {
+        obj.adminPermissions = Math.round(message.adminPermissions);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<BinaryOptionsMarketLaunchProposal>, I>>(
+      base?: I,
+    ): BinaryOptionsMarketLaunchProposal {
+      return BinaryOptionsMarketLaunchProposal.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<BinaryOptionsMarketLaunchProposal>, I>,
+    >(object: I): BinaryOptionsMarketLaunchProposal {
+      const message = createBaseBinaryOptionsMarketLaunchProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.ticker = object.ticker ?? "";
+      message.oracleSymbol = object.oracleSymbol ?? "";
+      message.oracleProvider = object.oracleProvider ?? "";
+      message.oracleType = object.oracleType ?? 0;
+      message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
+      message.expirationTimestamp = object.expirationTimestamp ?? 0;
+      message.settlementTimestamp = object.settlementTimestamp ?? 0;
+      message.admin = object.admin ?? "";
+      message.quoteDenom = object.quoteDenom ?? "";
+      message.makerFeeRate = object.makerFeeRate ?? "";
+      message.takerFeeRate = object.takerFeeRate ?? "";
+      message.minPriceTickSize = object.minPriceTickSize ?? "";
+      message.minQuantityTickSize = object.minQuantityTickSize ?? "";
+      message.minNotional = object.minNotional ?? "";
+      message.adminPermissions = object.adminPermissions ?? 0;
+      return message;
+    },
+  };
 
 function createBaseExpiryFuturesMarketLaunchProposal(): ExpiryFuturesMarketLaunchProposal {
   return {
@@ -2415,375 +2652,386 @@ function createBaseExpiryFuturesMarketLaunchProposal(): ExpiryFuturesMarketLaunc
   };
 }
 
-export const ExpiryFuturesMarketLaunchProposal: MessageFns<ExpiryFuturesMarketLaunchProposal> = {
-  encode(message: ExpiryFuturesMarketLaunchProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.ticker !== "") {
-      writer.uint32(26).string(message.ticker);
-    }
-    if (message.quoteDenom !== "") {
-      writer.uint32(34).string(message.quoteDenom);
-    }
-    if (message.oracleBase !== "") {
-      writer.uint32(42).string(message.oracleBase);
-    }
-    if (message.oracleQuote !== "") {
-      writer.uint32(50).string(message.oracleQuote);
-    }
-    if (message.oracleScaleFactor !== 0) {
-      writer.uint32(56).uint32(message.oracleScaleFactor);
-    }
-    if (message.oracleType !== 0) {
-      writer.uint32(64).int32(message.oracleType);
-    }
-    if (message.expiry !== 0) {
-      writer.uint32(72).int64(message.expiry);
-    }
-    if (message.initialMarginRatio !== "") {
-      writer.uint32(82).string(message.initialMarginRatio);
-    }
-    if (message.maintenanceMarginRatio !== "") {
-      writer.uint32(90).string(message.maintenanceMarginRatio);
-    }
-    if (message.makerFeeRate !== "") {
-      writer.uint32(98).string(message.makerFeeRate);
-    }
-    if (message.takerFeeRate !== "") {
-      writer.uint32(106).string(message.takerFeeRate);
-    }
-    if (message.minPriceTickSize !== "") {
-      writer.uint32(114).string(message.minPriceTickSize);
-    }
-    if (message.minQuantityTickSize !== "") {
-      writer.uint32(122).string(message.minQuantityTickSize);
-    }
-    if (message.minNotional !== "") {
-      writer.uint32(130).string(message.minNotional);
-    }
-    if (message.adminInfo !== undefined) {
-      AdminInfo.encode(message.adminInfo, writer.uint32(138).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): ExpiryFuturesMarketLaunchProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseExpiryFuturesMarketLaunchProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.ticker = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.quoteDenom = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.oracleBase = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.oracleQuote = reader.string();
-          continue;
-        }
-        case 7: {
-          if (tag !== 56) {
-            break;
-          }
-
-          message.oracleScaleFactor = reader.uint32();
-          continue;
-        }
-        case 8: {
-          if (tag !== 64) {
-            break;
-          }
-
-          message.oracleType = reader.int32() as any;
-          continue;
-        }
-        case 9: {
-          if (tag !== 72) {
-            break;
-          }
-
-          message.expiry = longToNumber(reader.int64());
-          continue;
-        }
-        case 10: {
-          if (tag !== 82) {
-            break;
-          }
-
-          message.initialMarginRatio = reader.string();
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.maintenanceMarginRatio = reader.string();
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.makerFeeRate = reader.string();
-          continue;
-        }
-        case 13: {
-          if (tag !== 106) {
-            break;
-          }
-
-          message.takerFeeRate = reader.string();
-          continue;
-        }
-        case 14: {
-          if (tag !== 114) {
-            break;
-          }
-
-          message.minPriceTickSize = reader.string();
-          continue;
-        }
-        case 15: {
-          if (tag !== 122) {
-            break;
-          }
-
-          message.minQuantityTickSize = reader.string();
-          continue;
-        }
-        case 16: {
-          if (tag !== 130) {
-            break;
-          }
-
-          message.minNotional = reader.string();
-          continue;
-        }
-        case 17: {
-          if (tag !== 138) {
-            break;
-          }
-
-          message.adminInfo = AdminInfo.decode(reader, reader.uint32());
-          continue;
-        }
+export const ExpiryFuturesMarketLaunchProposal: MessageFns<ExpiryFuturesMarketLaunchProposal> =
+  {
+    encode(
+      message: ExpiryFuturesMarketLaunchProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.ticker !== "") {
+        writer.uint32(26).string(message.ticker);
+      }
+      if (message.quoteDenom !== "") {
+        writer.uint32(34).string(message.quoteDenom);
+      }
+      if (message.oracleBase !== "") {
+        writer.uint32(42).string(message.oracleBase);
+      }
+      if (message.oracleQuote !== "") {
+        writer.uint32(50).string(message.oracleQuote);
+      }
+      if (message.oracleScaleFactor !== 0) {
+        writer.uint32(56).uint32(message.oracleScaleFactor);
+      }
+      if (message.oracleType !== 0) {
+        writer.uint32(64).int32(message.oracleType);
+      }
+      if (message.expiry !== 0) {
+        writer.uint32(72).int64(message.expiry);
+      }
+      if (message.initialMarginRatio !== "") {
+        writer.uint32(82).string(message.initialMarginRatio);
+      }
+      if (message.maintenanceMarginRatio !== "") {
+        writer.uint32(90).string(message.maintenanceMarginRatio);
+      }
+      if (message.makerFeeRate !== "") {
+        writer.uint32(98).string(message.makerFeeRate);
+      }
+      if (message.takerFeeRate !== "") {
+        writer.uint32(106).string(message.takerFeeRate);
+      }
+      if (message.minPriceTickSize !== "") {
+        writer.uint32(114).string(message.minPriceTickSize);
+      }
+      if (message.minQuantityTickSize !== "") {
+        writer.uint32(122).string(message.minQuantityTickSize);
+      }
+      if (message.minNotional !== "") {
+        writer.uint32(130).string(message.minNotional);
+      }
+      if (message.adminInfo !== undefined) {
+        AdminInfo.encode(message.adminInfo, writer.uint32(138).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): ExpiryFuturesMarketLaunchProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
-      quoteDenom: isSet(object.quoteDenom)
-        ? globalThis.String(object.quoteDenom)
-        : isSet(object.quote_denom)
-        ? globalThis.String(object.quote_denom)
-        : "",
-      oracleBase: isSet(object.oracleBase)
-        ? globalThis.String(object.oracleBase)
-        : isSet(object.oracle_base)
-        ? globalThis.String(object.oracle_base)
-        : "",
-      oracleQuote: isSet(object.oracleQuote)
-        ? globalThis.String(object.oracleQuote)
-        : isSet(object.oracle_quote)
-        ? globalThis.String(object.oracle_quote)
-        : "",
-      oracleScaleFactor: isSet(object.oracleScaleFactor)
-        ? globalThis.Number(object.oracleScaleFactor)
-        : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
-      oracleType: isSet(object.oracleType)
-        ? oracleTypeFromJSON(object.oracleType)
-        : isSet(object.oracle_type)
-        ? oracleTypeFromJSON(object.oracle_type)
-        : 0,
-      expiry: isSet(object.expiry) ? globalThis.Number(object.expiry) : 0,
-      initialMarginRatio: isSet(object.initialMarginRatio)
-        ? globalThis.String(object.initialMarginRatio)
-        : isSet(object.initial_margin_ratio)
-        ? globalThis.String(object.initial_margin_ratio)
-        : "",
-      maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
-        ? globalThis.String(object.maintenanceMarginRatio)
-        : isSet(object.maintenance_margin_ratio)
-        ? globalThis.String(object.maintenance_margin_ratio)
-        : "",
-      makerFeeRate: isSet(object.makerFeeRate)
-        ? globalThis.String(object.makerFeeRate)
-        : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
-      takerFeeRate: isSet(object.takerFeeRate)
-        ? globalThis.String(object.takerFeeRate)
-        : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
-      minPriceTickSize: isSet(object.minPriceTickSize)
-        ? globalThis.String(object.minPriceTickSize)
-        : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
-      minQuantityTickSize: isSet(object.minQuantityTickSize)
-        ? globalThis.String(object.minQuantityTickSize)
-        : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
-      minNotional: isSet(object.minNotional)
-        ? globalThis.String(object.minNotional)
-        : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
-      adminInfo: isSet(object.adminInfo)
-        ? AdminInfo.fromJSON(object.adminInfo)
-        : isSet(object.admin_info)
-        ? AdminInfo.fromJSON(object.admin_info)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): ExpiryFuturesMarketLaunchProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseExpiryFuturesMarketLaunchProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: ExpiryFuturesMarketLaunchProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.ticker !== "") {
-      obj.ticker = message.ticker;
-    }
-    if (message.quoteDenom !== "") {
-      obj.quoteDenom = message.quoteDenom;
-    }
-    if (message.oracleBase !== "") {
-      obj.oracleBase = message.oracleBase;
-    }
-    if (message.oracleQuote !== "") {
-      obj.oracleQuote = message.oracleQuote;
-    }
-    if (message.oracleScaleFactor !== 0) {
-      obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
-    }
-    if (message.oracleType !== 0) {
-      obj.oracleType = oracleTypeToJSON(message.oracleType);
-    }
-    if (message.expiry !== 0) {
-      obj.expiry = Math.round(message.expiry);
-    }
-    if (message.initialMarginRatio !== "") {
-      obj.initialMarginRatio = message.initialMarginRatio;
-    }
-    if (message.maintenanceMarginRatio !== "") {
-      obj.maintenanceMarginRatio = message.maintenanceMarginRatio;
-    }
-    if (message.makerFeeRate !== "") {
-      obj.makerFeeRate = message.makerFeeRate;
-    }
-    if (message.takerFeeRate !== "") {
-      obj.takerFeeRate = message.takerFeeRate;
-    }
-    if (message.minPriceTickSize !== "") {
-      obj.minPriceTickSize = message.minPriceTickSize;
-    }
-    if (message.minQuantityTickSize !== "") {
-      obj.minQuantityTickSize = message.minQuantityTickSize;
-    }
-    if (message.minNotional !== "") {
-      obj.minNotional = message.minNotional;
-    }
-    if (message.adminInfo !== undefined) {
-      obj.adminInfo = AdminInfo.toJSON(message.adminInfo);
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<ExpiryFuturesMarketLaunchProposal>, I>>(
-    base?: I,
-  ): ExpiryFuturesMarketLaunchProposal {
-    return ExpiryFuturesMarketLaunchProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<ExpiryFuturesMarketLaunchProposal>, I>>(
-    object: I,
-  ): ExpiryFuturesMarketLaunchProposal {
-    const message = createBaseExpiryFuturesMarketLaunchProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.ticker = object.ticker ?? "";
-    message.quoteDenom = object.quoteDenom ?? "";
-    message.oracleBase = object.oracleBase ?? "";
-    message.oracleQuote = object.oracleQuote ?? "";
-    message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
-    message.oracleType = object.oracleType ?? 0;
-    message.expiry = object.expiry ?? 0;
-    message.initialMarginRatio = object.initialMarginRatio ?? "";
-    message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
-    message.makerFeeRate = object.makerFeeRate ?? "";
-    message.takerFeeRate = object.takerFeeRate ?? "";
-    message.minPriceTickSize = object.minPriceTickSize ?? "";
-    message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.minNotional = object.minNotional ?? "";
-    message.adminInfo = (object.adminInfo !== undefined && object.adminInfo !== null)
-      ? AdminInfo.fromPartial(object.adminInfo)
-      : undefined;
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.ticker = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.quoteDenom = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.oracleBase = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.oracleQuote = reader.string();
+            continue;
+          }
+          case 7: {
+            if (tag !== 56) {
+              break;
+            }
+
+            message.oracleScaleFactor = reader.uint32();
+            continue;
+          }
+          case 8: {
+            if (tag !== 64) {
+              break;
+            }
+
+            message.oracleType = reader.int32() as any;
+            continue;
+          }
+          case 9: {
+            if (tag !== 72) {
+              break;
+            }
+
+            message.expiry = longToNumber(reader.int64());
+            continue;
+          }
+          case 10: {
+            if (tag !== 82) {
+              break;
+            }
+
+            message.initialMarginRatio = reader.string();
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.maintenanceMarginRatio = reader.string();
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.makerFeeRate = reader.string();
+            continue;
+          }
+          case 13: {
+            if (tag !== 106) {
+              break;
+            }
+
+            message.takerFeeRate = reader.string();
+            continue;
+          }
+          case 14: {
+            if (tag !== 114) {
+              break;
+            }
+
+            message.minPriceTickSize = reader.string();
+            continue;
+          }
+          case 15: {
+            if (tag !== 122) {
+              break;
+            }
+
+            message.minQuantityTickSize = reader.string();
+            continue;
+          }
+          case 16: {
+            if (tag !== 130) {
+              break;
+            }
+
+            message.minNotional = reader.string();
+            continue;
+          }
+          case 17: {
+            if (tag !== 138) {
+              break;
+            }
+
+            message.adminInfo = AdminInfo.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): ExpiryFuturesMarketLaunchProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
+        quoteDenom: isSet(object.quoteDenom)
+          ? globalThis.String(object.quoteDenom)
+          : isSet(object.quote_denom)
+            ? globalThis.String(object.quote_denom)
+            : "",
+        oracleBase: isSet(object.oracleBase)
+          ? globalThis.String(object.oracleBase)
+          : isSet(object.oracle_base)
+            ? globalThis.String(object.oracle_base)
+            : "",
+        oracleQuote: isSet(object.oracleQuote)
+          ? globalThis.String(object.oracleQuote)
+          : isSet(object.oracle_quote)
+            ? globalThis.String(object.oracle_quote)
+            : "",
+        oracleScaleFactor: isSet(object.oracleScaleFactor)
+          ? globalThis.Number(object.oracleScaleFactor)
+          : isSet(object.oracle_scale_factor)
+            ? globalThis.Number(object.oracle_scale_factor)
+            : 0,
+        oracleType: isSet(object.oracleType)
+          ? oracleTypeFromJSON(object.oracleType)
+          : isSet(object.oracle_type)
+            ? oracleTypeFromJSON(object.oracle_type)
+            : 0,
+        expiry: isSet(object.expiry) ? globalThis.Number(object.expiry) : 0,
+        initialMarginRatio: isSet(object.initialMarginRatio)
+          ? globalThis.String(object.initialMarginRatio)
+          : isSet(object.initial_margin_ratio)
+            ? globalThis.String(object.initial_margin_ratio)
+            : "",
+        maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
+          ? globalThis.String(object.maintenanceMarginRatio)
+          : isSet(object.maintenance_margin_ratio)
+            ? globalThis.String(object.maintenance_margin_ratio)
+            : "",
+        makerFeeRate: isSet(object.makerFeeRate)
+          ? globalThis.String(object.makerFeeRate)
+          : isSet(object.maker_fee_rate)
+            ? globalThis.String(object.maker_fee_rate)
+            : "",
+        takerFeeRate: isSet(object.takerFeeRate)
+          ? globalThis.String(object.takerFeeRate)
+          : isSet(object.taker_fee_rate)
+            ? globalThis.String(object.taker_fee_rate)
+            : "",
+        minPriceTickSize: isSet(object.minPriceTickSize)
+          ? globalThis.String(object.minPriceTickSize)
+          : isSet(object.min_price_tick_size)
+            ? globalThis.String(object.min_price_tick_size)
+            : "",
+        minQuantityTickSize: isSet(object.minQuantityTickSize)
+          ? globalThis.String(object.minQuantityTickSize)
+          : isSet(object.min_quantity_tick_size)
+            ? globalThis.String(object.min_quantity_tick_size)
+            : "",
+        minNotional: isSet(object.minNotional)
+          ? globalThis.String(object.minNotional)
+          : isSet(object.min_notional)
+            ? globalThis.String(object.min_notional)
+            : "",
+        adminInfo: isSet(object.adminInfo)
+          ? AdminInfo.fromJSON(object.adminInfo)
+          : isSet(object.admin_info)
+            ? AdminInfo.fromJSON(object.admin_info)
+            : undefined,
+      };
+    },
+
+    toJSON(message: ExpiryFuturesMarketLaunchProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.ticker !== "") {
+        obj.ticker = message.ticker;
+      }
+      if (message.quoteDenom !== "") {
+        obj.quoteDenom = message.quoteDenom;
+      }
+      if (message.oracleBase !== "") {
+        obj.oracleBase = message.oracleBase;
+      }
+      if (message.oracleQuote !== "") {
+        obj.oracleQuote = message.oracleQuote;
+      }
+      if (message.oracleScaleFactor !== 0) {
+        obj.oracleScaleFactor = Math.round(message.oracleScaleFactor);
+      }
+      if (message.oracleType !== 0) {
+        obj.oracleType = oracleTypeToJSON(message.oracleType);
+      }
+      if (message.expiry !== 0) {
+        obj.expiry = Math.round(message.expiry);
+      }
+      if (message.initialMarginRatio !== "") {
+        obj.initialMarginRatio = message.initialMarginRatio;
+      }
+      if (message.maintenanceMarginRatio !== "") {
+        obj.maintenanceMarginRatio = message.maintenanceMarginRatio;
+      }
+      if (message.makerFeeRate !== "") {
+        obj.makerFeeRate = message.makerFeeRate;
+      }
+      if (message.takerFeeRate !== "") {
+        obj.takerFeeRate = message.takerFeeRate;
+      }
+      if (message.minPriceTickSize !== "") {
+        obj.minPriceTickSize = message.minPriceTickSize;
+      }
+      if (message.minQuantityTickSize !== "") {
+        obj.minQuantityTickSize = message.minQuantityTickSize;
+      }
+      if (message.minNotional !== "") {
+        obj.minNotional = message.minNotional;
+      }
+      if (message.adminInfo !== undefined) {
+        obj.adminInfo = AdminInfo.toJSON(message.adminInfo);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<ExpiryFuturesMarketLaunchProposal>, I>>(
+      base?: I,
+    ): ExpiryFuturesMarketLaunchProposal {
+      return ExpiryFuturesMarketLaunchProposal.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<ExpiryFuturesMarketLaunchProposal>, I>,
+    >(object: I): ExpiryFuturesMarketLaunchProposal {
+      const message = createBaseExpiryFuturesMarketLaunchProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.ticker = object.ticker ?? "";
+      message.quoteDenom = object.quoteDenom ?? "";
+      message.oracleBase = object.oracleBase ?? "";
+      message.oracleQuote = object.oracleQuote ?? "";
+      message.oracleScaleFactor = object.oracleScaleFactor ?? 0;
+      message.oracleType = object.oracleType ?? 0;
+      message.expiry = object.expiry ?? 0;
+      message.initialMarginRatio = object.initialMarginRatio ?? "";
+      message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
+      message.makerFeeRate = object.makerFeeRate ?? "";
+      message.takerFeeRate = object.takerFeeRate ?? "";
+      message.minPriceTickSize = object.minPriceTickSize ?? "";
+      message.minQuantityTickSize = object.minQuantityTickSize ?? "";
+      message.minNotional = object.minNotional ?? "";
+      message.adminInfo =
+        object.adminInfo !== undefined && object.adminInfo !== null
+          ? AdminInfo.fromPartial(object.adminInfo)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseDerivativeMarketParamUpdateProposal(): DerivativeMarketParamUpdateProposal {
   return {
@@ -2807,376 +3055,400 @@ function createBaseDerivativeMarketParamUpdateProposal(): DerivativeMarketParamU
   };
 }
 
-export const DerivativeMarketParamUpdateProposal: MessageFns<DerivativeMarketParamUpdateProposal> = {
-  encode(message: DerivativeMarketParamUpdateProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(26).string(message.marketId);
-    }
-    if (message.initialMarginRatio !== "") {
-      writer.uint32(34).string(message.initialMarginRatio);
-    }
-    if (message.maintenanceMarginRatio !== "") {
-      writer.uint32(42).string(message.maintenanceMarginRatio);
-    }
-    if (message.makerFeeRate !== "") {
-      writer.uint32(50).string(message.makerFeeRate);
-    }
-    if (message.takerFeeRate !== "") {
-      writer.uint32(58).string(message.takerFeeRate);
-    }
-    if (message.relayerFeeShareRate !== "") {
-      writer.uint32(66).string(message.relayerFeeShareRate);
-    }
-    if (message.minPriceTickSize !== "") {
-      writer.uint32(74).string(message.minPriceTickSize);
-    }
-    if (message.minQuantityTickSize !== "") {
-      writer.uint32(82).string(message.minQuantityTickSize);
-    }
-    if (message.HourlyInterestRate !== "") {
-      writer.uint32(90).string(message.HourlyInterestRate);
-    }
-    if (message.HourlyFundingRateCap !== "") {
-      writer.uint32(98).string(message.HourlyFundingRateCap);
-    }
-    if (message.status !== 0) {
-      writer.uint32(104).int32(message.status);
-    }
-    if (message.oracleParams !== undefined) {
-      OracleParams.encode(message.oracleParams, writer.uint32(114).fork()).join();
-    }
-    if (message.ticker !== "") {
-      writer.uint32(122).string(message.ticker);
-    }
-    if (message.minNotional !== "") {
-      writer.uint32(130).string(message.minNotional);
-    }
-    if (message.adminInfo !== undefined) {
-      AdminInfo.encode(message.adminInfo, writer.uint32(138).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeMarketParamUpdateProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDerivativeMarketParamUpdateProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.initialMarginRatio = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.maintenanceMarginRatio = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.makerFeeRate = reader.string();
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.takerFeeRate = reader.string();
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.relayerFeeShareRate = reader.string();
-          continue;
-        }
-        case 9: {
-          if (tag !== 74) {
-            break;
-          }
-
-          message.minPriceTickSize = reader.string();
-          continue;
-        }
-        case 10: {
-          if (tag !== 82) {
-            break;
-          }
-
-          message.minQuantityTickSize = reader.string();
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.HourlyInterestRate = reader.string();
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.HourlyFundingRateCap = reader.string();
-          continue;
-        }
-        case 13: {
-          if (tag !== 104) {
-            break;
-          }
-
-          message.status = reader.int32() as any;
-          continue;
-        }
-        case 14: {
-          if (tag !== 114) {
-            break;
-          }
-
-          message.oracleParams = OracleParams.decode(reader, reader.uint32());
-          continue;
-        }
-        case 15: {
-          if (tag !== 122) {
-            break;
-          }
-
-          message.ticker = reader.string();
-          continue;
-        }
-        case 16: {
-          if (tag !== 130) {
-            break;
-          }
-
-          message.minNotional = reader.string();
-          continue;
-        }
-        case 17: {
-          if (tag !== 138) {
-            break;
-          }
-
-          message.adminInfo = AdminInfo.decode(reader, reader.uint32());
-          continue;
-        }
+export const DerivativeMarketParamUpdateProposal: MessageFns<DerivativeMarketParamUpdateProposal> =
+  {
+    encode(
+      message: DerivativeMarketParamUpdateProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.marketId !== "") {
+        writer.uint32(26).string(message.marketId);
+      }
+      if (message.initialMarginRatio !== "") {
+        writer.uint32(34).string(message.initialMarginRatio);
+      }
+      if (message.maintenanceMarginRatio !== "") {
+        writer.uint32(42).string(message.maintenanceMarginRatio);
+      }
+      if (message.makerFeeRate !== "") {
+        writer.uint32(50).string(message.makerFeeRate);
+      }
+      if (message.takerFeeRate !== "") {
+        writer.uint32(58).string(message.takerFeeRate);
+      }
+      if (message.relayerFeeShareRate !== "") {
+        writer.uint32(66).string(message.relayerFeeShareRate);
+      }
+      if (message.minPriceTickSize !== "") {
+        writer.uint32(74).string(message.minPriceTickSize);
+      }
+      if (message.minQuantityTickSize !== "") {
+        writer.uint32(82).string(message.minQuantityTickSize);
+      }
+      if (message.HourlyInterestRate !== "") {
+        writer.uint32(90).string(message.HourlyInterestRate);
+      }
+      if (message.HourlyFundingRateCap !== "") {
+        writer.uint32(98).string(message.HourlyFundingRateCap);
+      }
+      if (message.status !== 0) {
+        writer.uint32(104).int32(message.status);
+      }
+      if (message.oracleParams !== undefined) {
+        OracleParams.encode(
+          message.oracleParams,
+          writer.uint32(114).fork(),
+        ).join();
+      }
+      if (message.ticker !== "") {
+        writer.uint32(122).string(message.ticker);
+      }
+      if (message.minNotional !== "") {
+        writer.uint32(130).string(message.minNotional);
+      }
+      if (message.adminInfo !== undefined) {
+        AdminInfo.encode(message.adminInfo, writer.uint32(138).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): DerivativeMarketParamUpdateProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      initialMarginRatio: isSet(object.initialMarginRatio)
-        ? globalThis.String(object.initialMarginRatio)
-        : isSet(object.initial_margin_ratio)
-        ? globalThis.String(object.initial_margin_ratio)
-        : "",
-      maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
-        ? globalThis.String(object.maintenanceMarginRatio)
-        : isSet(object.maintenance_margin_ratio)
-        ? globalThis.String(object.maintenance_margin_ratio)
-        : "",
-      makerFeeRate: isSet(object.makerFeeRate)
-        ? globalThis.String(object.makerFeeRate)
-        : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
-      takerFeeRate: isSet(object.takerFeeRate)
-        ? globalThis.String(object.takerFeeRate)
-        : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
-      relayerFeeShareRate: isSet(object.relayerFeeShareRate)
-        ? globalThis.String(object.relayerFeeShareRate)
-        : isSet(object.relayer_fee_share_rate)
-        ? globalThis.String(object.relayer_fee_share_rate)
-        : "",
-      minPriceTickSize: isSet(object.minPriceTickSize)
-        ? globalThis.String(object.minPriceTickSize)
-        : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
-      minQuantityTickSize: isSet(object.minQuantityTickSize)
-        ? globalThis.String(object.minQuantityTickSize)
-        : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
-      HourlyInterestRate: isSet(object.HourlyInterestRate) ? globalThis.String(object.HourlyInterestRate) : "",
-      HourlyFundingRateCap: isSet(object.HourlyFundingRateCap) ? globalThis.String(object.HourlyFundingRateCap) : "",
-      status: isSet(object.status) ? marketStatusFromJSON(object.status) : 0,
-      oracleParams: isSet(object.oracleParams)
-        ? OracleParams.fromJSON(object.oracleParams)
-        : isSet(object.oracle_params)
-        ? OracleParams.fromJSON(object.oracle_params)
-        : undefined,
-      ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
-      minNotional: isSet(object.minNotional)
-        ? globalThis.String(object.minNotional)
-        : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
-      adminInfo: isSet(object.adminInfo)
-        ? AdminInfo.fromJSON(object.adminInfo)
-        : isSet(object.admin_info)
-        ? AdminInfo.fromJSON(object.admin_info)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): DerivativeMarketParamUpdateProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseDerivativeMarketParamUpdateProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: DerivativeMarketParamUpdateProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.initialMarginRatio !== "") {
-      obj.initialMarginRatio = message.initialMarginRatio;
-    }
-    if (message.maintenanceMarginRatio !== "") {
-      obj.maintenanceMarginRatio = message.maintenanceMarginRatio;
-    }
-    if (message.makerFeeRate !== "") {
-      obj.makerFeeRate = message.makerFeeRate;
-    }
-    if (message.takerFeeRate !== "") {
-      obj.takerFeeRate = message.takerFeeRate;
-    }
-    if (message.relayerFeeShareRate !== "") {
-      obj.relayerFeeShareRate = message.relayerFeeShareRate;
-    }
-    if (message.minPriceTickSize !== "") {
-      obj.minPriceTickSize = message.minPriceTickSize;
-    }
-    if (message.minQuantityTickSize !== "") {
-      obj.minQuantityTickSize = message.minQuantityTickSize;
-    }
-    if (message.HourlyInterestRate !== "") {
-      obj.HourlyInterestRate = message.HourlyInterestRate;
-    }
-    if (message.HourlyFundingRateCap !== "") {
-      obj.HourlyFundingRateCap = message.HourlyFundingRateCap;
-    }
-    if (message.status !== 0) {
-      obj.status = marketStatusToJSON(message.status);
-    }
-    if (message.oracleParams !== undefined) {
-      obj.oracleParams = OracleParams.toJSON(message.oracleParams);
-    }
-    if (message.ticker !== "") {
-      obj.ticker = message.ticker;
-    }
-    if (message.minNotional !== "") {
-      obj.minNotional = message.minNotional;
-    }
-    if (message.adminInfo !== undefined) {
-      obj.adminInfo = AdminInfo.toJSON(message.adminInfo);
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<DerivativeMarketParamUpdateProposal>, I>>(
-    base?: I,
-  ): DerivativeMarketParamUpdateProposal {
-    return DerivativeMarketParamUpdateProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<DerivativeMarketParamUpdateProposal>, I>>(
-    object: I,
-  ): DerivativeMarketParamUpdateProposal {
-    const message = createBaseDerivativeMarketParamUpdateProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.marketId = object.marketId ?? "";
-    message.initialMarginRatio = object.initialMarginRatio ?? "";
-    message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
-    message.makerFeeRate = object.makerFeeRate ?? "";
-    message.takerFeeRate = object.takerFeeRate ?? "";
-    message.relayerFeeShareRate = object.relayerFeeShareRate ?? "";
-    message.minPriceTickSize = object.minPriceTickSize ?? "";
-    message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.HourlyInterestRate = object.HourlyInterestRate ?? "";
-    message.HourlyFundingRateCap = object.HourlyFundingRateCap ?? "";
-    message.status = object.status ?? 0;
-    message.oracleParams = (object.oracleParams !== undefined && object.oracleParams !== null)
-      ? OracleParams.fromPartial(object.oracleParams)
-      : undefined;
-    message.ticker = object.ticker ?? "";
-    message.minNotional = object.minNotional ?? "";
-    message.adminInfo = (object.adminInfo !== undefined && object.adminInfo !== null)
-      ? AdminInfo.fromPartial(object.adminInfo)
-      : undefined;
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.initialMarginRatio = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.maintenanceMarginRatio = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.makerFeeRate = reader.string();
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.takerFeeRate = reader.string();
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.relayerFeeShareRate = reader.string();
+            continue;
+          }
+          case 9: {
+            if (tag !== 74) {
+              break;
+            }
+
+            message.minPriceTickSize = reader.string();
+            continue;
+          }
+          case 10: {
+            if (tag !== 82) {
+              break;
+            }
+
+            message.minQuantityTickSize = reader.string();
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.HourlyInterestRate = reader.string();
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.HourlyFundingRateCap = reader.string();
+            continue;
+          }
+          case 13: {
+            if (tag !== 104) {
+              break;
+            }
+
+            message.status = reader.int32() as any;
+            continue;
+          }
+          case 14: {
+            if (tag !== 114) {
+              break;
+            }
+
+            message.oracleParams = OracleParams.decode(reader, reader.uint32());
+            continue;
+          }
+          case 15: {
+            if (tag !== 122) {
+              break;
+            }
+
+            message.ticker = reader.string();
+            continue;
+          }
+          case 16: {
+            if (tag !== 130) {
+              break;
+            }
+
+            message.minNotional = reader.string();
+            continue;
+          }
+          case 17: {
+            if (tag !== 138) {
+              break;
+            }
+
+            message.adminInfo = AdminInfo.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): DerivativeMarketParamUpdateProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        initialMarginRatio: isSet(object.initialMarginRatio)
+          ? globalThis.String(object.initialMarginRatio)
+          : isSet(object.initial_margin_ratio)
+            ? globalThis.String(object.initial_margin_ratio)
+            : "",
+        maintenanceMarginRatio: isSet(object.maintenanceMarginRatio)
+          ? globalThis.String(object.maintenanceMarginRatio)
+          : isSet(object.maintenance_margin_ratio)
+            ? globalThis.String(object.maintenance_margin_ratio)
+            : "",
+        makerFeeRate: isSet(object.makerFeeRate)
+          ? globalThis.String(object.makerFeeRate)
+          : isSet(object.maker_fee_rate)
+            ? globalThis.String(object.maker_fee_rate)
+            : "",
+        takerFeeRate: isSet(object.takerFeeRate)
+          ? globalThis.String(object.takerFeeRate)
+          : isSet(object.taker_fee_rate)
+            ? globalThis.String(object.taker_fee_rate)
+            : "",
+        relayerFeeShareRate: isSet(object.relayerFeeShareRate)
+          ? globalThis.String(object.relayerFeeShareRate)
+          : isSet(object.relayer_fee_share_rate)
+            ? globalThis.String(object.relayer_fee_share_rate)
+            : "",
+        minPriceTickSize: isSet(object.minPriceTickSize)
+          ? globalThis.String(object.minPriceTickSize)
+          : isSet(object.min_price_tick_size)
+            ? globalThis.String(object.min_price_tick_size)
+            : "",
+        minQuantityTickSize: isSet(object.minQuantityTickSize)
+          ? globalThis.String(object.minQuantityTickSize)
+          : isSet(object.min_quantity_tick_size)
+            ? globalThis.String(object.min_quantity_tick_size)
+            : "",
+        HourlyInterestRate: isSet(object.HourlyInterestRate)
+          ? globalThis.String(object.HourlyInterestRate)
+          : "",
+        HourlyFundingRateCap: isSet(object.HourlyFundingRateCap)
+          ? globalThis.String(object.HourlyFundingRateCap)
+          : "",
+        status: isSet(object.status) ? marketStatusFromJSON(object.status) : 0,
+        oracleParams: isSet(object.oracleParams)
+          ? OracleParams.fromJSON(object.oracleParams)
+          : isSet(object.oracle_params)
+            ? OracleParams.fromJSON(object.oracle_params)
+            : undefined,
+        ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
+        minNotional: isSet(object.minNotional)
+          ? globalThis.String(object.minNotional)
+          : isSet(object.min_notional)
+            ? globalThis.String(object.min_notional)
+            : "",
+        adminInfo: isSet(object.adminInfo)
+          ? AdminInfo.fromJSON(object.adminInfo)
+          : isSet(object.admin_info)
+            ? AdminInfo.fromJSON(object.admin_info)
+            : undefined,
+      };
+    },
+
+    toJSON(message: DerivativeMarketParamUpdateProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.initialMarginRatio !== "") {
+        obj.initialMarginRatio = message.initialMarginRatio;
+      }
+      if (message.maintenanceMarginRatio !== "") {
+        obj.maintenanceMarginRatio = message.maintenanceMarginRatio;
+      }
+      if (message.makerFeeRate !== "") {
+        obj.makerFeeRate = message.makerFeeRate;
+      }
+      if (message.takerFeeRate !== "") {
+        obj.takerFeeRate = message.takerFeeRate;
+      }
+      if (message.relayerFeeShareRate !== "") {
+        obj.relayerFeeShareRate = message.relayerFeeShareRate;
+      }
+      if (message.minPriceTickSize !== "") {
+        obj.minPriceTickSize = message.minPriceTickSize;
+      }
+      if (message.minQuantityTickSize !== "") {
+        obj.minQuantityTickSize = message.minQuantityTickSize;
+      }
+      if (message.HourlyInterestRate !== "") {
+        obj.HourlyInterestRate = message.HourlyInterestRate;
+      }
+      if (message.HourlyFundingRateCap !== "") {
+        obj.HourlyFundingRateCap = message.HourlyFundingRateCap;
+      }
+      if (message.status !== 0) {
+        obj.status = marketStatusToJSON(message.status);
+      }
+      if (message.oracleParams !== undefined) {
+        obj.oracleParams = OracleParams.toJSON(message.oracleParams);
+      }
+      if (message.ticker !== "") {
+        obj.ticker = message.ticker;
+      }
+      if (message.minNotional !== "") {
+        obj.minNotional = message.minNotional;
+      }
+      if (message.adminInfo !== undefined) {
+        obj.adminInfo = AdminInfo.toJSON(message.adminInfo);
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<DerivativeMarketParamUpdateProposal>, I>,
+    >(base?: I): DerivativeMarketParamUpdateProposal {
+      return DerivativeMarketParamUpdateProposal.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<DerivativeMarketParamUpdateProposal>, I>,
+    >(object: I): DerivativeMarketParamUpdateProposal {
+      const message = createBaseDerivativeMarketParamUpdateProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.marketId = object.marketId ?? "";
+      message.initialMarginRatio = object.initialMarginRatio ?? "";
+      message.maintenanceMarginRatio = object.maintenanceMarginRatio ?? "";
+      message.makerFeeRate = object.makerFeeRate ?? "";
+      message.takerFeeRate = object.takerFeeRate ?? "";
+      message.relayerFeeShareRate = object.relayerFeeShareRate ?? "";
+      message.minPriceTickSize = object.minPriceTickSize ?? "";
+      message.minQuantityTickSize = object.minQuantityTickSize ?? "";
+      message.HourlyInterestRate = object.HourlyInterestRate ?? "";
+      message.HourlyFundingRateCap = object.HourlyFundingRateCap ?? "";
+      message.status = object.status ?? 0;
+      message.oracleParams =
+        object.oracleParams !== undefined && object.oracleParams !== null
+          ? OracleParams.fromPartial(object.oracleParams)
+          : undefined;
+      message.ticker = object.ticker ?? "";
+      message.minNotional = object.minNotional ?? "";
+      message.adminInfo =
+        object.adminInfo !== undefined && object.adminInfo !== null
+          ? AdminInfo.fromPartial(object.adminInfo)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseAdminInfo(): AdminInfo {
   return { admin: "", adminPermissions: 0 };
 }
 
 export const AdminInfo: MessageFns<AdminInfo> = {
-  encode(message: AdminInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AdminInfo,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -3187,7 +3459,8 @@ export const AdminInfo: MessageFns<AdminInfo> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): AdminInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdminInfo();
     while (reader.pos < end) {
@@ -3224,8 +3497,8 @@ export const AdminInfo: MessageFns<AdminInfo> = {
       adminPermissions: isSet(object.adminPermissions)
         ? globalThis.Number(object.adminPermissions)
         : isSet(object.admin_permissions)
-        ? globalThis.Number(object.admin_permissions)
-        : 0,
+          ? globalThis.Number(object.admin_permissions)
+          : 0,
     };
   },
 
@@ -3243,7 +3516,9 @@ export const AdminInfo: MessageFns<AdminInfo> = {
   create<I extends Exact<DeepPartial<AdminInfo>, I>>(base?: I): AdminInfo {
     return AdminInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AdminInfo>, I>>(object: I): AdminInfo {
+  fromPartial<I extends Exact<DeepPartial<AdminInfo>, I>>(
+    object: I,
+  ): AdminInfo {
     const message = createBaseAdminInfo();
     message.admin = object.admin ?? "";
     message.adminPermissions = object.adminPermissions ?? 0;
@@ -3255,215 +3530,246 @@ function createBaseMarketForcedSettlementProposal(): MarketForcedSettlementPropo
   return { title: "", description: "", marketId: "", settlementPrice: "" };
 }
 
-export const MarketForcedSettlementProposal: MessageFns<MarketForcedSettlementProposal> = {
-  encode(message: MarketForcedSettlementProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(26).string(message.marketId);
-    }
-    if (message.settlementPrice !== "") {
-      writer.uint32(34).string(message.settlementPrice);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): MarketForcedSettlementProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMarketForcedSettlementProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.settlementPrice = reader.string();
-          continue;
-        }
+export const MarketForcedSettlementProposal: MessageFns<MarketForcedSettlementProposal> =
+  {
+    encode(
+      message: MarketForcedSettlementProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.marketId !== "") {
+        writer.uint32(26).string(message.marketId);
+      }
+      if (message.settlementPrice !== "") {
+        writer.uint32(34).string(message.settlementPrice);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): MarketForcedSettlementProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      settlementPrice: isSet(object.settlementPrice)
-        ? globalThis.String(object.settlementPrice)
-        : isSet(object.settlement_price)
-        ? globalThis.String(object.settlement_price)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): MarketForcedSettlementProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMarketForcedSettlementProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: MarketForcedSettlementProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.settlementPrice !== "") {
-      obj.settlementPrice = message.settlementPrice;
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<MarketForcedSettlementProposal>, I>>(base?: I): MarketForcedSettlementProposal {
-    return MarketForcedSettlementProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<MarketForcedSettlementProposal>, I>>(
-    object: I,
-  ): MarketForcedSettlementProposal {
-    const message = createBaseMarketForcedSettlementProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.marketId = object.marketId ?? "";
-    message.settlementPrice = object.settlementPrice ?? "";
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.settlementPrice = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): MarketForcedSettlementProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        settlementPrice: isSet(object.settlementPrice)
+          ? globalThis.String(object.settlementPrice)
+          : isSet(object.settlement_price)
+            ? globalThis.String(object.settlement_price)
+            : "",
+      };
+    },
+
+    toJSON(message: MarketForcedSettlementProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.settlementPrice !== "") {
+        obj.settlementPrice = message.settlementPrice;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<MarketForcedSettlementProposal>, I>>(
+      base?: I,
+    ): MarketForcedSettlementProposal {
+      return MarketForcedSettlementProposal.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<MarketForcedSettlementProposal>, I>,
+    >(object: I): MarketForcedSettlementProposal {
+      const message = createBaseMarketForcedSettlementProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.marketId = object.marketId ?? "";
+      message.settlementPrice = object.settlementPrice ?? "";
+      return message;
+    },
+  };
 
 function createBaseUpdateDenomDecimalsProposal(): UpdateDenomDecimalsProposal {
   return { title: "", description: "", denomDecimals: [] };
 }
 
-export const UpdateDenomDecimalsProposal: MessageFns<UpdateDenomDecimalsProposal> = {
-  encode(message: UpdateDenomDecimalsProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    for (const v of message.denomDecimals) {
-      DenomDecimals.encode(v!, writer.uint32(26).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateDenomDecimalsProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseUpdateDenomDecimalsProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.denomDecimals.push(DenomDecimals.decode(reader, reader.uint32()));
-          continue;
-        }
+export const UpdateDenomDecimalsProposal: MessageFns<UpdateDenomDecimalsProposal> =
+  {
+    encode(
+      message: UpdateDenomDecimalsProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.denomDecimals) {
+        DenomDecimals.encode(v!, writer.uint32(26).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): UpdateDenomDecimalsProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      denomDecimals: globalThis.Array.isArray(object?.denomDecimals)
-        ? object.denomDecimals.map((e: any) => DenomDecimals.fromJSON(e))
-        : globalThis.Array.isArray(object?.denom_decimals)
-        ? object.denom_decimals.map((e: any) => DenomDecimals.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): UpdateDenomDecimalsProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseUpdateDenomDecimalsProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: UpdateDenomDecimalsProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.denomDecimals?.length) {
-      obj.denomDecimals = message.denomDecimals.map((e) => DenomDecimals.toJSON(e));
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<UpdateDenomDecimalsProposal>, I>>(base?: I): UpdateDenomDecimalsProposal {
-    return UpdateDenomDecimalsProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<UpdateDenomDecimalsProposal>, I>>(object: I): UpdateDenomDecimalsProposal {
-    const message = createBaseUpdateDenomDecimalsProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.denomDecimals = object.denomDecimals?.map((e) => DenomDecimals.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.denomDecimals.push(
+              DenomDecimals.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): UpdateDenomDecimalsProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        denomDecimals: globalThis.Array.isArray(object?.denomDecimals)
+          ? object.denomDecimals.map((e: any) => DenomDecimals.fromJSON(e))
+          : globalThis.Array.isArray(object?.denom_decimals)
+            ? object.denom_decimals.map((e: any) => DenomDecimals.fromJSON(e))
+            : [],
+      };
+    },
+
+    toJSON(message: UpdateDenomDecimalsProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.denomDecimals?.length) {
+        obj.denomDecimals = message.denomDecimals.map((e) =>
+          DenomDecimals.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<UpdateDenomDecimalsProposal>, I>>(
+      base?: I,
+    ): UpdateDenomDecimalsProposal {
+      return UpdateDenomDecimalsProposal.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<UpdateDenomDecimalsProposal>, I>>(
+      object: I,
+    ): UpdateDenomDecimalsProposal {
+      const message = createBaseUpdateDenomDecimalsProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.denomDecimals =
+        object.denomDecimals?.map((e) => DenomDecimals.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseBinaryOptionsMarketParamUpdateProposal(): BinaryOptionsMarketParamUpdateProposal {
   return {
@@ -3486,358 +3792,380 @@ function createBaseBinaryOptionsMarketParamUpdateProposal(): BinaryOptionsMarket
   };
 }
 
-export const BinaryOptionsMarketParamUpdateProposal: MessageFns<BinaryOptionsMarketParamUpdateProposal> = {
-  encode(message: BinaryOptionsMarketParamUpdateProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(26).string(message.marketId);
-    }
-    if (message.makerFeeRate !== "") {
-      writer.uint32(34).string(message.makerFeeRate);
-    }
-    if (message.takerFeeRate !== "") {
-      writer.uint32(42).string(message.takerFeeRate);
-    }
-    if (message.relayerFeeShareRate !== "") {
-      writer.uint32(50).string(message.relayerFeeShareRate);
-    }
-    if (message.minPriceTickSize !== "") {
-      writer.uint32(58).string(message.minPriceTickSize);
-    }
-    if (message.minQuantityTickSize !== "") {
-      writer.uint32(66).string(message.minQuantityTickSize);
-    }
-    if (message.expirationTimestamp !== 0) {
-      writer.uint32(72).int64(message.expirationTimestamp);
-    }
-    if (message.settlementTimestamp !== 0) {
-      writer.uint32(80).int64(message.settlementTimestamp);
-    }
-    if (message.settlementPrice !== "") {
-      writer.uint32(90).string(message.settlementPrice);
-    }
-    if (message.admin !== "") {
-      writer.uint32(98).string(message.admin);
-    }
-    if (message.status !== 0) {
-      writer.uint32(104).int32(message.status);
-    }
-    if (message.oracleParams !== undefined) {
-      ProviderOracleParams.encode(message.oracleParams, writer.uint32(114).fork()).join();
-    }
-    if (message.ticker !== "") {
-      writer.uint32(122).string(message.ticker);
-    }
-    if (message.minNotional !== "") {
-      writer.uint32(130).string(message.minNotional);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BinaryOptionsMarketParamUpdateProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBinaryOptionsMarketParamUpdateProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.makerFeeRate = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.takerFeeRate = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.relayerFeeShareRate = reader.string();
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.minPriceTickSize = reader.string();
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.minQuantityTickSize = reader.string();
-          continue;
-        }
-        case 9: {
-          if (tag !== 72) {
-            break;
-          }
-
-          message.expirationTimestamp = longToNumber(reader.int64());
-          continue;
-        }
-        case 10: {
-          if (tag !== 80) {
-            break;
-          }
-
-          message.settlementTimestamp = longToNumber(reader.int64());
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.settlementPrice = reader.string();
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.admin = reader.string();
-          continue;
-        }
-        case 13: {
-          if (tag !== 104) {
-            break;
-          }
-
-          message.status = reader.int32() as any;
-          continue;
-        }
-        case 14: {
-          if (tag !== 114) {
-            break;
-          }
-
-          message.oracleParams = ProviderOracleParams.decode(reader, reader.uint32());
-          continue;
-        }
-        case 15: {
-          if (tag !== 122) {
-            break;
-          }
-
-          message.ticker = reader.string();
-          continue;
-        }
-        case 16: {
-          if (tag !== 130) {
-            break;
-          }
-
-          message.minNotional = reader.string();
-          continue;
-        }
+export const BinaryOptionsMarketParamUpdateProposal: MessageFns<BinaryOptionsMarketParamUpdateProposal> =
+  {
+    encode(
+      message: BinaryOptionsMarketParamUpdateProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.marketId !== "") {
+        writer.uint32(26).string(message.marketId);
+      }
+      if (message.makerFeeRate !== "") {
+        writer.uint32(34).string(message.makerFeeRate);
+      }
+      if (message.takerFeeRate !== "") {
+        writer.uint32(42).string(message.takerFeeRate);
+      }
+      if (message.relayerFeeShareRate !== "") {
+        writer.uint32(50).string(message.relayerFeeShareRate);
+      }
+      if (message.minPriceTickSize !== "") {
+        writer.uint32(58).string(message.minPriceTickSize);
+      }
+      if (message.minQuantityTickSize !== "") {
+        writer.uint32(66).string(message.minQuantityTickSize);
+      }
+      if (message.expirationTimestamp !== 0) {
+        writer.uint32(72).int64(message.expirationTimestamp);
+      }
+      if (message.settlementTimestamp !== 0) {
+        writer.uint32(80).int64(message.settlementTimestamp);
+      }
+      if (message.settlementPrice !== "") {
+        writer.uint32(90).string(message.settlementPrice);
+      }
+      if (message.admin !== "") {
+        writer.uint32(98).string(message.admin);
+      }
+      if (message.status !== 0) {
+        writer.uint32(104).int32(message.status);
+      }
+      if (message.oracleParams !== undefined) {
+        ProviderOracleParams.encode(
+          message.oracleParams,
+          writer.uint32(114).fork(),
+        ).join();
+      }
+      if (message.ticker !== "") {
+        writer.uint32(122).string(message.ticker);
+      }
+      if (message.minNotional !== "") {
+        writer.uint32(130).string(message.minNotional);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): BinaryOptionsMarketParamUpdateProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      makerFeeRate: isSet(object.makerFeeRate)
-        ? globalThis.String(object.makerFeeRate)
-        : isSet(object.maker_fee_rate)
-        ? globalThis.String(object.maker_fee_rate)
-        : "",
-      takerFeeRate: isSet(object.takerFeeRate)
-        ? globalThis.String(object.takerFeeRate)
-        : isSet(object.taker_fee_rate)
-        ? globalThis.String(object.taker_fee_rate)
-        : "",
-      relayerFeeShareRate: isSet(object.relayerFeeShareRate)
-        ? globalThis.String(object.relayerFeeShareRate)
-        : isSet(object.relayer_fee_share_rate)
-        ? globalThis.String(object.relayer_fee_share_rate)
-        : "",
-      minPriceTickSize: isSet(object.minPriceTickSize)
-        ? globalThis.String(object.minPriceTickSize)
-        : isSet(object.min_price_tick_size)
-        ? globalThis.String(object.min_price_tick_size)
-        : "",
-      minQuantityTickSize: isSet(object.minQuantityTickSize)
-        ? globalThis.String(object.minQuantityTickSize)
-        : isSet(object.min_quantity_tick_size)
-        ? globalThis.String(object.min_quantity_tick_size)
-        : "",
-      expirationTimestamp: isSet(object.expirationTimestamp)
-        ? globalThis.Number(object.expirationTimestamp)
-        : isSet(object.expiration_timestamp)
-        ? globalThis.Number(object.expiration_timestamp)
-        : 0,
-      settlementTimestamp: isSet(object.settlementTimestamp)
-        ? globalThis.Number(object.settlementTimestamp)
-        : isSet(object.settlement_timestamp)
-        ? globalThis.Number(object.settlement_timestamp)
-        : 0,
-      settlementPrice: isSet(object.settlementPrice)
-        ? globalThis.String(object.settlementPrice)
-        : isSet(object.settlement_price)
-        ? globalThis.String(object.settlement_price)
-        : "",
-      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
-      status: isSet(object.status) ? marketStatusFromJSON(object.status) : 0,
-      oracleParams: isSet(object.oracleParams)
-        ? ProviderOracleParams.fromJSON(object.oracleParams)
-        : isSet(object.oracle_params)
-        ? ProviderOracleParams.fromJSON(object.oracle_params)
-        : undefined,
-      ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
-      minNotional: isSet(object.minNotional)
-        ? globalThis.String(object.minNotional)
-        : isSet(object.min_notional)
-        ? globalThis.String(object.min_notional)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BinaryOptionsMarketParamUpdateProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBinaryOptionsMarketParamUpdateProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BinaryOptionsMarketParamUpdateProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.makerFeeRate !== "") {
-      obj.makerFeeRate = message.makerFeeRate;
-    }
-    if (message.takerFeeRate !== "") {
-      obj.takerFeeRate = message.takerFeeRate;
-    }
-    if (message.relayerFeeShareRate !== "") {
-      obj.relayerFeeShareRate = message.relayerFeeShareRate;
-    }
-    if (message.minPriceTickSize !== "") {
-      obj.minPriceTickSize = message.minPriceTickSize;
-    }
-    if (message.minQuantityTickSize !== "") {
-      obj.minQuantityTickSize = message.minQuantityTickSize;
-    }
-    if (message.expirationTimestamp !== 0) {
-      obj.expirationTimestamp = Math.round(message.expirationTimestamp);
-    }
-    if (message.settlementTimestamp !== 0) {
-      obj.settlementTimestamp = Math.round(message.settlementTimestamp);
-    }
-    if (message.settlementPrice !== "") {
-      obj.settlementPrice = message.settlementPrice;
-    }
-    if (message.admin !== "") {
-      obj.admin = message.admin;
-    }
-    if (message.status !== 0) {
-      obj.status = marketStatusToJSON(message.status);
-    }
-    if (message.oracleParams !== undefined) {
-      obj.oracleParams = ProviderOracleParams.toJSON(message.oracleParams);
-    }
-    if (message.ticker !== "") {
-      obj.ticker = message.ticker;
-    }
-    if (message.minNotional !== "") {
-      obj.minNotional = message.minNotional;
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<BinaryOptionsMarketParamUpdateProposal>, I>>(
-    base?: I,
-  ): BinaryOptionsMarketParamUpdateProposal {
-    return BinaryOptionsMarketParamUpdateProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BinaryOptionsMarketParamUpdateProposal>, I>>(
-    object: I,
-  ): BinaryOptionsMarketParamUpdateProposal {
-    const message = createBaseBinaryOptionsMarketParamUpdateProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.marketId = object.marketId ?? "";
-    message.makerFeeRate = object.makerFeeRate ?? "";
-    message.takerFeeRate = object.takerFeeRate ?? "";
-    message.relayerFeeShareRate = object.relayerFeeShareRate ?? "";
-    message.minPriceTickSize = object.minPriceTickSize ?? "";
-    message.minQuantityTickSize = object.minQuantityTickSize ?? "";
-    message.expirationTimestamp = object.expirationTimestamp ?? 0;
-    message.settlementTimestamp = object.settlementTimestamp ?? 0;
-    message.settlementPrice = object.settlementPrice ?? "";
-    message.admin = object.admin ?? "";
-    message.status = object.status ?? 0;
-    message.oracleParams = (object.oracleParams !== undefined && object.oracleParams !== null)
-      ? ProviderOracleParams.fromPartial(object.oracleParams)
-      : undefined;
-    message.ticker = object.ticker ?? "";
-    message.minNotional = object.minNotional ?? "";
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.marketId = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.makerFeeRate = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.takerFeeRate = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.relayerFeeShareRate = reader.string();
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.minPriceTickSize = reader.string();
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.minQuantityTickSize = reader.string();
+            continue;
+          }
+          case 9: {
+            if (tag !== 72) {
+              break;
+            }
+
+            message.expirationTimestamp = longToNumber(reader.int64());
+            continue;
+          }
+          case 10: {
+            if (tag !== 80) {
+              break;
+            }
+
+            message.settlementTimestamp = longToNumber(reader.int64());
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.settlementPrice = reader.string();
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.admin = reader.string();
+            continue;
+          }
+          case 13: {
+            if (tag !== 104) {
+              break;
+            }
+
+            message.status = reader.int32() as any;
+            continue;
+          }
+          case 14: {
+            if (tag !== 114) {
+              break;
+            }
+
+            message.oracleParams = ProviderOracleParams.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 15: {
+            if (tag !== 122) {
+              break;
+            }
+
+            message.ticker = reader.string();
+            continue;
+          }
+          case 16: {
+            if (tag !== 130) {
+              break;
+            }
+
+            message.minNotional = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BinaryOptionsMarketParamUpdateProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        makerFeeRate: isSet(object.makerFeeRate)
+          ? globalThis.String(object.makerFeeRate)
+          : isSet(object.maker_fee_rate)
+            ? globalThis.String(object.maker_fee_rate)
+            : "",
+        takerFeeRate: isSet(object.takerFeeRate)
+          ? globalThis.String(object.takerFeeRate)
+          : isSet(object.taker_fee_rate)
+            ? globalThis.String(object.taker_fee_rate)
+            : "",
+        relayerFeeShareRate: isSet(object.relayerFeeShareRate)
+          ? globalThis.String(object.relayerFeeShareRate)
+          : isSet(object.relayer_fee_share_rate)
+            ? globalThis.String(object.relayer_fee_share_rate)
+            : "",
+        minPriceTickSize: isSet(object.minPriceTickSize)
+          ? globalThis.String(object.minPriceTickSize)
+          : isSet(object.min_price_tick_size)
+            ? globalThis.String(object.min_price_tick_size)
+            : "",
+        minQuantityTickSize: isSet(object.minQuantityTickSize)
+          ? globalThis.String(object.minQuantityTickSize)
+          : isSet(object.min_quantity_tick_size)
+            ? globalThis.String(object.min_quantity_tick_size)
+            : "",
+        expirationTimestamp: isSet(object.expirationTimestamp)
+          ? globalThis.Number(object.expirationTimestamp)
+          : isSet(object.expiration_timestamp)
+            ? globalThis.Number(object.expiration_timestamp)
+            : 0,
+        settlementTimestamp: isSet(object.settlementTimestamp)
+          ? globalThis.Number(object.settlementTimestamp)
+          : isSet(object.settlement_timestamp)
+            ? globalThis.Number(object.settlement_timestamp)
+            : 0,
+        settlementPrice: isSet(object.settlementPrice)
+          ? globalThis.String(object.settlementPrice)
+          : isSet(object.settlement_price)
+            ? globalThis.String(object.settlement_price)
+            : "",
+        admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+        status: isSet(object.status) ? marketStatusFromJSON(object.status) : 0,
+        oracleParams: isSet(object.oracleParams)
+          ? ProviderOracleParams.fromJSON(object.oracleParams)
+          : isSet(object.oracle_params)
+            ? ProviderOracleParams.fromJSON(object.oracle_params)
+            : undefined,
+        ticker: isSet(object.ticker) ? globalThis.String(object.ticker) : "",
+        minNotional: isSet(object.minNotional)
+          ? globalThis.String(object.minNotional)
+          : isSet(object.min_notional)
+            ? globalThis.String(object.min_notional)
+            : "",
+      };
+    },
+
+    toJSON(message: BinaryOptionsMarketParamUpdateProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.makerFeeRate !== "") {
+        obj.makerFeeRate = message.makerFeeRate;
+      }
+      if (message.takerFeeRate !== "") {
+        obj.takerFeeRate = message.takerFeeRate;
+      }
+      if (message.relayerFeeShareRate !== "") {
+        obj.relayerFeeShareRate = message.relayerFeeShareRate;
+      }
+      if (message.minPriceTickSize !== "") {
+        obj.minPriceTickSize = message.minPriceTickSize;
+      }
+      if (message.minQuantityTickSize !== "") {
+        obj.minQuantityTickSize = message.minQuantityTickSize;
+      }
+      if (message.expirationTimestamp !== 0) {
+        obj.expirationTimestamp = Math.round(message.expirationTimestamp);
+      }
+      if (message.settlementTimestamp !== 0) {
+        obj.settlementTimestamp = Math.round(message.settlementTimestamp);
+      }
+      if (message.settlementPrice !== "") {
+        obj.settlementPrice = message.settlementPrice;
+      }
+      if (message.admin !== "") {
+        obj.admin = message.admin;
+      }
+      if (message.status !== 0) {
+        obj.status = marketStatusToJSON(message.status);
+      }
+      if (message.oracleParams !== undefined) {
+        obj.oracleParams = ProviderOracleParams.toJSON(message.oracleParams);
+      }
+      if (message.ticker !== "") {
+        obj.ticker = message.ticker;
+      }
+      if (message.minNotional !== "") {
+        obj.minNotional = message.minNotional;
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<BinaryOptionsMarketParamUpdateProposal>, I>,
+    >(base?: I): BinaryOptionsMarketParamUpdateProposal {
+      return BinaryOptionsMarketParamUpdateProposal.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<BinaryOptionsMarketParamUpdateProposal>, I>,
+    >(object: I): BinaryOptionsMarketParamUpdateProposal {
+      const message = createBaseBinaryOptionsMarketParamUpdateProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.marketId = object.marketId ?? "";
+      message.makerFeeRate = object.makerFeeRate ?? "";
+      message.takerFeeRate = object.takerFeeRate ?? "";
+      message.relayerFeeShareRate = object.relayerFeeShareRate ?? "";
+      message.minPriceTickSize = object.minPriceTickSize ?? "";
+      message.minQuantityTickSize = object.minQuantityTickSize ?? "";
+      message.expirationTimestamp = object.expirationTimestamp ?? 0;
+      message.settlementTimestamp = object.settlementTimestamp ?? 0;
+      message.settlementPrice = object.settlementPrice ?? "";
+      message.admin = object.admin ?? "";
+      message.status = object.status ?? 0;
+      message.oracleParams =
+        object.oracleParams !== undefined && object.oracleParams !== null
+          ? ProviderOracleParams.fromPartial(object.oracleParams)
+          : undefined;
+      message.ticker = object.ticker ?? "";
+      message.minNotional = object.minNotional ?? "";
+      return message;
+    },
+  };
 
 function createBaseProviderOracleParams(): ProviderOracleParams {
   return { symbol: "", provider: "", oracleScaleFactor: 0, oracleType: 0 };
 }
 
 export const ProviderOracleParams: MessageFns<ProviderOracleParams> = {
-  encode(message: ProviderOracleParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ProviderOracleParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.symbol !== "") {
       writer.uint32(10).string(message.symbol);
     }
@@ -3853,8 +4181,12 @@ export const ProviderOracleParams: MessageFns<ProviderOracleParams> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ProviderOracleParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ProviderOracleParams {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProviderOracleParams();
     while (reader.pos < end) {
@@ -3904,17 +4236,19 @@ export const ProviderOracleParams: MessageFns<ProviderOracleParams> = {
   fromJSON(object: any): ProviderOracleParams {
     return {
       symbol: isSet(object.symbol) ? globalThis.String(object.symbol) : "",
-      provider: isSet(object.provider) ? globalThis.String(object.provider) : "",
+      provider: isSet(object.provider)
+        ? globalThis.String(object.provider)
+        : "",
       oracleScaleFactor: isSet(object.oracleScaleFactor)
         ? globalThis.Number(object.oracleScaleFactor)
         : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
+          ? globalThis.Number(object.oracle_scale_factor)
+          : 0,
       oracleType: isSet(object.oracleType)
         ? oracleTypeFromJSON(object.oracleType)
         : isSet(object.oracle_type)
-        ? oracleTypeFromJSON(object.oracle_type)
-        : 0,
+          ? oracleTypeFromJSON(object.oracle_type)
+          : 0,
     };
   },
 
@@ -3935,10 +4269,14 @@ export const ProviderOracleParams: MessageFns<ProviderOracleParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProviderOracleParams>, I>>(base?: I): ProviderOracleParams {
+  create<I extends Exact<DeepPartial<ProviderOracleParams>, I>>(
+    base?: I,
+  ): ProviderOracleParams {
     return ProviderOracleParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ProviderOracleParams>, I>>(object: I): ProviderOracleParams {
+  fromPartial<I extends Exact<DeepPartial<ProviderOracleParams>, I>>(
+    object: I,
+  ): ProviderOracleParams {
     const message = createBaseProviderOracleParams();
     message.symbol = object.symbol ?? "";
     message.provider = object.provider ?? "";
@@ -3949,11 +4287,19 @@ export const ProviderOracleParams: MessageFns<ProviderOracleParams> = {
 };
 
 function createBaseOracleParams(): OracleParams {
-  return { oracleBase: "", oracleQuote: "", oracleScaleFactor: 0, oracleType: 0 };
+  return {
+    oracleBase: "",
+    oracleQuote: "",
+    oracleScaleFactor: 0,
+    oracleType: 0,
+  };
 }
 
 export const OracleParams: MessageFns<OracleParams> = {
-  encode(message: OracleParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OracleParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.oracleBase !== "") {
       writer.uint32(10).string(message.oracleBase);
     }
@@ -3970,7 +4316,8 @@ export const OracleParams: MessageFns<OracleParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): OracleParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOracleParams();
     while (reader.pos < end) {
@@ -4022,23 +4369,23 @@ export const OracleParams: MessageFns<OracleParams> = {
       oracleBase: isSet(object.oracleBase)
         ? globalThis.String(object.oracleBase)
         : isSet(object.oracle_base)
-        ? globalThis.String(object.oracle_base)
-        : "",
+          ? globalThis.String(object.oracle_base)
+          : "",
       oracleQuote: isSet(object.oracleQuote)
         ? globalThis.String(object.oracleQuote)
         : isSet(object.oracle_quote)
-        ? globalThis.String(object.oracle_quote)
-        : "",
+          ? globalThis.String(object.oracle_quote)
+          : "",
       oracleScaleFactor: isSet(object.oracleScaleFactor)
         ? globalThis.Number(object.oracleScaleFactor)
         : isSet(object.oracle_scale_factor)
-        ? globalThis.Number(object.oracle_scale_factor)
-        : 0,
+          ? globalThis.Number(object.oracle_scale_factor)
+          : 0,
       oracleType: isSet(object.oracleType)
         ? oracleTypeFromJSON(object.oracleType)
         : isSet(object.oracle_type)
-        ? oracleTypeFromJSON(object.oracle_type)
-        : 0,
+          ? oracleTypeFromJSON(object.oracle_type)
+          : 0,
     };
   },
 
@@ -4059,10 +4406,14 @@ export const OracleParams: MessageFns<OracleParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OracleParams>, I>>(base?: I): OracleParams {
+  create<I extends Exact<DeepPartial<OracleParams>, I>>(
+    base?: I,
+  ): OracleParams {
     return OracleParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OracleParams>, I>>(object: I): OracleParams {
+  fromPartial<I extends Exact<DeepPartial<OracleParams>, I>>(
+    object: I,
+  ): OracleParams {
     const message = createBaseOracleParams();
     message.oracleBase = object.oracleBase ?? "";
     message.oracleQuote = object.oracleQuote ?? "";
@@ -4073,126 +4424,165 @@ export const OracleParams: MessageFns<OracleParams> = {
 };
 
 function createBaseTradingRewardCampaignLaunchProposal(): TradingRewardCampaignLaunchProposal {
-  return { title: "", description: "", campaignInfo: undefined, campaignRewardPools: [] };
+  return {
+    title: "",
+    description: "",
+    campaignInfo: undefined,
+    campaignRewardPools: [],
+  };
 }
 
-export const TradingRewardCampaignLaunchProposal: MessageFns<TradingRewardCampaignLaunchProposal> = {
-  encode(message: TradingRewardCampaignLaunchProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.campaignInfo !== undefined) {
-      TradingRewardCampaignInfo.encode(message.campaignInfo, writer.uint32(26).fork()).join();
-    }
-    for (const v of message.campaignRewardPools) {
-      CampaignRewardPool.encode(v!, writer.uint32(34).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): TradingRewardCampaignLaunchProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTradingRewardCampaignLaunchProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.campaignInfo = TradingRewardCampaignInfo.decode(reader, reader.uint32());
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.campaignRewardPools.push(CampaignRewardPool.decode(reader, reader.uint32()));
-          continue;
-        }
+export const TradingRewardCampaignLaunchProposal: MessageFns<TradingRewardCampaignLaunchProposal> =
+  {
+    encode(
+      message: TradingRewardCampaignLaunchProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.campaignInfo !== undefined) {
+        TradingRewardCampaignInfo.encode(
+          message.campaignInfo,
+          writer.uint32(26).fork(),
+        ).join();
+      }
+      for (const v of message.campaignRewardPools) {
+        CampaignRewardPool.encode(v!, writer.uint32(34).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): TradingRewardCampaignLaunchProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      campaignInfo: isSet(object.campaignInfo)
-        ? TradingRewardCampaignInfo.fromJSON(object.campaignInfo)
-        : isSet(object.campaign_info)
-        ? TradingRewardCampaignInfo.fromJSON(object.campaign_info)
-        : undefined,
-      campaignRewardPools: globalThis.Array.isArray(object?.campaignRewardPools)
-        ? object.campaignRewardPools.map((e: any) => CampaignRewardPool.fromJSON(e))
-        : globalThis.Array.isArray(object?.campaign_reward_pools)
-        ? object.campaign_reward_pools.map((e: any) => CampaignRewardPool.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): TradingRewardCampaignLaunchProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTradingRewardCampaignLaunchProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: TradingRewardCampaignLaunchProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.campaignInfo !== undefined) {
-      obj.campaignInfo = TradingRewardCampaignInfo.toJSON(message.campaignInfo);
-    }
-    if (message.campaignRewardPools?.length) {
-      obj.campaignRewardPools = message.campaignRewardPools.map((e) => CampaignRewardPool.toJSON(e));
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<TradingRewardCampaignLaunchProposal>, I>>(
-    base?: I,
-  ): TradingRewardCampaignLaunchProposal {
-    return TradingRewardCampaignLaunchProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TradingRewardCampaignLaunchProposal>, I>>(
-    object: I,
-  ): TradingRewardCampaignLaunchProposal {
-    const message = createBaseTradingRewardCampaignLaunchProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.campaignInfo = (object.campaignInfo !== undefined && object.campaignInfo !== null)
-      ? TradingRewardCampaignInfo.fromPartial(object.campaignInfo)
-      : undefined;
-    message.campaignRewardPools = object.campaignRewardPools?.map((e) => CampaignRewardPool.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.campaignInfo = TradingRewardCampaignInfo.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.campaignRewardPools.push(
+              CampaignRewardPool.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): TradingRewardCampaignLaunchProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        campaignInfo: isSet(object.campaignInfo)
+          ? TradingRewardCampaignInfo.fromJSON(object.campaignInfo)
+          : isSet(object.campaign_info)
+            ? TradingRewardCampaignInfo.fromJSON(object.campaign_info)
+            : undefined,
+        campaignRewardPools: globalThis.Array.isArray(
+          object?.campaignRewardPools,
+        )
+          ? object.campaignRewardPools.map((e: any) =>
+              CampaignRewardPool.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.campaign_reward_pools)
+            ? object.campaign_reward_pools.map((e: any) =>
+                CampaignRewardPool.fromJSON(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: TradingRewardCampaignLaunchProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.campaignInfo !== undefined) {
+        obj.campaignInfo = TradingRewardCampaignInfo.toJSON(
+          message.campaignInfo,
+        );
+      }
+      if (message.campaignRewardPools?.length) {
+        obj.campaignRewardPools = message.campaignRewardPools.map((e) =>
+          CampaignRewardPool.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<TradingRewardCampaignLaunchProposal>, I>,
+    >(base?: I): TradingRewardCampaignLaunchProposal {
+      return TradingRewardCampaignLaunchProposal.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<TradingRewardCampaignLaunchProposal>, I>,
+    >(object: I): TradingRewardCampaignLaunchProposal {
+      const message = createBaseTradingRewardCampaignLaunchProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.campaignInfo =
+        object.campaignInfo !== undefined && object.campaignInfo !== null
+          ? TradingRewardCampaignInfo.fromPartial(object.campaignInfo)
+          : undefined;
+      message.campaignRewardPools =
+        object.campaignRewardPools?.map((e) =>
+          CampaignRewardPool.fromPartial(e),
+        ) || [];
+      return message;
+    },
+  };
 
 function createBaseTradingRewardCampaignUpdateProposal(): TradingRewardCampaignUpdateProposal {
   return {
@@ -4204,152 +4594,201 @@ function createBaseTradingRewardCampaignUpdateProposal(): TradingRewardCampaignU
   };
 }
 
-export const TradingRewardCampaignUpdateProposal: MessageFns<TradingRewardCampaignUpdateProposal> = {
-  encode(message: TradingRewardCampaignUpdateProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.campaignInfo !== undefined) {
-      TradingRewardCampaignInfo.encode(message.campaignInfo, writer.uint32(26).fork()).join();
-    }
-    for (const v of message.campaignRewardPoolsAdditions) {
-      CampaignRewardPool.encode(v!, writer.uint32(34).fork()).join();
-    }
-    for (const v of message.campaignRewardPoolsUpdates) {
-      CampaignRewardPool.encode(v!, writer.uint32(42).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): TradingRewardCampaignUpdateProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTradingRewardCampaignUpdateProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.campaignInfo = TradingRewardCampaignInfo.decode(reader, reader.uint32());
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.campaignRewardPoolsAdditions.push(CampaignRewardPool.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.campaignRewardPoolsUpdates.push(CampaignRewardPool.decode(reader, reader.uint32()));
-          continue;
-        }
+export const TradingRewardCampaignUpdateProposal: MessageFns<TradingRewardCampaignUpdateProposal> =
+  {
+    encode(
+      message: TradingRewardCampaignUpdateProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.campaignInfo !== undefined) {
+        TradingRewardCampaignInfo.encode(
+          message.campaignInfo,
+          writer.uint32(26).fork(),
+        ).join();
+      }
+      for (const v of message.campaignRewardPoolsAdditions) {
+        CampaignRewardPool.encode(v!, writer.uint32(34).fork()).join();
+      }
+      for (const v of message.campaignRewardPoolsUpdates) {
+        CampaignRewardPool.encode(v!, writer.uint32(42).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): TradingRewardCampaignUpdateProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      campaignInfo: isSet(object.campaignInfo)
-        ? TradingRewardCampaignInfo.fromJSON(object.campaignInfo)
-        : isSet(object.campaign_info)
-        ? TradingRewardCampaignInfo.fromJSON(object.campaign_info)
-        : undefined,
-      campaignRewardPoolsAdditions: globalThis.Array.isArray(object?.campaignRewardPoolsAdditions)
-        ? object.campaignRewardPoolsAdditions.map((e: any) => CampaignRewardPool.fromJSON(e))
-        : globalThis.Array.isArray(object?.campaign_reward_pools_additions)
-        ? object.campaign_reward_pools_additions.map((e: any) => CampaignRewardPool.fromJSON(e))
-        : [],
-      campaignRewardPoolsUpdates: globalThis.Array.isArray(object?.campaignRewardPoolsUpdates)
-        ? object.campaignRewardPoolsUpdates.map((e: any) => CampaignRewardPool.fromJSON(e))
-        : globalThis.Array.isArray(object?.campaign_reward_pools_updates)
-        ? object.campaign_reward_pools_updates.map((e: any) => CampaignRewardPool.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): TradingRewardCampaignUpdateProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTradingRewardCampaignUpdateProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: TradingRewardCampaignUpdateProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.campaignInfo !== undefined) {
-      obj.campaignInfo = TradingRewardCampaignInfo.toJSON(message.campaignInfo);
-    }
-    if (message.campaignRewardPoolsAdditions?.length) {
-      obj.campaignRewardPoolsAdditions = message.campaignRewardPoolsAdditions.map((e) => CampaignRewardPool.toJSON(e));
-    }
-    if (message.campaignRewardPoolsUpdates?.length) {
-      obj.campaignRewardPoolsUpdates = message.campaignRewardPoolsUpdates.map((e) => CampaignRewardPool.toJSON(e));
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<TradingRewardCampaignUpdateProposal>, I>>(
-    base?: I,
-  ): TradingRewardCampaignUpdateProposal {
-    return TradingRewardCampaignUpdateProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TradingRewardCampaignUpdateProposal>, I>>(
-    object: I,
-  ): TradingRewardCampaignUpdateProposal {
-    const message = createBaseTradingRewardCampaignUpdateProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.campaignInfo = (object.campaignInfo !== undefined && object.campaignInfo !== null)
-      ? TradingRewardCampaignInfo.fromPartial(object.campaignInfo)
-      : undefined;
-    message.campaignRewardPoolsAdditions =
-      object.campaignRewardPoolsAdditions?.map((e) => CampaignRewardPool.fromPartial(e)) || [];
-    message.campaignRewardPoolsUpdates =
-      object.campaignRewardPoolsUpdates?.map((e) => CampaignRewardPool.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.campaignInfo = TradingRewardCampaignInfo.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.campaignRewardPoolsAdditions.push(
+              CampaignRewardPool.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.campaignRewardPoolsUpdates.push(
+              CampaignRewardPool.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): TradingRewardCampaignUpdateProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        campaignInfo: isSet(object.campaignInfo)
+          ? TradingRewardCampaignInfo.fromJSON(object.campaignInfo)
+          : isSet(object.campaign_info)
+            ? TradingRewardCampaignInfo.fromJSON(object.campaign_info)
+            : undefined,
+        campaignRewardPoolsAdditions: globalThis.Array.isArray(
+          object?.campaignRewardPoolsAdditions,
+        )
+          ? object.campaignRewardPoolsAdditions.map((e: any) =>
+              CampaignRewardPool.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.campaign_reward_pools_additions)
+            ? object.campaign_reward_pools_additions.map((e: any) =>
+                CampaignRewardPool.fromJSON(e),
+              )
+            : [],
+        campaignRewardPoolsUpdates: globalThis.Array.isArray(
+          object?.campaignRewardPoolsUpdates,
+        )
+          ? object.campaignRewardPoolsUpdates.map((e: any) =>
+              CampaignRewardPool.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.campaign_reward_pools_updates)
+            ? object.campaign_reward_pools_updates.map((e: any) =>
+                CampaignRewardPool.fromJSON(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: TradingRewardCampaignUpdateProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.campaignInfo !== undefined) {
+        obj.campaignInfo = TradingRewardCampaignInfo.toJSON(
+          message.campaignInfo,
+        );
+      }
+      if (message.campaignRewardPoolsAdditions?.length) {
+        obj.campaignRewardPoolsAdditions =
+          message.campaignRewardPoolsAdditions.map((e) =>
+            CampaignRewardPool.toJSON(e),
+          );
+      }
+      if (message.campaignRewardPoolsUpdates?.length) {
+        obj.campaignRewardPoolsUpdates = message.campaignRewardPoolsUpdates.map(
+          (e) => CampaignRewardPool.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<TradingRewardCampaignUpdateProposal>, I>,
+    >(base?: I): TradingRewardCampaignUpdateProposal {
+      return TradingRewardCampaignUpdateProposal.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<TradingRewardCampaignUpdateProposal>, I>,
+    >(object: I): TradingRewardCampaignUpdateProposal {
+      const message = createBaseTradingRewardCampaignUpdateProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.campaignInfo =
+        object.campaignInfo !== undefined && object.campaignInfo !== null
+          ? TradingRewardCampaignInfo.fromPartial(object.campaignInfo)
+          : undefined;
+      message.campaignRewardPoolsAdditions =
+        object.campaignRewardPoolsAdditions?.map((e) =>
+          CampaignRewardPool.fromPartial(e),
+        ) || [];
+      message.campaignRewardPoolsUpdates =
+        object.campaignRewardPoolsUpdates?.map((e) =>
+          CampaignRewardPool.fromPartial(e),
+        ) || [];
+      return message;
+    },
+  };
 
 function createBaseRewardPointUpdate(): RewardPointUpdate {
   return { accountAddress: "", newPoints: "" };
 }
 
 export const RewardPointUpdate: MessageFns<RewardPointUpdate> = {
-  encode(message: RewardPointUpdate, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: RewardPointUpdate,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
@@ -4360,7 +4799,8 @@ export const RewardPointUpdate: MessageFns<RewardPointUpdate> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): RewardPointUpdate {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRewardPointUpdate();
     while (reader.pos < end) {
@@ -4396,13 +4836,13 @@ export const RewardPointUpdate: MessageFns<RewardPointUpdate> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
       newPoints: isSet(object.newPoints)
         ? globalThis.String(object.newPoints)
         : isSet(object.new_points)
-        ? globalThis.String(object.new_points)
-        : "",
+          ? globalThis.String(object.new_points)
+          : "",
     };
   },
 
@@ -4417,10 +4857,14 @@ export const RewardPointUpdate: MessageFns<RewardPointUpdate> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<RewardPointUpdate>, I>>(base?: I): RewardPointUpdate {
+  create<I extends Exact<DeepPartial<RewardPointUpdate>, I>>(
+    base?: I,
+  ): RewardPointUpdate {
     return RewardPointUpdate.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<RewardPointUpdate>, I>>(object: I): RewardPointUpdate {
+  fromPartial<I extends Exact<DeepPartial<RewardPointUpdate>, I>>(
+    object: I,
+  ): RewardPointUpdate {
     const message = createBaseRewardPointUpdate();
     message.accountAddress = object.accountAddress ?? "";
     message.newPoints = object.newPoints ?? "";
@@ -4429,131 +4873,162 @@ export const RewardPointUpdate: MessageFns<RewardPointUpdate> = {
 };
 
 function createBaseTradingRewardPendingPointsUpdateProposal(): TradingRewardPendingPointsUpdateProposal {
-  return { title: "", description: "", pendingPoolTimestamp: 0, rewardPointUpdates: [] };
+  return {
+    title: "",
+    description: "",
+    pendingPoolTimestamp: 0,
+    rewardPointUpdates: [],
+  };
 }
 
-export const TradingRewardPendingPointsUpdateProposal: MessageFns<TradingRewardPendingPointsUpdateProposal> = {
-  encode(message: TradingRewardPendingPointsUpdateProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    if (message.pendingPoolTimestamp !== 0) {
-      writer.uint32(24).int64(message.pendingPoolTimestamp);
-    }
-    for (const v of message.rewardPointUpdates) {
-      RewardPointUpdate.encode(v!, writer.uint32(34).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): TradingRewardPendingPointsUpdateProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTradingRewardPendingPointsUpdateProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.pendingPoolTimestamp = longToNumber(reader.int64());
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.rewardPointUpdates.push(RewardPointUpdate.decode(reader, reader.uint32()));
-          continue;
-        }
+export const TradingRewardPendingPointsUpdateProposal: MessageFns<TradingRewardPendingPointsUpdateProposal> =
+  {
+    encode(
+      message: TradingRewardPendingPointsUpdateProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.pendingPoolTimestamp !== 0) {
+        writer.uint32(24).int64(message.pendingPoolTimestamp);
+      }
+      for (const v of message.rewardPointUpdates) {
+        RewardPointUpdate.encode(v!, writer.uint32(34).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): TradingRewardPendingPointsUpdateProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      pendingPoolTimestamp: isSet(object.pendingPoolTimestamp)
-        ? globalThis.Number(object.pendingPoolTimestamp)
-        : isSet(object.pending_pool_timestamp)
-        ? globalThis.Number(object.pending_pool_timestamp)
-        : 0,
-      rewardPointUpdates: globalThis.Array.isArray(object?.rewardPointUpdates)
-        ? object.rewardPointUpdates.map((e: any) => RewardPointUpdate.fromJSON(e))
-        : globalThis.Array.isArray(object?.reward_point_updates)
-        ? object.reward_point_updates.map((e: any) => RewardPointUpdate.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): TradingRewardPendingPointsUpdateProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTradingRewardPendingPointsUpdateProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: TradingRewardPendingPointsUpdateProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.pendingPoolTimestamp !== 0) {
-      obj.pendingPoolTimestamp = Math.round(message.pendingPoolTimestamp);
-    }
-    if (message.rewardPointUpdates?.length) {
-      obj.rewardPointUpdates = message.rewardPointUpdates.map((e) => RewardPointUpdate.toJSON(e));
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<TradingRewardPendingPointsUpdateProposal>, I>>(
-    base?: I,
-  ): TradingRewardPendingPointsUpdateProposal {
-    return TradingRewardPendingPointsUpdateProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TradingRewardPendingPointsUpdateProposal>, I>>(
-    object: I,
-  ): TradingRewardPendingPointsUpdateProposal {
-    const message = createBaseTradingRewardPendingPointsUpdateProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.pendingPoolTimestamp = object.pendingPoolTimestamp ?? 0;
-    message.rewardPointUpdates = object.rewardPointUpdates?.map((e) => RewardPointUpdate.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.pendingPoolTimestamp = longToNumber(reader.int64());
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.rewardPointUpdates.push(
+              RewardPointUpdate.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): TradingRewardPendingPointsUpdateProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        pendingPoolTimestamp: isSet(object.pendingPoolTimestamp)
+          ? globalThis.Number(object.pendingPoolTimestamp)
+          : isSet(object.pending_pool_timestamp)
+            ? globalThis.Number(object.pending_pool_timestamp)
+            : 0,
+        rewardPointUpdates: globalThis.Array.isArray(object?.rewardPointUpdates)
+          ? object.rewardPointUpdates.map((e: any) =>
+              RewardPointUpdate.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.reward_point_updates)
+            ? object.reward_point_updates.map((e: any) =>
+                RewardPointUpdate.fromJSON(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: TradingRewardPendingPointsUpdateProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.pendingPoolTimestamp !== 0) {
+        obj.pendingPoolTimestamp = Math.round(message.pendingPoolTimestamp);
+      }
+      if (message.rewardPointUpdates?.length) {
+        obj.rewardPointUpdates = message.rewardPointUpdates.map((e) =>
+          RewardPointUpdate.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<DeepPartial<TradingRewardPendingPointsUpdateProposal>, I>,
+    >(base?: I): TradingRewardPendingPointsUpdateProposal {
+      return TradingRewardPendingPointsUpdateProposal.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<TradingRewardPendingPointsUpdateProposal>, I>,
+    >(object: I): TradingRewardPendingPointsUpdateProposal {
+      const message = createBaseTradingRewardPendingPointsUpdateProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.pendingPoolTimestamp = object.pendingPoolTimestamp ?? 0;
+      message.rewardPointUpdates =
+        object.rewardPointUpdates?.map((e) =>
+          RewardPointUpdate.fromPartial(e),
+        ) || [];
+      return message;
+    },
+  };
 
 function createBaseFeeDiscountProposal(): FeeDiscountProposal {
   return { title: "", description: "", schedule: undefined };
 }
 
 export const FeeDiscountProposal: MessageFns<FeeDiscountProposal> = {
-  encode(message: FeeDiscountProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FeeDiscountProposal,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -4561,13 +5036,20 @@ export const FeeDiscountProposal: MessageFns<FeeDiscountProposal> = {
       writer.uint32(18).string(message.description);
     }
     if (message.schedule !== undefined) {
-      FeeDiscountSchedule.encode(message.schedule, writer.uint32(26).fork()).join();
+      FeeDiscountSchedule.encode(
+        message.schedule,
+        writer.uint32(26).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): FeeDiscountProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): FeeDiscountProposal {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFeeDiscountProposal();
     while (reader.pos < end) {
@@ -4594,7 +5076,10 @@ export const FeeDiscountProposal: MessageFns<FeeDiscountProposal> = {
             break;
           }
 
-          message.schedule = FeeDiscountSchedule.decode(reader, reader.uint32());
+          message.schedule = FeeDiscountSchedule.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
       }
@@ -4609,8 +5094,12 @@ export const FeeDiscountProposal: MessageFns<FeeDiscountProposal> = {
   fromJSON(object: any): FeeDiscountProposal {
     return {
       title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      schedule: isSet(object.schedule) ? FeeDiscountSchedule.fromJSON(object.schedule) : undefined,
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
+      schedule: isSet(object.schedule)
+        ? FeeDiscountSchedule.fromJSON(object.schedule)
+        : undefined,
     };
   },
 
@@ -4628,16 +5117,21 @@ export const FeeDiscountProposal: MessageFns<FeeDiscountProposal> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FeeDiscountProposal>, I>>(base?: I): FeeDiscountProposal {
+  create<I extends Exact<DeepPartial<FeeDiscountProposal>, I>>(
+    base?: I,
+  ): FeeDiscountProposal {
     return FeeDiscountProposal.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FeeDiscountProposal>, I>>(object: I): FeeDiscountProposal {
+  fromPartial<I extends Exact<DeepPartial<FeeDiscountProposal>, I>>(
+    object: I,
+  ): FeeDiscountProposal {
     const message = createBaseFeeDiscountProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.schedule = (object.schedule !== undefined && object.schedule !== null)
-      ? FeeDiscountSchedule.fromPartial(object.schedule)
-      : undefined;
+    message.schedule =
+      object.schedule !== undefined && object.schedule !== null
+        ? FeeDiscountSchedule.fromPartial(object.schedule)
+        : undefined;
     return message;
   },
 };
@@ -4646,209 +5140,261 @@ function createBaseBatchCommunityPoolSpendProposal(): BatchCommunityPoolSpendPro
   return { title: "", description: "", proposals: [] };
 }
 
-export const BatchCommunityPoolSpendProposal: MessageFns<BatchCommunityPoolSpendProposal> = {
-  encode(message: BatchCommunityPoolSpendProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    for (const v of message.proposals) {
-      CommunityPoolSpendProposal.encode(v!, writer.uint32(26).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchCommunityPoolSpendProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBatchCommunityPoolSpendProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.proposals.push(CommunityPoolSpendProposal.decode(reader, reader.uint32()));
-          continue;
-        }
+export const BatchCommunityPoolSpendProposal: MessageFns<BatchCommunityPoolSpendProposal> =
+  {
+    encode(
+      message: BatchCommunityPoolSpendProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.proposals) {
+        CommunityPoolSpendProposal.encode(v!, writer.uint32(26).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): BatchCommunityPoolSpendProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      proposals: globalThis.Array.isArray(object?.proposals)
-        ? object.proposals.map((e: any) => CommunityPoolSpendProposal.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): BatchCommunityPoolSpendProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBatchCommunityPoolSpendProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BatchCommunityPoolSpendProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.proposals?.length) {
-      obj.proposals = message.proposals.map((e) => CommunityPoolSpendProposal.toJSON(e));
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<BatchCommunityPoolSpendProposal>, I>>(base?: I): BatchCommunityPoolSpendProposal {
-    return BatchCommunityPoolSpendProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<BatchCommunityPoolSpendProposal>, I>>(
-    object: I,
-  ): BatchCommunityPoolSpendProposal {
-    const message = createBaseBatchCommunityPoolSpendProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.proposals = object.proposals?.map((e) => CommunityPoolSpendProposal.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.proposals.push(
+              CommunityPoolSpendProposal.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BatchCommunityPoolSpendProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        proposals: globalThis.Array.isArray(object?.proposals)
+          ? object.proposals.map((e: any) =>
+              CommunityPoolSpendProposal.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: BatchCommunityPoolSpendProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.proposals?.length) {
+        obj.proposals = message.proposals.map((e) =>
+          CommunityPoolSpendProposal.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<BatchCommunityPoolSpendProposal>, I>>(
+      base?: I,
+    ): BatchCommunityPoolSpendProposal {
+      return BatchCommunityPoolSpendProposal.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<BatchCommunityPoolSpendProposal>, I>,
+    >(object: I): BatchCommunityPoolSpendProposal {
+      const message = createBaseBatchCommunityPoolSpendProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.proposals =
+        object.proposals?.map((e) =>
+          CommunityPoolSpendProposal.fromPartial(e),
+        ) || [];
+      return message;
+    },
+  };
 
 function createBaseAtomicMarketOrderFeeMultiplierScheduleProposal(): AtomicMarketOrderFeeMultiplierScheduleProposal {
   return { title: "", description: "", marketFeeMultipliers: [] };
 }
 
-export const AtomicMarketOrderFeeMultiplierScheduleProposal: MessageFns<
-  AtomicMarketOrderFeeMultiplierScheduleProposal
-> = {
-  encode(
-    message: AtomicMarketOrderFeeMultiplierScheduleProposal,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.title !== "") {
-      writer.uint32(10).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(18).string(message.description);
-    }
-    for (const v of message.marketFeeMultipliers) {
-      MarketFeeMultiplier.encode(v!, writer.uint32(26).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): AtomicMarketOrderFeeMultiplierScheduleProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAtomicMarketOrderFeeMultiplierScheduleProposal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.marketFeeMultipliers.push(MarketFeeMultiplier.decode(reader, reader.uint32()));
-          continue;
-        }
+export const AtomicMarketOrderFeeMultiplierScheduleProposal: MessageFns<AtomicMarketOrderFeeMultiplierScheduleProposal> =
+  {
+    encode(
+      message: AtomicMarketOrderFeeMultiplierScheduleProposal,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.title !== "") {
+        writer.uint32(10).string(message.title);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.description !== "") {
+        writer.uint32(18).string(message.description);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.marketFeeMultipliers) {
+        MarketFeeMultiplier.encode(v!, writer.uint32(26).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): AtomicMarketOrderFeeMultiplierScheduleProposal {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      marketFeeMultipliers: globalThis.Array.isArray(object?.marketFeeMultipliers)
-        ? object.marketFeeMultipliers.map((e: any) => MarketFeeMultiplier.fromJSON(e))
-        : globalThis.Array.isArray(object?.market_fee_multipliers)
-        ? object.market_fee_multipliers.map((e: any) => MarketFeeMultiplier.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): AtomicMarketOrderFeeMultiplierScheduleProposal {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseAtomicMarketOrderFeeMultiplierScheduleProposal();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: AtomicMarketOrderFeeMultiplierScheduleProposal): unknown {
-    const obj: any = {};
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.marketFeeMultipliers?.length) {
-      obj.marketFeeMultipliers = message.marketFeeMultipliers.map((e) => MarketFeeMultiplier.toJSON(e));
-    }
-    return obj;
-  },
+            message.title = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<AtomicMarketOrderFeeMultiplierScheduleProposal>, I>>(
-    base?: I,
-  ): AtomicMarketOrderFeeMultiplierScheduleProposal {
-    return AtomicMarketOrderFeeMultiplierScheduleProposal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AtomicMarketOrderFeeMultiplierScheduleProposal>, I>>(
-    object: I,
-  ): AtomicMarketOrderFeeMultiplierScheduleProposal {
-    const message = createBaseAtomicMarketOrderFeeMultiplierScheduleProposal();
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.marketFeeMultipliers = object.marketFeeMultipliers?.map((e) => MarketFeeMultiplier.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.description = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.marketFeeMultipliers.push(
+              MarketFeeMultiplier.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): AtomicMarketOrderFeeMultiplierScheduleProposal {
+      return {
+        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        description: isSet(object.description)
+          ? globalThis.String(object.description)
+          : "",
+        marketFeeMultipliers: globalThis.Array.isArray(
+          object?.marketFeeMultipliers,
+        )
+          ? object.marketFeeMultipliers.map((e: any) =>
+              MarketFeeMultiplier.fromJSON(e),
+            )
+          : globalThis.Array.isArray(object?.market_fee_multipliers)
+            ? object.market_fee_multipliers.map((e: any) =>
+                MarketFeeMultiplier.fromJSON(e),
+              )
+            : [],
+      };
+    },
+
+    toJSON(message: AtomicMarketOrderFeeMultiplierScheduleProposal): unknown {
+      const obj: any = {};
+      if (message.title !== "") {
+        obj.title = message.title;
+      }
+      if (message.description !== "") {
+        obj.description = message.description;
+      }
+      if (message.marketFeeMultipliers?.length) {
+        obj.marketFeeMultipliers = message.marketFeeMultipliers.map((e) =>
+          MarketFeeMultiplier.toJSON(e),
+        );
+      }
+      return obj;
+    },
+
+    create<
+      I extends Exact<
+        DeepPartial<AtomicMarketOrderFeeMultiplierScheduleProposal>,
+        I
+      >,
+    >(base?: I): AtomicMarketOrderFeeMultiplierScheduleProposal {
+      return AtomicMarketOrderFeeMultiplierScheduleProposal.fromPartial(
+        base ?? ({} as any),
+      );
+    },
+    fromPartial<
+      I extends Exact<
+        DeepPartial<AtomicMarketOrderFeeMultiplierScheduleProposal>,
+        I
+      >,
+    >(object: I): AtomicMarketOrderFeeMultiplierScheduleProposal {
+      const message =
+        createBaseAtomicMarketOrderFeeMultiplierScheduleProposal();
+      message.title = object.title ?? "";
+      message.description = object.description ?? "";
+      message.marketFeeMultipliers =
+        object.marketFeeMultipliers?.map((e) =>
+          MarketFeeMultiplier.fromPartial(e),
+        ) || [];
+      return message;
+    },
+  };
 
 function createBaseDenomMinNotionalProposal(): DenomMinNotionalProposal {
   return { title: "", description: "", denomMinNotionals: [] };
 }
 
 export const DenomMinNotionalProposal: MessageFns<DenomMinNotionalProposal> = {
-  encode(message: DenomMinNotionalProposal, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DenomMinNotionalProposal,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
@@ -4861,8 +5407,12 @@ export const DenomMinNotionalProposal: MessageFns<DenomMinNotionalProposal> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DenomMinNotionalProposal {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DenomMinNotionalProposal {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomMinNotionalProposal();
     while (reader.pos < end) {
@@ -4889,7 +5439,9 @@ export const DenomMinNotionalProposal: MessageFns<DenomMinNotionalProposal> = {
             break;
           }
 
-          message.denomMinNotionals.push(DenomMinNotional.decode(reader, reader.uint32()));
+          message.denomMinNotionals.push(
+            DenomMinNotional.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -4904,12 +5456,16 @@ export const DenomMinNotionalProposal: MessageFns<DenomMinNotionalProposal> = {
   fromJSON(object: any): DenomMinNotionalProposal {
     return {
       title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
       denomMinNotionals: globalThis.Array.isArray(object?.denomMinNotionals)
         ? object.denomMinNotionals.map((e: any) => DenomMinNotional.fromJSON(e))
         : globalThis.Array.isArray(object?.denom_min_notionals)
-        ? object.denom_min_notionals.map((e: any) => DenomMinNotional.fromJSON(e))
-        : [],
+          ? object.denom_min_notionals.map((e: any) =>
+              DenomMinNotional.fromJSON(e),
+            )
+          : [],
     };
   },
 
@@ -4922,34 +5478,50 @@ export const DenomMinNotionalProposal: MessageFns<DenomMinNotionalProposal> = {
       obj.description = message.description;
     }
     if (message.denomMinNotionals?.length) {
-      obj.denomMinNotionals = message.denomMinNotionals.map((e) => DenomMinNotional.toJSON(e));
+      obj.denomMinNotionals = message.denomMinNotionals.map((e) =>
+        DenomMinNotional.toJSON(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DenomMinNotionalProposal>, I>>(base?: I): DenomMinNotionalProposal {
+  create<I extends Exact<DeepPartial<DenomMinNotionalProposal>, I>>(
+    base?: I,
+  ): DenomMinNotionalProposal {
     return DenomMinNotionalProposal.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DenomMinNotionalProposal>, I>>(object: I): DenomMinNotionalProposal {
+  fromPartial<I extends Exact<DeepPartial<DenomMinNotionalProposal>, I>>(
+    object: I,
+  ): DenomMinNotionalProposal {
     const message = createBaseDenomMinNotionalProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.denomMinNotionals = object.denomMinNotionals?.map((e) => DenomMinNotional.fromPartial(e)) || [];
+    message.denomMinNotionals =
+      object.denomMinNotionals?.map((e) => DenomMinNotional.fromPartial(e)) ||
+      [];
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

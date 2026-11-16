@@ -19,9 +19,7 @@ export interface ConsensusParams {
   block: BlockParams | undefined;
   evidence: EvidenceParams | undefined;
   validator: ValidatorParams | undefined;
-  version:
-    | VersionParams
-    | undefined;
+  version: VersionParams | undefined;
   /**
    * Use FeatureParams.vote_extensions_enable_height instead
    *
@@ -68,9 +66,7 @@ export interface EvidenceParams {
    * Nothing-At-Stake attacks.
    * See: https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed.
    */
-  maxAgeDuration:
-    | Duration
-    | undefined;
+  maxAgeDuration: Duration | undefined;
   /**
    * Maximum size in bytes of evidence allowed to be included in a block.
    *
@@ -121,9 +117,7 @@ export interface SynchronyParams {
    * Bound for how skewed a proposer's clock may be from any validator on the
    * network while still producing valid proposals.
    */
-  precision:
-    | Duration
-    | undefined;
+  precision: Duration | undefined;
   /**
    * Bound for how long a proposal message may take to reach all validators on
    * a network and still be considered valid.
@@ -150,9 +144,7 @@ export interface FeatureParams {
    *
    * Cannot be set to heights lower or equal to the current blockchain height.
    */
-  voteExtensionsEnableHeight:
-    | number
-    | undefined;
+  voteExtensionsEnableHeight: number | undefined;
   /**
    * Height at which Proposer-Based Timestamps (PBTS) will be enabled.
    *
@@ -195,7 +187,10 @@ function createBaseConsensusParams(): ConsensusParams {
 }
 
 export const ConsensusParams: MessageFns<ConsensusParams> = {
-  encode(message: ConsensusParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ConsensusParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.block !== undefined) {
       BlockParams.encode(message.block, writer.uint32(10).fork()).join();
     }
@@ -203,7 +198,10 @@ export const ConsensusParams: MessageFns<ConsensusParams> = {
       EvidenceParams.encode(message.evidence, writer.uint32(18).fork()).join();
     }
     if (message.validator !== undefined) {
-      ValidatorParams.encode(message.validator, writer.uint32(26).fork()).join();
+      ValidatorParams.encode(
+        message.validator,
+        writer.uint32(26).fork(),
+      ).join();
     }
     if (message.version !== undefined) {
       VersionParams.encode(message.version, writer.uint32(34).fork()).join();
@@ -212,7 +210,10 @@ export const ConsensusParams: MessageFns<ConsensusParams> = {
       ABCIParams.encode(message.abci, writer.uint32(42).fork()).join();
     }
     if (message.synchrony !== undefined) {
-      SynchronyParams.encode(message.synchrony, writer.uint32(50).fork()).join();
+      SynchronyParams.encode(
+        message.synchrony,
+        writer.uint32(50).fork(),
+      ).join();
     }
     if (message.feature !== undefined) {
       FeatureParams.encode(message.feature, writer.uint32(58).fork()).join();
@@ -221,7 +222,8 @@ export const ConsensusParams: MessageFns<ConsensusParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ConsensusParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusParams();
     while (reader.pos < end) {
@@ -294,13 +296,25 @@ export const ConsensusParams: MessageFns<ConsensusParams> = {
 
   fromJSON(object: any): ConsensusParams {
     return {
-      block: isSet(object.block) ? BlockParams.fromJSON(object.block) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceParams.fromJSON(object.evidence) : undefined,
-      validator: isSet(object.validator) ? ValidatorParams.fromJSON(object.validator) : undefined,
-      version: isSet(object.version) ? VersionParams.fromJSON(object.version) : undefined,
+      block: isSet(object.block)
+        ? BlockParams.fromJSON(object.block)
+        : undefined,
+      evidence: isSet(object.evidence)
+        ? EvidenceParams.fromJSON(object.evidence)
+        : undefined,
+      validator: isSet(object.validator)
+        ? ValidatorParams.fromJSON(object.validator)
+        : undefined,
+      version: isSet(object.version)
+        ? VersionParams.fromJSON(object.version)
+        : undefined,
       abci: isSet(object.abci) ? ABCIParams.fromJSON(object.abci) : undefined,
-      synchrony: isSet(object.synchrony) ? SynchronyParams.fromJSON(object.synchrony) : undefined,
-      feature: isSet(object.feature) ? FeatureParams.fromJSON(object.feature) : undefined,
+      synchrony: isSet(object.synchrony)
+        ? SynchronyParams.fromJSON(object.synchrony)
+        : undefined,
+      feature: isSet(object.feature)
+        ? FeatureParams.fromJSON(object.feature)
+        : undefined,
     };
   },
 
@@ -330,32 +344,43 @@ export const ConsensusParams: MessageFns<ConsensusParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ConsensusParams>, I>>(base?: I): ConsensusParams {
+  create<I extends Exact<DeepPartial<ConsensusParams>, I>>(
+    base?: I,
+  ): ConsensusParams {
     return ConsensusParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ConsensusParams>, I>>(object: I): ConsensusParams {
+  fromPartial<I extends Exact<DeepPartial<ConsensusParams>, I>>(
+    object: I,
+  ): ConsensusParams {
     const message = createBaseConsensusParams();
-    message.block = (object.block !== undefined && object.block !== null)
-      ? BlockParams.fromPartial(object.block)
-      : undefined;
-    message.evidence = (object.evidence !== undefined && object.evidence !== null)
-      ? EvidenceParams.fromPartial(object.evidence)
-      : undefined;
-    message.validator = (object.validator !== undefined && object.validator !== null)
-      ? ValidatorParams.fromPartial(object.validator)
-      : undefined;
-    message.version = (object.version !== undefined && object.version !== null)
-      ? VersionParams.fromPartial(object.version)
-      : undefined;
-    message.abci = (object.abci !== undefined && object.abci !== null)
-      ? ABCIParams.fromPartial(object.abci)
-      : undefined;
-    message.synchrony = (object.synchrony !== undefined && object.synchrony !== null)
-      ? SynchronyParams.fromPartial(object.synchrony)
-      : undefined;
-    message.feature = (object.feature !== undefined && object.feature !== null)
-      ? FeatureParams.fromPartial(object.feature)
-      : undefined;
+    message.block =
+      object.block !== undefined && object.block !== null
+        ? BlockParams.fromPartial(object.block)
+        : undefined;
+    message.evidence =
+      object.evidence !== undefined && object.evidence !== null
+        ? EvidenceParams.fromPartial(object.evidence)
+        : undefined;
+    message.validator =
+      object.validator !== undefined && object.validator !== null
+        ? ValidatorParams.fromPartial(object.validator)
+        : undefined;
+    message.version =
+      object.version !== undefined && object.version !== null
+        ? VersionParams.fromPartial(object.version)
+        : undefined;
+    message.abci =
+      object.abci !== undefined && object.abci !== null
+        ? ABCIParams.fromPartial(object.abci)
+        : undefined;
+    message.synchrony =
+      object.synchrony !== undefined && object.synchrony !== null
+        ? SynchronyParams.fromPartial(object.synchrony)
+        : undefined;
+    message.feature =
+      object.feature !== undefined && object.feature !== null
+        ? FeatureParams.fromPartial(object.feature)
+        : undefined;
     return message;
   },
 };
@@ -365,7 +390,10 @@ function createBaseBlockParams(): BlockParams {
 }
 
 export const BlockParams: MessageFns<BlockParams> = {
-  encode(message: BlockParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: BlockParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.maxBytes !== 0) {
       writer.uint32(8).int64(message.maxBytes);
     }
@@ -376,7 +404,8 @@ export const BlockParams: MessageFns<BlockParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): BlockParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlockParams();
     while (reader.pos < end) {
@@ -412,13 +441,13 @@ export const BlockParams: MessageFns<BlockParams> = {
       maxBytes: isSet(object.maxBytes)
         ? globalThis.Number(object.maxBytes)
         : isSet(object.max_bytes)
-        ? globalThis.Number(object.max_bytes)
-        : 0,
+          ? globalThis.Number(object.max_bytes)
+          : 0,
       maxGas: isSet(object.maxGas)
         ? globalThis.Number(object.maxGas)
         : isSet(object.max_gas)
-        ? globalThis.Number(object.max_gas)
-        : 0,
+          ? globalThis.Number(object.max_gas)
+          : 0,
     };
   },
 
@@ -436,7 +465,9 @@ export const BlockParams: MessageFns<BlockParams> = {
   create<I extends Exact<DeepPartial<BlockParams>, I>>(base?: I): BlockParams {
     return BlockParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<BlockParams>, I>>(object: I): BlockParams {
+  fromPartial<I extends Exact<DeepPartial<BlockParams>, I>>(
+    object: I,
+  ): BlockParams {
     const message = createBaseBlockParams();
     message.maxBytes = object.maxBytes ?? 0;
     message.maxGas = object.maxGas ?? 0;
@@ -449,7 +480,10 @@ function createBaseEvidenceParams(): EvidenceParams {
 }
 
 export const EvidenceParams: MessageFns<EvidenceParams> = {
-  encode(message: EvidenceParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: EvidenceParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.maxAgeNumBlocks !== 0) {
       writer.uint32(8).int64(message.maxAgeNumBlocks);
     }
@@ -463,7 +497,8 @@ export const EvidenceParams: MessageFns<EvidenceParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): EvidenceParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvidenceParams();
     while (reader.pos < end) {
@@ -507,18 +542,18 @@ export const EvidenceParams: MessageFns<EvidenceParams> = {
       maxAgeNumBlocks: isSet(object.maxAgeNumBlocks)
         ? globalThis.Number(object.maxAgeNumBlocks)
         : isSet(object.max_age_num_blocks)
-        ? globalThis.Number(object.max_age_num_blocks)
-        : 0,
+          ? globalThis.Number(object.max_age_num_blocks)
+          : 0,
       maxAgeDuration: isSet(object.maxAgeDuration)
         ? Duration.fromJSON(object.maxAgeDuration)
         : isSet(object.max_age_duration)
-        ? Duration.fromJSON(object.max_age_duration)
-        : undefined,
+          ? Duration.fromJSON(object.max_age_duration)
+          : undefined,
       maxBytes: isSet(object.maxBytes)
         ? globalThis.Number(object.maxBytes)
         : isSet(object.max_bytes)
-        ? globalThis.Number(object.max_bytes)
-        : 0,
+          ? globalThis.Number(object.max_bytes)
+          : 0,
     };
   },
 
@@ -536,15 +571,20 @@ export const EvidenceParams: MessageFns<EvidenceParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<EvidenceParams>, I>>(base?: I): EvidenceParams {
+  create<I extends Exact<DeepPartial<EvidenceParams>, I>>(
+    base?: I,
+  ): EvidenceParams {
     return EvidenceParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<EvidenceParams>, I>>(object: I): EvidenceParams {
+  fromPartial<I extends Exact<DeepPartial<EvidenceParams>, I>>(
+    object: I,
+  ): EvidenceParams {
     const message = createBaseEvidenceParams();
     message.maxAgeNumBlocks = object.maxAgeNumBlocks ?? 0;
-    message.maxAgeDuration = (object.maxAgeDuration !== undefined && object.maxAgeDuration !== null)
-      ? Duration.fromPartial(object.maxAgeDuration)
-      : undefined;
+    message.maxAgeDuration =
+      object.maxAgeDuration !== undefined && object.maxAgeDuration !== null
+        ? Duration.fromPartial(object.maxAgeDuration)
+        : undefined;
     message.maxBytes = object.maxBytes ?? 0;
     return message;
   },
@@ -555,7 +595,10 @@ function createBaseValidatorParams(): ValidatorParams {
 }
 
 export const ValidatorParams: MessageFns<ValidatorParams> = {
-  encode(message: ValidatorParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ValidatorParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.pubKeyTypes) {
       writer.uint32(10).string(v!);
     }
@@ -563,7 +606,8 @@ export const ValidatorParams: MessageFns<ValidatorParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ValidatorParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorParams();
     while (reader.pos < end) {
@@ -591,8 +635,8 @@ export const ValidatorParams: MessageFns<ValidatorParams> = {
       pubKeyTypes: globalThis.Array.isArray(object?.pubKeyTypes)
         ? object.pubKeyTypes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.pub_key_types)
-        ? object.pub_key_types.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.pub_key_types.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -604,10 +648,14 @@ export const ValidatorParams: MessageFns<ValidatorParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ValidatorParams>, I>>(base?: I): ValidatorParams {
+  create<I extends Exact<DeepPartial<ValidatorParams>, I>>(
+    base?: I,
+  ): ValidatorParams {
     return ValidatorParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ValidatorParams>, I>>(object: I): ValidatorParams {
+  fromPartial<I extends Exact<DeepPartial<ValidatorParams>, I>>(
+    object: I,
+  ): ValidatorParams {
     const message = createBaseValidatorParams();
     message.pubKeyTypes = object.pubKeyTypes?.map((e) => e) || [];
     return message;
@@ -619,7 +667,10 @@ function createBaseVersionParams(): VersionParams {
 }
 
 export const VersionParams: MessageFns<VersionParams> = {
-  encode(message: VersionParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: VersionParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.app !== 0) {
       writer.uint32(8).uint64(message.app);
     }
@@ -627,7 +678,8 @@ export const VersionParams: MessageFns<VersionParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): VersionParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersionParams();
     while (reader.pos < end) {
@@ -662,10 +714,14 @@ export const VersionParams: MessageFns<VersionParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<VersionParams>, I>>(base?: I): VersionParams {
+  create<I extends Exact<DeepPartial<VersionParams>, I>>(
+    base?: I,
+  ): VersionParams {
     return VersionParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<VersionParams>, I>>(object: I): VersionParams {
+  fromPartial<I extends Exact<DeepPartial<VersionParams>, I>>(
+    object: I,
+  ): VersionParams {
     const message = createBaseVersionParams();
     message.app = object.app ?? 0;
     return message;
@@ -677,7 +733,10 @@ function createBaseHashedParams(): HashedParams {
 }
 
 export const HashedParams: MessageFns<HashedParams> = {
-  encode(message: HashedParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: HashedParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.blockMaxBytes !== 0) {
       writer.uint32(8).int64(message.blockMaxBytes);
     }
@@ -688,7 +747,8 @@ export const HashedParams: MessageFns<HashedParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): HashedParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHashedParams();
     while (reader.pos < end) {
@@ -724,13 +784,13 @@ export const HashedParams: MessageFns<HashedParams> = {
       blockMaxBytes: isSet(object.blockMaxBytes)
         ? globalThis.Number(object.blockMaxBytes)
         : isSet(object.block_max_bytes)
-        ? globalThis.Number(object.block_max_bytes)
-        : 0,
+          ? globalThis.Number(object.block_max_bytes)
+          : 0,
       blockMaxGas: isSet(object.blockMaxGas)
         ? globalThis.Number(object.blockMaxGas)
         : isSet(object.block_max_gas)
-        ? globalThis.Number(object.block_max_gas)
-        : 0,
+          ? globalThis.Number(object.block_max_gas)
+          : 0,
     };
   },
 
@@ -745,10 +805,14 @@ export const HashedParams: MessageFns<HashedParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<HashedParams>, I>>(base?: I): HashedParams {
+  create<I extends Exact<DeepPartial<HashedParams>, I>>(
+    base?: I,
+  ): HashedParams {
     return HashedParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<HashedParams>, I>>(object: I): HashedParams {
+  fromPartial<I extends Exact<DeepPartial<HashedParams>, I>>(
+    object: I,
+  ): HashedParams {
     const message = createBaseHashedParams();
     message.blockMaxBytes = object.blockMaxBytes ?? 0;
     message.blockMaxGas = object.blockMaxGas ?? 0;
@@ -761,7 +825,10 @@ function createBaseSynchronyParams(): SynchronyParams {
 }
 
 export const SynchronyParams: MessageFns<SynchronyParams> = {
-  encode(message: SynchronyParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SynchronyParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.precision !== undefined) {
       Duration.encode(message.precision, writer.uint32(10).fork()).join();
     }
@@ -772,7 +839,8 @@ export const SynchronyParams: MessageFns<SynchronyParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SynchronyParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSynchronyParams();
     while (reader.pos < end) {
@@ -805,12 +873,14 @@ export const SynchronyParams: MessageFns<SynchronyParams> = {
 
   fromJSON(object: any): SynchronyParams {
     return {
-      precision: isSet(object.precision) ? Duration.fromJSON(object.precision) : undefined,
+      precision: isSet(object.precision)
+        ? Duration.fromJSON(object.precision)
+        : undefined,
       messageDelay: isSet(object.messageDelay)
         ? Duration.fromJSON(object.messageDelay)
         : isSet(object.message_delay)
-        ? Duration.fromJSON(object.message_delay)
-        : undefined,
+          ? Duration.fromJSON(object.message_delay)
+          : undefined,
     };
   },
 
@@ -825,17 +895,23 @@ export const SynchronyParams: MessageFns<SynchronyParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SynchronyParams>, I>>(base?: I): SynchronyParams {
+  create<I extends Exact<DeepPartial<SynchronyParams>, I>>(
+    base?: I,
+  ): SynchronyParams {
     return SynchronyParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SynchronyParams>, I>>(object: I): SynchronyParams {
+  fromPartial<I extends Exact<DeepPartial<SynchronyParams>, I>>(
+    object: I,
+  ): SynchronyParams {
     const message = createBaseSynchronyParams();
-    message.precision = (object.precision !== undefined && object.precision !== null)
-      ? Duration.fromPartial(object.precision)
-      : undefined;
-    message.messageDelay = (object.messageDelay !== undefined && object.messageDelay !== null)
-      ? Duration.fromPartial(object.messageDelay)
-      : undefined;
+    message.precision =
+      object.precision !== undefined && object.precision !== null
+        ? Duration.fromPartial(object.precision)
+        : undefined;
+    message.messageDelay =
+      object.messageDelay !== undefined && object.messageDelay !== null
+        ? Duration.fromPartial(object.messageDelay)
+        : undefined;
     return message;
   },
 };
@@ -845,18 +921,28 @@ function createBaseFeatureParams(): FeatureParams {
 }
 
 export const FeatureParams: MessageFns<FeatureParams> = {
-  encode(message: FeatureParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FeatureParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.voteExtensionsEnableHeight !== undefined) {
-      Int64Value.encode({ value: message.voteExtensionsEnableHeight! }, writer.uint32(10).fork()).join();
+      Int64Value.encode(
+        { value: message.voteExtensionsEnableHeight! },
+        writer.uint32(10).fork(),
+      ).join();
     }
     if (message.pbtsEnableHeight !== undefined) {
-      Int64Value.encode({ value: message.pbtsEnableHeight! }, writer.uint32(18).fork()).join();
+      Int64Value.encode(
+        { value: message.pbtsEnableHeight! },
+        writer.uint32(18).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): FeatureParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFeatureParams();
     while (reader.pos < end) {
@@ -867,7 +953,10 @@ export const FeatureParams: MessageFns<FeatureParams> = {
             break;
           }
 
-          message.voteExtensionsEnableHeight = Int64Value.decode(reader, reader.uint32()).value;
+          message.voteExtensionsEnableHeight = Int64Value.decode(
+            reader,
+            reader.uint32(),
+          ).value;
           continue;
         }
         case 2: {
@@ -875,7 +964,10 @@ export const FeatureParams: MessageFns<FeatureParams> = {
             break;
           }
 
-          message.pbtsEnableHeight = Int64Value.decode(reader, reader.uint32()).value;
+          message.pbtsEnableHeight = Int64Value.decode(
+            reader,
+            reader.uint32(),
+          ).value;
           continue;
         }
       }
@@ -892,13 +984,13 @@ export const FeatureParams: MessageFns<FeatureParams> = {
       voteExtensionsEnableHeight: isSet(object.voteExtensionsEnableHeight)
         ? Number(object.voteExtensionsEnableHeight)
         : isSet(object.vote_extensions_enable_height)
-        ? Number(object.vote_extensions_enable_height)
-        : undefined,
+          ? Number(object.vote_extensions_enable_height)
+          : undefined,
       pbtsEnableHeight: isSet(object.pbtsEnableHeight)
         ? Number(object.pbtsEnableHeight)
         : isSet(object.pbts_enable_height)
-        ? Number(object.pbts_enable_height)
-        : undefined,
+          ? Number(object.pbts_enable_height)
+          : undefined,
     };
   },
 
@@ -913,12 +1005,17 @@ export const FeatureParams: MessageFns<FeatureParams> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FeatureParams>, I>>(base?: I): FeatureParams {
+  create<I extends Exact<DeepPartial<FeatureParams>, I>>(
+    base?: I,
+  ): FeatureParams {
     return FeatureParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FeatureParams>, I>>(object: I): FeatureParams {
+  fromPartial<I extends Exact<DeepPartial<FeatureParams>, I>>(
+    object: I,
+  ): FeatureParams {
     const message = createBaseFeatureParams();
-    message.voteExtensionsEnableHeight = object.voteExtensionsEnableHeight ?? undefined;
+    message.voteExtensionsEnableHeight =
+      object.voteExtensionsEnableHeight ?? undefined;
     message.pbtsEnableHeight = object.pbtsEnableHeight ?? undefined;
     return message;
   },
@@ -929,7 +1026,10 @@ function createBaseABCIParams(): ABCIParams {
 }
 
 export const ABCIParams: MessageFns<ABCIParams> = {
-  encode(message: ABCIParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ABCIParams,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.voteExtensionsEnableHeight !== 0) {
       writer.uint32(8).int64(message.voteExtensionsEnableHeight);
     }
@@ -937,7 +1037,8 @@ export const ABCIParams: MessageFns<ABCIParams> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ABCIParams {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseABCIParams();
     while (reader.pos < end) {
@@ -965,15 +1066,17 @@ export const ABCIParams: MessageFns<ABCIParams> = {
       voteExtensionsEnableHeight: isSet(object.voteExtensionsEnableHeight)
         ? globalThis.Number(object.voteExtensionsEnableHeight)
         : isSet(object.vote_extensions_enable_height)
-        ? globalThis.Number(object.vote_extensions_enable_height)
-        : 0,
+          ? globalThis.Number(object.vote_extensions_enable_height)
+          : 0,
     };
   },
 
   toJSON(message: ABCIParams): unknown {
     const obj: any = {};
     if (message.voteExtensionsEnableHeight !== 0) {
-      obj.voteExtensionsEnableHeight = Math.round(message.voteExtensionsEnableHeight);
+      obj.voteExtensionsEnableHeight = Math.round(
+        message.voteExtensionsEnableHeight,
+      );
     }
     return obj;
   },
@@ -981,24 +1084,34 @@ export const ABCIParams: MessageFns<ABCIParams> = {
   create<I extends Exact<DeepPartial<ABCIParams>, I>>(base?: I): ABCIParams {
     return ABCIParams.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ABCIParams>, I>>(object: I): ABCIParams {
+  fromPartial<I extends Exact<DeepPartial<ABCIParams>, I>>(
+    object: I,
+  ): ABCIParams {
     const message = createBaseABCIParams();
     message.voteExtensionsEnableHeight = object.voteExtensionsEnableHeight ?? 0;
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

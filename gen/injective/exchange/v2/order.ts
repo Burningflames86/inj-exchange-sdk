@@ -176,7 +176,9 @@ export enum AtomicMarketOrderAccessLevel {
   UNRECOGNIZED = -1,
 }
 
-export function atomicMarketOrderAccessLevelFromJSON(object: any): AtomicMarketOrderAccessLevel {
+export function atomicMarketOrderAccessLevelFromJSON(
+  object: any,
+): AtomicMarketOrderAccessLevel {
   switch (object) {
     case 0:
     case "Nobody":
@@ -197,7 +199,9 @@ export function atomicMarketOrderAccessLevelFromJSON(object: any): AtomicMarketO
   }
 }
 
-export function atomicMarketOrderAccessLevelToJSON(object: AtomicMarketOrderAccessLevel): string {
+export function atomicMarketOrderAccessLevelToJSON(
+  object: AtomicMarketOrderAccessLevel,
+): string {
   switch (object) {
     case AtomicMarketOrderAccessLevel.Nobody:
       return "Nobody";
@@ -230,9 +234,7 @@ export interface SpotOrder {
   /** market_id represents the unique ID of the market */
   marketId: string;
   /** order_info contains the information of the order */
-  orderInfo:
-    | OrderInfo
-    | undefined;
+  orderInfo: OrderInfo | undefined;
   /** order types */
   orderType: OrderType;
   /**
@@ -259,9 +261,7 @@ export interface SpotMarketOrder {
 /** A valid Spot limit order with Metadata. */
 export interface SpotLimitOrder {
   /** order_info contains the information of the order */
-  orderInfo:
-    | OrderInfo
-    | undefined;
+  orderInfo: OrderInfo | undefined;
   /** order types */
   orderType: OrderType;
   /** the amount of the quantity remaining fillable */
@@ -278,9 +278,7 @@ export interface DerivativeOrder {
   /** market_id represents the unique ID of the market */
   marketId: string;
   /** order_info contains the information of the order */
-  orderInfo:
-    | OrderInfo
-    | undefined;
+  orderInfo: OrderInfo | undefined;
   /** order types */
   orderType: OrderType;
   /** margin is the margin used by the limit order (in human readable format) */
@@ -297,9 +295,7 @@ export interface DerivativeOrder {
 /** A valid Derivative market order with Metadata. */
 export interface DerivativeMarketOrder {
   /** order_info contains the information of the order */
-  orderInfo:
-    | OrderInfo
-    | undefined;
+  orderInfo: OrderInfo | undefined;
   /** order types */
   orderType: OrderType;
   margin: string;
@@ -312,9 +308,7 @@ export interface DerivativeMarketOrder {
 /** A valid Derivative limit order with Metadata. */
 export interface DerivativeLimitOrder {
   /** order_info contains the information of the order */
-  orderInfo:
-    | OrderInfo
-    | undefined;
+  orderInfo: OrderInfo | undefined;
   /** order types */
   orderType: OrderType;
   /** margin is the margin used by the limit order */
@@ -329,11 +323,20 @@ export interface DerivativeLimitOrder {
 }
 
 function createBaseOrderInfo(): OrderInfo {
-  return { subaccountId: "", feeRecipient: "", price: "", quantity: "", cid: "" };
+  return {
+    subaccountId: "",
+    feeRecipient: "",
+    price: "",
+    quantity: "",
+    cid: "",
+  };
 }
 
 export const OrderInfo: MessageFns<OrderInfo> = {
-  encode(message: OrderInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderInfo,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -353,7 +356,8 @@ export const OrderInfo: MessageFns<OrderInfo> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): OrderInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderInfo();
     while (reader.pos < end) {
@@ -413,15 +417,17 @@ export const OrderInfo: MessageFns<OrderInfo> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -449,7 +455,9 @@ export const OrderInfo: MessageFns<OrderInfo> = {
   create<I extends Exact<DeepPartial<OrderInfo>, I>>(base?: I): OrderInfo {
     return OrderInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderInfo>, I>>(object: I): OrderInfo {
+  fromPartial<I extends Exact<DeepPartial<OrderInfo>, I>>(
+    object: I,
+  ): OrderInfo {
     const message = createBaseOrderInfo();
     message.subaccountId = object.subaccountId ?? "";
     message.feeRecipient = object.feeRecipient ?? "";
@@ -461,11 +469,20 @@ export const OrderInfo: MessageFns<OrderInfo> = {
 };
 
 function createBaseSpotOrder(): SpotOrder {
-  return { marketId: "", orderInfo: undefined, orderType: 0, triggerPrice: "", expirationBlock: 0 };
+  return {
+    marketId: "",
+    orderInfo: undefined,
+    orderType: 0,
+    triggerPrice: "",
+    expirationBlock: 0,
+  };
 }
 
 export const SpotOrder: MessageFns<SpotOrder> = {
-  encode(message: SpotOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -485,7 +502,8 @@ export const SpotOrder: MessageFns<SpotOrder> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SpotOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotOrder();
     while (reader.pos < end) {
@@ -545,28 +563,28 @@ export const SpotOrder: MessageFns<SpotOrder> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       orderInfo: isSet(object.orderInfo)
         ? OrderInfo.fromJSON(object.orderInfo)
         : isSet(object.order_info)
-        ? OrderInfo.fromJSON(object.order_info)
-        : undefined,
+          ? OrderInfo.fromJSON(object.order_info)
+          : undefined,
       orderType: isSet(object.orderType)
         ? orderTypeFromJSON(object.orderType)
         : isSet(object.order_type)
-        ? orderTypeFromJSON(object.order_type)
-        : 0,
+          ? orderTypeFromJSON(object.order_type)
+          : 0,
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
-        : "",
+          ? globalThis.String(object.trigger_price)
+          : "",
       expirationBlock: isSet(object.expirationBlock)
         ? globalThis.Number(object.expirationBlock)
         : isSet(object.expiration_block)
-        ? globalThis.Number(object.expiration_block)
-        : 0,
+          ? globalThis.Number(object.expiration_block)
+          : 0,
     };
   },
 
@@ -593,12 +611,15 @@ export const SpotOrder: MessageFns<SpotOrder> = {
   create<I extends Exact<DeepPartial<SpotOrder>, I>>(base?: I): SpotOrder {
     return SpotOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotOrder>, I>>(object: I): SpotOrder {
+  fromPartial<I extends Exact<DeepPartial<SpotOrder>, I>>(
+    object: I,
+  ): SpotOrder {
     const message = createBaseSpotOrder();
     message.marketId = object.marketId ?? "";
-    message.orderInfo = (object.orderInfo !== undefined && object.orderInfo !== null)
-      ? OrderInfo.fromPartial(object.orderInfo)
-      : undefined;
+    message.orderInfo =
+      object.orderInfo !== undefined && object.orderInfo !== null
+        ? OrderInfo.fromPartial(object.orderInfo)
+        : undefined;
     message.orderType = object.orderType ?? 0;
     message.triggerPrice = object.triggerPrice ?? "";
     message.expirationBlock = object.expirationBlock ?? 0;
@@ -607,11 +628,20 @@ export const SpotOrder: MessageFns<SpotOrder> = {
 };
 
 function createBaseSpotMarketOrder(): SpotMarketOrder {
-  return { orderInfo: undefined, balanceHold: "", orderHash: Buffer.alloc(0), orderType: 0, triggerPrice: "" };
+  return {
+    orderInfo: undefined,
+    balanceHold: "",
+    orderHash: Buffer.alloc(0),
+    orderType: 0,
+    triggerPrice: "",
+  };
 }
 
 export const SpotMarketOrder: MessageFns<SpotMarketOrder> = {
-  encode(message: SpotMarketOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotMarketOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderInfo !== undefined) {
       OrderInfo.encode(message.orderInfo, writer.uint32(10).fork()).join();
     }
@@ -631,7 +661,8 @@ export const SpotMarketOrder: MessageFns<SpotMarketOrder> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SpotMarketOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotMarketOrder();
     while (reader.pos < end) {
@@ -691,28 +722,28 @@ export const SpotMarketOrder: MessageFns<SpotMarketOrder> = {
       orderInfo: isSet(object.orderInfo)
         ? OrderInfo.fromJSON(object.orderInfo)
         : isSet(object.order_info)
-        ? OrderInfo.fromJSON(object.order_info)
-        : undefined,
+          ? OrderInfo.fromJSON(object.order_info)
+          : undefined,
       balanceHold: isSet(object.balanceHold)
         ? globalThis.String(object.balanceHold)
         : isSet(object.balance_hold)
-        ? globalThis.String(object.balance_hold)
-        : "",
+          ? globalThis.String(object.balance_hold)
+          : "",
       orderHash: isSet(object.orderHash)
         ? Buffer.from(bytesFromBase64(object.orderHash))
         : isSet(object.order_hash)
-        ? Buffer.from(bytesFromBase64(object.order_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.order_hash))
+          : Buffer.alloc(0),
       orderType: isSet(object.orderType)
         ? orderTypeFromJSON(object.orderType)
         : isSet(object.order_type)
-        ? orderTypeFromJSON(object.order_type)
-        : 0,
+          ? orderTypeFromJSON(object.order_type)
+          : 0,
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
-        : "",
+          ? globalThis.String(object.trigger_price)
+          : "",
     };
   },
 
@@ -736,14 +767,19 @@ export const SpotMarketOrder: MessageFns<SpotMarketOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SpotMarketOrder>, I>>(base?: I): SpotMarketOrder {
+  create<I extends Exact<DeepPartial<SpotMarketOrder>, I>>(
+    base?: I,
+  ): SpotMarketOrder {
     return SpotMarketOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotMarketOrder>, I>>(object: I): SpotMarketOrder {
+  fromPartial<I extends Exact<DeepPartial<SpotMarketOrder>, I>>(
+    object: I,
+  ): SpotMarketOrder {
     const message = createBaseSpotMarketOrder();
-    message.orderInfo = (object.orderInfo !== undefined && object.orderInfo !== null)
-      ? OrderInfo.fromPartial(object.orderInfo)
-      : undefined;
+    message.orderInfo =
+      object.orderInfo !== undefined && object.orderInfo !== null
+        ? OrderInfo.fromPartial(object.orderInfo)
+        : undefined;
     message.balanceHold = object.balanceHold ?? "";
     message.orderHash = object.orderHash ?? Buffer.alloc(0);
     message.orderType = object.orderType ?? 0;
@@ -764,7 +800,10 @@ function createBaseSpotLimitOrder(): SpotLimitOrder {
 }
 
 export const SpotLimitOrder: MessageFns<SpotLimitOrder> = {
-  encode(message: SpotLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotLimitOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderInfo !== undefined) {
       OrderInfo.encode(message.orderInfo, writer.uint32(10).fork()).join();
     }
@@ -787,7 +826,8 @@ export const SpotLimitOrder: MessageFns<SpotLimitOrder> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SpotLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotLimitOrder();
     while (reader.pos < end) {
@@ -855,29 +895,31 @@ export const SpotLimitOrder: MessageFns<SpotLimitOrder> = {
       orderInfo: isSet(object.orderInfo)
         ? OrderInfo.fromJSON(object.orderInfo)
         : isSet(object.order_info)
-        ? OrderInfo.fromJSON(object.order_info)
-        : undefined,
+          ? OrderInfo.fromJSON(object.order_info)
+          : undefined,
       orderType: isSet(object.orderType)
         ? orderTypeFromJSON(object.orderType)
         : isSet(object.order_type)
-        ? orderTypeFromJSON(object.order_type)
-        : 0,
-      fillable: isSet(object.fillable) ? globalThis.String(object.fillable) : "",
+          ? orderTypeFromJSON(object.order_type)
+          : 0,
+      fillable: isSet(object.fillable)
+        ? globalThis.String(object.fillable)
+        : "",
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
-        : "",
+          ? globalThis.String(object.trigger_price)
+          : "",
       orderHash: isSet(object.orderHash)
         ? Buffer.from(bytesFromBase64(object.orderHash))
         : isSet(object.order_hash)
-        ? Buffer.from(bytesFromBase64(object.order_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.order_hash))
+          : Buffer.alloc(0),
       expirationBlock: isSet(object.expirationBlock)
         ? globalThis.Number(object.expirationBlock)
         : isSet(object.expiration_block)
-        ? globalThis.Number(object.expiration_block)
-        : 0,
+          ? globalThis.Number(object.expiration_block)
+          : 0,
     };
   },
 
@@ -904,14 +946,19 @@ export const SpotLimitOrder: MessageFns<SpotLimitOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SpotLimitOrder>, I>>(base?: I): SpotLimitOrder {
+  create<I extends Exact<DeepPartial<SpotLimitOrder>, I>>(
+    base?: I,
+  ): SpotLimitOrder {
     return SpotLimitOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotLimitOrder>, I>>(object: I): SpotLimitOrder {
+  fromPartial<I extends Exact<DeepPartial<SpotLimitOrder>, I>>(
+    object: I,
+  ): SpotLimitOrder {
     const message = createBaseSpotLimitOrder();
-    message.orderInfo = (object.orderInfo !== undefined && object.orderInfo !== null)
-      ? OrderInfo.fromPartial(object.orderInfo)
-      : undefined;
+    message.orderInfo =
+      object.orderInfo !== undefined && object.orderInfo !== null
+        ? OrderInfo.fromPartial(object.orderInfo)
+        : undefined;
     message.orderType = object.orderType ?? 0;
     message.fillable = object.fillable ?? "";
     message.triggerPrice = object.triggerPrice ?? "";
@@ -922,11 +969,21 @@ export const SpotLimitOrder: MessageFns<SpotLimitOrder> = {
 };
 
 function createBaseDerivativeOrder(): DerivativeOrder {
-  return { marketId: "", orderInfo: undefined, orderType: 0, margin: "", triggerPrice: "", expirationBlock: 0 };
+  return {
+    marketId: "",
+    orderInfo: undefined,
+    orderType: 0,
+    margin: "",
+    triggerPrice: "",
+    expirationBlock: 0,
+  };
 }
 
 export const DerivativeOrder: MessageFns<DerivativeOrder> = {
-  encode(message: DerivativeOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativeOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -949,7 +1006,8 @@ export const DerivativeOrder: MessageFns<DerivativeOrder> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DerivativeOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativeOrder();
     while (reader.pos < end) {
@@ -1017,29 +1075,29 @@ export const DerivativeOrder: MessageFns<DerivativeOrder> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       orderInfo: isSet(object.orderInfo)
         ? OrderInfo.fromJSON(object.orderInfo)
         : isSet(object.order_info)
-        ? OrderInfo.fromJSON(object.order_info)
-        : undefined,
+          ? OrderInfo.fromJSON(object.order_info)
+          : undefined,
       orderType: isSet(object.orderType)
         ? orderTypeFromJSON(object.orderType)
         : isSet(object.order_type)
-        ? orderTypeFromJSON(object.order_type)
-        : 0,
+          ? orderTypeFromJSON(object.order_type)
+          : 0,
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
-        : "",
+          ? globalThis.String(object.trigger_price)
+          : "",
       expirationBlock: isSet(object.expirationBlock)
         ? globalThis.Number(object.expirationBlock)
         : isSet(object.expiration_block)
-        ? globalThis.Number(object.expiration_block)
-        : 0,
+          ? globalThis.Number(object.expiration_block)
+          : 0,
     };
   },
 
@@ -1066,15 +1124,20 @@ export const DerivativeOrder: MessageFns<DerivativeOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativeOrder>, I>>(base?: I): DerivativeOrder {
+  create<I extends Exact<DeepPartial<DerivativeOrder>, I>>(
+    base?: I,
+  ): DerivativeOrder {
     return DerivativeOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativeOrder>, I>>(object: I): DerivativeOrder {
+  fromPartial<I extends Exact<DeepPartial<DerivativeOrder>, I>>(
+    object: I,
+  ): DerivativeOrder {
     const message = createBaseDerivativeOrder();
     message.marketId = object.marketId ?? "";
-    message.orderInfo = (object.orderInfo !== undefined && object.orderInfo !== null)
-      ? OrderInfo.fromPartial(object.orderInfo)
-      : undefined;
+    message.orderInfo =
+      object.orderInfo !== undefined && object.orderInfo !== null
+        ? OrderInfo.fromPartial(object.orderInfo)
+        : undefined;
     message.orderType = object.orderType ?? 0;
     message.margin = object.margin ?? "";
     message.triggerPrice = object.triggerPrice ?? "";
@@ -1095,7 +1158,10 @@ function createBaseDerivativeMarketOrder(): DerivativeMarketOrder {
 }
 
 export const DerivativeMarketOrder: MessageFns<DerivativeMarketOrder> = {
-  encode(message: DerivativeMarketOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativeMarketOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderInfo !== undefined) {
       OrderInfo.encode(message.orderInfo, writer.uint32(10).fork()).join();
     }
@@ -1117,8 +1183,12 @@ export const DerivativeMarketOrder: MessageFns<DerivativeMarketOrder> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeMarketOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DerivativeMarketOrder {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativeMarketOrder();
     while (reader.pos < end) {
@@ -1186,29 +1256,29 @@ export const DerivativeMarketOrder: MessageFns<DerivativeMarketOrder> = {
       orderInfo: isSet(object.orderInfo)
         ? OrderInfo.fromJSON(object.orderInfo)
         : isSet(object.order_info)
-        ? OrderInfo.fromJSON(object.order_info)
-        : undefined,
+          ? OrderInfo.fromJSON(object.order_info)
+          : undefined,
       orderType: isSet(object.orderType)
         ? orderTypeFromJSON(object.orderType)
         : isSet(object.order_type)
-        ? orderTypeFromJSON(object.order_type)
-        : 0,
+          ? orderTypeFromJSON(object.order_type)
+          : 0,
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
       marginHold: isSet(object.marginHold)
         ? globalThis.String(object.marginHold)
         : isSet(object.margin_hold)
-        ? globalThis.String(object.margin_hold)
-        : "",
+          ? globalThis.String(object.margin_hold)
+          : "",
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
-        : "",
+          ? globalThis.String(object.trigger_price)
+          : "",
       orderHash: isSet(object.orderHash)
         ? Buffer.from(bytesFromBase64(object.orderHash))
         : isSet(object.order_hash)
-        ? Buffer.from(bytesFromBase64(object.order_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.order_hash))
+          : Buffer.alloc(0),
     };
   },
 
@@ -1235,14 +1305,19 @@ export const DerivativeMarketOrder: MessageFns<DerivativeMarketOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativeMarketOrder>, I>>(base?: I): DerivativeMarketOrder {
+  create<I extends Exact<DeepPartial<DerivativeMarketOrder>, I>>(
+    base?: I,
+  ): DerivativeMarketOrder {
     return DerivativeMarketOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativeMarketOrder>, I>>(object: I): DerivativeMarketOrder {
+  fromPartial<I extends Exact<DeepPartial<DerivativeMarketOrder>, I>>(
+    object: I,
+  ): DerivativeMarketOrder {
     const message = createBaseDerivativeMarketOrder();
-    message.orderInfo = (object.orderInfo !== undefined && object.orderInfo !== null)
-      ? OrderInfo.fromPartial(object.orderInfo)
-      : undefined;
+    message.orderInfo =
+      object.orderInfo !== undefined && object.orderInfo !== null
+        ? OrderInfo.fromPartial(object.orderInfo)
+        : undefined;
     message.orderType = object.orderType ?? 0;
     message.margin = object.margin ?? "";
     message.marginHold = object.marginHold ?? "";
@@ -1265,7 +1340,10 @@ function createBaseDerivativeLimitOrder(): DerivativeLimitOrder {
 }
 
 export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
-  encode(message: DerivativeLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativeLimitOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderInfo !== undefined) {
       OrderInfo.encode(message.orderInfo, writer.uint32(10).fork()).join();
     }
@@ -1290,8 +1368,12 @@ export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DerivativeLimitOrder {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativeLimitOrder();
     while (reader.pos < end) {
@@ -1367,30 +1449,32 @@ export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
       orderInfo: isSet(object.orderInfo)
         ? OrderInfo.fromJSON(object.orderInfo)
         : isSet(object.order_info)
-        ? OrderInfo.fromJSON(object.order_info)
-        : undefined,
+          ? OrderInfo.fromJSON(object.order_info)
+          : undefined,
       orderType: isSet(object.orderType)
         ? orderTypeFromJSON(object.orderType)
         : isSet(object.order_type)
-        ? orderTypeFromJSON(object.order_type)
-        : 0,
+          ? orderTypeFromJSON(object.order_type)
+          : 0,
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
-      fillable: isSet(object.fillable) ? globalThis.String(object.fillable) : "",
+      fillable: isSet(object.fillable)
+        ? globalThis.String(object.fillable)
+        : "",
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
-        : "",
+          ? globalThis.String(object.trigger_price)
+          : "",
       orderHash: isSet(object.orderHash)
         ? Buffer.from(bytesFromBase64(object.orderHash))
         : isSet(object.order_hash)
-        ? Buffer.from(bytesFromBase64(object.order_hash))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.order_hash))
+          : Buffer.alloc(0),
       expirationBlock: isSet(object.expirationBlock)
         ? globalThis.Number(object.expirationBlock)
         : isSet(object.expiration_block)
-        ? globalThis.Number(object.expiration_block)
-        : 0,
+          ? globalThis.Number(object.expiration_block)
+          : 0,
     };
   },
 
@@ -1420,14 +1504,19 @@ export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(base?: I): DerivativeLimitOrder {
+  create<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(
+    base?: I,
+  ): DerivativeLimitOrder {
     return DerivativeLimitOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(object: I): DerivativeLimitOrder {
+  fromPartial<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(
+    object: I,
+  ): DerivativeLimitOrder {
     const message = createBaseDerivativeLimitOrder();
-    message.orderInfo = (object.orderInfo !== undefined && object.orderInfo !== null)
-      ? OrderInfo.fromPartial(object.orderInfo)
-      : undefined;
+    message.orderInfo =
+      object.orderInfo !== undefined && object.orderInfo !== null
+        ? OrderInfo.fromPartial(object.orderInfo)
+        : undefined;
     message.orderType = object.orderType ?? 0;
     message.margin = object.margin ?? "";
     message.fillable = object.fillable ?? "";
@@ -1446,17 +1535,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

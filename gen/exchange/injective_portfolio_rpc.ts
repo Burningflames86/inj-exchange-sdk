@@ -88,9 +88,7 @@ export interface SubaccountDeposit {
 }
 
 export interface PositionsWithUPNL {
-  position:
-    | DerivativePosition
-    | undefined;
+  position: DerivativePosition | undefined;
   /** Unrealized PNL */
   unrealizedPnl: string;
 }
@@ -179,7 +177,10 @@ function createBaseTokenHoldersRequest(): TokenHoldersRequest {
 }
 
 export const TokenHoldersRequest: MessageFns<TokenHoldersRequest> = {
-  encode(message: TokenHoldersRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TokenHoldersRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -192,8 +193,12 @@ export const TokenHoldersRequest: MessageFns<TokenHoldersRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TokenHoldersRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TokenHoldersRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTokenHoldersRequest();
     while (reader.pos < end) {
@@ -254,10 +259,14 @@ export const TokenHoldersRequest: MessageFns<TokenHoldersRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TokenHoldersRequest>, I>>(base?: I): TokenHoldersRequest {
+  create<I extends Exact<DeepPartial<TokenHoldersRequest>, I>>(
+    base?: I,
+  ): TokenHoldersRequest {
     return TokenHoldersRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TokenHoldersRequest>, I>>(object: I): TokenHoldersRequest {
+  fromPartial<I extends Exact<DeepPartial<TokenHoldersRequest>, I>>(
+    object: I,
+  ): TokenHoldersRequest {
     const message = createBaseTokenHoldersRequest();
     message.denom = object.denom ?? "";
     message.cursor = object.cursor ?? "";
@@ -271,7 +280,10 @@ function createBaseTokenHoldersResponse(): TokenHoldersResponse {
 }
 
 export const TokenHoldersResponse: MessageFns<TokenHoldersResponse> = {
-  encode(message: TokenHoldersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TokenHoldersResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.holders) {
       Holder.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -281,8 +293,12 @@ export const TokenHoldersResponse: MessageFns<TokenHoldersResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TokenHoldersResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TokenHoldersResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTokenHoldersResponse();
     while (reader.pos < end) {
@@ -315,12 +331,14 @@ export const TokenHoldersResponse: MessageFns<TokenHoldersResponse> = {
 
   fromJSON(object: any): TokenHoldersResponse {
     return {
-      holders: globalThis.Array.isArray(object?.holders) ? object.holders.map((e: any) => Holder.fromJSON(e)) : [],
+      holders: globalThis.Array.isArray(object?.holders)
+        ? object.holders.map((e: any) => Holder.fromJSON(e))
+        : [],
       nextCursors: globalThis.Array.isArray(object?.nextCursors)
         ? object.nextCursors.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.next_cursors)
-        ? object.next_cursors.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.next_cursors.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -335,10 +353,14 @@ export const TokenHoldersResponse: MessageFns<TokenHoldersResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TokenHoldersResponse>, I>>(base?: I): TokenHoldersResponse {
+  create<I extends Exact<DeepPartial<TokenHoldersResponse>, I>>(
+    base?: I,
+  ): TokenHoldersResponse {
     return TokenHoldersResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TokenHoldersResponse>, I>>(object: I): TokenHoldersResponse {
+  fromPartial<I extends Exact<DeepPartial<TokenHoldersResponse>, I>>(
+    object: I,
+  ): TokenHoldersResponse {
     const message = createBaseTokenHoldersResponse();
     message.holders = object.holders?.map((e) => Holder.fromPartial(e)) || [];
     message.nextCursors = object.nextCursors?.map((e) => e) || [];
@@ -351,7 +373,10 @@ function createBaseHolder(): Holder {
 }
 
 export const Holder: MessageFns<Holder> = {
-  encode(message: Holder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Holder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
@@ -362,7 +387,8 @@ export const Holder: MessageFns<Holder> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Holder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHolder();
     while (reader.pos < end) {
@@ -398,8 +424,8 @@ export const Holder: MessageFns<Holder> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
       balance: isSet(object.balance) ? globalThis.String(object.balance) : "",
     };
   },
@@ -431,15 +457,22 @@ function createBaseAccountPortfolioRequest(): AccountPortfolioRequest {
 }
 
 export const AccountPortfolioRequest: MessageFns<AccountPortfolioRequest> = {
-  encode(message: AccountPortfolioRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AccountPortfolioRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AccountPortfolioRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): AccountPortfolioRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountPortfolioRequest();
     while (reader.pos < end) {
@@ -467,8 +500,8 @@ export const AccountPortfolioRequest: MessageFns<AccountPortfolioRequest> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -480,10 +513,14 @@ export const AccountPortfolioRequest: MessageFns<AccountPortfolioRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AccountPortfolioRequest>, I>>(base?: I): AccountPortfolioRequest {
+  create<I extends Exact<DeepPartial<AccountPortfolioRequest>, I>>(
+    base?: I,
+  ): AccountPortfolioRequest {
     return AccountPortfolioRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AccountPortfolioRequest>, I>>(object: I): AccountPortfolioRequest {
+  fromPartial<I extends Exact<DeepPartial<AccountPortfolioRequest>, I>>(
+    object: I,
+  ): AccountPortfolioRequest {
     const message = createBaseAccountPortfolioRequest();
     message.accountAddress = object.accountAddress ?? "";
     return message;
@@ -495,15 +532,22 @@ function createBaseAccountPortfolioResponse(): AccountPortfolioResponse {
 }
 
 export const AccountPortfolioResponse: MessageFns<AccountPortfolioResponse> = {
-  encode(message: AccountPortfolioResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AccountPortfolioResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.portfolio !== undefined) {
       Portfolio.encode(message.portfolio, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AccountPortfolioResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): AccountPortfolioResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountPortfolioResponse();
     while (reader.pos < end) {
@@ -527,7 +571,11 @@ export const AccountPortfolioResponse: MessageFns<AccountPortfolioResponse> = {
   },
 
   fromJSON(object: any): AccountPortfolioResponse {
-    return { portfolio: isSet(object.portfolio) ? Portfolio.fromJSON(object.portfolio) : undefined };
+    return {
+      portfolio: isSet(object.portfolio)
+        ? Portfolio.fromJSON(object.portfolio)
+        : undefined,
+    };
   },
 
   toJSON(message: AccountPortfolioResponse): unknown {
@@ -538,24 +586,37 @@ export const AccountPortfolioResponse: MessageFns<AccountPortfolioResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AccountPortfolioResponse>, I>>(base?: I): AccountPortfolioResponse {
+  create<I extends Exact<DeepPartial<AccountPortfolioResponse>, I>>(
+    base?: I,
+  ): AccountPortfolioResponse {
     return AccountPortfolioResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AccountPortfolioResponse>, I>>(object: I): AccountPortfolioResponse {
+  fromPartial<I extends Exact<DeepPartial<AccountPortfolioResponse>, I>>(
+    object: I,
+  ): AccountPortfolioResponse {
     const message = createBaseAccountPortfolioResponse();
-    message.portfolio = (object.portfolio !== undefined && object.portfolio !== null)
-      ? Portfolio.fromPartial(object.portfolio)
-      : undefined;
+    message.portfolio =
+      object.portfolio !== undefined && object.portfolio !== null
+        ? Portfolio.fromPartial(object.portfolio)
+        : undefined;
     return message;
   },
 };
 
 function createBasePortfolio(): Portfolio {
-  return { accountAddress: "", bankBalances: [], subaccounts: [], positionsWithUpnl: [] };
+  return {
+    accountAddress: "",
+    bankBalances: [],
+    subaccounts: [],
+    positionsWithUpnl: [],
+  };
 }
 
 export const Portfolio: MessageFns<Portfolio> = {
-  encode(message: Portfolio, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Portfolio,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
@@ -572,7 +633,8 @@ export const Portfolio: MessageFns<Portfolio> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Portfolio {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePortfolio();
     while (reader.pos < end) {
@@ -599,7 +661,9 @@ export const Portfolio: MessageFns<Portfolio> = {
             break;
           }
 
-          message.subaccounts.push(SubaccountBalanceV2.decode(reader, reader.uint32()));
+          message.subaccounts.push(
+            SubaccountBalanceV2.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 4: {
@@ -607,7 +671,9 @@ export const Portfolio: MessageFns<Portfolio> = {
             break;
           }
 
-          message.positionsWithUpnl.push(PositionsWithUPNL.decode(reader, reader.uint32()));
+          message.positionsWithUpnl.push(
+            PositionsWithUPNL.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -624,21 +690,25 @@ export const Portfolio: MessageFns<Portfolio> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
       bankBalances: globalThis.Array.isArray(object?.bankBalances)
         ? object.bankBalances.map((e: any) => Coin.fromJSON(e))
         : globalThis.Array.isArray(object?.bank_balances)
-        ? object.bank_balances.map((e: any) => Coin.fromJSON(e))
-        : [],
+          ? object.bank_balances.map((e: any) => Coin.fromJSON(e))
+          : [],
       subaccounts: globalThis.Array.isArray(object?.subaccounts)
         ? object.subaccounts.map((e: any) => SubaccountBalanceV2.fromJSON(e))
         : [],
       positionsWithUpnl: globalThis.Array.isArray(object?.positionsWithUpnl)
-        ? object.positionsWithUpnl.map((e: any) => PositionsWithUPNL.fromJSON(e))
+        ? object.positionsWithUpnl.map((e: any) =>
+            PositionsWithUPNL.fromJSON(e),
+          )
         : globalThis.Array.isArray(object?.positions_with_upnl)
-        ? object.positions_with_upnl.map((e: any) => PositionsWithUPNL.fromJSON(e))
-        : [],
+          ? object.positions_with_upnl.map((e: any) =>
+              PositionsWithUPNL.fromJSON(e),
+            )
+          : [],
     };
   },
 
@@ -651,10 +721,14 @@ export const Portfolio: MessageFns<Portfolio> = {
       obj.bankBalances = message.bankBalances.map((e) => Coin.toJSON(e));
     }
     if (message.subaccounts?.length) {
-      obj.subaccounts = message.subaccounts.map((e) => SubaccountBalanceV2.toJSON(e));
+      obj.subaccounts = message.subaccounts.map((e) =>
+        SubaccountBalanceV2.toJSON(e),
+      );
     }
     if (message.positionsWithUpnl?.length) {
-      obj.positionsWithUpnl = message.positionsWithUpnl.map((e) => PositionsWithUPNL.toJSON(e));
+      obj.positionsWithUpnl = message.positionsWithUpnl.map((e) =>
+        PositionsWithUPNL.toJSON(e),
+      );
     }
     return obj;
   },
@@ -662,12 +736,18 @@ export const Portfolio: MessageFns<Portfolio> = {
   create<I extends Exact<DeepPartial<Portfolio>, I>>(base?: I): Portfolio {
     return Portfolio.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<Portfolio>, I>>(object: I): Portfolio {
+  fromPartial<I extends Exact<DeepPartial<Portfolio>, I>>(
+    object: I,
+  ): Portfolio {
     const message = createBasePortfolio();
     message.accountAddress = object.accountAddress ?? "";
-    message.bankBalances = object.bankBalances?.map((e) => Coin.fromPartial(e)) || [];
-    message.subaccounts = object.subaccounts?.map((e) => SubaccountBalanceV2.fromPartial(e)) || [];
-    message.positionsWithUpnl = object.positionsWithUpnl?.map((e) => PositionsWithUPNL.fromPartial(e)) || [];
+    message.bankBalances =
+      object.bankBalances?.map((e) => Coin.fromPartial(e)) || [];
+    message.subaccounts =
+      object.subaccounts?.map((e) => SubaccountBalanceV2.fromPartial(e)) || [];
+    message.positionsWithUpnl =
+      object.positionsWithUpnl?.map((e) => PositionsWithUPNL.fromPartial(e)) ||
+      [];
     return message;
   },
 };
@@ -677,7 +757,10 @@ function createBaseCoin(): Coin {
 }
 
 export const Coin: MessageFns<Coin> = {
-  encode(message: Coin, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Coin,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -691,7 +774,8 @@ export const Coin: MessageFns<Coin> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Coin {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCoin();
     while (reader.pos < end) {
@@ -737,8 +821,8 @@ export const Coin: MessageFns<Coin> = {
       usdValue: isSet(object.usdValue)
         ? globalThis.String(object.usdValue)
         : isSet(object.usd_value)
-        ? globalThis.String(object.usd_value)
-        : "",
+          ? globalThis.String(object.usd_value)
+          : "",
     };
   },
 
@@ -773,7 +857,10 @@ function createBaseSubaccountBalanceV2(): SubaccountBalanceV2 {
 }
 
 export const SubaccountBalanceV2: MessageFns<SubaccountBalanceV2> = {
-  encode(message: SubaccountBalanceV2, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SubaccountBalanceV2,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -781,13 +868,20 @@ export const SubaccountBalanceV2: MessageFns<SubaccountBalanceV2> = {
       writer.uint32(18).string(message.denom);
     }
     if (message.deposit !== undefined) {
-      SubaccountDeposit.encode(message.deposit, writer.uint32(26).fork()).join();
+      SubaccountDeposit.encode(
+        message.deposit,
+        writer.uint32(26).fork(),
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountBalanceV2 {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SubaccountBalanceV2 {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubaccountBalanceV2();
     while (reader.pos < end) {
@@ -831,10 +925,12 @@ export const SubaccountBalanceV2: MessageFns<SubaccountBalanceV2> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
-      deposit: isSet(object.deposit) ? SubaccountDeposit.fromJSON(object.deposit) : undefined,
+      deposit: isSet(object.deposit)
+        ? SubaccountDeposit.fromJSON(object.deposit)
+        : undefined,
     };
   },
 
@@ -852,26 +948,39 @@ export const SubaccountBalanceV2: MessageFns<SubaccountBalanceV2> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SubaccountBalanceV2>, I>>(base?: I): SubaccountBalanceV2 {
+  create<I extends Exact<DeepPartial<SubaccountBalanceV2>, I>>(
+    base?: I,
+  ): SubaccountBalanceV2 {
     return SubaccountBalanceV2.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SubaccountBalanceV2>, I>>(object: I): SubaccountBalanceV2 {
+  fromPartial<I extends Exact<DeepPartial<SubaccountBalanceV2>, I>>(
+    object: I,
+  ): SubaccountBalanceV2 {
     const message = createBaseSubaccountBalanceV2();
     message.subaccountId = object.subaccountId ?? "";
     message.denom = object.denom ?? "";
-    message.deposit = (object.deposit !== undefined && object.deposit !== null)
-      ? SubaccountDeposit.fromPartial(object.deposit)
-      : undefined;
+    message.deposit =
+      object.deposit !== undefined && object.deposit !== null
+        ? SubaccountDeposit.fromPartial(object.deposit)
+        : undefined;
     return message;
   },
 };
 
 function createBaseSubaccountDeposit(): SubaccountDeposit {
-  return { totalBalance: "", availableBalance: "", totalBalanceUsd: "", availableBalanceUsd: "" };
+  return {
+    totalBalance: "",
+    availableBalance: "",
+    totalBalanceUsd: "",
+    availableBalanceUsd: "",
+  };
 }
 
 export const SubaccountDeposit: MessageFns<SubaccountDeposit> = {
-  encode(message: SubaccountDeposit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SubaccountDeposit,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.totalBalance !== "") {
       writer.uint32(10).string(message.totalBalance);
     }
@@ -888,7 +997,8 @@ export const SubaccountDeposit: MessageFns<SubaccountDeposit> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SubaccountDeposit {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubaccountDeposit();
     while (reader.pos < end) {
@@ -940,23 +1050,23 @@ export const SubaccountDeposit: MessageFns<SubaccountDeposit> = {
       totalBalance: isSet(object.totalBalance)
         ? globalThis.String(object.totalBalance)
         : isSet(object.total_balance)
-        ? globalThis.String(object.total_balance)
-        : "",
+          ? globalThis.String(object.total_balance)
+          : "",
       availableBalance: isSet(object.availableBalance)
         ? globalThis.String(object.availableBalance)
         : isSet(object.available_balance)
-        ? globalThis.String(object.available_balance)
-        : "",
+          ? globalThis.String(object.available_balance)
+          : "",
       totalBalanceUsd: isSet(object.totalBalanceUsd)
         ? globalThis.String(object.totalBalanceUsd)
         : isSet(object.total_balance_usd)
-        ? globalThis.String(object.total_balance_usd)
-        : "",
+          ? globalThis.String(object.total_balance_usd)
+          : "",
       availableBalanceUsd: isSet(object.availableBalanceUsd)
         ? globalThis.String(object.availableBalanceUsd)
         : isSet(object.available_balance_usd)
-        ? globalThis.String(object.available_balance_usd)
-        : "",
+          ? globalThis.String(object.available_balance_usd)
+          : "",
     };
   },
 
@@ -977,10 +1087,14 @@ export const SubaccountDeposit: MessageFns<SubaccountDeposit> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SubaccountDeposit>, I>>(base?: I): SubaccountDeposit {
+  create<I extends Exact<DeepPartial<SubaccountDeposit>, I>>(
+    base?: I,
+  ): SubaccountDeposit {
     return SubaccountDeposit.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SubaccountDeposit>, I>>(object: I): SubaccountDeposit {
+  fromPartial<I extends Exact<DeepPartial<SubaccountDeposit>, I>>(
+    object: I,
+  ): SubaccountDeposit {
     const message = createBaseSubaccountDeposit();
     message.totalBalance = object.totalBalance ?? "";
     message.availableBalance = object.availableBalance ?? "";
@@ -995,9 +1109,15 @@ function createBasePositionsWithUPNL(): PositionsWithUPNL {
 }
 
 export const PositionsWithUPNL: MessageFns<PositionsWithUPNL> = {
-  encode(message: PositionsWithUPNL, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PositionsWithUPNL,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.position !== undefined) {
-      DerivativePosition.encode(message.position, writer.uint32(10).fork()).join();
+      DerivativePosition.encode(
+        message.position,
+        writer.uint32(10).fork(),
+      ).join();
     }
     if (message.unrealizedPnl !== "") {
       writer.uint32(18).string(message.unrealizedPnl);
@@ -1006,7 +1126,8 @@ export const PositionsWithUPNL: MessageFns<PositionsWithUPNL> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PositionsWithUPNL {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePositionsWithUPNL();
     while (reader.pos < end) {
@@ -1039,12 +1160,14 @@ export const PositionsWithUPNL: MessageFns<PositionsWithUPNL> = {
 
   fromJSON(object: any): PositionsWithUPNL {
     return {
-      position: isSet(object.position) ? DerivativePosition.fromJSON(object.position) : undefined,
+      position: isSet(object.position)
+        ? DerivativePosition.fromJSON(object.position)
+        : undefined,
       unrealizedPnl: isSet(object.unrealizedPnl)
         ? globalThis.String(object.unrealizedPnl)
         : isSet(object.unrealized_pnl)
-        ? globalThis.String(object.unrealized_pnl)
-        : "",
+          ? globalThis.String(object.unrealized_pnl)
+          : "",
     };
   },
 
@@ -1059,14 +1182,19 @@ export const PositionsWithUPNL: MessageFns<PositionsWithUPNL> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PositionsWithUPNL>, I>>(base?: I): PositionsWithUPNL {
+  create<I extends Exact<DeepPartial<PositionsWithUPNL>, I>>(
+    base?: I,
+  ): PositionsWithUPNL {
     return PositionsWithUPNL.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PositionsWithUPNL>, I>>(object: I): PositionsWithUPNL {
+  fromPartial<I extends Exact<DeepPartial<PositionsWithUPNL>, I>>(
+    object: I,
+  ): PositionsWithUPNL {
     const message = createBasePositionsWithUPNL();
-    message.position = (object.position !== undefined && object.position !== null)
-      ? DerivativePosition.fromPartial(object.position)
-      : undefined;
+    message.position =
+      object.position !== undefined && object.position !== null
+        ? DerivativePosition.fromPartial(object.position)
+        : undefined;
     message.unrealizedPnl = object.unrealizedPnl ?? "";
     return message;
   },
@@ -1094,7 +1222,10 @@ function createBaseDerivativePosition(): DerivativePosition {
 }
 
 export const DerivativePosition: MessageFns<DerivativePosition> = {
-  encode(message: DerivativePosition, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativePosition,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.ticker !== "") {
       writer.uint32(10).string(message.ticker);
     }
@@ -1146,8 +1277,12 @@ export const DerivativePosition: MessageFns<DerivativePosition> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativePosition {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DerivativePosition {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativePosition();
     while (reader.pos < end) {
@@ -1296,66 +1431,72 @@ export const DerivativePosition: MessageFns<DerivativePosition> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
+          ? globalThis.String(object.subaccount_id)
+          : "",
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
         : "",
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       entryPrice: isSet(object.entryPrice)
         ? globalThis.String(object.entryPrice)
         : isSet(object.entry_price)
-        ? globalThis.String(object.entry_price)
-        : "",
+          ? globalThis.String(object.entry_price)
+          : "",
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
       liquidationPrice: isSet(object.liquidationPrice)
         ? globalThis.String(object.liquidationPrice)
         : isSet(object.liquidation_price)
-        ? globalThis.String(object.liquidation_price)
-        : "",
+          ? globalThis.String(object.liquidation_price)
+          : "",
       markPrice: isSet(object.markPrice)
         ? globalThis.String(object.markPrice)
         : isSet(object.mark_price)
-        ? globalThis.String(object.mark_price)
-        : "",
+          ? globalThis.String(object.mark_price)
+          : "",
       aggregateReduceOnlyQuantity: isSet(object.aggregateReduceOnlyQuantity)
         ? globalThis.String(object.aggregateReduceOnlyQuantity)
         : isSet(object.aggregate_reduce_only_quantity)
-        ? globalThis.String(object.aggregate_reduce_only_quantity)
-        : "",
+          ? globalThis.String(object.aggregate_reduce_only_quantity)
+          : "",
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
       createdAt: isSet(object.createdAt)
         ? globalThis.Number(object.createdAt)
         : isSet(object.created_at)
-        ? globalThis.Number(object.created_at)
-        : 0,
+          ? globalThis.Number(object.created_at)
+          : 0,
       fundingLast: isSet(object.fundingLast)
         ? globalThis.String(object.fundingLast)
         : isSet(object.funding_last)
-        ? globalThis.String(object.funding_last)
-        : "",
+          ? globalThis.String(object.funding_last)
+          : "",
       fundingSum: isSet(object.fundingSum)
         ? globalThis.String(object.fundingSum)
         : isSet(object.funding_sum)
-        ? globalThis.String(object.funding_sum)
-        : "",
+          ? globalThis.String(object.funding_sum)
+          : "",
       cumulativeFundingEntry: isSet(object.cumulativeFundingEntry)
         ? globalThis.String(object.cumulativeFundingEntry)
         : isSet(object.cumulative_funding_entry)
-        ? globalThis.String(object.cumulative_funding_entry)
-        : "",
-      effectiveCumulativeFundingEntry: isSet(object.effectiveCumulativeFundingEntry)
+          ? globalThis.String(object.cumulative_funding_entry)
+          : "",
+      effectiveCumulativeFundingEntry: isSet(
+        object.effectiveCumulativeFundingEntry,
+      )
         ? globalThis.String(object.effectiveCumulativeFundingEntry)
         : isSet(object.effective_cumulative_funding_entry)
-        ? globalThis.String(object.effective_cumulative_funding_entry)
-        : "",
+          ? globalThis.String(object.effective_cumulative_funding_entry)
+          : "",
     };
   },
 
@@ -1407,15 +1548,20 @@ export const DerivativePosition: MessageFns<DerivativePosition> = {
       obj.cumulativeFundingEntry = message.cumulativeFundingEntry;
     }
     if (message.effectiveCumulativeFundingEntry !== "") {
-      obj.effectiveCumulativeFundingEntry = message.effectiveCumulativeFundingEntry;
+      obj.effectiveCumulativeFundingEntry =
+        message.effectiveCumulativeFundingEntry;
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativePosition>, I>>(base?: I): DerivativePosition {
+  create<I extends Exact<DeepPartial<DerivativePosition>, I>>(
+    base?: I,
+  ): DerivativePosition {
     return DerivativePosition.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativePosition>, I>>(object: I): DerivativePosition {
+  fromPartial<I extends Exact<DeepPartial<DerivativePosition>, I>>(
+    object: I,
+  ): DerivativePosition {
     const message = createBaseDerivativePosition();
     message.ticker = object.ticker ?? "";
     message.marketId = object.marketId ?? "";
@@ -1426,13 +1572,15 @@ export const DerivativePosition: MessageFns<DerivativePosition> = {
     message.margin = object.margin ?? "";
     message.liquidationPrice = object.liquidationPrice ?? "";
     message.markPrice = object.markPrice ?? "";
-    message.aggregateReduceOnlyQuantity = object.aggregateReduceOnlyQuantity ?? "";
+    message.aggregateReduceOnlyQuantity =
+      object.aggregateReduceOnlyQuantity ?? "";
     message.updatedAt = object.updatedAt ?? 0;
     message.createdAt = object.createdAt ?? 0;
     message.fundingLast = object.fundingLast ?? "";
     message.fundingSum = object.fundingSum ?? "";
     message.cumulativeFundingEntry = object.cumulativeFundingEntry ?? "";
-    message.effectiveCumulativeFundingEntry = object.effectiveCumulativeFundingEntry ?? "";
+    message.effectiveCumulativeFundingEntry =
+      object.effectiveCumulativeFundingEntry ?? "";
     return message;
   },
 };
@@ -1441,154 +1589,191 @@ function createBaseAccountPortfolioBalancesRequest(): AccountPortfolioBalancesRe
   return { accountAddress: "", usd: false };
 }
 
-export const AccountPortfolioBalancesRequest: MessageFns<AccountPortfolioBalancesRequest> = {
-  encode(message: AccountPortfolioBalancesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.accountAddress !== "") {
-      writer.uint32(10).string(message.accountAddress);
-    }
-    if (message.usd !== false) {
-      writer.uint32(16).bool(message.usd);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): AccountPortfolioBalancesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAccountPortfolioBalancesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.accountAddress = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.usd = reader.bool();
-          continue;
-        }
+export const AccountPortfolioBalancesRequest: MessageFns<AccountPortfolioBalancesRequest> =
+  {
+    encode(
+      message: AccountPortfolioBalancesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.accountAddress !== "") {
+        writer.uint32(10).string(message.accountAddress);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.usd !== false) {
+        writer.uint32(16).bool(message.usd);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): AccountPortfolioBalancesRequest {
-    return {
-      accountAddress: isSet(object.accountAddress)
-        ? globalThis.String(object.accountAddress)
-        : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
-      usd: isSet(object.usd) ? globalThis.Boolean(object.usd) : false,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): AccountPortfolioBalancesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseAccountPortfolioBalancesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: AccountPortfolioBalancesRequest): unknown {
-    const obj: any = {};
-    if (message.accountAddress !== "") {
-      obj.accountAddress = message.accountAddress;
-    }
-    if (message.usd !== false) {
-      obj.usd = message.usd;
-    }
-    return obj;
-  },
+            message.accountAddress = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<AccountPortfolioBalancesRequest>, I>>(base?: I): AccountPortfolioBalancesRequest {
-    return AccountPortfolioBalancesRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AccountPortfolioBalancesRequest>, I>>(
-    object: I,
-  ): AccountPortfolioBalancesRequest {
-    const message = createBaseAccountPortfolioBalancesRequest();
-    message.accountAddress = object.accountAddress ?? "";
-    message.usd = object.usd ?? false;
-    return message;
-  },
-};
+            message.usd = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): AccountPortfolioBalancesRequest {
+      return {
+        accountAddress: isSet(object.accountAddress)
+          ? globalThis.String(object.accountAddress)
+          : isSet(object.account_address)
+            ? globalThis.String(object.account_address)
+            : "",
+        usd: isSet(object.usd) ? globalThis.Boolean(object.usd) : false,
+      };
+    },
+
+    toJSON(message: AccountPortfolioBalancesRequest): unknown {
+      const obj: any = {};
+      if (message.accountAddress !== "") {
+        obj.accountAddress = message.accountAddress;
+      }
+      if (message.usd !== false) {
+        obj.usd = message.usd;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<AccountPortfolioBalancesRequest>, I>>(
+      base?: I,
+    ): AccountPortfolioBalancesRequest {
+      return AccountPortfolioBalancesRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<AccountPortfolioBalancesRequest>, I>,
+    >(object: I): AccountPortfolioBalancesRequest {
+      const message = createBaseAccountPortfolioBalancesRequest();
+      message.accountAddress = object.accountAddress ?? "";
+      message.usd = object.usd ?? false;
+      return message;
+    },
+  };
 
 function createBaseAccountPortfolioBalancesResponse(): AccountPortfolioBalancesResponse {
   return { portfolio: undefined };
 }
 
-export const AccountPortfolioBalancesResponse: MessageFns<AccountPortfolioBalancesResponse> = {
-  encode(message: AccountPortfolioBalancesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.portfolio !== undefined) {
-      PortfolioBalances.encode(message.portfolio, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const AccountPortfolioBalancesResponse: MessageFns<AccountPortfolioBalancesResponse> =
+  {
+    encode(
+      message: AccountPortfolioBalancesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.portfolio !== undefined) {
+        PortfolioBalances.encode(
+          message.portfolio,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AccountPortfolioBalancesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAccountPortfolioBalancesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): AccountPortfolioBalancesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseAccountPortfolioBalancesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.portfolio = PortfolioBalances.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
           }
-
-          message.portfolio = PortfolioBalances.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): AccountPortfolioBalancesResponse {
+      return {
+        portfolio: isSet(object.portfolio)
+          ? PortfolioBalances.fromJSON(object.portfolio)
+          : undefined,
+      };
+    },
+
+    toJSON(message: AccountPortfolioBalancesResponse): unknown {
+      const obj: any = {};
+      if (message.portfolio !== undefined) {
+        obj.portfolio = PortfolioBalances.toJSON(message.portfolio);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): AccountPortfolioBalancesResponse {
-    return { portfolio: isSet(object.portfolio) ? PortfolioBalances.fromJSON(object.portfolio) : undefined };
-  },
-
-  toJSON(message: AccountPortfolioBalancesResponse): unknown {
-    const obj: any = {};
-    if (message.portfolio !== undefined) {
-      obj.portfolio = PortfolioBalances.toJSON(message.portfolio);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<AccountPortfolioBalancesResponse>, I>>(
-    base?: I,
-  ): AccountPortfolioBalancesResponse {
-    return AccountPortfolioBalancesResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<AccountPortfolioBalancesResponse>, I>>(
-    object: I,
-  ): AccountPortfolioBalancesResponse {
-    const message = createBaseAccountPortfolioBalancesResponse();
-    message.portfolio = (object.portfolio !== undefined && object.portfolio !== null)
-      ? PortfolioBalances.fromPartial(object.portfolio)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<AccountPortfolioBalancesResponse>, I>>(
+      base?: I,
+    ): AccountPortfolioBalancesResponse {
+      return AccountPortfolioBalancesResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<AccountPortfolioBalancesResponse>, I>,
+    >(object: I): AccountPortfolioBalancesResponse {
+      const message = createBaseAccountPortfolioBalancesResponse();
+      message.portfolio =
+        object.portfolio !== undefined && object.portfolio !== null
+          ? PortfolioBalances.fromPartial(object.portfolio)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBasePortfolioBalances(): PortfolioBalances {
-  return { accountAddress: "", bankBalances: [], subaccounts: [], totalUsd: "" };
+  return {
+    accountAddress: "",
+    bankBalances: [],
+    subaccounts: [],
+    totalUsd: "",
+  };
 }
 
 export const PortfolioBalances: MessageFns<PortfolioBalances> = {
-  encode(message: PortfolioBalances, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PortfolioBalances,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
@@ -1605,7 +1790,8 @@ export const PortfolioBalances: MessageFns<PortfolioBalances> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PortfolioBalances {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePortfolioBalances();
     while (reader.pos < end) {
@@ -1632,7 +1818,9 @@ export const PortfolioBalances: MessageFns<PortfolioBalances> = {
             break;
           }
 
-          message.subaccounts.push(SubaccountBalanceV2.decode(reader, reader.uint32()));
+          message.subaccounts.push(
+            SubaccountBalanceV2.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 4: {
@@ -1657,21 +1845,21 @@ export const PortfolioBalances: MessageFns<PortfolioBalances> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
       bankBalances: globalThis.Array.isArray(object?.bankBalances)
         ? object.bankBalances.map((e: any) => Coin.fromJSON(e))
         : globalThis.Array.isArray(object?.bank_balances)
-        ? object.bank_balances.map((e: any) => Coin.fromJSON(e))
-        : [],
+          ? object.bank_balances.map((e: any) => Coin.fromJSON(e))
+          : [],
       subaccounts: globalThis.Array.isArray(object?.subaccounts)
         ? object.subaccounts.map((e: any) => SubaccountBalanceV2.fromJSON(e))
         : [],
       totalUsd: isSet(object.totalUsd)
         ? globalThis.String(object.totalUsd)
         : isSet(object.total_usd)
-        ? globalThis.String(object.total_usd)
-        : "",
+          ? globalThis.String(object.total_usd)
+          : "",
     };
   },
 
@@ -1684,7 +1872,9 @@ export const PortfolioBalances: MessageFns<PortfolioBalances> = {
       obj.bankBalances = message.bankBalances.map((e) => Coin.toJSON(e));
     }
     if (message.subaccounts?.length) {
-      obj.subaccounts = message.subaccounts.map((e) => SubaccountBalanceV2.toJSON(e));
+      obj.subaccounts = message.subaccounts.map((e) =>
+        SubaccountBalanceV2.toJSON(e),
+      );
     }
     if (message.totalUsd !== "") {
       obj.totalUsd = message.totalUsd;
@@ -1692,14 +1882,20 @@ export const PortfolioBalances: MessageFns<PortfolioBalances> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PortfolioBalances>, I>>(base?: I): PortfolioBalances {
+  create<I extends Exact<DeepPartial<PortfolioBalances>, I>>(
+    base?: I,
+  ): PortfolioBalances {
     return PortfolioBalances.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PortfolioBalances>, I>>(object: I): PortfolioBalances {
+  fromPartial<I extends Exact<DeepPartial<PortfolioBalances>, I>>(
+    object: I,
+  ): PortfolioBalances {
     const message = createBasePortfolioBalances();
     message.accountAddress = object.accountAddress ?? "";
-    message.bankBalances = object.bankBalances?.map((e) => Coin.fromPartial(e)) || [];
-    message.subaccounts = object.subaccounts?.map((e) => SubaccountBalanceV2.fromPartial(e)) || [];
+    message.bankBalances =
+      object.bankBalances?.map((e) => Coin.fromPartial(e)) || [];
+    message.subaccounts =
+      object.subaccounts?.map((e) => SubaccountBalanceV2.fromPartial(e)) || [];
     message.totalUsd = object.totalUsd ?? "";
     return message;
   },
@@ -1709,233 +1905,255 @@ function createBaseStreamAccountPortfolioRequest(): StreamAccountPortfolioReques
   return { accountAddress: "", subaccountId: "", type: "" };
 }
 
-export const StreamAccountPortfolioRequest: MessageFns<StreamAccountPortfolioRequest> = {
-  encode(message: StreamAccountPortfolioRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.accountAddress !== "") {
-      writer.uint32(10).string(message.accountAddress);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(18).string(message.subaccountId);
-    }
-    if (message.type !== "") {
-      writer.uint32(26).string(message.type);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamAccountPortfolioRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamAccountPortfolioRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.accountAddress = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.type = reader.string();
-          continue;
-        }
+export const StreamAccountPortfolioRequest: MessageFns<StreamAccountPortfolioRequest> =
+  {
+    encode(
+      message: StreamAccountPortfolioRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.accountAddress !== "") {
+        writer.uint32(10).string(message.accountAddress);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.subaccountId !== "") {
+        writer.uint32(18).string(message.subaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.type !== "") {
+        writer.uint32(26).string(message.type);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): StreamAccountPortfolioRequest {
-    return {
-      accountAddress: isSet(object.accountAddress)
-        ? globalThis.String(object.accountAddress)
-        : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      type: isSet(object.type) ? globalThis.String(object.type) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamAccountPortfolioRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamAccountPortfolioRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamAccountPortfolioRequest): unknown {
-    const obj: any = {};
-    if (message.accountAddress !== "") {
-      obj.accountAddress = message.accountAddress;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.type !== "") {
-      obj.type = message.type;
-    }
-    return obj;
-  },
+            message.accountAddress = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamAccountPortfolioRequest>, I>>(base?: I): StreamAccountPortfolioRequest {
-    return StreamAccountPortfolioRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamAccountPortfolioRequest>, I>>(
-    object: I,
-  ): StreamAccountPortfolioRequest {
-    const message = createBaseStreamAccountPortfolioRequest();
-    message.accountAddress = object.accountAddress ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    message.type = object.type ?? "";
-    return message;
-  },
-};
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.type = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamAccountPortfolioRequest {
+      return {
+        accountAddress: isSet(object.accountAddress)
+          ? globalThis.String(object.accountAddress)
+          : isSet(object.account_address)
+            ? globalThis.String(object.account_address)
+            : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        type: isSet(object.type) ? globalThis.String(object.type) : "",
+      };
+    },
+
+    toJSON(message: StreamAccountPortfolioRequest): unknown {
+      const obj: any = {};
+      if (message.accountAddress !== "") {
+        obj.accountAddress = message.accountAddress;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.type !== "") {
+        obj.type = message.type;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamAccountPortfolioRequest>, I>>(
+      base?: I,
+    ): StreamAccountPortfolioRequest {
+      return StreamAccountPortfolioRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<StreamAccountPortfolioRequest>, I>>(
+      object: I,
+    ): StreamAccountPortfolioRequest {
+      const message = createBaseStreamAccountPortfolioRequest();
+      message.accountAddress = object.accountAddress ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      message.type = object.type ?? "";
+      return message;
+    },
+  };
 
 function createBaseStreamAccountPortfolioResponse(): StreamAccountPortfolioResponse {
   return { type: "", denom: "", amount: "", subaccountId: "", timestamp: 0 };
 }
 
-export const StreamAccountPortfolioResponse: MessageFns<StreamAccountPortfolioResponse> = {
-  encode(message: StreamAccountPortfolioResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.type !== "") {
-      writer.uint32(10).string(message.type);
-    }
-    if (message.denom !== "") {
-      writer.uint32(18).string(message.denom);
-    }
-    if (message.amount !== "") {
-      writer.uint32(26).string(message.amount);
-    }
-    if (message.subaccountId !== "") {
-      writer.uint32(34).string(message.subaccountId);
-    }
-    if (message.timestamp !== 0) {
-      writer.uint32(40).sint64(message.timestamp);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamAccountPortfolioResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamAccountPortfolioResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.type = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.denom = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.amount = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.timestamp = longToNumber(reader.sint64());
-          continue;
-        }
+export const StreamAccountPortfolioResponse: MessageFns<StreamAccountPortfolioResponse> =
+  {
+    encode(
+      message: StreamAccountPortfolioResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.type !== "") {
+        writer.uint32(10).string(message.type);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.denom !== "") {
+        writer.uint32(18).string(message.denom);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.amount !== "") {
+        writer.uint32(26).string(message.amount);
+      }
+      if (message.subaccountId !== "") {
+        writer.uint32(34).string(message.subaccountId);
+      }
+      if (message.timestamp !== 0) {
+        writer.uint32(40).sint64(message.timestamp);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): StreamAccountPortfolioResponse {
-    return {
-      type: isSet(object.type) ? globalThis.String(object.type) : "",
-      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
-      amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamAccountPortfolioResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamAccountPortfolioResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamAccountPortfolioResponse): unknown {
-    const obj: any = {};
-    if (message.type !== "") {
-      obj.type = message.type;
-    }
-    if (message.denom !== "") {
-      obj.denom = message.denom;
-    }
-    if (message.amount !== "") {
-      obj.amount = message.amount;
-    }
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.timestamp !== 0) {
-      obj.timestamp = Math.round(message.timestamp);
-    }
-    return obj;
-  },
+            message.type = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamAccountPortfolioResponse>, I>>(base?: I): StreamAccountPortfolioResponse {
-    return StreamAccountPortfolioResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamAccountPortfolioResponse>, I>>(
-    object: I,
-  ): StreamAccountPortfolioResponse {
-    const message = createBaseStreamAccountPortfolioResponse();
-    message.type = object.type ?? "";
-    message.denom = object.denom ?? "";
-    message.amount = object.amount ?? "";
-    message.subaccountId = object.subaccountId ?? "";
-    message.timestamp = object.timestamp ?? 0;
-    return message;
-  },
-};
+            message.denom = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.amount = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.timestamp = longToNumber(reader.sint64());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamAccountPortfolioResponse {
+      return {
+        type: isSet(object.type) ? globalThis.String(object.type) : "",
+        denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+        amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        timestamp: isSet(object.timestamp)
+          ? globalThis.Number(object.timestamp)
+          : 0,
+      };
+    },
+
+    toJSON(message: StreamAccountPortfolioResponse): unknown {
+      const obj: any = {};
+      if (message.type !== "") {
+        obj.type = message.type;
+      }
+      if (message.denom !== "") {
+        obj.denom = message.denom;
+      }
+      if (message.amount !== "") {
+        obj.amount = message.amount;
+      }
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.timestamp !== 0) {
+        obj.timestamp = Math.round(message.timestamp);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamAccountPortfolioResponse>, I>>(
+      base?: I,
+    ): StreamAccountPortfolioResponse {
+      return StreamAccountPortfolioResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<StreamAccountPortfolioResponse>, I>,
+    >(object: I): StreamAccountPortfolioResponse {
+      const message = createBaseStreamAccountPortfolioResponse();
+      message.type = object.type ?? "";
+      message.denom = object.denom ?? "";
+      message.amount = object.amount ?? "";
+      message.subaccountId = object.subaccountId ?? "";
+      message.timestamp = object.timestamp ?? 0;
+      return message;
+    },
+  };
 
 /** InjectivePortfolioRPC defines gRPC API of Exchange Portfolio provider. */
 export type InjectivePortfolioRPCService = typeof InjectivePortfolioRPCService;
@@ -1945,11 +2163,14 @@ export const InjectivePortfolioRPCService = {
     path: "/injective_portfolio_rpc.InjectivePortfolioRPC/TokenHolders" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: TokenHoldersRequest): Buffer => Buffer.from(TokenHoldersRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): TokenHoldersRequest => TokenHoldersRequest.decode(value),
+    requestSerialize: (value: TokenHoldersRequest): Buffer =>
+      Buffer.from(TokenHoldersRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): TokenHoldersRequest =>
+      TokenHoldersRequest.decode(value),
     responseSerialize: (value: TokenHoldersResponse): Buffer =>
       Buffer.from(TokenHoldersResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): TokenHoldersResponse => TokenHoldersResponse.decode(value),
+    responseDeserialize: (value: Buffer): TokenHoldersResponse =>
+      TokenHoldersResponse.decode(value),
   },
   /** Provide the account's portfolio */
   accountPortfolio: {
@@ -1958,10 +2179,12 @@ export const InjectivePortfolioRPCService = {
     responseStream: false as const,
     requestSerialize: (value: AccountPortfolioRequest): Buffer =>
       Buffer.from(AccountPortfolioRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): AccountPortfolioRequest => AccountPortfolioRequest.decode(value),
+    requestDeserialize: (value: Buffer): AccountPortfolioRequest =>
+      AccountPortfolioRequest.decode(value),
     responseSerialize: (value: AccountPortfolioResponse): Buffer =>
       Buffer.from(AccountPortfolioResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): AccountPortfolioResponse => AccountPortfolioResponse.decode(value),
+    responseDeserialize: (value: Buffer): AccountPortfolioResponse =>
+      AccountPortfolioResponse.decode(value),
   },
   /** Provide the account's portfolio balances */
   accountPortfolioBalances: {
@@ -1984,7 +2207,8 @@ export const InjectivePortfolioRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamAccountPortfolioRequest): Buffer =>
       Buffer.from(StreamAccountPortfolioRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamAccountPortfolioRequest => StreamAccountPortfolioRequest.decode(value),
+    requestDeserialize: (value: Buffer): StreamAccountPortfolioRequest =>
+      StreamAccountPortfolioRequest.decode(value),
     responseSerialize: (value: StreamAccountPortfolioResponse): Buffer =>
       Buffer.from(StreamAccountPortfolioResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): StreamAccountPortfolioResponse =>
@@ -1996,61 +2220,97 @@ export interface InjectivePortfolioRPCServer extends UntypedServiceImplementatio
   /** Provide a list of addresses holding a specific token */
   tokenHolders: handleUnaryCall<TokenHoldersRequest, TokenHoldersResponse>;
   /** Provide the account's portfolio */
-  accountPortfolio: handleUnaryCall<AccountPortfolioRequest, AccountPortfolioResponse>;
+  accountPortfolio: handleUnaryCall<
+    AccountPortfolioRequest,
+    AccountPortfolioResponse
+  >;
   /** Provide the account's portfolio balances */
-  accountPortfolioBalances: handleUnaryCall<AccountPortfolioBalancesRequest, AccountPortfolioBalancesResponse>;
+  accountPortfolioBalances: handleUnaryCall<
+    AccountPortfolioBalancesRequest,
+    AccountPortfolioBalancesResponse
+  >;
   /** Stream the account's portfolio */
-  streamAccountPortfolio: handleServerStreamingCall<StreamAccountPortfolioRequest, StreamAccountPortfolioResponse>;
+  streamAccountPortfolio: handleServerStreamingCall<
+    StreamAccountPortfolioRequest,
+    StreamAccountPortfolioResponse
+  >;
 }
 
 export interface InjectivePortfolioRPCClient extends Client {
   /** Provide a list of addresses holding a specific token */
   tokenHolders(
     request: TokenHoldersRequest,
-    callback: (error: ServiceError | null, response: TokenHoldersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: TokenHoldersResponse,
+    ) => void,
   ): ClientUnaryCall;
   tokenHolders(
     request: TokenHoldersRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: TokenHoldersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: TokenHoldersResponse,
+    ) => void,
   ): ClientUnaryCall;
   tokenHolders(
     request: TokenHoldersRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: TokenHoldersResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: TokenHoldersResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Provide the account's portfolio */
   accountPortfolio(
     request: AccountPortfolioRequest,
-    callback: (error: ServiceError | null, response: AccountPortfolioResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AccountPortfolioResponse,
+    ) => void,
   ): ClientUnaryCall;
   accountPortfolio(
     request: AccountPortfolioRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: AccountPortfolioResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AccountPortfolioResponse,
+    ) => void,
   ): ClientUnaryCall;
   accountPortfolio(
     request: AccountPortfolioRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: AccountPortfolioResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AccountPortfolioResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Provide the account's portfolio balances */
   accountPortfolioBalances(
     request: AccountPortfolioBalancesRequest,
-    callback: (error: ServiceError | null, response: AccountPortfolioBalancesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AccountPortfolioBalancesResponse,
+    ) => void,
   ): ClientUnaryCall;
   accountPortfolioBalances(
     request: AccountPortfolioBalancesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: AccountPortfolioBalancesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AccountPortfolioBalancesResponse,
+    ) => void,
   ): ClientUnaryCall;
   accountPortfolioBalances(
     request: AccountPortfolioBalancesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: AccountPortfolioBalancesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: AccountPortfolioBalancesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Stream the account's portfolio */
   streamAccountPortfolio(
@@ -2068,22 +2328,34 @@ export const InjectivePortfolioRPCClient = makeGenericClientConstructor(
   InjectivePortfolioRPCService,
   "injective_portfolio_rpc.InjectivePortfolioRPC",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): InjectivePortfolioRPCClient;
+  new (
+    address: string,
+    credentials: ChannelCredentials,
+    options?: Partial<ClientOptions>,
+  ): InjectivePortfolioRPCClient;
   service: typeof InjectivePortfolioRPCService;
   serviceName: string;
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

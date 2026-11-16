@@ -93,7 +93,10 @@ function createBaseValidatorSet(): ValidatorSet {
 }
 
 export const ValidatorSet: MessageFns<ValidatorSet> = {
-  encode(message: ValidatorSet, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ValidatorSet,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -107,7 +110,8 @@ export const ValidatorSet: MessageFns<ValidatorSet> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSet {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSet();
     while (reader.pos < end) {
@@ -151,12 +155,14 @@ export const ValidatorSet: MessageFns<ValidatorSet> = {
       validators: globalThis.Array.isArray(object?.validators)
         ? object.validators.map((e: any) => Validator.fromJSON(e))
         : [],
-      proposer: isSet(object.proposer) ? Validator.fromJSON(object.proposer) : undefined,
+      proposer: isSet(object.proposer)
+        ? Validator.fromJSON(object.proposer)
+        : undefined,
       totalVotingPower: isSet(object.totalVotingPower)
         ? globalThis.Number(object.totalVotingPower)
         : isSet(object.total_voting_power)
-        ? globalThis.Number(object.total_voting_power)
-        : 0,
+          ? globalThis.Number(object.total_voting_power)
+          : 0,
     };
   },
 
@@ -174,15 +180,21 @@ export const ValidatorSet: MessageFns<ValidatorSet> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ValidatorSet>, I>>(base?: I): ValidatorSet {
+  create<I extends Exact<DeepPartial<ValidatorSet>, I>>(
+    base?: I,
+  ): ValidatorSet {
     return ValidatorSet.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ValidatorSet>, I>>(object: I): ValidatorSet {
+  fromPartial<I extends Exact<DeepPartial<ValidatorSet>, I>>(
+    object: I,
+  ): ValidatorSet {
     const message = createBaseValidatorSet();
-    message.validators = object.validators?.map((e) => Validator.fromPartial(e)) || [];
-    message.proposer = (object.proposer !== undefined && object.proposer !== null)
-      ? Validator.fromPartial(object.proposer)
-      : undefined;
+    message.validators =
+      object.validators?.map((e) => Validator.fromPartial(e)) || [];
+    message.proposer =
+      object.proposer !== undefined && object.proposer !== null
+        ? Validator.fromPartial(object.proposer)
+        : undefined;
     message.totalVotingPower = object.totalVotingPower ?? 0;
     return message;
   },
@@ -200,7 +212,10 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator: MessageFns<Validator> = {
-  encode(message: Validator, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Validator,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -223,7 +238,8 @@ export const Validator: MessageFns<Validator> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Validator {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidator();
     while (reader.pos < end) {
@@ -288,32 +304,34 @@ export const Validator: MessageFns<Validator> = {
 
   fromJSON(object: any): Validator {
     return {
-      address: isSet(object.address) ? Buffer.from(bytesFromBase64(object.address)) : Buffer.alloc(0),
+      address: isSet(object.address)
+        ? Buffer.from(bytesFromBase64(object.address))
+        : Buffer.alloc(0),
       pubKey: isSet(object.pubKey)
         ? PublicKey.fromJSON(object.pubKey)
         : isSet(object.pub_key)
-        ? PublicKey.fromJSON(object.pub_key)
-        : undefined,
+          ? PublicKey.fromJSON(object.pub_key)
+          : undefined,
       votingPower: isSet(object.votingPower)
         ? globalThis.Number(object.votingPower)
         : isSet(object.voting_power)
-        ? globalThis.Number(object.voting_power)
-        : 0,
+          ? globalThis.Number(object.voting_power)
+          : 0,
       proposerPriority: isSet(object.proposerPriority)
         ? globalThis.Number(object.proposerPriority)
         : isSet(object.proposer_priority)
-        ? globalThis.Number(object.proposer_priority)
-        : 0,
+          ? globalThis.Number(object.proposer_priority)
+          : 0,
       pubKeyBytes: isSet(object.pubKeyBytes)
         ? Buffer.from(bytesFromBase64(object.pubKeyBytes))
         : isSet(object.pub_key_bytes)
-        ? Buffer.from(bytesFromBase64(object.pub_key_bytes))
-        : Buffer.alloc(0),
+          ? Buffer.from(bytesFromBase64(object.pub_key_bytes))
+          : Buffer.alloc(0),
       pubKeyType: isSet(object.pubKeyType)
         ? globalThis.String(object.pubKeyType)
         : isSet(object.pub_key_type)
-        ? globalThis.String(object.pub_key_type)
-        : "",
+          ? globalThis.String(object.pub_key_type)
+          : "",
     };
   },
 
@@ -343,12 +361,15 @@ export const Validator: MessageFns<Validator> = {
   create<I extends Exact<DeepPartial<Validator>, I>>(base?: I): Validator {
     return Validator.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<Validator>, I>>(object: I): Validator {
+  fromPartial<I extends Exact<DeepPartial<Validator>, I>>(
+    object: I,
+  ): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? Buffer.alloc(0);
-    message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)
-      ? PublicKey.fromPartial(object.pubKey)
-      : undefined;
+    message.pubKey =
+      object.pubKey !== undefined && object.pubKey !== null
+        ? PublicKey.fromPartial(object.pubKey)
+        : undefined;
     message.votingPower = object.votingPower ?? 0;
     message.proposerPriority = object.proposerPriority ?? 0;
     message.pubKeyBytes = object.pubKeyBytes ?? Buffer.alloc(0);
@@ -362,7 +383,10 @@ function createBaseSimpleValidator(): SimpleValidator {
 }
 
 export const SimpleValidator: MessageFns<SimpleValidator> = {
-  encode(message: SimpleValidator, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SimpleValidator,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).join();
     }
@@ -373,7 +397,8 @@ export const SimpleValidator: MessageFns<SimpleValidator> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SimpleValidator {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimpleValidator();
     while (reader.pos < end) {
@@ -409,13 +434,13 @@ export const SimpleValidator: MessageFns<SimpleValidator> = {
       pubKey: isSet(object.pubKey)
         ? PublicKey.fromJSON(object.pubKey)
         : isSet(object.pub_key)
-        ? PublicKey.fromJSON(object.pub_key)
-        : undefined,
+          ? PublicKey.fromJSON(object.pub_key)
+          : undefined,
       votingPower: isSet(object.votingPower)
         ? globalThis.Number(object.votingPower)
         : isSet(object.voting_power)
-        ? globalThis.Number(object.voting_power)
-        : 0,
+          ? globalThis.Number(object.voting_power)
+          : 0,
     };
   },
 
@@ -430,14 +455,19 @@ export const SimpleValidator: MessageFns<SimpleValidator> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SimpleValidator>, I>>(base?: I): SimpleValidator {
+  create<I extends Exact<DeepPartial<SimpleValidator>, I>>(
+    base?: I,
+  ): SimpleValidator {
     return SimpleValidator.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SimpleValidator>, I>>(object: I): SimpleValidator {
+  fromPartial<I extends Exact<DeepPartial<SimpleValidator>, I>>(
+    object: I,
+  ): SimpleValidator {
     const message = createBaseSimpleValidator();
-    message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)
-      ? PublicKey.fromPartial(object.pubKey)
-      : undefined;
+    message.pubKey =
+      object.pubKey !== undefined && object.pubKey !== null
+        ? PublicKey.fromPartial(object.pubKey)
+        : undefined;
     message.votingPower = object.votingPower ?? 0;
     return message;
   },
@@ -451,17 +481,25 @@ function base64FromBytes(arr: Uint8Array): string {
   return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());

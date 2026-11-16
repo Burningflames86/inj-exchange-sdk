@@ -161,9 +161,7 @@ export interface StreamSubaccountBalanceRequest {
 
 export interface StreamSubaccountBalanceResponse {
   /** Subaccount balance */
-  balance:
-    | SubaccountBalance
-    | undefined;
+  balance: SubaccountBalance | undefined;
   /** Operation timestamp in UNIX millis. */
   timestamp: number;
 }
@@ -201,9 +199,7 @@ export interface SubaccountBalanceTransfer {
   /** Account address of the receiving side */
   dstAccountAddress: string;
   /** Coin amount of the transfer */
-  amount:
-    | CosmosCoin
-    | undefined;
+  amount: CosmosCoin | undefined;
   /** Timestamp of the transfer in UNIX millis */
   executedAt: number;
 }
@@ -289,18 +285,14 @@ export interface StreamAccountDataResponse {
 
 export interface SubaccountBalanceResult {
   /** Subaccount balance */
-  balance:
-    | SubaccountBalance
-    | undefined;
+  balance: SubaccountBalance | undefined;
   /** Operation timestamp in UNIX millis. */
   timestamp: number;
 }
 
 export interface PositionsResult {
   /** Updated derivative Position */
-  position:
-    | Position
-    | undefined;
+  position: Position | undefined;
   /** Operation timestamp in UNIX millis. */
   timestamp: number;
 }
@@ -336,13 +328,9 @@ export interface Position {
 
 export interface TradeResult {
   /** New spot market trade */
-  spotTrade?:
-    | SpotTrade
-    | undefined;
+  spotTrade?: SpotTrade | undefined;
   /** New derivative market trade */
-  derivativeTrade?:
-    | DerivativeTrade
-    | undefined;
+  derivativeTrade?: DerivativeTrade | undefined;
   /** Executed trades update type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -361,9 +349,7 @@ export interface SpotTrade {
   /** The direction the trade */
   tradeDirection: string;
   /** Price level at which trade has been executed */
-  price:
-    | PriceLevel
-    | undefined;
+  price: PriceLevel | undefined;
   /** The fee associated with the trade (quote asset denom) */
   fee: string;
   /** Timestamp of trade execution in UNIX millis */
@@ -399,9 +385,7 @@ export interface DerivativeTrade {
   /** True if the trade is a liquidation */
   isLiquidation: boolean;
   /** Position Delta from the trade */
-  positionDelta:
-    | PositionDelta
-    | undefined;
+  positionDelta: PositionDelta | undefined;
   /** The payout associated with the trade */
   payout: string;
   /** The fee associated with the trade */
@@ -433,13 +417,9 @@ export interface PositionDelta {
 
 export interface OrderResult {
   /** Updated spot market order */
-  spotOrder?:
-    | SpotLimitOrder
-    | undefined;
+  spotOrder?: SpotLimitOrder | undefined;
   /** Updated derivative market order */
-  derivativeOrder?:
-    | DerivativeLimitOrder
-    | undefined;
+  derivativeOrder?: DerivativeLimitOrder | undefined;
   /** Executed orders update type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -531,13 +511,9 @@ export interface DerivativeLimitOrder {
 
 export interface OrderHistoryResult {
   /** Spot order history */
-  spotOrderHistory?:
-    | SpotOrderHistory
-    | undefined;
+  spotOrderHistory?: SpotOrderHistory | undefined;
   /** Derivative order history */
-  derivativeOrderHistory?:
-    | DerivativeOrderHistory
-    | undefined;
+  derivativeOrderHistory?: DerivativeOrderHistory | undefined;
   /** Order update type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -626,9 +602,7 @@ export interface DerivativeOrderHistory {
 
 export interface FundingPaymentResult {
   /** Funding payments of the account */
-  fundingPayments:
-    | FundingPayment
-    | undefined;
+  fundingPayments: FundingPayment | undefined;
   /** Funding payments type */
   operationType: string;
   /** Operation timestamp in UNIX millis. */
@@ -651,7 +625,10 @@ function createBasePortfolioRequest(): PortfolioRequest {
 }
 
 export const PortfolioRequest: MessageFns<PortfolioRequest> = {
-  encode(message: PortfolioRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PortfolioRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
@@ -659,7 +636,8 @@ export const PortfolioRequest: MessageFns<PortfolioRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PortfolioRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePortfolioRequest();
     while (reader.pos < end) {
@@ -687,8 +665,8 @@ export const PortfolioRequest: MessageFns<PortfolioRequest> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -700,10 +678,14 @@ export const PortfolioRequest: MessageFns<PortfolioRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PortfolioRequest>, I>>(base?: I): PortfolioRequest {
+  create<I extends Exact<DeepPartial<PortfolioRequest>, I>>(
+    base?: I,
+  ): PortfolioRequest {
     return PortfolioRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PortfolioRequest>, I>>(object: I): PortfolioRequest {
+  fromPartial<I extends Exact<DeepPartial<PortfolioRequest>, I>>(
+    object: I,
+  ): PortfolioRequest {
     const message = createBasePortfolioRequest();
     message.accountAddress = object.accountAddress ?? "";
     return message;
@@ -715,15 +697,22 @@ function createBasePortfolioResponse(): PortfolioResponse {
 }
 
 export const PortfolioResponse: MessageFns<PortfolioResponse> = {
-  encode(message: PortfolioResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PortfolioResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.portfolio !== undefined) {
-      AccountPortfolio.encode(message.portfolio, writer.uint32(10).fork()).join();
+      AccountPortfolio.encode(
+        message.portfolio,
+        writer.uint32(10).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PortfolioResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePortfolioResponse();
     while (reader.pos < end) {
@@ -747,7 +736,11 @@ export const PortfolioResponse: MessageFns<PortfolioResponse> = {
   },
 
   fromJSON(object: any): PortfolioResponse {
-    return { portfolio: isSet(object.portfolio) ? AccountPortfolio.fromJSON(object.portfolio) : undefined };
+    return {
+      portfolio: isSet(object.portfolio)
+        ? AccountPortfolio.fromJSON(object.portfolio)
+        : undefined,
+    };
   },
 
   toJSON(message: PortfolioResponse): unknown {
@@ -758,24 +751,38 @@ export const PortfolioResponse: MessageFns<PortfolioResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PortfolioResponse>, I>>(base?: I): PortfolioResponse {
+  create<I extends Exact<DeepPartial<PortfolioResponse>, I>>(
+    base?: I,
+  ): PortfolioResponse {
     return PortfolioResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PortfolioResponse>, I>>(object: I): PortfolioResponse {
+  fromPartial<I extends Exact<DeepPartial<PortfolioResponse>, I>>(
+    object: I,
+  ): PortfolioResponse {
     const message = createBasePortfolioResponse();
-    message.portfolio = (object.portfolio !== undefined && object.portfolio !== null)
-      ? AccountPortfolio.fromPartial(object.portfolio)
-      : undefined;
+    message.portfolio =
+      object.portfolio !== undefined && object.portfolio !== null
+        ? AccountPortfolio.fromPartial(object.portfolio)
+        : undefined;
     return message;
   },
 };
 
 function createBaseAccountPortfolio(): AccountPortfolio {
-  return { portfolioValue: "", availableBalance: "", lockedBalance: "", unrealizedPnl: "", subaccounts: [] };
+  return {
+    portfolioValue: "",
+    availableBalance: "",
+    lockedBalance: "",
+    unrealizedPnl: "",
+    subaccounts: [],
+  };
 }
 
 export const AccountPortfolio: MessageFns<AccountPortfolio> = {
-  encode(message: AccountPortfolio, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AccountPortfolio,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.portfolioValue !== "") {
       writer.uint32(10).string(message.portfolioValue);
     }
@@ -795,7 +802,8 @@ export const AccountPortfolio: MessageFns<AccountPortfolio> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): AccountPortfolio {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountPortfolio();
     while (reader.pos < end) {
@@ -838,7 +846,9 @@ export const AccountPortfolio: MessageFns<AccountPortfolio> = {
             break;
           }
 
-          message.subaccounts.push(SubaccountPortfolio.decode(reader, reader.uint32()));
+          message.subaccounts.push(
+            SubaccountPortfolio.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -855,23 +865,23 @@ export const AccountPortfolio: MessageFns<AccountPortfolio> = {
       portfolioValue: isSet(object.portfolioValue)
         ? globalThis.String(object.portfolioValue)
         : isSet(object.portfolio_value)
-        ? globalThis.String(object.portfolio_value)
-        : "",
+          ? globalThis.String(object.portfolio_value)
+          : "",
       availableBalance: isSet(object.availableBalance)
         ? globalThis.String(object.availableBalance)
         : isSet(object.available_balance)
-        ? globalThis.String(object.available_balance)
-        : "",
+          ? globalThis.String(object.available_balance)
+          : "",
       lockedBalance: isSet(object.lockedBalance)
         ? globalThis.String(object.lockedBalance)
         : isSet(object.locked_balance)
-        ? globalThis.String(object.locked_balance)
-        : "",
+          ? globalThis.String(object.locked_balance)
+          : "",
       unrealizedPnl: isSet(object.unrealizedPnl)
         ? globalThis.String(object.unrealizedPnl)
         : isSet(object.unrealized_pnl)
-        ? globalThis.String(object.unrealized_pnl)
-        : "",
+          ? globalThis.String(object.unrealized_pnl)
+          : "",
       subaccounts: globalThis.Array.isArray(object?.subaccounts)
         ? object.subaccounts.map((e: any) => SubaccountPortfolio.fromJSON(e))
         : [],
@@ -893,31 +903,46 @@ export const AccountPortfolio: MessageFns<AccountPortfolio> = {
       obj.unrealizedPnl = message.unrealizedPnl;
     }
     if (message.subaccounts?.length) {
-      obj.subaccounts = message.subaccounts.map((e) => SubaccountPortfolio.toJSON(e));
+      obj.subaccounts = message.subaccounts.map((e) =>
+        SubaccountPortfolio.toJSON(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<AccountPortfolio>, I>>(base?: I): AccountPortfolio {
+  create<I extends Exact<DeepPartial<AccountPortfolio>, I>>(
+    base?: I,
+  ): AccountPortfolio {
     return AccountPortfolio.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AccountPortfolio>, I>>(object: I): AccountPortfolio {
+  fromPartial<I extends Exact<DeepPartial<AccountPortfolio>, I>>(
+    object: I,
+  ): AccountPortfolio {
     const message = createBaseAccountPortfolio();
     message.portfolioValue = object.portfolioValue ?? "";
     message.availableBalance = object.availableBalance ?? "";
     message.lockedBalance = object.lockedBalance ?? "";
     message.unrealizedPnl = object.unrealizedPnl ?? "";
-    message.subaccounts = object.subaccounts?.map((e) => SubaccountPortfolio.fromPartial(e)) || [];
+    message.subaccounts =
+      object.subaccounts?.map((e) => SubaccountPortfolio.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseSubaccountPortfolio(): SubaccountPortfolio {
-  return { subaccountId: "", availableBalance: "", lockedBalance: "", unrealizedPnl: "" };
+  return {
+    subaccountId: "",
+    availableBalance: "",
+    lockedBalance: "",
+    unrealizedPnl: "",
+  };
 }
 
 export const SubaccountPortfolio: MessageFns<SubaccountPortfolio> = {
-  encode(message: SubaccountPortfolio, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SubaccountPortfolio,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -933,8 +958,12 @@ export const SubaccountPortfolio: MessageFns<SubaccountPortfolio> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountPortfolio {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SubaccountPortfolio {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubaccountPortfolio();
     while (reader.pos < end) {
@@ -986,23 +1015,23 @@ export const SubaccountPortfolio: MessageFns<SubaccountPortfolio> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       availableBalance: isSet(object.availableBalance)
         ? globalThis.String(object.availableBalance)
         : isSet(object.available_balance)
-        ? globalThis.String(object.available_balance)
-        : "",
+          ? globalThis.String(object.available_balance)
+          : "",
       lockedBalance: isSet(object.lockedBalance)
         ? globalThis.String(object.lockedBalance)
         : isSet(object.locked_balance)
-        ? globalThis.String(object.locked_balance)
-        : "",
+          ? globalThis.String(object.locked_balance)
+          : "",
       unrealizedPnl: isSet(object.unrealizedPnl)
         ? globalThis.String(object.unrealizedPnl)
         : isSet(object.unrealized_pnl)
-        ? globalThis.String(object.unrealized_pnl)
-        : "",
+          ? globalThis.String(object.unrealized_pnl)
+          : "",
     };
   },
 
@@ -1023,10 +1052,14 @@ export const SubaccountPortfolio: MessageFns<SubaccountPortfolio> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SubaccountPortfolio>, I>>(base?: I): SubaccountPortfolio {
+  create<I extends Exact<DeepPartial<SubaccountPortfolio>, I>>(
+    base?: I,
+  ): SubaccountPortfolio {
     return SubaccountPortfolio.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SubaccountPortfolio>, I>>(object: I): SubaccountPortfolio {
+  fromPartial<I extends Exact<DeepPartial<SubaccountPortfolio>, I>>(
+    object: I,
+  ): SubaccountPortfolio {
     const message = createBaseSubaccountPortfolio();
     message.subaccountId = object.subaccountId ?? "";
     message.availableBalance = object.availableBalance ?? "";
@@ -1041,7 +1074,10 @@ function createBaseOrderStatesRequest(): OrderStatesRequest {
 }
 
 export const OrderStatesRequest: MessageFns<OrderStatesRequest> = {
-  encode(message: OrderStatesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderStatesRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.spotOrderHashes) {
       writer.uint32(10).string(v!);
     }
@@ -1051,8 +1087,12 @@ export const OrderStatesRequest: MessageFns<OrderStatesRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OrderStatesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OrderStatesRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderStatesRequest();
     while (reader.pos < end) {
@@ -1088,13 +1128,15 @@ export const OrderStatesRequest: MessageFns<OrderStatesRequest> = {
       spotOrderHashes: globalThis.Array.isArray(object?.spotOrderHashes)
         ? object.spotOrderHashes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.spot_order_hashes)
-        ? object.spot_order_hashes.map((e: any) => globalThis.String(e))
-        : [],
-      derivativeOrderHashes: globalThis.Array.isArray(object?.derivativeOrderHashes)
+          ? object.spot_order_hashes.map((e: any) => globalThis.String(e))
+          : [],
+      derivativeOrderHashes: globalThis.Array.isArray(
+        object?.derivativeOrderHashes,
+      )
         ? object.derivativeOrderHashes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.derivative_order_hashes)
-        ? object.derivative_order_hashes.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.derivative_order_hashes.map((e: any) => globalThis.String(e))
+          : [],
     };
   },
 
@@ -1109,13 +1151,18 @@ export const OrderStatesRequest: MessageFns<OrderStatesRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrderStatesRequest>, I>>(base?: I): OrderStatesRequest {
+  create<I extends Exact<DeepPartial<OrderStatesRequest>, I>>(
+    base?: I,
+  ): OrderStatesRequest {
     return OrderStatesRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderStatesRequest>, I>>(object: I): OrderStatesRequest {
+  fromPartial<I extends Exact<DeepPartial<OrderStatesRequest>, I>>(
+    object: I,
+  ): OrderStatesRequest {
     const message = createBaseOrderStatesRequest();
     message.spotOrderHashes = object.spotOrderHashes?.map((e) => e) || [];
-    message.derivativeOrderHashes = object.derivativeOrderHashes?.map((e) => e) || [];
+    message.derivativeOrderHashes =
+      object.derivativeOrderHashes?.map((e) => e) || [];
     return message;
   },
 };
@@ -1125,7 +1172,10 @@ function createBaseOrderStatesResponse(): OrderStatesResponse {
 }
 
 export const OrderStatesResponse: MessageFns<OrderStatesResponse> = {
-  encode(message: OrderStatesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderStatesResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.spotOrderStates) {
       OrderStateRecord.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -1135,8 +1185,12 @@ export const OrderStatesResponse: MessageFns<OrderStatesResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OrderStatesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OrderStatesResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderStatesResponse();
     while (reader.pos < end) {
@@ -1147,7 +1201,9 @@ export const OrderStatesResponse: MessageFns<OrderStatesResponse> = {
             break;
           }
 
-          message.spotOrderStates.push(OrderStateRecord.decode(reader, reader.uint32()));
+          message.spotOrderStates.push(
+            OrderStateRecord.decode(reader, reader.uint32()),
+          );
           continue;
         }
         case 2: {
@@ -1155,7 +1211,9 @@ export const OrderStatesResponse: MessageFns<OrderStatesResponse> = {
             break;
           }
 
-          message.derivativeOrderStates.push(OrderStateRecord.decode(reader, reader.uint32()));
+          message.derivativeOrderStates.push(
+            OrderStateRecord.decode(reader, reader.uint32()),
+          );
           continue;
         }
       }
@@ -1172,34 +1230,54 @@ export const OrderStatesResponse: MessageFns<OrderStatesResponse> = {
       spotOrderStates: globalThis.Array.isArray(object?.spotOrderStates)
         ? object.spotOrderStates.map((e: any) => OrderStateRecord.fromJSON(e))
         : globalThis.Array.isArray(object?.spot_order_states)
-        ? object.spot_order_states.map((e: any) => OrderStateRecord.fromJSON(e))
-        : [],
-      derivativeOrderStates: globalThis.Array.isArray(object?.derivativeOrderStates)
-        ? object.derivativeOrderStates.map((e: any) => OrderStateRecord.fromJSON(e))
+          ? object.spot_order_states.map((e: any) =>
+              OrderStateRecord.fromJSON(e),
+            )
+          : [],
+      derivativeOrderStates: globalThis.Array.isArray(
+        object?.derivativeOrderStates,
+      )
+        ? object.derivativeOrderStates.map((e: any) =>
+            OrderStateRecord.fromJSON(e),
+          )
         : globalThis.Array.isArray(object?.derivative_order_states)
-        ? object.derivative_order_states.map((e: any) => OrderStateRecord.fromJSON(e))
-        : [],
+          ? object.derivative_order_states.map((e: any) =>
+              OrderStateRecord.fromJSON(e),
+            )
+          : [],
     };
   },
 
   toJSON(message: OrderStatesResponse): unknown {
     const obj: any = {};
     if (message.spotOrderStates?.length) {
-      obj.spotOrderStates = message.spotOrderStates.map((e) => OrderStateRecord.toJSON(e));
+      obj.spotOrderStates = message.spotOrderStates.map((e) =>
+        OrderStateRecord.toJSON(e),
+      );
     }
     if (message.derivativeOrderStates?.length) {
-      obj.derivativeOrderStates = message.derivativeOrderStates.map((e) => OrderStateRecord.toJSON(e));
+      obj.derivativeOrderStates = message.derivativeOrderStates.map((e) =>
+        OrderStateRecord.toJSON(e),
+      );
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrderStatesResponse>, I>>(base?: I): OrderStatesResponse {
+  create<I extends Exact<DeepPartial<OrderStatesResponse>, I>>(
+    base?: I,
+  ): OrderStatesResponse {
     return OrderStatesResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderStatesResponse>, I>>(object: I): OrderStatesResponse {
+  fromPartial<I extends Exact<DeepPartial<OrderStatesResponse>, I>>(
+    object: I,
+  ): OrderStatesResponse {
     const message = createBaseOrderStatesResponse();
-    message.spotOrderStates = object.spotOrderStates?.map((e) => OrderStateRecord.fromPartial(e)) || [];
-    message.derivativeOrderStates = object.derivativeOrderStates?.map((e) => OrderStateRecord.fromPartial(e)) || [];
+    message.spotOrderStates =
+      object.spotOrderStates?.map((e) => OrderStateRecord.fromPartial(e)) || [];
+    message.derivativeOrderStates =
+      object.derivativeOrderStates?.map((e) =>
+        OrderStateRecord.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -1222,7 +1300,10 @@ function createBaseOrderStateRecord(): OrderStateRecord {
 }
 
 export const OrderStateRecord: MessageFns<OrderStateRecord> = {
-  encode(message: OrderStateRecord, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderStateRecord,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderHash !== "") {
       writer.uint32(10).string(message.orderHash);
     }
@@ -1263,7 +1344,8 @@ export const OrderStateRecord: MessageFns<OrderStateRecord> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): OrderStateRecord {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderStateRecord();
     while (reader.pos < end) {
@@ -1379,49 +1461,49 @@ export const OrderStateRecord: MessageFns<OrderStateRecord> = {
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       orderType: isSet(object.orderType)
         ? globalThis.String(object.orderType)
         : isSet(object.order_type)
-        ? globalThis.String(object.order_type)
-        : "",
+          ? globalThis.String(object.order_type)
+          : "",
       orderSide: isSet(object.orderSide)
         ? globalThis.String(object.orderSide)
         : isSet(object.order_side)
-        ? globalThis.String(object.order_side)
-        : "",
+          ? globalThis.String(object.order_side)
+          : "",
       state: isSet(object.state) ? globalThis.String(object.state) : "",
       quantityFilled: isSet(object.quantityFilled)
         ? globalThis.String(object.quantityFilled)
         : isSet(object.quantity_filled)
-        ? globalThis.String(object.quantity_filled)
-        : "",
+          ? globalThis.String(object.quantity_filled)
+          : "",
       quantityRemaining: isSet(object.quantityRemaining)
         ? globalThis.String(object.quantityRemaining)
         : isSet(object.quantity_remaining)
-        ? globalThis.String(object.quantity_remaining)
-        : "",
+          ? globalThis.String(object.quantity_remaining)
+          : "",
       createdAt: isSet(object.createdAt)
         ? globalThis.Number(object.createdAt)
         : isSet(object.created_at)
-        ? globalThis.Number(object.created_at)
-        : 0,
+          ? globalThis.Number(object.created_at)
+          : 0,
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
       price: isSet(object.price) ? globalThis.String(object.price) : "",
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
     };
@@ -1468,10 +1550,14 @@ export const OrderStateRecord: MessageFns<OrderStateRecord> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrderStateRecord>, I>>(base?: I): OrderStateRecord {
+  create<I extends Exact<DeepPartial<OrderStateRecord>, I>>(
+    base?: I,
+  ): OrderStateRecord {
     return OrderStateRecord.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderStateRecord>, I>>(object: I): OrderStateRecord {
+  fromPartial<I extends Exact<DeepPartial<OrderStateRecord>, I>>(
+    object: I,
+  ): OrderStateRecord {
     const message = createBaseOrderStateRecord();
     message.orderHash = object.orderHash ?? "";
     message.subaccountId = object.subaccountId ?? "";
@@ -1494,15 +1580,22 @@ function createBaseSubaccountsListRequest(): SubaccountsListRequest {
 }
 
 export const SubaccountsListRequest: MessageFns<SubaccountsListRequest> = {
-  encode(message: SubaccountsListRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SubaccountsListRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountsListRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SubaccountsListRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubaccountsListRequest();
     while (reader.pos < end) {
@@ -1530,8 +1623,8 @@ export const SubaccountsListRequest: MessageFns<SubaccountsListRequest> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -1543,10 +1636,14 @@ export const SubaccountsListRequest: MessageFns<SubaccountsListRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SubaccountsListRequest>, I>>(base?: I): SubaccountsListRequest {
+  create<I extends Exact<DeepPartial<SubaccountsListRequest>, I>>(
+    base?: I,
+  ): SubaccountsListRequest {
     return SubaccountsListRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SubaccountsListRequest>, I>>(object: I): SubaccountsListRequest {
+  fromPartial<I extends Exact<DeepPartial<SubaccountsListRequest>, I>>(
+    object: I,
+  ): SubaccountsListRequest {
     const message = createBaseSubaccountsListRequest();
     message.accountAddress = object.accountAddress ?? "";
     return message;
@@ -1558,15 +1655,22 @@ function createBaseSubaccountsListResponse(): SubaccountsListResponse {
 }
 
 export const SubaccountsListResponse: MessageFns<SubaccountsListResponse> = {
-  encode(message: SubaccountsListResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SubaccountsListResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.subaccounts) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountsListResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SubaccountsListResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubaccountsListResponse();
     while (reader.pos < end) {
@@ -1605,10 +1709,14 @@ export const SubaccountsListResponse: MessageFns<SubaccountsListResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SubaccountsListResponse>, I>>(base?: I): SubaccountsListResponse {
+  create<I extends Exact<DeepPartial<SubaccountsListResponse>, I>>(
+    base?: I,
+  ): SubaccountsListResponse {
     return SubaccountsListResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SubaccountsListResponse>, I>>(object: I): SubaccountsListResponse {
+  fromPartial<I extends Exact<DeepPartial<SubaccountsListResponse>, I>>(
+    object: I,
+  ): SubaccountsListResponse {
     const message = createBaseSubaccountsListResponse();
     message.subaccounts = object.subaccounts?.map((e) => e) || [];
     return message;
@@ -1619,154 +1727,187 @@ function createBaseSubaccountBalancesListRequest(): SubaccountBalancesListReques
   return { subaccountId: "", denoms: [] };
 }
 
-export const SubaccountBalancesListRequest: MessageFns<SubaccountBalancesListRequest> = {
-  encode(message: SubaccountBalancesListRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.denoms) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountBalancesListRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountBalancesListRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.denoms.push(reader.string());
-          continue;
-        }
+export const SubaccountBalancesListRequest: MessageFns<SubaccountBalancesListRequest> =
+  {
+    encode(
+      message: SubaccountBalancesListRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.denoms) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): SubaccountBalancesListRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      denoms: globalThis.Array.isArray(object?.denoms) ? object.denoms.map((e: any) => globalThis.String(e)) : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountBalancesListRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountBalancesListRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SubaccountBalancesListRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.denoms?.length) {
-      obj.denoms = message.denoms;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SubaccountBalancesListRequest>, I>>(base?: I): SubaccountBalancesListRequest {
-    return SubaccountBalancesListRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountBalancesListRequest>, I>>(
-    object: I,
-  ): SubaccountBalancesListRequest {
-    const message = createBaseSubaccountBalancesListRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.denoms = object.denoms?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.denoms.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountBalancesListRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        denoms: globalThis.Array.isArray(object?.denoms)
+          ? object.denoms.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
+
+    toJSON(message: SubaccountBalancesListRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.denoms?.length) {
+        obj.denoms = message.denoms;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SubaccountBalancesListRequest>, I>>(
+      base?: I,
+    ): SubaccountBalancesListRequest {
+      return SubaccountBalancesListRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SubaccountBalancesListRequest>, I>>(
+      object: I,
+    ): SubaccountBalancesListRequest {
+      const message = createBaseSubaccountBalancesListRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.denoms = object.denoms?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseSubaccountBalancesListResponse(): SubaccountBalancesListResponse {
   return { balances: [] };
 }
 
-export const SubaccountBalancesListResponse: MessageFns<SubaccountBalancesListResponse> = {
-  encode(message: SubaccountBalancesListResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.balances) {
-      SubaccountBalance.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const SubaccountBalancesListResponse: MessageFns<SubaccountBalancesListResponse> =
+  {
+    encode(
+      message: SubaccountBalancesListResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.balances) {
+        SubaccountBalance.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountBalancesListResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountBalancesListResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountBalancesListResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountBalancesListResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.balances.push(
+              SubaccountBalance.decode(reader, reader.uint32()),
+            );
+            continue;
           }
-
-          message.balances.push(SubaccountBalance.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountBalancesListResponse {
+      return {
+        balances: globalThis.Array.isArray(object?.balances)
+          ? object.balances.map((e: any) => SubaccountBalance.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: SubaccountBalancesListResponse): unknown {
+      const obj: any = {};
+      if (message.balances?.length) {
+        obj.balances = message.balances.map((e) => SubaccountBalance.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): SubaccountBalancesListResponse {
-    return {
-      balances: globalThis.Array.isArray(object?.balances)
-        ? object.balances.map((e: any) => SubaccountBalance.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: SubaccountBalancesListResponse): unknown {
-    const obj: any = {};
-    if (message.balances?.length) {
-      obj.balances = message.balances.map((e) => SubaccountBalance.toJSON(e));
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<SubaccountBalancesListResponse>, I>>(base?: I): SubaccountBalancesListResponse {
-    return SubaccountBalancesListResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountBalancesListResponse>, I>>(
-    object: I,
-  ): SubaccountBalancesListResponse {
-    const message = createBaseSubaccountBalancesListResponse();
-    message.balances = object.balances?.map((e) => SubaccountBalance.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<SubaccountBalancesListResponse>, I>>(
+      base?: I,
+    ): SubaccountBalancesListResponse {
+      return SubaccountBalancesListResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<SubaccountBalancesListResponse>, I>,
+    >(object: I): SubaccountBalancesListResponse {
+      const message = createBaseSubaccountBalancesListResponse();
+      message.balances =
+        object.balances?.map((e) => SubaccountBalance.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseSubaccountBalance(): SubaccountBalance {
-  return { subaccountId: "", accountAddress: "", denom: "", deposit: undefined };
+  return {
+    subaccountId: "",
+    accountAddress: "",
+    denom: "",
+    deposit: undefined,
+  };
 }
 
 export const SubaccountBalance: MessageFns<SubaccountBalance> = {
-  encode(message: SubaccountBalance, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SubaccountBalance,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -1777,13 +1918,17 @@ export const SubaccountBalance: MessageFns<SubaccountBalance> = {
       writer.uint32(26).string(message.denom);
     }
     if (message.deposit !== undefined) {
-      SubaccountDeposit.encode(message.deposit, writer.uint32(34).fork()).join();
+      SubaccountDeposit.encode(
+        message.deposit,
+        writer.uint32(34).fork(),
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SubaccountBalance {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubaccountBalance();
     while (reader.pos < end) {
@@ -1835,15 +1980,17 @@ export const SubaccountBalance: MessageFns<SubaccountBalance> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
       denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
-      deposit: isSet(object.deposit) ? SubaccountDeposit.fromJSON(object.deposit) : undefined,
+      deposit: isSet(object.deposit)
+        ? SubaccountDeposit.fromJSON(object.deposit)
+        : undefined,
     };
   },
 
@@ -1864,27 +2011,40 @@ export const SubaccountBalance: MessageFns<SubaccountBalance> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SubaccountBalance>, I>>(base?: I): SubaccountBalance {
+  create<I extends Exact<DeepPartial<SubaccountBalance>, I>>(
+    base?: I,
+  ): SubaccountBalance {
     return SubaccountBalance.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SubaccountBalance>, I>>(object: I): SubaccountBalance {
+  fromPartial<I extends Exact<DeepPartial<SubaccountBalance>, I>>(
+    object: I,
+  ): SubaccountBalance {
     const message = createBaseSubaccountBalance();
     message.subaccountId = object.subaccountId ?? "";
     message.accountAddress = object.accountAddress ?? "";
     message.denom = object.denom ?? "";
-    message.deposit = (object.deposit !== undefined && object.deposit !== null)
-      ? SubaccountDeposit.fromPartial(object.deposit)
-      : undefined;
+    message.deposit =
+      object.deposit !== undefined && object.deposit !== null
+        ? SubaccountDeposit.fromPartial(object.deposit)
+        : undefined;
     return message;
   },
 };
 
 function createBaseSubaccountDeposit(): SubaccountDeposit {
-  return { totalBalance: "", availableBalance: "", totalBalanceUsd: "", availableBalanceUsd: "" };
+  return {
+    totalBalance: "",
+    availableBalance: "",
+    totalBalanceUsd: "",
+    availableBalanceUsd: "",
+  };
 }
 
 export const SubaccountDeposit: MessageFns<SubaccountDeposit> = {
-  encode(message: SubaccountDeposit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SubaccountDeposit,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.totalBalance !== "") {
       writer.uint32(10).string(message.totalBalance);
     }
@@ -1901,7 +2061,8 @@ export const SubaccountDeposit: MessageFns<SubaccountDeposit> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SubaccountDeposit {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubaccountDeposit();
     while (reader.pos < end) {
@@ -1953,23 +2114,23 @@ export const SubaccountDeposit: MessageFns<SubaccountDeposit> = {
       totalBalance: isSet(object.totalBalance)
         ? globalThis.String(object.totalBalance)
         : isSet(object.total_balance)
-        ? globalThis.String(object.total_balance)
-        : "",
+          ? globalThis.String(object.total_balance)
+          : "",
       availableBalance: isSet(object.availableBalance)
         ? globalThis.String(object.availableBalance)
         : isSet(object.available_balance)
-        ? globalThis.String(object.available_balance)
-        : "",
+          ? globalThis.String(object.available_balance)
+          : "",
       totalBalanceUsd: isSet(object.totalBalanceUsd)
         ? globalThis.String(object.totalBalanceUsd)
         : isSet(object.total_balance_usd)
-        ? globalThis.String(object.total_balance_usd)
-        : "",
+          ? globalThis.String(object.total_balance_usd)
+          : "",
       availableBalanceUsd: isSet(object.availableBalanceUsd)
         ? globalThis.String(object.availableBalanceUsd)
         : isSet(object.available_balance_usd)
-        ? globalThis.String(object.available_balance_usd)
-        : "",
+          ? globalThis.String(object.available_balance_usd)
+          : "",
     };
   },
 
@@ -1990,10 +2151,14 @@ export const SubaccountDeposit: MessageFns<SubaccountDeposit> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SubaccountDeposit>, I>>(base?: I): SubaccountDeposit {
+  create<I extends Exact<DeepPartial<SubaccountDeposit>, I>>(
+    base?: I,
+  ): SubaccountDeposit {
     return SubaccountDeposit.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SubaccountDeposit>, I>>(object: I): SubaccountDeposit {
+  fromPartial<I extends Exact<DeepPartial<SubaccountDeposit>, I>>(
+    object: I,
+  ): SubaccountDeposit {
     const message = createBaseSubaccountDeposit();
     message.totalBalance = object.totalBalance ?? "";
     message.availableBalance = object.availableBalance ?? "";
@@ -2007,318 +2172,382 @@ function createBaseSubaccountBalanceEndpointRequest(): SubaccountBalanceEndpoint
   return { subaccountId: "", denom: "" };
 }
 
-export const SubaccountBalanceEndpointRequest: MessageFns<SubaccountBalanceEndpointRequest> = {
-  encode(message: SubaccountBalanceEndpointRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    if (message.denom !== "") {
-      writer.uint32(18).string(message.denom);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountBalanceEndpointRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountBalanceEndpointRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.denom = reader.string();
-          continue;
-        }
+export const SubaccountBalanceEndpointRequest: MessageFns<SubaccountBalanceEndpointRequest> =
+  {
+    encode(
+      message: SubaccountBalanceEndpointRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.denom !== "") {
+        writer.uint32(18).string(message.denom);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): SubaccountBalanceEndpointRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountBalanceEndpointRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountBalanceEndpointRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SubaccountBalanceEndpointRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.denom !== "") {
-      obj.denom = message.denom;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SubaccountBalanceEndpointRequest>, I>>(
-    base?: I,
-  ): SubaccountBalanceEndpointRequest {
-    return SubaccountBalanceEndpointRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountBalanceEndpointRequest>, I>>(
-    object: I,
-  ): SubaccountBalanceEndpointRequest {
-    const message = createBaseSubaccountBalanceEndpointRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.denom = object.denom ?? "";
-    return message;
-  },
-};
+            message.denom = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountBalanceEndpointRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+      };
+    },
+
+    toJSON(message: SubaccountBalanceEndpointRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.denom !== "") {
+        obj.denom = message.denom;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SubaccountBalanceEndpointRequest>, I>>(
+      base?: I,
+    ): SubaccountBalanceEndpointRequest {
+      return SubaccountBalanceEndpointRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<SubaccountBalanceEndpointRequest>, I>,
+    >(object: I): SubaccountBalanceEndpointRequest {
+      const message = createBaseSubaccountBalanceEndpointRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.denom = object.denom ?? "";
+      return message;
+    },
+  };
 
 function createBaseSubaccountBalanceEndpointResponse(): SubaccountBalanceEndpointResponse {
   return { balance: undefined };
 }
 
-export const SubaccountBalanceEndpointResponse: MessageFns<SubaccountBalanceEndpointResponse> = {
-  encode(message: SubaccountBalanceEndpointResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.balance !== undefined) {
-      SubaccountBalance.encode(message.balance, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const SubaccountBalanceEndpointResponse: MessageFns<SubaccountBalanceEndpointResponse> =
+  {
+    encode(
+      message: SubaccountBalanceEndpointResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.balance !== undefined) {
+        SubaccountBalance.encode(
+          message.balance,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountBalanceEndpointResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountBalanceEndpointResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountBalanceEndpointResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountBalanceEndpointResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.balance = SubaccountBalance.decode(reader, reader.uint32());
+            continue;
           }
-
-          message.balance = SubaccountBalance.decode(reader, reader.uint32());
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountBalanceEndpointResponse {
+      return {
+        balance: isSet(object.balance)
+          ? SubaccountBalance.fromJSON(object.balance)
+          : undefined,
+      };
+    },
+
+    toJSON(message: SubaccountBalanceEndpointResponse): unknown {
+      const obj: any = {};
+      if (message.balance !== undefined) {
+        obj.balance = SubaccountBalance.toJSON(message.balance);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): SubaccountBalanceEndpointResponse {
-    return { balance: isSet(object.balance) ? SubaccountBalance.fromJSON(object.balance) : undefined };
-  },
-
-  toJSON(message: SubaccountBalanceEndpointResponse): unknown {
-    const obj: any = {};
-    if (message.balance !== undefined) {
-      obj.balance = SubaccountBalance.toJSON(message.balance);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<SubaccountBalanceEndpointResponse>, I>>(
-    base?: I,
-  ): SubaccountBalanceEndpointResponse {
-    return SubaccountBalanceEndpointResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountBalanceEndpointResponse>, I>>(
-    object: I,
-  ): SubaccountBalanceEndpointResponse {
-    const message = createBaseSubaccountBalanceEndpointResponse();
-    message.balance = (object.balance !== undefined && object.balance !== null)
-      ? SubaccountBalance.fromPartial(object.balance)
-      : undefined;
-    return message;
-  },
-};
+    create<I extends Exact<DeepPartial<SubaccountBalanceEndpointResponse>, I>>(
+      base?: I,
+    ): SubaccountBalanceEndpointResponse {
+      return SubaccountBalanceEndpointResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<SubaccountBalanceEndpointResponse>, I>,
+    >(object: I): SubaccountBalanceEndpointResponse {
+      const message = createBaseSubaccountBalanceEndpointResponse();
+      message.balance =
+        object.balance !== undefined && object.balance !== null
+          ? SubaccountBalance.fromPartial(object.balance)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseStreamSubaccountBalanceRequest(): StreamSubaccountBalanceRequest {
   return { subaccountId: "", denoms: [] };
 }
 
-export const StreamSubaccountBalanceRequest: MessageFns<StreamSubaccountBalanceRequest> = {
-  encode(message: StreamSubaccountBalanceRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    for (const v of message.denoms) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamSubaccountBalanceRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamSubaccountBalanceRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.denoms.push(reader.string());
-          continue;
-        }
+export const StreamSubaccountBalanceRequest: MessageFns<StreamSubaccountBalanceRequest> =
+  {
+    encode(
+      message: StreamSubaccountBalanceRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.denoms) {
+        writer.uint32(18).string(v!);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): StreamSubaccountBalanceRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      denoms: globalThis.Array.isArray(object?.denoms) ? object.denoms.map((e: any) => globalThis.String(e)) : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamSubaccountBalanceRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamSubaccountBalanceRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamSubaccountBalanceRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.denoms?.length) {
-      obj.denoms = message.denoms;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamSubaccountBalanceRequest>, I>>(base?: I): StreamSubaccountBalanceRequest {
-    return StreamSubaccountBalanceRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamSubaccountBalanceRequest>, I>>(
-    object: I,
-  ): StreamSubaccountBalanceRequest {
-    const message = createBaseStreamSubaccountBalanceRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.denoms = object.denoms?.map((e) => e) || [];
-    return message;
-  },
-};
+            message.denoms.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamSubaccountBalanceRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        denoms: globalThis.Array.isArray(object?.denoms)
+          ? object.denoms.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
+
+    toJSON(message: StreamSubaccountBalanceRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.denoms?.length) {
+        obj.denoms = message.denoms;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamSubaccountBalanceRequest>, I>>(
+      base?: I,
+    ): StreamSubaccountBalanceRequest {
+      return StreamSubaccountBalanceRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<StreamSubaccountBalanceRequest>, I>,
+    >(object: I): StreamSubaccountBalanceRequest {
+      const message = createBaseStreamSubaccountBalanceRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.denoms = object.denoms?.map((e) => e) || [];
+      return message;
+    },
+  };
 
 function createBaseStreamSubaccountBalanceResponse(): StreamSubaccountBalanceResponse {
   return { balance: undefined, timestamp: 0 };
 }
 
-export const StreamSubaccountBalanceResponse: MessageFns<StreamSubaccountBalanceResponse> = {
-  encode(message: StreamSubaccountBalanceResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.balance !== undefined) {
-      SubaccountBalance.encode(message.balance, writer.uint32(10).fork()).join();
-    }
-    if (message.timestamp !== 0) {
-      writer.uint32(16).sint64(message.timestamp);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamSubaccountBalanceResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamSubaccountBalanceResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.balance = SubaccountBalance.decode(reader, reader.uint32());
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.timestamp = longToNumber(reader.sint64());
-          continue;
-        }
+export const StreamSubaccountBalanceResponse: MessageFns<StreamSubaccountBalanceResponse> =
+  {
+    encode(
+      message: StreamSubaccountBalanceResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.balance !== undefined) {
+        SubaccountBalance.encode(
+          message.balance,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.timestamp !== 0) {
+        writer.uint32(16).sint64(message.timestamp);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): StreamSubaccountBalanceResponse {
-    return {
-      balance: isSet(object.balance) ? SubaccountBalance.fromJSON(object.balance) : undefined,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamSubaccountBalanceResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamSubaccountBalanceResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamSubaccountBalanceResponse): unknown {
-    const obj: any = {};
-    if (message.balance !== undefined) {
-      obj.balance = SubaccountBalance.toJSON(message.balance);
-    }
-    if (message.timestamp !== 0) {
-      obj.timestamp = Math.round(message.timestamp);
-    }
-    return obj;
-  },
+            message.balance = SubaccountBalance.decode(reader, reader.uint32());
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamSubaccountBalanceResponse>, I>>(base?: I): StreamSubaccountBalanceResponse {
-    return StreamSubaccountBalanceResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamSubaccountBalanceResponse>, I>>(
-    object: I,
-  ): StreamSubaccountBalanceResponse {
-    const message = createBaseStreamSubaccountBalanceResponse();
-    message.balance = (object.balance !== undefined && object.balance !== null)
-      ? SubaccountBalance.fromPartial(object.balance)
-      : undefined;
-    message.timestamp = object.timestamp ?? 0;
-    return message;
-  },
-};
+            message.timestamp = longToNumber(reader.sint64());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamSubaccountBalanceResponse {
+      return {
+        balance: isSet(object.balance)
+          ? SubaccountBalance.fromJSON(object.balance)
+          : undefined,
+        timestamp: isSet(object.timestamp)
+          ? globalThis.Number(object.timestamp)
+          : 0,
+      };
+    },
+
+    toJSON(message: StreamSubaccountBalanceResponse): unknown {
+      const obj: any = {};
+      if (message.balance !== undefined) {
+        obj.balance = SubaccountBalance.toJSON(message.balance);
+      }
+      if (message.timestamp !== 0) {
+        obj.timestamp = Math.round(message.timestamp);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamSubaccountBalanceResponse>, I>>(
+      base?: I,
+    ): StreamSubaccountBalanceResponse {
+      return StreamSubaccountBalanceResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<StreamSubaccountBalanceResponse>, I>,
+    >(object: I): StreamSubaccountBalanceResponse {
+      const message = createBaseStreamSubaccountBalanceResponse();
+      message.balance =
+        object.balance !== undefined && object.balance !== null
+          ? SubaccountBalance.fromPartial(object.balance)
+          : undefined;
+      message.timestamp = object.timestamp ?? 0;
+      return message;
+    },
+  };
 
 function createBaseSubaccountHistoryRequest(): SubaccountHistoryRequest {
-  return { subaccountId: "", denom: "", transferTypes: [], skip: 0, limit: 0, endTime: 0 };
+  return {
+    subaccountId: "",
+    denom: "",
+    transferTypes: [],
+    skip: 0,
+    limit: 0,
+    endTime: 0,
+  };
 }
 
 export const SubaccountHistoryRequest: MessageFns<SubaccountHistoryRequest> = {
-  encode(message: SubaccountHistoryRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SubaccountHistoryRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.subaccountId !== "") {
       writer.uint32(10).string(message.subaccountId);
     }
@@ -2340,8 +2569,12 @@ export const SubaccountHistoryRequest: MessageFns<SubaccountHistoryRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountHistoryRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SubaccountHistoryRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubaccountHistoryRequest();
     while (reader.pos < end) {
@@ -2409,21 +2642,21 @@ export const SubaccountHistoryRequest: MessageFns<SubaccountHistoryRequest> = {
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
       transferTypes: globalThis.Array.isArray(object?.transferTypes)
         ? object.transferTypes.map((e: any) => globalThis.String(e))
         : globalThis.Array.isArray(object?.transfer_types)
-        ? object.transfer_types.map((e: any) => globalThis.String(e))
-        : [],
+          ? object.transfer_types.map((e: any) => globalThis.String(e))
+          : [],
       skip: isSet(object.skip) ? globalThis.Number(object.skip) : 0,
       limit: isSet(object.limit) ? globalThis.Number(object.limit) : 0,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
-        ? globalThis.Number(object.end_time)
-        : 0,
+          ? globalThis.Number(object.end_time)
+          : 0,
     };
   },
 
@@ -2450,10 +2683,14 @@ export const SubaccountHistoryRequest: MessageFns<SubaccountHistoryRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SubaccountHistoryRequest>, I>>(base?: I): SubaccountHistoryRequest {
+  create<I extends Exact<DeepPartial<SubaccountHistoryRequest>, I>>(
+    base?: I,
+  ): SubaccountHistoryRequest {
     return SubaccountHistoryRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SubaccountHistoryRequest>, I>>(object: I): SubaccountHistoryRequest {
+  fromPartial<I extends Exact<DeepPartial<SubaccountHistoryRequest>, I>>(
+    object: I,
+  ): SubaccountHistoryRequest {
     const message = createBaseSubaccountHistoryRequest();
     message.subaccountId = object.subaccountId ?? "";
     message.denom = object.denom ?? "";
@@ -2469,81 +2706,105 @@ function createBaseSubaccountHistoryResponse(): SubaccountHistoryResponse {
   return { transfers: [], paging: undefined };
 }
 
-export const SubaccountHistoryResponse: MessageFns<SubaccountHistoryResponse> = {
-  encode(message: SubaccountHistoryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.transfers) {
-      SubaccountBalanceTransfer.encode(v!, writer.uint32(10).fork()).join();
-    }
-    if (message.paging !== undefined) {
-      Paging.encode(message.paging, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountHistoryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountHistoryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.transfers.push(SubaccountBalanceTransfer.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.paging = Paging.decode(reader, reader.uint32());
-          continue;
-        }
+export const SubaccountHistoryResponse: MessageFns<SubaccountHistoryResponse> =
+  {
+    encode(
+      message: SubaccountHistoryResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.transfers) {
+        SubaccountBalanceTransfer.encode(v!, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.paging !== undefined) {
+        Paging.encode(message.paging, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): SubaccountHistoryResponse {
-    return {
-      transfers: globalThis.Array.isArray(object?.transfers)
-        ? object.transfers.map((e: any) => SubaccountBalanceTransfer.fromJSON(e))
-        : [],
-      paging: isSet(object.paging) ? Paging.fromJSON(object.paging) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountHistoryResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountHistoryResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SubaccountHistoryResponse): unknown {
-    const obj: any = {};
-    if (message.transfers?.length) {
-      obj.transfers = message.transfers.map((e) => SubaccountBalanceTransfer.toJSON(e));
-    }
-    if (message.paging !== undefined) {
-      obj.paging = Paging.toJSON(message.paging);
-    }
-    return obj;
-  },
+            message.transfers.push(
+              SubaccountBalanceTransfer.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SubaccountHistoryResponse>, I>>(base?: I): SubaccountHistoryResponse {
-    return SubaccountHistoryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountHistoryResponse>, I>>(object: I): SubaccountHistoryResponse {
-    const message = createBaseSubaccountHistoryResponse();
-    message.transfers = object.transfers?.map((e) => SubaccountBalanceTransfer.fromPartial(e)) || [];
-    message.paging = (object.paging !== undefined && object.paging !== null)
-      ? Paging.fromPartial(object.paging)
-      : undefined;
-    return message;
-  },
-};
+            message.paging = Paging.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountHistoryResponse {
+      return {
+        transfers: globalThis.Array.isArray(object?.transfers)
+          ? object.transfers.map((e: any) =>
+              SubaccountBalanceTransfer.fromJSON(e),
+            )
+          : [],
+        paging: isSet(object.paging)
+          ? Paging.fromJSON(object.paging)
+          : undefined,
+      };
+    },
+
+    toJSON(message: SubaccountHistoryResponse): unknown {
+      const obj: any = {};
+      if (message.transfers?.length) {
+        obj.transfers = message.transfers.map((e) =>
+          SubaccountBalanceTransfer.toJSON(e),
+        );
+      }
+      if (message.paging !== undefined) {
+        obj.paging = Paging.toJSON(message.paging);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SubaccountHistoryResponse>, I>>(
+      base?: I,
+    ): SubaccountHistoryResponse {
+      return SubaccountHistoryResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SubaccountHistoryResponse>, I>>(
+      object: I,
+    ): SubaccountHistoryResponse {
+      const message = createBaseSubaccountHistoryResponse();
+      message.transfers =
+        object.transfers?.map((e) =>
+          SubaccountBalanceTransfer.fromPartial(e),
+        ) || [];
+      message.paging =
+        object.paging !== undefined && object.paging !== null
+          ? Paging.fromPartial(object.paging)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseSubaccountBalanceTransfer(): SubaccountBalanceTransfer {
   return {
@@ -2557,190 +2818,208 @@ function createBaseSubaccountBalanceTransfer(): SubaccountBalanceTransfer {
   };
 }
 
-export const SubaccountBalanceTransfer: MessageFns<SubaccountBalanceTransfer> = {
-  encode(message: SubaccountBalanceTransfer, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.transferType !== "") {
-      writer.uint32(10).string(message.transferType);
-    }
-    if (message.srcSubaccountId !== "") {
-      writer.uint32(18).string(message.srcSubaccountId);
-    }
-    if (message.srcAccountAddress !== "") {
-      writer.uint32(26).string(message.srcAccountAddress);
-    }
-    if (message.dstSubaccountId !== "") {
-      writer.uint32(34).string(message.dstSubaccountId);
-    }
-    if (message.dstAccountAddress !== "") {
-      writer.uint32(42).string(message.dstAccountAddress);
-    }
-    if (message.amount !== undefined) {
-      CosmosCoin.encode(message.amount, writer.uint32(50).fork()).join();
-    }
-    if (message.executedAt !== 0) {
-      writer.uint32(56).sint64(message.executedAt);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountBalanceTransfer {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountBalanceTransfer();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.transferType = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.srcSubaccountId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.srcAccountAddress = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.dstSubaccountId = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.dstAccountAddress = reader.string();
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.amount = CosmosCoin.decode(reader, reader.uint32());
-          continue;
-        }
-        case 7: {
-          if (tag !== 56) {
-            break;
-          }
-
-          message.executedAt = longToNumber(reader.sint64());
-          continue;
-        }
+export const SubaccountBalanceTransfer: MessageFns<SubaccountBalanceTransfer> =
+  {
+    encode(
+      message: SubaccountBalanceTransfer,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.transferType !== "") {
+        writer.uint32(10).string(message.transferType);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.srcSubaccountId !== "") {
+        writer.uint32(18).string(message.srcSubaccountId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.srcAccountAddress !== "") {
+        writer.uint32(26).string(message.srcAccountAddress);
+      }
+      if (message.dstSubaccountId !== "") {
+        writer.uint32(34).string(message.dstSubaccountId);
+      }
+      if (message.dstAccountAddress !== "") {
+        writer.uint32(42).string(message.dstAccountAddress);
+      }
+      if (message.amount !== undefined) {
+        CosmosCoin.encode(message.amount, writer.uint32(50).fork()).join();
+      }
+      if (message.executedAt !== 0) {
+        writer.uint32(56).sint64(message.executedAt);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): SubaccountBalanceTransfer {
-    return {
-      transferType: isSet(object.transferType)
-        ? globalThis.String(object.transferType)
-        : isSet(object.transfer_type)
-        ? globalThis.String(object.transfer_type)
-        : "",
-      srcSubaccountId: isSet(object.srcSubaccountId)
-        ? globalThis.String(object.srcSubaccountId)
-        : isSet(object.src_subaccount_id)
-        ? globalThis.String(object.src_subaccount_id)
-        : "",
-      srcAccountAddress: isSet(object.srcAccountAddress)
-        ? globalThis.String(object.srcAccountAddress)
-        : isSet(object.src_account_address)
-        ? globalThis.String(object.src_account_address)
-        : "",
-      dstSubaccountId: isSet(object.dstSubaccountId)
-        ? globalThis.String(object.dstSubaccountId)
-        : isSet(object.dst_subaccount_id)
-        ? globalThis.String(object.dst_subaccount_id)
-        : "",
-      dstAccountAddress: isSet(object.dstAccountAddress)
-        ? globalThis.String(object.dstAccountAddress)
-        : isSet(object.dst_account_address)
-        ? globalThis.String(object.dst_account_address)
-        : "",
-      amount: isSet(object.amount) ? CosmosCoin.fromJSON(object.amount) : undefined,
-      executedAt: isSet(object.executedAt)
-        ? globalThis.Number(object.executedAt)
-        : isSet(object.executed_at)
-        ? globalThis.Number(object.executed_at)
-        : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountBalanceTransfer {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountBalanceTransfer();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SubaccountBalanceTransfer): unknown {
-    const obj: any = {};
-    if (message.transferType !== "") {
-      obj.transferType = message.transferType;
-    }
-    if (message.srcSubaccountId !== "") {
-      obj.srcSubaccountId = message.srcSubaccountId;
-    }
-    if (message.srcAccountAddress !== "") {
-      obj.srcAccountAddress = message.srcAccountAddress;
-    }
-    if (message.dstSubaccountId !== "") {
-      obj.dstSubaccountId = message.dstSubaccountId;
-    }
-    if (message.dstAccountAddress !== "") {
-      obj.dstAccountAddress = message.dstAccountAddress;
-    }
-    if (message.amount !== undefined) {
-      obj.amount = CosmosCoin.toJSON(message.amount);
-    }
-    if (message.executedAt !== 0) {
-      obj.executedAt = Math.round(message.executedAt);
-    }
-    return obj;
-  },
+            message.transferType = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SubaccountBalanceTransfer>, I>>(base?: I): SubaccountBalanceTransfer {
-    return SubaccountBalanceTransfer.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountBalanceTransfer>, I>>(object: I): SubaccountBalanceTransfer {
-    const message = createBaseSubaccountBalanceTransfer();
-    message.transferType = object.transferType ?? "";
-    message.srcSubaccountId = object.srcSubaccountId ?? "";
-    message.srcAccountAddress = object.srcAccountAddress ?? "";
-    message.dstSubaccountId = object.dstSubaccountId ?? "";
-    message.dstAccountAddress = object.dstAccountAddress ?? "";
-    message.amount = (object.amount !== undefined && object.amount !== null)
-      ? CosmosCoin.fromPartial(object.amount)
-      : undefined;
-    message.executedAt = object.executedAt ?? 0;
-    return message;
-  },
-};
+            message.srcSubaccountId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.srcAccountAddress = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.dstSubaccountId = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.dstAccountAddress = reader.string();
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.amount = CosmosCoin.decode(reader, reader.uint32());
+            continue;
+          }
+          case 7: {
+            if (tag !== 56) {
+              break;
+            }
+
+            message.executedAt = longToNumber(reader.sint64());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountBalanceTransfer {
+      return {
+        transferType: isSet(object.transferType)
+          ? globalThis.String(object.transferType)
+          : isSet(object.transfer_type)
+            ? globalThis.String(object.transfer_type)
+            : "",
+        srcSubaccountId: isSet(object.srcSubaccountId)
+          ? globalThis.String(object.srcSubaccountId)
+          : isSet(object.src_subaccount_id)
+            ? globalThis.String(object.src_subaccount_id)
+            : "",
+        srcAccountAddress: isSet(object.srcAccountAddress)
+          ? globalThis.String(object.srcAccountAddress)
+          : isSet(object.src_account_address)
+            ? globalThis.String(object.src_account_address)
+            : "",
+        dstSubaccountId: isSet(object.dstSubaccountId)
+          ? globalThis.String(object.dstSubaccountId)
+          : isSet(object.dst_subaccount_id)
+            ? globalThis.String(object.dst_subaccount_id)
+            : "",
+        dstAccountAddress: isSet(object.dstAccountAddress)
+          ? globalThis.String(object.dstAccountAddress)
+          : isSet(object.dst_account_address)
+            ? globalThis.String(object.dst_account_address)
+            : "",
+        amount: isSet(object.amount)
+          ? CosmosCoin.fromJSON(object.amount)
+          : undefined,
+        executedAt: isSet(object.executedAt)
+          ? globalThis.Number(object.executedAt)
+          : isSet(object.executed_at)
+            ? globalThis.Number(object.executed_at)
+            : 0,
+      };
+    },
+
+    toJSON(message: SubaccountBalanceTransfer): unknown {
+      const obj: any = {};
+      if (message.transferType !== "") {
+        obj.transferType = message.transferType;
+      }
+      if (message.srcSubaccountId !== "") {
+        obj.srcSubaccountId = message.srcSubaccountId;
+      }
+      if (message.srcAccountAddress !== "") {
+        obj.srcAccountAddress = message.srcAccountAddress;
+      }
+      if (message.dstSubaccountId !== "") {
+        obj.dstSubaccountId = message.dstSubaccountId;
+      }
+      if (message.dstAccountAddress !== "") {
+        obj.dstAccountAddress = message.dstAccountAddress;
+      }
+      if (message.amount !== undefined) {
+        obj.amount = CosmosCoin.toJSON(message.amount);
+      }
+      if (message.executedAt !== 0) {
+        obj.executedAt = Math.round(message.executedAt);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SubaccountBalanceTransfer>, I>>(
+      base?: I,
+    ): SubaccountBalanceTransfer {
+      return SubaccountBalanceTransfer.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SubaccountBalanceTransfer>, I>>(
+      object: I,
+    ): SubaccountBalanceTransfer {
+      const message = createBaseSubaccountBalanceTransfer();
+      message.transferType = object.transferType ?? "";
+      message.srcSubaccountId = object.srcSubaccountId ?? "";
+      message.srcAccountAddress = object.srcAccountAddress ?? "";
+      message.dstSubaccountId = object.dstSubaccountId ?? "";
+      message.dstAccountAddress = object.dstAccountAddress ?? "";
+      message.amount =
+        object.amount !== undefined && object.amount !== null
+          ? CosmosCoin.fromPartial(object.amount)
+          : undefined;
+      message.executedAt = object.executedAt ?? 0;
+      return message;
+    },
+  };
 
 function createBaseCosmosCoin(): CosmosCoin {
   return { denom: "", amount: "" };
 }
 
 export const CosmosCoin: MessageFns<CosmosCoin> = {
-  encode(message: CosmosCoin, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CosmosCoin,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -2751,7 +3030,8 @@ export const CosmosCoin: MessageFns<CosmosCoin> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): CosmosCoin {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCosmosCoin();
     while (reader.pos < end) {
@@ -2803,7 +3083,9 @@ export const CosmosCoin: MessageFns<CosmosCoin> = {
   create<I extends Exact<DeepPartial<CosmosCoin>, I>>(base?: I): CosmosCoin {
     return CosmosCoin.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CosmosCoin>, I>>(object: I): CosmosCoin {
+  fromPartial<I extends Exact<DeepPartial<CosmosCoin>, I>>(
+    object: I,
+  ): CosmosCoin {
     const message = createBaseCosmosCoin();
     message.denom = object.denom ?? "";
     message.amount = object.amount ?? "";
@@ -2816,7 +3098,10 @@ function createBasePaging(): Paging {
 }
 
 export const Paging: MessageFns<Paging> = {
-  encode(message: Paging, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Paging,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.total !== 0) {
       writer.uint32(8).sint64(message.total);
     }
@@ -2836,7 +3121,8 @@ export const Paging: MessageFns<Paging> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Paging {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePaging();
     while (reader.pos < end) {
@@ -2899,9 +3185,11 @@ export const Paging: MessageFns<Paging> = {
       countBySubaccount: isSet(object.countBySubaccount)
         ? globalThis.Number(object.countBySubaccount)
         : isSet(object.count_by_subaccount)
-        ? globalThis.Number(object.count_by_subaccount)
-        : 0,
-      next: globalThis.Array.isArray(object?.next) ? object.next.map((e: any) => globalThis.String(e)) : [],
+          ? globalThis.Number(object.count_by_subaccount)
+          : 0,
+      next: globalThis.Array.isArray(object?.next)
+        ? object.next.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -2943,200 +3231,223 @@ function createBaseSubaccountOrderSummaryRequest(): SubaccountOrderSummaryReques
   return { subaccountId: "", marketId: "", orderDirection: "" };
 }
 
-export const SubaccountOrderSummaryRequest: MessageFns<SubaccountOrderSummaryRequest> = {
-  encode(message: SubaccountOrderSummaryRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountId !== "") {
-      writer.uint32(10).string(message.subaccountId);
-    }
-    if (message.marketId !== "") {
-      writer.uint32(18).string(message.marketId);
-    }
-    if (message.orderDirection !== "") {
-      writer.uint32(26).string(message.orderDirection);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountOrderSummaryRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountOrderSummaryRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.marketId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.orderDirection = reader.string();
-          continue;
-        }
+export const SubaccountOrderSummaryRequest: MessageFns<SubaccountOrderSummaryRequest> =
+  {
+    encode(
+      message: SubaccountOrderSummaryRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountId !== "") {
+        writer.uint32(10).string(message.subaccountId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.marketId !== "") {
+        writer.uint32(18).string(message.marketId);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.orderDirection !== "") {
+        writer.uint32(26).string(message.orderDirection);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): SubaccountOrderSummaryRequest {
-    return {
-      subaccountId: isSet(object.subaccountId)
-        ? globalThis.String(object.subaccountId)
-        : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
-      marketId: isSet(object.marketId)
-        ? globalThis.String(object.marketId)
-        : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
-      orderDirection: isSet(object.orderDirection)
-        ? globalThis.String(object.orderDirection)
-        : isSet(object.order_direction)
-        ? globalThis.String(object.order_direction)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountOrderSummaryRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountOrderSummaryRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: SubaccountOrderSummaryRequest): unknown {
-    const obj: any = {};
-    if (message.subaccountId !== "") {
-      obj.subaccountId = message.subaccountId;
-    }
-    if (message.marketId !== "") {
-      obj.marketId = message.marketId;
-    }
-    if (message.orderDirection !== "") {
-      obj.orderDirection = message.orderDirection;
-    }
-    return obj;
-  },
+            message.subaccountId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SubaccountOrderSummaryRequest>, I>>(base?: I): SubaccountOrderSummaryRequest {
-    return SubaccountOrderSummaryRequest.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountOrderSummaryRequest>, I>>(
-    object: I,
-  ): SubaccountOrderSummaryRequest {
-    const message = createBaseSubaccountOrderSummaryRequest();
-    message.subaccountId = object.subaccountId ?? "";
-    message.marketId = object.marketId ?? "";
-    message.orderDirection = object.orderDirection ?? "";
-    return message;
-  },
-};
+            message.marketId = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.orderDirection = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountOrderSummaryRequest {
+      return {
+        subaccountId: isSet(object.subaccountId)
+          ? globalThis.String(object.subaccountId)
+          : isSet(object.subaccount_id)
+            ? globalThis.String(object.subaccount_id)
+            : "",
+        marketId: isSet(object.marketId)
+          ? globalThis.String(object.marketId)
+          : isSet(object.market_id)
+            ? globalThis.String(object.market_id)
+            : "",
+        orderDirection: isSet(object.orderDirection)
+          ? globalThis.String(object.orderDirection)
+          : isSet(object.order_direction)
+            ? globalThis.String(object.order_direction)
+            : "",
+      };
+    },
+
+    toJSON(message: SubaccountOrderSummaryRequest): unknown {
+      const obj: any = {};
+      if (message.subaccountId !== "") {
+        obj.subaccountId = message.subaccountId;
+      }
+      if (message.marketId !== "") {
+        obj.marketId = message.marketId;
+      }
+      if (message.orderDirection !== "") {
+        obj.orderDirection = message.orderDirection;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SubaccountOrderSummaryRequest>, I>>(
+      base?: I,
+    ): SubaccountOrderSummaryRequest {
+      return SubaccountOrderSummaryRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SubaccountOrderSummaryRequest>, I>>(
+      object: I,
+    ): SubaccountOrderSummaryRequest {
+      const message = createBaseSubaccountOrderSummaryRequest();
+      message.subaccountId = object.subaccountId ?? "";
+      message.marketId = object.marketId ?? "";
+      message.orderDirection = object.orderDirection ?? "";
+      return message;
+    },
+  };
 
 function createBaseSubaccountOrderSummaryResponse(): SubaccountOrderSummaryResponse {
   return { spotOrdersTotal: 0, derivativeOrdersTotal: 0 };
 }
 
-export const SubaccountOrderSummaryResponse: MessageFns<SubaccountOrderSummaryResponse> = {
-  encode(message: SubaccountOrderSummaryResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.spotOrdersTotal !== 0) {
-      writer.uint32(8).sint64(message.spotOrdersTotal);
-    }
-    if (message.derivativeOrdersTotal !== 0) {
-      writer.uint32(16).sint64(message.derivativeOrdersTotal);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountOrderSummaryResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSubaccountOrderSummaryResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.spotOrdersTotal = longToNumber(reader.sint64());
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.derivativeOrdersTotal = longToNumber(reader.sint64());
-          continue;
-        }
+export const SubaccountOrderSummaryResponse: MessageFns<SubaccountOrderSummaryResponse> =
+  {
+    encode(
+      message: SubaccountOrderSummaryResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.spotOrdersTotal !== 0) {
+        writer.uint32(8).sint64(message.spotOrdersTotal);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.derivativeOrdersTotal !== 0) {
+        writer.uint32(16).sint64(message.derivativeOrdersTotal);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): SubaccountOrderSummaryResponse {
-    return {
-      spotOrdersTotal: isSet(object.spotOrdersTotal)
-        ? globalThis.Number(object.spotOrdersTotal)
-        : isSet(object.spot_orders_total)
-        ? globalThis.Number(object.spot_orders_total)
-        : 0,
-      derivativeOrdersTotal: isSet(object.derivativeOrdersTotal)
-        ? globalThis.Number(object.derivativeOrdersTotal)
-        : isSet(object.derivative_orders_total)
-        ? globalThis.Number(object.derivative_orders_total)
-        : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SubaccountOrderSummaryResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSubaccountOrderSummaryResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
 
-  toJSON(message: SubaccountOrderSummaryResponse): unknown {
-    const obj: any = {};
-    if (message.spotOrdersTotal !== 0) {
-      obj.spotOrdersTotal = Math.round(message.spotOrdersTotal);
-    }
-    if (message.derivativeOrdersTotal !== 0) {
-      obj.derivativeOrdersTotal = Math.round(message.derivativeOrdersTotal);
-    }
-    return obj;
-  },
+            message.spotOrdersTotal = longToNumber(reader.sint64());
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<SubaccountOrderSummaryResponse>, I>>(base?: I): SubaccountOrderSummaryResponse {
-    return SubaccountOrderSummaryResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<SubaccountOrderSummaryResponse>, I>>(
-    object: I,
-  ): SubaccountOrderSummaryResponse {
-    const message = createBaseSubaccountOrderSummaryResponse();
-    message.spotOrdersTotal = object.spotOrdersTotal ?? 0;
-    message.derivativeOrdersTotal = object.derivativeOrdersTotal ?? 0;
-    return message;
-  },
-};
+            message.derivativeOrdersTotal = longToNumber(reader.sint64());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): SubaccountOrderSummaryResponse {
+      return {
+        spotOrdersTotal: isSet(object.spotOrdersTotal)
+          ? globalThis.Number(object.spotOrdersTotal)
+          : isSet(object.spot_orders_total)
+            ? globalThis.Number(object.spot_orders_total)
+            : 0,
+        derivativeOrdersTotal: isSet(object.derivativeOrdersTotal)
+          ? globalThis.Number(object.derivativeOrdersTotal)
+          : isSet(object.derivative_orders_total)
+            ? globalThis.Number(object.derivative_orders_total)
+            : 0,
+      };
+    },
+
+    toJSON(message: SubaccountOrderSummaryResponse): unknown {
+      const obj: any = {};
+      if (message.spotOrdersTotal !== 0) {
+        obj.spotOrdersTotal = Math.round(message.spotOrdersTotal);
+      }
+      if (message.derivativeOrdersTotal !== 0) {
+        obj.derivativeOrdersTotal = Math.round(message.derivativeOrdersTotal);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<SubaccountOrderSummaryResponse>, I>>(
+      base?: I,
+    ): SubaccountOrderSummaryResponse {
+      return SubaccountOrderSummaryResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<SubaccountOrderSummaryResponse>, I>,
+    >(object: I): SubaccountOrderSummaryResponse {
+      const message = createBaseSubaccountOrderSummaryResponse();
+      message.spotOrdersTotal = object.spotOrdersTotal ?? 0;
+      message.derivativeOrdersTotal = object.derivativeOrdersTotal ?? 0;
+      return message;
+    },
+  };
 
 function createBaseRewardsRequest(): RewardsRequest {
   return { epoch: 0, accountAddress: "" };
 }
 
 export const RewardsRequest: MessageFns<RewardsRequest> = {
-  encode(message: RewardsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: RewardsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.epoch !== 0) {
       writer.uint32(8).sint64(message.epoch);
     }
@@ -3147,7 +3458,8 @@ export const RewardsRequest: MessageFns<RewardsRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): RewardsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRewardsRequest();
     while (reader.pos < end) {
@@ -3184,8 +3496,8 @@ export const RewardsRequest: MessageFns<RewardsRequest> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -3200,10 +3512,14 @@ export const RewardsRequest: MessageFns<RewardsRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<RewardsRequest>, I>>(base?: I): RewardsRequest {
+  create<I extends Exact<DeepPartial<RewardsRequest>, I>>(
+    base?: I,
+  ): RewardsRequest {
     return RewardsRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<RewardsRequest>, I>>(object: I): RewardsRequest {
+  fromPartial<I extends Exact<DeepPartial<RewardsRequest>, I>>(
+    object: I,
+  ): RewardsRequest {
     const message = createBaseRewardsRequest();
     message.epoch = object.epoch ?? 0;
     message.accountAddress = object.accountAddress ?? "";
@@ -3216,7 +3532,10 @@ function createBaseRewardsResponse(): RewardsResponse {
 }
 
 export const RewardsResponse: MessageFns<RewardsResponse> = {
-  encode(message: RewardsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: RewardsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.rewards) {
       Reward.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -3224,7 +3543,8 @@ export const RewardsResponse: MessageFns<RewardsResponse> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): RewardsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRewardsResponse();
     while (reader.pos < end) {
@@ -3249,7 +3569,9 @@ export const RewardsResponse: MessageFns<RewardsResponse> = {
 
   fromJSON(object: any): RewardsResponse {
     return {
-      rewards: globalThis.Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Reward.fromJSON(e)) : [],
+      rewards: globalThis.Array.isArray(object?.rewards)
+        ? object.rewards.map((e: any) => Reward.fromJSON(e))
+        : [],
     };
   },
 
@@ -3261,10 +3583,14 @@ export const RewardsResponse: MessageFns<RewardsResponse> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<RewardsResponse>, I>>(base?: I): RewardsResponse {
+  create<I extends Exact<DeepPartial<RewardsResponse>, I>>(
+    base?: I,
+  ): RewardsResponse {
     return RewardsResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<RewardsResponse>, I>>(object: I): RewardsResponse {
+  fromPartial<I extends Exact<DeepPartial<RewardsResponse>, I>>(
+    object: I,
+  ): RewardsResponse {
     const message = createBaseRewardsResponse();
     message.rewards = object.rewards?.map((e) => Reward.fromPartial(e)) || [];
     return message;
@@ -3276,7 +3602,10 @@ function createBaseReward(): Reward {
 }
 
 export const Reward: MessageFns<Reward> = {
-  encode(message: Reward, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Reward,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
@@ -3290,7 +3619,8 @@ export const Reward: MessageFns<Reward> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Reward {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReward();
     while (reader.pos < end) {
@@ -3334,14 +3664,16 @@ export const Reward: MessageFns<Reward> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
-      rewards: globalThis.Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromJSON(e)) : [],
+          ? globalThis.String(object.account_address)
+          : "",
+      rewards: globalThis.Array.isArray(object?.rewards)
+        ? object.rewards.map((e: any) => Coin.fromJSON(e))
+        : [],
       distributedAt: isSet(object.distributedAt)
         ? globalThis.Number(object.distributedAt)
         : isSet(object.distributed_at)
-        ? globalThis.Number(object.distributed_at)
-        : 0,
+          ? globalThis.Number(object.distributed_at)
+          : 0,
     };
   },
 
@@ -3376,7 +3708,10 @@ function createBaseCoin(): Coin {
 }
 
 export const Coin: MessageFns<Coin> = {
-  encode(message: Coin, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Coin,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -3390,7 +3725,8 @@ export const Coin: MessageFns<Coin> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Coin {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCoin();
     while (reader.pos < end) {
@@ -3436,8 +3772,8 @@ export const Coin: MessageFns<Coin> = {
       usdValue: isSet(object.usdValue)
         ? globalThis.String(object.usdValue)
         : isSet(object.usd_value)
-        ? globalThis.String(object.usd_value)
-        : "",
+          ? globalThis.String(object.usd_value)
+          : "",
     };
   },
 
@@ -3472,15 +3808,22 @@ function createBaseStreamAccountDataRequest(): StreamAccountDataRequest {
 }
 
 export const StreamAccountDataRequest: MessageFns<StreamAccountDataRequest> = {
-  encode(message: StreamAccountDataRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamAccountDataRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamAccountDataRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): StreamAccountDataRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamAccountDataRequest();
     while (reader.pos < end) {
@@ -3508,8 +3851,8 @@ export const StreamAccountDataRequest: MessageFns<StreamAccountDataRequest> = {
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -3521,10 +3864,14 @@ export const StreamAccountDataRequest: MessageFns<StreamAccountDataRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<StreamAccountDataRequest>, I>>(base?: I): StreamAccountDataRequest {
+  create<I extends Exact<DeepPartial<StreamAccountDataRequest>, I>>(
+    base?: I,
+  ): StreamAccountDataRequest {
     return StreamAccountDataRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<StreamAccountDataRequest>, I>>(object: I): StreamAccountDataRequest {
+  fromPartial<I extends Exact<DeepPartial<StreamAccountDataRequest>, I>>(
+    object: I,
+  ): StreamAccountDataRequest {
     const message = createBaseStreamAccountDataRequest();
     message.accountAddress = object.accountAddress ?? "";
     return message;
@@ -3542,174 +3889,230 @@ function createBaseStreamAccountDataResponse(): StreamAccountDataResponse {
   };
 }
 
-export const StreamAccountDataResponse: MessageFns<StreamAccountDataResponse> = {
-  encode(message: StreamAccountDataResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.subaccountBalance !== undefined) {
-      SubaccountBalanceResult.encode(message.subaccountBalance, writer.uint32(10).fork()).join();
-    }
-    if (message.position !== undefined) {
-      PositionsResult.encode(message.position, writer.uint32(18).fork()).join();
-    }
-    if (message.trade !== undefined) {
-      TradeResult.encode(message.trade, writer.uint32(26).fork()).join();
-    }
-    if (message.order !== undefined) {
-      OrderResult.encode(message.order, writer.uint32(34).fork()).join();
-    }
-    if (message.orderHistory !== undefined) {
-      OrderHistoryResult.encode(message.orderHistory, writer.uint32(42).fork()).join();
-    }
-    if (message.fundingPayment !== undefined) {
-      FundingPaymentResult.encode(message.fundingPayment, writer.uint32(50).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): StreamAccountDataResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseStreamAccountDataResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.subaccountBalance = SubaccountBalanceResult.decode(reader, reader.uint32());
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.position = PositionsResult.decode(reader, reader.uint32());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.trade = TradeResult.decode(reader, reader.uint32());
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.order = OrderResult.decode(reader, reader.uint32());
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.orderHistory = OrderHistoryResult.decode(reader, reader.uint32());
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.fundingPayment = FundingPaymentResult.decode(reader, reader.uint32());
-          continue;
-        }
+export const StreamAccountDataResponse: MessageFns<StreamAccountDataResponse> =
+  {
+    encode(
+      message: StreamAccountDataResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.subaccountBalance !== undefined) {
+        SubaccountBalanceResult.encode(
+          message.subaccountBalance,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.position !== undefined) {
+        PositionsResult.encode(
+          message.position,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.trade !== undefined) {
+        TradeResult.encode(message.trade, writer.uint32(26).fork()).join();
+      }
+      if (message.order !== undefined) {
+        OrderResult.encode(message.order, writer.uint32(34).fork()).join();
+      }
+      if (message.orderHistory !== undefined) {
+        OrderHistoryResult.encode(
+          message.orderHistory,
+          writer.uint32(42).fork(),
+        ).join();
+      }
+      if (message.fundingPayment !== undefined) {
+        FundingPaymentResult.encode(
+          message.fundingPayment,
+          writer.uint32(50).fork(),
+        ).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): StreamAccountDataResponse {
-    return {
-      subaccountBalance: isSet(object.subaccountBalance)
-        ? SubaccountBalanceResult.fromJSON(object.subaccountBalance)
-        : isSet(object.subaccount_balance)
-        ? SubaccountBalanceResult.fromJSON(object.subaccount_balance)
-        : undefined,
-      position: isSet(object.position) ? PositionsResult.fromJSON(object.position) : undefined,
-      trade: isSet(object.trade) ? TradeResult.fromJSON(object.trade) : undefined,
-      order: isSet(object.order) ? OrderResult.fromJSON(object.order) : undefined,
-      orderHistory: isSet(object.orderHistory)
-        ? OrderHistoryResult.fromJSON(object.orderHistory)
-        : isSet(object.order_history)
-        ? OrderHistoryResult.fromJSON(object.order_history)
-        : undefined,
-      fundingPayment: isSet(object.fundingPayment)
-        ? FundingPaymentResult.fromJSON(object.fundingPayment)
-        : isSet(object.funding_payment)
-        ? FundingPaymentResult.fromJSON(object.funding_payment)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): StreamAccountDataResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseStreamAccountDataResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: StreamAccountDataResponse): unknown {
-    const obj: any = {};
-    if (message.subaccountBalance !== undefined) {
-      obj.subaccountBalance = SubaccountBalanceResult.toJSON(message.subaccountBalance);
-    }
-    if (message.position !== undefined) {
-      obj.position = PositionsResult.toJSON(message.position);
-    }
-    if (message.trade !== undefined) {
-      obj.trade = TradeResult.toJSON(message.trade);
-    }
-    if (message.order !== undefined) {
-      obj.order = OrderResult.toJSON(message.order);
-    }
-    if (message.orderHistory !== undefined) {
-      obj.orderHistory = OrderHistoryResult.toJSON(message.orderHistory);
-    }
-    if (message.fundingPayment !== undefined) {
-      obj.fundingPayment = FundingPaymentResult.toJSON(message.fundingPayment);
-    }
-    return obj;
-  },
+            message.subaccountBalance = SubaccountBalanceResult.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<StreamAccountDataResponse>, I>>(base?: I): StreamAccountDataResponse {
-    return StreamAccountDataResponse.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<StreamAccountDataResponse>, I>>(object: I): StreamAccountDataResponse {
-    const message = createBaseStreamAccountDataResponse();
-    message.subaccountBalance = (object.subaccountBalance !== undefined && object.subaccountBalance !== null)
-      ? SubaccountBalanceResult.fromPartial(object.subaccountBalance)
-      : undefined;
-    message.position = (object.position !== undefined && object.position !== null)
-      ? PositionsResult.fromPartial(object.position)
-      : undefined;
-    message.trade = (object.trade !== undefined && object.trade !== null)
-      ? TradeResult.fromPartial(object.trade)
-      : undefined;
-    message.order = (object.order !== undefined && object.order !== null)
-      ? OrderResult.fromPartial(object.order)
-      : undefined;
-    message.orderHistory = (object.orderHistory !== undefined && object.orderHistory !== null)
-      ? OrderHistoryResult.fromPartial(object.orderHistory)
-      : undefined;
-    message.fundingPayment = (object.fundingPayment !== undefined && object.fundingPayment !== null)
-      ? FundingPaymentResult.fromPartial(object.fundingPayment)
-      : undefined;
-    return message;
-  },
-};
+            message.position = PositionsResult.decode(reader, reader.uint32());
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.trade = TradeResult.decode(reader, reader.uint32());
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.order = OrderResult.decode(reader, reader.uint32());
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.orderHistory = OrderHistoryResult.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.fundingPayment = FundingPaymentResult.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): StreamAccountDataResponse {
+      return {
+        subaccountBalance: isSet(object.subaccountBalance)
+          ? SubaccountBalanceResult.fromJSON(object.subaccountBalance)
+          : isSet(object.subaccount_balance)
+            ? SubaccountBalanceResult.fromJSON(object.subaccount_balance)
+            : undefined,
+        position: isSet(object.position)
+          ? PositionsResult.fromJSON(object.position)
+          : undefined,
+        trade: isSet(object.trade)
+          ? TradeResult.fromJSON(object.trade)
+          : undefined,
+        order: isSet(object.order)
+          ? OrderResult.fromJSON(object.order)
+          : undefined,
+        orderHistory: isSet(object.orderHistory)
+          ? OrderHistoryResult.fromJSON(object.orderHistory)
+          : isSet(object.order_history)
+            ? OrderHistoryResult.fromJSON(object.order_history)
+            : undefined,
+        fundingPayment: isSet(object.fundingPayment)
+          ? FundingPaymentResult.fromJSON(object.fundingPayment)
+          : isSet(object.funding_payment)
+            ? FundingPaymentResult.fromJSON(object.funding_payment)
+            : undefined,
+      };
+    },
+
+    toJSON(message: StreamAccountDataResponse): unknown {
+      const obj: any = {};
+      if (message.subaccountBalance !== undefined) {
+        obj.subaccountBalance = SubaccountBalanceResult.toJSON(
+          message.subaccountBalance,
+        );
+      }
+      if (message.position !== undefined) {
+        obj.position = PositionsResult.toJSON(message.position);
+      }
+      if (message.trade !== undefined) {
+        obj.trade = TradeResult.toJSON(message.trade);
+      }
+      if (message.order !== undefined) {
+        obj.order = OrderResult.toJSON(message.order);
+      }
+      if (message.orderHistory !== undefined) {
+        obj.orderHistory = OrderHistoryResult.toJSON(message.orderHistory);
+      }
+      if (message.fundingPayment !== undefined) {
+        obj.fundingPayment = FundingPaymentResult.toJSON(
+          message.fundingPayment,
+        );
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<StreamAccountDataResponse>, I>>(
+      base?: I,
+    ): StreamAccountDataResponse {
+      return StreamAccountDataResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<StreamAccountDataResponse>, I>>(
+      object: I,
+    ): StreamAccountDataResponse {
+      const message = createBaseStreamAccountDataResponse();
+      message.subaccountBalance =
+        object.subaccountBalance !== undefined &&
+        object.subaccountBalance !== null
+          ? SubaccountBalanceResult.fromPartial(object.subaccountBalance)
+          : undefined;
+      message.position =
+        object.position !== undefined && object.position !== null
+          ? PositionsResult.fromPartial(object.position)
+          : undefined;
+      message.trade =
+        object.trade !== undefined && object.trade !== null
+          ? TradeResult.fromPartial(object.trade)
+          : undefined;
+      message.order =
+        object.order !== undefined && object.order !== null
+          ? OrderResult.fromPartial(object.order)
+          : undefined;
+      message.orderHistory =
+        object.orderHistory !== undefined && object.orderHistory !== null
+          ? OrderHistoryResult.fromPartial(object.orderHistory)
+          : undefined;
+      message.fundingPayment =
+        object.fundingPayment !== undefined && object.fundingPayment !== null
+          ? FundingPaymentResult.fromPartial(object.fundingPayment)
+          : undefined;
+      return message;
+    },
+  };
 
 function createBaseSubaccountBalanceResult(): SubaccountBalanceResult {
   return { balance: undefined, timestamp: 0 };
 }
 
 export const SubaccountBalanceResult: MessageFns<SubaccountBalanceResult> = {
-  encode(message: SubaccountBalanceResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SubaccountBalanceResult,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.balance !== undefined) {
-      SubaccountBalance.encode(message.balance, writer.uint32(10).fork()).join();
+      SubaccountBalance.encode(
+        message.balance,
+        writer.uint32(10).fork(),
+      ).join();
     }
     if (message.timestamp !== 0) {
       writer.uint32(16).sint64(message.timestamp);
@@ -3717,8 +4120,12 @@ export const SubaccountBalanceResult: MessageFns<SubaccountBalanceResult> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SubaccountBalanceResult {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): SubaccountBalanceResult {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubaccountBalanceResult();
     while (reader.pos < end) {
@@ -3751,8 +4158,12 @@ export const SubaccountBalanceResult: MessageFns<SubaccountBalanceResult> = {
 
   fromJSON(object: any): SubaccountBalanceResult {
     return {
-      balance: isSet(object.balance) ? SubaccountBalance.fromJSON(object.balance) : undefined,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      balance: isSet(object.balance)
+        ? SubaccountBalance.fromJSON(object.balance)
+        : undefined,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -3767,14 +4178,19 @@ export const SubaccountBalanceResult: MessageFns<SubaccountBalanceResult> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SubaccountBalanceResult>, I>>(base?: I): SubaccountBalanceResult {
+  create<I extends Exact<DeepPartial<SubaccountBalanceResult>, I>>(
+    base?: I,
+  ): SubaccountBalanceResult {
     return SubaccountBalanceResult.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SubaccountBalanceResult>, I>>(object: I): SubaccountBalanceResult {
+  fromPartial<I extends Exact<DeepPartial<SubaccountBalanceResult>, I>>(
+    object: I,
+  ): SubaccountBalanceResult {
     const message = createBaseSubaccountBalanceResult();
-    message.balance = (object.balance !== undefined && object.balance !== null)
-      ? SubaccountBalance.fromPartial(object.balance)
-      : undefined;
+    message.balance =
+      object.balance !== undefined && object.balance !== null
+        ? SubaccountBalance.fromPartial(object.balance)
+        : undefined;
     message.timestamp = object.timestamp ?? 0;
     return message;
   },
@@ -3785,7 +4201,10 @@ function createBasePositionsResult(): PositionsResult {
 }
 
 export const PositionsResult: MessageFns<PositionsResult> = {
-  encode(message: PositionsResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PositionsResult,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.position !== undefined) {
       Position.encode(message.position, writer.uint32(10).fork()).join();
     }
@@ -3796,7 +4215,8 @@ export const PositionsResult: MessageFns<PositionsResult> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PositionsResult {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePositionsResult();
     while (reader.pos < end) {
@@ -3829,8 +4249,12 @@ export const PositionsResult: MessageFns<PositionsResult> = {
 
   fromJSON(object: any): PositionsResult {
     return {
-      position: isSet(object.position) ? Position.fromJSON(object.position) : undefined,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      position: isSet(object.position)
+        ? Position.fromJSON(object.position)
+        : undefined,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -3845,14 +4269,19 @@ export const PositionsResult: MessageFns<PositionsResult> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PositionsResult>, I>>(base?: I): PositionsResult {
+  create<I extends Exact<DeepPartial<PositionsResult>, I>>(
+    base?: I,
+  ): PositionsResult {
     return PositionsResult.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PositionsResult>, I>>(object: I): PositionsResult {
+  fromPartial<I extends Exact<DeepPartial<PositionsResult>, I>>(
+    object: I,
+  ): PositionsResult {
     const message = createBasePositionsResult();
-    message.position = (object.position !== undefined && object.position !== null)
-      ? Position.fromPartial(object.position)
-      : undefined;
+    message.position =
+      object.position !== undefined && object.position !== null
+        ? Position.fromPartial(object.position)
+        : undefined;
     message.timestamp = object.timestamp ?? 0;
     return message;
   },
@@ -3877,7 +4306,10 @@ function createBasePosition(): Position {
 }
 
 export const Position: MessageFns<Position> = {
-  encode(message: Position, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Position,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.ticker !== "") {
       writer.uint32(10).string(message.ticker);
     }
@@ -3921,7 +4353,8 @@ export const Position: MessageFns<Position> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Position {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePosition();
     while (reader.pos < end) {
@@ -4046,51 +4479,55 @@ export const Position: MessageFns<Position> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
+          ? globalThis.String(object.subaccount_id)
+          : "",
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
         : "",
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       entryPrice: isSet(object.entryPrice)
         ? globalThis.String(object.entryPrice)
         : isSet(object.entry_price)
-        ? globalThis.String(object.entry_price)
-        : "",
+          ? globalThis.String(object.entry_price)
+          : "",
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
       liquidationPrice: isSet(object.liquidationPrice)
         ? globalThis.String(object.liquidationPrice)
         : isSet(object.liquidation_price)
-        ? globalThis.String(object.liquidation_price)
-        : "",
+          ? globalThis.String(object.liquidation_price)
+          : "",
       markPrice: isSet(object.markPrice)
         ? globalThis.String(object.markPrice)
         : isSet(object.mark_price)
-        ? globalThis.String(object.mark_price)
-        : "",
+          ? globalThis.String(object.mark_price)
+          : "",
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
       createdAt: isSet(object.createdAt)
         ? globalThis.Number(object.createdAt)
         : isSet(object.created_at)
-        ? globalThis.Number(object.created_at)
-        : 0,
+          ? globalThis.Number(object.created_at)
+          : 0,
       fundingLast: isSet(object.fundingLast)
         ? globalThis.String(object.fundingLast)
         : isSet(object.funding_last)
-        ? globalThis.String(object.funding_last)
-        : "",
+          ? globalThis.String(object.funding_last)
+          : "",
       fundingSum: isSet(object.fundingSum)
         ? globalThis.String(object.fundingSum)
         : isSet(object.funding_sum)
-        ? globalThis.String(object.funding_sum)
-        : "",
+          ? globalThis.String(object.funding_sum)
+          : "",
     };
   },
 
@@ -4161,16 +4598,27 @@ export const Position: MessageFns<Position> = {
 };
 
 function createBaseTradeResult(): TradeResult {
-  return { spotTrade: undefined, derivativeTrade: undefined, operationType: "", timestamp: 0 };
+  return {
+    spotTrade: undefined,
+    derivativeTrade: undefined,
+    operationType: "",
+    timestamp: 0,
+  };
 }
 
 export const TradeResult: MessageFns<TradeResult> = {
-  encode(message: TradeResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TradeResult,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.spotTrade !== undefined) {
       SpotTrade.encode(message.spotTrade, writer.uint32(10).fork()).join();
     }
     if (message.derivativeTrade !== undefined) {
-      DerivativeTrade.encode(message.derivativeTrade, writer.uint32(18).fork()).join();
+      DerivativeTrade.encode(
+        message.derivativeTrade,
+        writer.uint32(18).fork(),
+      ).join();
     }
     if (message.operationType !== "") {
       writer.uint32(26).string(message.operationType);
@@ -4182,7 +4630,8 @@ export const TradeResult: MessageFns<TradeResult> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TradeResult {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTradeResult();
     while (reader.pos < end) {
@@ -4201,7 +4650,10 @@ export const TradeResult: MessageFns<TradeResult> = {
             break;
           }
 
-          message.derivativeTrade = DerivativeTrade.decode(reader, reader.uint32());
+          message.derivativeTrade = DerivativeTrade.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 3: {
@@ -4234,19 +4686,21 @@ export const TradeResult: MessageFns<TradeResult> = {
       spotTrade: isSet(object.spotTrade)
         ? SpotTrade.fromJSON(object.spotTrade)
         : isSet(object.spot_trade)
-        ? SpotTrade.fromJSON(object.spot_trade)
-        : undefined,
+          ? SpotTrade.fromJSON(object.spot_trade)
+          : undefined,
       derivativeTrade: isSet(object.derivativeTrade)
         ? DerivativeTrade.fromJSON(object.derivativeTrade)
         : isSet(object.derivative_trade)
-        ? DerivativeTrade.fromJSON(object.derivative_trade)
-        : undefined,
+          ? DerivativeTrade.fromJSON(object.derivative_trade)
+          : undefined,
       operationType: isSet(object.operationType)
         ? globalThis.String(object.operationType)
         : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.operation_type)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -4270,14 +4724,18 @@ export const TradeResult: MessageFns<TradeResult> = {
   create<I extends Exact<DeepPartial<TradeResult>, I>>(base?: I): TradeResult {
     return TradeResult.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TradeResult>, I>>(object: I): TradeResult {
+  fromPartial<I extends Exact<DeepPartial<TradeResult>, I>>(
+    object: I,
+  ): TradeResult {
     const message = createBaseTradeResult();
-    message.spotTrade = (object.spotTrade !== undefined && object.spotTrade !== null)
-      ? SpotTrade.fromPartial(object.spotTrade)
-      : undefined;
-    message.derivativeTrade = (object.derivativeTrade !== undefined && object.derivativeTrade !== null)
-      ? DerivativeTrade.fromPartial(object.derivativeTrade)
-      : undefined;
+    message.spotTrade =
+      object.spotTrade !== undefined && object.spotTrade !== null
+        ? SpotTrade.fromPartial(object.spotTrade)
+        : undefined;
+    message.derivativeTrade =
+      object.derivativeTrade !== undefined && object.derivativeTrade !== null
+        ? DerivativeTrade.fromPartial(object.derivativeTrade)
+        : undefined;
     message.operationType = object.operationType ?? "";
     message.timestamp = object.timestamp ?? 0;
     return message;
@@ -4302,7 +4760,10 @@ function createBaseSpotTrade(): SpotTrade {
 }
 
 export const SpotTrade: MessageFns<SpotTrade> = {
-  encode(message: SpotTrade, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotTrade,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderHash !== "") {
       writer.uint32(10).string(message.orderHash);
     }
@@ -4343,7 +4804,8 @@ export const SpotTrade: MessageFns<SpotTrade> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SpotTrade {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotTrade();
     while (reader.pos < end) {
@@ -4459,50 +4921,52 @@ export const SpotTrade: MessageFns<SpotTrade> = {
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       tradeExecutionType: isSet(object.tradeExecutionType)
         ? globalThis.String(object.tradeExecutionType)
         : isSet(object.trade_execution_type)
-        ? globalThis.String(object.trade_execution_type)
-        : "",
+          ? globalThis.String(object.trade_execution_type)
+          : "",
       tradeDirection: isSet(object.tradeDirection)
         ? globalThis.String(object.tradeDirection)
         : isSet(object.trade_direction)
-        ? globalThis.String(object.trade_direction)
-        : "",
-      price: isSet(object.price) ? PriceLevel.fromJSON(object.price) : undefined,
+          ? globalThis.String(object.trade_direction)
+          : "",
+      price: isSet(object.price)
+        ? PriceLevel.fromJSON(object.price)
+        : undefined,
       fee: isSet(object.fee) ? globalThis.String(object.fee) : "",
       executedAt: isSet(object.executedAt)
         ? globalThis.Number(object.executedAt)
         : isSet(object.executed_at)
-        ? globalThis.Number(object.executed_at)
-        : 0,
+          ? globalThis.Number(object.executed_at)
+          : 0,
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       executionSide: isSet(object.executionSide)
         ? globalThis.String(object.executionSide)
         : isSet(object.execution_side)
-        ? globalThis.String(object.execution_side)
-        : "",
+          ? globalThis.String(object.execution_side)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -4551,16 +5015,19 @@ export const SpotTrade: MessageFns<SpotTrade> = {
   create<I extends Exact<DeepPartial<SpotTrade>, I>>(base?: I): SpotTrade {
     return SpotTrade.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotTrade>, I>>(object: I): SpotTrade {
+  fromPartial<I extends Exact<DeepPartial<SpotTrade>, I>>(
+    object: I,
+  ): SpotTrade {
     const message = createBaseSpotTrade();
     message.orderHash = object.orderHash ?? "";
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
     message.tradeExecutionType = object.tradeExecutionType ?? "";
     message.tradeDirection = object.tradeDirection ?? "";
-    message.price = (object.price !== undefined && object.price !== null)
-      ? PriceLevel.fromPartial(object.price)
-      : undefined;
+    message.price =
+      object.price !== undefined && object.price !== null
+        ? PriceLevel.fromPartial(object.price)
+        : undefined;
     message.fee = object.fee ?? "";
     message.executedAt = object.executedAt ?? 0;
     message.feeRecipient = object.feeRecipient ?? "";
@@ -4576,7 +5043,10 @@ function createBasePriceLevel(): PriceLevel {
 }
 
 export const PriceLevel: MessageFns<PriceLevel> = {
-  encode(message: PriceLevel, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PriceLevel,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.price !== "") {
       writer.uint32(10).string(message.price);
     }
@@ -4590,7 +5060,8 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PriceLevel {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePriceLevel();
     while (reader.pos < end) {
@@ -4632,8 +5103,12 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   fromJSON(object: any): PriceLevel {
     return {
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -4654,7 +5129,9 @@ export const PriceLevel: MessageFns<PriceLevel> = {
   create<I extends Exact<DeepPartial<PriceLevel>, I>>(base?: I): PriceLevel {
     return PriceLevel.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PriceLevel>, I>>(object: I): PriceLevel {
+  fromPartial<I extends Exact<DeepPartial<PriceLevel>, I>>(
+    object: I,
+  ): PriceLevel {
     const message = createBasePriceLevel();
     message.price = object.price ?? "";
     message.quantity = object.quantity ?? "";
@@ -4683,7 +5160,10 @@ function createBaseDerivativeTrade(): DerivativeTrade {
 }
 
 export const DerivativeTrade: MessageFns<DerivativeTrade> = {
-  encode(message: DerivativeTrade, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativeTrade,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderHash !== "") {
       writer.uint32(10).string(message.orderHash);
     }
@@ -4700,7 +5180,10 @@ export const DerivativeTrade: MessageFns<DerivativeTrade> = {
       writer.uint32(40).bool(message.isLiquidation);
     }
     if (message.positionDelta !== undefined) {
-      PositionDelta.encode(message.positionDelta, writer.uint32(50).fork()).join();
+      PositionDelta.encode(
+        message.positionDelta,
+        writer.uint32(50).fork(),
+      ).join();
     }
     if (message.payout !== "") {
       writer.uint32(58).string(message.payout);
@@ -4730,7 +5213,8 @@ export const DerivativeTrade: MessageFns<DerivativeTrade> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DerivativeTrade {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativeTrade();
     while (reader.pos < end) {
@@ -4862,55 +5346,55 @@ export const DerivativeTrade: MessageFns<DerivativeTrade> = {
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       tradeExecutionType: isSet(object.tradeExecutionType)
         ? globalThis.String(object.tradeExecutionType)
         : isSet(object.trade_execution_type)
-        ? globalThis.String(object.trade_execution_type)
-        : "",
+          ? globalThis.String(object.trade_execution_type)
+          : "",
       isLiquidation: isSet(object.isLiquidation)
         ? globalThis.Boolean(object.isLiquidation)
         : isSet(object.is_liquidation)
-        ? globalThis.Boolean(object.is_liquidation)
-        : false,
+          ? globalThis.Boolean(object.is_liquidation)
+          : false,
       positionDelta: isSet(object.positionDelta)
         ? PositionDelta.fromJSON(object.positionDelta)
         : isSet(object.position_delta)
-        ? PositionDelta.fromJSON(object.position_delta)
-        : undefined,
+          ? PositionDelta.fromJSON(object.position_delta)
+          : undefined,
       payout: isSet(object.payout) ? globalThis.String(object.payout) : "",
       fee: isSet(object.fee) ? globalThis.String(object.fee) : "",
       executedAt: isSet(object.executedAt)
         ? globalThis.Number(object.executedAt)
         : isSet(object.executed_at)
-        ? globalThis.Number(object.executed_at)
-        : 0,
+          ? globalThis.Number(object.executed_at)
+          : 0,
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
       tradeId: isSet(object.tradeId)
         ? globalThis.String(object.tradeId)
         : isSet(object.trade_id)
-        ? globalThis.String(object.trade_id)
-        : "",
+          ? globalThis.String(object.trade_id)
+          : "",
       executionSide: isSet(object.executionSide)
         ? globalThis.String(object.executionSide)
         : isSet(object.execution_side)
-        ? globalThis.String(object.execution_side)
-        : "",
+          ? globalThis.String(object.execution_side)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
       pnl: isSet(object.pnl) ? globalThis.String(object.pnl) : "",
     };
@@ -4963,19 +5447,24 @@ export const DerivativeTrade: MessageFns<DerivativeTrade> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativeTrade>, I>>(base?: I): DerivativeTrade {
+  create<I extends Exact<DeepPartial<DerivativeTrade>, I>>(
+    base?: I,
+  ): DerivativeTrade {
     return DerivativeTrade.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativeTrade>, I>>(object: I): DerivativeTrade {
+  fromPartial<I extends Exact<DeepPartial<DerivativeTrade>, I>>(
+    object: I,
+  ): DerivativeTrade {
     const message = createBaseDerivativeTrade();
     message.orderHash = object.orderHash ?? "";
     message.subaccountId = object.subaccountId ?? "";
     message.marketId = object.marketId ?? "";
     message.tradeExecutionType = object.tradeExecutionType ?? "";
     message.isLiquidation = object.isLiquidation ?? false;
-    message.positionDelta = (object.positionDelta !== undefined && object.positionDelta !== null)
-      ? PositionDelta.fromPartial(object.positionDelta)
-      : undefined;
+    message.positionDelta =
+      object.positionDelta !== undefined && object.positionDelta !== null
+        ? PositionDelta.fromPartial(object.positionDelta)
+        : undefined;
     message.payout = object.payout ?? "";
     message.fee = object.fee ?? "";
     message.executedAt = object.executedAt ?? 0;
@@ -4989,11 +5478,19 @@ export const DerivativeTrade: MessageFns<DerivativeTrade> = {
 };
 
 function createBasePositionDelta(): PositionDelta {
-  return { tradeDirection: "", executionPrice: "", executionQuantity: "", executionMargin: "" };
+  return {
+    tradeDirection: "",
+    executionPrice: "",
+    executionQuantity: "",
+    executionMargin: "",
+  };
 }
 
 export const PositionDelta: MessageFns<PositionDelta> = {
-  encode(message: PositionDelta, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PositionDelta,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.tradeDirection !== "") {
       writer.uint32(10).string(message.tradeDirection);
     }
@@ -5010,7 +5507,8 @@ export const PositionDelta: MessageFns<PositionDelta> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PositionDelta {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePositionDelta();
     while (reader.pos < end) {
@@ -5062,23 +5560,23 @@ export const PositionDelta: MessageFns<PositionDelta> = {
       tradeDirection: isSet(object.tradeDirection)
         ? globalThis.String(object.tradeDirection)
         : isSet(object.trade_direction)
-        ? globalThis.String(object.trade_direction)
-        : "",
+          ? globalThis.String(object.trade_direction)
+          : "",
       executionPrice: isSet(object.executionPrice)
         ? globalThis.String(object.executionPrice)
         : isSet(object.execution_price)
-        ? globalThis.String(object.execution_price)
-        : "",
+          ? globalThis.String(object.execution_price)
+          : "",
       executionQuantity: isSet(object.executionQuantity)
         ? globalThis.String(object.executionQuantity)
         : isSet(object.execution_quantity)
-        ? globalThis.String(object.execution_quantity)
-        : "",
+          ? globalThis.String(object.execution_quantity)
+          : "",
       executionMargin: isSet(object.executionMargin)
         ? globalThis.String(object.executionMargin)
         : isSet(object.execution_margin)
-        ? globalThis.String(object.execution_margin)
-        : "",
+          ? globalThis.String(object.execution_margin)
+          : "",
     };
   },
 
@@ -5099,10 +5597,14 @@ export const PositionDelta: MessageFns<PositionDelta> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PositionDelta>, I>>(base?: I): PositionDelta {
+  create<I extends Exact<DeepPartial<PositionDelta>, I>>(
+    base?: I,
+  ): PositionDelta {
     return PositionDelta.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PositionDelta>, I>>(object: I): PositionDelta {
+  fromPartial<I extends Exact<DeepPartial<PositionDelta>, I>>(
+    object: I,
+  ): PositionDelta {
     const message = createBasePositionDelta();
     message.tradeDirection = object.tradeDirection ?? "";
     message.executionPrice = object.executionPrice ?? "";
@@ -5113,16 +5615,27 @@ export const PositionDelta: MessageFns<PositionDelta> = {
 };
 
 function createBaseOrderResult(): OrderResult {
-  return { spotOrder: undefined, derivativeOrder: undefined, operationType: "", timestamp: 0 };
+  return {
+    spotOrder: undefined,
+    derivativeOrder: undefined,
+    operationType: "",
+    timestamp: 0,
+  };
 }
 
 export const OrderResult: MessageFns<OrderResult> = {
-  encode(message: OrderResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderResult,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.spotOrder !== undefined) {
       SpotLimitOrder.encode(message.spotOrder, writer.uint32(10).fork()).join();
     }
     if (message.derivativeOrder !== undefined) {
-      DerivativeLimitOrder.encode(message.derivativeOrder, writer.uint32(18).fork()).join();
+      DerivativeLimitOrder.encode(
+        message.derivativeOrder,
+        writer.uint32(18).fork(),
+      ).join();
     }
     if (message.operationType !== "") {
       writer.uint32(26).string(message.operationType);
@@ -5134,7 +5647,8 @@ export const OrderResult: MessageFns<OrderResult> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): OrderResult {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderResult();
     while (reader.pos < end) {
@@ -5153,7 +5667,10 @@ export const OrderResult: MessageFns<OrderResult> = {
             break;
           }
 
-          message.derivativeOrder = DerivativeLimitOrder.decode(reader, reader.uint32());
+          message.derivativeOrder = DerivativeLimitOrder.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 3: {
@@ -5186,19 +5703,21 @@ export const OrderResult: MessageFns<OrderResult> = {
       spotOrder: isSet(object.spotOrder)
         ? SpotLimitOrder.fromJSON(object.spotOrder)
         : isSet(object.spot_order)
-        ? SpotLimitOrder.fromJSON(object.spot_order)
-        : undefined,
+          ? SpotLimitOrder.fromJSON(object.spot_order)
+          : undefined,
       derivativeOrder: isSet(object.derivativeOrder)
         ? DerivativeLimitOrder.fromJSON(object.derivativeOrder)
         : isSet(object.derivative_order)
-        ? DerivativeLimitOrder.fromJSON(object.derivative_order)
-        : undefined,
+          ? DerivativeLimitOrder.fromJSON(object.derivative_order)
+          : undefined,
       operationType: isSet(object.operationType)
         ? globalThis.String(object.operationType)
         : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.operation_type)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -5208,7 +5727,9 @@ export const OrderResult: MessageFns<OrderResult> = {
       obj.spotOrder = SpotLimitOrder.toJSON(message.spotOrder);
     }
     if (message.derivativeOrder !== undefined) {
-      obj.derivativeOrder = DerivativeLimitOrder.toJSON(message.derivativeOrder);
+      obj.derivativeOrder = DerivativeLimitOrder.toJSON(
+        message.derivativeOrder,
+      );
     }
     if (message.operationType !== "") {
       obj.operationType = message.operationType;
@@ -5222,14 +5743,18 @@ export const OrderResult: MessageFns<OrderResult> = {
   create<I extends Exact<DeepPartial<OrderResult>, I>>(base?: I): OrderResult {
     return OrderResult.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderResult>, I>>(object: I): OrderResult {
+  fromPartial<I extends Exact<DeepPartial<OrderResult>, I>>(
+    object: I,
+  ): OrderResult {
     const message = createBaseOrderResult();
-    message.spotOrder = (object.spotOrder !== undefined && object.spotOrder !== null)
-      ? SpotLimitOrder.fromPartial(object.spotOrder)
-      : undefined;
-    message.derivativeOrder = (object.derivativeOrder !== undefined && object.derivativeOrder !== null)
-      ? DerivativeLimitOrder.fromPartial(object.derivativeOrder)
-      : undefined;
+    message.spotOrder =
+      object.spotOrder !== undefined && object.spotOrder !== null
+        ? SpotLimitOrder.fromPartial(object.spotOrder)
+        : undefined;
+    message.derivativeOrder =
+      object.derivativeOrder !== undefined && object.derivativeOrder !== null
+        ? DerivativeLimitOrder.fromPartial(object.derivativeOrder)
+        : undefined;
     message.operationType = object.operationType ?? "";
     message.timestamp = object.timestamp ?? 0;
     return message;
@@ -5256,7 +5781,10 @@ function createBaseSpotLimitOrder(): SpotLimitOrder {
 }
 
 export const SpotLimitOrder: MessageFns<SpotLimitOrder> = {
-  encode(message: SpotLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotLimitOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderHash !== "") {
       writer.uint32(10).string(message.orderHash);
     }
@@ -5303,7 +5831,8 @@ export const SpotLimitOrder: MessageFns<SpotLimitOrder> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SpotLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotLimitOrder();
     while (reader.pos < end) {
@@ -5435,56 +5964,58 @@ export const SpotLimitOrder: MessageFns<SpotLimitOrder> = {
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       orderSide: isSet(object.orderSide)
         ? globalThis.String(object.orderSide)
         : isSet(object.order_side)
-        ? globalThis.String(object.order_side)
-        : "",
+          ? globalThis.String(object.order_side)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       unfilledQuantity: isSet(object.unfilledQuantity)
         ? globalThis.String(object.unfilledQuantity)
         : isSet(object.unfilled_quantity)
-        ? globalThis.String(object.unfilled_quantity)
-        : "",
+          ? globalThis.String(object.unfilled_quantity)
+          : "",
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
-        : "",
+          ? globalThis.String(object.trigger_price)
+          : "",
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
       state: isSet(object.state) ? globalThis.String(object.state) : "",
       createdAt: isSet(object.createdAt)
         ? globalThis.Number(object.createdAt)
         : isSet(object.created_at)
-        ? globalThis.Number(object.created_at)
-        : 0,
+          ? globalThis.Number(object.created_at)
+          : 0,
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
       txHash: isSet(object.txHash)
         ? globalThis.String(object.txHash)
         : isSet(object.tx_hash)
-        ? globalThis.String(object.tx_hash)
-        : "",
+          ? globalThis.String(object.tx_hash)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -5536,10 +6067,14 @@ export const SpotLimitOrder: MessageFns<SpotLimitOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SpotLimitOrder>, I>>(base?: I): SpotLimitOrder {
+  create<I extends Exact<DeepPartial<SpotLimitOrder>, I>>(
+    base?: I,
+  ): SpotLimitOrder {
     return SpotLimitOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotLimitOrder>, I>>(object: I): SpotLimitOrder {
+  fromPartial<I extends Exact<DeepPartial<SpotLimitOrder>, I>>(
+    object: I,
+  ): SpotLimitOrder {
     const message = createBaseSpotLimitOrder();
     message.orderHash = object.orderHash ?? "";
     message.orderSide = object.orderSide ?? "";
@@ -5588,7 +6123,10 @@ function createBaseDerivativeLimitOrder(): DerivativeLimitOrder {
 }
 
 export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
-  encode(message: DerivativeLimitOrder, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativeLimitOrder,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderHash !== "") {
       writer.uint32(10).string(message.orderHash);
     }
@@ -5661,8 +6199,12 @@ export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeLimitOrder {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DerivativeLimitOrder {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativeLimitOrder();
     while (reader.pos < end) {
@@ -5866,98 +6408,100 @@ export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       orderSide: isSet(object.orderSide)
         ? globalThis.String(object.orderSide)
         : isSet(object.order_side)
-        ? globalThis.String(object.order_side)
-        : "",
+          ? globalThis.String(object.order_side)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       isReduceOnly: isSet(object.isReduceOnly)
         ? globalThis.Boolean(object.isReduceOnly)
         : isSet(object.is_reduce_only)
-        ? globalThis.Boolean(object.is_reduce_only)
-        : false,
+          ? globalThis.Boolean(object.is_reduce_only)
+          : false,
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
       price: isSet(object.price) ? globalThis.String(object.price) : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
+        : "",
       unfilledQuantity: isSet(object.unfilledQuantity)
         ? globalThis.String(object.unfilledQuantity)
         : isSet(object.unfilled_quantity)
-        ? globalThis.String(object.unfilled_quantity)
-        : "",
+          ? globalThis.String(object.unfilled_quantity)
+          : "",
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
-        : "",
+          ? globalThis.String(object.trigger_price)
+          : "",
       feeRecipient: isSet(object.feeRecipient)
         ? globalThis.String(object.feeRecipient)
         : isSet(object.fee_recipient)
-        ? globalThis.String(object.fee_recipient)
-        : "",
+          ? globalThis.String(object.fee_recipient)
+          : "",
       state: isSet(object.state) ? globalThis.String(object.state) : "",
       createdAt: isSet(object.createdAt)
         ? globalThis.Number(object.createdAt)
         : isSet(object.created_at)
-        ? globalThis.Number(object.created_at)
-        : 0,
+          ? globalThis.Number(object.created_at)
+          : 0,
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
       orderNumber: isSet(object.orderNumber)
         ? globalThis.Number(object.orderNumber)
         : isSet(object.order_number)
-        ? globalThis.Number(object.order_number)
-        : 0,
+          ? globalThis.Number(object.order_number)
+          : 0,
       orderType: isSet(object.orderType)
         ? globalThis.String(object.orderType)
         : isSet(object.order_type)
-        ? globalThis.String(object.order_type)
-        : "",
+          ? globalThis.String(object.order_type)
+          : "",
       isConditional: isSet(object.isConditional)
         ? globalThis.Boolean(object.isConditional)
         : isSet(object.is_conditional)
-        ? globalThis.Boolean(object.is_conditional)
-        : false,
+          ? globalThis.Boolean(object.is_conditional)
+          : false,
       triggerAt: isSet(object.triggerAt)
         ? globalThis.Number(object.triggerAt)
         : isSet(object.trigger_at)
-        ? globalThis.Number(object.trigger_at)
-        : 0,
+          ? globalThis.Number(object.trigger_at)
+          : 0,
       placedOrderHash: isSet(object.placedOrderHash)
         ? globalThis.String(object.placedOrderHash)
         : isSet(object.placed_order_hash)
-        ? globalThis.String(object.placed_order_hash)
-        : "",
+          ? globalThis.String(object.placed_order_hash)
+          : "",
       executionType: isSet(object.executionType)
         ? globalThis.String(object.executionType)
         : isSet(object.execution_type)
-        ? globalThis.String(object.execution_type)
-        : "",
+          ? globalThis.String(object.execution_type)
+          : "",
       txHash: isSet(object.txHash)
         ? globalThis.String(object.txHash)
         : isSet(object.tx_hash)
-        ? globalThis.String(object.tx_hash)
-        : "",
+          ? globalThis.String(object.tx_hash)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
       accountAddress: isSet(object.accountAddress)
         ? globalThis.String(object.accountAddress)
         : isSet(object.account_address)
-        ? globalThis.String(object.account_address)
-        : "",
+          ? globalThis.String(object.account_address)
+          : "",
     };
   },
 
@@ -6035,10 +6579,14 @@ export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(base?: I): DerivativeLimitOrder {
+  create<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(
+    base?: I,
+  ): DerivativeLimitOrder {
     return DerivativeLimitOrder.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(object: I): DerivativeLimitOrder {
+  fromPartial<I extends Exact<DeepPartial<DerivativeLimitOrder>, I>>(
+    object: I,
+  ): DerivativeLimitOrder {
     const message = createBaseDerivativeLimitOrder();
     message.orderHash = object.orderHash ?? "";
     message.orderSide = object.orderSide ?? "";
@@ -6068,16 +6616,30 @@ export const DerivativeLimitOrder: MessageFns<DerivativeLimitOrder> = {
 };
 
 function createBaseOrderHistoryResult(): OrderHistoryResult {
-  return { spotOrderHistory: undefined, derivativeOrderHistory: undefined, operationType: "", timestamp: 0 };
+  return {
+    spotOrderHistory: undefined,
+    derivativeOrderHistory: undefined,
+    operationType: "",
+    timestamp: 0,
+  };
 }
 
 export const OrderHistoryResult: MessageFns<OrderHistoryResult> = {
-  encode(message: OrderHistoryResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: OrderHistoryResult,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.spotOrderHistory !== undefined) {
-      SpotOrderHistory.encode(message.spotOrderHistory, writer.uint32(10).fork()).join();
+      SpotOrderHistory.encode(
+        message.spotOrderHistory,
+        writer.uint32(10).fork(),
+      ).join();
     }
     if (message.derivativeOrderHistory !== undefined) {
-      DerivativeOrderHistory.encode(message.derivativeOrderHistory, writer.uint32(18).fork()).join();
+      DerivativeOrderHistory.encode(
+        message.derivativeOrderHistory,
+        writer.uint32(18).fork(),
+      ).join();
     }
     if (message.operationType !== "") {
       writer.uint32(26).string(message.operationType);
@@ -6088,8 +6650,12 @@ export const OrderHistoryResult: MessageFns<OrderHistoryResult> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OrderHistoryResult {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): OrderHistoryResult {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderHistoryResult();
     while (reader.pos < end) {
@@ -6100,7 +6666,10 @@ export const OrderHistoryResult: MessageFns<OrderHistoryResult> = {
             break;
           }
 
-          message.spotOrderHistory = SpotOrderHistory.decode(reader, reader.uint32());
+          message.spotOrderHistory = SpotOrderHistory.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 2: {
@@ -6108,7 +6677,10 @@ export const OrderHistoryResult: MessageFns<OrderHistoryResult> = {
             break;
           }
 
-          message.derivativeOrderHistory = DerivativeOrderHistory.decode(reader, reader.uint32());
+          message.derivativeOrderHistory = DerivativeOrderHistory.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 3: {
@@ -6141,19 +6713,21 @@ export const OrderHistoryResult: MessageFns<OrderHistoryResult> = {
       spotOrderHistory: isSet(object.spotOrderHistory)
         ? SpotOrderHistory.fromJSON(object.spotOrderHistory)
         : isSet(object.spot_order_history)
-        ? SpotOrderHistory.fromJSON(object.spot_order_history)
-        : undefined,
+          ? SpotOrderHistory.fromJSON(object.spot_order_history)
+          : undefined,
       derivativeOrderHistory: isSet(object.derivativeOrderHistory)
         ? DerivativeOrderHistory.fromJSON(object.derivativeOrderHistory)
         : isSet(object.derivative_order_history)
-        ? DerivativeOrderHistory.fromJSON(object.derivative_order_history)
-        : undefined,
+          ? DerivativeOrderHistory.fromJSON(object.derivative_order_history)
+          : undefined,
       operationType: isSet(object.operationType)
         ? globalThis.String(object.operationType)
         : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.operation_type)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -6163,7 +6737,9 @@ export const OrderHistoryResult: MessageFns<OrderHistoryResult> = {
       obj.spotOrderHistory = SpotOrderHistory.toJSON(message.spotOrderHistory);
     }
     if (message.derivativeOrderHistory !== undefined) {
-      obj.derivativeOrderHistory = DerivativeOrderHistory.toJSON(message.derivativeOrderHistory);
+      obj.derivativeOrderHistory = DerivativeOrderHistory.toJSON(
+        message.derivativeOrderHistory,
+      );
     }
     if (message.operationType !== "") {
       obj.operationType = message.operationType;
@@ -6174,16 +6750,22 @@ export const OrderHistoryResult: MessageFns<OrderHistoryResult> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OrderHistoryResult>, I>>(base?: I): OrderHistoryResult {
+  create<I extends Exact<DeepPartial<OrderHistoryResult>, I>>(
+    base?: I,
+  ): OrderHistoryResult {
     return OrderHistoryResult.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<OrderHistoryResult>, I>>(object: I): OrderHistoryResult {
+  fromPartial<I extends Exact<DeepPartial<OrderHistoryResult>, I>>(
+    object: I,
+  ): OrderHistoryResult {
     const message = createBaseOrderHistoryResult();
-    message.spotOrderHistory = (object.spotOrderHistory !== undefined && object.spotOrderHistory !== null)
-      ? SpotOrderHistory.fromPartial(object.spotOrderHistory)
-      : undefined;
+    message.spotOrderHistory =
+      object.spotOrderHistory !== undefined && object.spotOrderHistory !== null
+        ? SpotOrderHistory.fromPartial(object.spotOrderHistory)
+        : undefined;
     message.derivativeOrderHistory =
-      (object.derivativeOrderHistory !== undefined && object.derivativeOrderHistory !== null)
+      object.derivativeOrderHistory !== undefined &&
+      object.derivativeOrderHistory !== null
         ? DerivativeOrderHistory.fromPartial(object.derivativeOrderHistory)
         : undefined;
     message.operationType = object.operationType ?? "";
@@ -6214,7 +6796,10 @@ function createBaseSpotOrderHistory(): SpotOrderHistory {
 }
 
 export const SpotOrderHistory: MessageFns<SpotOrderHistory> = {
-  encode(message: SpotOrderHistory, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SpotOrderHistory,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderHash !== "") {
       writer.uint32(10).string(message.orderHash);
     }
@@ -6267,7 +6852,8 @@ export const SpotOrderHistory: MessageFns<SpotOrderHistory> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SpotOrderHistory {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpotOrderHistory();
     while (reader.pos < end) {
@@ -6415,62 +7001,66 @@ export const SpotOrderHistory: MessageFns<SpotOrderHistory> = {
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       isActive: isSet(object.isActive)
         ? globalThis.Boolean(object.isActive)
         : isSet(object.is_active)
-        ? globalThis.Boolean(object.is_active)
-        : false,
+          ? globalThis.Boolean(object.is_active)
+          : false,
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       executionType: isSet(object.executionType)
         ? globalThis.String(object.executionType)
         : isSet(object.execution_type)
-        ? globalThis.String(object.execution_type)
-        : "",
+          ? globalThis.String(object.execution_type)
+          : "",
       orderType: isSet(object.orderType)
         ? globalThis.String(object.orderType)
         : isSet(object.order_type)
-        ? globalThis.String(object.order_type)
-        : "",
+          ? globalThis.String(object.order_type)
+          : "",
       price: isSet(object.price) ? globalThis.String(object.price) : "",
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
+          ? globalThis.String(object.trigger_price)
+          : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
         : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
       filledQuantity: isSet(object.filledQuantity)
         ? globalThis.String(object.filledQuantity)
         : isSet(object.filled_quantity)
-        ? globalThis.String(object.filled_quantity)
-        : "",
+          ? globalThis.String(object.filled_quantity)
+          : "",
       state: isSet(object.state) ? globalThis.String(object.state) : "",
       createdAt: isSet(object.createdAt)
         ? globalThis.Number(object.createdAt)
         : isSet(object.created_at)
-        ? globalThis.Number(object.created_at)
-        : 0,
+          ? globalThis.Number(object.created_at)
+          : 0,
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
+          ? globalThis.Number(object.updated_at)
+          : 0,
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
+        : "",
       txHash: isSet(object.txHash)
         ? globalThis.String(object.txHash)
         : isSet(object.tx_hash)
-        ? globalThis.String(object.tx_hash)
-        : "",
+          ? globalThis.String(object.tx_hash)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -6528,10 +7118,14 @@ export const SpotOrderHistory: MessageFns<SpotOrderHistory> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SpotOrderHistory>, I>>(base?: I): SpotOrderHistory {
+  create<I extends Exact<DeepPartial<SpotOrderHistory>, I>>(
+    base?: I,
+  ): SpotOrderHistory {
     return SpotOrderHistory.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpotOrderHistory>, I>>(object: I): SpotOrderHistory {
+  fromPartial<I extends Exact<DeepPartial<SpotOrderHistory>, I>>(
+    object: I,
+  ): SpotOrderHistory {
     const message = createBaseSpotOrderHistory();
     message.orderHash = object.orderHash ?? "";
     message.marketId = object.marketId ?? "";
@@ -6580,7 +7174,10 @@ function createBaseDerivativeOrderHistory(): DerivativeOrderHistory {
 }
 
 export const DerivativeOrderHistory: MessageFns<DerivativeOrderHistory> = {
-  encode(message: DerivativeOrderHistory, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DerivativeOrderHistory,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.orderHash !== "") {
       writer.uint32(10).string(message.orderHash);
     }
@@ -6647,8 +7244,12 @@ export const DerivativeOrderHistory: MessageFns<DerivativeOrderHistory> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DerivativeOrderHistory {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DerivativeOrderHistory {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivativeOrderHistory();
     while (reader.pos < end) {
@@ -6836,83 +7437,87 @@ export const DerivativeOrderHistory: MessageFns<DerivativeOrderHistory> = {
       orderHash: isSet(object.orderHash)
         ? globalThis.String(object.orderHash)
         : isSet(object.order_hash)
-        ? globalThis.String(object.order_hash)
-        : "",
+          ? globalThis.String(object.order_hash)
+          : "",
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       isActive: isSet(object.isActive)
         ? globalThis.Boolean(object.isActive)
         : isSet(object.is_active)
-        ? globalThis.Boolean(object.is_active)
-        : false,
+          ? globalThis.Boolean(object.is_active)
+          : false,
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       executionType: isSet(object.executionType)
         ? globalThis.String(object.executionType)
         : isSet(object.execution_type)
-        ? globalThis.String(object.execution_type)
-        : "",
+          ? globalThis.String(object.execution_type)
+          : "",
       orderType: isSet(object.orderType)
         ? globalThis.String(object.orderType)
         : isSet(object.order_type)
-        ? globalThis.String(object.order_type)
-        : "",
+          ? globalThis.String(object.order_type)
+          : "",
       price: isSet(object.price) ? globalThis.String(object.price) : "",
       triggerPrice: isSet(object.triggerPrice)
         ? globalThis.String(object.triggerPrice)
         : isSet(object.trigger_price)
-        ? globalThis.String(object.trigger_price)
+          ? globalThis.String(object.trigger_price)
+          : "",
+      quantity: isSet(object.quantity)
+        ? globalThis.String(object.quantity)
         : "",
-      quantity: isSet(object.quantity) ? globalThis.String(object.quantity) : "",
       filledQuantity: isSet(object.filledQuantity)
         ? globalThis.String(object.filledQuantity)
         : isSet(object.filled_quantity)
-        ? globalThis.String(object.filled_quantity)
-        : "",
+          ? globalThis.String(object.filled_quantity)
+          : "",
       state: isSet(object.state) ? globalThis.String(object.state) : "",
       createdAt: isSet(object.createdAt)
         ? globalThis.Number(object.createdAt)
         : isSet(object.created_at)
-        ? globalThis.Number(object.created_at)
-        : 0,
+          ? globalThis.Number(object.created_at)
+          : 0,
       updatedAt: isSet(object.updatedAt)
         ? globalThis.Number(object.updatedAt)
         : isSet(object.updated_at)
-        ? globalThis.Number(object.updated_at)
-        : 0,
+          ? globalThis.Number(object.updated_at)
+          : 0,
       isReduceOnly: isSet(object.isReduceOnly)
         ? globalThis.Boolean(object.isReduceOnly)
         : isSet(object.is_reduce_only)
-        ? globalThis.Boolean(object.is_reduce_only)
-        : false,
-      direction: isSet(object.direction) ? globalThis.String(object.direction) : "",
+          ? globalThis.Boolean(object.is_reduce_only)
+          : false,
+      direction: isSet(object.direction)
+        ? globalThis.String(object.direction)
+        : "",
       isConditional: isSet(object.isConditional)
         ? globalThis.Boolean(object.isConditional)
         : isSet(object.is_conditional)
-        ? globalThis.Boolean(object.is_conditional)
-        : false,
+          ? globalThis.Boolean(object.is_conditional)
+          : false,
       triggerAt: isSet(object.triggerAt)
         ? globalThis.Number(object.triggerAt)
         : isSet(object.trigger_at)
-        ? globalThis.Number(object.trigger_at)
-        : 0,
+          ? globalThis.Number(object.trigger_at)
+          : 0,
       placedOrderHash: isSet(object.placedOrderHash)
         ? globalThis.String(object.placedOrderHash)
         : isSet(object.placed_order_hash)
-        ? globalThis.String(object.placed_order_hash)
-        : "",
+          ? globalThis.String(object.placed_order_hash)
+          : "",
       margin: isSet(object.margin) ? globalThis.String(object.margin) : "",
       txHash: isSet(object.txHash)
         ? globalThis.String(object.txHash)
         : isSet(object.tx_hash)
-        ? globalThis.String(object.tx_hash)
-        : "",
+          ? globalThis.String(object.tx_hash)
+          : "",
       cid: isSet(object.cid) ? globalThis.String(object.cid) : "",
     };
   },
@@ -6985,10 +7590,14 @@ export const DerivativeOrderHistory: MessageFns<DerivativeOrderHistory> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DerivativeOrderHistory>, I>>(base?: I): DerivativeOrderHistory {
+  create<I extends Exact<DeepPartial<DerivativeOrderHistory>, I>>(
+    base?: I,
+  ): DerivativeOrderHistory {
     return DerivativeOrderHistory.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DerivativeOrderHistory>, I>>(object: I): DerivativeOrderHistory {
+  fromPartial<I extends Exact<DeepPartial<DerivativeOrderHistory>, I>>(
+    object: I,
+  ): DerivativeOrderHistory {
     const message = createBaseDerivativeOrderHistory();
     message.orderHash = object.orderHash ?? "";
     message.marketId = object.marketId ?? "";
@@ -7020,9 +7629,15 @@ function createBaseFundingPaymentResult(): FundingPaymentResult {
 }
 
 export const FundingPaymentResult: MessageFns<FundingPaymentResult> = {
-  encode(message: FundingPaymentResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FundingPaymentResult,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.fundingPayments !== undefined) {
-      FundingPayment.encode(message.fundingPayments, writer.uint32(10).fork()).join();
+      FundingPayment.encode(
+        message.fundingPayments,
+        writer.uint32(10).fork(),
+      ).join();
     }
     if (message.operationType !== "") {
       writer.uint32(18).string(message.operationType);
@@ -7033,8 +7648,12 @@ export const FundingPaymentResult: MessageFns<FundingPaymentResult> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): FundingPaymentResult {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): FundingPaymentResult {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFundingPaymentResult();
     while (reader.pos < end) {
@@ -7045,7 +7664,10 @@ export const FundingPaymentResult: MessageFns<FundingPaymentResult> = {
             break;
           }
 
-          message.fundingPayments = FundingPayment.decode(reader, reader.uint32());
+          message.fundingPayments = FundingPayment.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         }
         case 2: {
@@ -7078,14 +7700,16 @@ export const FundingPaymentResult: MessageFns<FundingPaymentResult> = {
       fundingPayments: isSet(object.fundingPayments)
         ? FundingPayment.fromJSON(object.fundingPayments)
         : isSet(object.funding_payments)
-        ? FundingPayment.fromJSON(object.funding_payments)
-        : undefined,
+          ? FundingPayment.fromJSON(object.funding_payments)
+          : undefined,
       operationType: isSet(object.operationType)
         ? globalThis.String(object.operationType)
         : isSet(object.operation_type)
-        ? globalThis.String(object.operation_type)
-        : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+          ? globalThis.String(object.operation_type)
+          : "",
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -7103,14 +7727,19 @@ export const FundingPaymentResult: MessageFns<FundingPaymentResult> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FundingPaymentResult>, I>>(base?: I): FundingPaymentResult {
+  create<I extends Exact<DeepPartial<FundingPaymentResult>, I>>(
+    base?: I,
+  ): FundingPaymentResult {
     return FundingPaymentResult.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FundingPaymentResult>, I>>(object: I): FundingPaymentResult {
+  fromPartial<I extends Exact<DeepPartial<FundingPaymentResult>, I>>(
+    object: I,
+  ): FundingPaymentResult {
     const message = createBaseFundingPaymentResult();
-    message.fundingPayments = (object.fundingPayments !== undefined && object.fundingPayments !== null)
-      ? FundingPayment.fromPartial(object.fundingPayments)
-      : undefined;
+    message.fundingPayments =
+      object.fundingPayments !== undefined && object.fundingPayments !== null
+        ? FundingPayment.fromPartial(object.fundingPayments)
+        : undefined;
     message.operationType = object.operationType ?? "";
     message.timestamp = object.timestamp ?? 0;
     return message;
@@ -7122,7 +7751,10 @@ function createBaseFundingPayment(): FundingPayment {
 }
 
 export const FundingPayment: MessageFns<FundingPayment> = {
-  encode(message: FundingPayment, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FundingPayment,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.marketId !== "") {
       writer.uint32(10).string(message.marketId);
     }
@@ -7139,7 +7771,8 @@ export const FundingPayment: MessageFns<FundingPayment> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): FundingPayment {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFundingPayment();
     while (reader.pos < end) {
@@ -7191,15 +7824,17 @@ export const FundingPayment: MessageFns<FundingPayment> = {
       marketId: isSet(object.marketId)
         ? globalThis.String(object.marketId)
         : isSet(object.market_id)
-        ? globalThis.String(object.market_id)
-        : "",
+          ? globalThis.String(object.market_id)
+          : "",
       subaccountId: isSet(object.subaccountId)
         ? globalThis.String(object.subaccountId)
         : isSet(object.subaccount_id)
-        ? globalThis.String(object.subaccount_id)
-        : "",
+          ? globalThis.String(object.subaccount_id)
+          : "",
       amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
     };
   },
 
@@ -7220,10 +7855,14 @@ export const FundingPayment: MessageFns<FundingPayment> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<FundingPayment>, I>>(base?: I): FundingPayment {
+  create<I extends Exact<DeepPartial<FundingPayment>, I>>(
+    base?: I,
+  ): FundingPayment {
     return FundingPayment.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<FundingPayment>, I>>(object: I): FundingPayment {
+  fromPartial<I extends Exact<DeepPartial<FundingPayment>, I>>(
+    object: I,
+  ): FundingPayment {
     const message = createBaseFundingPayment();
     message.marketId = object.marketId ?? "";
     message.subaccountId = object.subaccountId ?? "";
@@ -7241,20 +7880,28 @@ export const InjectiveAccountsRPCService = {
     path: "/injective_accounts_rpc.InjectiveAccountsRPC/Portfolio" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: PortfolioRequest): Buffer => Buffer.from(PortfolioRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): PortfolioRequest => PortfolioRequest.decode(value),
-    responseSerialize: (value: PortfolioResponse): Buffer => Buffer.from(PortfolioResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): PortfolioResponse => PortfolioResponse.decode(value),
+    requestSerialize: (value: PortfolioRequest): Buffer =>
+      Buffer.from(PortfolioRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): PortfolioRequest =>
+      PortfolioRequest.decode(value),
+    responseSerialize: (value: PortfolioResponse): Buffer =>
+      Buffer.from(PortfolioResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): PortfolioResponse =>
+      PortfolioResponse.decode(value),
   },
   /** List order states by order hashes */
   orderStates: {
     path: "/injective_accounts_rpc.InjectiveAccountsRPC/OrderStates" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: OrderStatesRequest): Buffer => Buffer.from(OrderStatesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): OrderStatesRequest => OrderStatesRequest.decode(value),
-    responseSerialize: (value: OrderStatesResponse): Buffer => Buffer.from(OrderStatesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): OrderStatesResponse => OrderStatesResponse.decode(value),
+    requestSerialize: (value: OrderStatesRequest): Buffer =>
+      Buffer.from(OrderStatesRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): OrderStatesRequest =>
+      OrderStatesRequest.decode(value),
+    responseSerialize: (value: OrderStatesResponse): Buffer =>
+      Buffer.from(OrderStatesResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): OrderStatesResponse =>
+      OrderStatesResponse.decode(value),
   },
   /** List all subaccounts IDs of an account address */
   subaccountsList: {
@@ -7263,10 +7910,12 @@ export const InjectiveAccountsRPCService = {
     responseStream: false as const,
     requestSerialize: (value: SubaccountsListRequest): Buffer =>
       Buffer.from(SubaccountsListRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): SubaccountsListRequest => SubaccountsListRequest.decode(value),
+    requestDeserialize: (value: Buffer): SubaccountsListRequest =>
+      SubaccountsListRequest.decode(value),
     responseSerialize: (value: SubaccountsListResponse): Buffer =>
       Buffer.from(SubaccountsListResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): SubaccountsListResponse => SubaccountsListResponse.decode(value),
+    responseDeserialize: (value: Buffer): SubaccountsListResponse =>
+      SubaccountsListResponse.decode(value),
   },
   /** List subaccount balances for the provided denoms. */
   subaccountBalancesList: {
@@ -7275,7 +7924,8 @@ export const InjectiveAccountsRPCService = {
     responseStream: false as const,
     requestSerialize: (value: SubaccountBalancesListRequest): Buffer =>
       Buffer.from(SubaccountBalancesListRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): SubaccountBalancesListRequest => SubaccountBalancesListRequest.decode(value),
+    requestDeserialize: (value: Buffer): SubaccountBalancesListRequest =>
+      SubaccountBalancesListRequest.decode(value),
     responseSerialize: (value: SubaccountBalancesListResponse): Buffer =>
       Buffer.from(SubaccountBalancesListResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): SubaccountBalancesListResponse =>
@@ -7306,7 +7956,8 @@ export const InjectiveAccountsRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamSubaccountBalanceRequest): Buffer =>
       Buffer.from(StreamSubaccountBalanceRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamSubaccountBalanceRequest => StreamSubaccountBalanceRequest.decode(value),
+    requestDeserialize: (value: Buffer): StreamSubaccountBalanceRequest =>
+      StreamSubaccountBalanceRequest.decode(value),
     responseSerialize: (value: StreamSubaccountBalanceResponse): Buffer =>
       Buffer.from(StreamSubaccountBalanceResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): StreamSubaccountBalanceResponse =>
@@ -7319,10 +7970,12 @@ export const InjectiveAccountsRPCService = {
     responseStream: false as const,
     requestSerialize: (value: SubaccountHistoryRequest): Buffer =>
       Buffer.from(SubaccountHistoryRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): SubaccountHistoryRequest => SubaccountHistoryRequest.decode(value),
+    requestDeserialize: (value: Buffer): SubaccountHistoryRequest =>
+      SubaccountHistoryRequest.decode(value),
     responseSerialize: (value: SubaccountHistoryResponse): Buffer =>
       Buffer.from(SubaccountHistoryResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): SubaccountHistoryResponse => SubaccountHistoryResponse.decode(value),
+    responseDeserialize: (value: Buffer): SubaccountHistoryResponse =>
+      SubaccountHistoryResponse.decode(value),
   },
   /** Get subaccount's orders summary */
   subaccountOrderSummary: {
@@ -7331,7 +7984,8 @@ export const InjectiveAccountsRPCService = {
     responseStream: false as const,
     requestSerialize: (value: SubaccountOrderSummaryRequest): Buffer =>
       Buffer.from(SubaccountOrderSummaryRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): SubaccountOrderSummaryRequest => SubaccountOrderSummaryRequest.decode(value),
+    requestDeserialize: (value: Buffer): SubaccountOrderSummaryRequest =>
+      SubaccountOrderSummaryRequest.decode(value),
     responseSerialize: (value: SubaccountOrderSummaryResponse): Buffer =>
       Buffer.from(SubaccountOrderSummaryResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer): SubaccountOrderSummaryResponse =>
@@ -7342,10 +7996,14 @@ export const InjectiveAccountsRPCService = {
     path: "/injective_accounts_rpc.InjectiveAccountsRPC/Rewards" as const,
     requestStream: false as const,
     responseStream: false as const,
-    requestSerialize: (value: RewardsRequest): Buffer => Buffer.from(RewardsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): RewardsRequest => RewardsRequest.decode(value),
-    responseSerialize: (value: RewardsResponse): Buffer => Buffer.from(RewardsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): RewardsResponse => RewardsResponse.decode(value),
+    requestSerialize: (value: RewardsRequest): Buffer =>
+      Buffer.from(RewardsRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): RewardsRequest =>
+      RewardsRequest.decode(value),
+    responseSerialize: (value: RewardsResponse): Buffer =>
+      Buffer.from(RewardsResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): RewardsResponse =>
+      RewardsResponse.decode(value),
   },
   /** Stream live data for an account and respective data */
   streamAccountData: {
@@ -7354,10 +8012,12 @@ export const InjectiveAccountsRPCService = {
     responseStream: true as const,
     requestSerialize: (value: StreamAccountDataRequest): Buffer =>
       Buffer.from(StreamAccountDataRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer): StreamAccountDataRequest => StreamAccountDataRequest.decode(value),
+    requestDeserialize: (value: Buffer): StreamAccountDataRequest =>
+      StreamAccountDataRequest.decode(value),
     responseSerialize: (value: StreamAccountDataResponse): Buffer =>
       Buffer.from(StreamAccountDataResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer): StreamAccountDataResponse => StreamAccountDataResponse.decode(value),
+    responseDeserialize: (value: Buffer): StreamAccountDataResponse =>
+      StreamAccountDataResponse.decode(value),
   },
 } as const;
 
@@ -7367,25 +8027,46 @@ export interface InjectiveAccountsRPCServer extends UntypedServiceImplementation
   /** List order states by order hashes */
   orderStates: handleUnaryCall<OrderStatesRequest, OrderStatesResponse>;
   /** List all subaccounts IDs of an account address */
-  subaccountsList: handleUnaryCall<SubaccountsListRequest, SubaccountsListResponse>;
+  subaccountsList: handleUnaryCall<
+    SubaccountsListRequest,
+    SubaccountsListResponse
+  >;
   /** List subaccount balances for the provided denoms. */
-  subaccountBalancesList: handleUnaryCall<SubaccountBalancesListRequest, SubaccountBalancesListResponse>;
+  subaccountBalancesList: handleUnaryCall<
+    SubaccountBalancesListRequest,
+    SubaccountBalancesListResponse
+  >;
   /** Gets a balance for specific coin denom */
-  subaccountBalanceEndpoint: handleUnaryCall<SubaccountBalanceEndpointRequest, SubaccountBalanceEndpointResponse>;
+  subaccountBalanceEndpoint: handleUnaryCall<
+    SubaccountBalanceEndpointRequest,
+    SubaccountBalanceEndpointResponse
+  >;
   /**
    * StreamSubaccountBalance streams new balance changes for a specified
    * subaccount and denoms. If no denoms are provided, all denom changes are
    * streamed.
    */
-  streamSubaccountBalance: handleServerStreamingCall<StreamSubaccountBalanceRequest, StreamSubaccountBalanceResponse>;
+  streamSubaccountBalance: handleServerStreamingCall<
+    StreamSubaccountBalanceRequest,
+    StreamSubaccountBalanceResponse
+  >;
   /** Get subaccount's deposits and withdrawals history */
-  subaccountHistory: handleUnaryCall<SubaccountHistoryRequest, SubaccountHistoryResponse>;
+  subaccountHistory: handleUnaryCall<
+    SubaccountHistoryRequest,
+    SubaccountHistoryResponse
+  >;
   /** Get subaccount's orders summary */
-  subaccountOrderSummary: handleUnaryCall<SubaccountOrderSummaryRequest, SubaccountOrderSummaryResponse>;
+  subaccountOrderSummary: handleUnaryCall<
+    SubaccountOrderSummaryRequest,
+    SubaccountOrderSummaryResponse
+  >;
   /** Provide historical trading rewards */
   rewards: handleUnaryCall<RewardsRequest, RewardsResponse>;
   /** Stream live data for an account and respective data */
-  streamAccountData: handleServerStreamingCall<StreamAccountDataRequest, StreamAccountDataResponse>;
+  streamAccountData: handleServerStreamingCall<
+    StreamAccountDataRequest,
+    StreamAccountDataResponse
+  >;
 }
 
 export interface InjectiveAccountsRPCClient extends Client {
@@ -7408,66 +8089,102 @@ export interface InjectiveAccountsRPCClient extends Client {
   /** List order states by order hashes */
   orderStates(
     request: OrderStatesRequest,
-    callback: (error: ServiceError | null, response: OrderStatesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrderStatesResponse,
+    ) => void,
   ): ClientUnaryCall;
   orderStates(
     request: OrderStatesRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: OrderStatesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrderStatesResponse,
+    ) => void,
   ): ClientUnaryCall;
   orderStates(
     request: OrderStatesRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: OrderStatesResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: OrderStatesResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** List all subaccounts IDs of an account address */
   subaccountsList(
     request: SubaccountsListRequest,
-    callback: (error: ServiceError | null, response: SubaccountsListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountsListResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountsList(
     request: SubaccountsListRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: SubaccountsListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountsListResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountsList(
     request: SubaccountsListRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: SubaccountsListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountsListResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** List subaccount balances for the provided denoms. */
   subaccountBalancesList(
     request: SubaccountBalancesListRequest,
-    callback: (error: ServiceError | null, response: SubaccountBalancesListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountBalancesListResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountBalancesList(
     request: SubaccountBalancesListRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: SubaccountBalancesListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountBalancesListResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountBalancesList(
     request: SubaccountBalancesListRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: SubaccountBalancesListResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountBalancesListResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Gets a balance for specific coin denom */
   subaccountBalanceEndpoint(
     request: SubaccountBalanceEndpointRequest,
-    callback: (error: ServiceError | null, response: SubaccountBalanceEndpointResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountBalanceEndpointResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountBalanceEndpoint(
     request: SubaccountBalanceEndpointRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: SubaccountBalanceEndpointResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountBalanceEndpointResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountBalanceEndpoint(
     request: SubaccountBalanceEndpointRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: SubaccountBalanceEndpointResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountBalanceEndpointResponse,
+    ) => void,
   ): ClientUnaryCall;
   /**
    * StreamSubaccountBalance streams new balance changes for a specified
@@ -7486,34 +8203,52 @@ export interface InjectiveAccountsRPCClient extends Client {
   /** Get subaccount's deposits and withdrawals history */
   subaccountHistory(
     request: SubaccountHistoryRequest,
-    callback: (error: ServiceError | null, response: SubaccountHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountHistory(
     request: SubaccountHistoryRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: SubaccountHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountHistory(
     request: SubaccountHistoryRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: SubaccountHistoryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountHistoryResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Get subaccount's orders summary */
   subaccountOrderSummary(
     request: SubaccountOrderSummaryRequest,
-    callback: (error: ServiceError | null, response: SubaccountOrderSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountOrderSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountOrderSummary(
     request: SubaccountOrderSummaryRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: SubaccountOrderSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountOrderSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   subaccountOrderSummary(
     request: SubaccountOrderSummaryRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: SubaccountOrderSummaryResponse) => void,
+    callback: (
+      error: ServiceError | null,
+      response: SubaccountOrderSummaryResponse,
+    ) => void,
   ): ClientUnaryCall;
   /** Provide historical trading rewards */
   rewards(
@@ -7547,22 +8282,34 @@ export const InjectiveAccountsRPCClient = makeGenericClientConstructor(
   InjectiveAccountsRPCService,
   "injective_accounts_rpc.InjectiveAccountsRPC",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): InjectiveAccountsRPCClient;
+  new (
+    address: string,
+    credentials: ChannelCredentials,
+    options?: Partial<ClientOptions>,
+  ): InjectiveAccountsRPCClient;
   service: typeof InjectiveAccountsRPCService;
   serviceName: string;
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());
