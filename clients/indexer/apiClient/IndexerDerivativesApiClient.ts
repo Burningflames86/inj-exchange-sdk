@@ -136,7 +136,8 @@ export class IndexerDerivativesApiClient {
     return response;
   }
   public async fetchSubaccountOrdersList(
-    params?: Partial<SubaccountOrdersListRequest>,
+    params: Partial<SubaccountOrdersListRequest> &
+      Pick<SubaccountOrdersListRequest, "subaccountId">,
   ): Promise<SubaccountOrdersListResponse> {
     const response: SubaccountOrdersListResponse = await ApiManager(
       this.client.subaccountOrdersList.bind(this.client),
@@ -146,7 +147,8 @@ export class IndexerDerivativesApiClient {
     return response;
   }
   public async fetchSubaccountTradesList(
-    params: Partial<SubaccountTradesListRequest>,
+    params: Partial<SubaccountTradesListRequest> &
+      Pick<SubaccountTradesListRequest, "subaccountId">,
   ): Promise<SubaccountTradesListResponse> {
     const response: SubaccountTradesListResponse = await ApiManager(
       this.client.subaccountTradesList.bind(this.client),
