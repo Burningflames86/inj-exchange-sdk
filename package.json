@@ -8,6 +8,7 @@
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^26.2.0",
+    "oxlint": "^1.94.0",
     "prettier": "^3.10.1",
     "ts-proto": "^2.12.0",
     "typescript": "^7.0.2"
@@ -15,5 +16,13 @@
   "name": "inj-trading-sdk",
   "module": "index.ts",
   "type": "module",
-  "private": true
+  "private": true,
+  "scripts": {
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "prettier --write clients managers types utils",
+    "format:check": "prettier --check clients managers types utils",
+    "typecheck": "tsc --noEmit",
+    "check": "bun run lint && bun run format:check && bun run typecheck"
+  }
 }

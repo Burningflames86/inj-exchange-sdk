@@ -8,7 +8,10 @@ import {
   QueryAccountsResponse,
 } from "../../../gen/cosmos/auth/v1beta1/query";
 import { ApiManager } from "../../../managers/ApiManager";
-import { EthAccount, MessageFns } from "../../../gen/injective/types/v1beta1/account";
+import {
+  EthAccount,
+  MessageFns,
+} from "../../../gen/injective/types/v1beta1/account";
 import { base64 } from "@scure/base";
 import { PubKey } from "../../../gen/injective/crypto/v1beta1/ethsecp256k1/keys";
 import { Any } from "../../../gen/google/protobuf/any";

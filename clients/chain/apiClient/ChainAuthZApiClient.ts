@@ -10,7 +10,6 @@ import {
   QueryService,
 } from "../../../gen/cosmos/authz/v1beta1/query";
 import { ApiManager } from "../../../managers/ApiManager";
-import { base64 } from "@scure/base";
 import {
   GenericAuthorization,
   Grant,
@@ -126,12 +125,6 @@ export class ChainAuthZApiClient {
           granter: grant.granter,
         };
       }),
-      // pagination: {
-      //   next: response.pagination?.nextKey
-      //     ? base64.encode(response.pagination.nextKey)
-      //     : null,
-      //   total: response.pagination?.total ? response.pagination.total : 0,
-      // },
       pagination: createSanitizedPageResponse(response.pagination),
     };
   }
