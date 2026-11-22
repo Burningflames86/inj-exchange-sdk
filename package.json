@@ -3,7 +3,8 @@
     "@bufbuild/protobuf": "^2.13.0",
     "@grpc/grpc-js": "^1.14.4",
     "@scure/base": "^2.3.0",
-    "eventemitter3": "^5.0.4"
+    "eventemitter3": "^5.0.4",
+    "viem": "^2.58.0"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -20,8 +21,8 @@
   "scripts": {
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "format": "oxfmt clients managers types utils",
-    "format:check": "oxfmt --check clients managers types utils",
+    "format": "oxfmt clients managers msgs types utils",
+    "format:check": "oxfmt --check clients managers msgs types utils",
     "typecheck": "tsc --noEmit",
     "check": "bun run lint && bun run format:check && bun run typecheck"
   }

@@ -29,6 +29,7 @@
   },
   "include": [
     "clients/**/*.ts",
+    "msgs/**/*.ts",
     "managers/**/*.ts",
     "types/**/*.ts",
     "utils/**/*.ts",
