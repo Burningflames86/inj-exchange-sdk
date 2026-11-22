@@ -1,6 +1,7 @@
 node_modules/
 all_protos/
 *.zip
+!.gen-full/gen-full.zip
 
 # build / tooling
 dist/
