@@ -4,14 +4,13 @@ import {
 } from "../../gen/injective/exchange/v1beta1/exchange";
 import { MsgCreateSpotLimitOrder as ProtoMsgCreateSpotLimitOrder } from "../../gen/injective/exchange/v1beta1/tx";
 import { toChainFormat } from "../../utils/decimal";
-import { MsgBase } from "../MsgBase";
-import {
+import type {
   SpotOrderAmino,
   SpotOrderEip712V2,
   SpotOrderParams,
-  toSpotOrderAmino,
-  toSpotOrderEip712V2,
-} from "./spotOrder";
+} from "../../types/chain/msgs";
+import { MsgBase } from "../MsgBase";
+import { toSpotOrderAmino, toSpotOrderEip712V2 } from "./spotOrder";
 
 export class MsgCreateSpotLimitOrder extends MsgBase<
   SpotOrderParams,

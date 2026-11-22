@@ -1,13 +1,6 @@
 import { MsgCancelSpotOrder as ProtoMsgCancelSpotOrder } from "../../gen/injective/exchange/v1beta1/tx";
+import type { MsgCancelSpotOrderParams } from "../../types/chain/msgs";
 import { MsgBase } from "../MsgBase";
-
-export interface MsgCancelSpotOrderParams {
-  injectiveAddress: string;
-  marketId: string;
-  subaccountId: string;
-  orderHash?: string;
-  cid?: string;
-}
 
 export class MsgCancelSpotOrder extends MsgBase<
   MsgCancelSpotOrderParams,
