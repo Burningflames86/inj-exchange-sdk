@@ -10,13 +10,6 @@ export abstract class MsgBase<Params, ProtoMsg> {
     this.params = params;
   }
 
-  static fromJSON<T extends MsgBase<any, any>>(
-    this: new (params: any) => T,
-    params: any,
-  ): T {
-    return new this(params);
-  }
-
   abstract toProto(): ProtoMsg;
   abstract toDirectSign(): { type: string; message: ProtoMsg };
   abstract toBinary(): Buffer;
