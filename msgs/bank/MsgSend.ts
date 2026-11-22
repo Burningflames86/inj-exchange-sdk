@@ -1,9 +1,28 @@
+import { Coin } from "../../gen/cosmos/base/v1beta1/coin";
 import { MsgSend as ProtoMsgSend } from "../../gen/cosmos/bank/v1beta1/tx";
 import { MsgBase } from "../MsgBase";
 
-export class MsgSend extends MsgBase<ProtoMsgSend, ProtoMsgSend> {
+export interface MsgSendParams {
+  srcInjectiveAddress: string;
+  dstInjectiveAddress: string;
+  /** Base units of each denom, not scaled. */
+  amount: Coin | Coin[];
+}
+
+export class MsgSend extends MsgBase<MsgSendParams, ProtoMsgSend> {
   toProto(): ProtoMsgSend {
-    return ProtoMsgSend.create(this.params);
+    const { params } = this;
+    const amounts = Array.isArray(params.amount)
+      ? params.amount
+      : [params.amount];
+
+    return ProtoMsgSend.create({
+      fromAddress: params.srcInjectiveAddress,
+      toAddress: params.dstInjectiveAddress,
+      amount: amounts.map((coin) =>
+        Coin.create({ denom: coin.denom, amount: coin.amount }),
+      ),
+    });
   }
 
   toDirectSign(): {
