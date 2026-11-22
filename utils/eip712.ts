@@ -1,3 +1,4 @@
+import type { ChainId, EvmChainId } from "../types/chain/enums";
 import { Msg } from "../types/chain/msgs";
 import { Eip712TypedData } from "../types/chain/eip712";
 import { StdFee } from "../types/chain/tx";
@@ -17,12 +18,12 @@ export function getEip712TypedDataV2({
   tx: {
     accountNumber: number;
     sequence: number;
-    chainId: string;
+    chainId: ChainId;
     memo?: string;
     timeoutHeight?: number;
   };
   fee: StdFee;
-  evmChainId: number;
+  evmChainId: EvmChainId;
 }): Eip712TypedData {
   const eip712Msgs = (Array.isArray(msgs) ? msgs : [msgs]).map((msg) =>
     msg.toEip712V2(),

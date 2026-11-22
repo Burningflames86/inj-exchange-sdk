@@ -1,4 +1,5 @@
 import { Coin } from "../../gen/cosmos/base/v1beta1/coin";
+import type { ChainId } from "./enums";
 import { SignMode } from "../../gen/cosmos/tx/signing/v1beta1/signing";
 import { SignDoc } from "../../gen/cosmos/tx/v1beta1/tx";
 import { Msg } from "./msgs";
@@ -25,7 +26,7 @@ export interface SignerDetails {
 
 export interface CreateTransactionParams {
   message: Msg | Msg[];
-  chainId: string;
+  chainId: ChainId;
   pubKey: string;
   accountNumber: number;
   sequence: number;

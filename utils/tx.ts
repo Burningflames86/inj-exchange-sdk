@@ -15,6 +15,7 @@ import {
 import { Any } from "../gen/google/protobuf/any";
 import { PubKey as EthSecp256k1PubKey } from "../gen/injective/crypto/v1beta1/ethsecp256k1/keys";
 import { ExtensionOptionsWeb3Tx } from "../gen/injective/types/v1beta1/tx_ext";
+import type { EvmChainId } from "../types/chain/enums";
 import { Msg } from "../types/chain/msgs";
 import {
   CreateTransactionParams,
@@ -37,7 +38,7 @@ export function createWeb3Extension({
   feePayer,
   feePayerSig,
 }: {
-  evmChainId: number;
+  evmChainId: EvmChainId;
   feePayer?: string;
   feePayerSig?: Buffer;
 }): ExtensionOptionsWeb3Tx {
