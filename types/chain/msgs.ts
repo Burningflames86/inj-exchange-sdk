@@ -4,6 +4,12 @@ import type { MsgCancelSpotOrder } from "../../msgs/exchange/MsgCancelSpotOrder"
 import type { MsgCreateSpotLimitOrder } from "../../msgs/exchange/MsgCreateSpotLimitOrder";
 import type { MsgCreateSpotMarketOrder } from "../../msgs/exchange/MsgCreateSpotMarketOrder";
 import type { MsgDeposit } from "../../msgs/exchange/MsgDeposit";
+import type { MsgCreateDerivativeLimitOrder } from "../../msgs/exchange/MsgCreateDerivativeLimitOrder";
+import type { MsgCreateDerivativeMarketOrder } from "../../msgs/exchange/MsgCreateDerivativeMarketOrder";
+import type { MsgCancelDerivativeOrder } from "../../msgs/exchange/MsgCancelDerivativeOrder";
+import type { MsgBatchCancelDerivativeOrders } from "../../msgs/exchange/MsgBatchCancelDerivativeOrders";
+import type { MsgIncreasePositionMargin } from "../../msgs/exchange/MsgIncreasePositionMargin";
+import type { MsgDecreasePositionMargin } from "../../msgs/exchange/MsgDecreasePositionMargin";
 
 /** Every message a transaction can carry. */
 export type Msg =
@@ -12,4 +18,10 @@ export type Msg =
   | MsgCreateSpotLimitOrder
   | MsgCreateSpotMarketOrder
   | MsgCancelSpotOrder
-  | MsgBatchCancelSpotOrders;
+  | MsgBatchCancelSpotOrders
+  | MsgCreateDerivativeLimitOrder
+  | MsgCreateDerivativeMarketOrder
+  | MsgCancelDerivativeOrder
+  | MsgBatchCancelDerivativeOrders
+  | MsgIncreasePositionMargin
+  | MsgDecreasePositionMargin;
