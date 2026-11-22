@@ -1,4 +1,4 @@
-import type { OrderType } from "../../../gen/injective/exchange/v1beta1/exchange";
+import type { OrderType } from "../enums";
 
 export interface DerivativeOrderParams {
   injectiveAddress: string;

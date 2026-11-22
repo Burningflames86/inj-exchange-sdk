@@ -1,4 +1,4 @@
-import type { OrderMask } from "../../../gen/injective/exchange/v1beta1/exchange";
+import type { OrderMask } from "../enums";
 
 export interface MsgCancelDerivativeOrderParams {
   injectiveAddress: string;

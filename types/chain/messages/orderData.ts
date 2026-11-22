@@ -1,4 +1,4 @@
-import type { OrderMask } from "../../../gen/injective/exchange/v1beta1/exchange";
+import type { OrderMask } from "../enums";
 
 /** One order to cancel, shared by the spot and derivative batch cancels. */
 export interface OrderDataParams {
