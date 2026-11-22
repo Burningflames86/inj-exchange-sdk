@@ -3,7 +3,7 @@ import {
   MsgBatchCancelSpotOrders as ProtoMsgBatchCancelSpotOrders,
   OrderData,
 } from "../../gen/injective/exchange/v1beta1/tx";
-import type { MsgBatchCancelSpotOrdersParams } from "../../types/chain/msgs";
+import type { MsgBatchCancelSpotOrdersParams } from "../../types/chain/messages/msgBatchCancelSpotOrders";
 import { MsgBase } from "../MsgBase";
 
 export class MsgBatchCancelSpotOrders extends MsgBase<

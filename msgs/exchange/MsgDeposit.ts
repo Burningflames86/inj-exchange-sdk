@@ -1,6 +1,6 @@
 import { Coin } from "../../gen/cosmos/base/v1beta1/coin";
 import { MsgDeposit as ProtoMsgDeposit } from "../../gen/injective/exchange/v1beta1/tx";
-import type { MsgDepositParams } from "../../types/chain/msgs";
+import type { MsgDepositParams } from "../../types/chain/messages/msgDeposit";
 import { MsgBase } from "../MsgBase";
 
 export class MsgDeposit extends MsgBase<MsgDepositParams, ProtoMsgDeposit> {

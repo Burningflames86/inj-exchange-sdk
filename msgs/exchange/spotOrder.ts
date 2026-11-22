@@ -3,7 +3,7 @@ import type {
   SpotOrderAmino,
   SpotOrderEip712V2,
   SpotOrderParams,
-} from "../../types/chain/msgs";
+} from "../../types/chain/messages/spotOrder";
 import { toCosmosSdkDecString } from "../../utils/decimal";
 
 export function toSpotOrderAmino(params: SpotOrderParams): SpotOrderAmino {

@@ -1,5 +1,5 @@
 import { MsgCancelSpotOrder as ProtoMsgCancelSpotOrder } from "../../gen/injective/exchange/v1beta1/tx";
-import type { MsgCancelSpotOrderParams } from "../../types/chain/msgs";
+import type { MsgCancelSpotOrderParams } from "../../types/chain/messages/msgCancelSpotOrder";
 import { MsgBase } from "../MsgBase";
 
 export class MsgCancelSpotOrder extends MsgBase<

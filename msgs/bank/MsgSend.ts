@@ -1,6 +1,6 @@
 import { Coin } from "../../gen/cosmos/base/v1beta1/coin";
 import { MsgSend as ProtoMsgSend } from "../../gen/cosmos/bank/v1beta1/tx";
-import type { MsgSendParams } from "../../types/chain/msgs";
+import type { MsgSendParams } from "../../types/chain/messages/msgSend";
 import { MsgBase } from "../MsgBase";
 
 export class MsgSend extends MsgBase<MsgSendParams, ProtoMsgSend> {

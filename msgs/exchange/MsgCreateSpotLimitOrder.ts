@@ -8,7 +8,7 @@ import type {
   SpotOrderAmino,
   SpotOrderEip712V2,
   SpotOrderParams,
-} from "../../types/chain/msgs";
+} from "../../types/chain/messages/spotOrder";
 import { MsgBase } from "../MsgBase";
 import { toSpotOrderAmino, toSpotOrderEip712V2 } from "./spotOrder";
 
