@@ -1,4 +1,4 @@
-import { MsgCancelSpotOrder as ProtoMsgCancelSpotOrder } from "../../gen/injective/exchange/v1beta1/tx";
+import { MsgCancelSpotOrder as ProtoMsgCancelSpotOrder } from "../../gen/injective/exchange/v2/tx";
 import type { MsgCancelSpotOrderParams } from "../../types/chain/messages/msgCancelSpotOrder";
 import { MsgBase } from "../MsgBase";
 
@@ -19,11 +19,11 @@ export class MsgCancelSpotOrder extends MsgBase<
   }
 
   toDirectSign(): {
-    type: "/injective.exchange.v1beta1.MsgCancelSpotOrder";
+    type: "/injective.exchange.v2.MsgCancelSpotOrder";
     message: ProtoMsgCancelSpotOrder;
   } {
     return {
-      type: "/injective.exchange.v1beta1.MsgCancelSpotOrder",
+      type: "/injective.exchange.v2.MsgCancelSpotOrder",
       message: this.toProto(),
     };
   }

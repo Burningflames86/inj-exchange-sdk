@@ -1,8 +1,5 @@
-import {
-  OrderInfo,
-  SpotOrder,
-} from "../../gen/injective/exchange/v1beta1/exchange";
-import { MsgCreateSpotMarketOrder as ProtoMsgCreateSpotMarketOrder } from "../../gen/injective/exchange/v1beta1/tx";
+import { OrderInfo, SpotOrder } from "../../gen/injective/exchange/v2/order";
+import { MsgCreateSpotMarketOrder as ProtoMsgCreateSpotMarketOrder } from "../../gen/injective/exchange/v2/tx";
 import { toChainFormat } from "../../utils/decimal";
 import type {
   SpotOrderAmino,
@@ -32,16 +29,17 @@ export class MsgCreateSpotMarketOrder extends MsgBase<
         }),
         orderType: params.orderType,
         triggerPrice: toChainFormat(params.triggerPrice ?? "0"),
+        expirationBlock: params.expirationBlock ?? 0,
       }),
     });
   }
 
   toDirectSign(): {
-    type: "/injective.exchange.v1beta1.MsgCreateSpotMarketOrder";
+    type: "/injective.exchange.v2.MsgCreateSpotMarketOrder";
     message: ProtoMsgCreateSpotMarketOrder;
   } {
     return {
-      type: "/injective.exchange.v1beta1.MsgCreateSpotMarketOrder",
+      type: "/injective.exchange.v2.MsgCreateSpotMarketOrder",
       message: this.toProto(),
     };
   }

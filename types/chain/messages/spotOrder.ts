@@ -11,6 +11,8 @@ export interface SpotOrderParams {
   quantity: string;
   orderType: OrderType;
   triggerPrice?: string;
+  /** Block after which a resting order expires; zero means no expiry. */
+  expirationBlock?: number;
   cid?: string;
 }
 
@@ -26,6 +28,7 @@ export interface SpotOrderAmino {
   };
   order_type: OrderType;
   trigger_price: string;
+  expiration_block: string;
 }
 
 /** The EIP-712 form signs decimals as Cosmos SDK decimal strings. */
@@ -40,4 +43,5 @@ export interface SpotOrderEip712V2 {
   };
   order_type: string;
   trigger_price: string;
+  expiration_block: string;
 }

@@ -1,8 +1,6 @@
 import { ChannelCredentials, ChannelOptions, credentials } from "@grpc/grpc-js";
 import {
   QueryClient,
-  QueryDenomDecimalsRequest,
-  QueryDenomDecimalsResponse,
   QueryExchangeParamsRequest,
   QueryExchangeParamsResponse,
   QueryService,
@@ -16,7 +14,7 @@ import {
   QueryTraderDerivativeOrdersResponse,
   QueryTraderSpotOrdersRequest,
   QueryTraderSpotOrdersResponse,
-} from "../../../gen/injective/exchange/v1beta1/query";
+} from "../../../gen/injective/exchange/v2/query";
 import { ApiManager } from "../../../managers/ApiManager";
 
 export class ChainExchangeApiClient {
@@ -95,16 +93,5 @@ export class ChainExchangeApiClient {
       QueryService.traderDerivativeOrders.path,
     );
     return response.orders;
-  }
-
-  public async fetchDenomDecimals(
-    denoms?: string[],
-  ): Promise<QueryDenomDecimalsResponse["denomDecimals"]> {
-    const response: QueryDenomDecimalsResponse = await ApiManager(
-      this.client.denomDecimals.bind(this.client),
-      QueryDenomDecimalsRequest.create({ denoms }),
-      QueryService.denomDecimals.path,
-    );
-    return response.denomDecimals;
   }
 }

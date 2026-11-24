@@ -1,5 +1,5 @@
 import { Coin } from "../../gen/cosmos/base/v1beta1/coin";
-import { MsgSubaccountTransfer as ProtoMsgSubaccountTransfer } from "../../gen/injective/exchange/v1beta1/tx";
+import { MsgSubaccountTransfer as ProtoMsgSubaccountTransfer } from "../../gen/injective/exchange/v2/tx";
 import type { MsgSubaccountTransferParams } from "../../types/chain/messages/msgSubaccountTransfer";
 import { MsgBase } from "../MsgBase";
 
@@ -22,11 +22,11 @@ export class MsgSubaccountTransfer extends MsgBase<
   }
 
   toDirectSign(): {
-    type: "/injective.exchange.v1beta1.MsgSubaccountTransfer";
+    type: "/injective.exchange.v2.MsgSubaccountTransfer";
     message: ProtoMsgSubaccountTransfer;
   } {
     return {
-      type: "/injective.exchange.v1beta1.MsgSubaccountTransfer",
+      type: "/injective.exchange.v2.MsgSubaccountTransfer",
       message: this.toProto(),
     };
   }

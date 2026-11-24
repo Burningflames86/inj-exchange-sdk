@@ -1,8 +1,9 @@
 import {
   DerivativeOrder,
   OrderInfo,
-} from "../../gen/injective/exchange/v1beta1/exchange";
-import { MsgCreateDerivativeMarketOrder as ProtoMsgCreateDerivativeMarketOrder } from "../../gen/injective/exchange/v1beta1/tx";
+  OrderType as ChainOrderType,
+} from "../../gen/injective/exchange/v2/order";
+import { MsgCreateDerivativeMarketOrder as ProtoMsgCreateDerivativeMarketOrder } from "../../gen/injective/exchange/v2/tx";
 import type {
   DerivativeOrderAmino,
   DerivativeOrderEip712V2,
@@ -33,19 +34,21 @@ export class MsgCreateDerivativeMarketOrder extends MsgBase<
           quantity: toChainFormat(params.quantity),
           cid: params.cid ?? "",
         }),
-        orderType: params.orderType,
+        // The v2 proto types the enum its own way; the values are the same.
+        orderType: params.orderType as unknown as ChainOrderType,
         margin: toChainFormat(params.margin),
         triggerPrice: toChainFormat(params.triggerPrice ?? "0"),
+        expirationBlock: 0,
       }),
     });
   }
 
   toDirectSign(): {
-    type: "/injective.exchange.v1beta1.MsgCreateDerivativeMarketOrder";
+    type: "/injective.exchange.v2.MsgCreateDerivativeMarketOrder";
     message: ProtoMsgCreateDerivativeMarketOrder;
   } {
     return {
-      type: "/injective.exchange.v1beta1.MsgCreateDerivativeMarketOrder",
+      type: "/injective.exchange.v2.MsgCreateDerivativeMarketOrder",
       message: this.toProto(),
     };
   }

@@ -1,4 +1,4 @@
-import { OrderType } from "../../gen/injective/exchange/v1beta1/exchange";
+import { OrderType } from "../../gen/injective/exchange/v2/order";
 import type {
   DerivativeOrderAmino,
   DerivativeOrderEip712V2,
@@ -21,6 +21,7 @@ export function toDerivativeOrderAmino(
     order_type: params.orderType,
     margin: params.margin,
     trigger_price: params.triggerPrice ?? "0",
+    expiration_block: String(params.expirationBlock ?? 0),
   };
 }
 
@@ -39,5 +40,6 @@ export function toDerivativeOrderEip712V2(
     order_type: OrderType[params.orderType],
     margin: toCosmosSdkDecString(params.margin),
     trigger_price: toCosmosSdkDecString(params.triggerPrice ?? "0"),
+    expiration_block: String(params.expirationBlock ?? 0),
   };
 }

@@ -1,4 +1,4 @@
-import { OrderType } from "../../gen/injective/exchange/v1beta1/exchange";
+import { OrderType } from "../../gen/injective/exchange/v2/order";
 import type {
   SpotOrderAmino,
   SpotOrderEip712V2,
@@ -18,6 +18,7 @@ export function toSpotOrderAmino(params: SpotOrderParams): SpotOrderAmino {
     },
     order_type: params.orderType,
     trigger_price: params.triggerPrice ?? "0",
+    expiration_block: String(params.expirationBlock ?? 0),
   };
 }
 
@@ -35,5 +36,6 @@ export function toSpotOrderEip712V2(
     },
     order_type: OrderType[params.orderType],
     trigger_price: toCosmosSdkDecString(params.triggerPrice ?? "0"),
+    expiration_block: String(params.expirationBlock ?? 0),
   };
 }

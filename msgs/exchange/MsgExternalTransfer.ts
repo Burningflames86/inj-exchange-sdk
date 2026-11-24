@@ -1,5 +1,5 @@
 import { Coin } from "../../gen/cosmos/base/v1beta1/coin";
-import { MsgExternalTransfer as ProtoMsgExternalTransfer } from "../../gen/injective/exchange/v1beta1/tx";
+import { MsgExternalTransfer as ProtoMsgExternalTransfer } from "../../gen/injective/exchange/v2/tx";
 import type { MsgExternalTransferParams } from "../../types/chain/messages/msgExternalTransfer";
 import { MsgBase } from "../MsgBase";
 
@@ -22,11 +22,11 @@ export class MsgExternalTransfer extends MsgBase<
   }
 
   toDirectSign(): {
-    type: "/injective.exchange.v1beta1.MsgExternalTransfer";
+    type: "/injective.exchange.v2.MsgExternalTransfer";
     message: ProtoMsgExternalTransfer;
   } {
     return {
-      type: "/injective.exchange.v1beta1.MsgExternalTransfer",
+      type: "/injective.exchange.v2.MsgExternalTransfer",
       message: this.toProto(),
     };
   }

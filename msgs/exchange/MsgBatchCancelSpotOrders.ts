@@ -1,8 +1,8 @@
-import { OrderMask } from "../../gen/injective/exchange/v1beta1/exchange";
+import { OrderMask } from "../../gen/injective/exchange/v2/order";
 import {
   MsgBatchCancelSpotOrders as ProtoMsgBatchCancelSpotOrders,
   OrderData,
-} from "../../gen/injective/exchange/v1beta1/tx";
+} from "../../gen/injective/exchange/v2/tx";
 import type { MsgBatchCancelSpotOrdersParams } from "../../types/chain/messages/msgBatchCancelSpotOrders";
 import { MsgBase } from "../MsgBase";
 
@@ -28,11 +28,11 @@ export class MsgBatchCancelSpotOrders extends MsgBase<
   }
 
   toDirectSign(): {
-    type: "/injective.exchange.v1beta1.MsgBatchCancelSpotOrders";
+    type: "/injective.exchange.v2.MsgBatchCancelSpotOrders";
     message: ProtoMsgBatchCancelSpotOrders;
   } {
     return {
-      type: "/injective.exchange.v1beta1.MsgBatchCancelSpotOrders",
+      type: "/injective.exchange.v2.MsgBatchCancelSpotOrders",
       message: this.toProto(),
     };
   }

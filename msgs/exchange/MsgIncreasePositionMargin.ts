@@ -1,4 +1,4 @@
-import { MsgIncreasePositionMargin as ProtoMsgIncreasePositionMargin } from "../../gen/injective/exchange/v1beta1/tx";
+import { MsgIncreasePositionMargin as ProtoMsgIncreasePositionMargin } from "../../gen/injective/exchange/v2/tx";
 import type { MsgIncreasePositionMarginParams } from "../../types/chain/messages/msgIncreasePositionMargin";
 import { toChainFormat, toCosmosSdkDecString } from "../../utils/decimal";
 import { MsgBase } from "../MsgBase";
@@ -20,11 +20,11 @@ export class MsgIncreasePositionMargin extends MsgBase<
   }
 
   toDirectSign(): {
-    type: "/injective.exchange.v1beta1.MsgIncreasePositionMargin";
+    type: "/injective.exchange.v2.MsgIncreasePositionMargin";
     message: ProtoMsgIncreasePositionMargin;
   } {
     return {
-      type: "/injective.exchange.v1beta1.MsgIncreasePositionMargin",
+      type: "/injective.exchange.v2.MsgIncreasePositionMargin",
       message: this.toProto(),
     };
   }

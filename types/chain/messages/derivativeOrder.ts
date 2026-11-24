@@ -13,6 +13,8 @@ export interface DerivativeOrderParams {
   margin: string;
   orderType: OrderType;
   triggerPrice?: string;
+  /** Block after which a resting order expires; zero means no expiry. */
+  expirationBlock?: number;
   cid?: string;
 }
 
@@ -29,6 +31,7 @@ export interface DerivativeOrderAmino {
   order_type: OrderType;
   margin: string;
   trigger_price: string;
+  expiration_block: string;
 }
 
 /** The EIP-712 form signs decimals as Cosmos SDK decimal strings. */
@@ -44,4 +47,5 @@ export interface DerivativeOrderEip712V2 {
   order_type: string;
   margin: string;
   trigger_price: string;
+  expiration_block: string;
 }

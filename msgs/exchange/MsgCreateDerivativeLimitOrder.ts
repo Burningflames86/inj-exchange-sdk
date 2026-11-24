@@ -1,8 +1,8 @@
 import {
   DerivativeOrder,
   OrderInfo,
-} from "../../gen/injective/exchange/v1beta1/exchange";
-import { MsgCreateDerivativeLimitOrder as ProtoMsgCreateDerivativeLimitOrder } from "../../gen/injective/exchange/v1beta1/tx";
+} from "../../gen/injective/exchange/v2/order";
+import { MsgCreateDerivativeLimitOrder as ProtoMsgCreateDerivativeLimitOrder } from "../../gen/injective/exchange/v2/tx";
 import type {
   DerivativeOrderAmino,
   DerivativeOrderEip712V2,
@@ -41,11 +41,11 @@ export class MsgCreateDerivativeLimitOrder extends MsgBase<
   }
 
   toDirectSign(): {
-    type: "/injective.exchange.v1beta1.MsgCreateDerivativeLimitOrder";
+    type: "/injective.exchange.v2.MsgCreateDerivativeLimitOrder";
     message: ProtoMsgCreateDerivativeLimitOrder;
   } {
     return {
-      type: "/injective.exchange.v1beta1.MsgCreateDerivativeLimitOrder",
+      type: "/injective.exchange.v2.MsgCreateDerivativeLimitOrder",
       message: this.toProto(),
     };
   }

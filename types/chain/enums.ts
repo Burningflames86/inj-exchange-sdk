@@ -1,12 +1,9 @@
 export { BroadcastMode } from "../../gen/cosmos/tx/v1beta1/service";
 export { SignMode } from "../../gen/cosmos/tx/signing/v1beta1/signing";
-export {
-  ExecutionType,
-  MarketStatus,
-  OrderMask,
-  OrderType,
-} from "../../gen/injective/exchange/v1beta1/exchange";
-export { OrderSide } from "../../gen/injective/exchange/v1beta1/query";
+export { ExecutionType } from "../../gen/injective/exchange/v2/exchange";
+export { OrderMask, OrderType } from "../../gen/injective/exchange/v2/order";
+export { MarketStatus } from "../../gen/injective/exchange/v2/market";
+export { OrderSide } from "../../gen/injective/exchange/v2/query";
 
 export const ChainId = {
   Mainnet: "injective-1",

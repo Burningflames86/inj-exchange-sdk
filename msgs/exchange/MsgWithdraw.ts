@@ -1,5 +1,5 @@
 import { Coin } from "../../gen/cosmos/base/v1beta1/coin";
-import { MsgWithdraw as ProtoMsgWithdraw } from "../../gen/injective/exchange/v1beta1/tx";
+import { MsgWithdraw as ProtoMsgWithdraw } from "../../gen/injective/exchange/v2/tx";
 import type { MsgWithdrawParams } from "../../types/chain/messages/msgWithdraw";
 import { MsgBase } from "../MsgBase";
 
@@ -18,11 +18,11 @@ export class MsgWithdraw extends MsgBase<MsgWithdrawParams, ProtoMsgWithdraw> {
   }
 
   toDirectSign(): {
-    type: "/injective.exchange.v1beta1.MsgWithdraw";
+    type: "/injective.exchange.v2.MsgWithdraw";
     message: ProtoMsgWithdraw;
   } {
     return {
-      type: "/injective.exchange.v1beta1.MsgWithdraw",
+      type: "/injective.exchange.v2.MsgWithdraw",
       message: this.toProto(),
     };
   }
