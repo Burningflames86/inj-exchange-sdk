@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "dist",
+    "rootDir": ".",
+    "module": "Preserve",
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "declarationMap": false,
+    "sourceMap": false,
+    "allowImportingTsExtensions": false,
+    "types": ["node"]
+  },
+  "include": ["index.ts", "clients/**/*.ts", "msgs/**/*.ts", "managers/**/*.ts", "types/**/*.ts", "utils/**/*.ts", "gen/**/*.ts"]
+}

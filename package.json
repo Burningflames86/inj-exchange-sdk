@@ -4,29 +4,40 @@
   "description": "Trading messages, query clients and EIP-712 transaction building for the Injective exchange module",
   "type": "module",
   "exports": {
-    ".": "./index.ts",
-    "./clients/*": "./clients/*.ts",
-    "./msgs/*": "./msgs/*.ts",
-    "./types/*": "./types/*.ts",
-    "./utils/*": "./utils/*.ts",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./clients/*": {
+      "types": "./dist/clients/*.d.ts",
+      "default": "./dist/clients/*.js"
+    },
+    "./msgs/*": {
+      "types": "./dist/msgs/*.d.ts",
+      "default": "./dist/msgs/*.js"
+    },
+    "./types/*": {
+      "types": "./dist/types/*.d.ts",
+      "default": "./dist/types/*.js"
+    },
+    "./utils/*": {
+      "types": "./dist/utils/*.d.ts",
+      "default": "./dist/utils/*.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
-    "index.ts",
-    "clients",
-    "gen",
-    "managers",
-    "msgs",
-    "types",
-    "utils"
+    "dist"
   ],
   "scripts": {
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "format": "oxfmt clients managers msgs types utils",
-    "format:check": "oxfmt --check clients managers msgs types utils",
+    "format": "oxfmt clients managers msgs scripts types utils",
+    "format:check": "oxfmt --check clients managers msgs scripts types utils",
     "typecheck": "tsc --noEmit",
-    "check": "bun run lint && bun run format:check && bun run typecheck"
+    "check": "bun run lint && bun run format:check && bun run typecheck",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && bun run scripts/add-js-extensions.ts",
+    "prepublishOnly": "bun run check && bun run build"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^2.13.0",
@@ -43,6 +54,6 @@
     "ts-proto": "^2.12.0",
     "typescript": "^7.0.2"
   },
-  "main": "./index.ts",
-  "types": "./index.ts"
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts"
 }
