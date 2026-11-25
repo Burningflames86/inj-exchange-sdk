@@ -1,8 +1,12 @@
 import { Coin } from "../../gen/cosmos/base/v1beta1/coin";
 import type { ChainId } from "./enums";
 import { SignMode } from "../../gen/cosmos/tx/signing/v1beta1/signing";
-import { SignDoc } from "../../gen/cosmos/tx/v1beta1/tx";
+import type { SignDoc } from "../../gen/cosmos/tx/v1beta1/tx";
 import { Msg } from "./msgs";
+
+// The two proto types our transaction helpers put in a caller's hands.
+export { SignMode };
+export type { SignDoc };
 
 export interface TxRaw {
   bodyBytes: Buffer;
