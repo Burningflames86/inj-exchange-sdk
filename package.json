@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Trading messages, query clients and EIP-712 transaction building for the Injective exchange module",
   "type": "module",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "exports": {
     ".": {
       "import": {
@@ -68,7 +68,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "NOTICE"
   ],
   "scripts": {
     "lint": "oxlint",
@@ -105,5 +106,18 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Burningflames86/inj-trading-sdk.git"
-  }
+  },
+  "homepage": "https://github.com/Burningflames86/inj-trading-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/Burningflames86/inj-trading-sdk/issues"
+  },
+  "keywords": [
+    "injective",
+    "grpc",
+    "trading",
+    "exchange",
+    "perpetuals",
+    "eip712",
+    "sdk"
+  ]
 }

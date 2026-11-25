@@ -191,3 +191,8 @@ bun pm pack       # the publishable tarball
 mainnet transactions carried. If a change alters them, `bun run record:fixtures`
 re-records them, and the diff is the review.
 
+## License
+
+Apache-2.0, see [LICENSE](LICENSE). The generated sources under `gen/` come from
+Injective's protocol definitions and keep their attribution, as [NOTICE](NOTICE)
+records.
