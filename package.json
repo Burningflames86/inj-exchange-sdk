@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Trading messages, query clients and EIP-712 transaction building for the Injective exchange module",
   "type": "module",
+  "license": "UNLICENSED",
   "exports": {
     ".": {
       "import": {
@@ -72,13 +73,15 @@
   "scripts": {
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "format": "oxfmt clients managers msgs types utils tsdown.config.ts",
-    "format:check": "oxfmt --check clients managers msgs types utils tsdown.config.ts",
+    "format": "oxfmt clients managers msgs tests types utils tsdown.config.ts",
+    "format:check": "oxfmt --check clients managers msgs tests types utils tsdown.config.ts",
     "typecheck": "tsc --noEmit",
-    "check": "bun run lint && bun run format:check && bun run typecheck",
+    "check": "bun run lint && bun run format:check && bun run typecheck && bun test",
     "build": "tsdown",
     "prepublishOnly": "bun run check && bun run build",
-    "prepack": "bun run build"
+    "prepack": "bun run build",
+    "test": "bun test",
+    "record:fixtures": "bun run scripts/record-encoding-fixtures.ts"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^2.13.0",
@@ -98,5 +101,9 @@
   },
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
-  "module": "./dist/index.js"
+  "module": "./dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Burningflames86/inj-trading-sdk.git"
+  }
 }

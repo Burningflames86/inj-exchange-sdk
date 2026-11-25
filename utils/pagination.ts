@@ -26,6 +26,7 @@ export function toPageRequest(
 export function toPagination(response: PageResponse | undefined): Pagination {
   return {
     total: response?.total ? response.total : 0,
-    next: response?.nextKey ? base64.encode(response.nextKey) : null,
+    // The chain decodes an absent key as empty bytes, not undefined.
+    next: response?.nextKey?.length ? base64.encode(response.nextKey) : null,
   };
 }
