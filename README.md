@@ -1,4 +1,4 @@
-# inj-trading-sdk
+# inj-exchange-sdk
 
 Native gRPC clients and exchange messages for the Injective backend, with the
 EIP-712 transaction assembly that goes with them. It holds no key: you sign, and
@@ -40,12 +40,12 @@ Six entry points, each a layer:
 
 | Import | What it gives you |
 | --- | --- |
-| `inj-trading-sdk` | everything below, in one import |
-| `inj-trading-sdk/clients/chain` | native gRPC clients for the chain: account, bank, exchange, tx, tendermint, authz |
-| `inj-trading-sdk/clients/indexer` | native gRPC clients for the indexer: markets, orders, positions, trades, balances, and the stream clients |
-| `inj-trading-sdk/msgs` | 14 message classes: the 13 exchange actions plus bank `MsgSend` |
-| `inj-trading-sdk/types` | orders, pagination, fees, EIP-712 shape, enums, `ApiError`, stream state |
-| `inj-trading-sdk/utils` | `getEip712TypedDataV2`, the transaction builders, decimal scaling, address conversion |
+| `@burningflames/inj-exchange-sdk` | everything below, in one import |
+| `@burningflames/inj-exchange-sdk/clients/chain` | native gRPC clients for the chain: account, bank, exchange, tx, tendermint, authz |
+| `@burningflames/inj-exchange-sdk/clients/indexer` | native gRPC clients for the indexer: markets, orders, positions, trades, balances, and the stream clients |
+| `@burningflames/inj-exchange-sdk/msgs` | 14 message classes: the 13 exchange actions plus bank `MsgSend` |
+| `@burningflames/inj-exchange-sdk/types` | orders, pagination, fees, EIP-712 shape, enums, `ApiError`, stream state |
+| `@burningflames/inj-exchange-sdk/utils` | `getEip712TypedDataV2`, the transaction builders, decimal scaling, address conversion |
 
 TypeScript sources are compiled to `dist/` in both ESM and CommonJS, with
 declarations for each.
@@ -53,11 +53,12 @@ declarations for each.
 ## Install
 
 ```sh
-bun add /path/to/inj-trading-sdk-0.1.0.tgz   # or: npm i ./inj-trading-sdk-0.1.0.tgz
+bun add @burningflames/inj-exchange-sdk   # or: npm i @burningflames/inj-exchange-sdk
 ```
 
-`bun pm pack` in the SDK repo produces that tarball; it contains `dist/` and
-`package.json`, nothing else.
+From a checkout instead: `bun pm pack` builds and packs the tarball —
+`dist/`, `package.json`, `README.md`, `LICENSE` and `NOTICE` — which installs
+with `bun add ./burningflames-inj-exchange-sdk-0.1.0.tgz`.
 
 ## Sending a transaction
 
@@ -70,16 +71,16 @@ import {
   ChainAuthApiClient,
   ChainTendermintApiClient,
   ChainTxApiClient,
-} from "inj-trading-sdk/clients/chain";
-import { MsgDeposit } from "inj-trading-sdk/msgs";
-import { ChainId, EvmChainId, SignMode, type StdFee } from "inj-trading-sdk/types";
+} from "@burningflames/inj-exchange-sdk/clients/chain";
+import { MsgDeposit } from "@burningflames/inj-exchange-sdk/msgs";
+import { ChainId, EvmChainId, SignMode, type StdFee } from "@burningflames/inj-exchange-sdk/types";
 import {
   createTransaction,
   createTxBytes,
   createTxRawEIP712,
   createWeb3Extension,
   getEip712TypedDataV2,
-} from "inj-trading-sdk/utils";
+} from "@burningflames/inj-exchange-sdk/utils";
 
 const endpoint = "sentry.chain.grpc.injective.network:443";
 const auth = new ChainAuthApiClient(endpoint);

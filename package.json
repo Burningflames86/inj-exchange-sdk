@@ -1,5 +1,5 @@
 {
-  "name": "inj-trading-sdk",
+  "name": "@burningflames/inj-exchange-sdk",
   "version": "0.1.0",
   "description": "Trading messages, query clients and EIP-712 transaction building for the Injective exchange module",
   "type": "module",
@@ -105,11 +105,11 @@
   "module": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Burningflames86/inj-trading-sdk.git"
+    "url": "https://github.com/Burningflames86/inj-exchange-sdk.git"
   },
-  "homepage": "https://github.com/Burningflames86/inj-trading-sdk#readme",
+  "homepage": "https://github.com/Burningflames86/inj-exchange-sdk#readme",
   "bugs": {
-    "url": "https://github.com/Burningflames86/inj-trading-sdk/issues"
+    "url": "https://github.com/Burningflames86/inj-exchange-sdk/issues"
   },
   "keywords": [
     "injective",
@@ -119,5 +119,8 @@
     "perpetuals",
     "eip712",
     "sdk"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
