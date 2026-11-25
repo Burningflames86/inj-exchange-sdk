@@ -1,6 +1,6 @@
 import { ServiceError } from "@grpc/grpc-js";
 import { Status } from "@grpc/grpc-js/build/src/constants";
-import { getServiceAndMethodFromPath } from "../../utils/helper";
+import { getServiceAndMethodFromPath } from "../utils/helper";
 
 export class ApiError extends Error {
   private code: Status;

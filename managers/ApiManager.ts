@@ -1,5 +1,5 @@
 import { ClientUnaryCall, ServiceError } from "@grpc/grpc-js";
-import { ApiError } from "../types/managers/api";
+import { ApiError } from "../types/errors";
 
 type UnaryType<UnaryRequest, UnaryResponse> = (
   req: UnaryRequest,

@@ -4,7 +4,7 @@ import {
   StreamDisconnectReason,
   StreamState,
   EventTypes,
-} from "../types/managers/stream";
+} from "../types/stream";
 import {
   ClientReadableStream,
   ServerErrorResponse,
