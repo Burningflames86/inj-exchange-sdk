@@ -1,12 +1,12 @@
 import { BaseAccount, ModuleAccount } from "../../gen/cosmos/auth/v1beta1/auth";
-import { SanitizedPageResponse } from "./pagination";
+import { Pagination } from "./pagination";
 
 export interface AccountResponse {
   codeHash: string;
   baseAccount: SanitizedBaseAccount;
 }
 export interface AccountsResponse {
-  pagination: SanitizedPageResponse;
+  pagination: Pagination;
   accounts: AccountResponse[];
 }
 

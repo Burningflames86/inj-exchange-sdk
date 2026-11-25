@@ -1,34 +1,31 @@
 import { base64 } from "@scure/base";
-import {
-  SanitizedPageRequest,
-  SanitizedPageResponse,
-} from "../types/chain/pagination";
-import {
+import type { Pagination, PaginationOption } from "../types/chain/pagination";
+import type {
   PageRequest,
   PageResponse,
 } from "../gen/cosmos/base/query/v1beta1/pagination";
 
-export function createUnSanitizedPageRequest(
-  pagination: SanitizedPageRequest | undefined,
+/** Turns a caller's paging request into the proto request, key decoded. */
+export function toPageRequest(
+  option: PaginationOption | undefined,
 ): PageRequest | undefined {
-  return pagination
+  return option
     ? {
-        key: pagination.key
-          ? Buffer.from(base64.decode(pagination.key))
+        key: option.key
+          ? Buffer.from(base64.decode(option.key))
           : Buffer.from([]),
-        offset: pagination.offset || 0,
-        limit: pagination.limit || 0,
-        countTotal: pagination.countTotal || false,
-        reverse: pagination.reverse || false,
+        offset: option.offset || 0,
+        limit: option.limit || 0,
+        countTotal: option.countTotal || false,
+        reverse: option.reverse || false,
       }
     : undefined;
 }
 
-export function createSanitizedPageResponse(
-  pagination: PageResponse | undefined,
-): SanitizedPageResponse {
+/** Turns the proto response's paging into the shape a caller receives. */
+export function toPagination(response: PageResponse | undefined): Pagination {
   return {
-    total: pagination?.total ? pagination.total : 0,
-    next: pagination?.nextKey ? base64.encode(pagination.nextKey) : null,
+    total: response?.total ? response.total : 0,
+    next: response?.nextKey ? base64.encode(response.nextKey) : null,
   };
 }

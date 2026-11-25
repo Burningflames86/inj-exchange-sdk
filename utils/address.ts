@@ -1,5 +1,5 @@
 import { bech32 } from "@scure/base";
-import { bytesToHex, hexToBytes } from "./encoding.ts";
+import { bytesToHex, hexToBytes } from "./encoding";
 
 export function getEthereumAddress(injectiveAddress: string): string {
   if (injectiveAddress.startsWith("0x")) return injectiveAddress;

@@ -14,14 +14,8 @@ import {
   QuerySpendableBalancesResponse,
 } from "../../../gen/cosmos/bank/v1beta1/query";
 import { ApiManager } from "../../../managers/ApiManager";
-import {
-  SanitizedPageRequest,
-  SanitizedPageResponse,
-} from "../../../types/chain/pagination";
-import {
-  createSanitizedPageResponse,
-  createUnSanitizedPageRequest,
-} from "../../../utils/pagination";
+import { Pagination, PaginationOption } from "../../../types/chain/pagination";
+import { toPagination, toPageRequest } from "../../../utils/pagination";
 
 export class ChainBankApiClient {
   private client: QueryClient;
@@ -52,43 +46,43 @@ export class ChainBankApiClient {
 
   public async fetchBalances(
     address: string,
-    pagination?: SanitizedPageRequest,
+    pagination?: PaginationOption,
   ): Promise<{
     balances: QueryAllBalancesResponse["balances"];
-    pagination: SanitizedPageResponse;
+    pagination: Pagination;
   }> {
     const response: QueryAllBalancesResponse = await ApiManager(
       this.client.allBalances.bind(this.client),
       QueryAllBalancesRequest.create({
         address,
-        pagination: createUnSanitizedPageRequest(pagination),
+        pagination: toPageRequest(pagination),
       }),
       QueryService.allBalances.path,
     );
     return {
       balances: response.balances,
-      pagination: createSanitizedPageResponse(response.pagination),
+      pagination: toPagination(response.pagination),
     };
   }
 
   public async fetchSpendableBalances(
     address: string,
-    pagination?: SanitizedPageRequest,
+    pagination?: PaginationOption,
   ): Promise<{
     balances: QuerySpendableBalancesResponse["balances"];
-    pagination: SanitizedPageResponse;
+    pagination: Pagination;
   }> {
     const response: QuerySpendableBalancesResponse = await ApiManager(
       this.client.spendableBalances.bind(this.client),
       QuerySpendableBalancesRequest.create({
         address,
-        pagination: createUnSanitizedPageRequest(pagination),
+        pagination: toPageRequest(pagination),
       }),
       QueryService.spendableBalances.path,
     );
     return {
       balances: response.balances,
-      pagination: createSanitizedPageResponse(response.pagination),
+      pagination: toPagination(response.pagination),
     };
   }
 

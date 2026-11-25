@@ -19,14 +19,8 @@ import {
   SantizedGrant,
   SantizedGranterGrant,
 } from "../../../types/chain/authz";
-import {
-  SanitizedPageRequest,
-  SanitizedPageResponse,
-} from "../../../types/chain/pagination";
-import {
-  createSanitizedPageResponse,
-  createUnSanitizedPageRequest,
-} from "../../../utils/pagination";
+import { Pagination, PaginationOption } from "../../../types/chain/pagination";
+import { toPagination, toPageRequest } from "../../../utils/pagination";
 
 export class ChainAuthZApiClient {
   private client: QueryClient;
@@ -53,39 +47,39 @@ export class ChainAuthZApiClient {
   public async fetchGrants(
     params: Omit<QueryGrantsRequest, "msgTypeUrl" | "pagination"> & {
       msgTypeUrl?: string;
-      pagination?: SanitizedPageRequest; // same datatype available in ChainAuthApiClient.ts, merge them later on
+      pagination?: PaginationOption; // same datatype available in ChainAuthApiClient.ts, merge them later on
     },
   ): Promise<{
     grants: SantizedGrant[];
-    pagination: SanitizedPageResponse; //Same kind of type and code logic available in ChainAuthApiClien.ts as well, merge them later on
+    pagination: Pagination; //Same kind of type and code logic available in ChainAuthApiClien.ts as well, merge them later on
   }> {
     const { pagination } = params;
     const response: QueryGrantsResponse = await ApiManager(
       this.client.grants.bind(this.client),
       QueryGrantsRequest.create({
         ...params,
-        pagination: createUnSanitizedPageRequest(pagination),
+        pagination: toPageRequest(pagination),
       }),
       QueryService.grants.path,
     );
     return {
       grants: response.grants.map((grant) => this.sanitizeGrant(grant)),
-      pagination: createSanitizedPageResponse(response.pagination),
+      pagination: toPagination(response.pagination),
     };
   }
 
   public async fetchGranterGrants(
     granter: string,
-    pagination?: SanitizedPageRequest,
+    pagination?: PaginationOption,
   ): Promise<{
     grants: SantizedGranterGrant[];
-    pagination: SanitizedPageResponse; //Same kind of type and code logic available in ChainAuthApiClien.ts as well, merge them later on
+    pagination: Pagination; //Same kind of type and code logic available in ChainAuthApiClien.ts as well, merge them later on
   }> {
     const response: QueryGranterGrantsResponse = await ApiManager(
       this.client.granterGrants.bind(this.client),
       QueryGranterGrantsRequest.create({
         granter,
-        pagination: createUnSanitizedPageRequest(pagination),
+        pagination: toPageRequest(pagination),
       }),
       QueryService.granterGrants.path,
     );
@@ -97,23 +91,23 @@ export class ChainAuthZApiClient {
           granter: grant.granter,
         };
       }),
-      pagination: createSanitizedPageResponse(response.pagination),
+      pagination: toPagination(response.pagination),
     };
   }
 
   // TEST IT AGAIN
   public async fetchGranteeGrants(
     grantee: string,
-    pagination?: SanitizedPageRequest,
+    pagination?: PaginationOption,
   ): Promise<{
     grants: SanitzedGranteeGrant[];
-    pagination: SanitizedPageResponse; //Same kind of type and code logic available in ChainAuthApiClien.ts as well, merge them later on
+    pagination: Pagination; //Same kind of type and code logic available in ChainAuthApiClien.ts as well, merge them later on
   }> {
     const response: QueryGranteeGrantsResponse = await ApiManager(
       this.client.granteeGrants.bind(this.client),
       QueryGranteeGrantsRequest.create({
         grantee,
-        pagination: createUnSanitizedPageRequest(pagination),
+        pagination: toPageRequest(pagination),
       }),
       QueryService.granteeGrants.path,
     );
@@ -125,7 +119,7 @@ export class ChainAuthZApiClient {
           granter: grant.granter,
         };
       }),
-      pagination: createSanitizedPageResponse(response.pagination),
+      pagination: toPagination(response.pagination),
     };
   }
 }

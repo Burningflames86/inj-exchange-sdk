@@ -7,6 +7,10 @@ import { StdFee } from "../types/chain/tx";
  * The typed data an EIP-712 signer signs for a transaction. The message is two
  * JSON strings rather than nested objects, which is what the chain's verifier
  * rebuilds and compares against.
+ *
+ * Building the payload is as far as the SDK goes: it holds no key, so the
+ * caller signs these bytes with whatever account it owns and hands the
+ * signature to `createTransaction`.
  */
 export function getEip712TypedDataV2({
   msgs,

@@ -21,11 +21,8 @@ import {
   AccountsResponse,
   SanitizedBaseAccount,
 } from "../../../types/chain/auth";
-import { SanitizedPageRequest } from "../../../types/chain/pagination";
-import {
-  createSanitizedPageResponse,
-  createUnSanitizedPageRequest,
-} from "../../../utils/pagination";
+import { PaginationOption } from "../../../types/chain/pagination";
+import { toPagination, toPageRequest } from "../../../utils/pagination";
 
 export class ChainAuthApiClient {
   private client: QueryClient;
@@ -64,18 +61,18 @@ export class ChainAuthApiClient {
   }
 
   public async fetchAccounts(
-    params?: SanitizedPageRequest,
+    params?: PaginationOption,
   ): Promise<AccountsResponse> {
     const response: QueryAccountsResponse = await ApiManager(
       this.client.accounts.bind(this.client),
       QueryAccountsRequest.create({
-        pagination: createUnSanitizedPageRequest(params),
+        pagination: toPageRequest(params),
       }),
       QueryService.accounts.path,
     );
     const { accounts, pagination } = response;
     return {
-      pagination: createSanitizedPageResponse(pagination),
+      pagination: toPagination(pagination),
       accounts: accounts.map((acc) => {
         const { baseAccount, codeHash } = this.decodeAccount(acc, EthAccount);
         return {
