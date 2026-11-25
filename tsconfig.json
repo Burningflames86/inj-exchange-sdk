@@ -28,12 +28,12 @@
     "noPropertyAccessFromIndexSignature": false
   },
   "include": [
+    "index.ts",
     "clients/**/*.ts",
     "msgs/**/*.ts",
     "managers/**/*.ts",
     "types/**/*.ts",
     "utils/**/*.ts",
-    "scripts/**/*.ts",
     "gen/**/*.ts"
   ]
 }

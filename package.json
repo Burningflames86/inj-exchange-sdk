@@ -5,24 +5,64 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
-    "./clients/*": {
-      "types": "./dist/clients/*.d.ts",
-      "default": "./dist/clients/*.js"
+    "./clients/chain": {
+      "import": {
+        "types": "./dist/clients/chain.d.ts",
+        "default": "./dist/clients/chain.js"
+      },
+      "require": {
+        "types": "./dist/clients/chain.d.cts",
+        "default": "./dist/clients/chain.cjs"
+      }
     },
-    "./msgs/*": {
-      "types": "./dist/msgs/*.d.ts",
-      "default": "./dist/msgs/*.js"
+    "./clients/indexer": {
+      "import": {
+        "types": "./dist/clients/indexer.d.ts",
+        "default": "./dist/clients/indexer.js"
+      },
+      "require": {
+        "types": "./dist/clients/indexer.d.cts",
+        "default": "./dist/clients/indexer.cjs"
+      }
     },
-    "./types/*": {
-      "types": "./dist/types/*.d.ts",
-      "default": "./dist/types/*.js"
+    "./msgs": {
+      "import": {
+        "types": "./dist/msgs.d.ts",
+        "default": "./dist/msgs.js"
+      },
+      "require": {
+        "types": "./dist/msgs.d.cts",
+        "default": "./dist/msgs.cjs"
+      }
     },
-    "./utils/*": {
-      "types": "./dist/utils/*.d.ts",
-      "default": "./dist/utils/*.js"
+    "./types": {
+      "import": {
+        "types": "./dist/types.d.ts",
+        "default": "./dist/types.js"
+      },
+      "require": {
+        "types": "./dist/types.d.cts",
+        "default": "./dist/types.cjs"
+      }
+    },
+    "./utils": {
+      "import": {
+        "types": "./dist/utils.d.ts",
+        "default": "./dist/utils.js"
+      },
+      "require": {
+        "types": "./dist/utils.d.cts",
+        "default": "./dist/utils.cjs"
+      }
     },
     "./package.json": "./package.json"
   },
@@ -32,11 +72,11 @@
   "scripts": {
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "format": "oxfmt clients managers msgs scripts types utils",
-    "format:check": "oxfmt --check clients managers msgs scripts types utils",
+    "format": "oxfmt clients managers msgs types utils tsdown.config.ts",
+    "format:check": "oxfmt --check clients managers msgs types utils tsdown.config.ts",
     "typecheck": "tsc --noEmit",
     "check": "bun run lint && bun run format:check && bun run typecheck",
-    "build": "rm -rf dist && tsc -p tsconfig.build.json && bun run scripts/add-js-extensions.ts",
+    "build": "tsdown",
     "prepublishOnly": "bun run check && bun run build"
   },
   "dependencies": {
@@ -52,8 +92,10 @@
     "oxfmt": "^0.79.0",
     "oxlint": "^1.94.0",
     "ts-proto": "^2.12.0",
+    "tsdown": "^0.23.7",
     "typescript": "^7.0.2"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts"
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js"
 }
