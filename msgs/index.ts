@@ -7,7 +7,6 @@ export * from "./exchange/MsgCreateDerivativeLimitOrder";
 export * from "./exchange/MsgCreateDerivativeMarketOrder";
 export * from "./exchange/MsgCreateSpotLimitOrder";
 export * from "./exchange/MsgCreateSpotMarketOrder";
-export * from "./exchange/MsgDecreasePositionMargin";
 export * from "./exchange/MsgDeposit";
 export * from "./exchange/MsgExternalTransfer";
 export * from "./exchange/MsgIncreasePositionMargin";

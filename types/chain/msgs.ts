@@ -12,7 +12,6 @@ import type { MsgCreateDerivativeMarketOrder } from "../../msgs/exchange/MsgCrea
 import type { MsgCancelDerivativeOrder } from "../../msgs/exchange/MsgCancelDerivativeOrder";
 import type { MsgBatchCancelDerivativeOrders } from "../../msgs/exchange/MsgBatchCancelDerivativeOrders";
 import type { MsgIncreasePositionMargin } from "../../msgs/exchange/MsgIncreasePositionMargin";
-import type { MsgDecreasePositionMargin } from "../../msgs/exchange/MsgDecreasePositionMargin";
 
 /** Every message a transaction can carry. */
 export type Msg =
@@ -27,7 +26,6 @@ export type Msg =
   | MsgCancelDerivativeOrder
   | MsgBatchCancelDerivativeOrders
   | MsgIncreasePositionMargin
-  | MsgDecreasePositionMargin
   | MsgSubaccountTransfer
   | MsgExternalTransfer
   | MsgWithdraw;
