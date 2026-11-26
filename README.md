@@ -6,13 +6,21 @@ the SDK hands you the bytes.
 
 ## Why this exists
 
-`@injectivelabs/sdk-ts` talks to the chain and the indexer over **gRPC-web**. In a
-browser that is the only option; in a backend it is the wrong one — gRPC-web needs
-a proxy hop in front of the node, and it is meaningfully slower than the native
-protocol for the number of calls a trading service makes.
+`@injectivelabs/sdk-ts` reaches the chain and the indexer over **gRPC-web**. That is
+the right choice in a browser and a detour in a backend: every call crosses an
+Envoy hop in front of the node, and the client carries a wallet-and-cosmos platform
+this service never touches — 68 packages, 181 MB installed, 705 ms to import.
 
-This SDK speaks native gRPC over `@grpc/grpc-js` to the same endpoints, so a
-backend calls the chain and the indexer directly with no proxy in the path.
+This SDK speaks native gRPC over `@grpc/grpc-js` to the same endpoints, so nothing
+sits between the backend and the node. It installs 35 packages, 105 MB, and imports
+in 67 ms.
+
+The hop is not the bottleneck. Measured against the public endpoints, p50 is within
+5% and throughput at 64 calls in flight is within 3%, because a call spends its time
+inside the endpoint rather than in the proxy. What native gRPC does buy is the tail:
+on an orderbook read gRPC-web reached 871 ms at p95 where native stayed at 259 ms.
+It also lets the client point at a node's own port 9090 with no proxy to stand up,
+which is the lever that matters.
 
 ## Scope
 
