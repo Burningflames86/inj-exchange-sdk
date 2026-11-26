@@ -53,12 +53,41 @@ declarations for each.
 ## Install
 
 ```sh
-bun add @burningflames/inj-exchange-sdk   # or: npm i @burningflames/inj-exchange-sdk
+bun add @burningflames/inj-exchange-sdk
+# or: npm i @burningflames/inj-exchange-sdk
+# or: pnpm add / yarn add @burningflames/inj-exchange-sdk
 ```
 
-From a checkout instead: `bun pm pack` builds and packs the tarball —
-`dist/`, `package.json`, `README.md`, `LICENSE` and `NOTICE` — which installs
-with `bun add ./burningflames-inj-exchange-sdk-0.1.0.tgz`.
+Everything it needs installs with it — `@grpc/grpc-js`, `@bufbuild/protobuf`,
+`@scure/base`, `eventemitter3` and `viem` — and there are no peer dependencies to
+add yourself. Type declarations ship in the package, so nothing extra is needed
+for TypeScript.
+
+It loads as ESM or as CommonJS, from the package root or any of the six entry
+points:
+
+```ts
+import { MsgDeposit } from "@burningflames/inj-exchange-sdk/msgs";
+import { getEip712TypedDataV2 } from "@burningflames/inj-exchange-sdk/utils";
+```
+
+```js
+const { MsgDeposit } = require("@burningflames/inj-exchange-sdk/msgs");
+const { getEip712TypedDataV2 } = require("@burningflames/inj-exchange-sdk/utils");
+```
+
+`gen/` is not importable: the proto layer reaches you only through these entry
+points, so `@burningflames/inj-exchange-sdk/gen/...` fails with
+`ERR_PACKAGE_PATH_NOT_EXPORTED` by design.
+
+From a checkout instead: `bun pm pack` builds and packs the tarball — `dist/`,
+`package.json`, `README.md`, `LICENSE` and `NOTICE` — which installs with
+`bun add ./burningflames-inj-exchange-sdk-0.1.0.tgz`.
+
+Bun blocks one postinstall from a dependency, `protobufjs` arriving through
+`@grpc/grpc-js`. It only prints a version-pinning warning when the consumer pins
+`protobufjs` itself, and nothing is built or fetched, so it is safe to leave
+blocked or to allow with `bun pm trust protobufjs`.
 
 ## Sending a transaction
 
@@ -185,6 +214,7 @@ and need a trigger price.
 bun run check     # oxlint, oxfmt --check, tsc --noEmit, bun test
 bun test          # 59 tests: encodings, EIP-712 payload, decimal scaling, pagination
 bun run build     # tsdown → dist/, ESM and CJS with declarations
+bun run check:pack # the file list a publish would carry; refuses an unexpected one
 bun pm pack       # the publishable tarball
 ```
 

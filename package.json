@@ -79,10 +79,11 @@
     "typecheck": "tsc --noEmit",
     "check": "bun run lint && bun run format:check && bun run typecheck && bun test",
     "build": "tsdown",
-    "prepublishOnly": "bun run check && bun run build",
+    "prepublishOnly": "bun run check && bun run check:pack",
     "prepack": "bun run build",
     "test": "bun test",
-    "record:fixtures": "bun run scripts/record-encoding-fixtures.ts"
+    "record:fixtures": "bun run scripts/record-encoding-fixtures.ts",
+    "check:pack": "bun run scripts/check-pack.ts"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^2.13.0",
