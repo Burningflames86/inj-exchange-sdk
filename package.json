@@ -1,6 +1,6 @@
 {
   "name": "@burningflames/inj-exchange-sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Trading messages, query clients and EIP-712 transaction building for the Injective exchange module",
   "type": "module",
   "license": "Apache-2.0",
